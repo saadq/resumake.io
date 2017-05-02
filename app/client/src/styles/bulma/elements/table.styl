@@ -1,0 +1,68 @@
+$table ?=                           $grey-darker 
+$table-background ?=                $white 
+$table-border ?=                    $grey-lighter 
+
+$table-head ?=                      $grey 
+
+$table-row-hover-background ?=      $white-bis 
+$table-row-even-background ?=       $white-bis 
+$table-row-even-hover-background ?= $white-ter 
+
+.table
+  background-color $table-background
+  color $table
+  margin-bottom 1.5rem
+  width 100%
+  td,
+  th
+    border 1px solid $table-border
+    border-width 0 0 1px
+    padding 0.5em 0.75em
+    vertical-align top
+    // Modifiers
+    &.is-narrow
+      white-space nowrap
+      width 1%
+  th
+    color $text-strong
+    text-align left
+  tr
+    &:hover
+      background-color $table-row-hover-background
+  thead
+    td,
+    th
+      border-width 0 0 2px
+      color $table-head
+  tfoot
+    td,
+    th
+      border-width 2px 0 0
+      color $table-head
+  tbody
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width 0
+  // Modifiers
+  &.is-bordered
+    td,
+    th
+      border-width 1px
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width 1px
+  &.is-narrow
+    td,
+    th
+      padding 0.25em 0.5em
+  &.is-striped
+    tbody
+      tr
+        &:nth-child(even)
+          background-color $table-row-even-background
+          &:hover
+            background-color $table-row-even-hover-background

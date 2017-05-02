@@ -1,0 +1,26 @@
+.notification
+  block()
+  background-color $background
+  border-radius $radius
+  padding 1.25rem 2.5rem 1.25rem 1.5rem
+  position relative
+  code,
+  pre
+    background $white
+  pre code
+    background transparent
+  .delete
+    position absolute
+    right 0.5em
+    top 0.5em
+  .title,
+  .subtitle,
+  .content
+    color inherit
+  // Colors
+  for name, pair in $colors
+    color = pair['1']
+    color-invert = pair['2']
+    &.is-{name}
+      background-color color
+      color color-invert

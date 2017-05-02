@@ -1,0 +1,59 @@
+.block
+  block()
+
+.container
+  position relative
+  +desktop()
+    margin 0 auto
+    width $desktop - 40px
+    // Modifiers
+    &.is-fluid
+      margin 0 20px
+      max-width none
+      width auto
+  +widescreen()
+    width $widescreen - 40px
+  +fullhd()
+    width $fullhd - 40px
+
+.delete
+  delete()
+
+.fa
+  font-size 21px
+  text-align center
+  vertical-align top
+
+.heading
+  display block
+  font-size 11px
+  letter-spacing 1px
+  margin-bottom 5px
+  text-transform uppercase
+
+.highlight
+  block()
+  font-weight $weight-normal
+  max-width 100%
+  overflow hidden
+  padding 0
+  pre
+    overflow auto
+    max-width 100%
+
+.loader
+  loader()
+
+.number
+  align-items center
+  background-color $background
+  border-radius 290486px
+  display inline-flex
+  font-size $size-medium
+  height 2em
+  justify-content center
+  margin-right 1.5rem
+  min-width 2.5em
+  padding 0.25rem 0.5rem
+  text-align center
+  vertical-align top

@@ -1,0 +1,21 @@
+{
+  "ecmaVersion": "7",
+  "libs": [
+    "browser"
+  ],
+  "loadEagerly": [],
+  "dontLoad": [
+    "node_module/**"
+  ],
+  "plugins": {
+    "doc_comment": true,
+    "node": {
+      "dontLoad": "",
+      "load": "",
+      "modules": ""
+    },
+    "node_resolve": {},
+    "es_modules": {},
+    "commonjs": {}
+  }
+}

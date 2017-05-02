@@ -1,0 +1,39 @@
+$control-radius ?= $radius 
+$control-radius-small ?= $radius-small 
+
+control()
+  -moz-appearance none
+  -webkit-appearance none
+  align-items center
+  border none
+  border-radius $control-radius
+  box-shadow none
+  display inline-flex
+  font-size $size-normal
+  height 2.25em
+  justify-content flex-start
+  line-height 1.25
+  padding-bottom 0.5em
+  padding-left 0.625em
+  padding-right 0.625em
+  padding-top 0.5em
+  position relative
+  vertical-align top
+  // States
+  &:focus,
+  &.is-focused,
+  &:active,
+  &.is-active
+    outline none
+  &[disabled],
+  &.is-disabled
+    pointer-events none
+
+// The controls sizes use mixins so they can be used at different breakpoints
+control-small()
+  border-radius $control-radius-small
+  font-size $size-small
+control-medium()
+  font-size $size-medium
+control-large()
+  font-size $size-large

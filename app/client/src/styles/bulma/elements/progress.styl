@@ -1,0 +1,32 @@
+.progress
+  block()
+  -moz-appearance none
+  -webkit-appearance none
+  border none
+  border-radius 290486px
+  display block
+  height $size-normal
+  overflow hidden
+  padding 0
+  width 100%
+  &::-webkit-progress-bar
+    background-color $border
+  &::-webkit-progress-value
+    background-color $text
+  &::-moz-progress-bar
+    background-color $text
+  // Colors
+  for name, pair in $colors
+    color = pair['1']
+    &.is-{name}
+      &::-webkit-progress-value
+        background-color color
+      &::-moz-progress-bar
+        background-color color
+  // Sizes
+  &.is-small
+    height $size-small
+  &.is-medium
+    height $size-medium
+  &.is-large
+    height $size-large

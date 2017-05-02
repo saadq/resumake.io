@@ -1,0 +1,35 @@
+{
+  "name": "saadq-server-boilerplate",
+  "description": "Server-side boilerplate for Koa 2",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saadq/saadq-client-boilerplate"
+  },
+  "homepage": "https://github.com/saadq/saadq-client-boilerplate",
+  "dependencies": {
+    "common-tags": "^1.4.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.1.1",
+    "koa-static": "^3.0.0",
+    "node-latex": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "blyss": "^2.0.0",
+    "nodemon": "^1.11.0",
+    "snazzy": "^7.0.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "watch": "nodemon src/index.js",
+    "lint": "blyss | snazzy",
+    "fix": "blyss --fix",
+    "test": "npm run lint --silent"
+  },
+  "blyss": {
+    "parser": "babel-eslint"
+  }
+}

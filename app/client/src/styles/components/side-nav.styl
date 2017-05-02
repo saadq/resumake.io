@@ -1,0 +1,101 @@
+@import '../variables/sizes'
+@import '../variables/colors'
+
+#side-nav
+  display flex
+  flex-direction column
+  background-color $side-nav-background-color
+  align-items center
+  position fixed
+  top $top-bar-height
+  left 0
+  bottom 0
+  padding 20px 0 50px
+  width $side-nav-width
+  min-width 45px
+  max-height $side-nav-height
+  overflow-y auto
+  overflow-x hidden
+  box-shadow 1px 0px 0 rgba(219, 219, 219, 0.3)
+  z-index 1000
+
+  hr
+    border 0
+    height 1px
+    width 80%
+    margin-top 0
+    margin-bottom 25px
+    background-image -webkit-linear-gradient(left, #000, #8c8b8b, #000)
+    background-image -moz-linear-gradient(left, #000, #8c8b8b, #000)
+    background-image -ms-linear-gradient(left, #000, #8c8b8b, #000)
+    background-image -o-linear-gradient(left, #000, #8c8b8b, #000)
+
+  .icon
+    display inline-block
+    font-size 21px
+    height 1.5rem
+    line-height 1.5rem
+    text-align center
+    vertical-align top
+    width 1.5rem
+
+    &.is-medium
+      display inline-block
+      text-align center
+      vertical-align top
+
+    &.is-small
+      vertical-align baseline
+      margin-right 5px
+      font-size 14px
+      height 1rem
+      line-height 1rem
+      width 1rem
+
+    &.is-angle
+      position absolute
+      right 10px
+
+  ul
+    width 60%
+    line-height 1.25
+
+    a
+      border-radius 0
+      color #4a4a4a
+      display block
+      padding .5em .75em
+      text-transform uppercase
+      font-size .9em
+      text-align left
+      transition background-color .4s ease
+
+      &#submit
+        &:hover
+          background-color transparent
+
+      &:hover
+        background-color darken($side-nav-active-background-color, 30%)
+        color oc-gray-6
+
+      &.is-active
+        background-color $side-nav-active-background-color
+        color $side-nav-active-color
+
+
+    button
+      border 1px solid $preview-button-color
+      border-radius 3px
+      width 100%
+      padding 12.5px 20px
+      background-color transparent
+      color $preview-button-color
+      transition border-color .4s ease
+      margin-top 30px
+
+      &:hover
+        border 1px solid darken($preview-button-color, 50%)
+        cursor pointer
+
+      &:focus
+        outline none

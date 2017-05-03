@@ -1,0 +1,16 @@
+{
+  "name": "latexresu.me",
+  "version": "0.1.0",
+  "repository": "git@github.com:saadq/latexresu.me.git",
+  "author": {
+    "name": "Saad Quadri",
+    "email": "saad@saadq.com",
+    "url": "http://saadq.com"
+  },
+  "scripts": {
+    "start": "npm run start:client & npm run start:server",
+    "start:client": "cd app/client && npm run start",
+    "start:server": "cd app/server && npm run watch"
+  },
+  "license": "MIT"
+}

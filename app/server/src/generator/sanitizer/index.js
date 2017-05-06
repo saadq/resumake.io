@@ -94,11 +94,11 @@ function isObject(val) {
 }
 
 /**
- * [isString description]
+ * Checks to see if a value is a string.
  *
- * @param {[type]} val [description]
+ * @param {any} val - The value to be checked.
  *
- * @return {Boolean} [description]
+ * @return {boolean}
  */
 function isString(val) {
   return typeof val === 'string'

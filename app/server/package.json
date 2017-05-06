@@ -17,8 +17,10 @@
     "node-latex": "^2.4.0"
   },
   "devDependencies": {
+    "ava": "^0.19.1",
     "babel-eslint": "^7.2.1",
     "blyss": "^2.0.0",
+    "inspect-process": "^0.4.2",
     "nodemon": "^1.11.0",
     "snazzy": "^7.0.0"
   },
@@ -27,7 +29,8 @@
     "watch": "nodemon src/index.js",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "test": "npm run lint --silent"
+    "test": "npm run lint --silent && ava src/tests/**/*.js --fail-fast --verbose",
+    "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js"
   },
   "blyss": {
     "parser": "babel-eslint"

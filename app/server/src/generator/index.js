@@ -1,59 +1,21 @@
 const latex = require('node-latex')
-const generateTemplate = require('./templates')
+const sanitize = require('./sanitizer')
+const getTemplateData = require('./templates')
 
 function generateTex(formData) {
-  const data = sanitizeInputs(formData)
-  const template = generateTemplate(data)
+  const data = sanitize(formData)
+  const { texDoc, opts } = getTemplateData(data)
 
-  return template
+  process.stdout.write('\x1Bc')
+  console.log(JSON.stringify(data, null, 4))
+
+  return { texDoc, opts }
 }
 
 function generatePDF(formData) {
-  const texDoc = generateTex(formData)
+  const { texDoc, opts } = generateTex(formData)
 
-  return latex(texDoc)
-}
-
-function sanitizeInputs(formData) {
-  Object.keys(formData).forEach((key) => {
-    if (!formData[key]) {
-      return
-    }
-
-    if (typeof formData[key] === 'object') {
-      sanitizeInputs(formData[key])
-      return
-    }
-
-    if (typeof formData[key] === 'number') {
-      return
-    }
-
-    formData[key] = sanitizeStr(formData[key])
-  })
-
-  return formData
-}
-
-function sanitizeStr(str) {
-  const symbolMap = {
-    '\\': '\\textbackslash{}',
-    '^': '\\textasciicircum{}',
-    '~': '\\textasciitilde{}',
-    '{': '\\{',
-    '}': '\\}',
-    '$': '\\$',
-    '&': '\\&',
-    '#': '\\#',
-    '_': '\\_',
-    '%': '\\%'
-  }
-
-  const symbols = Object.keys(symbolMap)
-
-  return Array.from(str)
-    .map(char => symbols.includes(char) ? symbolMap[char] : char)
-    .join('')
+  return latex(texDoc, opts)
 }
 
 module.exports = {

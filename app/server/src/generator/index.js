@@ -6,9 +6,6 @@ function generateTex(formData) {
   const data = sanitize(formData)
   const { texDoc, opts } = getTemplateData(data)
 
-  process.stdout.write('\x1Bc')
-  console.log(JSON.stringify(data, null, 4))
-
   return { texDoc, opts }
 }
 

@@ -13,7 +13,6 @@ function getTemplateData(data) {
       }
 
     case TEMPLATE2:
-      console.log(template2(data))
       return {
         texDoc: template2(data),
         opts: {

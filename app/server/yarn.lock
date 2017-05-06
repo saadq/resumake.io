@@ -3617,6 +3617,10 @@ safe-buffer@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
 
+sanitize-latex@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/sanitize-latex/-/sanitize-latex-0.1.2.tgz#b53b5f1e344ec0d73cb70dfcbdaf232d1b77dbc1"
+
 sax@>=0.6.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"

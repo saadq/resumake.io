@@ -1,18 +1,20 @@
+const sanitizeLatex = require('sanitize-latex')
+
 function sanitize(obj = {}) {
   if (Array.isArray(obj)) {
     return obj
       .map((val) => {
         if (isObject(val)) return sanitize(val)
-        if (isString(val)) return normalizeLatexSymbols(val)
+        if (isString(val)) return sanitizeLatex(trim(val))
         return val
       })
-      .filter(val => val != null && !Number.isNaN(val) && !isEmptyObject(val) && !isEmptyString(val))
+      .filter(val => !isEmpty(val))
   }
 
   const copy = {}
 
   Object.entries(obj).forEach(([key, val]) => {
-    if (val == null || Number.isNaN(val) || isEmptyObject(val) || isEmptyString(val)) {
+    if (isEmpty(val)) {
       return
     }
 
@@ -23,7 +25,7 @@ function sanitize(obj = {}) {
         copy[key] = sanitize(val)
       }
     } else if (isString(val)) {
-      copy[key] = normalizeLatexSymbols(val)
+      copy[key] = sanitizeLatex(trim(val))
     } else if (val != null) {
       copy[key] = val
     }
@@ -32,30 +34,8 @@ function sanitize(obj = {}) {
   return copy
 }
 
-function normalizeLatexSymbols(str) {
-  const symbolMap = {
-    '\\': '\\textbackslash{}',
-    '^': '\\textasciicircum{}',
-    '~': '\\textasciitilde{}',
-    '{': '\\{',
-    '}': '\\}',
-    '$': '\\$',
-    '&': '\\&',
-    '#': '\\#',
-    '_': '\\_',
-    '%': '\\%'
-  }
-
-  const symbols = Object.keys(symbolMap)
-  const trimmedStr = trim(str)
-
-  return Array.from(trimmedStr)
-    .map(char => symbols.includes(char) ? symbolMap[char] : char)
-    .join('')
-}
-
-function isObject(val) {
-  return val && typeof val === 'object'
+function isEmpty(val) {
+  return val == null || Number.isNaN(val) || isEmptyObject(val) || isEmptyString(val)
 }
 
 function isEmptyObject(val) {
@@ -72,30 +52,14 @@ function isEmptyString(val) {
   return isString(val) && isOnlyWhitespace(val)
 }
 
+function isObject(val) {
+  return val && typeof val === 'object'
+}
+
 function isString(val) {
   return typeof val === 'string'
 }
 
-// function isNumber(val) {
-//   return val && typeof val === 'number'
-// }
-
-// function isNotEmpty(val) {
-//   if (val == null) {
-//     return false
-//   }
-//
-//   if (isString(val) && isOnlyWhitespace(val)) {
-//     return false
-//   }
-//
-//   if (isNumber(val) && Number.isNaN(val)) {
-//     return false
-//   }
-//
-//   return true
-// }
-//
 function isOnlyWhitespace(str) {
   return !(/\S/).test(str.trim())
 }

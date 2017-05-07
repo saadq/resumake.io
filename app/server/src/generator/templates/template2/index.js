@@ -1,20 +1,12 @@
 const { stripIndent } = require('common-tags')
 
-function template2({ profile = {} }) {
+function template2({ profile, schools, jobs, projects, skills }) {
   return `
     ${generateCommentHeader()}
 
     \\documentclass[]{deedy-resume-openfont}
 
-
     \\begin{document}
-
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Profile
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ${generateProfileSection(profile)}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,16 +117,15 @@ function template2({ profile = {} }) {
   `
 }
 
-// email, phoneNumber, address, link
 function generateProfileSection(profile) {
   if (!profile) {
     return ''
   }
 
-  const { fullName } = profile
+  const { fullName, email, phoneNumber, address, link } = profile
 
-  let nameStart = 'Your'
-  let nameEnd = 'Name'
+  let nameStart = ''
+  let nameEnd = ''
 
   if (fullName) {
     const names = fullName.split(' ')
@@ -151,7 +142,32 @@ function generateProfileSection(profile) {
     }
   }
 
-  return `\\namesection{${nameStart}}{${nameEnd}}{saad@saadq.com | 732-476-8719 | Metuchen, NJ}`
+  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+
+  if (!fullName) {
+    return stripIndent`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Profile
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\centering{
+        \\color{headings}
+        \\fontspec[Path = fonts/raleway/]{Raleway-Medium}
+        \\fontsize{11pt}{14pt}
+        \\selectfont ${info}
+      }
+    `
+  }
+
+  return stripIndent`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Profile
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\namesection{${nameStart}}{${nameEnd}}{${info}}
+  `
 }
 
 function generateCommentHeader() {

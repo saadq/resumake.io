@@ -127,6 +127,10 @@ function template2({ profile = {} }) {
 
 // email, phoneNumber, address, link
 function generateProfileSection(profile) {
+  if (!profile) {
+    return ''
+  }
+
   const { fullName } = profile
 
   let nameStart = 'Your'

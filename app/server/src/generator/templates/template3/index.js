@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template3({ profile = {}, schools = [], jobs = [], projects = [], skills = {} }) {
+function template3({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
     \\documentclass{article}
     \\usepackage{fullpage}
@@ -37,80 +37,90 @@ function template3({ profile = {}, schools = [], jobs = [], projects = [], skill
 }
 
 function generateProfileSection(profile) {
+  if (!profile) {
+    return ''
+  }
+
   const { fullName, email, phoneNumber, address, link } = profile
 
-  const info = [address, email, phoneNumber, link]
-    .filter(Boolean)
-    .join(' $\\cdot$ ')
+  let line1 = fullName ? `{\\Huge \\scshape {${fullName}}}` : ''
+  let line2 = [address, email, phoneNumber, link].filter(Boolean).join(' $\\cdot$ ')
+
+  if (line1 && line2) {
+    line1 += '\\\\'
+    line2 += '\\\\'
+  }
 
   return stripIndent`
     %==== Profile ====%
-    \\contact{${fullName || 'Your Name'}}
-    {${info || 'Contact Info'}}
+    \\vspace*{-10pt}
+    \\begin{center}
+      ${line1}
+      ${line2}
+    \\end{center}
   `
 }
 
 function generateEducationSection(schools) {
-  if (schools.length === 0 || schools.every(school => Object.keys(school).length === 0)) {
+  if (!schools) {
     return ''
   }
 
   return source`
     %==== Education ====%
     \\header{Education}
+      ${schools.map((school) => {
+        const { name, location, degree, major, gpa, graduationDate } = school
 
-        ${schools.filter(Boolean).map((school) => {
-          if (Object.keys(school).length === 0) {
-            return
-          }
+        let line1 = ''
+        let line2 = ''
 
-          const { name, location, degree, major, gpa, graduationDate } = school
+        if (name) {
+          line1 += `\\textbf{${name}}`
+        }
 
-          let line1 = ''
-          let line2 = ''
+        if (location) {
+          line1 += `\\hfill ${location}`
+        }
 
-          line1 += `\\textbf{${name || 'School Name'}}`
+        if (degree) {
+          line2 += degree
+        }
 
-          if (location) {
-            line1 += `\\hfill ${location}`
-          }
+        if (major) {
+          line2 += degree ? ` ${major}` : `Degree in ${major}`
+        }
 
+        if (gpa) {
+          line2 += ` \\textit{GPA: ${gpa}}`
+        }
+
+        if (graduationDate) {
+          const gradLine = `Grad: ${graduationDate}`
+          line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
+        }
+
+        if (line1) {
           line1 += '\\\\'
+        }
 
-          if (degree) {
-            line2 += degree
-          }
+        if (line2) {
+          line2 += '\\\\'
+        }
 
-          if (major) {
-            line2 += degree ? ` ${major}` : `Degree in ${major}`
-          }
+        line2.trim()
 
-          if (gpa) {
-            line2 += ` \\textit{GPA: ${gpa}}`
-          }
-
-          if (graduationDate) {
-            const gradLine = `Grad: ${graduationDate}`
-            line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
-          }
-
-          if (line2) {
-            line2 += '\\\\'
-          }
-
-          line2.trim()
-
-          return stripIndent`
-            ${line1}
-            ${line2}
-            \\vspace{1mm}
-          `
-        })}
+        return stripIndent`
+          ${line1}
+          ${line2}
+          \\vspace{1mm}
+        `
+      })}
   `
 }
 
 function generateExperienceSection(jobs) {
-  if (jobs.length === 0 || jobs.every(job => Object.keys(job).length === 0)) {
+  if (!jobs) {
     return ''
   }
 
@@ -119,26 +129,24 @@ function generateExperienceSection(jobs) {
     \\header{Experience}
     \\vspace{1mm}
 
-    ${jobs.filter(Boolean).map((job) => {
-      if (Object.keys(job).length === 0) {
-        return ''
-      }
-
+    ${jobs.map((job) => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let line1 = ''
       let line2 = ''
       let dutyLines = ''
 
-      line1 += `\\textbf{${name || 'Company Name'}}`
+      if (name) {
+        line1 += `\\textbf{${name}}`
+      }
 
       if (location) {
         line1 += ` \\hfill ${location}`
       }
 
-      line1 += '\\\\'
-
-      line2 += `\\textit{${title || 'Job Title'}}`
+      if (title) {
+        line2 += `\\textit{${title}}`
+      }
 
       if (startDate && endDate) {
         line2 += ` \\hfill ${startDate} | ${endDate}`
@@ -148,13 +156,14 @@ function generateExperienceSection(jobs) {
         line2 += ` \\hfill ${endDate}`
       }
 
-      line2 += '\\\\'
+      if (line1) line1 += '\\\\'
+      if (line2) line2 += '\\\\'
 
-      if (duties && duties.filter(Boolean).length > 0) {
+      if (duties) {
         dutyLines = source`
           \\vspace{-1mm}
           \\begin{itemize} \\itemsep 1pt
-            ${duties.filter(Boolean).map(duty => `\\item ${duty}`)}
+            ${duties.map(duty => `\\item ${duty}`)}
           \\end{itemize}
         `
       }
@@ -169,7 +178,7 @@ function generateExperienceSection(jobs) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills || Object.keys(skills).length === 0) {
+  if (!skills) {
     return ''
   }
 
@@ -186,13 +195,13 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects || projects.length === 0) {
+  if (!projects) {
     return ''
   }
 
   return source`
     \\header{Projects}
-    ${projects.filter(Boolean).map((project) => {
+    ${projects.map((project) => {
       if (Object.keys(project) === 0) {
         return ''
       }
@@ -202,17 +211,21 @@ function generateProjectsSection(projects) {
       let line1 = ''
       let line2 = description || ''
 
-      line1 += `{\\textbf{${name || 'Project Name'}}`
+      if (name) {
+        line1 += `{\\textbf{${name}}`
+      }
 
       if (technologies) {
-        line1 += `, \\sl ${technologies}} `
+        line1 += ` \\sl ${technologies}} `
       }
 
       if (link) {
         line1 += `\\hfill ${link}`
       }
 
-      line1 += '\\\\'
+      if (line1) {
+        line1 += '\\\\'
+      }
 
       if (line2) {
         line2 += '\\\\'

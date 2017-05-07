@@ -2,14 +2,16 @@ const { join } = require('path')
 const template1 = require('./template1')
 const template2 = require('./template2')
 const template3 = require('./template3')
-const { TEMPLATE1, TEMPLATE2, TEMPLATE3 } = require('../constants')
+const { TEMPLATE1, TEMPLATE2, TEMPLATE3 } = require('./constants')
 
 function getTemplateData(data) {
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {
         texDoc: template1(data),
-        opts: {}
+        opts: {
+          errorLogs: join(__dirname, 'latexerrors.log')
+        }
       }
 
     case TEMPLATE2:
@@ -26,7 +28,9 @@ function getTemplateData(data) {
     case TEMPLATE3:
       return {
         texDoc: template3(data),
-        opts: {}
+        opts: {
+          errorLogs: join(__dirname, 'latexerrors.log')
+        }
       }
   }
 }

@@ -11,7 +11,7 @@
     "build": "npm run build:client && npm run build:server",
     "start": "npm run start:client & npm run start:server",
     "lint": "npm run lint:client && npm run lint:server",
-    "test": "npm run lint --silent && npm run test:client && npm run test:server",
+    "test": "npm run test:client && npm run test:server",
     "build:client": "cd app/client && npm install",
     "start:client": "cd app/client && npm run start",
     "lint:client": "cd app/client && npm run lint",

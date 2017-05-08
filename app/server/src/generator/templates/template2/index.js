@@ -1,4 +1,4 @@
-const { stripIndent } = require('common-tags')
+const { stripIndent, source } = require('common-tags')
 
 function template2({ profile, schools, jobs, projects, skills }) {
   return `
@@ -7,17 +7,8 @@ function template2({ profile, schools, jobs, projects, skills }) {
     \\documentclass[]{deedy-resume-openfont}
 
     \\begin{document}
-    ${generateProfileSection(profile)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Education
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Education}
-
-    \\runsubsection{Rutgers University} \\descript{| BS in Computer Science} \\hfill \\location{New Brunswick, NJ | Expected: Jan 2017}
-    \\sectionsep
+      ${generateProfileSection(profile)}
+      ${generateEducationSection(schools)}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %
@@ -167,6 +158,61 @@ function generateProfileSection(profile) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\namesection{${nameStart}}{${nameEnd}}{${info}}
+  `
+}
+
+function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Education
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\section{Education}
+    ${schools.map((school) => {
+      const { name, location, degree, major, gpa, graduationDate } = school
+
+      let line1 = ''
+      let line2 = ''
+
+      if (name) {
+        line1 += `\\runsubsection{${name}}`
+      }
+
+      if (degree && major) {
+        line1 += `\\descript{| ${degree} ${major}}`
+      } else if (degree) {
+        line1 += `\\descript{| ${degree}}`
+      } else if (major) {
+        line1 += `\\descript{| ${major}}`
+      } else {
+        line1 += '\\descript{}'
+      }
+
+      const locationAndDate = [location, graduationDate].filter(Boolean).join(' | ')
+
+      if (locationAndDate) {
+        line1 += `\\hfill \\location{${locationAndDate}}`
+      }
+
+      if (line1) {
+        line1 += '\\\\'
+      }
+
+      if (gpa) {
+        line2 += `GPA: ${gpa}\\\\`
+      }
+
+      return `
+        ${line1}
+        ${line2}
+        \\sectionsep
+      `
+    })}
   `
 }
 

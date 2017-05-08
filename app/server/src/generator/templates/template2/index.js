@@ -8,50 +8,7 @@ function template2({ profile, schools, jobs, projects, skills }) {
     \\begin{document}
       ${generateProfileSection(profile)}
       ${generateEducationSection(schools)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Experience
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Experience}
-
-    \\runsubsection{Mozilla} \\descript{| Software Engineer Intern} \\hfill \\location{Mountain View, CA | Jun 2016 – Aug 2016}
-    % \\vspace{\\topsep} % Hacky fix for awkward extra vertical space
-    \\begin{tightemize}
-    \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.
-    \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-    \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-    \\item te
-    \\end{tightemize}
-    \\sectionsep
-
-    \\runsubsection{Codecademy} \\descript{| Coding Advisor} \\hfill \\location{Manhattan, NY | Dec 2015 – May 2016}
-    % \\vspace{\\topsep} % Hacky fix for awkward extra vertical space
-    \\begin{tightemize}
-    \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-    \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-    \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-    \\end{tightemize}
-    \\sectionsep
-
-    \\runsubsection{IEEE} \\descript{| Application Developer Intern} \\hfill \\location{Piscataway, NJ | Jun 2015 – Nov 2015}
-    % \\vspace{\\topsep} % Hacky fix for awkward extra vertical space
-    \\begin{tightemize}
-    \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-    \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-    \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-    \\end{tightemize}
-    \\sectionsep
-
-    \\runsubsection{Johnson \\& Johnson} \\descript{| Web Developer Intern} \\hfill \\location{Mountain View, CA | Jan 2015 – Jun 2015}
-    % \\vspace{\\topsep} % Hacky fix for awkward extra vertical space
-    \\begin{tightemize}
-    \\item  Improved existing web pages by migrating inline-styling to external CSS files, and adding cross-browser compatibility.
-    \\item Created SharePoint front-ends with HTML, CSS, and JavaScript and utilized the jQuery UI library to create responsive widgets.
-    \\item Debugged original code base as the sole developer on the team and created a standard for SharePoint web part development for future employees.
-    \\end{tightemize}
-    \\sectionsep
+      ${generateExperienceSection(jobs)}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %
@@ -59,6 +16,7 @@ function template2({ profile, schools, jobs, projects, skills }) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Skills}
+    \\raggedright
     \\begin{tabular}{ l l }
       \\descript{Programming Languages:} & {\\location{JavaScript, Java, Ruby, HTML, CSS}} \\\\
 
@@ -76,7 +34,7 @@ function template2({ profile, schools, jobs, projects, skills }) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Projects}
-
+    \\raggedright
     \\runsubsection{\\large{Resume Generator}}
     \\descript{| Node.js, Koa, React, Redux} \\hfill \\location{https://latexresu.me} \\\\
     A webapp for generating LaTeX resumes from form data (including this one).
@@ -134,13 +92,17 @@ function generateProfileSection(profile) {
 
   const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
 
+  const sectionHeader = stripIndent`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Profile
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  `
+
   if (!fullName) {
     return stripIndent`
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      %
-      %     Profile
-      %
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      ${sectionHeader}
       \\centering{
         \\color{headings}
         \\fontspec[Path = fonts/raleway/]{Raleway-Medium}
@@ -151,11 +113,7 @@ function generateProfileSection(profile) {
   }
 
   return stripIndent`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Profile
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    ${sectionHeader}
     \\namesection{${nameStart}}{${nameEnd}}{${info}}
   `
 }
@@ -172,6 +130,7 @@ function generateEducationSection(schools) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Education}
+    \\raggedright
     ${schools.map((school) => {
       const { name, location, degree, major, gpa, graduationDate } = school
 
@@ -179,7 +138,7 @@ function generateEducationSection(schools) {
       let line2 = ''
 
       if (name) {
-        line1 += `\\runsubsection{\\noindent ${name}}`
+        line1 += `\\runsubsection{${name}}`
       }
 
       if (degree && major) {
@@ -188,8 +147,6 @@ function generateEducationSection(schools) {
         line1 += `\\descript{| ${degree}}`
       } else if (major) {
         line1 += `\\descript{| ${major}}`
-      } else {
-        line1 += '\\descript{}'
       }
 
       const locationAndDate = [location, graduationDate].filter(Boolean).join(' | ')
@@ -209,6 +166,67 @@ function generateEducationSection(schools) {
       return `
         ${line1}
         ${line2}
+        \\sectionsep
+      `
+    })}
+  `
+}
+
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Experience
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\section{Experience}
+    \\raggedright
+    ${jobs.map((job) => {
+      const { name, title, location, startDate, endDate, duties } = job
+
+      let line1 = ''
+      let dateRange = ''
+      let dutyLines = ''
+
+      if (name) {
+        line1 += `\\runsubsection{${name}}`
+      }
+
+      if (title) {
+        line1 += `\\descript{| ${title}}`
+      }
+
+      if (startDate && endDate) {
+        dateRange = `${startDate} – ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} – Present`
+      } else {
+        dateRange = endDate
+      }
+
+      if (location && dateRange) {
+        line1 += `\\hfill \\location{${location} | ${dateRange}}`
+      } else if (location) {
+        line1 += `\\hfill \\location{${location}}`
+      } else if (dateRange) {
+        line1 += `\\hfill \\location{${dateRange}}`
+      }
+
+      if (duties) {
+        dutyLines = source`
+          \\begin{tightemize}
+            ${duties.map(duty => `\\item ${duty}`)}
+          \\end{tightemize}
+        `
+      }
+
+      return stripIndent`
+        ${line1}
+        ${dutyLines}
         \\sectionsep
       `
     })}

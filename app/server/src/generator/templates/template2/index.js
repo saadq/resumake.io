@@ -1,9 +1,8 @@
 const { stripIndent, source } = require('common-tags')
 
 function template2({ profile, schools, jobs, projects, skills }) {
-  return `
+  return stripIndent`
     ${generateCommentHeader()}
-
     \\documentclass[]{deedy-resume-openfont}
 
     \\begin{document}
@@ -180,7 +179,7 @@ function generateEducationSection(schools) {
       let line2 = ''
 
       if (name) {
-        line1 += `\\runsubsection{${name}}`
+        line1 += `\\runsubsection{\\noindent ${name}}`
       }
 
       if (degree && major) {

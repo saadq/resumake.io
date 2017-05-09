@@ -10,41 +10,8 @@ function template2({ profile, schools, jobs, projects, skills }) {
       ${generateEducationSection(schools)}
       ${generateExperienceSection(jobs)}
       ${generateSkillsSection(skills)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Projects
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Projects}
-    \\raggedright
-    \\runsubsection{\\large{Resume Generator}}
-    \\descript{| Node.js, Koa, React, Redux} \\hfill \\location{https://latexresu.me} \\\\
-    A webapp for generating LaTeX resumes from form data (including this one).
-    \\sectionsep
-
-    \\runsubsection{\\large{Flow Timer}}
-    \\descript{| Node.js, Koa, React, Redux} \\hfill \\location{https://flowtimer.com} \\\\
-    A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.
-    \\sectionsep
-
-    \\runsubsection{\\large{Reddit Image Scraper}}
-    \\descript{| Ruby, Sinatra} \\hfill \\location{https://github.com/saadq/reddit-scraper} \\\\
-    A web app that lets you view a collage of images/videos from a subreddit.
-    \\sectionsep
-
-    \\runsubsection{\\large{Anagrams}}
-    \\descript{| HTML, CSS, JavaScript} \\hfill \\location{https://saadq.github.io/Anagrams} \\\\
-    A cognitive, anagram-recognition game where the player must quickly find the answer.
-    \\sectionsep
-
-    \\runsubsection{\\large{Materialize}}
-    \\descript{| XML, JSON} \\hfill \\location{https://packagecontrol.io/packages/Materialize} \\\\
-    A collection of custom themes for Sublime Text, inspired by Material design with 30k+ installations.
-    \\sectionsep
-
-
-    \\end{document}  \\documentclass[]{article}
+      ${generateProjectsSection(projects)}
+    \\end{document}
   `
 }
 
@@ -233,6 +200,56 @@ function generateSkillsSection(skills) {
       ${skills.map(skill => `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`)}
     \\end{tabular}
     \\sectionsep
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Projects
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\section{Projects}
+    \\raggedright
+    ${projects.map((project) => {
+      const { name, description, technologies, link } = project
+
+      let line1 = ''
+      let line2 = ''
+      let line3 = ''
+
+      if (name) {
+        line1 += `\\runsubsection{\\large{${name}}}`
+      }
+
+      if (technologies) {
+        line2 += `\\descript{| ${technologies}}`
+      }
+
+      if (link) {
+        line2 += `\\hfill \\location{${link}}`
+      }
+
+      if (line2) {
+        line2 += '\\\\'
+      }
+
+      if (description) {
+        line3 += `${description}\\\\`
+      }
+
+      return `
+        ${line1}
+        ${line2}
+        ${line3}
+        \\sectionsep
+      `
+    })}
   `
 }
 

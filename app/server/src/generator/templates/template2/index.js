@@ -9,24 +9,7 @@ function template2({ profile, schools, jobs, projects, skills }) {
       ${generateProfileSection(profile)}
       ${generateEducationSection(schools)}
       ${generateExperienceSection(jobs)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Skills
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Skills}
-    \\raggedright
-    \\begin{tabular}{ l l }
-      \\descript{Programming Languages:} & {\\location{JavaScript, Java, Ruby, HTML, CSS}} \\\\
-
-      \\descript{Frameworks/Libraries:} & {\\location{Node.js, Koa, Express, React, Redux, jQuery}} \\\\
-
-      \\descript{Miscellaneous:} & {\\location{PostgreSQL, Bash, Git, SVN, Mercurial}} \\\\
-    \\end{tabular}
-
-    \\sectionsep
-
+      ${generateSkillsSection(skills)}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %
@@ -230,6 +213,26 @@ function generateExperienceSection(jobs) {
         \\sectionsep
       `
     })}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Skills
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\section{Skills}
+    \\raggedright
+    \\begin{tabular}{ l l }
+      ${skills.map(skill => `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`)}
+    \\end{tabular}
+    \\sectionsep
   `
 }
 

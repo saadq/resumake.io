@@ -182,14 +182,10 @@ function generateSkillsSection(skills) {
     return ''
   }
 
-  const { languages, frameworks, miscellaneous } = skills
-
-  return `
+  return source`
     \\header{Skills}
     \\begin{tabular}{ l l }
-      ${languages ? `Programming Languages: & ${languages} \\\\` : ''}
-      ${frameworks ? `Frameworks/Libraries: & ${frameworks} \\\\` : ''}
-      ${miscellaneous ? `Miscellaneous: & ${miscellaneous} \\\\` : ''}
+      ${skills.map(skill => `${skill.name}: & ${skill.details} \\\\`)}
     \\end{tabular}
   `
 }

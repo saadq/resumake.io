@@ -8,6 +8,8 @@ import {
   DECREMENT_JOB_DUTY,
   ADD_PROJECT,
   REMOVE_PROJECT,
+  ADD_SKILL,
+  REMOVE_SKILL,
   SET_RESUME_URL
 } from '../constants'
 
@@ -17,6 +19,7 @@ const initialState = {
   jobCount: 1,
   jobDuties: [1],
   projectCount: 1,
+  skillCount: 1,
   resumeURL: null
 }
 
@@ -84,6 +87,18 @@ function resume(state = initialState, action) {
       return {
         ...state,
         projectCount: (state.projectCount > 1) ? state.projectCount - 1 : 1
+      }
+
+    case ADD_SKILL:
+      return {
+        ...state,
+        skillCount: state.skillCount + 1
+      }
+
+    case REMOVE_SKILL:
+      return {
+        ...state,
+        skillCount: (state.skillCount > 1) ? state.skillCount - 1 : 1
       }
 
     case SET_RESUME_URL:

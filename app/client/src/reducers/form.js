@@ -3,7 +3,8 @@ import {
   CLEAR_SCHOOL_FIELD,
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
-  CLEAR_PROJECT_FIELD
+  CLEAR_PROJECT_FIELD,
+  CLEAR_SKILL_FIELD
 } from '../constants'
 
 const form = reducer.plugin({
@@ -79,6 +80,22 @@ const form = reducer.plugin({
           values: {
             ...state.values,
             projects: state.values.projects.slice(0, -1)
+          }
+        }
+
+      case CLEAR_SKILL_FIELD:
+        if (!state.values ||
+            !state.values.skills ||
+            state.values.skills.length <= 1 ||
+            state.values.skills.length !== action.skillCount) {
+          return state
+        }
+
+        return {
+          ...state,
+          values: {
+            ...state.values,
+            skills: state.values.skills.slice(0, -1)
           }
         }
 

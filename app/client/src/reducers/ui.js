@@ -7,7 +7,8 @@ import {
 
 const initialState = {
   modal: {
-    active: false
+    active: false,
+    src: null
   },
   sideNav: {
     active: false

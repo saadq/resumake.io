@@ -8,6 +8,8 @@ import {
   DECREMENT_JOB_DUTY,
   ADD_PROJECT,
   REMOVE_PROJECT,
+  ADD_SKILL,
+  REMOVE_SKILL,
   SET_RESUME_URL
 } from '../constants'
 
@@ -50,6 +52,14 @@ const removeProject = () => ({
   type: REMOVE_PROJECT
 })
 
+const addSkill = () => ({
+  type: ADD_SKILL
+})
+
+const removeSkill = () => ({
+  type: REMOVE_SKILL
+})
+
 const setResumeURL = url => ({
   type: SET_RESUME_URL,
   url
@@ -61,9 +71,11 @@ export {
   removeSchool,
   addJob,
   removeJob,
-  addProject,
   incrementJobDuty,
   decrementJobDuty,
+  addProject,
   removeProject,
+  addSkill,
+  removeSkill,
   setResumeURL
 }

@@ -1,13 +1,49 @@
 import React from 'react'
-import { Input } from '../bulma'
+import { number, object } from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Skill } from './fragments'
+import { Icon } from '../bulma'
+import { ResumeActions, FormActions } from '../../actions'
 
-const Skills = () => (
+const Skills = ({ skillCount, actions }) => (
   <section id='skills'>
-    <h1>Your Educational Background</h1>
-    <Input name='skills[languages]' title='Languages' />
-    <Input name='skills[frameworks]' title='Frameworks/Libraries' />
-    <Input name='skills[miscellaneous]' title='Miscellaneous' />
+    {Array.from({ length: skillCount }).map((_, index) => (
+      <Skill key={index} index={index} />
+    ))}
+    <button onClick={() => actions.addSkill()} type='button'>
+      <Icon size='small' type='plus' />
+    </button>
+    <button
+      onClick={() => {
+        actions.removeSkill()
+        actions.clearSkillField(skillCount)
+      }}
+      type='button'>
+      <Icon size='small' type='times' />
+    </button>
   </section>
 )
 
-export default Skills
+Skills.propTypes = {
+  skillCount: number.isRequired,
+  actions: object.isRequired
+}
+
+const actionCreators = {
+  ...ResumeActions,
+  ...FormActions
+}
+
+const mapStateToProps = state => ({
+  skillCount: state.resume.skillCount
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Skills)

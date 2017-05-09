@@ -1,9 +1,9 @@
-
 import {
   CLEAR_SCHOOL_FIELD,
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
-  CLEAR_PROJECT_FIELD
+  CLEAR_PROJECT_FIELD,
+  CLEAR_SKILL_FIELD
 } from '../constants'
 
 const clearSchoolField = schoolCount => ({
@@ -27,9 +27,15 @@ const clearProjectField = projectCount => ({
   projectCount
 })
 
+const clearSkillField = skillCount => ({
+  type: CLEAR_SKILL_FIELD,
+  skillCount
+})
+
 export {
   clearSchoolField,
   clearJobField,
   clearJobDutyField,
-  clearProjectField
+  clearProjectField,
+  clearSkillField
 }

@@ -10,17 +10,23 @@ import {
   REMOVE_PROJECT,
   ADD_SKILL,
   REMOVE_SKILL,
-  SET_RESUME_URL
+  REQUEST_RESUME,
+  RECEIVE_RESUME,
+  SAVE_PREVIOUS_RESUME
 } from '../constants'
 
 const initialState = {
-  selectedTemplate: 3,
+  template: 3,
   schoolCount: 1,
   jobCount: 1,
   jobDuties: [1],
   projectCount: 1,
   skillCount: 1,
-  resumeURL: null
+  generator: {
+    isGenerating: false,
+    resumeURL: null,
+    prevResume: {}
+  }
 }
 
 function resume(state = initialState, action) {
@@ -28,7 +34,7 @@ function resume(state = initialState, action) {
     case SELECT_TEMPLATE:
       return {
         ...state,
-        selectedTemplate: action.templateId
+        template: action.templateId
       }
 
     case ADD_SCHOOL:
@@ -101,10 +107,32 @@ function resume(state = initialState, action) {
         skillCount: (state.skillCount > 1) ? state.skillCount - 1 : 1
       }
 
-    case SET_RESUME_URL:
+    case REQUEST_RESUME:
       return {
         ...state,
-        resumeURL: action.url
+        generator: {
+          ...state.generator,
+          isGenerating: true
+        }
+      }
+
+    case RECEIVE_RESUME:
+      return {
+        ...state,
+        generator: {
+          ...state.generator,
+          resumeURL: action.url,
+          isGenerating: false
+        }
+      }
+
+    case SAVE_PREVIOUS_RESUME:
+      return {
+        ...state,
+        generator: {
+          ...state.generator,
+          prevResume: action.payload
+        }
       }
 
     default:

@@ -1,3 +1,4 @@
+import isEqual from 'lodash/isEqual'
 import {
   SELECT_TEMPLATE,
   ADD_SCHOOL,
@@ -10,7 +11,9 @@ import {
   REMOVE_PROJECT,
   ADD_SKILL,
   REMOVE_SKILL,
-  SET_RESUME_URL
+  REQUEST_RESUME,
+  RECEIVE_RESUME,
+  SAVE_PREVIOUS_RESUME
 } from '../constants'
 
 function selectTemplate(templateId) {
@@ -82,10 +85,52 @@ function removeSkill() {
   }
 }
 
-function setResumeURL(url) {
+function requestResume() {
   return {
-    type: SET_RESUME_URL,
+    type: REQUEST_RESUME
+  }
+}
+
+function receiveResume(url) {
+  return {
+    type: RECEIVE_RESUME,
     url
+  }
+}
+
+function savePreviousResume(payload) {
+  return {
+    type: SAVE_PREVIOUS_RESUME,
+    payload
+  }
+}
+
+function generateResume(payload) {
+  return async (dispatch, getState) => {
+    const { isGenerating, prevResume } = getState().resume.generator
+
+    if (isGenerating || isEqual(prevResume, payload)) {
+      return
+    }
+
+    dispatch(requestResume())
+    dispatch(savePreviousResume(payload))
+
+    const req = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }
+
+    const { fetch, URL } = window
+    const res = await fetch('/api/generate/resume', req)
+    const blob = await res.blob()
+    const url = URL.createObjectURL(blob)
+
+    dispatch(receiveResume(url))
   }
 }
 
@@ -101,5 +146,5 @@ export {
   removeProject,
   addSkill,
   removeSkill,
-  setResumeURL
+  generateResume
 }

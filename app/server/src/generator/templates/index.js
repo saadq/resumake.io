@@ -5,7 +5,7 @@ const template3 = require('./template3')
 const { TEMPLATE1, TEMPLATE2, TEMPLATE3 } = require('./constants')
 
 function getTemplateData(data) {
-  switch (data.selectedTemplate) {
+  switch (data.template) {
     case TEMPLATE1:
       return {
         texDoc: template1(data),

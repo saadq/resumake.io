@@ -9,13 +9,13 @@ import '../../styles/components/templates.styl'
 const ctx = require.context('../../assets/img/templates', true)
 const imgs = ctx.keys().map(ctx)
 
-function Templates({ actions, selectedTemplate, modalActive, modalSrc }) {
+function Templates({ actions, template, modalActive, modalSrc }) {
   return (
     <section id='templates'>
       <h1>Choose a Template</h1>
       <Row multi>
         {imgs.map((src, i) =>
-          <Column size='one-third' classes={selectedTemplate === (i + 1) ? 'selected' : ''} key={i}>
+          <Column size='one-third' classes={template === (i + 1) ? 'selected' : ''} key={i}>
             <Card>
               <img src={src} onClick={() => actions.showModal(src)} />
             </Card>
@@ -35,7 +35,7 @@ function Templates({ actions, selectedTemplate, modalActive, modalSrc }) {
 }
 
 Templates.propTypes = {
-  selectedTemplate: number.isRequired,
+  template: number.isRequired,
   actions: object.isRequired,
   modalActive: bool.isRequired,
   modalSrc: string
@@ -48,7 +48,7 @@ const actionCreators = {
 
 function mapStateToProps(state) {
   return {
-    selectedTemplate: state.resume.selectedTemplate,
+    template: state.resume.template,
     modalActive: state.ui.modal.active,
     modalSrc: state.ui.modal.src
   }

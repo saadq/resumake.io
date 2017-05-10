@@ -32,15 +32,17 @@ class Preview extends Component {
   }
 
   render() {
-    if (!this.props.url) {
+    const { url, isGenerating } = this.props
+
+    if (!url) {
       return <LoadingBar />
     }
 
     return (
       <section id='preview'>
-        <LoadingBar />
+        <LoadingBar hidden={!isGenerating} />
         <Row>
-          <PDF scale={3} file={this.props.url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
+          <PDF scale={3} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
         </Row>
       </section>
     )
@@ -49,10 +51,9 @@ class Preview extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.resume.resumeURL
+    url: state.resume.generator.resumeURL,
+    isGenerating: state.resume.generator.isGenerating
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Preview)
+export default connect(mapStateToProps)(Preview)

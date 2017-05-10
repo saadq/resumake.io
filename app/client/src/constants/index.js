@@ -17,7 +17,9 @@ export {
   REMOVE_PROJECT,
   ADD_SKILL,
   REMOVE_SKILL,
-  SET_RESUME_URL
+  REQUEST_RESUME,
+  RECEIVE_RESUME,
+  SAVE_PREVIOUS_RESUME
 } from './resume'
 
 export {

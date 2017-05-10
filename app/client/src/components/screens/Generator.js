@@ -7,7 +7,7 @@ import { TopBar, SideNav, Content, Form } from '../layout'
 import RouteWithSubRoutes from '../../routes/RouteWithSubRoutes'
 import { UIActions, ResumeActions } from '../../actions'
 
-function Generator({ actions, selectedTemplate, sideNavActive, routes, history }) {
+function Generator({ actions, template, sideNavActive, routes, history, generateResume }) {
   return (
     <section className='hero'>
       <div className='hero-head'>
@@ -20,7 +20,11 @@ function Generator({ actions, selectedTemplate, sideNavActive, routes, history }
           hideSideNav={() => actions.hideSideNav()}
           handlePreviewClick={() => history.push('/generator/preview')}
         />
-        <Form setResumeURL={actions.setResumeURL} selectedTemplate={selectedTemplate}>
+        <Form
+          generateResume={generateResume}
+          setResumeURL={actions.setResumeURL}
+          template={template}
+        >
           <Content hideSideNav={() => actions.hideSideNav()}>
             <Switch>
               {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
@@ -34,7 +38,7 @@ function Generator({ actions, selectedTemplate, sideNavActive, routes, history }
 
 Generator.propTypes = {
   actions: object.isRequired,
-  selectedTemplate: number.isRequired,
+  template: number.isRequired,
   sideNavActive: bool.isRequired,
   routes: array.isRequired,
   history: object.isRequired
@@ -47,14 +51,15 @@ const actionCreators = {
 
 function mapStateToProps(state) {
   return {
-    selectedTemplate: state.resume.selectedTemplate,
+    template: state.resume.template,
     sideNavActive: state.ui.sideNav.active
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actionCreators, dispatch)
+    actions: bindActionCreators(actionCreators, dispatch),
+    generateResume: payload => dispatch(ResumeActions.generateResume(payload))
   }
 }
 

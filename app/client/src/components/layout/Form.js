@@ -6,34 +6,16 @@ import { func, number, node } from 'prop-types'
 class Form extends Component {
   static propTypes = {
     handleSubmit: func.isRequired,
-    selectedTemplate: number.isRequired,
+    template: number.isRequired,
     children: node.isRequired,
-    setResumeURL: func.isRequired
+    generateResume: func.isRequired
   }
 
-  async onSubmit(values) {
-    const { fetch, URL } = window
-    const { selectedTemplate, setResumeURL } = this.props
+  onSubmit(values) {
+    const { template, generateResume } = this.props
+    const payload = { template, ...values }
 
-    const payload = {
-      ...values,
-      selectedTemplate
-    }
-
-    const req = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }
-
-    const res = await fetch('/api/generate/resume', req)
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
-
-    setResumeURL(url)
+    generateResume(payload)
   }
 
   render = () => (

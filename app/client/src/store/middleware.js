@@ -8,7 +8,7 @@ const middleware = []
 if (process.env.NODE_ENV === 'development') {
   middleware.push(thunk)
   middleware.push(createLogger({
-    predicate: (getState, action) => !action.type.startsWith('@@redux-form')
+    predicate: (getState, action) => !action.type.startsWith('@@redux-form') && !action.type.startsWith('HIDE_SIDE')
   }))
 }
 

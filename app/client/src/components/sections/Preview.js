@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
-import { Row } from '../bulma'
+import { Row, LoadingBar } from '../bulma'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
@@ -33,16 +33,17 @@ class Preview extends Component {
 
   render() {
     if (!this.props.url) {
-      return <div>Loading PDF</div>
-    } else {
-      return (
-        <section id='preview'>
-          <Row>
-            <PDF scale={3} file={this.props.url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
-          </Row>
-        </section>
-      )
+      return <LoadingBar />
     }
+
+    return (
+      <section id='preview'>
+        <LoadingBar />
+        <Row>
+          <PDF scale={3} file={this.props.url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
+        </Row>
+      </section>
+    )
   }
 }
 

@@ -1,11 +1,13 @@
 import React from 'react'
 import { node, string } from 'prop-types'
 
-const Column = ({ children, classes = '', size }) => (
-  <div className={`column ${classes} ${size ? `is-${size}` : ''}`}>
-    {children}
-  </div>
-)
+function Column({ children, classes = '', size }) {
+  return (
+    <div className={`column ${classes} ${size ? `is-${size}` : ''}`}>
+      {children}
+    </div>
+  )
+}
 
 Column.propTypes = {
   children: node.isRequired,

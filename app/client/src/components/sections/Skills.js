@@ -6,24 +6,26 @@ import { Skill } from './fragments'
 import { Icon } from '../bulma'
 import { ResumeActions, FormActions } from '../../actions'
 
-const Skills = ({ skillCount, actions }) => (
-  <section id='skills'>
-    {Array.from({ length: skillCount }).map((_, index) => (
-      <Skill key={index} index={index} />
-    ))}
-    <button onClick={() => actions.addSkill()} type='button'>
-      <Icon size='small' type='plus' />
-    </button>
-    <button
-      onClick={() => {
-        actions.removeSkill()
-        actions.clearSkillField(skillCount)
-      }}
-      type='button'>
-      <Icon size='small' type='times' />
-    </button>
-  </section>
-)
+function Skills({ skillCount, actions }) {
+  return (
+    <section id='skills'>
+      {Array.from({ length: skillCount }).map((_, index) => (
+        <Skill key={index} index={index} />
+      ))}
+      <button onClick={() => actions.addSkill()} type='button'>
+        <Icon size='small' type='plus' />
+      </button>
+      <button
+        onClick={() => {
+          actions.removeSkill()
+          actions.clearSkillField(skillCount)
+        }}
+        type='button'>
+        <Icon size='small' type='times' />
+      </button>
+    </section>
+  )
+}
 
 Skills.propTypes = {
   skillCount: number.isRequired,
@@ -35,13 +37,17 @@ const actionCreators = {
   ...FormActions
 }
 
-const mapStateToProps = state => ({
-  skillCount: state.resume.skillCount
-})
+function mapStateToProps(state) {
+  return {
+    skillCount: state.resume.skillCount
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
-})
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  }
+}
 
 export default connect(
   mapStateToProps,

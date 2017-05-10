@@ -47,9 +47,11 @@ class Preview extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  url: state.resume.resumeURL
-})
+function mapStateToProps(state) {
+  return {
+    url: state.resume.resumeURL
+  }
+}
 
 export default connect(
   mapStateToProps

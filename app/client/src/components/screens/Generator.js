@@ -7,28 +7,30 @@ import { TopBar, SideNav, Content, Form } from '../layout'
 import RouteWithSubRoutes from '../../routes/RouteWithSubRoutes'
 import { UIActions, ResumeActions } from '../../actions'
 
-const Generator = ({ actions, selectedTemplate, sideNavActive, routes, history }) => (
-  <section className='hero'>
-    <div className='hero-head'>
-      <TopBar
-        sideNavActive={sideNavActive}
-        toggleSideNav={() => sideNavActive ? actions.hideSideNav() : actions.showSideNav()}
-      />
-      <SideNav
-        sideNavActive={sideNavActive}
-        hideSideNav={() => actions.hideSideNav()}
-        handlePreviewClick={() => history.push('/generator/preview')}
-      />
-      <Form setResumeURL={actions.setResumeURL} selectedTemplate={selectedTemplate}>
-        <Content hideSideNav={() => actions.hideSideNav()}>
-          <Switch>
-            {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-          </Switch>
-        </Content>
-      </Form>
-    </div>
-  </section>
-)
+function Generator({ actions, selectedTemplate, sideNavActive, routes, history }) {
+  return (
+    <section className='hero'>
+      <div className='hero-head'>
+        <TopBar
+          sideNavActive={sideNavActive}
+          toggleSideNav={() => sideNavActive ? actions.hideSideNav() : actions.showSideNav()}
+        />
+        <SideNav
+          sideNavActive={sideNavActive}
+          hideSideNav={() => actions.hideSideNav()}
+          handlePreviewClick={() => history.push('/generator/preview')}
+        />
+        <Form setResumeURL={actions.setResumeURL} selectedTemplate={selectedTemplate}>
+          <Content hideSideNav={() => actions.hideSideNav()}>
+            <Switch>
+              {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+            </Switch>
+          </Content>
+        </Form>
+      </div>
+    </section>
+  )
+}
 
 Generator.propTypes = {
   actions: object.isRequired,
@@ -43,14 +45,18 @@ const actionCreators = {
   ...ResumeActions
 }
 
-const mapStateToProps = state => ({
-  selectedTemplate: state.resume.selectedTemplate,
-  sideNavActive: state.ui.sideNav.active
-})
+function mapStateToProps(state) {
+  return {
+    selectedTemplate: state.resume.selectedTemplate,
+    sideNavActive: state.ui.sideNav.active
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
-})
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  }
+}
 
 export default connect(
   mapStateToProps,

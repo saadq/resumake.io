@@ -9,28 +9,30 @@ import '../../styles/components/templates.styl'
 const ctx = require.context('../../assets/img/templates', true)
 const imgs = ctx.keys().map(ctx)
 
-const Templates = ({ actions, selectedTemplate, modalActive, modalSrc }) => (
-  <section id='templates'>
-    <h1>Choose a Template</h1>
-    <Row multi>
-      {imgs.map((src, i) =>
-        <Column size='one-third' classes={selectedTemplate === (i + 1) ? 'selected' : ''} key={i}>
-          <Card>
-            <img src={src} onClick={() => actions.showModal(src)} />
-          </Card>
-          <button onClick={() => actions.selectTemplate(i + 1)} type='button'>
-            Template {i + 1}
-          </button>
-        </Column>
-      )}
-      <Modal
-        image={modalSrc}
-        active={modalActive}
-        hideModal={() => actions.hideModal()}
-      />
-    </Row>
-  </section>
-)
+function Templates({ actions, selectedTemplate, modalActive, modalSrc }) {
+  return (
+    <section id='templates'>
+      <h1>Choose a Template</h1>
+      <Row multi>
+        {imgs.map((src, i) =>
+          <Column size='one-third' classes={selectedTemplate === (i + 1) ? 'selected' : ''} key={i}>
+            <Card>
+              <img src={src} onClick={() => actions.showModal(src)} />
+            </Card>
+            <button onClick={() => actions.selectTemplate(i + 1)} type='button'>
+              Template {i + 1}
+            </button>
+          </Column>
+        )}
+        <Modal
+          image={modalSrc}
+          active={modalActive}
+          hideModal={() => actions.hideModal()}
+        />
+      </Row>
+    </section>
+  )
+}
 
 Templates.propTypes = {
   selectedTemplate: number.isRequired,
@@ -44,15 +46,19 @@ const actionCreators = {
   ...ResumeActions
 }
 
-const mapStateToProps = state => ({
-  selectedTemplate: state.resume.selectedTemplate,
-  modalActive: state.ui.modal.active,
-  modalSrc: state.ui.modal.src
-})
+function mapStateToProps(state) {
+  return {
+    selectedTemplate: state.resume.selectedTemplate,
+    modalActive: state.ui.modal.active,
+    modalSrc: state.ui.modal.src
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
-})
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  }
+}
 
 export default connect(
   mapStateToProps,

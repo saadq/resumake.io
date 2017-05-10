@@ -5,26 +5,28 @@ import { connect } from 'react-redux'
 import { Project } from './fragments'
 import { ResumeActions, FormActions } from '../../actions'
 
-const Projects = ({ projectCount, actions }) => (
-  <section id='projects'>
-    <h1>Your Projects</h1>
-    {Array.from({ length: projectCount }).map((_, index) => (
-      <Project key={index} index={index} />
-    ))}
-    <div className='section-buttons'>
-      <button type='button' onClick={() => actions.addProject()}>Add Project</button>
-      <button
-        onClick={() => {
-          actions.removeProject()
-          actions.clearProjectField(projectCount)
-        }}
-        type='button'
-      >
-        Remove Project
-      </button>
-    </div>
-  </section>
-)
+function Projects({ projectCount, actions }) {
+  return (
+    <section id='projects'>
+      <h1>Your Projects</h1>
+      {Array.from({ length: projectCount }).map((_, index) => (
+        <Project key={index} index={index} />
+      ))}
+      <div className='section-buttons'>
+        <button type='button' onClick={() => actions.addProject()}>Add Project</button>
+        <button
+          onClick={() => {
+            actions.removeProject()
+            actions.clearProjectField(projectCount)
+          }}
+          type='button'
+        >
+          Remove Project
+        </button>
+      </div>
+    </section>
+  )
+}
 
 Projects.propTypes = {
   projectCount: number.isRequired,
@@ -36,13 +38,17 @@ const actionCreators = {
   ...FormActions
 }
 
-const mapStateToProps = state => ({
-  projectCount: state.resume.projectCount
-})
+function mapStateToProps(state) {
+  return {
+    projectCount: state.resume.projectCount
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
-})
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  }
+}
 
 export default connect(
   mapStateToProps,

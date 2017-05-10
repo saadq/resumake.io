@@ -68,7 +68,12 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HtmlWebpackPlugin({ template: './index.html', inject: 'body' })
+    new HtmlWebpackPlugin({ template: './index.html', inject: 'body' }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    })
   ],
 
   devServer: {

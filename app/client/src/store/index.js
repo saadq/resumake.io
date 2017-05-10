@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import middleware from './middleware'
 import reducer from '../reducers'
 
-const store = createStore(reducer, {}, devToolsEnhancer())
+const store = createStore(reducer, middleware)
 
 export default store

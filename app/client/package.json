@@ -46,6 +46,8 @@
     "html-webpack-plugin": "^2.28.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux-devtools-extension": "^2.13.0",
+    "redux-logger": "^3.0.1",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.0",
     "snazzy": "^6.0.0",
     "style-loader": "^0.16.1",

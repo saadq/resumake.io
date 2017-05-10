@@ -12,9 +12,9 @@ const imgs = ctx.keys().map(ctx)
 const Templates = ({ actions, selectedTemplate, modalActive, modalSrc }) => (
   <section id='templates'>
     <h1>Choose a Template</h1>
-    <Row>
+    <Row multi>
       {imgs.map((src, i) =>
-        <Column classes={selectedTemplate === (i + 1) ? 'selected' : ''} key={i}>
+        <Column size='one-third' classes={selectedTemplate === (i + 1) ? 'selected' : ''} key={i}>
           <Card>
             <img src={src} onClick={() => actions.showModal(src)} />
           </Card>

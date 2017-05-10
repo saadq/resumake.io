@@ -1,8 +1,8 @@
 import React from 'react'
 import { node } from 'prop-types'
 
-const Row = ({ children }) => (
-  <div className='row columns'>
+const Row = ({ children, multi }) => (
+  <div className={`row columns ${multi ? 'is-multiline' : ''}`}>
     {children}
   </div>
 )

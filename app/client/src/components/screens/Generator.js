@@ -5,7 +5,7 @@ import { number, object, bool, array } from 'prop-types'
 import { Switch } from 'react-router-dom'
 import { TopBar, SideNav, Content, Form } from '../layout'
 import RouteWithSubRoutes from '../../routes/RouteWithSubRoutes'
-import { UIActions, ResumeActions } from '../../actions'
+import { UIActions, GeneratorActions } from '../../actions'
 
 function Generator({ actions, template, sideNavActive, routes, history, generateResume }) {
   return (
@@ -46,12 +46,12 @@ Generator.propTypes = {
 
 const actionCreators = {
   ...UIActions,
-  ...ResumeActions
+  ...GeneratorActions
 }
 
 function mapStateToProps(state) {
   return {
-    template: state.resume.template,
+    template: state.generator.template,
     sideNavActive: state.ui.sideNav.active
   }
 }
@@ -59,7 +59,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actionCreators, dispatch),
-    generateResume: payload => dispatch(ResumeActions.generateResume(payload))
+    generateResume: payload => dispatch(GeneratorActions.generateResume(payload))
   }
 }
 

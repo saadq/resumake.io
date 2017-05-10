@@ -3,7 +3,7 @@ import { number, array, object } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Job } from './fragments'
-import { ResumeActions, FormActions } from '../../actions'
+import { UIActions, FormActions } from '../../actions'
 
 function Experience({ jobCount, jobDuties, actions }) {
   return (
@@ -44,14 +44,14 @@ Experience.propTypes = {
 }
 
 const actionCreators = {
-  ...ResumeActions,
+  ...UIActions,
   ...FormActions
 }
 
 function mapStateToProps(state) {
   return {
-    jobCount: state.resume.jobCount,
-    jobDuties: state.resume.jobDuties
+    jobCount: state.ui.jobCount,
+    jobDuties: state.ui.jobDuties
   }
 }
 

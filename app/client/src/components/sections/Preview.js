@@ -51,8 +51,8 @@ class Preview extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.resume.generator.resumeURL,
-    isGenerating: state.resume.generator.isGenerating
+    url: state.generator.resumeURL,
+    isGenerating: state.generator.isGenerating
   }
 }
 

@@ -2,11 +2,7 @@ export {
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
-  HIDE_SIDE_NAV
-} from './ui'
-
-export {
-  SELECT_TEMPLATE,
+  HIDE_SIDE_NAV,
   ADD_SCHOOL,
   REMOVE_SCHOOL,
   ADD_JOB,
@@ -16,11 +12,15 @@ export {
   ADD_PROJECT,
   REMOVE_PROJECT,
   ADD_SKILL,
-  REMOVE_SKILL,
+  REMOVE_SKILL
+} from './ui'
+
+export {
+  SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
   SAVE_PREVIOUS_RESUME
-} from './resume'
+} from './generator'
 
 export {
   CLEAR_SCHOOL_FIELD,

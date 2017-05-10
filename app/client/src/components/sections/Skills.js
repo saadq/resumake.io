@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Skill } from './fragments'
 import { Icon } from '../bulma'
-import { ResumeActions, FormActions } from '../../actions'
+import { UIActions, FormActions } from '../../actions'
 
 function Skills({ skillCount, actions }) {
   return (
@@ -33,13 +33,13 @@ Skills.propTypes = {
 }
 
 const actionCreators = {
-  ...ResumeActions,
+  ...UIActions,
   ...FormActions
 }
 
 function mapStateToProps(state) {
   return {
-    skillCount: state.resume.skillCount
+    skillCount: state.ui.skillCount
   }
 }
 

@@ -1,3 +1,3 @@
 export * as UIActions from './ui'
-export * as ResumeActions from './resume'
+export * as GeneratorActions from './generator'
 export * as FormActions from './form'

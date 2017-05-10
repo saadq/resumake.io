@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import form from './form'
 import ui from './ui'
-import resume from './resume'
+import generator from './generator'
 
 const reducer = combineReducers({
   form,
   ui,
-  resume
+  generator
 })
 
 export default reducer

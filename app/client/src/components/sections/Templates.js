@@ -3,7 +3,7 @@ import { number, object, bool, string } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Row, Column, Card, Modal } from '../bulma'
-import { UIActions, ResumeActions } from '../../actions'
+import { UIActions, GeneratorActions } from '../../actions'
 import '../../styles/components/templates.styl'
 
 const ctx = require.context('../../assets/img/templates', true)
@@ -43,12 +43,12 @@ Templates.propTypes = {
 
 const actionCreators = {
   ...UIActions,
-  ...ResumeActions
+  ...GeneratorActions
 }
 
 function mapStateToProps(state) {
   return {
-    template: state.resume.template,
+    template: state.generator.template,
     modalActive: state.ui.modal.active,
     modalSrc: state.ui.modal.src
   }

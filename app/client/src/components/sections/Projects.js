@@ -3,7 +3,7 @@ import { number, object } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Project } from './fragments'
-import { ResumeActions, FormActions } from '../../actions'
+import { UIActions, FormActions } from '../../actions'
 
 function Projects({ projectCount, actions }) {
   return (
@@ -34,13 +34,13 @@ Projects.propTypes = {
 }
 
 const actionCreators = {
-  ...ResumeActions,
+  ...UIActions,
   ...FormActions
 }
 
 function mapStateToProps(state) {
   return {
-    projectCount: state.resume.projectCount
+    projectCount: state.ui.projectCount
   }
 }
 

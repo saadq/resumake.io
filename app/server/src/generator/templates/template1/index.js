@@ -1,4 +1,4 @@
-const { stripIndent } = require('common-tags')
+const { stripIndent, source } = require('common-tags')
 
 function template1({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
@@ -7,16 +7,7 @@ function template1({ profile, schools, jobs, projects, skills }) {
 
     \\begin{document}
     ${generateProfileSection(profile)}
-
-    \\section{education}
-
-    \\begin{entrylist}
-      \\entry
-        {Jan 2017}
-        {Rutgers University {\\normalfont BA in Computer Science}}
-        {New Brunswick, NJ}
-        {\\emph{GPA: 3.4}}
-    \\end{entrylist}
+    ${generateEducationSection(schools)}
 
     \\section{experience}
 
@@ -128,6 +119,41 @@ function generateProfileSection(profile) {
 
   return stripIndent`
     \\header{${nameStart}}{${nameEnd}}{${info}}
+  `
+}
+
+function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
+  return source`
+    \\section{education}
+    \\begin{entrylist}
+    ${schools.map((school) => {
+      const { name, location, degree, major, gpa, graduationDate } = school
+
+      let schoolLine = ''
+
+      if (name) {
+        schoolLine += name
+      }
+
+      if (degree && major) {
+        schoolLine += ` {\\normalfont ${degree} in ${major}}`
+      } else if (degree || major) {
+        schoolLine += ` {\\normalfont ${degree || major}}`
+      }
+
+      return `
+        \\entry
+          {${graduationDate || ''}}
+          {${schoolLine}}
+          {${location || ''}}
+          {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
+      `
+    })}
+    \\end{entrylist}
   `
 }
 

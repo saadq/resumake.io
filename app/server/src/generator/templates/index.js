@@ -10,7 +10,11 @@ function getTemplateData(data) {
       return {
         texDoc: template1(data),
         opts: {
-          errorLogs: join(__dirname, 'latexerrors.log')
+          cmd: 'xelatex',
+          inputs: join(__dirname, 'template1', 'inputs'),
+          fonts: join(__dirname, 'template1', 'inputs'),
+          errorLogs: join(__dirname, 'latexerrors.log'),
+          passes: 2
         }
       }
 

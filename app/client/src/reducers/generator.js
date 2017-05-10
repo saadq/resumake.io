@@ -12,7 +12,7 @@ const initialState = {
   prevResume: {}
 }
 
-function resume(state = initialState, action) {
+function generator(state = initialState, action) {
   switch (action.type) {
     case SELECT_TEMPLATE:
       return {
@@ -44,4 +44,4 @@ function resume(state = initialState, action) {
   }
 }
 
-export default resume
+export default generator

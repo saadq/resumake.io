@@ -8,45 +8,8 @@ function template1({ profile, schools, jobs, projects, skills }) {
     \\begin{document}
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
-
-    \\section{experience}
-
-    \\begin{entrylist}
-      \\entry
-        {Jun 2016 – Aug 2016}
-        {Mozilla, Software Engineer Intern}
-        {Mountain View, CA}
-        {\\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-         \\item Broadened search criteria for Firefox’s context menu to include subdomains in password.
-         \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-         \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-         \\end{itemize}}
-      \\entry
-        {Dec 2015 – May 2016}
-        {Codecademy, Coding Advisor}
-        {Manhattan, NY}
-        {\\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-         \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-         \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-         \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-         \\end{itemize}}
-      \\entry
-        {Jun 2015 – Nov 2015}
-        {IEEE, Software Developer Intern}
-        {Piscataway, NJ}
-        {\\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-         \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-         \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-         \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-         \\end{itemize}}
-    \\end{entrylist}
-
-    \\section{Skills}
-    \\begin{entrylist}
-    \\skill{}{Languages: {\\normalfont Java, JavaScript, Ruby, Python, HTML, CSS}}
-    \\skill{}{Frameworks: {\\normalfont Koa, Express, Sinatra, React, Redux}}
-    \\end{entrylist}
-
+    ${generateExperienceSection(jobs)}
+    ${generateSkillsSection(skills)}
 
     \\section{Projects}
     \\begin{entrylist}
@@ -140,9 +103,9 @@ function generateEducationSection(schools) {
       }
 
       if (degree && major) {
-        schoolLine += ` {\\normalfont ${degree} in ${major}}`
+        schoolLine += `, {\\normalfont ${degree} in ${major}}`
       } else if (degree || major) {
-        schoolLine += ` {\\normalfont ${degree || major}}`
+        schoolLine += `, {\\normalfont ${degree || major}}`
       }
 
       return `
@@ -152,6 +115,75 @@ function generateEducationSection(schools) {
           {${location || ''}}
           {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
       `
+    })}
+    \\end{entrylist}
+  `
+}
+
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    \\section{experience}
+    \\begin{entrylist}
+      ${jobs.map((job) => {
+        const { name, title, location, startDate, endDate, duties } = job
+
+        let jobLine = ''
+        let dateRange = ''
+        let dutyLines
+
+        if (name) {
+          jobLine += name
+        }
+
+        if (title) {
+          jobLine += `, ${title}`
+        }
+
+        if (duties) {
+          dutyLines = source`
+            \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
+            ${duties.map(duty => `\\item ${duty}`)}
+            \\end{itemize}
+          `
+        }
+
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
+
+        return `
+          \\entry
+            {${dateRange}}
+            {${jobLine}}
+            {${location || ''}}
+            {${dutyLines}}
+        `
+      })}
+    \\end{entrylist}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    \\section{Skills}
+    \\begin{entrylist}
+    ${skills.map(({ name, details }) => {
+      const nameLine = name ? `${name}: ` : ''
+      const detailsLine = details ? `{\\normalfont ${details}}` : ''
+
+      return `\\skill{}{${nameLine}${detailsLine}}`
     })}
     \\end{entrylist}
   `

@@ -6,31 +6,41 @@ import {
   CLEAR_SKILL_FIELD
 } from '../constants'
 
-const clearSchoolField = schoolCount => ({
-  type: CLEAR_SCHOOL_FIELD,
-  schoolCount
-})
+function clearSchoolField(schoolCount) {
+  return {
+    type: CLEAR_SCHOOL_FIELD,
+    schoolCount
+  }
+}
 
-const clearJobField = jobCount => ({
-  type: CLEAR_JOB_FIELD,
-  jobCount
-})
+function clearJobField(jobCount) {
+  return {
+    type: CLEAR_JOB_FIELD,
+    jobCount
+  }
+}
 
-const clearJobDutyField = (index, jobDutyCount) => ({
-  type: CLEAR_JOB_DUTY_FIELD,
-  index,
-  jobDutyCount
-})
+function clearJobDutyField(index, jobDutyCount) {
+  return {
+    type: CLEAR_JOB_DUTY_FIELD,
+    index,
+    jobDutyCount
+  }
+}
 
-const clearProjectField = projectCount => ({
-  type: CLEAR_PROJECT_FIELD,
-  projectCount
-})
+function clearProjectField(projectCount) {
+  return {
+    type: CLEAR_PROJECT_FIELD,
+    projectCount
+  }
+}
 
-const clearSkillField = skillCount => ({
-  type: CLEAR_SKILL_FIELD,
-  skillCount
-})
+function clearSkillField(skillCount) {
+  return {
+    type: CLEAR_SKILL_FIELD,
+    skillCount
+  }
+}
 
 export {
   clearSchoolField,

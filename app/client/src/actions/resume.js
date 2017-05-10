@@ -13,57 +13,81 @@ import {
   SET_RESUME_URL
 } from '../constants'
 
-const selectTemplate = templateId => ({
-  type: SELECT_TEMPLATE,
-  templateId
-})
+function selectTemplate(templateId) {
+  return {
+    type: SELECT_TEMPLATE,
+    templateId
+  }
+}
 
-const addSchool = () => ({
-  type: ADD_SCHOOL
-})
+function addSchool() {
+  return {
+    type: ADD_SCHOOL
+  }
+}
 
-const removeSchool = () => ({
-  type: REMOVE_SCHOOL
-})
+function removeSchool() {
+  return {
+    type: REMOVE_SCHOOL
+  }
+}
 
-const addJob = () => ({
-  type: ADD_JOB
-})
+function addJob() {
+  return {
+    type: ADD_JOB
+  }
+}
 
-const removeJob = () => ({
-  type: REMOVE_JOB
-})
+function removeJob() {
+  return {
+    type: REMOVE_JOB
+  }
+}
 
-const incrementJobDuty = index => ({
-  type: INCREMENT_JOB_DUTY,
-  index
-})
+function incrementJobDuty(index) {
+  return {
+    type: INCREMENT_JOB_DUTY,
+    index
+  }
+}
 
-const decrementJobDuty = index => ({
-  type: DECREMENT_JOB_DUTY,
-  index
-})
+function decrementJobDuty(index) {
+  return {
+    type: DECREMENT_JOB_DUTY,
+    index
+  }
+}
 
-const addProject = () => ({
-  type: ADD_PROJECT
-})
+function addProject() {
+  return {
+    type: ADD_PROJECT
+  }
+}
 
-const removeProject = () => ({
-  type: REMOVE_PROJECT
-})
+function removeProject() {
+  return {
+    type: REMOVE_PROJECT
+  }
+}
 
-const addSkill = () => ({
-  type: ADD_SKILL
-})
+function addSkill() {
+  return {
+    type: ADD_SKILL
+  }
+}
 
-const removeSkill = () => ({
-  type: REMOVE_SKILL
-})
+function removeSkill() {
+  return {
+    type: REMOVE_SKILL
+  }
+}
 
-const setResumeURL = url => ({
-  type: SET_RESUME_URL,
-  url
-})
+function setResumeURL(url) {
+  return {
+    type: SET_RESUME_URL,
+    url
+  }
+}
 
 export {
   selectTemplate,

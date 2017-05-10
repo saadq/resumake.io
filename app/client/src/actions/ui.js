@@ -5,22 +5,30 @@ import {
   HIDE_SIDE_NAV
 } from '../constants'
 
-const showModal = modalSrc => ({
-  type: SHOW_MODAL,
-  modalSrc
-})
+function showModal(modalSrc) {
+  return {
+    type: SHOW_MODAL,
+    modalSrc
+  }
+}
 
-const hideModal = () => ({
-  type: HIDE_MODAL
-})
+function hideModal() {
+  return {
+    type: HIDE_MODAL
+  }
+}
 
-const showSideNav = () => ({
-  type: SHOW_SIDE_NAV
-})
+function showSideNav() {
+  return {
+    type: SHOW_SIDE_NAV
+  }
+}
 
-const hideSideNav = () => ({
-  type: HIDE_SIDE_NAV
-})
+function hideSideNav() {
+  return {
+    type: HIDE_SIDE_NAV
+  }
+}
 
 export {
   showModal,

@@ -10,41 +10,7 @@ function template1({ profile, schools, jobs, projects, skills }) {
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
-
-    \\section{Projects}
-    \\begin{entrylist}
-    \\entry
-        {}
-        {LaTeX Resume Generator {\\normalfont React, Redux, Node.js, Koa}}
-        {https://latexresu.me}
-        {A webapp for generating LaTeX resumes from form data (including this one).}
-
-    \\entry
-        {}
-        {Anagrams {\\normalfont HTML, CSS, JavaScript}}
-        {https://saadq.github.io/Anagrams}
-        {A cognitive, anagram-recognition game where the player must quickly find the answer.}
-
-    \\entry
-        {}
-        {Flow Timer {\\normalfont React, Redux, Node.js, Koa}}
-        {https://github.com/flow-timer}
-        {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
-
-    \\entry
-        {}
-        {Reddit Image Scraper {\\normalfont Ruby, Sinatra}}
-        {https://reddit-scraper.herokuapp.com}
-        {A web app that lets you view a collage of images/videos from a subreddit.}
-
-    \\entry
-        {}
-        {Materialize {\\normalfont XML, JSON}}
-        {https://packagecontrol.io/packages/Materialize}
-        {A collection of custom themes for Sublime Text, inspired by Material design with 30k+ installations.}
-
-    \\end{entrylist}
-
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
@@ -184,6 +150,39 @@ function generateSkillsSection(skills) {
       const detailsLine = details ? `{\\normalfont ${details}}` : ''
 
       return `\\skill{}{${nameLine}${detailsLine}}`
+    })}
+    \\end{entrylist}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    \\section{Projects}
+    \\begin{entrylist}
+    ${projects.map((project) => {
+      const { name, description, technologies, link } = project
+
+      let nameLine = ''
+
+      if (name) {
+        nameLine += name
+      }
+
+      if (technologies) {
+        nameLine += ` {\\normalfont ${technologies}}`
+      }
+
+      return `
+        \\entry
+          {}
+          {${nameLine}}
+          {${link || ''}}
+          {${description || ''}}
+      `
     })}
     \\end{entrylist}
   `

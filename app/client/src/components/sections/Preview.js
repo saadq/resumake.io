@@ -42,7 +42,7 @@ class Preview extends Component {
       <section id='preview'>
         <LoadingBar hidden={!isGenerating} />
         <Row>
-          <PDF scale={3} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
+          <PDF scale={4} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
         </Row>
       </section>
     )

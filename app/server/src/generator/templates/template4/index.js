@@ -1,4 +1,4 @@
-const { stripIndent } = require('common-tags')
+const { stripIndent, source } = require('common-tags')
 
 function template4({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
@@ -6,18 +6,7 @@ function template4({ profile, schools, jobs, projects, skills }) {
 
     \\begin{document}
     ${generateProfileSection(profile)}
-
-    \\cvsection{Education}
-    \\begin{cventries}
-      \\cventry
-        {BS in Computer Science}
-        {Rutgers University}
-        {New Brunswick, NJ}
-        {Jan 2017}
-        {}
-    \\end{cventries}
-
-    \\vspace{-2mm}
+    ${generateEducationSection(schools)}
 
     \\cvsection{Experience}
     \\begin{cventries}
@@ -71,8 +60,6 @@ function template4({ profile, schools, jobs, projects, skills }) {
         }
     \\end{cventries}
 
-    \\vspace{2mm}
-
     \\cvsection{Skills}
     \\begin{cventries}
     \\cventry
@@ -86,7 +73,7 @@ function template4({ profile, schools, jobs, projects, skills }) {
       {}
     \\end{cventries}
 
-    \\vspace{-6mm}
+    \\vspace{-7mm}
 
     \\cvsection{Projects}
     \\begin{cventries}
@@ -172,6 +159,44 @@ function generateProfileSection(profile) {
     \\vspace{2mm}
     ${info}
     \\end{center}
+  `
+}
+
+function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %     Education
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\cvsection{Education}
+    \\raggedright
+    \\begin{cventries}
+      ${schools.map((school) => {
+        const { name, location, degree, major, gpa, graduationDate } = school
+
+        let degreeLine = ''
+
+        if (degree && major) {
+          degreeLine = `${degree} in ${major}`
+        } else if (degree || major) {
+          degreeLine = degree || major
+        }
+
+        return stripIndent`
+          \\cventry
+            {${degreeLine}}
+            {${name || ''}}
+            {${location || ''}}
+            {${graduationDate || ''}}
+            {${gpa ? `GPA: ${gpa}` : ''} \\vspace{2mm}}
+        `
+      })}
+    \\end{cventries}
+
+    \\vspace{-2mm}
   `
 }
 

@@ -3,50 +3,12 @@ const { stripIndent, source } = require('common-tags')
 function template4({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
     ${generateCommentHeader()}
-
     \\begin{document}
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
-    \\cvsection{Projects}
-    \\begin{cventries}
-      \\cventry
-        {A webapp for generating LaTeX resumes from form data (including this one).}
-        {LaTeX Resume Generator}
-        {Node.js, Koa, React, Redux}
-        {https://latexresu.me}
-        {}
-
-      \\vspace{-5mm}
-
-      \\cventry
-        {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
-        {Flow Timer}
-        {Node.js, Koa, React, Redux}
-        {https://flowtimer.com}
-        {}
-
-      \\vspace{-5mm}
-
-      \\cventry
-        {A web app that lets you view a collage of images/videos from a subreddit.}
-        {Reddit Image Scraper}
-        {Ruby, Sinatra}
-        {https://reddit-scraper.herokuapp.com}
-        {}
-
-      \\vspace{-5mm}
-
-      \\cventry
-        {A cognitive, anagram-recognition game where the player must quickly find the answer.}
-        {Anagrams}
-        {HTML, CSS, JavaScript}
-        {A cognitive, anagram-recognition game where the player must quickly find the answer.}
-        {}
-    \\end{cventries}
-
-
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
@@ -124,10 +86,12 @@ function generateEducationSection(schools) {
           {${name || ''}}
           {${location || ''}}
           {${graduationDate || ''}}
-          {${gpa ? `GPA: ${gpa}` : ''} \\vspace{1mm}}
+          {${gpa ? `GPA: ${gpa}` : ''}}
       `
     })}
     \\end{cventries}
+
+    \\vspace{-2mm}
   `
 }
 
@@ -202,6 +166,30 @@ function generateSkillsSection(skills) {
       \\end{cventries}
 
       \\vspace{-7mm}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    \\cvsection{Projects}
+    \\begin{cventries}
+    ${projects.map(project => stripIndent`
+        \\cventry
+          {${project.description || ''}}
+          {${project.name || ''}}
+          {${project.technologies || ''}}
+          {${project.link || ''}}
+          {}
+
+        \\vspace{-5mm}
+
+      `
+    )}
+    \\end{cventries}
   `
 }
 

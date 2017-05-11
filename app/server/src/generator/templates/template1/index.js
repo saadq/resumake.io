@@ -17,7 +17,7 @@ function template1({ profile, schools, jobs, projects, skills }) {
 
 function generateProfileSection(profile) {
   if (!profile) {
-    return ''
+    return '\\header{}{}{}'
   }
 
   const { fullName, email, phoneNumber, address, link } = profile

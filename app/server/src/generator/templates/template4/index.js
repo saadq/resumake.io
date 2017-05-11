@@ -8,21 +8,7 @@ function template4({ profile, schools, jobs, projects, skills }) {
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
-    \\cvsection{Skills}
-    \\begin{cventries}
-    \\cventry
-      {}
-      {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
-        Languages: & {\\skill{ Java, JavaScript, Ruby, Python, HTML, CSS}} \\\\
-        Libraries: & {\\skill{ Node.js, Koa, Express, React, Redux, Bootstrap, Materialize}} \\\\
-      \\end{tabular}}}
-      {}
-      {}
-      {}
-    \\end{cventries}
-
-    \\vspace{-7mm}
-
+    ${generateSkillsSection(skills)}
     \\cvsection{Projects}
     \\begin{cventries}
       \\cventry
@@ -188,6 +174,34 @@ function generateExperienceSection(jobs) {
       `
     })}
     \\end{cventries}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+      \\cvsection{Skills}
+      \\begin{cventries}
+      \\cventry
+        {}
+        {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
+          ${skills.map((skill) => {
+            const { name, details } = skill
+            const nameLine = name ? `${name}: ` : ''
+            const detailsLine = `{\\skill{ ${details || ''}}}`
+
+            return `${nameLine} & ${detailsLine} \\\\`
+          })}
+        \\end{tabular}}}
+        {}
+        {}
+        {}
+      \\end{cventries}
+
+      \\vspace{-7mm}
   `
 }
 

@@ -47,7 +47,7 @@ function generateResume(payload) {
     const req = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        'Accept': 'application/pdf',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)

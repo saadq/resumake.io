@@ -6,7 +6,7 @@ import {
 } from '../constants'
 
 const initialState = {
-  template: 3,
+  template: 4,
   isGenerating: false,
   resumeURL: null,
   prevResume: {}

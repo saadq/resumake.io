@@ -8,31 +8,12 @@ function template5({ profile, schools, jobs, projects, skills }) {
     \\begin{document}
         ${generateProfileSection(profile)}
         \\begin{resume}
-
           \\vspace{-5mm}
-
           ${generateEducationSection(schools)}
           ${generateExperienceSection(jobs)}
           ${generateSkillsSection(skills)}
-          \\section{PROJECTS}
-              \\textbf{LaTeX Resume Generator} \\sl Node.js, Koa, React, Redux \\\\
-              A webapp for generating LaTeX resumes from form data (including this one).
-
-              \\textbf{Cube Graphs} \\sl Node.js, Express, React, Chart.js, MongoDB \\\\
-              A Rubik's Cube timer for speedcubers that visualizes a user's cubing stats with graphs.
-
-              \\textbf{Reddit Scraper} \\sl Ruby, Sinatra \\\\
-              A Sinatra web app that lets the user easily view images/videos from a subreddit.
-
-              \\textbf{Materialize} \\sl XML, JSON \\\\
-              A collection of custom themes and color schemes for ST3, inspired by Material design.
-
-              \\textbf{Anagrams} \\sl HTML, CSS, JavaScript \\\\
-              A cognitive, anagram-recognition game where the player must quickly find the answer.
-
-
+          ${generateProjectsSection(projects)}
         \\end{resume}
-
     \\end{document}
   `
 }
@@ -167,6 +148,43 @@ function generateSkillsSection(skills) {
     \\begin{tabular}{@{}ll}
     ${skills.map(skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`)}
     \\end{tabular}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    \\section{PROJECTS}
+      ${projects.map((project) => {
+        const { name, description, technologies, link } = project
+
+        let projectLine = ''
+
+        if (name) {
+          projectLine += `\\textbf{${name}}`
+        }
+
+        if (technologies) {
+          projectLine += `, {\\sl ${technologies}}`
+        }
+
+        if (description) {
+          projectLine += projectLine ? `\\\\ ${description}` : description
+        }
+
+        if (link) {
+          projectLine += projectLine ? `\\\\ ${link}` : link
+        }
+
+        if (projectLine) {
+          projectLine += '\\\\\\\\'
+        }
+
+        return projectLine
+      })}
   `
 }
 

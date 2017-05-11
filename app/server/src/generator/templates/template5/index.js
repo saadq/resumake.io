@@ -12,35 +12,7 @@ function template5({ profile, schools, jobs, projects, skills }) {
           \\vspace{-5mm}
 
           ${generateEducationSection(schools)}
-
-          \\section{EXPERIENCE}
-              {\\textbf{Mozilla}, {\\sl Software Engineer Intern} \\hfill Jun 2016 | Aug 2016} \\\\
-              Mountain View, CA
-              \\vspace{1.75mm}
-              \\begin{itemize} \\itemsep 3pt
-                  \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.
-                  \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-                  \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-              \\end{itemize}
-
-              {\\textbf{Codecademy}, {\\sl Coding Advisor}  \\hfill Dec 2015 | May 2016} \\\\
-              Manhattan, NY
-              \\hfill
-              \\vspace{1.75mm}
-              \\begin{itemize} \\itemsep 3pt
-                  \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-                  \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-                  \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-              \\end{itemize}
-
-              {\\textbf{IEEE}, {\\sl Coding Advisor} \\hfill Jun 2015 | Nov 2015} \\\\
-               \\hfill Piscataway, NJ
-              \\vspace{1.75mm}
-              \\begin{itemize} \\itemsep 3pt
-                  \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-                  \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-                  \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-              \\end{itemize}
+          ${generateExperienceSection(jobs)}
 
           \\section{SKILLS}
               {Programming Languages:} $\\:$\\sl{Java, JavaScript/Node.js, Ruby, XML, HTML, SASS, CSS} \\vspace{1mm}
@@ -51,10 +23,10 @@ function template5({ profile, schools, jobs, projects, skills }) {
               A webapp for generating LaTeX resumes from form data (including this one).
 
               \\textbf{Cube Graphs} \\sl Node.js, Express, React, Chart.js, MongoDB \\\\
-              A Rubik's Cube timer for speedcubers that visualizes a user's cubing stats with graphs. \\vspace{-6mm}
+              A Rubik's Cube timer for speedcubers that visualizes a user's cubing stats with graphs.
 
               \\textbf{Reddit Scraper} \\sl Ruby, Sinatra \\\\
-              A Sinatra web app that lets the user easily view images/videos from a subreddit. \\vspace{-2mm}
+              A Sinatra web app that lets the user easily view images/videos from a subreddit.
 
               \\textbf{Materialize} \\sl XML, JSON \\\\
               A collection of custom themes and color schemes for ST3, inspired by Material design.
@@ -97,7 +69,7 @@ function generateEducationSection(schools) {
       let degreeLine = ''
 
       if (name) {
-        schoolLine += `\\textbf{${name ? `${name}, ` : ''}}`
+        schoolLine += `\\textbf{${name}}, `
       }
 
       if (degree && major) {
@@ -131,6 +103,60 @@ function generateEducationSection(schools) {
       }
 
       return schoolLine
+    })}
+  `
+}
+
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    \\section{EXPERIENCE}
+    ${jobs.map((job) => {
+      const { name, title, location, startDate, endDate, duties } = job
+
+      let jobLine = ''
+      let dateRange = ''
+
+      if (name) {
+        jobLine += `\\textbf{${name}}, `
+      }
+
+      if (title) {
+        jobLine += `{\\sl ${title}}`
+      }
+
+      if (startDate && endDate) {
+        dateRange = `${startDate} | ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} | Present`
+      } else {
+        dateRange = endDate
+      }
+
+      if (dateRange) {
+        jobLine += `\\hfill ${dateRange}`
+      }
+
+      if (jobLine) {
+        jobLine += '\\\\'
+      }
+
+      if (location) {
+        jobLine += `${location}\\\\`
+      }
+
+      if (duties) {
+        jobLine += source`
+          \\begin{itemize} \\itemsep 3pt
+          ${duties.map(duty => `\\item ${duty}`)}
+          \\end{itemize}
+        `
+      }
+
+      return jobLine
     })}
   `
 }

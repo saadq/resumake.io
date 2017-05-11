@@ -13,11 +13,7 @@ function template5({ profile, schools, jobs, projects, skills }) {
 
           ${generateEducationSection(schools)}
           ${generateExperienceSection(jobs)}
-
-          \\section{SKILLS}
-              {Programming Languages:} $\\:$\\sl{Java, JavaScript/Node.js, Ruby, XML, HTML, SASS, CSS} \\vspace{1mm}
-              {\\\\ \\normalfont Frameworks/Libraries:} $\\:$ $\\:$$\\:$ $\\:$\\sl{Express, React, jQuery, Sinatra, Bootstrap, Materialize} \\vspace{1mm}
-
+          ${generateSkillsSection(skills)}
           \\section{PROJECTS}
               \\textbf{LaTeX Resume Generator} \\sl Node.js, Koa, React, Redux \\\\
               A webapp for generating LaTeX resumes from form data (including this one).
@@ -158,6 +154,19 @@ function generateExperienceSection(jobs) {
 
       return jobLine
     })}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    \\section{SKILLS}
+    \\begin{tabular}{@{}ll}
+    ${skills.map(skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`)}
+    \\end{tabular}
   `
 }
 

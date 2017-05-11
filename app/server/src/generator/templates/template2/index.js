@@ -134,7 +134,6 @@ function generateExperienceSection(jobs) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Experience}
-    \\raggedright
     ${jobs.map((job) => {
       const { name, title, location, startDate, endDate, duties } = job
 

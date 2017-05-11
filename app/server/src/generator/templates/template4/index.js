@@ -7,59 +7,7 @@ function template4({ profile, schools, jobs, projects, skills }) {
     \\begin{document}
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
-
-    \\cvsection{Experience}
-    \\begin{cventries}
-      \\cventry
-        {Software Engineer Intern}
-        {Mozilla}
-        {Mountain View, CA}
-        {Jun 2016 - Aug 2016}
-        {
-          \\begin{cvitems}
-            \\item {Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.}
-            \\item {Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.}
-            \\item {Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.}
-          \\end{cvitems}
-        }
-      \\cventry
-        {Coding Advisor}
-        {Codecademy}
-        {Manhattan, NY}
-        {Dec 2015 - May 2016}
-        {
-          \\begin{cvitems}
-            \\item {Created a JavaScript project for Codecademy Pro members now available in the new JS course.}
-            \\item {Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.}
-            \\item {Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.}
-          \\end{cvitems}
-        }
-      \\cventry
-        {Software Developer Intern}
-        {IEEE}
-        {Piscataway, NJ}
-        {Jun 2015 - Nov 2015}
-        {
-          \\begin{cvitems}
-            \\item {Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.}
-            \\item {Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.}
-            \\item {Improved the IEEE Innovate site by using cookies to display tailored web-content.}
-          \\end{cvitems}
-        }
-      \\cventry
-        {Web Developer Intern}
-        {Johnson \\& Johnson}
-        {New Brunswick, NJ}
-        {Jan 2015 - Jun 2015}
-        {
-          \\begin{cvitems}
-            \\item {Improved existing web pages by migrating inline-styling to external CSS files, and adding cross-browser compatibility.}
-            \\item {Created SharePoint front-ends with HTML, CSS, and JavaScript and utilized the jQuery UI library to create responsive widgets.}
-            \\item {Debugged original code base as the sole developer on the team and created a standard for SharePoint web part development for future employees.}
-          \\end{cvitems}
-        }
-    \\end{cventries}
-
+    ${generateExperienceSection(jobs)}
     \\cvsection{Skills}
     \\begin{cventries}
     \\cventry
@@ -172,31 +120,74 @@ function generateEducationSection(schools) {
     %     Education
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\cvsection{Education}
-    \\raggedright
     \\begin{cventries}
-      ${schools.map((school) => {
-        const { name, location, degree, major, gpa, graduationDate } = school
+    ${schools.map((school) => {
+      const { name, location, degree, major, gpa, graduationDate } = school
 
-        let degreeLine = ''
+      let degreeLine = ''
 
-        if (degree && major) {
-          degreeLine = `${degree} in ${major}`
-        } else if (degree || major) {
-          degreeLine = degree || major
-        }
+      if (degree && major) {
+        degreeLine = `${degree} in ${major}`
+      } else if (degree || major) {
+        degreeLine = degree || major
+      }
 
-        return stripIndent`
-          \\cventry
-            {${degreeLine}}
-            {${name || ''}}
-            {${location || ''}}
-            {${graduationDate || ''}}
-            {${gpa ? `GPA: ${gpa}` : ''} \\vspace{2mm}}
-        `
-      })}
+      return stripIndent`
+        \\cventry
+          {${degreeLine}}
+          {${name || ''}}
+          {${location || ''}}
+          {${graduationDate || ''}}
+          {${gpa ? `GPA: ${gpa}` : ''} \\vspace{1mm}}
+      `
+    })}
     \\end{cventries}
+  `
+}
 
-    \\vspace{-2mm}
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %     Experience
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\cvsection{Experience}
+    \\begin{cventries}
+    ${jobs.map((job) => {
+      const { name, title, location, startDate, endDate, duties } = job
+
+      let dateRange = ''
+      let dutyLines = ''
+
+      if (startDate && endDate) {
+        dateRange = `${startDate} – ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} – Present`
+      } else {
+        dateRange = endDate
+      }
+
+      if (duties) {
+        dutyLines = source`
+          \\begin{cvitems}
+            ${duties.map(duty => `\\item {${duty}}`)}
+          \\end{cvitems}
+        `
+      }
+
+      return stripIndent`
+        \\cventry
+          {${title || ''}}
+          {${name || ''}}
+          {${location || ''}}
+          {${dateRange}}
+          {${dutyLines}}
+      `
+    })}
+    \\end{cventries}
   `
 }
 

@@ -2,62 +2,52 @@ const { stripIndent, source } = require('common-tags')
 
 function template3({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
-    \\documentclass[a4paper]{article}
-    \\usepackage{fullpage}
-    \\usepackage{amsmath}
-    \\usepackage{amssymb}
-    \\textheight=10in
-    \\pagestyle{empty}
-    \\raggedright
-
-    ${generateResumeDefinitions()}
+    %!TEX TS-program = xelatex
+    \\documentclass[]{friggeri-cv}
 
     \\begin{document}
-
-        \\vspace*{-40pt}
-
-        ${generateProfileSection(profile)}
-
-        \\vspace*{2mm}
-
-        ${generateEducationSection(schools)}
-
-        \\vspace*{2mm}
-
-        ${generateExperienceSection(jobs)}
-
-        ${generateSkillsSection(skills)}
-
-        \\vspace*{2mm}
-
-        ${generateProjectsSection(projects)}
-
+    ${generateProfileSection(profile)}
+    ${generateEducationSection(schools)}
+    ${generateExperienceSection(jobs)}
+    ${generateSkillsSection(skills)}
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
 
 function generateProfileSection(profile) {
   if (!profile) {
-    return ''
+    return '\\header{}{}{}'
   }
 
   const { fullName, email, phoneNumber, address, link } = profile
 
-  let line1 = fullName ? `{\\Huge \\scshape {${fullName}}}` : ''
-  let line2 = [address, email, phoneNumber, link].filter(Boolean).join(' $\\cdot$ ')
+  let nameStart = ''
+  let nameEnd = ''
 
-  if (line1 && line2) {
-    line1 += '\\\\'
-    line2 += '\\\\'
+  if (fullName) {
+    const names = fullName.split(' ')
+
+    if (names.length === 1) {
+      nameStart = names[0]
+      nameEnd = ''
+    } else if (names.length === 2) {
+      nameStart = names[0]
+      nameEnd = names[1]
+    } else {
+      nameStart = names.slice(0, names.length - 1).join(' ')
+      nameEnd = names[names.length - 1]
+    }
   }
 
+  if (nameStart && nameEnd) {
+    nameStart += ' '
+  }
+
+  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+
   return stripIndent`
-    %==== Profile ====%
-    \\vspace*{-10pt}
-    \\begin{center}
-      ${line1}
-      ${line2}
-    \\end{center}
+    \\header{${nameStart}}{${nameEnd}}{${info}}
   `
 }
 
@@ -67,55 +57,32 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    %==== Education ====%
-    \\header{Education}
-      ${schools.map((school) => {
-        const { name, location, degree, major, gpa, graduationDate } = school
+    \\section{education}
+    \\begin{entrylist}
+    ${schools.map((school) => {
+      const { name, location, degree, major, gpa, graduationDate } = school
 
-        let line1 = ''
-        let line2 = ''
+      let schoolLine = ''
 
-        if (name) {
-          line1 += `\\textbf{${name}}`
-        }
+      if (name) {
+        schoolLine += name
+      }
 
-        if (location) {
-          line1 += `\\hfill ${location}`
-        }
+      if (degree && major) {
+        schoolLine += `, {\\normalfont ${degree} in ${major}}`
+      } else if (degree || major) {
+        schoolLine += `, {\\normalfont ${degree || major}}`
+      }
 
-        if (degree) {
-          line2 += degree
-        }
-
-        if (major) {
-          line2 += degree ? ` ${major}` : `Degree in ${major}`
-        }
-
-        if (gpa) {
-          line2 += ` \\textit{GPA: ${gpa}}`
-        }
-
-        if (graduationDate) {
-          const gradLine = `Grad: ${graduationDate}`
-          line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
-        }
-
-        if (line1) {
-          line1 += '\\\\'
-        }
-
-        if (line2) {
-          line2 += '\\\\'
-        }
-
-        line2.trim()
-
-        return stripIndent`
-          ${line1}
-          ${line2}
-          \\vspace{1mm}
-        `
-      })}
+      return `
+        \\entry
+          {${graduationDate || ''}}
+          {${schoolLine}}
+          {${location || ''}}
+          {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
+      `
+    })}
+    \\end{entrylist}
   `
 }
 
@@ -125,55 +92,48 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    %==== Experience ====%
-    \\header{Experience}
-    \\vspace{1mm}
+    \\section{experience}
+    \\begin{entrylist}
+      ${jobs.map((job) => {
+        const { name, title, location, startDate, endDate, duties } = job
 
-    ${jobs.map((job) => {
-      const { name, title, location, startDate, endDate, duties } = job
+        let jobLine = ''
+        let dateRange = ''
+        let dutyLines
 
-      let line1 = ''
-      let line2 = ''
-      let dutyLines = ''
+        if (name) {
+          jobLine += name
+        }
 
-      if (name) {
-        line1 += `\\textbf{${name}}`
-      }
+        if (title) {
+          jobLine += `, ${title}`
+        }
 
-      if (location) {
-        line1 += ` \\hfill ${location}`
-      }
-
-      if (title) {
-        line2 += `\\textit{${title}}`
-      }
-
-      if (startDate && endDate) {
-        line2 += ` \\hfill ${startDate} | ${endDate}`
-      } else if (startDate) {
-        line2 += ` \\hfill ${startDate} | Present`
-      } else if (endDate) {
-        line2 += ` \\hfill ${endDate}`
-      }
-
-      if (line1) line1 += '\\\\'
-      if (line2) line2 += '\\\\'
-
-      if (duties) {
-        dutyLines = source`
-          \\vspace{-1mm}
-          \\begin{itemize} \\itemsep 1pt
+        if (duties) {
+          dutyLines = source`
+            \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
             ${duties.map(duty => `\\item ${duty}`)}
-          \\end{itemize}
-        `
-      }
+            \\end{itemize}
+          `
+        }
 
-      return stripIndent`
-        ${line1}
-        ${line2}
-        ${dutyLines}
-      `
-    })}
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
+
+        return `
+          \\entry
+            {${dateRange}}
+            {${jobLine}}
+            {${location || ''}}
+            {${dutyLines}}
+        `
+      })}
+    \\end{entrylist}
   `
 }
 
@@ -183,10 +143,15 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\header{Skills}
-    \\begin{tabular}{ l l }
-      ${skills.map(skill => `${skill.name}: & ${skill.details} \\\\`)}
-    \\end{tabular}
+    \\section{Skills}
+    \\begin{entrylist}
+    ${skills.map(({ name, details }) => {
+      const nameLine = name ? `${name}: ` : ''
+      const detailsLine = details ? `{\\normalfont ${details}}` : ''
+
+      return `\\skill{}{${nameLine}${detailsLine}}`
+    })}
+    \\end{entrylist}
   `
 }
 
@@ -196,102 +161,30 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\header{Projects}
+    \\section{Projects}
+    \\begin{entrylist}
     ${projects.map((project) => {
-      if (Object.keys(project) === 0) {
-        return ''
-      }
-
       const { name, description, technologies, link } = project
 
-      let line1 = ''
-      let line2 = description || ''
+      let nameLine = ''
 
       if (name) {
-        line1 += `{\\textbf{${name}}`
+        nameLine += name
       }
 
       if (technologies) {
-        line1 += ` \\sl ${technologies}} `
+        nameLine += ` {\\normalfont ${technologies}}`
       }
 
-      if (link) {
-        line1 += `\\hfill ${link}`
-      }
-
-      if (line1) {
-        line1 += '\\\\'
-      }
-
-      if (line2) {
-        line2 += '\\\\'
-      }
-
-      return stripIndent`
-        ${line1}
-        ${line2}
-        \\vspace*{2mm}
+      return `
+        \\entry
+          {}
+          {${nameLine}}
+          {${link || ''}}
+          {${description || ''}}
       `
     })}
-  `
-}
-
-function generateResumeDefinitions() {
-  return stripIndent`
-    %\\renewcommand{\\encodingdefault}{cg}
-    %\\renewcommand{\\rmdefault}{lgrcmr}
-
-    \\def\\bull{\\vrule height 0.8ex width .7ex depth -.1ex }
-
-    % DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
-
-    \\newcommand{\\area} [2] {
-        \\vspace*{-9pt}
-        \\begin{verse}
-            \\textbf{#1}   #2
-        \\end{verse}
-    }
-
-    \\newcommand{\\lineunder} {
-        \\vspace*{-8pt} \\\\
-        \\hspace*{-18pt} \\hrulefill \\\\
-    }
-
-    \\newcommand{\\header} [1] {
-        {\\hspace*{-18pt}\\vspace*{6pt} \\textsc{#1}}
-        \\vspace*{-6pt} \\lineunder
-    }
-
-    \\newcommand{\\employer} [3] {
-        { \\textbf{#1} (#2)\\\\ \\underline{\\textbf{\\emph{#3}}}\\\\  }
-    }
-
-    \\newcommand{\\contact} [3] {
-        \\vspace*{-10pt}
-        \\begin{center}
-            {\\Huge \\scshape {#1}}\\\\
-            #2 \\\\ #3
-        \\end{center}
-        \\vspace*{-8pt}
-    }
-
-    \\newenvironment{achievements}{
-        \\begin{list}
-            {$\\bullet$}{\\topsep 0pt \\itemsep -2pt}}{\\vspace*{4pt}
-        \\end{list}
-    }
-
-    \\newcommand{\\schoolwithcourses} [4] {
-        \\textbf{#1} #2 $\\bullet$ #3\\\\
-        #4 \\\\
-        \\vspace*{5pt}
-    }
-
-    \\newcommand{\\school} [4] {
-        \\textbf{#1} #2 $\\bullet$ #3\\\\
-        #4 \\\\
-    }
-        % END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+    \\end{entrylist}
   `
 }
 

@@ -18,11 +18,7 @@ function getTemplateData(data) {
       return {
         texDoc: template1(data),
         opts: {
-          cmd: 'xelatex',
-          inputs: join(__dirname, 'template1', 'inputs'),
-          fonts: join(__dirname, 'template1', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log'),
-          passes: 2
+          errorLogs: join(__dirname, 'latexerrors.log')
         }
       }
 
@@ -41,7 +37,11 @@ function getTemplateData(data) {
       return {
         texDoc: template3(data),
         opts: {
-          errorLogs: join(__dirname, 'latexerrors.log')
+          cmd: 'xelatex',
+          inputs: join(__dirname, 'template3', 'inputs'),
+          fonts: join(__dirname, 'template3', 'inputs'),
+          errorLogs: join(__dirname, 'latexerrors.log'),
+          passes: 2
         }
       }
 

@@ -2,7 +2,7 @@ const { stripIndent, source } = require('common-tags')
 
 function template4({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
-    ${generateCommentHeader()}
+    ${generateHeader()}
     \\begin{document}
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
@@ -193,7 +193,7 @@ function generateProjectsSection(projects) {
   `
 }
 
-function generateCommentHeader() {
+function generateHeader() {
   return stripIndent`
     %!TEX TS-program = xelatex
     %!TEX encoding = UTF-8 Unicode

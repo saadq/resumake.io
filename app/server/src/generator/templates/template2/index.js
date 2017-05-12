@@ -3,7 +3,7 @@ const { stripIndent, source } = require('common-tags')
 function template2({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
     ${generateCommentHeader()}
-    \\documentclass[]{deedy-resume-openfont}
+    \\documentclass[a4paper]{deedy-resume-openfont}
 
     \\begin{document}
       ${generateProfileSection(profile)}

@@ -2,7 +2,7 @@ const { stripIndent, source } = require('common-tags')
 
 function template3({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
-    \\documentclass{article}
+    \\documentclass[a4paper]{article}
     \\usepackage{fullpage}
     \\usepackage{amsmath}
     \\usepackage{amssymb}

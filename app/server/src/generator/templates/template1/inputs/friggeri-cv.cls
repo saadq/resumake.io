@@ -49,14 +49,14 @@
 
 % \RequirePackage[quiet]{fontspec}
 % \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
-% 
+%
 % \newfontfamily\bodyfont[]{Helvetica Neue}
 % \newfontfamily\thinfont[]{Helvetica Neue UltraLight}
 % \newfontfamily\headingfont[]{Helvetica Neue Condensed Bold}
-% 
+%
 % \defaultfontfeatures{Mapping=tex-text}
 % \setmainfont[Mapping=tex-text, Color=textcolor]{Helvetica Neue Light}
-% 
+%
 % \setmathfont{XITS Math}
 
 %%% modified by Karol Kozioł for ShareLaTex use
@@ -166,18 +166,18 @@ BoldItalicFont=texgyreheros-bolditalic.otf
 }
 \renewcommand{\bfseries}{\headingfont\color{headercolor}}
 \newcommand{\entry}[4]{%
-  #1&\parbox[t]{14.5cm}{%
+  #1&\parbox[t]{14cm}{%
     \textbf{#2}%
     \hfill%
     {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
     #4\vspace{4mm}%
   }\\}
-  
+
   \newcommand{\skill}[2]{%
-  #1&\parbox[t]{14.5cm}{%
+  #1&\parbox[t]{14cm}{%
 \textbf{#2}\vspace{1mm}%
   }\\}
-  
+
 \newcommand{\project}[4]{%
   #1&\parbox[t]{14.5cm}{%
     \textbf{#2}%

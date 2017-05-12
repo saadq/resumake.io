@@ -97,6 +97,7 @@ function generateEducationSection(schools) {
 
         if (graduationDate) {
           const gradLine = `Grad: ${graduationDate}`
+
           line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
         }
 

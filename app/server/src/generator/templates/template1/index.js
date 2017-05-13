@@ -114,7 +114,7 @@ function generateEducationSection(schools) {
         return stripIndent`
           ${line1}
           ${line2}
-          \\vspace{1mm}
+          \\vspace{2mm}
         `
       })}
   `

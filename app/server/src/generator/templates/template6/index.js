@@ -7,47 +7,7 @@ function template6({ profile, schools, jobs, projects, skills }) {
 
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Experience}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    \\begin{itemize}[leftmargin=*]
-    \\item[]
-        \\job
-            {Mozilla}
-            {Mountain View, CA}
-            {Software Engineer Intern}
-            {Jun 2016 – Aug 2016}
-            \\begin{itemize}
-            \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions
-            \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-            \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-            \\end{itemize}
-
-        \\job
-            {Codecademy}
-            {Manhattan, NY}
-            {Coding Advisor}
-            {Dec 2015 – May 2016}
-            \\begin{itemize}
-            \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-            \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-            \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-            \\end{itemize}
-
-        \\job
-            {IEEE}
-            {Piscataway, NJ}
-            {Application Developer Intern}
-            {Jun 2015 – Nov 2015}
-            \\begin{itemize}
-            \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-            \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-            \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-            \\end{itemize}
-    \\end{itemize}
-
+    ${generateExperienceSection(jobs)}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\resheading{Skills}
@@ -140,6 +100,52 @@ function generateEducationSection(schools) {
       `
     })}
 
+    \\end{itemize}
+  `
+}
+
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\resheading{Experience}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\begin{itemize}[leftmargin=*]
+    ${jobs.map((job) => {
+      const { name, title, location, startDate, endDate, duties } = job
+
+      let dateRange = ''
+      let dutyLines = ''
+
+      if (startDate && endDate) {
+        dateRange = `${startDate} | ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} | Present`
+      } else {
+        dateRange = endDate
+      }
+
+      if (duties) {
+        dutyLines = source`
+          \\begin{itemize}
+            ${duties.map(duty => `\\item ${duty}`)}
+          \\end{itemize}
+        `
+      }
+
+      return stripIndent`
+        \\item[]
+          \\job
+            {${name || ''}}
+            {${location || ''}}
+            {${title || ''}}
+            {${dateRange}}
+            ${dutyLines}
+      `
+    })}
     \\end{itemize}
   `
 }

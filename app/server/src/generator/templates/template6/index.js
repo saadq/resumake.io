@@ -8,16 +8,7 @@ function template6({ profile, schools, jobs, projects, skills }) {
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Skills}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    \\begin{itemize}[leftmargin=*]
-    \\setlength\\itemsep{0em}
-    \\item[] \\skill{Languages:}{Java, JavaScript, Ruby, Python, HTML, CSS}
-    \\item[] \\skill{Frameworks:}{Node.js, Koa, Express, React, Redux}
-    \\end{itemize}
+    ${generateSkillsSection(skills)}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -146,6 +137,22 @@ function generateExperienceSection(jobs) {
             ${dutyLines}
       `
     })}
+    \\end{itemize}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\resheading{Skills}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\begin{itemize}[leftmargin=*]
+    \\setlength\\itemsep{0em}
+    ${skills.map(skill => `\\item[] \\skill{${skill.name}}{${skill.details}}`)}
     \\end{itemize}
   `
 }

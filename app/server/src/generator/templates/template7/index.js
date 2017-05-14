@@ -1,56 +1,11 @@
 const { stripIndent } = require('common-tags')
 
-function template7() {
+function template7({ profile, schools, jobs, skills, projects }) {
   return stripIndent`
-    %% start of file 'template.tex'.
-    %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
-    %
-    % This work may be distributed and/or modified under the
-    % conditions of the LaTeX Project Public License version 1.3c,
-    % available at http://www.latex-project.org/lppl/.
-
-
-    \\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
-
-    % moderncv themes
-    \\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-    \\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
-    %\\renewcommand{\\familydefault}{\\sfdefault}         % to set the default font; use '\\sfdefault' for the default sans serif font, '\\rmdefault' for the default roman one, or any tex font name
-    %\\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
-
-    % character encoding
-    \\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
-    %\\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
-
-    % adjust the page margins
-    \\usepackage[scale=0.75]{geometry}
-    %\\setlength{\\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
-    %\\setlength{\\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
-
-    % personal data
-    \\name{Saad}{Quadri}                              % optional, remove / comment the line if not wanted
-    \\address{Metuchen, NJ}% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
-    \\phone[mobile]{(732) 476-8719}                   % optional, remove / comment the line if not wanted
-    \\email{saad@saadq.com}                               % optional, remove / comment the line if not wanted
-    \\homepage{www.saadq.com}
-
-    % to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
-    %\\makeatletter
-    %\\renewcommand*{\\bibliographyitemlabel}{\\@biblabel{\\arabic{enumiv}}}
-    %\\makeatother
-    %\\renewcommand*{\\bibliographyitemlabel}{[\\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
-
-    % bibliography with mutiple entries
-    %\\usepackage{multibib}
-    %\\newcites{book,misc}{{Books},{Others}}
-    %----------------------------------------------------------------------------------
-    %            content
-    %----------------------------------------------------------------------------------
+    ${generateHeader()}
+    ${generateProfileSection(profile)}
     \\begin{document}
-    %\\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
-    %-----       resume       ---------------------------------------------------------
-
-    \\makecvtitle
+    ${profile ? '\\makecvtitle' : ''}
 
     \\section{Education}
     \\cventry{Jan 2017}{BA Computer Science}{Rutgers University}{GPA: 3.0}{\\textit{New Brunswick, NJ}}{}  % arguments 3 to 6 can be left empty
@@ -92,6 +47,48 @@ function template7() {
     \\cventry{}{Reddit Image Scraper}{}{\\textit{Ruby, Sinatra}}{}{A web app that lets you view a collage of images/videos from a subreddit.\\\\reddit-image-scraper.herokuapp.com}
 
     \\end{document}
+  `
+}
+
+function generateProfileSection(profile = {}) {
+  const { fullName, email, phoneNumber, address, link } = profile
+
+  return stripIndent`
+    % Profile
+    \\name{${fullName || ''}}{}
+    \\address{${address || ''}}
+    ${phoneNumber ? `\\phone[mobile]{${phoneNumber}}` : ''}
+    ${email ? `\\email{${email || ''}}` : ''}
+    ${link ? `\\homepage{${link || ''}}` : ''}
+  `
+}
+
+function generateHeader() {
+  return stripIndent`
+    %% start of file 'template.tex'.
+    %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+    %
+    % This work may be distributed and/or modified under the
+    % conditions of the LaTeX Project Public License version 1.3c,
+    % available at http://www.latex-project.org/lppl/.
+
+
+    \\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+    % moderncv themes
+    \\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+    \\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+    %\\renewcommand{\\familydefault}{\\sfdefault}         % to set the default font; use '\\sfdefault' for the default sans serif font, '\\rmdefault' for the default roman one, or any tex font name
+    %\\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+    % character encoding
+    \\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+    %\\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+    % adjust the page margins
+    \\usepackage[scale=0.75]{geometry}
+    %\\setlength{\\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+    %\\setlength{\\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
   `
 }
 

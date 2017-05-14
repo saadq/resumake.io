@@ -4,38 +4,11 @@ function template6({ profile, schools, jobs, projects, skills }) {
   return stripIndent`
     ${generateHeader()}
     \\begin{document}
-
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
-
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Projects}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\begin{itemize}[leftmargin=*]
-    \\item[]
-        \\project
-            {LaTeX Resume Generator}
-            {Node.js, Koa, React, Redux}
-            {https://latexresu.me}
-            {A webapp for generating LaTeX resumes from form data (including this one).}
-
-        \\project
-            {Flow Timer}
-            {Node.js, Koa, React, Redux, PostgreSQL}
-            {https://flowtimer.com}
-            {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
-
-        \\project
-            {Reddit Image Scraper}
-            {Ruby, Sinatra}
-            {https://reddit-image-scraper.herokuapp.com}
-            {A web app that lets you view a collage of images/videos from a subreddit.}
-    \\end{itemize}
-
-
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
@@ -153,6 +126,32 @@ function generateSkillsSection(skills) {
     \\begin{itemize}[leftmargin=*]
     \\setlength\\itemsep{0em}
     ${skills.map(skill => `\\item[] \\skill{${skill.name}}{${skill.details}}`)}
+    \\end{itemize}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\resheading{Projects}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\begin{itemize}[leftmargin=*]
+    ${projects.map((project) => {
+      const { name, description, technologies, link } = project
+
+      return stripIndent`
+        \\item[]
+            \\project
+                {${name || ''}}
+                {${technologies || ''}}
+                {${link || ''}}
+                {${description || ''}}
+      `
+    })}
     \\end{itemize}
   `
 }

@@ -8,10 +8,7 @@ function template7({ profile, schools, jobs, skills, projects }) {
     ${profile ? '\\makecvtitle' : ''}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
-
-    \\section{Skills}
-    \\cvitem{Languages}{Java, JavaScript, Ruby, Python, \\LaTeX, HTML, CSS}
-    \\cvitem{Frameworks}{Node.js, Koa, Express, React, Redux, Sinatra}
+    ${generateSkillsSection(skills)}
 
     \\section{Projects}
     \\cventry{}{LaTeX Resume Generator}{}{\\textit{Node.js, Koa, React, Redux}}{}{A webapp for generating LaTeX resumes from form data (including this one).\\\\https://latexresu.me}
@@ -111,6 +108,17 @@ function generateExperienceSection(jobs) {
           {${dutyLines}}
       `
     })}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    \\section{Skills}
+    ${skills.map(skill => `\\cvitem{${skill.name || ''}}{${skill.details || ''}}`)}
   `
 }
 

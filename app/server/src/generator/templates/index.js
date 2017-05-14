@@ -5,6 +5,7 @@ const template3 = require('./template3')
 const template4 = require('./template4')
 const template5 = require('./template5')
 const template6 = require('./template6')
+const template7 = require('./template7')
 
 const {
   TEMPLATE1,
@@ -12,7 +13,8 @@ const {
   TEMPLATE3,
   TEMPLATE4,
   TEMPLATE5,
-  TEMPLATE6
+  TEMPLATE6,
+  TEMPLATE7
 } = require('./constants')
 
 function getTemplateData(data) {
@@ -68,11 +70,20 @@ function getTemplateData(data) {
       }
 
     case TEMPLATE6:
-      console.log(template6(data))
-
       return {
         texDoc: template6(data),
         opts: {
+          errorLogs: join(__dirname, 'latexerrors.log')
+        }
+      }
+
+    case TEMPLATE7:
+      console.log(template7(data))
+
+      return {
+        texDoc: template7(data),
+        opts: {
+          inputs: join(__dirname, 'template7', 'inputs'),
           errorLogs: join(__dirname, 'latexerrors.log')
         }
       }

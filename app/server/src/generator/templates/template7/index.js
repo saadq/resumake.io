@@ -9,18 +9,7 @@ function template7({ profile, schools, jobs, skills, projects }) {
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
-
-    \\section{Projects}
-    \\cventry{}{LaTeX Resume Generator}{}{\\textit{Node.js, Koa, React, Redux}}{}{A webapp for generating LaTeX resumes from form data (including this one).\\\\https://latexresu.me}
-
-    \\vspace{2mm}
-
-    \\cventry{}{Flow Timer}{}{\\textit{Node.js, Koa, React, Redux}}{}{A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.\\\\https://flowtimer.com}
-
-    \\vspace{2mm}
-
-    \\cventry{}{Reddit Image Scraper}{}{\\textit{Ruby, Sinatra}}{}{A web app that lets you view a collage of images/videos from a subreddit.\\\\reddit-image-scraper.herokuapp.com}
-
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
@@ -119,6 +108,40 @@ function generateSkillsSection(skills) {
   return source`
     \\section{Skills}
     ${skills.map(skill => `\\cvitem{${skill.name || ''}}{${skill.details || ''}}`)}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    \\section{Projects}
+    ${projects.map((project) => {
+      const { name, description, technologies, link } = project
+
+      let detailsLine = ''
+
+      if (description) {
+        detailsLine += `${description}\\\\`
+      }
+
+      if (link) {
+        detailsLine += link
+      }
+
+      return stripIndent`
+        \\cventry
+          {}
+          {${name || ''}}
+          {}
+          {\\textit{${technologies || ''}}}
+          {}
+          {${detailsLine}}
+        \\vspace{1mm}
+      `
+    })}
   `
 }
 

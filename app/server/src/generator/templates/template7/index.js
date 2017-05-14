@@ -1,4 +1,4 @@
-const { stripIndent } = require('common-tags')
+const { stripIndent, source } = require('common-tags')
 
 function template7({ profile, schools, jobs, skills, projects }) {
   return stripIndent`
@@ -6,10 +6,7 @@ function template7({ profile, schools, jobs, skills, projects }) {
     ${generateProfileSection(profile)}
     \\begin{document}
     ${profile ? '\\makecvtitle' : ''}
-
-    \\section{Education}
-    \\cventry{Jan 2017}{BA Computer Science}{Rutgers University}{GPA: 3.0}{\\textit{New Brunswick, NJ}}{}  % arguments 3 to 6 can be left empty
-
+    ${generateEducationSection(schools)}
     \\section{Experience}
     \\cventry{Jun 2016 -- Aug 2016}{Software Engineer Intern}{Mozilla}{Mountain View, CA}{}{
     \\begin{itemize}%
@@ -60,6 +57,31 @@ function generateProfileSection(profile = {}) {
     ${phoneNumber ? `\\phone[mobile]{${phoneNumber}}` : ''}
     ${email ? `\\email{${email || ''}}` : ''}
     ${link ? `\\homepage{${link || ''}}` : ''}
+  `
+}
+
+function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
+  return source`
+    \\section{Education}
+    ${schools.map((school) => {
+      const { name, degree, major, gpa, location, graduationDate } = school
+
+      let degreeLine = ''
+
+      if (degree && major) {
+        degreeLine = `${degree} in ${major}`
+      } else if (degree || major) {
+        degreeLine = degree || major
+      }
+
+      return stripIndent`
+        \\cventry{${graduationDate || ''}}{${degreeLine}}{${name || ''}}{${gpa ? `GPA: ${gpa}` : ''}}{\\textit{${location || ''}}}{}  
+      `
+    })}
   `
 }
 

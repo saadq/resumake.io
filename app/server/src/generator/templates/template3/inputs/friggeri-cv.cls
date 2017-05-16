@@ -9,7 +9,7 @@
 \LoadClass{article}
 
 \usepackage{enumitem}
-
+\usepackage{textcomp}
 %%%%%%%%%%
 % Colors %
 %%%%%%%%%%

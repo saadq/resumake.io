@@ -175,6 +175,7 @@ function generateHeader() {
     \\usepackage{framed}
     \\usepackage{tocloft}
     \\usepackage{enumitem}
+    \\usepackage{textcomp}
 
 
     %-----------------------------------------------------------

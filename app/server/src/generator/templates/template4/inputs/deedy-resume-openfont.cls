@@ -17,6 +17,7 @@
 \usepackage[UKenglish]{babel}
 \usepackage[UKenglish]{isodate}
 \usepackage{fontspec,xltxtra,xunicode}
+\usepackage{textcomp}
 
 % Color definitions
 \definecolor{date}{HTML}{666666}

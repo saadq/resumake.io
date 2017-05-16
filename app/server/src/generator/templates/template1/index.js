@@ -6,6 +6,7 @@ function template1({ profile, schools, jobs, projects, skills }) {
     \\usepackage{fullpage}
     \\usepackage{amsmath}
     \\usepackage{amssymb}
+    \\usepackage{textcomp}
     \\textheight=10in
     \\pagestyle{empty}
     \\raggedright

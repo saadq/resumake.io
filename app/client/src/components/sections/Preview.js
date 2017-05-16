@@ -1,5 +1,6 @@
 import 'whatwg-fetch'
 import React from 'react'
+import { string, number, bool, object } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
@@ -51,6 +52,13 @@ function Preview({ url, page, isGenerating, actions }) {
       </Row>
     </section>
   )
+}
+
+Preview.propTypes = {
+  actions: object.isRequired,
+  isGenerating: bool.isRequired,
+  url: string,
+  page: number
 }
 
 function mapStateToProps(state) {

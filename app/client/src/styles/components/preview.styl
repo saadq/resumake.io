@@ -15,24 +15,27 @@
 
   .download-buttons
     display flex
-    flex-direction column
-    align-items center
+    justify-content space-between
 
     .button
-      width 65%
-      min-width 200px
+      width 49%
       color $home-text-color
       background-color oc-gray-9
-      margin-bottom 10px
       outline none
       border none
       border-radius 0
       transition all .4s ease
 
+      @media screen and (max-width: 768px)
+        font-size .75rem
+
       &:hover
         cursor pointer
         background-color $download-button-background-color
         color #000
+
+      span
+        width 100%
 
       i
         margin-right 7px

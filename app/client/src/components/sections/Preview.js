@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
-import FileSaver from 'file-saver'
+import { GeneratorActions } from '../../actions'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
@@ -32,27 +32,8 @@ class Preview extends Component {
     this.setState({ page: this.state.page + 1 })
   }
 
-  downloadSource = () => {
-    const { template, form } = this.props
-    const { values = {} } = form
-
-    const payload = {
-      template,
-      ...values
-    }
-
-    window.fetch('/api/generate/source', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      credentials: 'same-origin'
-    })
-    .then(res => res.blob())
-    .then(blob => FileSaver.saveAs(blob, 'resume.zip'))
-  }
-
   render() {
-    const { url, isGenerating } = this.props
+    const { url, isGenerating, downloadSource } = this.props
 
     if (!url) {
       return <LoadingBar />
@@ -68,7 +49,7 @@ class Preview extends Component {
               Download PDF
             </span>
           </a>
-          <button className='button' onClick={this.downloadSource}>
+          <button className='button' onClick={() => downloadSource()}>
             <span className='icon is-small'>
               <i className='fa fa-file-code-o' />
               Download Source
@@ -81,7 +62,13 @@ class Preview extends Component {
           <button onClick={this.handleNext} className='button'>&rarr;</button>
         </div>
         <Row>
-          <PDF scale={4} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
+          <PDF
+            file={url}
+            page={this.state.page}
+            scale={4}
+            onDocumentComplete={this.onDocumentComplete}
+            onPageComplete={this.onPageComplete}
+          />
         </Row>
       </section>
     )
@@ -93,8 +80,17 @@ function mapStateToProps(state) {
     url: state.generator.pdf.url,
     isGenerating: state.generator.isGenerating,
     form: state.form.resume,
-    template: state.generator.template
+    payload: state.generator.prevResume
   }
 }
 
-export default connect(mapStateToProps)(Preview)
+function mapDispatchToProps(dispatch) {
+  return {
+    downloadSource: () => dispatch(GeneratorActions.downloadSource())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Preview)

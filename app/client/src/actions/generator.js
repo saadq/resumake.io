@@ -1,9 +1,12 @@
+import FileSaver from 'file-saver'
 import isEqual from 'lodash/isEqual'
 import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME
+  SAVE_PREVIOUS_RESUME,
+  REQUEST_SOURCE,
+  RECEIVE_SOURCE
 } from '../constants'
 
 function selectTemplate(templateId) {
@@ -63,7 +66,46 @@ function generateResume(payload) {
   }
 }
 
+function requestSource() {
+  return {
+    type: REQUEST_SOURCE
+  }
+}
+
+function receiveSource() {
+  return {
+    type: RECEIVE_SOURCE
+  }
+}
+
+function downloadSource() {
+  return async (dispatch, getState) => {
+    const { fetch } = window
+    const { isGenerating, isDownloading, prevResume } = getState().generator
+
+    if (isGenerating || isDownloading) {
+      return
+    }
+
+    dispatch(requestSource())
+
+    const req = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(prevResume),
+      credentials: 'same-origin'
+    }
+
+    const res = await fetch('/api/generate/source', req)
+    const blob = await res.blob()
+
+    FileSaver.saveAs(blob, 'resume.zip')
+    dispatch(receiveSource())
+  }
+}
+
 export {
   selectTemplate,
-  generateResume
+  generateResume,
+  downloadSource
 }

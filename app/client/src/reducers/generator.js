@@ -2,12 +2,15 @@ import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME
+  SAVE_PREVIOUS_RESUME,
+  REQUEST_SOURCE,
+  RECEIVE_SOURCE
 } from '../constants'
 
 const initialState = {
   template: 1,
   isGenerating: false,
+  isDownloading: false,
   prevResume: {},
   pdf: {
     url: null
@@ -42,6 +45,18 @@ function generator(state = initialState, action) {
       return {
         ...state,
         prevResume: action.payload
+      }
+
+    case REQUEST_SOURCE:
+      return {
+        ...state,
+        isDownloading: true
+      }
+
+    case RECEIVE_SOURCE:
+      return {
+        ...state,
+        isDownloading: false
       }
 
     default:

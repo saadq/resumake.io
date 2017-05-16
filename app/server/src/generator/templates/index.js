@@ -17,6 +17,15 @@ const {
   TEMPLATE7
 } = require('./constants')
 
+/**
+ * Generates the LaTeX document based on the selected template
+ * as well as the necessary options needed for it to create a
+ * pdf via node-latex.
+ *
+ * @param {Object} data - The sanitized form data from the request body.
+ *
+ * @return {Object} - The generated LaTeX document as well as its additional opts.
+ */
 function getTemplateData(data) {
   switch (data.template) {
     case TEMPLATE1:

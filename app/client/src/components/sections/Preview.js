@@ -55,7 +55,7 @@ class Preview extends Component {
 
 function mapStateToProps(state) {
   return {
-    url: state.generator.resumeURL,
+    url: state.generator.pdf.url,
     isGenerating: state.generator.isGenerating
   }
 }

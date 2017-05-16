@@ -8,8 +8,10 @@ import {
 const initialState = {
   template: 1,
   isGenerating: false,
-  resumeURL: null,
-  prevResume: {}
+  prevResume: {},
+  pdf: {
+    url: null
+  }
 }
 
 function generator(state = initialState, action) {
@@ -29,8 +31,11 @@ function generator(state = initialState, action) {
     case RECEIVE_RESUME:
       return {
         ...state,
-        resumeURL: action.url,
-        isGenerating: false
+        isGenerating: false,
+        pdf: {
+          ...state.pdf,
+          url: action.url
+        }
       }
 
     case SAVE_PREVIOUS_RESUME:

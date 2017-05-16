@@ -2,7 +2,7 @@ import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME,
+  SAVE_RESUME_DATA,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
   SET_TOTAL_PAGES,
@@ -47,7 +47,7 @@ function generator(state = initialState, action) {
         }
       }
 
-    case SAVE_PREVIOUS_RESUME:
+    case SAVE_RESUME_DATA:
       return {
         ...state,
         prevResume: action.payload

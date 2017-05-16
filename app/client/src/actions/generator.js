@@ -4,7 +4,7 @@ import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME,
+  SAVE_RESUME_DATA,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
   SET_TOTAL_PAGES,
@@ -20,26 +20,6 @@ function selectTemplate(templateId) {
   }
 }
 
-function requestResume() {
-  return {
-    type: REQUEST_RESUME
-  }
-}
-
-function receiveResume(url) {
-  return {
-    type: RECEIVE_RESUME,
-    url
-  }
-}
-
-function savePreviousResume(payload) {
-  return {
-    type: SAVE_PREVIOUS_RESUME,
-    payload
-  }
-}
-
 function generateResume(payload) {
   return async (dispatch, getState) => {
     const { isGenerating, prevResume } = getState().generator
@@ -48,8 +28,8 @@ function generateResume(payload) {
       return
     }
 
-    dispatch(requestResume())
-    dispatch(savePreviousResume(payload))
+    dispatch({ type: REQUEST_RESUME })
+    dispatch({ type: SAVE_RESUME_DATA, payload })
 
     const req = {
       method: 'POST',
@@ -66,19 +46,7 @@ function generateResume(payload) {
     const blob = await res.blob()
     const url = URL.createObjectURL(blob)
 
-    dispatch(receiveResume(url))
-  }
-}
-
-function requestSource() {
-  return {
-    type: REQUEST_SOURCE
-  }
-}
-
-function receiveSource() {
-  return {
-    type: RECEIVE_SOURCE
+    dispatch({ type: RECEIVE_RESUME, url })
   }
 }
 
@@ -91,7 +59,7 @@ function downloadSource() {
       return
     }
 
-    dispatch(requestSource())
+    dispatch({ type: REQUEST_SOURCE })
 
     const req = {
       method: 'POST',
@@ -104,7 +72,7 @@ function downloadSource() {
     const blob = await res.blob()
 
     FileSaver.saveAs(blob, 'resume.zip')
-    dispatch(receiveSource())
+    dispatch({ type: RECEIVE_SOURCE })
   }
 }
 

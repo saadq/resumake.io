@@ -50,7 +50,8 @@ function generateResume(payload) {
         'Accept': 'application/pdf',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: 'same-origin'
     }
 
     const { fetch, URL } = window

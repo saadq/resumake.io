@@ -4,6 +4,7 @@ const router = require('./routes')
 
 const app = new Koa()
 
+app.proxy = true
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())

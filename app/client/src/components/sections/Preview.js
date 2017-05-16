@@ -41,6 +41,10 @@ class Preview extends Component {
     return (
       <section id='preview'>
         <LoadingBar hidden={!isGenerating} />
+        <div className='download-buttons'>
+          <a href={url} download='resume.pdf' className='button'>Download PDF</a>
+          <a href='/api/generate/source' className='button'>Download TeX</a>
+        </div>
         <Row>
           <PDF scale={4} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
         </Row>

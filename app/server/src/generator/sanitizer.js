@@ -31,7 +31,7 @@ function sanitize(obj = {}) {
       const sanitized = sanitize(val)
 
       if (!isEmptyObject(sanitized)) {
-        copy[key] = sanitize(val)
+        copy[key] = sanitized
       }
     } else if (isString(val)) {
       copy[key] = sanitizeLatex(trim(val))

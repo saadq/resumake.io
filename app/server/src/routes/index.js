@@ -7,8 +7,9 @@ const generate = require('../generator')
 const router = new Router({ prefix: '/api' })
 
 /**
- * Generates the LaTeX from the request body and then a PDF
- * is created from the LaTeX doc which is then sent to the client.
+ * Generates the LaTeX from the request body and
+ * then a PDF is created from the LaTeX doc which
+ * is then sent to the client.
  */
 router.post('/generate/resume', async (ctx) => {
   const { texDoc, opts } = generate(ctx.request.body)
@@ -19,8 +20,8 @@ router.post('/generate/resume', async (ctx) => {
 })
 
 /**
- * Generates resume source files from request body and
- * saves it to a zip to send to the client.
+ * Generates resume source files from request body
+ * and saves it to a zip to send to the client.
  */
 router.post('/generate/source', async (ctx) => {
   const { texDoc, opts } = generate(ctx.request.body)

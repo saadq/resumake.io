@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
+import FileSaver from 'file-saver'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
@@ -31,6 +32,25 @@ class Preview extends Component {
     this.setState({ page: this.state.page + 1 })
   }
 
+  downloadSource = () => {
+    const { template, form } = this.props
+    const { values = {} } = form
+
+    const payload = {
+      template,
+      ...values
+    }
+
+    window.fetch('/api/generate/source', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'same-origin'
+    })
+    .then(res => res.blob())
+    .then(blob => FileSaver.saveAs(blob, 'resume.zip'))
+  }
+
   render() {
     const { url, isGenerating } = this.props
 
@@ -43,7 +63,7 @@ class Preview extends Component {
         <LoadingBar hidden={!isGenerating} />
         <div className='download-buttons'>
           <a href={url} download='resume.pdf' className='button'>Download PDF</a>
-          <a href='/api/generate/source' className='button'>Download TeX</a>
+          <button className='button' onClick={this.downloadSource}>Download Source</button>
         </div>
         <Row>
           <PDF scale={4} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
@@ -56,7 +76,9 @@ class Preview extends Component {
 function mapStateToProps(state) {
   return {
     url: state.generator.pdf.url,
-    isGenerating: state.generator.isGenerating
+    isGenerating: state.generator.isGenerating,
+    form: state.form.resume,
+    template: state.generator.template
   }
 }
 

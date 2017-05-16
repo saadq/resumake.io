@@ -6,26 +6,20 @@ const { generateTex, generatePDF } = require('../generator')
 const router = new Router({ prefix: '/api' })
 
 /**
- * Generates a PDF from the request body and sends it back to the client.
- * Saves the request body in a cookie for use in GET /generate/source.
+ * Generates a PDF from the request body and sends it to the client.
  */
 router.post('/generate/resume', async (ctx) => {
   const pdf = generatePDF(ctx.request.body)
-  const encodedReqBody = encodeURIComponent(JSON.stringify(ctx.request.body))
-
-  ctx.cookies.set('resume', encodedReqBody, { overwrite: true })
 
   ctx.type = 'application/pdf'
   ctx.body = pdf
 })
 
 /**
- * Retrieves the request body that was created during PDF generation, and sends
- * the client a generated LaTeX doc as well as the assets needed for that doc.
+ * Generates resume source files from request body and sends it to the client.
  */
-router.get('/generate/source', async (ctx) => {
-  const decodedReqBody = JSON.parse(decodeURIComponent(ctx.cookies.get('resume')))
-  const { texDoc, opts } = generateTex(decodedReqBody)
+router.post('/generate/source', async (ctx) => {
+  const { texDoc, opts } = generateTex(ctx.request.body)
   const zip = Archiver('zip')
 
   zip.on('error', (err) => {
@@ -40,8 +34,7 @@ router.get('/generate/source', async (ctx) => {
 
   zip.finalize()
 
-  ctx.attachment('resume.zip')
-  ctx.type = 'application/zip'
+  ctx.type = 'application/octet-stream'
   ctx.body = zip
 })
 

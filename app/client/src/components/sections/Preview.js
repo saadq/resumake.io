@@ -1,5 +1,6 @@
 import 'whatwg-fetch'
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
@@ -7,33 +8,21 @@ import { GeneratorActions } from '../../actions'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
-  constructor(props) {
-    super(props)
-    this.onDocumentComplete = this.onDocumentComplete.bind(this)
-    this.onPageComplete = this.onPageComplete.bind(this)
-    this.handlePrevious = this.handlePrevious.bind(this)
-    this.handleNext = this.handleNext.bind(this)
-    this.state = {}
+  onDocumentComplete = (pages) => {
+    const { actions } = this.props
+
+    actions.setTotalPages(pages)
+    actions.setCurrentPage(1)
   }
 
-  onDocumentComplete(pages) {
-    this.setState({ page: 1, pages })
-  }
+  onPageComplete = (page) => {
+    const { actions } = this.props
 
-  onPageComplete(page) {
-    this.setState({ page })
-  }
-
-  handlePrevious = () => {
-    this.setState({ page: this.state.page - 1 })
-  }
-
-  handleNext = () => {
-    this.setState({ page: this.state.page + 1 })
+    actions.setCurrentPage(page)
   }
 
   render() {
-    const { url, isGenerating, downloadSource } = this.props
+    const { url, page, isGenerating, actions } = this.props
 
     if (!url) {
       return <LoadingBar />
@@ -49,7 +38,7 @@ class Preview extends Component {
               Download PDF
             </span>
           </a>
-          <button className='button' onClick={() => downloadSource()}>
+          <button className='button' onClick={actions.downloadSource}>
             <span className='icon is-small'>
               <i className='fa fa-file-code-o' />
               Download Source
@@ -57,14 +46,18 @@ class Preview extends Component {
           </button>
         </div>
         <div className='page-row'>
-          <button onClick={this.handlePrevious} className='button'>&larr;</button>
-          <p>Page {this.state.page}</p>
-          <button onClick={this.handleNext} className='button'>&rarr;</button>
+          <button onClick={actions.prevPage} className='button'>
+            &larr;
+          </button>
+          <p>Page {page}</p>
+          <button onClick={actions.nextPage} className='button'>
+            &rarr;
+          </button>
         </div>
         <Row>
           <PDF
             file={url}
-            page={this.state.page}
+            page={page}
             scale={4}
             onDocumentComplete={this.onDocumentComplete}
             onPageComplete={this.onPageComplete}
@@ -78,6 +71,7 @@ class Preview extends Component {
 function mapStateToProps(state) {
   return {
     url: state.generator.pdf.url,
+    page: state.generator.pdf.page,
     isGenerating: state.generator.isGenerating,
     form: state.form.resume,
     payload: state.generator.prevResume
@@ -86,7 +80,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    downloadSource: () => dispatch(GeneratorActions.downloadSource())
+    actions: bindActionCreators(GeneratorActions, dispatch)
   }
 }
 

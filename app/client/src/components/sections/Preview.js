@@ -24,11 +24,11 @@ class Preview extends Component {
     this.setState({ page })
   }
 
-  handlePrevious() {
+  handlePrevious = () => {
     this.setState({ page: this.state.page - 1 })
   }
 
-  handleNext() {
+  handleNext = () => {
     this.setState({ page: this.state.page + 1 })
   }
 
@@ -62,8 +62,23 @@ class Preview extends Component {
       <section id='preview'>
         <LoadingBar hidden={!isGenerating} />
         <div className='download-buttons'>
-          <a href={url} download='resume.pdf' className='button'>Download PDF</a>
-          <button className='button' onClick={this.downloadSource}>Download Source</button>
+          <a href={url} download='resume.pdf' className='button'>
+            <span className='icon is-small'>
+              <i className='fa fa-file-pdf-o' />
+              Download PDF
+            </span>
+          </a>
+          <button className='button' onClick={this.downloadSource}>
+            <span className='icon is-small'>
+              <i className='fa fa-file-code-o' />
+              Download Source
+            </span>
+          </button>
+        </div>
+        <div className='page-row'>
+          <button onClick={this.handlePrevious} className='button'>&larr;</button>
+          <p>Page {this.state.page}</p>
+          <button onClick={this.handleNext} className='button'>&rarr;</button>
         </div>
         <Row>
           <PDF scale={4} file={url} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />

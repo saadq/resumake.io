@@ -15,13 +15,15 @@
 
   .download-buttons
     display flex
-    justify-content space-between
+    flex-direction column
+    align-items center
 
     .button
-      width 49%
+      width 65%
+      min-width 200px
       color $home-text-color
       background-color oc-gray-9
-      margin-bottom 5px
+      margin-bottom 10px
       outline none
       border none
       border-radius 0
@@ -31,3 +33,26 @@
         cursor pointer
         background-color $download-button-background-color
         color #000
+
+      i
+        margin-right 7px
+
+  .page-row
+    border-radius 3px
+    background oc-gray-5
+    display flex
+    justify-content space-between
+    align-items center
+    margin-top 10px
+    color oc-black
+    font-size 1rem
+    height 35px
+
+    button
+      font-size 1.25rem
+      height 35px
+      padding 0 35px
+      background-color oc-gray-4
+      border-color oc-gray-4
+      border-radius 0
+      color white

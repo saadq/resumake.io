@@ -22,9 +22,9 @@ function selectTemplate(templateId) {
 
 function generateResume(payload) {
   return async (dispatch, getState) => {
-    const { isGenerating, prevResume } = getState().generator
+    const { isGenerating, resumeData } = getState().generator
 
-    if (isGenerating || isEqual(prevResume, payload)) {
+    if (isGenerating || isEqual(resumeData, payload)) {
       return
     }
 
@@ -53,7 +53,7 @@ function generateResume(payload) {
 function downloadSource() {
   return async (dispatch, getState) => {
     const { fetch } = window
-    const { isGenerating, isDownloading, prevResume } = getState().generator
+    const { isGenerating, isDownloading, resumeData } = getState().generator
 
     if (isGenerating || isDownloading) {
       return
@@ -64,7 +64,7 @@ function downloadSource() {
     const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(prevResume),
+      body: JSON.stringify(resumeData),
       credentials: 'same-origin'
     }
 

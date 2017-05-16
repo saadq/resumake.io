@@ -15,7 +15,7 @@ const initialState = {
   template: 1,
   isGenerating: false,
   isDownloading: false,
-  prevResume: {},
+  resumeData: {},
   pdf: {
     url: null,
     page: null,
@@ -50,7 +50,7 @@ function generator(state = initialState, action) {
     case SAVE_RESUME_DATA:
       return {
         ...state,
-        prevResume: action.payload
+        resumeData: action.payload
       }
 
     case REQUEST_SOURCE:

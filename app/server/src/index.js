@@ -4,13 +4,13 @@ const router = require('./routes')
 
 const app = new Koa()
 
-app.use(bodyParser())
-app.use(router.routes())
-app.use(router.allowedMethods())
-
 if (app.env === 'development') {
   app.proxy = true
 }
+
+app.use(bodyParser())
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 app.listen(3001)
 

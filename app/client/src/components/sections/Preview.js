@@ -65,9 +65,7 @@ function mapStateToProps(state) {
   return {
     url: state.generator.pdf.url,
     page: state.generator.pdf.page,
-    isGenerating: state.generator.isGenerating,
-    form: state.form.resume,
-    payload: state.generator.prevResume
+    isGenerating: state.generator.isGenerating
   }
 }
 

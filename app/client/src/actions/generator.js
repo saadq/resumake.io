@@ -6,7 +6,8 @@ import {
   RECEIVE_RESUME,
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE
+  RECEIVE_SOURCE,
+  SET_PAGE
 } from '../constants'
 
 function selectTemplate(templateId) {
@@ -104,8 +105,16 @@ function downloadSource() {
   }
 }
 
+function setPage(page) {
+  return {
+    type: SET_PAGE,
+    page
+  }
+}
+
 export {
   selectTemplate,
   generateResume,
-  downloadSource
+  downloadSource,
+  setPage
 }

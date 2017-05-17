@@ -15,6 +15,10 @@ router.post('/generate/resume', async (ctx) => {
   const { texDoc, opts } = generate(ctx.request.body)
   const pdf = latex(texDoc, opts)
 
+  pdf.on('error', (err) => {
+    console.error(err)
+  })
+
   ctx.type = 'application/pdf'
   ctx.body = pdf
 })

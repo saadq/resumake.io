@@ -21,7 +21,8 @@ export {
   RECEIVE_RESUME,
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE
+  RECEIVE_SOURCE,
+  SET_PAGE
 } from './generator'
 
 export {

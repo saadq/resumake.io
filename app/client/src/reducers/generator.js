@@ -4,7 +4,8 @@ import {
   RECEIVE_RESUME,
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE
+  RECEIVE_SOURCE,
+  SET_PAGE
 } from '../constants'
 
 const initialState = {
@@ -57,6 +58,15 @@ function generator(state = initialState, action) {
       return {
         ...state,
         isDownloading: false
+      }
+
+    case SET_PAGE:
+      return {
+        ...state,
+        pdf: {
+          ...state.pdf,
+          page: action.page
+        }
       }
 
     default:

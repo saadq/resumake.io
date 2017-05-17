@@ -2916,9 +2916,9 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
-node-latex@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/node-latex/-/node-latex-2.4.0.tgz#2e9b2b754f6758dc20ddb8bfc773d66e86d28797"
+node-latex@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/node-latex/-/node-latex-2.4.1.tgz#f2f21c456e9811c0968b522e346b96c8068e4896"
   dependencies:
     fs-extra "^2.0.0"
     string-to-stream "^1.1.0"

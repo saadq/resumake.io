@@ -2,24 +2,18 @@ import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_RESUME_DATA,
+  SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE,
-  SET_TOTAL_PAGES,
-  SET_CURRENT_PAGE,
-  PREV_PAGE,
-  NEXT_PAGE
+  RECEIVE_SOURCE
 } from '../constants'
 
 const initialState = {
   template: 1,
   isGenerating: false,
   isDownloading: false,
-  resumeData: {},
+  prevResume: {},
   pdf: {
-    url: null,
-    page: null,
-    pageCount: 0
+    url: null
   }
 }
 
@@ -47,10 +41,10 @@ function generator(state = initialState, action) {
         }
       }
 
-    case SAVE_RESUME_DATA:
+    case SAVE_PREVIOUS_RESUME:
       return {
         ...state,
-        resumeData: action.payload
+        prevResume: action.payload
       }
 
     case REQUEST_SOURCE:
@@ -63,42 +57,6 @@ function generator(state = initialState, action) {
       return {
         ...state,
         isDownloading: false
-      }
-
-    case SET_TOTAL_PAGES:
-      return {
-        ...state,
-        pdf: {
-          ...state.pdf,
-          pageCount: action.pageCount
-        }
-      }
-
-    case SET_CURRENT_PAGE:
-      return {
-        ...state,
-        pdf: {
-          ...state.pdf,
-          page: action.page
-        }
-      }
-
-    case PREV_PAGE:
-      return {
-        ...state,
-        pdf: {
-          ...state.pdf,
-          page: Math.max(state.pdf.page - 1, 1)
-        }
-      }
-
-    case NEXT_PAGE:
-      return {
-        ...state,
-        pdf: {
-          ...state.pdf,
-          page: Math.min(state.pdf.page + 1, state.pdf.pageCount)
-        }
       }
 
     default:

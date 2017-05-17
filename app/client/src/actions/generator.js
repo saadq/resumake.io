@@ -4,13 +4,9 @@ import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
   RECEIVE_RESUME,
-  SAVE_RESUME_DATA,
+  SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE,
-  SET_TOTAL_PAGES,
-  SET_CURRENT_PAGE,
-  PREV_PAGE,
-  NEXT_PAGE
+  RECEIVE_SOURCE
 } from '../constants'
 
 function selectTemplate(templateId) {
@@ -20,16 +16,36 @@ function selectTemplate(templateId) {
   }
 }
 
+function requestResume() {
+  return {
+    type: REQUEST_RESUME
+  }
+}
+
+function receiveResume(url) {
+  return {
+    type: RECEIVE_RESUME,
+    url
+  }
+}
+
+function savePreviousResume(payload) {
+  return {
+    type: SAVE_PREVIOUS_RESUME,
+    payload
+  }
+}
+
 function generateResume(payload) {
   return async (dispatch, getState) => {
-    const { isGenerating, resumeData } = getState().generator
+    const { isGenerating, prevResume } = getState().generator
 
-    if (isGenerating || isEqual(resumeData, payload)) {
+    if (isGenerating || isEqual(prevResume, payload)) {
       return
     }
 
-    dispatch({ type: REQUEST_RESUME })
-    dispatch({ type: SAVE_RESUME_DATA, payload })
+    dispatch(requestResume())
+    dispatch(savePreviousResume(payload))
 
     const req = {
       method: 'POST',
@@ -46,25 +62,37 @@ function generateResume(payload) {
     const blob = await res.blob()
     const url = URL.createObjectURL(blob)
 
-    dispatch({ type: RECEIVE_RESUME, url })
+    dispatch(receiveResume(url))
+  }
+}
+
+function requestSource() {
+  return {
+    type: REQUEST_SOURCE
+  }
+}
+
+function receiveSource() {
+  return {
+    type: RECEIVE_SOURCE
   }
 }
 
 function downloadSource() {
   return async (dispatch, getState) => {
     const { fetch } = window
-    const { isGenerating, isDownloading, resumeData } = getState().generator
+    const { isGenerating, isDownloading, prevResume } = getState().generator
 
     if (isGenerating || isDownloading) {
       return
     }
 
-    dispatch({ type: REQUEST_SOURCE })
+    dispatch(requestSource())
 
     const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(resumeData),
+      body: JSON.stringify(prevResume),
       credentials: 'same-origin'
     }
 
@@ -72,42 +100,12 @@ function downloadSource() {
     const blob = await res.blob()
 
     FileSaver.saveAs(blob, 'resume.zip')
-    dispatch({ type: RECEIVE_SOURCE })
-  }
-}
-
-function setTotalPages(pageCount) {
-  return {
-    type: SET_TOTAL_PAGES,
-    pageCount
-  }
-}
-
-function setCurrentPage(page) {
-  return {
-    type: SET_CURRENT_PAGE,
-    page
-  }
-}
-
-function prevPage() {
-  return {
-    type: PREV_PAGE
-  }
-}
-
-function nextPage() {
-  return {
-    type: NEXT_PAGE
+    dispatch(receiveSource())
   }
 }
 
 export {
   selectTemplate,
   generateResume,
-  downloadSource,
-  setTotalPages,
-  setCurrentPage,
-  prevPage,
-  nextPage
+  downloadSource
 }

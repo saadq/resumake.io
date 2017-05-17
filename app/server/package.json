@@ -15,7 +15,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
-    "node-latex": "^2.4.1",
+    "node-latex": "^2.4.0",
     "pretty-latex": "^0.1.0",
     "sanitize-latex": "^0.1.2"
   },

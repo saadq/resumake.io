@@ -5,7 +5,10 @@ import {
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
-  SET_PAGE
+  SET_PAGE_COUNT,
+  SET_PAGE,
+  PREV_PAGE,
+  NEXT_PAGE
 } from '../constants'
 
 const initialState = {
@@ -14,7 +17,8 @@ const initialState = {
   isDownloading: false,
   prevResume: {},
   pdf: {
-    url: null
+    url: null,
+    pageCount: 0
   }
 }
 
@@ -60,12 +64,39 @@ function generator(state = initialState, action) {
         isDownloading: false
       }
 
+    case SET_PAGE_COUNT:
+      return {
+        ...state,
+        pdf: {
+          ...state.pdf,
+          pageCount: action.pageCount
+        }
+      }
+
     case SET_PAGE:
       return {
         ...state,
         pdf: {
           ...state.pdf,
-          page: action.page
+          page: (action.page > 0 && action.page <= state.pdf.pageCount) ? action.page : 1
+        }
+      }
+
+    case PREV_PAGE:
+      return {
+        ...state,
+        pdf: {
+          ...state.pdf,
+          page: Math.max(state.pdf.page - 1, 1)
+        }
+      }
+
+    case NEXT_PAGE:
+      return {
+        ...state,
+        pdf: {
+          ...state.pdf,
+          page: Math.min(state.pdf.page + 1, state.pdf.pageCount)
         }
       }
 

@@ -13,8 +13,6 @@ function Home() {
               <Link to='/generator/templates'>
                 <button>Create New Resume</button>
               </Link>
-              <button>Import Existing Resume</button>
-              <button>Import LinkedIn Resume</button>
             </div>
           </div>
         </div>

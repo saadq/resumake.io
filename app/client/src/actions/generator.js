@@ -7,7 +7,10 @@ import {
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
-  SET_PAGE
+  SET_PAGE_COUNT,
+  SET_PAGE,
+  PREV_PAGE,
+  NEXT_PAGE
 } from '../constants'
 
 function selectTemplate(templateId) {
@@ -105,6 +108,13 @@ function downloadSource() {
   }
 }
 
+function setPageCount(pageCount) {
+  return {
+    type: SET_PAGE_COUNT,
+    pageCount
+  }
+}
+
 function setPage(page) {
   return {
     type: SET_PAGE,
@@ -112,9 +122,24 @@ function setPage(page) {
   }
 }
 
+function prevPage() {
+  return {
+    type: PREV_PAGE
+  }
+}
+
+function nextPage() {
+  return {
+    type: NEXT_PAGE
+  }
+}
+
 export {
   selectTemplate,
   generateResume,
   downloadSource,
-  setPage
+  setPageCount,
+  setPage,
+  prevPage,
+  nextPage
 }

@@ -1,13 +1,15 @@
 import 'whatwg-fetch'
 import React from 'react'
-import { func, bool, number, string } from 'prop-types'
+import { object, bool, number, string } from 'prop-types'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
 import { GeneratorActions } from '../../actions'
+// import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
-function Preview({ url, page, isGenerating, downloadSource, setPage }) {
+function Preview({ url, page, isGenerating, actions }) {
   if (!url) {
     return <LoadingBar />
   }
@@ -22,7 +24,7 @@ function Preview({ url, page, isGenerating, downloadSource, setPage }) {
             Download PDF
           </span>
         </a>
-        <button className='button' onClick={() => downloadSource()}>
+        <button className='button' onClick={() => actions.downloadSource()}>
           <span className='icon is-small'>
             <i className='fa fa-file-code-o' />
             Download Source
@@ -30,17 +32,20 @@ function Preview({ url, page, isGenerating, downloadSource, setPage }) {
         </button>
       </div>
       <div className='page-row'>
-        <button onClick={() => setPage(page - 1)} className='button'>&larr;</button>
+        <button onClick={actions.prevPage} className='button'>&larr;</button>
         <p>Page {page}</p>
-        <button onClick={() => setPage(page + 1)} className='button'>&rarr;</button>
+        <button onClick={actions.nextPage} className='button'>&rarr;</button>
       </div>
       <Row>
         <PDF
           file={url}
           page={page}
           scale={4}
-          onDocumentComplete={pageCount => setPage(1)}
-          onPageComplete={page => setPage(page)}
+          onDocumentComplete={(pageCount) => {
+            actions.setPageCount(pageCount)
+            actions.setPage(1)
+          }}
+          onPageComplete={page => actions.setPage(page)}
         />
       </Row>
     </section>
@@ -48,8 +53,7 @@ function Preview({ url, page, isGenerating, downloadSource, setPage }) {
 }
 
 Preview.propTypes = {
-  downloadSource: func.isRequired,
-  setPage: func.isRequired,
+  actions: object.isRequired,
   isGenerating: bool.isRequired,
   page: number,
   url: string
@@ -65,9 +69,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    downloadSource: () => dispatch(GeneratorActions.downloadSource()),
-    setPage: page => dispatch(GeneratorActions.setPage(page))
+    actions: bindActionCreators(GeneratorActions, dispatch)
   }
+  // return {
+  //   downloadSource: () => dispatch(GeneratorActions.downloadSource()),
+  //   setPage: page => dispatch(GeneratorActions.setPage(page)),
+  //   prevPage: () => dispatch(GeneratorActions.prevPage()),
+  //   nextPage: () => dispatch(GeneratorActions.nextPage())
+  // }
 }
 
 export default connect(

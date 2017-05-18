@@ -22,7 +22,10 @@ export {
   SAVE_PREVIOUS_RESUME,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
-  SET_PAGE
+  SET_PAGE_COUNT,
+  SET_PAGE,
+  PREV_PAGE,
+  NEXT_PAGE
 } from './generator'
 
 export {

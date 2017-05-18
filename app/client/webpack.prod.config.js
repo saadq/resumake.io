@@ -4,7 +4,10 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: [
+    'babel-polyfill',
+    './src/index.js'
+  ],
 
   output: {
     filename: 'static/bundle.js',
@@ -29,6 +32,13 @@ module.exports = {
           use: 'css-loader!stylus-loader',
           fallback: 'style-loader'
         })
+      },
+      {
+        test: /\.(jpg|jpeg|png|gif|ico|svg|pdf)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       }
     ]
   },
@@ -39,6 +49,11 @@ module.exports = {
       comments: false
     }),
     new ExtractTextPlugin('static/style.css'),
-    new HtmlWebpackPlugin({ template: 'src/index.html', inject: 'body' })
+    new HtmlWebpackPlugin({ template: 'src/index.html', inject: 'body' }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    })
   ]
 }

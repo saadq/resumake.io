@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
 import { GeneratorActions } from '../../actions'
-// import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
 function Preview({ url, page, isGenerating, actions }) {
@@ -71,12 +70,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(GeneratorActions, dispatch)
   }
-  // return {
-  //   downloadSource: () => dispatch(GeneratorActions.downloadSource()),
-  //   setPage: page => dispatch(GeneratorActions.setPage(page)),
-  //   prevPage: () => dispatch(GeneratorActions.prevPage()),
-  //   nextPage: () => dispatch(GeneratorActions.nextPage())
-  // }
 }
 
 export default connect(

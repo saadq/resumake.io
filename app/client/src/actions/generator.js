@@ -3,8 +3,9 @@ import isEqual from 'lodash/isEqual'
 import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
-  RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME,
+  RESUME_SUCCESS,
+  RESUME_FAILURE,
+  SAVE_RESUME_DATA,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
   SET_PAGE_COUNT,
@@ -26,30 +27,36 @@ function requestResume() {
   }
 }
 
-function receiveResume(url) {
+function resumeSuccess(url) {
   return {
-    type: RECEIVE_RESUME,
+    type: RESUME_SUCCESS,
     url
   }
 }
 
-function savePreviousResume(payload) {
+function resumeFailure() {
   return {
-    type: SAVE_PREVIOUS_RESUME,
+    type: RESUME_FAILURE
+  }
+}
+
+function saveResumeData(payload) {
+  return {
+    type: SAVE_RESUME_DATA,
     payload
   }
 }
 
 function generateResume(payload) {
   return async (dispatch, getState) => {
-    const { isGenerating, prevResume } = getState().generator
+    const { status, resumeData } = getState().generator
 
-    if (isGenerating || isEqual(prevResume, payload)) {
+    if (status === 'pending' || isEqual(resumeData, payload)) {
       return
     }
 
+    dispatch(saveResumeData(payload))
     dispatch(requestResume())
-    dispatch(savePreviousResume(payload))
 
     const req = {
       method: 'POST',
@@ -63,10 +70,15 @@ function generateResume(payload) {
 
     const { fetch, URL } = window
     const res = await fetch('/api/generate/resume', req)
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
 
-    dispatch(receiveResume(url))
+    if (!res.ok) {
+      dispatch(resumeFailure())
+    } else {
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+
+      dispatch(resumeSuccess(url))
+    }
   }
 }
 
@@ -85,9 +97,9 @@ function receiveSource() {
 function downloadSource() {
   return async (dispatch, getState) => {
     const { fetch } = window
-    const { isGenerating, isDownloading, prevResume } = getState().generator
+    const { status, isDownloading, resumeData } = getState().generator
 
-    if (isGenerating || isDownloading) {
+    if (status === 'pending' || isDownloading) {
       return
     }
 
@@ -96,7 +108,7 @@ function downloadSource() {
     const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(prevResume),
+      body: JSON.stringify(resumeData),
       credentials: 'same-origin'
     }
 

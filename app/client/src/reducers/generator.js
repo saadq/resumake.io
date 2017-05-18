@@ -1,8 +1,9 @@
 import {
   SELECT_TEMPLATE,
   REQUEST_RESUME,
-  RECEIVE_RESUME,
-  SAVE_PREVIOUS_RESUME,
+  RESUME_SUCCESS,
+  RESUME_FAILURE,
+  SAVE_RESUME_DATA,
   REQUEST_SOURCE,
   RECEIVE_SOURCE,
   SET_PAGE_COUNT,
@@ -13,9 +14,8 @@ import {
 
 const initialState = {
   template: 1,
-  isGenerating: false,
   isDownloading: false,
-  prevResume: {},
+  resumeData: {},
   pdf: {
     url: null,
     pageCount: 0
@@ -33,23 +33,33 @@ function generator(state = initialState, action) {
     case REQUEST_RESUME:
       return {
         ...state,
-        isGenerating: true
+        status: 'pending'
       }
 
-    case RECEIVE_RESUME:
+    case RESUME_SUCCESS:
       return {
         ...state,
-        isGenerating: false,
+        status: 'success',
         pdf: {
           ...state.pdf,
           url: action.url
         }
       }
 
-    case SAVE_PREVIOUS_RESUME:
+    case RESUME_FAILURE:
       return {
         ...state,
-        prevResume: action.payload
+        status: 'failure',
+        pdf: {
+          ...state.pdf,
+          url: null
+        }
+      }
+
+    case SAVE_RESUME_DATA:
+      return {
+        ...state,
+        resumeData: action.payload
       }
 
     case REQUEST_SOURCE:

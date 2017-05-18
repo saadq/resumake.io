@@ -1,21 +1,18 @@
 import 'whatwg-fetch'
 import React from 'react'
-import { object, bool, number, string } from 'prop-types'
+import { object, number, string } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PDF from 'react-pdf-js'
 import { Row, LoadingBar } from '../bulma'
 import { GeneratorActions } from '../../actions'
+import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
-function Preview({ url, page, isGenerating, actions }) {
-  if (!url) {
-    return <LoadingBar />
-  }
-
+function Preview({ url, page, status, actions }) {
   return (
     <section id='preview'>
-      <LoadingBar hidden={!isGenerating} />
+      <LoadingBar hidden={status !== 'pending'} />
       <div className='download-buttons'>
         <a href={url} download='resume.pdf' className='button'>
           <span className='icon is-small'>
@@ -37,7 +34,7 @@ function Preview({ url, page, isGenerating, actions }) {
       </div>
       <Row>
         <PDF
-          file={url}
+          file={url || BlankPDF}
           page={page}
           scale={4}
           onDocumentComplete={(pageCount) => {
@@ -53,7 +50,7 @@ function Preview({ url, page, isGenerating, actions }) {
 
 Preview.propTypes = {
   actions: object.isRequired,
-  isGenerating: bool.isRequired,
+  status: string,
   page: number,
   url: string
 }
@@ -62,7 +59,7 @@ function mapStateToProps(state) {
   return {
     url: state.generator.pdf.url,
     page: state.generator.pdf.page,
-    isGenerating: state.generator.isGenerating
+    status: state.generator.status
   }
 }
 

@@ -2,38 +2,14 @@ const { stripIndent } = require('common-tags')
 
 function template8({ profile, schools, jobs, skills, projects }) {
   return stripIndent`
-    %% The MIT License (MIT)
-    %%
-    %% Copyright (c) 2015 Daniil Belyakov
-    %%
-    %% Permission is hereby granted, free of charge, to any person obtaining a copy
-    %% of this software and associated documentation files (the "Software"), to deal
-    %% in the Software without restriction, including without limitation the rights
-    %% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    %% copies of the Software, and to permit persons to whom the Software is
-    %% furnished to do so, subject to the following conditions:
-    %%
-    %% The above copyright notice and this permission notice shall be included in all
-    %% copies or substantial portions of the Software.
-    %%
-    %% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    %% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    %% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    %% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    %% SOFTWARE.
-
+    ${generateCommentHeader()}
     % The font could be set to Windows-specific Calibri by using the 'calibri' option
     \\documentclass[a4paper]{mcdowellcv}
 
     % For mathematical symbols
     \\usepackage{amsmath}
 
-    % Set applicant's personal data for header
-    \\name{Saad Quadri}
-    \\address{Metuchen, NJ \\linebreak (732) 476-8719}
-    \\contacts{saad@saadq.com \\linebreak github.com/saadq}
+    ${generateProfileSection(profile)}
 
     \\begin{document}
 
@@ -111,6 +87,62 @@ function template8({ profile, schools, jobs, skills, projects }) {
       \\end{cvsection}
 
     \\end{document}
+  `
+}
+
+function generateProfileSection(profile) {
+  if (!profile) {
+    return ''
+  }
+
+  const { fullName, email, phoneNumber, address, link } = profile
+
+  let addressLine = ''
+  let contactsLine = ''
+
+  if (address && phoneNumber) {
+    addressLine = `\\address{${address} \\linebreak ${phoneNumber}}`
+  } else if (address || phoneNumber) {
+    addressLine = `\\address{${address || phoneNumber}}`
+  }
+
+  if (email && link) {
+    contactsLine = `\\contacts{${email} \\linebreak ${link}}`
+  } else if (email || link) {
+    contactsLine = `\\contacts{${email || link}}`
+  }
+
+  return `
+    % Set applicant's personal data for header
+    \\name{${fullName || ''}}
+    ${addressLine}
+    ${contactsLine}
+  `
+}
+
+function generateCommentHeader() {
+  return stripIndent`
+    %% The MIT License (MIT)
+    %%
+    %% Copyright (c) 2015 Daniil Belyakov
+    %%
+    %% Permission is hereby granted, free of charge, to any person obtaining a copy
+    %% of this software and associated documentation files (the "Software"), to deal
+    %% in the Software without restriction, including without limitation the rights
+    %% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    %% copies of the Software, and to permit persons to whom the Software is
+    %% furnished to do so, subject to the following conditions:
+    %%
+    %% The above copyright notice and this permission notice shall be included in all
+    %% copies or substantial portions of the Software.
+    %%
+    %% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    %% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    %% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    %% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    %% SOFTWARE.
   `
 }
 

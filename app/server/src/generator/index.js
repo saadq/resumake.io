@@ -1,4 +1,5 @@
 const latex = require('node-latex')
+const through = require('through2')
 const sanitize = require('./sanitizer')
 const getTemplateData = require('./templates')
 
@@ -15,9 +16,11 @@ function generate(formData) {
   return new Promise((resolve, reject) => {
     const data = sanitize(formData)
     const { texDoc, opts } = getTemplateData(data)
+    const output = through()
     const pdf = latex(texDoc, opts)
 
-    pdf.on('finish', () => resolve(pdf))
+    pdf.pipe(output)
+    pdf.on('finish', () => resolve(output))
     pdf.on('error', reject)
   })
 }

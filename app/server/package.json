@@ -17,7 +17,8 @@
     "koa-static": "^3.0.0",
     "node-latex": "^2.4.1",
     "pretty-latex": "^0.1.0",
-    "sanitize-latex": "^0.1.2"
+    "sanitize-latex": "^0.1.2",
+    "through2": "^2.0.3"
   },
   "devDependencies": {
     "ava": "^0.19.1",

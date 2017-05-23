@@ -17,57 +17,15 @@ function template8({ profile, schools, jobs, skills, projects }) {
       \\makeheader
 
       ${generateEducationSection(schools)}
-
-      % Print the content
-      \\begin{cvsection}{Experience}
-        \\begin{cvsubsection}{Software Engineer Intern}{Mozilla}{Jun 2016 -- Aug 2016}
-          Mountain View, CA
-          \\begin{itemize}
-            \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.
-            \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-            \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-          \\end{itemize}
-        \\end{cvsubsection}
-
-        \\begin{cvsubsection}{Coding Advisor}{Codecademy}{Dec 2015 -- May 2016}
-            Manhattan, NY
-          \\begin{itemize}
-            \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-            \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-            \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-          \\end{itemize}
-        \\end{cvsubsection}
-
-        \\begin{cvsubsection}{App. Developer Intern}{IEEE}{Jun 2015 -- Nov 2015}
-            Piscataway, NJ
-          \\begin{itemize}
-            \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-            \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-            \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-          \\end{itemize}
-        \\end{cvsubsection}
-
-        \\begin{cvsubsection}{Web Developer Intern}{Johnson \\& Johnson}{Jan 2015 -- Jun 2015}
-          New Brunswick, NJ
-          \\begin{itemize}
-            \\item Implemented a user interface for the VS open file switcher (ctrl-tab) and extended it to tool windows.
-            \\item Created service to provide gradient across VS and VS add-ins. Optimized service via caching.
-          \\end{itemize}
-          Programmer Productivity Research Center (Summers 2001, 2002)
-          \\begin{itemize}
-            \\item Built app to compute similarity of all methods in a code base; reduced time from $O(n^2)$ to $O(n\\ log\\ n)$.
-            \\item Created test case generation tool which creates random XML docs from XML Schema.
-          \\end{itemize}
-        \\end{cvsubsection}
-      \\end{cvsection}
+      ${generateExperienceSection(jobs)}
 
       \\begin{cvsection}{Projects}
         \\begin{cvsubsection}{}{}{}
-              \\begin{itemize}
-                \\item \\textbf{Resume Generator} (https://latexresu.me). A webapp for generating LaTeX resumes from form data (including this one).  Node.js, Koa, React, Redux
-                \\item \\textbf{Flow Timer} (https://flowtimer.com). A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.  Node.js, Koa, React, Redux
-                \\item \\textbf{Reddit Image Scraper} (github.com/saadq/reddit-scraper).  A web app that lets you view a collage of images/videos from a subreddit. Ruby, Sinatra
-          \\end{itemize}
+            \\begin{itemize}
+              \\item \\textbf{Resume Generator} (https://latexresu.me). A webapp for generating LaTeX resumes from form data (including this one).  Node.js, Koa, React, Redux
+              \\item \\textbf{Flow Timer} (https://flowtimer.com). A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.  Node.js, Koa, React, Redux
+              \\item \\textbf{Reddit Image Scraper} (github.com/saadq/reddit-scraper).  A web app that lets you view a collage of images/videos from a subreddit. Ruby, Sinatra
+            \\end{itemize}
           \\end{cvsubsection}
       \\end{cvsection}
 
@@ -115,6 +73,10 @@ function generateProfileSection(profile) {
 }
 
 function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
   return source`
     \\begin{cvsection}{Education}
       ${schools.map(school => {
@@ -137,6 +99,46 @@ function generateEducationSection(schools) {
             \\begin{itemize}
               \\item ${degreeLine}
             \\end{itemize}
+          \\end{cvsubsection}
+        `
+      })}
+    \\end{cvsection}
+  `
+}
+
+function generateExperienceSection(jobs) {
+  if (!jobs) {
+    return ''
+  }
+
+  return source`
+    \\begin{cvsection}{Experience}
+      ${jobs.map(job => {
+        const { name, title, location, startDate, endDate, duties } = job
+
+        let dateRange = ''
+        let dutyLines = ''
+
+        if (startDate && endDate) {
+          dateRange = `${startDate} -- ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} -- Present`
+        } else {
+          dateRange = endDate
+        }
+
+        if (duties) {
+          dutyLines = source`
+            \\begin{itemize}%
+              ${duties.map(duty => `\\item ${duty}`)}
+            \\end{itemize}
+          `
+        }
+
+        return stripIndent`
+          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange}}
+            ${location || ''}
+            ${dutyLines || ''}
           \\end{cvsubsection}
         `
       })}

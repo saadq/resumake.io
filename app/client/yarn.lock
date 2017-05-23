@@ -951,12 +951,12 @@ blyss-loader@^1.0.0:
     object-assign "^4.1.1"
     snazzy "^6.0.0"
 
-blyss@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/blyss/-/blyss-3.0.2.tgz#8b3534e7bf56461dbde02bf4c6c5a15e67ef443c"
+blyss@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/blyss/-/blyss-4.0.2.tgz#f77a0fd474d2c7f54c038698506c1015787bff62"
   dependencies:
     eslint "^3.19.0"
-    eslint-config-blyss "^3.0.2"
+    eslint-config-blyss "^4.0.0"
     eslint-config-standard "^10.2.1"
     eslint-config-standard-jsx "^4.0.1"
     eslint-plugin-import "^2.2.0"
@@ -1912,9 +1912,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-blyss@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-blyss/-/eslint-config-blyss-3.0.2.tgz#b0735a2036d090cd1c0bcc42d9c60e941181cc8f"
+eslint-config-blyss@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-blyss/-/eslint-config-blyss-4.0.0.tgz#4cf598e736a418e2906d8a9ecce934d305d66944"
 
 eslint-config-standard-jsx@4.0.1, eslint-config-standard-jsx@^4.0.1:
   version "4.0.1"

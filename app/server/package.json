@@ -22,7 +22,7 @@
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-eslint": "^7.2.1",
-    "blyss": "^3.0.2",
+    "blyss": "^4.0.2",
     "inspect-process": "^0.4.2",
     "nodemon": "^1.11.0",
     "snazzy": "^7.0.0"

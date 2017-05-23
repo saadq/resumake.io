@@ -1,4 +1,4 @@
-const { stripIndent } = require('common-tags')
+const { stripIndent, source } = require('common-tags')
 
 function template8({ profile, schools, jobs, skills, projects }) {
   return stripIndent`
@@ -16,13 +16,7 @@ function template8({ profile, schools, jobs, skills, projects }) {
       % Print the header
       \\makeheader
 
-      \\begin{cvsection}{Education}
-        \\begin{cvsubsection}{New Brunswick, NJ}{Rutgers University}{Jan 2017}
-          \\begin{itemize}
-            \\item BA in Computer Science. GPA: 3.0
-          \\end{itemize}
-        \\end{cvsubsection}
-      \\end{cvsection}
+      ${generateEducationSection(schools)}
 
       % Print the content
       \\begin{cvsection}{Experience}
@@ -117,6 +111,36 @@ function generateProfileSection(profile) {
     \\name{${fullName || ''}}
     ${addressLine}
     ${contactsLine}
+  `
+}
+
+function generateEducationSection(schools) {
+  return source`
+    \\begin{cvsection}{Education}
+      ${schools.map(school => {
+        const { name, degree, major, gpa, location, graduationDate } = school
+
+        let degreeLine = ''
+
+        if (degree && major) {
+          degreeLine = `${degree} in ${major}.`
+        } else if (degree || major) {
+          degreeLine = (degree || major) + '.'
+        }
+
+        if (gpa) {
+          degreeLine += ` GPA: ${gpa}`
+        }
+
+        return stripIndent`
+          \\begin{cvsubsection}{${location || ''}}{${name || ''}}{${graduationDate || ''}}
+            \\begin{itemize}
+              \\item ${degreeLine}
+            \\end{itemize}
+          \\end{cvsubsection}
+        `
+      })}
+    \\end{cvsection}
   `
 }
 

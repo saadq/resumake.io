@@ -88,7 +88,9 @@ function generator(state = initialState, action) {
         ...state,
         pdf: {
           ...state.pdf,
-          page: (action.page > 0 && action.page <= state.pdf.pageCount) ? action.page : 1
+          page: action.page > 0 && action.page <= state.pdf.pageCount
+            ? action.page
+            : 1
         }
       }
 

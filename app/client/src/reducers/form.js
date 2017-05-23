@@ -11,10 +11,12 @@ const form = reducer.plugin({
   resume: (state, action) => {
     switch (action.type) {
       case CLEAR_SCHOOL_FIELD:
-        if (!state.values ||
-            !state.values.schools ||
-            state.values.schools.length <= 1 ||
-            state.values.schools.length !== action.schoolCount) {
+        if (
+          !state.values ||
+          !state.values.schools ||
+          state.values.schools.length <= 1 ||
+          state.values.schools.length !== action.schoolCount
+        ) {
           return state
         }
 
@@ -27,10 +29,12 @@ const form = reducer.plugin({
         }
 
       case CLEAR_JOB_FIELD:
-        if (!state.values ||
-            !state.values.jobs ||
-            state.values.jobs.length <= 1 ||
-            state.values.jobs.length !== action.jobCount) {
+        if (
+          !state.values ||
+          !state.values.jobs ||
+          state.values.jobs.length <= 1 ||
+          state.values.jobs.length !== action.jobCount
+        ) {
           return state
         }
 
@@ -43,12 +47,14 @@ const form = reducer.plugin({
         }
 
       case CLEAR_JOB_DUTY_FIELD:
-        if (!state.values ||
-            !state.values.jobs ||
-            !state.values.jobs[action.index] ||
-            !state.values.jobs[action.index].duties ||
-            state.values.jobs[action.index].duties.length <= 1 ||
-            action.jobDutyCount !== state.values.jobs[action.index].duties.length) {
+        if (
+          !state.values ||
+          !state.values.jobs ||
+          !state.values.jobs[action.index] ||
+          !state.values.jobs[action.index].duties ||
+          state.values.jobs[action.index].duties.length <= 1 ||
+          action.jobDutyCount !== state.values.jobs[action.index].duties.length
+        ) {
           return state
         }
 
@@ -68,10 +74,12 @@ const form = reducer.plugin({
         }
 
       case CLEAR_PROJECT_FIELD:
-        if (!state.values ||
-            !state.values.projects ||
-            state.values.projects.length <= 1 ||
-            state.values.projects.length !== action.projectCount) {
+        if (
+          !state.values ||
+          !state.values.projects ||
+          state.values.projects.length <= 1 ||
+          state.values.projects.length !== action.projectCount
+        ) {
           return state
         }
 
@@ -84,10 +92,12 @@ const form = reducer.plugin({
         }
 
       case CLEAR_SKILL_FIELD:
-        if (!state.values ||
-            !state.values.skills ||
-            state.values.skills.length <= 1 ||
-            state.values.skills.length !== action.skillCount) {
+        if (
+          !state.values ||
+          !state.values.skills ||
+          state.values.skills.length <= 1 ||
+          state.values.skills.length !== action.skillCount
+        ) {
           return state
         }
 

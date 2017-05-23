@@ -75,7 +75,7 @@ function ui(state = initialState, action) {
     case REMOVE_SCHOOL:
       return {
         ...state,
-        schoolCount: (state.schoolCount > 1) ? state.schoolCount - 1 : 1
+        schoolCount: state.schoolCount > 1 ? state.schoolCount - 1 : 1
       }
 
     case ADD_JOB:
@@ -88,8 +88,10 @@ function ui(state = initialState, action) {
     case REMOVE_JOB:
       return {
         ...state,
-        jobCount: (state.jobCount > 1) ? state.jobCount - 1 : 1,
-        jobDuties: (state.jobCount > 1) ? state.jobDuties.slice(0, state.jobDuties.length - 1) : [1]
+        jobCount: state.jobCount > 1 ? state.jobCount - 1 : 1,
+        jobDuties: state.jobCount > 1
+          ? state.jobDuties.slice(0, state.jobDuties.length - 1)
+          : [1]
       }
 
     case INCREMENT_JOB_DUTY:
@@ -107,7 +109,9 @@ function ui(state = initialState, action) {
         ...state,
         jobDuties: [
           ...state.jobDuties.slice(0, action.index),
-          (state.jobDuties[action.index] > 1) ? state.jobDuties[action.index] - 1 : 1,
+          state.jobDuties[action.index] > 1
+            ? state.jobDuties[action.index] - 1
+            : 1,
           ...state.jobDuties.slice(action.index + 1)
         ]
       }
@@ -121,7 +125,7 @@ function ui(state = initialState, action) {
     case REMOVE_PROJECT:
       return {
         ...state,
-        projectCount: (state.projectCount > 1) ? state.projectCount - 1 : 1
+        projectCount: state.projectCount > 1 ? state.projectCount - 1 : 1
       }
 
     case ADD_SKILL:
@@ -133,7 +137,7 @@ function ui(state = initialState, action) {
     case REMOVE_SKILL:
       return {
         ...state,
-        skillCount: (state.skillCount > 1) ? state.skillCount - 1 : 1
+        skillCount: state.skillCount > 1 ? state.skillCount - 1 : 1
       }
 
     default:

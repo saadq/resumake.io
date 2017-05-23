@@ -9,7 +9,9 @@ function Router() {
     <BrowserRouter>
       <ScrollToTop>
         <div>
-          {routeConfig.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+          {routeConfig.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
         </div>
       </ScrollToTop>
     </BrowserRouter>

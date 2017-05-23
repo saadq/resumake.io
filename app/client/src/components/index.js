@@ -1,7 +1,4 @@
-export {
-  Home,
-  Generator
-} from './screens'
+export { Home, Generator } from './screens'
 
 export {
   Templates,

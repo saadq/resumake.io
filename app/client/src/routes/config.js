@@ -55,9 +55,6 @@ const generator = {
   ]
 }
 
-const routeConfig = [
-  home,
-  generator
-]
+const routeConfig = [home, generator]
 
 export default routeConfig

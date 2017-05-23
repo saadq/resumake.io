@@ -11,7 +11,7 @@ const sanitizeLatex = require('sanitize-latex')
 function sanitize(obj = {}) {
   if (Array.isArray(obj)) {
     return obj
-      .map((val) => {
+      .map(val => {
         if (isObject(val)) return sanitize(val)
         if (isString(val)) return sanitizeLatex(trim(val))
 
@@ -52,7 +52,9 @@ function sanitize(obj = {}) {
  * @return {boolean}
  */
 function isEmpty(val) {
-  return val == null || Number.isNaN(val) || isEmptyObject(val) || isEmptyString(val)
+  return (
+    val == null || Number.isNaN(val) || isEmptyObject(val) || isEmptyString(val)
+  )
 }
 
 /**
@@ -67,9 +69,7 @@ function isEmptyObject(val) {
     return false
   }
 
-  return Array.isArray(val)
-    ? val.length === 0
-    : Object.keys(val).length === 0
+  return Array.isArray(val) ? val.length === 0 : Object.keys(val).length === 0
 }
 
 /**
@@ -113,7 +113,7 @@ function isString(val) {
  * @return {boolean}
  */
 function isOnlyWhitespace(str) {
-  return !(/\S/).test(str.trim())
+  return !/\S/.test(str.trim())
 }
 
 /**

@@ -11,11 +11,11 @@ const router = new Router({ prefix: '/api' })
  * then a PDF is created from the LaTeX doc which
  * is then sent to the client.
  */
-router.post('/generate/resume', async (ctx) => {
+router.post('/generate/resume', async ctx => {
   const { texDoc, opts } = generate(ctx.request.body)
   const pdf = latex(texDoc, opts)
 
-  pdf.on('error', (err) => {
+  pdf.on('error', err => {
     console.error(err)
   })
 
@@ -27,11 +27,11 @@ router.post('/generate/resume', async (ctx) => {
  * Generates resume source files from request body
  * and saves it to a zip to send to the client.
  */
-router.post('/generate/source', async (ctx) => {
+router.post('/generate/source', async ctx => {
   const { texDoc, opts } = generate(ctx.request.body)
   const zip = Archiver('zip')
 
-  zip.on('error', (err) => {
+  zip.on('error', err => {
     ctx.throw(400, err.message)
   })
 

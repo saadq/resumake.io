@@ -14,9 +14,9 @@ function Experience({ jobCount, jobDuties, actions }) {
           key={index}
           index={index}
           dutiesCount={jobDuties[index]}
-          addJobDuty={actions.incrementJobDuty}
-          removeJobDuty={actions.decrementJobDuty}
-          clearJobDutyField={actions.clearJobDutyField}
+          addDuty={actions.incrementJobDuty}
+          removeDuty={actions.decrementJobDuty}
+          clearDutyField={actions.clearJobDutyField}
         />
       ))}
       <div className="section-buttons">

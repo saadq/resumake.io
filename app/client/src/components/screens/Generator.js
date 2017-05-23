@@ -7,14 +7,7 @@ import { TopBar, SideNav, Content, Form } from '../layout'
 import RouteWithSubRoutes from '../../routes/RouteWithSubRoutes'
 import { UIActions, GeneratorActions } from '../../actions'
 
-function Generator({
-  actions,
-  template,
-  sideNavActive,
-  routes,
-  history,
-  generateResume
-}) {
+function Generator({ actions, template, sideNavActive, routes, history }) {
   return (
     <section className="hero">
       <div className="hero-head">
@@ -29,7 +22,7 @@ function Generator({
           handlePreviewClick={() => history.push('/generator/preview')}
         />
         <Form
-          generateResume={generateResume}
+          generateResume={actions.generateResume}
           setResumeURL={actions.setResumeURL}
           template={template}
         >
@@ -68,9 +61,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actionCreators, dispatch),
-    generateResume: payload =>
-      dispatch(GeneratorActions.generateResume(payload))
+    actions: bindActionCreators(actionCreators, dispatch)
   }
 }
 

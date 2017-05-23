@@ -3,13 +3,7 @@ import { Field } from 'redux-form'
 import { number, func } from 'prop-types'
 import { Input, Icon } from '../../bulma'
 
-function Job({
-  index,
-  dutiesCount,
-  addJobDuty,
-  removeJobDuty,
-  clearJobDutyField
-}) {
+function Job({ index, dutiesCount, addDuty, removeDuty, clearDutyField }) {
   return (
     <div className="job">
       {index > 0 ? <hr /> : null}
@@ -28,15 +22,15 @@ function Job({
             name={`jobs[${index}][duties][${i}]`}
           />
         ))}
-        <button type="button" onClick={() => addJobDuty(index)}>
+        <button type="button" onClick={() => addDuty(index)}>
           <Icon size="small" type="plus" />
         </button>
         <button
           type="button"
           disabled={dutiesCount === 1}
           onClick={() => {
-            removeJobDuty(index)
-            clearJobDutyField(index, dutiesCount)
+            removeDuty(index)
+            clearDutyField(index, dutiesCount)
           }}
         >
           <Icon size="small" type="times" />
@@ -49,9 +43,9 @@ function Job({
 Job.propTypes = {
   index: number.isRequired,
   dutiesCount: number.isRequired,
-  addJobDuty: func.isRequired,
-  removeJobDuty: func.isRequired,
-  clearJobDutyField: func.isRequired
+  addDuty: func.isRequired,
+  removeDuty: func.isRequired,
+  clearDutyField: func.isRequired
 }
 
 export default Job

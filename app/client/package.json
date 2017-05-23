@@ -4,7 +4,7 @@
   "description": "A webapp for generating stunning LaTeX resumes.",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
-    "test": "npm run lint --silent",
+    "test": "yarn lint --silent",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "prebuild": "rimraf dist",

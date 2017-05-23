@@ -8,18 +8,18 @@
     "url": "http://saadq.com"
   },
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
-    "start": "npm run start:client & npm run start:server",
-    "lint": "npm run lint:client && npm run lint:server",
-    "test": "npm run test:client && npm run test:server",
-    "build:client": "cd app/client && npm install",
-    "start:client": "cd app/client && npm run start",
-    "lint:client": "cd app/client && npm run lint",
-    "test:client": "cd app/client && npm test",
-    "build:server": "cd app/server && npm install",
-    "start:server": "cd app/server && npm run watch",
-    "lint:server": "cd app/server && npm run lint",
-    "test:server": "cd app/server && npm test"
+    "build": "yarn build:client && yarn build:server",
+    "start": "yarn start:client & yarn start:server",
+    "lint": "yarn lint:client && yarn lint:server",
+    "test": "yarn test:client && yarn test:server",
+    "build:client": "cd app/client && yarn install",
+    "start:client": "cd app/client && yarn start",
+    "lint:client": "cd app/client && yarn lint",
+    "test:client": "cd app/client && yarn test",
+    "build:server": "cd app/server && yarn install",
+    "start:server": "cd app/server && yarn watch",
+    "lint:server": "cd app/server && yarn lint",
+    "test:server": "cd app/server && yarn test"
   },
   "license": "MIT"
 }

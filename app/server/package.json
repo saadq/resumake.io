@@ -32,7 +32,7 @@
     "watch": "nodemon src/index.js",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "test": "npm run lint --silent && ava src/tests/**/*.js --fail-fast --verbose",
+    "test": "yarn lint --silent && ava src/tests/**/*.js --fail-fast --verbose",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js"
   },
   "blyss": {

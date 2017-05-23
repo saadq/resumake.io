@@ -3,8 +3,6 @@ const Archiver = require('archiver')
 const latex = require('node-latex')
 const prettify = require('pretty-latex')
 const generate = require('../generator')
-const fs = require('fs')
-const path = require('path')
 
 const router = new Router({ prefix: '/api' })
 

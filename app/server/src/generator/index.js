@@ -1,3 +1,4 @@
+const latex = require('node-latex')
 const sanitize = require('./sanitizer')
 const getTemplateData = require('./templates')
 
@@ -11,10 +12,14 @@ const getTemplateData = require('./templates')
  * @return {Object} - The generated LaTeX document as well as its additional opts.
  */
 function generate(formData) {
-  const data = sanitize(formData)
-  const { texDoc, opts } = getTemplateData(data)
+  return new Promise((resolve, reject) => {
+    const data = sanitize(formData)
+    const { texDoc, opts } = getTemplateData(data)
+    const pdf = latex(texDoc, opts)
 
-  return { texDoc, opts }
+    pdf.on('finish', () => resolve(pdf))
+    pdf.on('error', reject)
+  })
 }
 
 module.exports = generate

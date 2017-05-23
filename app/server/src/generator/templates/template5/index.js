@@ -13,6 +13,7 @@ function template5({ profile, schools, jobs, projects, skills }) {
           ${generateExperienceSection(jobs)}
           ${generateSkillsSection(skills)}
           ${generateProjectsSection(projects)}
+          \\ 
         \\end{resume}
     \\end{document}
   `

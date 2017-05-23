@@ -33,6 +33,7 @@ function template1({ profile, schools, jobs, projects, skills }) {
 
         ${generateProjectsSection(projects)}
 
+        \\ 
     \\end{document}
   `
 }

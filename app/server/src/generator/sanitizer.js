@@ -14,6 +14,7 @@ function sanitize(obj = {}) {
       .map(val => {
         if (isObject(val)) return sanitize(val)
         if (isString(val)) return sanitizeLatex(trim(val))
+
         return val
       })
       .filter(val => !isEmpty(val))

@@ -6,6 +6,7 @@ const template4 = require('./template4')
 const template5 = require('./template5')
 const template6 = require('./template6')
 const template7 = require('./template7')
+const template8 = require('./template8')
 
 const {
   TEMPLATE1,
@@ -14,7 +15,8 @@ const {
   TEMPLATE4,
   TEMPLATE5,
   TEMPLATE6,
-  TEMPLATE7
+  TEMPLATE7,
+  TEMPLATE8
 } = require('./constants')
 
 /**
@@ -91,6 +93,16 @@ function getTemplateData(data) {
         texDoc: template7(data),
         opts: {
           inputs: join(__dirname, 'template7', 'inputs'),
+          errorLogs: join(__dirname, 'latexerrors.log')
+        }
+      }
+
+    case TEMPLATE8:
+      return {
+        texDoc: template8(data),
+        opts: {
+          cmd: 'lualatex',
+          inputs: join(__dirname, 'template8', 'inputs'),
           errorLogs: join(__dirname, 'latexerrors.log')
         }
       }

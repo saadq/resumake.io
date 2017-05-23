@@ -7,7 +7,7 @@
     "test": "yarn lint --silent",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "format": "prettier --single-quote --no-semi --write src/**/*.js",
+    "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize -p --config webpack.prod.config.js"
   },

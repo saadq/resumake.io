@@ -44,7 +44,9 @@ function generateProfileSection(profile) {
   const phoneLine = phoneNumber ? `{\\faMobile\\ ${phoneNumber}}` : ''
   const addressLine = address ? `{\\faMapMarker\\ ${address}}` : ''
   const linkLine = link ? `{\\faLink\\ ${link}}` : ''
-  const info = [emailLine, phoneLine, addressLine, linkLine].filter(Boolean).join(' | ')
+  const info = [emailLine, phoneLine, addressLine, linkLine]
+    .filter(Boolean)
+    .join(' | ')
 
   return stripIndent`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,7 +71,7 @@ function generateEducationSection(schools) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\cvsection{Education}
     \\begin{cventries}
-    ${schools.map((school) => {
+    ${schools.map(school => {
       const { name, location, degree, major, gpa, graduationDate } = school
 
       let degreeLine = ''
@@ -106,7 +108,7 @@ function generateExperienceSection(jobs) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\cvsection{Experience}
     \\begin{cventries}
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let dateRange = ''
@@ -152,7 +154,7 @@ function generateSkillsSection(skills) {
       \\cventry
         {}
         {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
-          ${skills.map((skill) => {
+          ${skills.map(skill => {
             const { name, details } = skill
             const nameLine = name ? `${name}: ` : ''
             const detailsLine = `{\\skill{ ${details || ''}}}`
@@ -187,8 +189,7 @@ function generateProjectsSection(projects) {
 
         \\vspace{-5mm}
 
-      `
-    )}
+      `)}
     \\end{cventries}
   `
 }

@@ -28,16 +28,16 @@ function Preview({ url, page, status, actions }) {
         </button>
       </div>
       <div className="page-row">
-        <button onClick={actions.prevPage} className="button">&larr;</button>
+        <button onClick={actions.prevPage} className="button">←</button>
         <p>Page {page}</p>
-        <button onClick={actions.nextPage} className="button">&rarr;</button>
+        <button onClick={actions.nextPage} className="button">→</button>
       </div>
       <Row>
         <PDF
           file={url || BlankPDF}
           page={page}
           scale={4}
-          onDocumentComplete={(pageCount) => {
+          onDocumentComplete={pageCount => {
             actions.setPageCount(pageCount)
             actions.setPage(1)
           }}
@@ -69,7 +69,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Preview)
+export default connect(mapStateToProps, mapDispatchToProps)(Preview)

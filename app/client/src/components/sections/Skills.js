@@ -20,7 +20,8 @@ function Skills({ skillCount, actions }) {
           actions.removeSkill()
           actions.clearSkillField(skillCount)
         }}
-        type="button">
+        type="button"
+      >
         <Icon size="small" type="times" />
       </button>
     </section>
@@ -49,7 +50,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Skills)
+export default connect(mapStateToProps, mapDispatchToProps)(Skills)

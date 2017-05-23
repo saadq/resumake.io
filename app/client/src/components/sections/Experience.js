@@ -61,7 +61,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Experience)
+export default connect(mapStateToProps, mapDispatchToProps)(Experience)

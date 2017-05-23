@@ -39,7 +39,7 @@ function generateEducationSection(schools) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
 
-    ${schools.map((school) => {
+    ${schools.map(school => {
       const { name, location, degree, major, gpa, graduationDate } = school
 
       let degreeLine = ''
@@ -78,7 +78,7 @@ function generateExperienceSection(jobs) {
     \\resheading{Experience}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let dateRange = ''
@@ -140,7 +140,7 @@ function generateProjectsSection(projects) {
     \\resheading{Projects}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
-    ${projects.map((project) => {
+    ${projects.map(project => {
       const { name, description, technologies, link } = project
 
       return stripIndent`

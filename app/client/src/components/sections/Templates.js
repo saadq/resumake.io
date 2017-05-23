@@ -14,8 +14,12 @@ function Templates({ actions, template, modalActive, modalSrc }) {
     <section id="templates">
       <h1>Choose a Template</h1>
       <Row multi>
-        {imgs.map((src, i) =>
-          <Column size="one-third" classes={template === (i + 1) ? 'selected' : ''} key={i}>
+        {imgs.map((src, i) => (
+          <Column
+            size="one-third"
+            classes={template === i + 1 ? 'selected' : ''}
+            key={i}
+          >
             <Card>
               <img src={src} onClick={() => actions.showModal(src)} />
             </Card>
@@ -23,7 +27,7 @@ function Templates({ actions, template, modalActive, modalSrc }) {
               Template {i + 1}
             </button>
           </Column>
-        )}
+        ))}
         <Modal
           image={modalSrc}
           active={modalActive}
@@ -60,7 +64,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Templates)
+export default connect(mapStateToProps, mapDispatchToProps)(Templates)

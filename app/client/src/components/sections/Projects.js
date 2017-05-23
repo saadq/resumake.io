@@ -13,7 +13,9 @@ function Projects({ projectCount, actions }) {
         <Project key={index} index={index} />
       ))}
       <div className="section-buttons">
-        <button type="button" onClick={() => actions.addProject()}>Add Project</button>
+        <button type="button" onClick={() => actions.addProject()}>
+          Add Project
+        </button>
         <button
           onClick={() => {
             actions.removeProject()
@@ -50,7 +52,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Projects)
+export default connect(mapStateToProps, mapDispatchToProps)(Projects)

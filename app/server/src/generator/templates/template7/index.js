@@ -34,7 +34,7 @@ function generateEducationSection(schools) {
 
   return source`
     \\section{Education}
-    ${schools.map((school) => {
+    ${schools.map(school => {
       const { name, degree, major, gpa, location, graduationDate } = school
 
       let degreeLine = ''
@@ -65,7 +65,7 @@ function generateExperienceSection(jobs) {
 
   return source`
     \\section{Experience}
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let dateRange = ''
@@ -118,7 +118,7 @@ function generateProjectsSection(projects) {
 
   return source`
     \\section{Projects}
-    ${projects.map((project) => {
+    ${projects.map(project => {
       const { name, description, technologies, link } = project
 
       let detailsLine = ''

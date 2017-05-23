@@ -13,7 +13,9 @@ function Education({ schoolCount, actions }) {
         <School key={index} index={index} />
       ))}
       <div className="section-buttons">
-        <button type="button" onClick={() => actions.addSchool()}>Add School</button>
+        <button type="button" onClick={() => actions.addSchool()}>
+          Add School
+        </button>
         <button
           onClick={() => {
             actions.removeSchool()
@@ -50,7 +52,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Education)
+export default connect(mapStateToProps, mapDispatchToProps)(Education)

@@ -81,7 +81,7 @@ function generateEducationSection(schools) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Education}
     \\raggedright
-    ${schools.map((school) => {
+    ${schools.map(school => {
       const { name, location, degree, major, gpa, graduationDate } = school
 
       let line1 = ''
@@ -99,7 +99,9 @@ function generateEducationSection(schools) {
         line1 += `\\descript{| ${major}}`
       }
 
-      const locationAndDate = [location, graduationDate].filter(Boolean).join(' | ')
+      const locationAndDate = [location, graduationDate]
+        .filter(Boolean)
+        .join(' | ')
 
       if (locationAndDate) {
         line1 += `\\hfill \\location{${locationAndDate}}`
@@ -134,7 +136,7 @@ function generateExperienceSection(jobs) {
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Experience}
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let line1 = ''
@@ -215,7 +217,7 @@ function generateProjectsSection(projects) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\section{Projects}
     \\raggedright
-    ${projects.map((project) => {
+    ${projects.map(project => {
       const { name, description, technologies, link } = project
 
       let line1 = ''

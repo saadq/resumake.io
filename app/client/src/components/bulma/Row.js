@@ -3,7 +3,9 @@ import { node, bool, string } from 'prop-types'
 
 function Row({ children, multi, className, id }) {
   return (
-    <div className={`${className || ''} row columns ${multi ? 'is-multiline' : ''}`.trim()}>
+    <div
+      className={`${className || ''} row columns ${multi ? 'is-multiline' : ''}`.trim()}
+    >
       {children}
     </div>
   )

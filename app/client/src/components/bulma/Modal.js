@@ -10,7 +10,11 @@ function Modal({ image, active, hideModal }) {
           <img src={image} />
         </p>
       </div>
-      <button type="button" onClick={() => hideModal()} className="modal-close" />
+      <button
+        type="button"
+        onClick={() => hideModal()}
+        className="modal-close"
+      />
     </div>
   )
 }

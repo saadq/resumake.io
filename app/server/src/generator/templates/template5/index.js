@@ -91,7 +91,7 @@ function generateExperienceSection(jobs) {
 
   return source`
     \\section{EXPERIENCE}
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let jobLine = ''
@@ -158,7 +158,7 @@ function generateProjectsSection(projects) {
 
   return source`
     \\section{PROJECTS}
-      ${projects.map((project) => {
+      ${projects.map(project => {
         const { name, description, technologies, link } = project
 
         let projectLine = ''

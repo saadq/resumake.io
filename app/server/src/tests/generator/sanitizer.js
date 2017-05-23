@@ -1,7 +1,7 @@
 import test from 'ava'
 import sanitize from '../../generator/sanitizer'
 
-test('sanitizer should trim excess space from values', async (t) => {
+test('sanitizer should trim excess space from values', async t => {
   const input = {
     profile: {
       fullName: '   Saad Quadri',
@@ -75,7 +75,7 @@ test('sanitizer should trim excess space from values', async (t) => {
   t.deepEqual(expected, actual)
 })
 
-test('sanitizer should normalize LaTeX symbols', async (t) => {
+test('sanitizer should normalize LaTeX symbols', async t => {
   const input = {
     jobs: [
       {
@@ -103,7 +103,7 @@ test('sanitizer should normalize LaTeX symbols', async (t) => {
   t.deepEqual(expected, actual)
 })
 
-test('sanitizer should recursively remove empty properties from complex objects', async (t) => {
+test('sanitizer should recursively remove empty properties from complex objects', async t => {
   const input = {
     profile: {
       fullName: 'Saad Quadri',
@@ -117,11 +117,7 @@ test('sanitizer should recursively remove empty properties from complex objects'
       {},
       {
         name: '',
-        stuff: [
-          {},
-          '',
-          NaN
-        ]
+        stuff: [{}, '', NaN]
       },
       '',
       null,
@@ -158,11 +154,7 @@ test('sanitizer should recursively remove empty properties from complex objects'
         name: 'IEEE',
         title: 'Software Developer Intern',
         location: 'Piscataway, NJ',
-        duties: [
-          null,
-          undefined,
-          ''
-        ],
+        duties: [null, undefined, ''],
         startDate: 'Jun 2015',
         endDate: 'Nov 2015'
       },
@@ -181,8 +173,7 @@ test('sanitizer should recursively remove empty properties from complex objects'
       }
     ],
     projects: [
-      {
-      },
+      {},
       {
         name: '',
         description: '       ',

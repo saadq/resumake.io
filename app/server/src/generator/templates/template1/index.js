@@ -45,7 +45,9 @@ function generateProfileSection(profile) {
   const { fullName, email, phoneNumber, address, link } = profile
 
   let line1 = fullName ? `{\\Huge \\scshape {${fullName}}}` : ''
-  let line2 = [address, email, phoneNumber, link].filter(Boolean).join(' $\\cdot$ ')
+  let line2 = [address, email, phoneNumber, link]
+    .filter(Boolean)
+    .join(' $\\cdot$ ')
 
   if (line1 && line2) {
     line1 += '\\\\'
@@ -70,7 +72,7 @@ function generateEducationSection(schools) {
   return source`
     %==== Education ====%
     \\header{Education}
-      ${schools.map((school) => {
+      ${schools.map(school => {
         const { name, location, degree, major, gpa, graduationDate } = school
 
         let line1 = ''
@@ -131,7 +133,7 @@ function generateExperienceSection(jobs) {
     \\header{Experience}
     \\vspace{1mm}
 
-    ${jobs.map((job) => {
+    ${jobs.map(job => {
       const { name, title, location, startDate, endDate, duties } = job
 
       let line1 = ''
@@ -199,7 +201,7 @@ function generateProjectsSection(projects) {
 
   return source`
     \\header{Projects}
-    ${projects.map((project) => {
+    ${projects.map(project => {
       if (Object.keys(project) === 0) {
         return ''
       }

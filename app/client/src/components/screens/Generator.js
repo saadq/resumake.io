@@ -7,13 +7,21 @@ import { TopBar, SideNav, Content, Form } from '../layout'
 import RouteWithSubRoutes from '../../routes/RouteWithSubRoutes'
 import { UIActions, GeneratorActions } from '../../actions'
 
-function Generator({ actions, template, sideNavActive, routes, history, generateResume }) {
+function Generator({
+  actions,
+  template,
+  sideNavActive,
+  routes,
+  history,
+  generateResume
+}) {
   return (
     <section className="hero">
       <div className="hero-head">
         <TopBar
           sideNavActive={sideNavActive}
-          toggleSideNav={() => sideNavActive ? actions.hideSideNav() : actions.showSideNav()}
+          toggleSideNav={() =>
+            sideNavActive ? actions.hideSideNav() : actions.showSideNav()}
         />
         <SideNav
           sideNavActive={sideNavActive}
@@ -27,7 +35,9 @@ function Generator({ actions, template, sideNavActive, routes, history, generate
         >
           <Content hideSideNav={() => actions.hideSideNav()}>
             <Switch>
-              {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+              {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route} />
+              ))}
             </Switch>
           </Content>
         </Form>
@@ -59,11 +69,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actionCreators, dispatch),
-    generateResume: payload => dispatch(GeneratorActions.generateResume(payload))
+    generateResume: payload =>
+      dispatch(GeneratorActions.generateResume(payload))
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Generator)
+export default connect(mapStateToProps, mapDispatchToProps)(Generator)

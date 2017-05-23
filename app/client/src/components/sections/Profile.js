@@ -9,7 +9,11 @@ function Profile() {
       <Input name="profile[email]" title="Email" />
       <Input name="profile[phoneNumber]" title="Phone Number" />
       <Input name="profile[address]" title="Address" />
-      <Input name="profile[link]" title="Link" placeholder="GitHub, website, etc" />
+      <Input
+        name="profile[link]"
+        title="Link"
+        placeholder="GitHub, website, etc"
+      />
     </section>
   )
 }

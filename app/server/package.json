@@ -33,7 +33,7 @@
     "watch": "nodemon src/index.js",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "format": "prettier --single-quote --no-semi --write src/**/*.js",
+    "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "test": "yarn lint --silent && ava src/tests/**/*.js --fail-fast --verbose",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js"
   },

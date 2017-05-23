@@ -5,18 +5,18 @@ import { Input, Row, Column } from '../../bulma'
 function Skill({ index }) {
   return (
     <Row>
-      <Column size='one-third'>
+      <Column size="one-third">
         <Input
           name={`skills[${index}][name]`}
-          title='Skill Name'
-          placeholder='Ex: Programming Languages'
+          title="Skill Name"
+          placeholder="Ex: Programming Languages"
         />
       </Column>
-      <Column size='two-thirds'>
+      <Column size="two-thirds">
         <Input
           name={`skills[${index}][details]`}
-          title='Skill Details'
-          placeholder='Ex: Java, JavaScript, Ruby, Python'
+          title="Skill Details"
+          placeholder="Ex: Java, JavaScript, Ruby, Python"
         />
       </Column>
     </Row>

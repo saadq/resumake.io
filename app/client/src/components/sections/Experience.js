@@ -7,7 +7,7 @@ import { UIActions, FormActions } from '../../actions'
 
 function Experience({ jobCount, jobDuties, actions }) {
   return (
-    <section id='education'>
+    <section id="education">
       <h1>Your Work Experience</h1>
       {Array.from({ length: jobCount }).map((_, index) => (
         <Job
@@ -19,12 +19,12 @@ function Experience({ jobCount, jobDuties, actions }) {
           clearJobDutyField={actions.clearJobDutyField}
         />
       ))}
-      <div className='section-buttons'>
-        <button type='button' onClick={actions.addJob}>
+      <div className="section-buttons">
+        <button type="button" onClick={actions.addJob}>
           Add Job
         </button>
         <button
-          type='button'
+          type="button"
           onClick={() => {
             actions.removeJob()
             actions.clearJobField(jobCount)

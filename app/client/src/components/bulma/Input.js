@@ -4,15 +4,15 @@ import { Field } from 'redux-form'
 
 function Input({ type = 'text', name, title, placeholder }) {
   return (
-    <div className='input-container'>
-      <label className='label'>{title}</label>
-      <p className='control'>
+    <div className="input-container">
+      <label className="label">{title}</label>
+      <p className="control">
         <Field
-          component='input'
+          component="input"
           placeholder={placeholder || ''}
           type={type}
           name={name}
-          className='input'
+          className="input"
         />
       </p>
     </div>

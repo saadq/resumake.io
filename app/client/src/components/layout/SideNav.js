@@ -5,41 +5,41 @@ import '../../styles/components/side-nav.styl'
 
 function SideNav({ sideNavActive, hideSideNav, handlePreviewClick }) {
   return (
-    <aside id='side-nav' className={sideNavActive ? '' : 'is-hidden-mobile'}>
-      <p className='menu-label'>Resume Sections</p>
+    <aside id="side-nav" className={sideNavActive ? '' : 'is-hidden-mobile'}>
+      <p className="menu-label">Resume Sections</p>
       <hr />
-      <ul onClick={hideSideNav} className='menu-list'>
+      <ul onClick={hideSideNav} className="menu-list">
         <li>
-          <NavLink to='/generator/templates' activeClassName='is-active'>
+          <NavLink to="/generator/templates" activeClassName="is-active">
             Templates
           </NavLink>
         </li>
         <li>
-          <NavLink to='/generator/profile' activeClassName='is-active'>
+          <NavLink to="/generator/profile" activeClassName="is-active">
             Profile
           </NavLink>
         </li>
         <li>
-          <NavLink to='/generator/education' activeClassName='is-active'>
+          <NavLink to="/generator/education" activeClassName="is-active">
             Education
           </NavLink>
         </li>
         <li>
-          <NavLink to='/generator/experience' activeClassName='is-active'>
+          <NavLink to="/generator/experience" activeClassName="is-active">
             Experience
           </NavLink>
         </li>
         <li>
-          <NavLink to='/generator/projects' activeClassName='is-active'>
+          <NavLink to="/generator/projects" activeClassName="is-active">
             Projects
           </NavLink>
         </li>
         <li>
-          <NavLink to='/generator/skills' activeClassName='is-active'>
+          <NavLink to="/generator/skills" activeClassName="is-active">
             Skills
           </NavLink>
         </li>
-        <button onClick={handlePreviewClick} type='submit' form='resume-form'>
+        <button onClick={handlePreviewClick} type="submit" form="resume-form">
           Preview Resume
         </button>
       </ul>

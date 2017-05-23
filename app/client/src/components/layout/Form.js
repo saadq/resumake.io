@@ -19,7 +19,7 @@ class Form extends Component {
   }
 
   render = () => (
-    <form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))} id='resume-form'>
+    <form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))} id="resume-form">
       {this.props.children}
     </form>
   )

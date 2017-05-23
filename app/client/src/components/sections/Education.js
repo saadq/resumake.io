@@ -7,19 +7,19 @@ import { UIActions, FormActions } from '../../actions'
 
 function Education({ schoolCount, actions }) {
   return (
-    <section id='education'>
+    <section id="education">
       <h1>Your Educational Background</h1>
       {Array.from({ length: schoolCount }).map((_, index) => (
         <School key={index} index={index} />
       ))}
-      <div className='section-buttons'>
-        <button type='button' onClick={() => actions.addSchool()}>Add School</button>
+      <div className="section-buttons">
+        <button type="button" onClick={() => actions.addSchool()}>Add School</button>
         <button
           onClick={() => {
             actions.removeSchool()
             actions.clearSchoolField(schoolCount)
           }}
-          type='button'
+          type="button"
         >
           Remove School
         </button>

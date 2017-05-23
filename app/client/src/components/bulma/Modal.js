@@ -4,13 +4,13 @@ import { bool, func, string } from 'prop-types'
 function Modal({ image, active, hideModal }) {
   return (
     <div className={`modal ${active ? 'is-active' : ''}`.trim()}>
-      <div onClick={() => hideModal()} className='modal-background' />
-      <div className='modal-content'>
-        <p className='image'>
+      <div onClick={() => hideModal()} className="modal-background" />
+      <div className="modal-content">
+        <p className="image">
           <img src={image} />
         </p>
       </div>
-      <button type='button' onClick={() => hideModal()} className='modal-close' />
+      <button type="button" onClick={() => hideModal()} className="modal-close" />
     </div>
   )
 }

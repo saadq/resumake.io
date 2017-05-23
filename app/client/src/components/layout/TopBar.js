@@ -5,18 +5,18 @@ import '../../styles/components/top-bar.styl'
 
 function TopBar({ sideNavActive, toggleSideNav }) {
   return (
-    <nav id='top-bar' className='nav'>
-      <div className='nav-left' />
-      <div className='nav-center'>
-        <Link to='/' className='nav-item hero-brand'>
+    <nav id="top-bar" className="nav">
+      <div className="nav-left" />
+      <div className="nav-center">
+        <Link to="/" className="nav-item hero-brand">
           <span>LaTeX </span>
           <strong>Resume</strong>
         </Link>
       </div>
-      <div className='nav-right is-flex'>
+      <div className="nav-right is-flex">
         <span
           onClick={toggleSideNav}
-          id='nav-toggle'
+          id="nav-toggle"
           className={sideNavActive ? 'is-active' : ''}
         >
           <span />

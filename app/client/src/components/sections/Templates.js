@@ -11,15 +11,15 @@ const imgs = ctx.keys().map(ctx)
 
 function Templates({ actions, template, modalActive, modalSrc }) {
   return (
-    <section id='templates'>
+    <section id="templates">
       <h1>Choose a Template</h1>
       <Row multi>
         {imgs.map((src, i) =>
-          <Column size='one-third' classes={template === (i + 1) ? 'selected' : ''} key={i}>
+          <Column size="one-third" classes={template === (i + 1) ? 'selected' : ''} key={i}>
             <Card>
               <img src={src} onClick={() => actions.showModal(src)} />
             </Card>
-            <button onClick={() => actions.selectTemplate(i + 1)} type='button'>
+            <button onClick={() => actions.selectTemplate(i + 1)} type="button">
               Template {i + 1}
             </button>
           </Column>

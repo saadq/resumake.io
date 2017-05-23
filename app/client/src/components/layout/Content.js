@@ -5,7 +5,7 @@ import '../../styles/components/content.styl'
 
 function Content({ hideSideNav, children }) {
   return (
-    <div onClick={hideSideNav} id='content'>
+    <div onClick={hideSideNav} id="content">
       <Container fluid>
         {children}
       </Container>

@@ -7,19 +7,19 @@ import { UIActions, FormActions } from '../../actions'
 
 function Projects({ projectCount, actions }) {
   return (
-    <section id='projects'>
+    <section id="projects">
       <h1>Your Projects</h1>
       {Array.from({ length: projectCount }).map((_, index) => (
         <Project key={index} index={index} />
       ))}
-      <div className='section-buttons'>
-        <button type='button' onClick={() => actions.addProject()}>Add Project</button>
+      <div className="section-buttons">
+        <button type="button" onClick={() => actions.addProject()}>Add Project</button>
         <button
           onClick={() => {
             actions.removeProject()
             actions.clearProjectField(projectCount)
           }}
-          type='button'
+          type="button"
         >
           Remove Project
         </button>

@@ -11,26 +11,26 @@ import '../../styles/components/preview.styl'
 
 function Preview({ url, page, status, actions }) {
   return (
-    <section id='preview'>
+    <section id="preview">
       <LoadingBar hidden={status !== 'pending'} />
-      <div className='download-buttons'>
-        <a href={url} download='resume.pdf' className='button'>
-          <span className='icon is-small'>
-            <i className='fa fa-file-pdf-o' />
+      <div className="download-buttons">
+        <a href={url} download="resume.pdf" className="button">
+          <span className="icon is-small">
+            <i className="fa fa-file-pdf-o" />
             Download PDF
           </span>
         </a>
-        <button className='button' onClick={() => actions.downloadSource()}>
-          <span className='icon is-small'>
-            <i className='fa fa-file-code-o' />
+        <button className="button" onClick={() => actions.downloadSource()}>
+          <span className="icon is-small">
+            <i className="fa fa-file-code-o" />
             Download Source
           </span>
         </button>
       </div>
-      <div className='page-row'>
-        <button onClick={actions.prevPage} className='button'>&larr;</button>
+      <div className="page-row">
+        <button onClick={actions.prevPage} className="button">&larr;</button>
         <p>Page {page}</p>
-        <button onClick={actions.nextPage} className='button'>&rarr;</button>
+        <button onClick={actions.nextPage} className="button">&rarr;</button>
       </div>
       <Row>
         <PDF

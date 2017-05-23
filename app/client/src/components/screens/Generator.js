@@ -9,8 +9,8 @@ import { UIActions, GeneratorActions } from '../../actions'
 
 function Generator({ actions, template, sideNavActive, routes, history, generateResume }) {
   return (
-    <section className='hero'>
-      <div className='hero-head'>
+    <section className="hero">
+      <div className="hero-head">
         <TopBar
           sideNavActive={sideNavActive}
           toggleSideNav={() => sideNavActive ? actions.hideSideNav() : actions.showSideNav()}

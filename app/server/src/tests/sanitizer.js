@@ -1,5 +1,5 @@
 import test from 'ava'
-import sanitize from '../../generator/sanitizer'
+import sanitize from '../generator/sanitizer'
 
 test('sanitizer should trim excess space from values', async t => {
   const input = {

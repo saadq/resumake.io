@@ -34,11 +34,6 @@ class Preview extends Component {
 
   calculateScale = () => {
     const { dimensions } = this.props
-
-    if (!dimensions) {
-      return
-    }
-
     const { width } = dimensions
 
     if (width > 1000) return 4

@@ -5,7 +5,8 @@ import {
   RESUME_FAILURE,
   SAVE_RESUME_DATA,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE,
+  DOWNLOAD_SOURCE_SUCCESS,
+  DOWNLOAD_SOURCE_FAILURE,
   SET_PAGE_COUNT,
   SET_PAGE,
   PREV_PAGE,
@@ -51,8 +52,7 @@ function generator(state = initialState, action) {
         ...state,
         status: 'failure',
         pdf: {
-          ...state.pdf,
-          url: null
+          ...state.pdf
         }
       }
 
@@ -68,7 +68,8 @@ function generator(state = initialState, action) {
         isDownloading: true
       }
 
-    case RECEIVE_SOURCE:
+    case DOWNLOAD_SOURCE_SUCCESS:
+    case DOWNLOAD_SOURCE_FAILURE:
       return {
         ...state,
         isDownloading: false

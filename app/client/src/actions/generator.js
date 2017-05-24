@@ -7,7 +7,8 @@ import {
   RESUME_FAILURE,
   SAVE_RESUME_DATA,
   REQUEST_SOURCE,
-  RECEIVE_SOURCE,
+  DOWNLOAD_SOURCE_SUCCESS,
+  DOWNLOAD_SOURCE_FAILURE,
   SET_PAGE_COUNT,
   SET_PAGE,
   PREV_PAGE,
@@ -55,7 +56,6 @@ function generateResume(payload) {
       return
     }
 
-    dispatch(saveResumeData(payload))
     dispatch(requestResume())
 
     const req = {
@@ -77,6 +77,7 @@ function generateResume(payload) {
       const blob = await res.blob()
       const url = URL.createObjectURL(blob)
 
+      dispatch(saveResumeData(payload))
       dispatch(resumeSuccess(url))
     }
   }
@@ -88,9 +89,15 @@ function requestSource() {
   }
 }
 
-function receiveSource() {
+function downloadSourceSuccess() {
   return {
-    type: RECEIVE_SOURCE
+    type: DOWNLOAD_SOURCE_SUCCESS
+  }
+}
+
+function downloadSourceFailure() {
+  return {
+    type: DOWNLOAD_SOURCE_FAILURE
   }
 }
 
@@ -99,7 +106,11 @@ function downloadSource() {
     const { fetch } = window
     const { status, isDownloading, resumeData } = getState().generator
 
-    if (status === 'pending' || isDownloading) {
+    if (
+      isDownloading ||
+      status === 'pending' ||
+      Object.keys(resumeData).length === 0
+    ) {
       return
     }
 
@@ -115,8 +126,12 @@ function downloadSource() {
     const res = await fetch('/api/generate/source', req)
     const blob = await res.blob()
 
-    FileSaver.saveAs(blob, 'resume.zip')
-    dispatch(receiveSource())
+    if (!res.ok) {
+      dispatch(downloadSourceFailure())
+    } else {
+      FileSaver.saveAs(blob, 'resume.zip')
+      dispatch(downloadSourceSuccess())
+    }
   }
 }
 

@@ -19,7 +19,6 @@ router.post('/generate/resume', async ctx => {
 router.post('/generate/source', async ctx => {
   ctx.body = generateSourceCode(ctx.request.body)
   ctx.type = 'application/octet-stream'
-  ctx.attachment('resume.tex')
 })
 
 module.exports = router

@@ -1,7 +1,5 @@
 const Router = require('koa-router')
-const Archiver = require('archiver')
-const prettify = require('pretty-latex')
-const generate = require('../generator')
+const { generatePDF, generateSourceCode } = require('../generator')
 
 const router = new Router({ prefix: '/api' })
 
@@ -10,32 +8,18 @@ const router = new Router({ prefix: '/api' })
  * is then sent to the client.
  */
 router.post('/generate/resume', async ctx => {
-  ctx.body = await generate(ctx.request.body)
+  ctx.body = generatePDF(ctx.request.body)
   ctx.type = 'application/pdf'
 })
 
 /**
- * Generates resume source files from request body
- * and saves it to a zip to send to the client.
+ * Generates resume source files from request body and
+ * saves it to a zip which is then sent to the client.
  */
 router.post('/generate/source', async ctx => {
-  const { texDoc, opts } = generate(ctx.request.body)
-  const zip = Archiver('zip')
-
-  zip.on('error', err => {
-    ctx.throw(400, err.message)
-  })
-
-  zip.append(prettify(texDoc), { name: 'resume.tex' })
-
-  if (opts.inputs) {
-    zip.directory(opts.inputs, 'inputs')
-  }
-
-  zip.finalize()
-
+  ctx.body = generateSourceCode(ctx.request.body)
   ctx.type = 'application/octet-stream'
-  ctx.body = zip
+  ctx.attachment('resume.tex')
 })
 
 module.exports = router

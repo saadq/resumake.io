@@ -98,8 +98,6 @@ function getTemplateData(data) {
       }
 
     case TEMPLATE8:
-      console.log(template8(data))
-
       return {
         texDoc: template8(data),
         opts: {

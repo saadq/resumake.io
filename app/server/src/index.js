@@ -11,7 +11,7 @@ if (app.env === 'development') {
 }
 
 app.use(errorHandler())
-app.use(serve('/Users/squadri/Desktop/dist'))
+app.use(serve('/Users/squadri/Projects/latexresu.me/app/client/dist'))
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())

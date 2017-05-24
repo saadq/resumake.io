@@ -1,28 +1,76 @@
 const latex = require('node-latex')
-const through = require('through2')
+const prettify = require('pretty-latex')
+const Archiver = require('archiver')
 const sanitize = require('./sanitizer')
 const getTemplateData = require('./templates')
 
 /**
- * Sanitizes the form data received in the request body, and then
- * generates the LaTeX document as well as the necessary options
- * needed for it to create a pdf via node-latex.
+ * Generates a LaTeX document from the request body,
+ * and then generates a PDF from that document.
  *
  * @param {Object} formData - The request body received from the client.
  *
- * @return {Object} - The generated LaTeX document as well as its additional opts.
+ * @return {TransformStream} - The generated PDF.
  */
-function generate(formData) {
-  return new Promise((resolve, reject) => {
-    const data = sanitize(formData)
-    const { texDoc, opts } = getTemplateData(data)
-    const output = through()
-    const pdf = latex(texDoc, opts)
+function generatePDF(formData) {
+  const { texDoc, opts } = generateTex(formData)
+  const pdf = latex(texDoc, opts)
 
-    pdf.pipe(output)
-    pdf.on('finish', () => resolve(output))
-    pdf.on('error', reject)
+  pdf.on('error', err => {
+    throw err
   })
+
+  return pdf
 }
 
-module.exports = generate
+/**
+ * Generates resume source files from the request body,
+ * and then saves it to a zip which is then sent to the client.
+ *
+ * @param {Object} formData - The request body received from the client.
+ *
+ * @return {TransformStream} - The generated zip.
+ */
+function generateSourceCode(formData) {
+  const { texDoc, opts } = generateTex(formData)
+  const prettyDoc = prettify(texDoc)
+  const zip = Archiver('zip')
+
+  prettyDoc.on('error', err => {
+    throw err
+  })
+
+  zip.on('error', err => {
+    throw err
+  })
+
+  zip.append(prettyDoc, { name: 'resume.tex' })
+
+  if (opts.inputs) {
+    zip.directory(opts.inputs, 'inputs')
+  }
+
+  zip.finalize()
+
+  return zip
+}
+
+/**
+ * Sanitizes the data in the request body and then generates
+ * a LaTeX document based on the data and template chosen.
+ *
+ * @param {Object} formData - The request body received from the client.
+ *
+ * @return {Object} - An object which contains the generated LaTeX doc (texDoc)
+ *                    as well as the opts needed to create a PDF from it (opts).
+ */
+function generateTex(formData) {
+  const data = sanitize(formData)
+
+  return getTemplateData(data)
+}
+
+module.exports = {
+  generatePDF,
+  generateSourceCode
+}

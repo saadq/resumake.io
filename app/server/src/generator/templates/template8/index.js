@@ -12,23 +12,13 @@ function template8({ profile, schools, jobs, skills, projects }) {
     ${generateProfileSection(profile)}
 
     \\begin{document}
-
       % Print the header
       \\makeheader
-
       ${generateEducationSection(schools)}
       ${generateExperienceSection(jobs)}
+      ${generateSkillsSection(skills)}
       ${generateProjectsSection(projects)}
-
-      \\begin{cvsection}{Skills}
-        \\begin{cvsubsection}{}{}{}
-          \\begin{itemize}
-            \\item Languages: C++; C; Java; Objective-C; C\\#.NET; SQL; JavaScript; XSLT; XML (XSD) Schema
-            \\item Frameworks: Visual Studio; Microsoft SQL Server; Eclipse; XCode; Interface Builder
-          \\end{itemize}
-        \\end{cvsubsection}
-      \\end{cvsection}
-
+      \\
     \\end{document}
   `
 }
@@ -171,6 +161,22 @@ function generateProjectsSection(projects) {
             })}
           \\end{itemize}
         \\end{cvsubsection}
+    \\end{cvsection}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    \\begin{cvsection}{Skills}
+      \\begin{cvsubsection}{}{}{}
+        \\begin{itemize}
+          ${skills.map(skill => `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`)}
+        \\end{itemize}
+      \\end{cvsubsection}
     \\end{cvsection}
   `
 }

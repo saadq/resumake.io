@@ -1,4 +1,5 @@
 import {
+  SET_WINDOW_DIMENSIONS,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -16,6 +17,10 @@ import {
 } from '../constants'
 
 const initialState = {
+  dimensions: {
+    width: 0,
+    height: 0
+  },
   schoolCount: 1,
   jobCount: 1,
   jobDuties: [1],
@@ -32,6 +37,15 @@ const initialState = {
 
 function ui(state = initialState, action) {
   switch (action.type) {
+    case SET_WINDOW_DIMENSIONS:
+      return {
+        ...state,
+        dimensions: {
+          width: action.width,
+          height: action.height
+        }
+      }
+
     case SHOW_MODAL:
       return {
         ...state,

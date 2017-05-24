@@ -1,4 +1,5 @@
 import {
+  SET_WINDOW_DIMENSIONS,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -14,6 +15,14 @@ import {
   ADD_SKILL,
   REMOVE_SKILL
 } from '../constants'
+
+function setWindowDimensions({ width, height }) {
+  return {
+    type: SET_WINDOW_DIMENSIONS,
+    width,
+    height
+  }
+}
 
 function showModal(modalSrc) {
   return {
@@ -103,6 +112,7 @@ function removeSkill() {
 }
 
 export {
+  setWindowDimensions,
   showModal,
   hideModal,
   showSideNav,

@@ -22,6 +22,8 @@ test('/api/generate/resume -> it should generate a PDF', async t => {
 
   t.truthy(response)
   t.truthy(response.text)
+  t.true(typeof response.text === 'string')
+  t.true(response.text.length > 0)
 })
 
 test('/api/generate/source -> it should generate source code zip', async t => {
@@ -43,4 +45,6 @@ test('/api/generate/source -> it should generate source code zip', async t => {
     .expect(200)
 
   t.truthy(response)
+  t.truthy(response.body)
+  t.true(Buffer.isBuffer(response.body))
 })

@@ -18,16 +18,7 @@ function template8({ profile, schools, jobs, skills, projects }) {
 
       ${generateEducationSection(schools)}
       ${generateExperienceSection(jobs)}
-
-      \\begin{cvsection}{Projects}
-        \\begin{cvsubsection}{}{}{}
-            \\begin{itemize}
-              \\item \\textbf{Resume Generator} (https://latexresu.me). A webapp for generating LaTeX resumes from form data (including this one).  Node.js, Koa, React, Redux
-              \\item \\textbf{Flow Timer} (https://flowtimer.com). A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.  Node.js, Koa, React, Redux
-              \\item \\textbf{Reddit Image Scraper} (github.com/saadq/reddit-scraper).  A web app that lets you view a collage of images/videos from a subreddit. Ruby, Sinatra
-            \\end{itemize}
-          \\end{cvsubsection}
-      \\end{cvsection}
+      ${generateProjectsSection(projects)}
 
       \\begin{cvsection}{Skills}
         \\begin{cvsubsection}{}{}{}
@@ -142,6 +133,44 @@ function generateExperienceSection(jobs) {
           \\end{cvsubsection}
         `
       })}
+    \\end{cvsection}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    \\begin{cvsection}{Projects}
+      \\begin{cvsubsection}{}{}{}
+          \\begin{itemize}
+            ${projects.map(project => {
+              const { name, description, technologies, link } = project
+
+              let line = ''
+
+              if (name) {
+                line += `\\textbf{${name}} `
+              }
+
+              if (link) {
+                line += `(${link}) `
+              }
+
+              if (description) {
+                line += description
+              }
+
+              if (technologies) {
+                line += technologies
+              }
+
+              return `\\item ${line}`
+            })}
+          \\end{itemize}
+        \\end{cvsubsection}
     \\end{cvsection}
   `
 }

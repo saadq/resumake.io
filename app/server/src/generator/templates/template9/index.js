@@ -38,35 +38,37 @@ function generateEducationSection(schools) {
     %%% Education
     %%% ------------------------------------------------------------
     \\NewPart{Education}{}
-    ${schools.map((school, i) => {
-      const { name, degree, major, gpa, location, graduationDate } = school
+    ${schools
+      .map((school, i) => {
+        const { name, degree, major, gpa, location, graduationDate } = school
 
-      let degreeLine = ''
-      let nameLine = ''
+        let degreeLine = ''
+        let nameLine = ''
 
-      if (degree && major) {
-        degreeLine = `${degree} ${major}`
-      } else if (degree || major) {
-        degreeLine = (degree || major)
-      }
+        if (degree && major) {
+          degreeLine = `${degree} ${major}`
+        } else if (degree || major) {
+          degreeLine = degree || major
+        }
 
-      if (name && location) {
-        nameLine += `${name}, ${location}`
-      } else if (name || location) {
-        nameLine = name || location
-      }
+        if (name && location) {
+          nameLine += `${name}, ${location}`
+        } else if (name || location) {
+          nameLine = name || location
+        }
 
-      if (gpa) {
-        nameLine += ` ${gpa}`
-      }
+        if (gpa) {
+          nameLine += ` ${gpa}`
+        }
 
-      return stripIndent`
+        return stripIndent`
         \\EducationEntry
             {${degreeLine}}
             {${graduationDate || ''}}
             {${nameLine}${i < schools.length - 1 ? '\\\\' : ''}}
       `
-    }).join('\n\n')}
+      })
+      .join('\n\n')}
   `
 }
 

@@ -16,10 +16,6 @@ function generatePDF(formData) {
   const { texDoc, opts } = generateTex(formData)
   const pdf = latex(texDoc, opts)
 
-  pdf.on('error', err => {
-    throw err
-  })
-
   return pdf
 }
 
@@ -35,14 +31,6 @@ function generateSourceCode(formData) {
   const { texDoc, opts } = generateTex(formData)
   const prettyDoc = prettify(texDoc)
   const zip = Archiver('zip')
-
-  prettyDoc.on('error', err => {
-    throw err
-  })
-
-  zip.on('error', err => {
-    throw err
-  })
 
   zip.append(prettyDoc, { name: 'resume.tex' })
 

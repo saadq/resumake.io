@@ -6,6 +6,7 @@ const TEMPLATE5 = 5
 const TEMPLATE6 = 6
 const TEMPLATE7 = 7
 const TEMPLATE8 = 8
+const TEMPLATE9 = 9
 
 const NEWLINE = '\\\\'
 const WHITESPACE = '\\ '
@@ -19,6 +20,7 @@ module.exports = {
   TEMPLATE6,
   TEMPLATE7,
   TEMPLATE8,
+  TEMPLATE9,
   NEWLINE,
   WHITESPACE
 }

@@ -2,36 +2,14 @@ const { stripIndent, source } = require('common-tags')
 
 function template9({ profile, schools, jobs, skills, projects }) {
   return stripIndent`
-    % http://www.howtotex.com/general/a-guide-to-building-a-plain-and-simple-latex-cv/
-    \\documentclass[a4paper,fontsize=11pt]{article} % KOMA-article class
-    % \\documentclass[a4paper,11pt]{article}
-
+    \\documentclass[a4paper,fontsize=11pt]{article}
     ${generateHeader(profile)}
-
     \\begin{document}
-
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
-
-    %%% Projects
-    %%% ------------------------------------------------------------
-    \\NewPart{Projects}{}
-
-    \\ProjectEntry{LaTeX Resume Generator}{https://latexresu.me}
-    {Node.js, Koa, React, Redux}
-    {An easy to use LaTeX Resume Generator webapp.}
-    \\sepspace
-
-    \\ProjectEntry{Flow Timer}{https://flowtimer.com}
-    {Node.js, Koa, React, Redux}
-    {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
-    \\sepspace
-
-    \\ProjectEntry{Anagrams}{https://saadq.github.io/Anagrams}
-    {HTML, CSS, JavaScript}
-    {A cognitive, anagram-recognition game where the player must quickly find the answer.}
+    ${generateProjectsSection(projects)}
     \\end{document}
   `
 }
@@ -147,6 +125,30 @@ function generateSkillsSection(skills) {
     %%% ------------------------------------------------------------
     \\NewPart{Skills}{}
     ${skills.map(skill => `\\SkillsEntry{${skill.name || ''}}{${skill.details || ''}}`)}
+  `
+}
+
+function generateProjectsSection(projects) {
+  if (!projects) {
+    return ''
+  }
+
+  return source`
+    %%% Projects
+    %%% ------------------------------------------------------------
+    \\NewPart{Projects}{}
+
+    ${projects.map((project, i) => {
+      const { name, description, technologies, link } = project
+
+      return stripIndent`
+        \\ProjectEntry{${name || ''}}{${link || ''}}
+        {${technologies || ''}}
+        {${description || ''}}
+        ${i < projects.length - 1 ? '\\sepspace' : ''}
+      `
+    })}
+
   `
 }
 

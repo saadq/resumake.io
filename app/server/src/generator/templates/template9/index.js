@@ -13,14 +13,7 @@ function template9({ profile, schools, jobs, skills, projects }) {
     ${generateProfileSection(profile)}
     ${generateEducationSection(schools)}
     ${generateExperienceSection(jobs)}
-
-    %%% Skills
-    %%% ------------------------------------------------------------
-    \\NewPart{Skills}{}
-
-    %% When running low on space, consider using {\\small text goes here} for skills
-    \\SkillsEntry{Languages}{JavaScript, Java, Ruby, HTML, CSS, \\LaTeX}
-    \\SkillsEntry{Frameworks}{Node.js, Koa, Express, React, Redux}
+    ${generateSkillsSection(skills)}
 
     %%% Projects
     %%% ------------------------------------------------------------
@@ -141,6 +134,19 @@ function generateExperienceSection(jobs) {
           ${i < jobs.length - 1 ? '\\sepspace' : ''}
       `
     })}
+  `
+}
+
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    %%% Skills
+    %%% ------------------------------------------------------------
+    \\NewPart{Skills}{}
+    ${skills.map(skill => `\\SkillsEntry{${skill.name || ''}}{${skill.details || ''}}`)}
   `
 }
 

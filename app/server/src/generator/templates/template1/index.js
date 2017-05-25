@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template1({ profile, schools, jobs, projects, skills }) {
+function template1({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}
@@ -33,7 +33,11 @@ function template1({ profile, schools, jobs, projects, skills }) {
 
         ${generateProjectsSection(projects)}
 
-        \\ 
+        \\vspace*{2mm}
+
+        ${generateAwardsSection(awards)}
+
+        \\
     \\end{document}
   `
 }
@@ -231,6 +235,47 @@ function generateProjectsSection(projects) {
       if (line2) {
         line2 += '\\\\'
       }
+
+      return stripIndent`
+        ${line1}
+        ${line2}
+        \\vspace*{2mm}
+      `
+    })}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    \\header{Awards}
+    ${awards.map(award => {
+      const { name, details, date, location } = award
+
+      let line1 = ''
+      let line2 = details || ''
+
+      if (name) {
+        line1 += `\\textbf{${name}}`
+      }
+
+      if (location) {
+        line1 += ` \\hfill ${location}`
+      }
+
+      if (details) {
+        line2 += details
+      }
+
+      if (date) {
+        line2 += ` \\hfill ${date}`
+      }
+
+      if (line1) line1 += '\\\\'
+      if (line2) line2 += '\\\\'
 
       return stripIndent`
         ${line1}

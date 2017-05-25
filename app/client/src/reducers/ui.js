@@ -13,7 +13,9 @@ import {
   ADD_PROJECT,
   REMOVE_PROJECT,
   ADD_SKILL,
-  REMOVE_SKILL
+  REMOVE_SKILL,
+  ADD_AWARD,
+  REMOVE_AWARD
 } from '../constants'
 
 const initialState = {
@@ -26,6 +28,7 @@ const initialState = {
   jobDuties: [1],
   projectCount: 1,
   skillCount: 1,
+  awardCount: 1,
   modal: {
     active: false,
     src: null
@@ -152,6 +155,18 @@ function ui(state = initialState, action) {
       return {
         ...state,
         skillCount: state.skillCount > 1 ? state.skillCount - 1 : 1
+      }
+
+    case ADD_AWARD:
+      return {
+        ...state,
+        awardCount: state.awardCount + 1
+      }
+
+    case REMOVE_AWARD:
+      return {
+        ...state,
+        awardCount: state.awardCount > 1 ? state.awardCount - 1 : 1
       }
 
     default:

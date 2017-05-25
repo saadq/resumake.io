@@ -3,7 +3,8 @@ import {
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
   CLEAR_PROJECT_FIELD,
-  CLEAR_SKILL_FIELD
+  CLEAR_SKILL_FIELD,
+  CLEAR_AWARD_FIELD
 } from '../constants'
 
 function clearSchoolField(schoolCount) {
@@ -42,10 +43,18 @@ function clearSkillField(skillCount) {
   }
 }
 
+function clearAwardField(awardCount) {
+  return {
+    type: CLEAR_AWARD_FIELD,
+    awardCount
+  }
+}
+
 export {
   clearSchoolField,
   clearJobField,
   clearJobDutyField,
   clearProjectField,
-  clearSkillField
+  clearSkillField,
+  clearAwardField
 }

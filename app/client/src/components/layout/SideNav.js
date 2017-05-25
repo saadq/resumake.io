@@ -39,6 +39,11 @@ function SideNav({ sideNavActive, hideSideNav, handlePreviewClick }) {
             Skills
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/generator/awards" activeClassName="is-active">
+            Awards
+          </NavLink>
+        </li>
         <button onClick={handlePreviewClick} type="submit" form="resume-form">
           Preview Resume
         </button>

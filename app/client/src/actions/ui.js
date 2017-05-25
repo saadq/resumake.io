@@ -13,7 +13,9 @@ import {
   ADD_PROJECT,
   REMOVE_PROJECT,
   ADD_SKILL,
-  REMOVE_SKILL
+  REMOVE_SKILL,
+  ADD_AWARD,
+  REMOVE_AWARD
 } from '../constants'
 
 function setWindowDimensions({ width, height }) {
@@ -111,6 +113,18 @@ function removeSkill() {
   }
 }
 
+function addAward() {
+  return {
+    type: ADD_AWARD
+  }
+}
+
+function removeAward() {
+  return {
+    type: REMOVE_AWARD
+  }
+}
+
 export {
   setWindowDimensions,
   showModal,
@@ -126,5 +140,7 @@ export {
   addProject,
   removeProject,
   addSkill,
-  removeSkill
+  removeSkill,
+  addAward,
+  removeAward
 }

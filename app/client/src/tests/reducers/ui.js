@@ -15,7 +15,9 @@ import {
   ADD_PROJECT,
   REMOVE_PROJECT,
   ADD_SKILL,
-  REMOVE_SKILL
+  REMOVE_SKILL,
+  ADD_AWARD,
+  REMOVE_AWARD
 } from '../../constants'
 
 test('it can set the window dimensions', async t => {
@@ -194,6 +196,22 @@ test('it can remove a project', async t => {
   const state = { projectCount: 2 }
   const expected = { projectCount: 1 }
   const actual = reducer(state, { type: REMOVE_PROJECT })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it can add an award', async t => {
+  const state = { awardCount: 5 }
+  const expected = { awardCount: 6 }
+  const actual = reducer(state, { type: ADD_AWARD })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it can remove an award', async t => {
+  const state = { awardCount: 4 }
+  const expected = { awardCount: 3 }
+  const actual = reducer(state, { type: REMOVE_AWARD })
 
   t.deepEqual(expected, actual)
 })

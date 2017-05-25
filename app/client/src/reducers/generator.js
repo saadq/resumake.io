@@ -50,10 +50,7 @@ function generator(state = initialState, action) {
     case RESUME_FAILURE:
       return {
         ...state,
-        status: 'failure',
-        pdf: {
-          ...state.pdf
-        }
+        status: 'failure'
       }
 
     case SAVE_RESUME_DATA:

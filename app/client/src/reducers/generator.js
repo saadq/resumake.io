@@ -14,7 +14,7 @@ import {
 } from '../constants'
 
 const initialState = {
-  template: 8,
+  template: 9,
   isDownloading: false,
   resumeData: {},
   pdf: {

@@ -11,15 +11,7 @@ function template9({ profile, schools, jobs, skills, projects }) {
     \\begin{document}
 
     ${generateProfileSection(profile)}
-
-    %%% Education
-    %%% ------------------------------------------------------------
-    \\NewPart{Education}{}
-
-    \\EducationEntry
-        {BA Computer Science}
-        {Jan 2017}
-        {Rutgers University, New Brunswick, NJ}
+    ${generateEducationSection(schools)}
 
     %%% Work experience
     %%% ------------------------------------------------------------
@@ -109,6 +101,47 @@ function generateProfileSection(profile) {
     \\MyName{${fullName || ''}}
     \\bigskip
     {\\small \\hfill ${info || ''}}
+  `
+}
+
+function generateEducationSection(schools) {
+  if (!schools) {
+    return ''
+  }
+
+  return `
+    %%% Education
+    %%% ------------------------------------------------------------
+    \\NewPart{Education}{}
+    ${schools.map((school, i) => {
+      const { name, degree, major, gpa, location, graduationDate } = school
+
+      let degreeLine = ''
+      let nameLine = ''
+
+      if (degree && major) {
+        degreeLine = `${degree} ${major}`
+      } else if (degree || major) {
+        degreeLine = (degree || major)
+      }
+
+      if (name && location) {
+        nameLine += `${name}, ${location}`
+      } else if (name || location) {
+        nameLine = name || location
+      }
+
+      if (gpa) {
+        nameLine += ` ${gpa}`
+      }
+
+      return stripIndent`
+        \\EducationEntry
+            {${degreeLine}}
+            {${graduationDate || ''}}
+            {${nameLine}${i < schools.length - 1 ? '\\\\' : ''}}
+      `
+    }).join('\n\n')}
   `
 }
 

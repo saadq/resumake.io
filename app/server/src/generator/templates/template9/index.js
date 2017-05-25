@@ -6,6 +6,114 @@ function template9({ profile, schools, jobs, skills, projects }) {
     \\documentclass[a4paper,fontsize=11pt]{article} % KOMA-article class
     % \\documentclass[a4paper,11pt]{article}
 
+    ${generateHeader(profile)}
+
+    \\begin{document}
+
+    ${generateProfileSection(profile)}
+
+    %%% Education
+    %%% ------------------------------------------------------------
+    \\NewPart{Education}{}
+
+    \\EducationEntry
+        {BA Computer Science}
+        {Jan 2017}
+        {Rutgers University, New Brunswick, NJ}
+
+    %%% Work experience
+    %%% ------------------------------------------------------------
+    \\NewPart{Work experience}{}
+
+    \\WorkEntry{Software Engineer Intern}{Jun 2016 - Aug 2016}
+    {Mozilla, Mountain View, CA}
+    {
+     \\begin{itemize} \\itemsep -1pt
+       \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.
+       \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
+       \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
+     \\end{itemize}
+    }
+    \\sepspace
+
+    \\WorkEntry{Coding Advisor}{Dec 2015 - May 2015}
+    {Codecademy, Manhattan, NY}
+    {
+     \\begin{itemize} \\itemsep -1pt
+       \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
+       \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
+       \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
+     \\end{itemize}
+    }
+    \\sepspace
+
+    \\WorkEntry{Application Developer Intern}{Jun 2015 - Nov 2015}
+    {IEEE, Piscataway, NJ}
+    {
+     \\begin{itemize} \\itemsep -1pt
+       \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
+       \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
+       \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
+     \\end{itemize}
+    }
+    \\sepspace
+
+    \\WorkEntry{Web Developer Intern}{Jan 2015 - Jun 2015}
+    {Johnson \\& Johnson, New Brunswick, NJ}
+    {
+     \\begin{itemize} \\itemsep -1pt
+      \\item Improved existing web pages by migrating inline-styling to external CSS files, and adding cross-browser compatibility.
+      \\item Created SharePoint front-ends with HTML, CSS, and JavaScript and utilized the jQuery UI library to create responsive widgets.
+      \\item Debugged original code base as the sole developer on the team and created a standard for SharePoint web part development for future employees.
+     \\end{itemize}
+    }
+
+    %%% Skills
+    %%% ------------------------------------------------------------
+    \\NewPart{Skills}{}
+
+    %% When running low on space, consider using {\\small text goes here} for skills
+    \\SkillsEntry{Languages}{JavaScript, Java, Ruby, HTML, CSS, \\LaTeX}
+    \\SkillsEntry{Frameworks}{Node.js, Koa, Express, React, Redux}
+
+    %%% Projects
+    %%% ------------------------------------------------------------
+    \\NewPart{Projects}{}
+
+    \\ProjectEntry{LaTeX Resume Generator}{https://latexresu.me}
+    {Node.js, Koa, React, Redux}
+    {An easy to use LaTeX Resume Generator webapp.}
+    \\sepspace
+
+    \\ProjectEntry{Flow Timer}{https://flowtimer.com}
+    {Node.js, Koa, React, Redux}
+    {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
+    \\sepspace
+
+    \\ProjectEntry{Anagrams}{https://saadq.github.io/Anagrams}
+    {HTML, CSS, JavaScript}
+    {A cognitive, anagram-recognition game where the player must quickly find the answer.}
+    \\end{document}
+  `
+}
+
+function generateProfileSection(profile) {
+  if (!profile) {
+    return ''
+  }
+
+  const { fullName, email, phoneNumber, address, link } = profile
+  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+
+  return stripIndent`
+    \\MyName{${fullName || ''}}
+    \\bigskip
+    {\\small \\hfill ${info || ''}}
+  `
+}
+
+function generateHeader() {
+  return stripIndent`
     \\usepackage[english]{babel}
     \\usepackage[utf8x]{inputenc}
     \\usepackage[protrusion=true,expansion=true]{microtype}
@@ -92,98 +200,6 @@ function template9({ profile, schools, jobs, skills, projects }) {
         \\noindent \\textbf{#1} \\noindent \\textit{#3} \\hfill {#2} \\par
         \\noindent \\small #4 % Description
         \\normalsize \\par}
-
-    %%% Begin Document
-    %%% ------------------------------------------------------------
-    \\begin{document}
-
-    \\MyName{Saad Quadri}
-    \\bigskip
-    {\\small \\hfill dennisideler.com | github.com/dideler | linkedin.com/in/dennisideler | ideler.dennis@gmail.com}
-
-    %%% Education
-    %%% ------------------------------------------------------------
-    \\NewPart{Education}{}
-
-    \\EducationEntry
-        {BA Computer Science}
-        {Jan 2017}
-        {Rutgers University, New Brunswick, NJ}
-
-    %%% Work experience
-    %%% ------------------------------------------------------------
-    \\NewPart{Work experience}{}
-
-    \\WorkEntry{Software Engineer Intern}{Jun 2016 - Aug 2016}
-    {Mozilla, Mountain View, CA}
-    {
-     \\begin{itemize} \\itemsep -1pt
-       \\item Broadened search criteria for Firefox’s context menu to include subdomains in password suggestions.
-       \\item Refactored disabled-host APIs to use the permission manager for both Firefox and Android’s Fennec.
-       \\item Fixed regressions for Firefox Electrolysis and improved dialogs and notification popups.
-     \\end{itemize}
-    }
-    \\sepspace
-
-    \\WorkEntry{Coding Advisor}{Dec 2015 - May 2015}
-    {Codecademy, Manhattan, NY}
-    {
-     \\begin{itemize} \\itemsep -1pt
-       \\item Created a JavaScript project for Codecademy Pro members now available in the new JS course.
-       \\item Taught new coders how to avoid bugs and how to go through the process of fixing existing ones.
-       \\item Reviewed general programming topics with students and provided assistance for lessons in Java, HTML, CSS, JavaScript, and Ruby.
-     \\end{itemize}
-    }
-    \\sepspace
-
-    \\WorkEntry{Application Developer Intern}{Jun 2015 - Nov 2015}
-    {IEEE, Piscataway, NJ}
-    {
-     \\begin{itemize} \\itemsep -1pt
-       \\item Wrote an API that allowed CRUD operations to be used for accessing and manipulating data involving current departments/groups/teams at IEEE.
-       \\item Created a UI for admins that used the aforementioned API to automate the process of syncing departments/groups/teams on the site to relevant databases.
-       \\item Improved the IEEE Innovate site by using cookies to display tailored web-content.
-     \\end{itemize}
-    }
-    \\sepspace
-
-    \\WorkEntry{Web Developer Intern}{Jan 2015 - Jun 2015}
-    {Johnson \\& Johnson, New Brunswick, NJ}
-    {
-     \\begin{itemize} \\itemsep -1pt
-      \\item Improved existing web pages by migrating inline-styling to external CSS files, and adding cross-browser compatibility.
-      \\item Created SharePoint front-ends with HTML, CSS, and JavaScript and utilized the jQuery UI library to create responsive widgets.
-      \\item Debugged original code base as the sole developer on the team and created a standard for SharePoint web part development for future employees.
-     \\end{itemize}
-    }
-
-    %%% Skills
-    %%% ------------------------------------------------------------
-    \\NewPart{Skills}{}
-
-    %% When running low on space, consider using {\\small text goes here} for skills
-    \\SkillsEntry{Languages}{JavaScript, Java, Ruby, HTML, CSS, \\LaTeX}
-    \\SkillsEntry{Frameworks}{Node.js, Koa, Express, React, Redux}
-
-    %%% Projects
-    %%% ------------------------------------------------------------
-    \\NewPart{Projects}{}
-
-    \\ProjectEntry{LaTeX Resume Generator}{https://latexresu.me}
-    {Node.js, Koa, React, Redux}
-    {An easy to use LaTeX Resume Generator webapp.}
-    \\sepspace
-
-    \\ProjectEntry{Flow Timer}{https://flowtimer.com}
-    {Node.js, Koa, React, Redux}
-    {A modern speedcubing app with a scrambler, timer, and analyzer for cubing statistics.}
-    \\sepspace
-
-    \\ProjectEntry{Anagrams}{https://saadq.github.io/Anagrams}
-    {HTML, CSS, JavaScript}
-    {A cognitive, anagram-recognition game where the player must quickly find the answer.}
-
-    \\end{document}
   `
 }
 

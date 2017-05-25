@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template3({ profile, schools, jobs, projects, skills }) {
+function template3({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     %!TEX TS-program = xelatex
     \\documentclass[]{friggeri-cv}
@@ -11,7 +11,8 @@ function template3({ profile, schools, jobs, projects, skills }) {
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
-    \\ 
+    ${generateAwardsSection(awards)}
+    \\
     \\end{document}
   `
 }
@@ -185,6 +186,29 @@ function generateProjectsSection(projects) {
           {${description || ''}}
       `
     })}
+    \\end{entrylist}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    \\section{awards}
+    \\begin{entrylist}
+      ${awards.map(award => {
+        const { name, details, date, location } = award
+
+        return stripIndent`
+          \\entry
+            {${date || ''}}
+            {${name || ''}}
+            {${location || ''}}
+            {${details || ''}}
+        `
+      })}
     \\end{entrylist}
   `
 }

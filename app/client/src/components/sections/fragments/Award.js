@@ -4,7 +4,7 @@ import { Input } from '../../bulma'
 
 function Award({ index }) {
   return (
-    <div className="job">
+    <div className="award">
       {index > 0 ? <hr /> : null}
       <Input name={`awards[${index}][name]`} title="Award Name" />
       <Input name={`awards[${index}][details]`} title="Award Details" />

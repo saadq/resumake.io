@@ -1,17 +1,18 @@
 const { stripIndent, source } = require('common-tags')
 
-function template4({ profile, schools, jobs, projects, skills }) {
+function template4({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     ${generateCommentHeader()}
     \\documentclass[a4paper]{deedy-resume-openfont}
 
     \\begin{document}
-      ${generateProfileSection(profile)}
-      ${generateEducationSection(schools)}
-      ${generateExperienceSection(jobs)}
-      ${generateSkillsSection(skills)}
-      ${generateProjectsSection(projects)}
-      \\ 
+    ${generateProfileSection(profile)}
+    ${generateEducationSection(schools)}
+    ${generateExperienceSection(jobs)}
+    ${generateSkillsSection(skills)}
+    ${generateProjectsSection(projects)}
+    ${generateAwardsSection(awards)}
+    \\
     \\end{document}
   `
 }
@@ -305,6 +306,31 @@ function generateCommentHeader() {
     % 2. Hacky space on the first bullet point on the second column.
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    %     Awards
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\section{Awards}
+    ${awards.map(award => {
+      const { name, details, date, location } = award
+      const info = [date, location].filter(Boolean).join(' | ')
+
+      return stripIndent`
+        \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
+        ${details || ''}
+        \\sectionsep
+      `
+    })}
   `
 }
 

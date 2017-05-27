@@ -2,7 +2,7 @@
   "env": {
     "development": {
       "presets": [
-        ["es2015", { "modules": false }],
+        ["es2015", { "loose": true, "modules": false }],
         "stage-0",
         "react"
       ],
@@ -12,7 +12,7 @@
     },
     "production": {
       "presets": [
-        ["es2015", { "modules": false }],
+        ["es2015", { "loose": true, "modules": false }],
         "stage-0",
         "react"
       ],

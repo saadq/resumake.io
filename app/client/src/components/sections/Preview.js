@@ -43,6 +43,13 @@ class Preview extends Component {
     return 1
   }
 
+  onDocumentLoad = ({ total }) => {
+    const { actions } = this.props
+
+    actions.setPageCount(total)
+    actions.setPage(1)
+  }
+
   render() {
     const { url, page, status, actions } = this.props
 
@@ -73,6 +80,7 @@ class Preview extends Component {
             file={url || BlankPDF}
             page={page}
             scale={this.calculateScale()}
+            onDocumentLoad={this.onDocumentLoad}
           />
         </Row>
       </section>

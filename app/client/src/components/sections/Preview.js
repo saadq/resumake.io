@@ -43,7 +43,7 @@ class Preview extends Component {
     return 1
   }
 
-  onDocumentComplete = (pageCount) => {
+  onDocumentComplete = pageCount => {
     const { actions } = this.props
 
     actions.setPageCount(pageCount)

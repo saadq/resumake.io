@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { object, number, string } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import PDF from 'react-pdf-js'
+import PDF from 'react-pdf'
 import { Row, LoadingBar } from '../bulma'
 import { GeneratorActions, UIActions } from '../../actions'
 import BlankPDF from '../../assets/blank.pdf'
@@ -73,10 +73,6 @@ class Preview extends Component {
             file={url || BlankPDF}
             page={page}
             scale={this.calculateScale()}
-            onDocumentComplete={pageCount => {
-              actions.setPageCount(pageCount)
-              actions.setPage(1)
-            }}
           />
         </Row>
       </section>

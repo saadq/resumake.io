@@ -51,12 +51,13 @@ class Preview extends Component {
   }
 
   render() {
-    const { url, page, status, actions } = this.props
+    const { url, page, status, actions, dimensions } = this.props
+    const width = dimensions.width / 2.5
 
     return (
       <section id="preview">
         <LoadingBar hidden={status !== 'pending'} />
-        <div className="download-buttons">
+        <div style={{ width }} className="download-buttons">
           <a href={url} download="resume.pdf" className="button">
             <span className="icon is-small">
               <i className="fa fa-file-pdf-o" />
@@ -70,7 +71,21 @@ class Preview extends Component {
             </span>
           </button>
         </div>
-        <div style={{ display: 'flex', width: this.props.dimensions.width / 2 }} className="page-row">
+        <div style={{ width }} className="zoom-buttons">
+          <a href={url} download="resume.pdf" className="button">
+            <span className="icon is-small">
+              <i className="fa fa-file-pdf-o" />
+              Download PDF
+            </span>
+          </a>
+          <button className="button" onClick={() => actions.downloadSource()}>
+            <span className="icon is-small">
+              <i className="fa fa-file-code-o" />
+              Download Source
+            </span>
+          </button>
+        </div>
+        <div style={{ display: 'flex', width }} className="page-row">
           <button onClick={actions.prevPage} className="button">←</button>
           <p>Page {page}</p>
           <button onClick={actions.nextPage} className="button">→</button>
@@ -78,7 +93,7 @@ class Preview extends Component {
         <Row>
           <PDF
             file={url || BlankPDF}
-            width={this.props.dimensions.width / 2}
+            width={width}
             pageIndex={page - 1}
             onDocumentLoad={this.onDocumentLoad}
           />

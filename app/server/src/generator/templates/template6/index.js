@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template6({ profile, schools, jobs, projects, skills }) {
+function template6({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     ${generateHeader()}
     \\begin{document}
@@ -9,7 +9,8 @@ function template6({ profile, schools, jobs, projects, skills }) {
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
-    \\ 
+    ${generateAwardsSection(awards)}
+    \\
     \\end{document}
   `
 }
@@ -157,6 +158,32 @@ function generateProjectsSection(projects) {
   `
 }
 
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\resheading{Awards}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \\begin{itemize}[leftmargin=*]
+    ${awards.map(award => {
+      const { name, details, date, location } = award
+
+      return stripIndent`
+        \\item[]
+            \\award
+                {${name || ''}}
+                {${date || ''}}
+                {${location || ''}}
+                {${details || ''}}
+      `
+    })}
+    \\end{itemize}
+  `
+}
+
 function generateHeader() {
   return stripIndent`
     % (c) 2002 Matthew Boedicker <mboedick@mboedick.org> (original author) http://mboedick.org
@@ -232,6 +259,10 @@ function generateHeader() {
     }
 
     \\newcommand{\\project}[4]{ \\vspace{1.5mm}
+      \\textbf{#1} #2 \\hfill \\textit{#3} \\\\ #4 \\\\ \\vspace{1.5mm}
+    }
+
+    \\newcommand{\\award}[4]{ \\vspace{1.5mm}
       \\textbf{#1} #2 \\hfill \\textit{#3} \\\\ #4 \\\\ \\vspace{1.5mm}
     }
     %-----------------------------------------------------------

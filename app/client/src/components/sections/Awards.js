@@ -7,7 +7,7 @@ import { UIActions, FormActions } from '../../actions'
 
 function Awards({ awardCount, actions }) {
   return (
-    <section id="Awards">
+    <section className="form-section" id="awards">
       <h1>Your Honors & Awards</h1>
       {Array.from({ length: awardCount }).map((_, index) => (
         <Award key={index} index={index} />

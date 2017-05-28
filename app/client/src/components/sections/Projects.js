@@ -7,7 +7,7 @@ import { UIActions, FormActions } from '../../actions'
 
 function Projects({ projectCount, actions }) {
   return (
-    <section id="projects">
+    <section className="form-section" id="projects">
       <h1>Your Projects</h1>
       {Array.from({ length: projectCount }).map((_, index) => (
         <Project key={index} index={index} />

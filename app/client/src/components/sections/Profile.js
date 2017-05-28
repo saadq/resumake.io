@@ -3,7 +3,7 @@ import { Input } from '../bulma'
 
 function Profile() {
   return (
-    <section id="profile">
+    <section className="form-section" id="profile">
       <h1>Your Personal Info</h1>
       <Input name="profile[fullName]" title="Full Name" />
       <Input name="profile[email]" title="Email" />

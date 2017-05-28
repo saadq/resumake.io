@@ -52,43 +52,43 @@ class Preview extends Component {
 
   render() {
     const { url, page, status, actions, dimensions } = this.props
-    const width = dimensions.width / 2.5
+    const width = dimensions.width / 1.25
 
     return (
       <section id="preview">
         <LoadingBar hidden={status !== 'pending'} />
-        <div style={{ width }} className="download-buttons">
-          <a href={url} download="resume.pdf" className="button">
-            <span className="icon is-small">
-              <i className="fa fa-file-pdf-o" />
-              Download PDF
-            </span>
-          </a>
-          <button className="button" onClick={() => actions.downloadSource()}>
-            <span className="icon is-small">
-              <i className="fa fa-file-code-o" />
-              Download Source
-            </span>
-          </button>
-        </div>
-        <div style={{ width }} className="zoom-buttons">
-          <a href={url} download="resume.pdf" className="button">
-            <span className="icon is-small">
-              <i className="fa fa-file-pdf-o" />
-              Download PDF
-            </span>
-          </a>
-          <button className="button" onClick={() => actions.downloadSource()}>
-            <span className="icon is-small">
-              <i className="fa fa-file-code-o" />
-              Download Source
-            </span>
-          </button>
-        </div>
-        <div style={{ display: 'flex', width }} className="page-row">
-          <button onClick={actions.prevPage} className="button">←</button>
-          <p>Page {page}</p>
-          <button onClick={actions.nextPage} className="button">→</button>
+        <div style={{ width }} className="controls">
+          <div className="download-buttons">
+            <a href={url} download="resume.pdf" className="button">
+              <span className="icon is-small">
+                <i className="fa fa-file-pdf-o" />
+                <span className="is-hidden-small">Download PDF</span>
+              </span>
+            </a>
+            <button className="button" onClick={() => actions.downloadSource()}>
+              <span className="icon is-small">
+                <i className="fa fa-file-code-o" />
+                <span className="is-hidden-small">Download Source</span>
+              </span>
+            </button>
+          </div>
+          <div className="page-controls">
+            <button onClick={actions.prevPage} className="button">←</button>
+            <p><span className="is-hidden-small">Page</span> {page}</p>
+            <button onClick={actions.nextPage} className="button">→</button>
+          </div>
+          <div className="zoom-controls">
+            <button className="button">
+              <span className="icon is-small">
+                <i className="fa fa-search-minus" />
+              </span>
+            </button>
+            <button className="button">
+              <span className="icon is-small">
+                <i className="fa fa-search-plus" />
+              </span>
+            </button>
+          </div>
         </div>
         <Row>
           <PDF
@@ -105,10 +105,10 @@ class Preview extends Component {
 
 Preview.propTypes = {
   actions: object.isRequired,
+  dimensions: object.isRequired,
   status: string,
   page: number,
-  url: string,
-  dimensions: object
+  url: string
 }
 
 const actionCreators = {

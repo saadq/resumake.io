@@ -70,7 +70,7 @@ class Preview extends Component {
             </span>
           </button>
         </div>
-        <div className="page-row">
+        <div style={{ display: 'flex', width: this.props.dimensions.width / 2 }} className="page-row">
           <button onClick={actions.prevPage} className="button">←</button>
           <p>Page {page}</p>
           <button onClick={actions.nextPage} className="button">→</button>
@@ -78,7 +78,7 @@ class Preview extends Component {
         <Row>
           <PDF
             file={url || BlankPDF}
-            scale={this.calculateScale()}
+            width={this.props.dimensions.width / 2}
             pageIndex={page - 1}
             onDocumentLoad={this.onDocumentLoad}
           />
@@ -92,7 +92,8 @@ Preview.propTypes = {
   actions: object.isRequired,
   status: string,
   page: number,
-  url: string
+  url: string,
+  dimensions: object
 }
 
 const actionCreators = {

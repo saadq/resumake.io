@@ -10,6 +10,10 @@ import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
+  state = {
+    scale: 1.5
+  }
+
   componentWillMount() {
     this.updateWindowDimensions()
   }
@@ -32,15 +36,27 @@ class Preview extends Component {
     })
   }
 
-  calculateScale = () => {
+  getWidth() {
+    const { scale } = this.state
     const { dimensions } = this.props
-    const { width } = dimensions
 
-    if (width > 1000) return 4
-    if (width > 768) return 3
-    if (width > 500) return 2
+    return dimensions.width / scale
+  }
 
-    return 1
+  zoomIn = () => {
+    const { scale } = this.state
+
+    this.setState({
+      scale: scale - 1
+    })
+  }
+
+  zoomOut = () => {
+    const { scale } = this.state
+
+    this.setState({
+      scale: scale + 1
+    })
   }
 
   onDocumentLoad = ({ total }) => {
@@ -51,8 +67,8 @@ class Preview extends Component {
   }
 
   render() {
-    const { url, page, status, actions, dimensions } = this.props
-    const width = dimensions.width / 1.25
+    const { url, page, status, actions } = this.props
+    const width = this.getWidth()
 
     return (
       <section id="preview">
@@ -78,12 +94,12 @@ class Preview extends Component {
             <button onClick={actions.nextPage} className="button">→</button>
           </div>
           <div className="zoom-controls">
-            <button className="button">
+            <button onClick={this.zoomOut} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-minus" />
               </span>
             </button>
-            <button className="button">
+            <button onClick={this.zoomIn} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-plus" />
               </span>

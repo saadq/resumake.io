@@ -34,9 +34,7 @@ function getTemplateData(data) {
     case TEMPLATE1:
       return {
         texDoc: template1(data),
-        opts: {
-          errorLogs: join(__dirname, 'latexerrors.log')
-        }
+        opts: {}
       }
 
     case TEMPLATE2:
@@ -45,21 +43,14 @@ function getTemplateData(data) {
         opts: {
           cmd: 'xelatex',
           inputs: join(__dirname, 'template2', 'inputs'),
-          fonts: join(__dirname, 'template2', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log')
+          fonts: join(__dirname, 'template2', 'inputs')
         }
       }
 
     case TEMPLATE3:
       return {
         texDoc: template3(data),
-        opts: {
-          cmd: 'xelatex',
-          inputs: join(__dirname, 'template3', 'inputs'),
-          fonts: join(__dirname, 'template3', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log'),
-          passes: 2
-        }
+        opts: {}
       }
 
     case TEMPLATE4:
@@ -68,8 +59,7 @@ function getTemplateData(data) {
         opts: {
           cmd: 'xelatex',
           inputs: join(__dirname, 'template4', 'inputs'),
-          fonts: join(__dirname, 'template4', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log')
+          fonts: join(__dirname, 'template4', 'inputs')
         }
       }
 
@@ -85,7 +75,10 @@ function getTemplateData(data) {
       return {
         texDoc: template6(data),
         opts: {
-          errorLogs: join(__dirname, 'latexerrors.log')
+          cmd: 'xelatex',
+          inputs: join(__dirname, 'template6', 'inputs'),
+          fonts: join(__dirname, 'template6', 'inputs'),
+          passes: 2
         }
       }
 
@@ -93,8 +86,7 @@ function getTemplateData(data) {
       return {
         texDoc: template7(data),
         opts: {
-          inputs: join(__dirname, 'template7', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log')
+          inputs: join(__dirname, 'template7', 'inputs')
         }
       }
 
@@ -103,17 +95,14 @@ function getTemplateData(data) {
         texDoc: template8(data),
         opts: {
           cmd: 'lualatex',
-          inputs: join(__dirname, 'template8', 'inputs'),
-          errorLogs: join(__dirname, 'latexerrors.log')
+          inputs: join(__dirname, 'template8', 'inputs')
         }
       }
 
     case TEMPLATE9:
       return {
         texDoc: template9(data),
-        opts: {
-          errorLogs: join(__dirname, 'latexerrors.log')
-        }
+        opts: {}
       }
   }
 }

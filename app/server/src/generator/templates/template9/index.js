@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template9({ profile, schools, jobs, skills, projects }) {
+function template9({ profile, schools, jobs, skills, projects, awards }) {
   return stripIndent`
     \\documentclass[a4paper,fontsize=11pt]{article}
     ${generateHeader(profile)}
@@ -10,6 +10,7 @@ function template9({ profile, schools, jobs, skills, projects }) {
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
+    ${generateAwardsSection(awards)}
     \\end{document}
   `
 }
@@ -154,6 +155,30 @@ function generateProjectsSection(projects) {
   `
 }
 
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    %%% Awards
+    %%% ------------------------------------------------------------
+    \\NewPart{Awards}{}
+
+    ${awards.map((award, i) => {
+      const { name, details, date, location } = award
+
+      return stripIndent`
+        \\AwardEntry{${name || ''}}{${location || ''}}
+        {${date || ''}}
+        {${details || ''}}
+        ${i < awards.length - 1 ? '\\sepspace' : ''}
+      `
+    })}
+
+  `
+}
+
 function generateHeader() {
   return stripIndent`
     \\usepackage[english]{babel}
@@ -239,6 +264,11 @@ function generateHeader() {
         \\normalsize \\par}
 
     \\newcommand{\\ProjectEntry}[4]{         % Similar to \\EducationEntry
+        \\noindent \\textbf{#1} \\noindent \\textit{#3} \\hfill {#2} \\par
+        \\noindent \\small #4 % Description
+        \\normalsize \\par}
+
+    \\newcommand{\\AwardEntry}[4]{         % Similar to \\EducationEntry
         \\noindent \\textbf{#1} \\noindent \\textit{#3} \\hfill {#2} \\par
         \\noindent \\small #4 % Description
         \\normalsize \\par}

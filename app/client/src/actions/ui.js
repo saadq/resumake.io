@@ -1,5 +1,7 @@
 import {
   SET_WINDOW_DIMENSIONS,
+  ZOOM_IN,
+  ZOOM_OUT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -23,6 +25,18 @@ function setWindowDimensions({ width, height }) {
     type: SET_WINDOW_DIMENSIONS,
     width,
     height
+  }
+}
+
+function zoomIn() {
+  return {
+    type: ZOOM_IN
+  }
+}
+
+function zoomOut() {
+  return {
+    type: ZOOM_OUT
   }
 }
 
@@ -127,6 +141,8 @@ function removeAward() {
 
 export {
   setWindowDimensions,
+  zoomIn,
+  zoomOut,
   showModal,
   hideModal,
   showSideNav,

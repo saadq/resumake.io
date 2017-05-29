@@ -1,5 +1,7 @@
 import {
   SET_WINDOW_DIMENSIONS,
+  ZOOM_IN,
+  ZOOM_OUT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -23,6 +25,7 @@ const initialState = {
     width: 0,
     height: 0
   },
+  scale: 1.5,
   schoolCount: 1,
   jobCount: 1,
   jobDuties: [1],
@@ -47,6 +50,18 @@ function ui(state = initialState, action) {
           width: action.width,
           height: action.height
         }
+      }
+
+    case ZOOM_IN:
+      return {
+        ...state,
+        scale: Math.max(state.scale - 0.5, 1)
+      }
+
+    case ZOOM_OUT:
+      return {
+        ...state,
+        scale: Math.min(state.scale + 0.5, 5)
       }
 
     case SHOW_MODAL:

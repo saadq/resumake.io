@@ -10,10 +10,6 @@ import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
-  state = {
-    scale: 1.5
-  }
-
   componentWillMount() {
     this.updateWindowDimensions()
   }
@@ -33,39 +29,6 @@ class Preview extends Component {
     actions.setWindowDimensions({
       width: innerWidth,
       height: innerHeight
-    })
-  }
-
-  getWidth() {
-    const { scale } = this.state
-    const { dimensions } = this.props
-
-    return dimensions.width / scale
-  }
-
-  zoomIn = () => {
-    const { scale } = this.state
-
-    if (scale <= 1) {
-      return
-    }
-
-    this.setState({
-      scale: scale - 0.5
-    })
-  }
-
-  zoomOut = () => {
-    const { scale } = this.state
-
-    if (scale >= 5) {
-      return
-    }
-
-    console.log(scale + 0.5)
-
-    this.setState({
-      scale: scale + 0.5
     })
   }
 
@@ -101,8 +64,8 @@ class Preview extends Component {
   }
 
   render() {
-    const { url, page, status, actions } = this.props
-    const width = this.getWidth()
+    const { url, page, status, actions, dimensions, scale } = this.props
+    const width = dimensions.width / scale
 
     return (
       <section id="preview">
@@ -127,12 +90,12 @@ class Preview extends Component {
             <button onClick={actions.nextPage} className="button">→</button>
           </div>
           <div className="zoom-controls">
-            <button onClick={this.zoomOut} className="button">
+            <button onClick={actions.zoomOut} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-minus" />
               </span>
             </button>
-            <button onClick={this.zoomIn} className="button">
+            <button onClick={actions.zoomIn} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-plus" />
               </span>
@@ -175,7 +138,8 @@ function mapStateToProps(state) {
     url: state.generator.pdf.url,
     page: state.generator.pdf.page,
     status: state.generator.status,
-    dimensions: state.ui.dimensions
+    dimensions: state.ui.dimensions,
+    scale: state.ui.scale
   }
 }
 

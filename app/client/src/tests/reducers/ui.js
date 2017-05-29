@@ -2,6 +2,8 @@ import test from 'ava'
 import reducer from '../../reducers/ui'
 import {
   SET_WINDOW_DIMENSIONS,
+  ZOOM_IN,
+  ZOOM_OUT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -40,6 +42,22 @@ test('it can set the window dimensions', async t => {
     width: 1440,
     height: 500
   })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it can zoom in', async t => {
+  const state = { scale: 1.5 }
+  const expected = { scale: 1 }
+  const actual = reducer(state, { type: ZOOM_IN })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it can zoom out', async t => {
+  const state = { scale: 1.5 }
+  const expected = { scale: 2 }
+  const actual = reducer(state, { type: ZOOM_OUT })
 
   t.deepEqual(expected, actual)
 })

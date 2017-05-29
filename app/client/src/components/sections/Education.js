@@ -7,7 +7,7 @@ import { UIActions, FormActions } from '../../actions'
 
 function Education({ schoolCount, actions }) {
   return (
-    <section id="education">
+    <section className="form-section" id="education">
       <h1>Your Educational Background</h1>
       {Array.from({ length: schoolCount }).map((_, index) => (
         <School key={index} index={index} />

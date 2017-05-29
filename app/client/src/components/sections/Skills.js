@@ -8,22 +8,24 @@ import { UIActions, FormActions } from '../../actions'
 
 function Skills({ skillCount, actions }) {
   return (
-    <section id="skills">
+    <section className="form-section" id="skills">
       {Array.from({ length: skillCount }).map((_, index) => (
         <Skill key={index} index={index} />
       ))}
-      <button onClick={() => actions.addSkill()} type="button">
-        <Icon size="small" type="plus" />
-      </button>
-      <button
-        onClick={() => {
-          actions.removeSkill()
-          actions.clearSkillField(skillCount)
-        }}
-        type="button"
-      >
-        <Icon size="small" type="times" />
-      </button>
+      <div className="skills-buttons">
+        <button onClick={() => actions.addSkill()} type="button">
+          <Icon size="small" type="plus" />
+        </button>
+        <button
+          onClick={() => {
+            actions.removeSkill()
+            actions.clearSkillField(skillCount)
+          }}
+          type="button"
+        >
+          <Icon size="small" type="times" />
+        </button>
+      </div>
     </section>
   )
 }

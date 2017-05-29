@@ -11,7 +11,7 @@ const imgs = ctx.keys().map(ctx)
 
 function Templates({ actions, template, modalActive, modalSrc }) {
   return (
-    <section id="templates">
+    <section className="form-section" id="templates">
       <h1>Choose a Template</h1>
       <Row multi>
         {imgs.map((src, i) => (

@@ -1,60 +1,91 @@
 @import '../variables/colors'
 
 #preview
-  .row
-    justify-content center
-    text-align center
-    margin-left 0
-    margin-top 0
-    width 100%
+  display flex
+  flex-direction column
+  align-items center
 
   canvas
-    width 100% !important
+    max-width 100% !important
     height 100% !important
 
-  .download-buttons
-    display flex
-    justify-content space-between
-
-    .button
-      width 49%
-      color $home-text-color
-      background-color oc-gray-9
-      outline none
-      border none
-      border-radius 0
-      transition all .4s ease
-
-      @media screen and (max-width: 768px)
-        font-size .75rem
-
-      &:hover
-        cursor pointer
-        background-color $download-button-background-color
-        color #000
-
-      span
-        width 100%
-
-      i
-        margin-right 7px
-
-  .page-row
+  .controls
     border-radius 3px
-    background oc-gray-5
+    background darken(oc-gray-9, 10%)
     display flex
     justify-content space-between
     align-items center
-    margin-top 10px
-    color oc-black
+    color oc-gray-1
     font-size 1rem
     height 35px
+    width 100%
 
-    button
+    .button
+      height 1rem
       font-size 1.25rem
       height 35px
-      padding 0 35px
-      background-color oc-gray-4
-      border-color oc-gray-4
-      border-radius 0
+      background-color oc-gray-8
+      border-color transparent
+      border-radius 2px
       color white
+      outline none
+
+      &:focus
+        outline none
+        box-shadow none
+
+      .icon
+        height 1rem
+
+    .download-buttons
+      width 33%
+      display flex
+      justify-content flex-start
+
+      .button
+        font-size .75rem
+        width 35%
+        word-wrap break-word
+        white-space normal
+        outline none
+        border none
+        border-radius 0
+        transition all .4s ease
+        margin-right 4px
+
+        i
+          margin-right 7px
+
+          @media screen and (max-width: 800px)
+            margin-right 0
+
+    .page-controls
+      width 33%
+      max-width 33%
+      display flex
+      align-items center
+      justify-content space-between
+
+      button
+        width 30%
+
+      p
+        text-align center
+        width 40%
+        height 1rem
+        line-height 1rem
+        display block
+
+    .zoom-controls
+      display flex
+      align-items center
+      justify-content flex-end
+      width 33%
+
+      button
+        margin-left 5px
+        width 20%
+
+  .is-hidden-small
+    @media screen and (max-width: 800px)
+      display none

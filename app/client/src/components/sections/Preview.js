@@ -113,7 +113,6 @@ class Preview extends Component {
           width={width}
           pageIndex={page - 1}
           onDocumentLoad={this.onDocumentLoad}
-          ref={(pdf => { this.pdf = pdf })}
         />
       </section>
     )

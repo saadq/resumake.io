@@ -46,7 +46,7 @@ class Preview extends Component {
                 <span className="is-hidden-small">PDF</span>
               </span>
             </a>
-            <button className="button" onClick={() => actions.downloadSource()}>
+            <button className="button" onClick={actions.downloadSource}>
               <span className="icon is-small">
                 <i className="fa fa-file-code-o" />
                 <span className="is-hidden-small">Source</span>

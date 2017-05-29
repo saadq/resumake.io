@@ -62,9 +62,35 @@ class Preview extends Component {
       return
     }
 
+    console.log(scale + 0.5)
+
     this.setState({
       scale: scale + 0.5
     })
+  }
+
+  print = () => {
+    const { url } = this.props
+    const frame = document.createElement('iframe')
+
+    frame.addEventListener('load', () => {
+      const win = frame.contentWindow
+
+      win.focus()
+      win.print()
+      win.addEventListener('focus', () => document.body.removeChild(frame))
+    })
+
+    Object.assign(frame.style, {
+      visibility: 'hidden',
+      position: 'fixed',
+      right: 0,
+      bottom: 0
+    })
+
+    frame.src = url
+
+    document.body.appendChild(frame)
   }
 
   onDocumentLoad = ({ total }) => {
@@ -111,6 +137,11 @@ class Preview extends Component {
                 <i className="fa fa-search-plus" />
               </span>
             </button>
+            <button onClick={this.print} className="button">
+              <span className="icon is-small">
+                <i className="fa fa-print" />
+              </span>
+            </button>
           </div>
         </div>
         <LoadingBar width={width} hidden={status !== 'pending'} />
@@ -119,6 +150,7 @@ class Preview extends Component {
           width={width}
           pageIndex={page - 1}
           onDocumentLoad={this.onDocumentLoad}
+          ref={(pdf => { this.pdf = pdf })}
         />
       </section>
     )

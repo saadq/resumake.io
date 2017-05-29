@@ -1,4 +1,5 @@
 const { stripIndent, source } = require('common-tags')
+const { WHITESPACE } = require('../constants')
 
 function template1({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
@@ -37,7 +38,7 @@ function template1({ profile, schools, jobs, projects, skills, awards }) {
 
         ${generateAwardsSection(awards)}
 
-        \\
+        ${WHITESPACE}
     \\end{document}
   `
 }

@@ -16,6 +16,7 @@ class Preview extends Component {
     scale: number.isRequired,
     status: string,
     page: number,
+    pageCount: number,
     url: string
   }
 
@@ -42,7 +43,16 @@ class Preview extends Component {
   }
 
   render() {
-    const { url, page, status, actions, dimensions, scale } = this.props
+    const {
+      url,
+      page,
+      pageCount,
+      status,
+      actions,
+      dimensions,
+      scale
+    } = this.props
+
     const width = dimensions.width / scale
 
     return (
@@ -63,9 +73,21 @@ class Preview extends Component {
             </button>
           </div>
           <div className="page-controls">
-            <button onClick={actions.prevPage} className="button">←</button>
+            <button
+              onClick={actions.prevPage}
+              className="button"
+              disabled={page <= 1}
+            >
+              ←
+            </button>
             <p><span className="is-hidden-small">Page</span> {page}</p>
-            <button onClick={actions.nextPage} className="button">→</button>
+            <button
+              onClick={actions.nextPage}
+              className="button"
+              disabled={page >= pageCount}
+            >
+              →
+            </button>
           </div>
           <div className="zoom-controls">
             <button onClick={actions.zoomOut} className="button">
@@ -109,6 +131,7 @@ function mapStateToProps(state) {
   return {
     url: state.generator.pdf.url,
     page: state.generator.pdf.page,
+    pageCount: state.generator.pdf.pageCount,
     status: state.generator.status,
     dimensions: state.ui.dimensions,
     scale: state.ui.scale

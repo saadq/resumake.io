@@ -4,6 +4,8 @@ import {
   SET_WINDOW_DIMENSIONS,
   ZOOM_IN,
   ZOOM_OUT,
+  START_PRINT,
+  STOP_PRINT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -26,6 +28,8 @@ const {
   setWindowDimensions,
   zoomIn,
   zoomOut,
+  startPrint,
+  stopPrint,
   showModal,
   hideModal,
   showSideNav,
@@ -52,6 +56,8 @@ test('ui actions', async t => {
   })
   t.deepEqual(zoomIn(), { type: ZOOM_IN })
   t.deepEqual(zoomOut(), { type: ZOOM_OUT })
+  t.deepEqual(startPrint(), { type: START_PRINT })
+  t.deepEqual(stopPrint(), { type: STOP_PRINT })
   t.deepEqual(showModal('/some-image.png'), {
     type: SHOW_MODAL,
     modalSrc: '/some-image.png'

@@ -32,37 +32,6 @@ class Preview extends Component {
     })
   }
 
-  print = () => {
-    const { url } = this.props
-    const frame = document.createElement('iframe')
-
-    frame.addEventListener('load', () => {
-      const win = frame.contentWindow
-
-      win.focus()
-      win.print()
-      win.addEventListener('focus', () => document.body.removeChild(frame))
-    })
-
-    Object.assign(frame.style, {
-      visibility: 'hidden',
-      position: 'fixed',
-      right: 0,
-      bottom: 0
-    })
-
-    frame.src = url
-
-    document.body.appendChild(frame)
-  }
-
-  onDocumentLoad = ({ total }) => {
-    const { actions } = this.props
-
-    actions.setPageCount(total)
-    actions.setPage(1)
-  }
-
   render() {
     const { url, page, status, actions, dimensions, scale } = this.props
     const width = dimensions.width / scale
@@ -100,7 +69,7 @@ class Preview extends Component {
                 <i className="fa fa-search-plus" />
               </span>
             </button>
-            <button onClick={this.print} className="button">
+            <button onClick={() => actions.print(url)} className="button">
               <span className="icon is-small">
                 <i className="fa fa-print" />
               </span>
@@ -112,7 +81,10 @@ class Preview extends Component {
           file={url || BlankPDF}
           width={width}
           pageIndex={page - 1}
-          onDocumentLoad={this.onDocumentLoad}
+          onDocumentLoad={({ total }) => {
+            actions.setPageCount(total)
+            actions.setPage(1)
+          }}
         />
       </section>
     )
@@ -122,6 +94,7 @@ class Preview extends Component {
 Preview.propTypes = {
   actions: object.isRequired,
   dimensions: object.isRequired,
+  scale: number.isRequired,
   status: string,
   page: number,
   url: string

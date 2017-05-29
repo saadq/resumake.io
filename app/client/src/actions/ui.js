@@ -2,6 +2,8 @@ import {
   SET_WINDOW_DIMENSIONS,
   ZOOM_IN,
   ZOOM_OUT,
+  START_PRINT,
+  STOP_PRINT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -37,6 +39,48 @@ function zoomIn() {
 function zoomOut() {
   return {
     type: ZOOM_OUT
+  }
+}
+
+function startPrint() {
+  return {
+    type: START_PRINT
+  }
+}
+
+function stopPrint() {
+  return {
+    type: STOP_PRINT
+  }
+}
+
+function print(url) {
+  return async (dispatch, getState) => {
+    dispatch(startPrint())
+
+    const frame = document.createElement('iframe')
+
+    frame.addEventListener('load', () => {
+      const win = frame.contentWindow
+
+      win.focus()
+      win.print()
+      win.addEventListener('focus', () => {
+        document.body.removeChild(frame)
+        dispatch(stopPrint())
+      })
+    })
+
+    Object.assign(frame.style, {
+      visibility: 'hidden',
+      position: 'fixed',
+      right: 0,
+      bottom: 0
+    })
+
+    frame.src = url
+
+    document.body.appendChild(frame)
   }
 }
 
@@ -143,6 +187,9 @@ export {
   setWindowDimensions,
   zoomIn,
   zoomOut,
+  startPrint,
+  stopPrint,
+  print,
   showModal,
   hideModal,
   showSideNav,

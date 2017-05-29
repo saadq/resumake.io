@@ -2,6 +2,8 @@ import {
   SET_WINDOW_DIMENSIONS,
   ZOOM_IN,
   ZOOM_OUT,
+  START_PRINT,
+  STOP_PRINT,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_SIDE_NAV,
@@ -26,6 +28,7 @@ const initialState = {
     height: 0
   },
   scale: 1.5,
+  isPrinting: false,
   schoolCount: 1,
   jobCount: 1,
   jobDuties: [1],
@@ -62,6 +65,18 @@ function ui(state = initialState, action) {
       return {
         ...state,
         scale: Math.min(state.scale + 0.5, 5)
+      }
+
+    case START_PRINT:
+      return {
+        ...state,
+        isPrinting: true
+      }
+
+    case STOP_PRINT:
+      return {
+        ...state,
+        isPrinting: false
       }
 
     case SHOW_MODAL:

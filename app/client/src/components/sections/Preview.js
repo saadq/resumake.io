@@ -10,6 +10,15 @@ import BlankPDF from '../../assets/blank.pdf'
 import '../../styles/components/preview.styl'
 
 class Preview extends Component {
+  static propTypes = {
+    actions: object.isRequired,
+    dimensions: object.isRequired,
+    scale: number.isRequired,
+    status: string,
+    page: number,
+    url: string
+  }
+
   componentWillMount() {
     this.updateWindowDimensions()
   }
@@ -89,15 +98,6 @@ class Preview extends Component {
       </section>
     )
   }
-}
-
-Preview.propTypes = {
-  actions: object.isRequired,
-  dimensions: object.isRequired,
-  scale: number.isRequired,
-  status: string,
-  page: number,
-  url: string
 }
 
 const actionCreators = {

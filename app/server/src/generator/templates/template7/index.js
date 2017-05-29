@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template7({ profile, schools, jobs, skills, projects }) {
+function template7({ profile, schools, jobs, skills, projects, awards }) {
   return stripIndent`
     ${generateHeader()}
     ${generateProfileSection(profile)}
@@ -10,7 +10,8 @@ function template7({ profile, schools, jobs, skills, projects }) {
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
-    \\ 
+    ${generateAwardsSection(awards)}
+    \\
     \\end{document}
   `
 }
@@ -138,6 +139,40 @@ function generateProjectsSection(projects) {
           {${name || ''}}
           {}
           {\\textit{${technologies || ''}}}
+          {}
+          {${detailsLine}}
+        \\vspace{1mm}
+      `
+    })}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    \\section{Awards}
+    ${awards.map(award => {
+      const { name, details, date, location } = award
+
+      let detailsLine = ''
+
+      if (details) {
+        detailsLine += `${details}\\\\`
+      }
+
+      if (location) {
+        detailsLine += location
+      }
+
+      return stripIndent`
+        \\cventry
+          {}
+          {${name || ''}}
+          {}
+          {\\textit{${date || ''}}}
           {}
           {${detailsLine}}
         \\vspace{1mm}

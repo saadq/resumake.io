@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template5({ profile, schools, jobs, projects, skills }) {
+function template5({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     \\documentclass[line,margin]{res}
     \\usepackage[none]{hyphenat}
@@ -13,7 +13,8 @@ function template5({ profile, schools, jobs, projects, skills }) {
           ${generateExperienceSection(jobs)}
           ${generateSkillsSection(skills)}
           ${generateProjectsSection(projects)}
-          \\ 
+          ${generateAwardsSection(awards)}
+          \\
         \\end{resume}
     \\end{document}
   `
@@ -186,6 +187,24 @@ function generateProjectsSection(projects) {
 
         return projectLine
       })}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    \\section{Awards}
+    ${awards.map(award => {
+      const { name, details, date, location } = award
+
+      return stripIndent`
+          \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date || ''} \\\\
+          ${details || ''} \\\\\\\\
+      `
+    })}
   `
 }
 

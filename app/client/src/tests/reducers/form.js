@@ -5,7 +5,8 @@ import {
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
   CLEAR_PROJECT_FIELD,
-  CLEAR_SKILL_FIELD
+  CLEAR_SKILL_FIELD,
+  CLEAR_AWARD_FIELD
 } from '../../constants'
 
 test('it should clear school field', async t => {
@@ -110,6 +111,24 @@ test('it should clear skill field', async t => {
   }
 
   const actual = reducer(state, { type: CLEAR_SKILL_FIELD, skillCount: 2 })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it should clear award field', async t => {
+  const state = {
+    values: {
+      awards: [{ name: 'award1' }, { name: 'award2' }]
+    }
+  }
+
+  const expected = {
+    values: {
+      awards: [{ name: 'award1' }]
+    }
+  }
+
+  const actual = reducer(state, { type: CLEAR_AWARD_FIELD, awardCount: 2 })
 
   t.deepEqual(expected, actual)
 })

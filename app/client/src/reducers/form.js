@@ -4,7 +4,8 @@ import {
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
   CLEAR_PROJECT_FIELD,
-  CLEAR_SKILL_FIELD
+  CLEAR_SKILL_FIELD,
+  CLEAR_AWARD_FIELD
 } from '../constants'
 
 function form(state = {}, action) {
@@ -105,6 +106,24 @@ function form(state = {}, action) {
         values: {
           ...state.values,
           skills: state.values.skills.slice(0, -1)
+        }
+      }
+
+    case CLEAR_AWARD_FIELD:
+      if (
+        !state.values ||
+        !state.values.awards ||
+        state.values.awards.length <= 1 ||
+        state.values.awards.length !== action.awardCount
+      ) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          awards: state.values.awards.slice(0, -1)
         }
       }
 

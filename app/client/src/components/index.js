@@ -7,6 +7,7 @@ export {
   Experience,
   Projects,
   Skills,
+  Awards,
   Preview,
   NoMatch
 } from './sections'

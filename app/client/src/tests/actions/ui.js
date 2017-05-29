@@ -15,7 +15,9 @@ import {
   ADD_PROJECT,
   REMOVE_PROJECT,
   ADD_SKILL,
-  REMOVE_SKILL
+  REMOVE_SKILL,
+  ADD_AWARD,
+  REMOVE_AWARD
 } from '../../constants'
 
 const {
@@ -33,7 +35,9 @@ const {
   addProject,
   removeProject,
   addSkill,
-  removeSkill
+  removeSkill,
+  addAward,
+  removeAward
 } = UIActions
 
 test('ui actions', async t => {
@@ -59,4 +63,6 @@ test('ui actions', async t => {
   t.deepEqual(removeSkill(), { type: REMOVE_SKILL })
   t.deepEqual(addProject(), { type: ADD_PROJECT })
   t.deepEqual(removeProject(), { type: REMOVE_PROJECT })
+  t.deepEqual(addAward(), { type: ADD_AWARD })
+  t.deepEqual(removeAward(), { type: REMOVE_AWARD })
 })

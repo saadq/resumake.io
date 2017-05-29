@@ -8,6 +8,7 @@ import {
   Projects,
   Skills,
   Preview,
+  Awards,
   NoMatch
 } from '../components'
 
@@ -43,6 +44,10 @@ const generator = {
     {
       path: '/generator/skills',
       component: Skills
+    },
+    {
+      path: '/generator/awards',
+      component: Awards
     },
     {
       path: '/generator/preview',

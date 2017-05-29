@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template8({ profile, schools, jobs, skills, projects }) {
+function template8({ profile, schools, jobs, skills, projects, awards }) {
   return stripIndent`
     ${generateCommentHeader()}
     % The font could be set to Windows-specific Calibri by using the 'calibri' option
@@ -18,6 +18,7 @@ function template8({ profile, schools, jobs, skills, projects }) {
       ${generateExperienceSection(jobs)}
       ${generateSkillsSection(skills)}
       ${generateProjectsSection(projects)}
+      ${generateAwardsSection(awards)}
       \\
     \\end{document}
   `
@@ -127,6 +128,22 @@ function generateExperienceSection(jobs) {
   `
 }
 
+function generateSkillsSection(skills) {
+  if (!skills) {
+    return ''
+  }
+
+  return source`
+    \\begin{cvsection}{Skills}
+      \\begin{cvsubsection}{}{}{}
+        \\begin{itemize}
+          ${skills.map(skill => `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`)}
+        \\end{itemize}
+      \\end{cvsubsection}
+    \\end{cvsection}
+  `
+}
+
 function generateProjectsSection(projects) {
   if (!projects) {
     return ''
@@ -136,6 +153,7 @@ function generateProjectsSection(projects) {
     \\begin{cvsection}{Projects}
       \\begin{cvsubsection}{}{}{}
           \\begin{itemize}
+          \\setlength\\itemsep{3pt}
             ${projects.map(project => {
               const { name, description, technologies, link } = project
 
@@ -150,11 +168,11 @@ function generateProjectsSection(projects) {
               }
 
               if (description) {
-                line += description
+                line += ` ${description}`
               }
 
               if (technologies) {
-                line += technologies
+                line += ` ${technologies}`
               }
 
               return `\\item ${line}`
@@ -165,18 +183,41 @@ function generateProjectsSection(projects) {
   `
 }
 
-function generateSkillsSection(skills) {
-  if (!skills) {
+function generateAwardsSection(awards) {
+  if (!awards) {
     return ''
   }
 
   return source`
-    \\begin{cvsection}{Skills}
+    \\begin{cvsection}{Awards}
       \\begin{cvsubsection}{}{}{}
-        \\begin{itemize}
-          ${skills.map(skill => `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`)}
-        \\end{itemize}
-      \\end{cvsubsection}
+          \\begin{itemize}
+          \\setlength\\itemsep{3pt}
+            ${awards.map(award => {
+              const { name, details, date, location } = award
+
+              let line = ''
+
+              if (name) {
+                line += `\\textbf{${name}} `
+              }
+
+              if (location) {
+                line += `(${location}) `
+              }
+
+              if (details) {
+                line += ` ${details}`
+              }
+
+              if (date) {
+                line += ` ${date}`
+              }
+
+              return `\\item ${line}`
+            })}
+          \\end{itemize}
+        \\end{cvsubsection}
     \\end{cvsection}
   `
 }

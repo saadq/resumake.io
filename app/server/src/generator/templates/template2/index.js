@@ -1,6 +1,6 @@
 const { stripIndent, source } = require('common-tags')
 
-function template2({ profile, schools, jobs, projects, skills }) {
+function template2({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     ${generateHeader()}
     \\begin{document}
@@ -9,7 +9,8 @@ function template2({ profile, schools, jobs, projects, skills }) {
     ${generateExperienceSection(jobs)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
-    \\ 
+    ${generateAwardsSection(awards)}
+    \\
     \\end{document}
   `
 }
@@ -192,6 +193,29 @@ function generateProjectsSection(projects) {
 
       `)}
     \\end{cventries}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+    \\cvsection{Honors \\& Awards}
+    \\begin{cvhonors}
+      ${awards.map(award => {
+        const { name, details, date, location } = award
+
+        return stripIndent`
+          \\cvhonor
+            {${name || ''}}
+            {${details || ''}}
+            {${location || ''}}
+            {${date || ''}}
+        `
+      })}
+    \\end{cvhonors}
   `
 }
 

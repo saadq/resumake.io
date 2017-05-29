@@ -5,7 +5,8 @@ import {
   CLEAR_JOB_FIELD,
   CLEAR_JOB_DUTY_FIELD,
   CLEAR_PROJECT_FIELD,
-  CLEAR_SKILL_FIELD
+  CLEAR_SKILL_FIELD,
+  CLEAR_AWARD_FIELD
 } from '../../constants'
 
 const {
@@ -13,7 +14,8 @@ const {
   clearJobField,
   clearJobDutyField,
   clearProjectField,
-  clearSkillField
+  clearSkillField,
+  clearAwardField
 } = FormActions
 
 test('form actions', async t => {
@@ -29,4 +31,5 @@ test('form actions', async t => {
     projectCount: 3
   })
   t.deepEqual(clearSkillField(4), { type: CLEAR_SKILL_FIELD, skillCount: 4 })
+  t.deepEqual(clearAwardField(2), { type: CLEAR_AWARD_FIELD, awardCount: 2 })
 })

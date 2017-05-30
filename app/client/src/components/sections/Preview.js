@@ -104,7 +104,10 @@ class Preview extends Component {
                 <i className="fa fa-search-plus" />
               </span>
             </a>
-            <a onClick={() => actions.print(url)} className="is-hidden-small button">
+            <a
+              onClick={() => actions.print(url)}
+              className="is-hidden-small button"
+            >
               <span className="icon is-small">
                 <i className="fa fa-print" />
               </span>

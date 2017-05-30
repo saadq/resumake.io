@@ -65,46 +65,50 @@ class Preview extends Component {
                 <span className="is-hidden-small">PDF</span>
               </span>
             </a>
-            <button className="button" onClick={actions.downloadSource}>
+            <a className="button" onClick={actions.downloadSource}>
               <span className="icon is-small">
                 <i className="fa fa-file-code-o" />
                 <span className="is-hidden-small">Source</span>
               </span>
-            </button>
+            </a>
           </div>
           <div className="page-controls">
-            <button
+            <a
               onClick={actions.prevPage}
               className="button"
               disabled={page <= 1}
             >
-              ←
-            </button>
+              <span className="icon is-small">
+                <i className="fa fa-chevron-left" />
+              </span>
+            </a>
             <p><span className="is-hidden-small">Page</span> {page}</p>
-            <button
+            <a
               onClick={actions.nextPage}
               className="button"
               disabled={page >= pageCount}
             >
-              →
-            </button>
+              <span className="icon is-small">
+                <i className="fa fa-chevron-right" />
+              </span>
+            </a>
           </div>
           <div className="zoom-controls">
-            <button onClick={actions.zoomOut} className="button">
+            <a onClick={actions.zoomOut} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-minus" />
               </span>
-            </button>
-            <button onClick={actions.zoomIn} className="button">
+            </a>
+            <a onClick={actions.zoomIn} className="button">
               <span className="icon is-small">
                 <i className="fa fa-search-plus" />
               </span>
-            </button>
-            <button onClick={() => actions.print(url)} className="button">
+            </a>
+            <a onClick={() => actions.print(url)} className="is-hidden-small button">
               <span className="icon is-small">
                 <i className="fa fa-print" />
               </span>
-            </button>
+            </a>
           </div>
         </div>
         <LoadingBar width={width} hidden={status !== 'pending'} />

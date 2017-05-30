@@ -55,6 +55,10 @@ function stopPrint() {
 }
 
 function print(url) {
+  if (/Android/i.test(navigator.userAgent)) {
+    return // Android doesn't have native printing functionality
+  }
+
   return async (dispatch, getState) => {
     dispatch(startPrint())
 

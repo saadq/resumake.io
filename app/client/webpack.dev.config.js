@@ -51,11 +51,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
+          'autoprefixer-loader',
           'stylus-loader'
         ]
       },
       {
-        test: /\.(jpg|jpeg|png|gif|ico|svg|pdf)$/,
+        test: /\.(jpg|jpeg|png|gif|ico|svg|pdf|eof|woff|ttf|woff2)$/,
         loader: 'url-loader',
         options: {
           limit: 10000

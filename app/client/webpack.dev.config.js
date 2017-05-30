@@ -51,7 +51,6 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'autoprefixer-loader',
           'stylus-loader'
         ]
       },

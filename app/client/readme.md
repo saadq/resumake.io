@@ -1,10 +1,37 @@
-# latexresu.me
+# latexresu.me server
+This contains the code for the client side app for latexresu.me.
 
-A webapp for generating stunning LaTeX resumes.
+### Install dependencies
+```
+npm install
+```
 
-![](http://i.imgur.com/JUUVnZp.png)
+### Starting the dev server (localhost:3000)
+```
+npm start
+```
 
-**IN PROGRESS**
+### Create production bundle
+```
+npm run build
+```
 
-## License
-MIT
+### Lint code
+```
+npm run lint
+```
+
+### Fix lint issues
+```
+npm run fix
+```
+
+### Format code
+```
+npm run format
+```
+
+### Run tests
+```
+npm test
+```

@@ -1,36 +1,37 @@
-# server-boilerplate
+# latexresu.me server
+This contains the code for the api backend for latexresu.me.
 
-A custom boilerplate for my server-side projects. The boilerplate includes:
-
-* Koa 2
-* Koa-Router
-* Koa-Static
-* Standard linting
-
-## Installation
-```
-yarn
-```
-
-or
-
+### Install dependencies
 ```
 npm install
 ```
 
-## Usage
-
-Start the server:
-
+### Starting the server (localhost:3001)
 ```
 npm start
 ```
 
-Watch changes on server:
-
+### Starting the server in watch mode (localhost:3001)
 ```
 npm run watch
 ```
 
-## License
-MIT
+### Lint code
+```
+npm run lint
+```
+
+### Fix lint issues
+```
+npm run fix
+```
+
+### Format code
+```
+npm run format
+```
+
+### Run tests
+```
+npm test
+```

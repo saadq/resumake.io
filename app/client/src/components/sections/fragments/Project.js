@@ -6,16 +6,26 @@ function Project({ index }) {
   return (
     <div className="school">
       {index > 0 ? <hr /> : null}
-      <Input name={`projects[${index}][name]`} title="Project Name" />
+      <Input
+        name={`projects[${index}][name]`}
+        title="Project Name"
+        placeholder="Piper Chat"
+      />
       <Input
         name={`projects[${index}][description]`}
         title="Short Description"
+        placeholder="A video chat app with great picture quality."
       />
       <Input
         name={`projects[${index}][technologies]`}
         title="Technologies Used"
+        placeholder="Node.js, Koa, React, Redux"
       />
-      <Input name={`projects[${index}][link]`} title="Link to Project" />
+      <Input
+        name={`projects[${index}][link]`}
+        title="Link to Project"
+        placeholder="Java, Swift"
+      />
     </div>
   )
 }

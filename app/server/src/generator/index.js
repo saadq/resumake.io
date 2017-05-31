@@ -35,7 +35,7 @@ function generateSourceCode(formData) {
   zip.append(prettyDoc, { name: 'resume.tex' })
 
   if (opts.inputs) {
-    zip.directory(opts.inputs, '.')
+    zip.directory(opts.inputs, '../')
   }
 
   zip.finalize()

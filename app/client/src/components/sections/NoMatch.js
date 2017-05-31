@@ -1,12 +1,13 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { Link } from 'react-router-dom'
 
-function NoMatch({ location }) {
-  return <div>Error 404: No match for {location.pathname}</div>
-}
-
-NoMatch.propTypes = {
-  location: object.isRequired
+function NoMatch() {
+  return (
+    <section className="form-section" id="no-match">
+      <h1>This page does not exist ¯\_(ツ)_/¯</h1>
+      <Link to="/generator/templates">Go back to the generator</Link>
+    </section>
+  )
 }
 
 export default NoMatch

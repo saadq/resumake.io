@@ -1,4 +1,4 @@
-# latexresu.me server
+# latexresu.me client
 This contains the code for the client side app for latexresu.me.
 
 ### Install dependencies

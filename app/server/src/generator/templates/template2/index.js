@@ -242,7 +242,7 @@ function generateHeader() {
     %     Configuration
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%% Themes: Awesome-CV
-    \\documentclass[11pt, a4paper]{awesome-cv}
+    \\documentclass[]{awesome-cv}
     \\usepackage{textcomp}
     %%% Override a directory location for fonts(default: 'fonts/')
     \\fontdir[fonts/]

@@ -281,7 +281,7 @@
 % usage: \moderncvstyle{<style variant name>}
 \newcommand*{\moderncvstyle}[1]{
   \RequirePackage{moderncvstyle#1}}
-  
+
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
 \newcommand*{\moderncvcolor}[1]{

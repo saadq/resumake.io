@@ -4,7 +4,7 @@ const { WHITESPACE } = require('../constants')
 function template4({ profile, schools, jobs, projects, skills, awards }) {
   return stripIndent`
     ${generateCommentHeader()}
-    \\documentclass[a4paper]{deedy-resume-openfont}
+    \\documentclass[]{deedy-resume-openfont}
 
     \\begin{document}
     ${generateProfileSection(profile)}

@@ -5,7 +5,7 @@ function template8({ profile, schools, jobs, skills, projects, awards }) {
   return stripIndent`
     ${generateCommentHeader()}
     % The font could be set to Windows-specific Calibri by using the 'calibri' option
-    \\documentclass[a4paper]{mcdowellcv}
+    \\documentclass[]{mcdowellcv}
 
     % For mathematical symbols
     \\usepackage{amsmath}

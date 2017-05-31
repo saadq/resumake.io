@@ -3,7 +3,7 @@ const { WHITESPACE } = require('../constants')
 
 function template9({ profile, schools, jobs, skills, projects, awards }) {
   return stripIndent`
-    \\documentclass[a4paper,fontsize=11pt]{article}
+    \\documentclass[fontsize=11pt]{article}
     ${generateHeader(profile)}
     \\begin{document}
     ${generateProfileSection(profile)}

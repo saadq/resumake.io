@@ -30,13 +30,13 @@ function SideNav({ sideNavActive, hideSideNav, handlePreviewClick }) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/generator/projects" activeClassName="is-active">
-            Projects
+          <NavLink to="/generator/skills" activeClassName="is-active">
+            Skills
           </NavLink>
         </li>
         <li>
-          <NavLink to="/generator/skills" activeClassName="is-active">
-            Skills
+          <NavLink to="/generator/projects" activeClassName="is-active">
+            Projects
           </NavLink>
         </li>
         <li>

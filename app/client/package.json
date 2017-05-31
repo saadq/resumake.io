@@ -10,6 +10,7 @@
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "prebuild": "npm run clean",
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize -p --config webpack.prod.config.js",
+    "postbuild": "cp src/assets/img/favicon.ico dist/static",
     "clean": "rimraf dist"
   },
   "repository": {

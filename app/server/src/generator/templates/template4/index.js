@@ -328,7 +328,7 @@ function generateAwardsSection(awards) {
 
       return stripIndent`
         \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
-        ${details || ''}
+        ${details ? `${details}\\\\` : ''}
         \\sectionsep
       `
     })}

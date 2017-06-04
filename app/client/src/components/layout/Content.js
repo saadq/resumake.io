@@ -5,7 +5,17 @@ import '../../styles/components/content.styl'
 function Content({ hideSideNav, children }) {
   return (
     <div onClick={hideSideNav} id="content">
+      <button className="switch-section-button prev-section-button">
+        <span className="icon is-small">
+          <i className="fa fa-chevron-left" />
+        </span>
+      </button>
       {children}
+      <button className="switch-section-button next-section-button">
+        <span className="icon is-small">
+          <i className="fa fa-chevron-right" />
+        </span>
+      </button>
     </div>
   )
 }

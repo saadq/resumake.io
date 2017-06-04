@@ -1,11 +1,14 @@
 @import '../variables/colors'
+@import '../variables/sizes'
 
 #preview
   text-align center
+  width calc(100% - 6rem)
+  margin 0 auto
 
   canvas
     max-width 100% !important
-    height 100% !important
+    height auto !important
 
   .controls
     padding 10px

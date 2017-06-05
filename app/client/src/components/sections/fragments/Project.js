@@ -24,7 +24,7 @@ function Project({ index }) {
       <Input
         name={`projects[${index}][link]`}
         title="Link to Project"
-        placeholder="Java, Swift"
+        placeholder="http://www.piedpiper.com/"
       />
     </div>
   )

@@ -36,7 +36,7 @@ function generateProfileSection(profile) {
       nameEnd = ''
     } else {
       nameStart = names[0]
-      nameEnd = names.slice(1,names.length).join(' ')
+      nameEnd = names.slice(1, names.length).join(' ')
     }
   }
 

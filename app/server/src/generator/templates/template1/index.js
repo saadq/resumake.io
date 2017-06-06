@@ -267,10 +267,6 @@ function generateAwardsSection(awards) {
         line1 += ` \\hfill ${location}`
       }
 
-      if (details) {
-        line2 += details
-      }
-
       if (date) {
         line2 += ` \\hfill ${date}`
       }

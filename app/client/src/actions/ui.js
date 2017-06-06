@@ -19,7 +19,8 @@ import {
   ADD_SKILL,
   REMOVE_SKILL,
   ADD_AWARD,
-  REMOVE_AWARD
+  REMOVE_AWARD,
+  SET_SECTION_NAVIGATION
 } from '../constants'
 
 function setWindowDimensions({ width, height }) {
@@ -187,6 +188,33 @@ function removeAward() {
   }
 }
 
+function setSectionNavigation(curr) {
+  const sections = [
+    'templates',
+    'profile',
+    'education',
+    'experience',
+    'skills',
+    'projects',
+    'awards',
+    'preview'
+  ]
+
+  const currIndex = sections.indexOf(curr)
+  const prevIndex = Math.max(currIndex - 1, 0)
+  const nextIndex = Math.min(currIndex + 1, sections.length - 1)
+
+  const prev = sections[prevIndex]
+  const next = sections[nextIndex]
+
+  return {
+    type: SET_SECTION_NAVIGATION,
+    prev,
+    curr,
+    next
+  }
+}
+
 export {
   setWindowDimensions,
   zoomIn,
@@ -209,5 +237,6 @@ export {
   addSkill,
   removeSkill,
   addAward,
-  removeAward
+  removeAward,
+  setSectionNavigation
 }

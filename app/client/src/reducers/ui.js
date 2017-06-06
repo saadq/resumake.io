@@ -19,10 +19,16 @@ import {
   ADD_SKILL,
   REMOVE_SKILL,
   ADD_AWARD,
-  REMOVE_AWARD
+  REMOVE_AWARD,
+  SET_SECTION_NAVIGATION
 } from '../constants'
 
 const initialState = {
+  section: {
+    prev: 'templates',
+    curr: 'templates',
+    next: 'profile'
+  },
   dimensions: {
     width: 0,
     height: 0
@@ -197,6 +203,16 @@ function ui(state = initialState, action) {
       return {
         ...state,
         awardCount: state.awardCount > 1 ? state.awardCount - 1 : 1
+      }
+
+    case SET_SECTION_NAVIGATION:
+      return {
+        ...state,
+        section: {
+          prev: action.prev,
+          curr: action.curr,
+          next: action.next
+        }
       }
 
     default:

@@ -2,18 +2,45 @@
 @import '../variables/sizes'
 
 #content
-  height $content-height
-  max-width $templates-width
+  display flex
+  min-height $content-height
   background-color $content-background-color
-  padding-top $top-bar-height
   margin-left $side-nav-width
 
   @media screen and (max-width: 768px)
     margin-left 0
 
+  .switch-section-button
+    z-index 1
+    position fixed
+    height 100%
+    background-color $switch-section-background-color
+    outline none
+    border none
+    width 3rem
+    color $switch-section-color
+    cursor pointer
+    transition background-color .4s ease
+
+    &:hover
+      background-color $switch-section-hover-background-color
+
+    &.prev-section-button
+      left $side-nav-width
+
+      @media screen and (max-width: 768px)
+        left 0
+
+    &.next-section-button
+      right 0
+
+  section
+    margin-top $top-bar-height
+
   .form-section
     padding 20px
-    margin 0 auto
+    margin-left auto
+    margin-right auto
     width 80%
 
     hr

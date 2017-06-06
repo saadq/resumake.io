@@ -21,7 +21,8 @@ import {
   ADD_SKILL,
   REMOVE_SKILL,
   ADD_AWARD,
-  REMOVE_AWARD
+  REMOVE_AWARD,
+  SET_SECTION_NAVIGATION
 } from '../../constants'
 
 test('it can set the window dimensions', async t => {
@@ -248,6 +249,33 @@ test('it can remove an award', async t => {
   const state = { awardCount: 4 }
   const expected = { awardCount: 3 }
   const actual = reducer(state, { type: REMOVE_AWARD })
+
+  t.deepEqual(expected, actual)
+})
+
+test('it can update the section navigation', async t => {
+  const state = {
+    section: {
+      prev: 'profile',
+      curr: 'education',
+      next: 'experience'
+    }
+  }
+
+  const expected = {
+    section: {
+      prev: 'education',
+      curr: 'experience',
+      next: 'skills'
+    }
+  }
+
+  const actual = reducer(state, {
+    type: SET_SECTION_NAVIGATION,
+    prev: 'education',
+    curr: 'experience',
+    next: 'skills'
+  })
 
   t.deepEqual(expected, actual)
 })

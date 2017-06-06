@@ -21,7 +21,8 @@ import {
   ADD_SKILL,
   REMOVE_SKILL,
   ADD_AWARD,
-  REMOVE_AWARD
+  REMOVE_AWARD,
+  SET_SECTION_NAVIGATION
 } from '../../constants'
 
 const {
@@ -45,7 +46,8 @@ const {
   addSkill,
   removeSkill,
   addAward,
-  removeAward
+  removeAward,
+  setSectionNavigation
 } = UIActions
 
 test('ui actions', async t => {
@@ -77,4 +79,10 @@ test('ui actions', async t => {
   t.deepEqual(removeProject(), { type: REMOVE_PROJECT })
   t.deepEqual(addAward(), { type: ADD_AWARD })
   t.deepEqual(removeAward(), { type: REMOVE_AWARD })
+  t.deepEqual(setSectionNavigation('profile'), {
+    type: SET_SECTION_NAVIGATION,
+    prev: 'templates',
+    curr: 'profile',
+    next: 'education'
+  })
 })

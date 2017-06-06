@@ -7,6 +7,13 @@ import { UIActions } from '../../actions'
 import '../../styles/components/content.styl'
 
 class Content extends Component {
+  static propTypes = {
+    hideSideNav: func.isRequired,
+    children: node.isRequired,
+    history: object.isRequired,
+    section: object.isRequired
+  }
+
   componentWillMount() {
     const { location, setSectionNavigation } = this.props
     const { pathname } = location
@@ -38,13 +45,6 @@ class Content extends Component {
       </div>
     )
   }
-}
-
-Content.propTypes = {
-  hideSideNav: func.isRequired,
-  children: node.isRequired,
-  history: object.isRequired,
-  section: object
 }
 
 function mapStateToProps(state) {

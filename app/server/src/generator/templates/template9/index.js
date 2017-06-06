@@ -111,7 +111,7 @@ function generateExperienceSection(jobs) {
       return stripIndent`
         \\WorkEntry
           {${title || ''}}
-          {${dateRange}}
+          {${dateRange || ''}}
           {${nameLine}}
           {${dutyLines}}
           ${i < jobs.length - 1 ? '\\sepspace' : ''}

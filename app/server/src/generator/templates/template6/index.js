@@ -99,7 +99,7 @@ function generateExperienceSection(jobs) {
 
         let jobLine = ''
         let dateRange = ''
-        let dutyLines
+        let dutyLines = ''
 
         if (name) {
           jobLine += name
@@ -127,7 +127,7 @@ function generateExperienceSection(jobs) {
 
         return `
           \\entry
-            {${dateRange}}
+            {${dateRange || ''}}
             {${jobLine}}
             {${location || ''}}
             {${dutyLines}}

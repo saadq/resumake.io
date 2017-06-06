@@ -119,7 +119,7 @@ function generateExperienceSection(jobs) {
         }
 
         return stripIndent`
-          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange}}
+          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange || ''}}
             ${location || ''}
             ${dutyLines || ''}
           \\end{cvsubsection}

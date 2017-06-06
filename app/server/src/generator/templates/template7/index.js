@@ -92,7 +92,7 @@ function generateExperienceSection(jobs) {
 
       return stripIndent`
         \\cventry
-          {${dateRange}}
+          {${dateRange || ''}}
           {${title || ''}}
           {${name || ''}}
           {${location || ''}}

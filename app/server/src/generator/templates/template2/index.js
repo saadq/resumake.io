@@ -135,7 +135,7 @@ function generateExperienceSection(jobs) {
           {${title || ''}}
           {${name || ''}}
           {${location || ''}}
-          {${dateRange}}
+          {${dateRange || ''}}
           {${dutyLines}}
       `
     })}

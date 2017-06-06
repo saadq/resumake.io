@@ -1,3 +1,5 @@
+export App from './App'
+
 export { Home, Generator } from './screens'
 
 export {

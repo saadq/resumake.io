@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { func, number, node } from 'prop-types'
+import '../../styles/components/form.styl'
 
 class Form extends Component {
   static propTypes = {

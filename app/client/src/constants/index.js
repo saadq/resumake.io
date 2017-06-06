@@ -19,7 +19,8 @@ export {
   ADD_SKILL,
   REMOVE_SKILL,
   ADD_AWARD,
-  REMOVE_AWARD
+  REMOVE_AWARD,
+  SET_SECTION_NAVIGATION
 } from './ui'
 
 export {

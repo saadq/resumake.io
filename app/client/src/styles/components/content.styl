@@ -5,6 +5,10 @@
   display flex
   min-height $content-height
   background-color $content-background-color
+  margin-left $side-nav-width
+
+  @media screen and (max-width: 768px)
+    margin-left 0
 
   .switch-section-button
     z-index 1
@@ -30,9 +34,11 @@
     &.next-section-button
       right 0
 
+  section
+    margin-top $top-bar-height
+
   .form-section
     padding 20px
-    margin-top $top-bar-height
     margin-left auto
     margin-right auto
     width 80%

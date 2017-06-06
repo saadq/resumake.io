@@ -3,17 +3,24 @@ import { func, node, object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import '../../styles/components/content.styl'
 
+const sections = [
+  'templates',
+  'profile',
+  'education',
+  'experience',
+  'skills',
+  'projects',
+  'awards',
+  'preview'
+]
+
 class Content extends Component {
   componentDidMount() {
     const { history } = this.props
 
     this.unlisten = history.listen(({ pathname }) => {
       if (pathname.startsWith('/generator/')) {
-        const section = pathname.slice(11)
-
-        console.log(history)
-
-        this.updateSectionNavigation(section)
+        this.updateSectionNavigation(pathname.slice(11))
       }
     })
   }
@@ -22,8 +29,17 @@ class Content extends Component {
     this.unlisten()
   }
 
-  updateSectionNavigation(section) {
-    console.log(section)
+  updateSectionNavigation(sectionName) {
+    const prevIndex = sections.indexOf(sectionName) - 1
+    const nextIndex = sections.indexOf(sectionName) + 1
+
+    const prev = sections[prevIndex >= 0 ? prevIndex : 0]
+    const curr = sectionName
+    const next = sections[nextIndex <= sections.length - 1 ? nextIndex : sections.length - 1]
+
+    console.log('prev: ', prev)
+    console.log('curr: ', curr)
+    console.log('next: ', next)
   }
 
   render() {

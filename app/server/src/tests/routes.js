@@ -41,10 +41,9 @@ test('/api/generate/source -> it should generate source code zip', async t => {
     .set('Accept', 'application/octet-stream')
     .set('Content-Type', 'application/json')
     .send(data)
-    .expect('Content-Type', 'application/octet-stream')
+    .expect('Content-Type', 'application/zip')
     .expect(200)
 
   t.truthy(response)
   t.truthy(response.body)
-  t.true(Buffer.isBuffer(response.body))
 })

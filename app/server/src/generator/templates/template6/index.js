@@ -143,7 +143,7 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\section{Skills}
+    \\section{skills}
     \\begin{entrylist}
     ${skills.map(({ name, details }) => {
       const nameLine = name ? `${name}: ` : ''
@@ -161,7 +161,7 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\section{Projects}
+    \\section{projects}
     \\begin{entrylist}
     ${projects.map(project => {
       const { name, description, technologies, link } = project

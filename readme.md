@@ -4,6 +4,8 @@ LaTeX Resume Generator is an easy to use tool for creating elegant LaTeX resumes
 
 Simply choose a template, fill in as much (or as little) info as you want, and click <kbd>Preview</kbd> at any point to see your generated resume. You can change which template you're using on the fly and once you're satisfied with your result you can download the generated PDF or the source code.
 
+![](https://camo.githubusercontent.com/de0532955fea66f17b749ef96c7efdbfad2e8bd2/687474703a2f2f692e696d6775722e636f6d2f547665617065372e706e67)
+
 ## Developing
 You will need to be using Node v7.6 or above because the source code has `async/await` usage. There was an issue with Node 8.0.0, but it was resolved in 8.1.0, so make sure to upgrade if you're still on Node 8.0.0.
 

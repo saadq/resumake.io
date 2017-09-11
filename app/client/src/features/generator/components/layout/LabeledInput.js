@@ -5,22 +5,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Section = styled.fieldset`
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-`
-
-const Heading = styled.h1`
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
-  font-size: inherit;
-  font-weight: normal;
-  color: #777;
-`
-
 const Label = styled.label`
   display: block;
   margin-top: 25px;
@@ -56,22 +40,18 @@ const Input = styled.input`
   }
 `
 
-function Profile() {
+type Props = {
+  label: string,
+  type?: string
+}
+
+function LabeledInput({ label, type = 'text' }: Props) {
   return (
-    <Section>
-      <Heading>Your Personal Info</Heading>
-      <Label>Full Name</Label>
-      <Input type="text" />
-      <Label>Email</Label>
-      <Input type="text" />
-      <Label>Phone Number</Label>
-      <Input type="text" />
-      <Label>Address</Label>
-      <Input type="text" />
-      <Label>Link</Label>
-      <Input type="text" />
-    </Section>
+    <div>
+      <Label>{label}</Label>
+      <Input type={type} />
+    </div>
   )
 }
 
-export default Profile
+export default LabeledInput

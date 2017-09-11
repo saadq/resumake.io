@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import Profile from './sections/Profile'
+import Profile from '../sections/Profile'
 
 const Main = styled.main`
   margin-left: 125px;

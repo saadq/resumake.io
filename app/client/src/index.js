@@ -1,16 +1,16 @@
+/**
+ * @flow
+ */
+
 import React from 'react'
-import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import App from './components/App'
-import store from './store'
+import App from './App'
 
 function renderApp() {
   render(
     <AppContainer>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
     </AppContainer>,
     document.querySelector('#root')
   )
@@ -19,5 +19,5 @@ function renderApp() {
 renderApp()
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => renderApp())
+  module.hot.accept('./App', () => renderApp())
 }

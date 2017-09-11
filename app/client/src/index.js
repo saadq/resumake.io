@@ -2,23 +2,22 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import Router from './routes'
+import App from './components/App'
 import store from './store'
-import './styles/index.styl'
 
-function renderApp(Component) {
+function renderApp() {
   render(
     <AppContainer>
       <Provider store={store}>
-        <Component />
+        <App />
       </Provider>
     </AppContainer>,
     document.querySelector('#root')
   )
 }
 
-renderApp(Router)
+renderApp()
 
 if (module.hot) {
-  module.hot.accept('./routes', () => renderApp(Router))
+  module.hot.accept('./components/App', () => renderApp())
 }

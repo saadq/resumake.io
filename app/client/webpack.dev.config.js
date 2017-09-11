@@ -42,19 +42,6 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        enforce: 'pre',
-        test: /\.styl$/,
-        loader: 'stylint-loader'
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'stylus-loader'
-        ]
-      },
-      {
         test: /\.(jpg|jpeg|png|gif|ico|svg|pdf|eof|woff|ttf|woff2)$/,
         loader: 'url-loader',
         options: {

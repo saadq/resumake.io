@@ -2,9 +2,8 @@
  * @flow
  */
 
-import React from 'react'
+import React, { type Node } from 'react'
 import styled from 'styled-components'
-import Profile from '../sections/Profile'
 
 const Main = styled.main`
   margin-left: 125px;
@@ -19,11 +18,15 @@ const Form = styled.form`
   width: 100%;
 `
 
-function Content() {
+type Props = {
+  children: Node
+}
+
+function Content({ children }: Props) {
   return (
     <Main>
       <Form>
-        <Profile />
+        {children}
       </Form>
     </Main>
   )

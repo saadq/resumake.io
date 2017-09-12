@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { injectGlobal } from 'styled-components'
-import Generator from './pages/generator/Generator'
+import Generator from './pages/Generator'
 
 injectGlobal`
   html, body {

@@ -1,4 +1,3 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
@@ -27,13 +26,6 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader!stylus-loader',
-          fallback: 'style-loader'
-        })
-      },
-      {
         test: /\.(jpg|jpeg|png|gif|ico|svg|pdf|ttf|eof|woff|woff2)$/,
         loader: 'url-loader',
         options: {
@@ -48,7 +40,6 @@ module.exports = {
       sourceMap: true,
       comments: false
     }),
-    new ExtractTextPlugin('static/style.css'),
     new HtmlWebpackPlugin({ template: 'src/index.html', inject: 'body' }),
     new webpack.DefinePlugin({
       'process.env': {

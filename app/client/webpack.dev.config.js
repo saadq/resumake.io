@@ -32,8 +32,7 @@ module.exports = {
         loader: 'blyss-loader',
         exclude: /(node_modules)/,
         options: {
-          error: true,
-          parser: 'babel-eslint'
+          error: true
         }
       },
       {
@@ -55,7 +54,11 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HtmlWebpackPlugin({ template: './index.html', inject: 'body' }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: 'body',
+      favicon: './assets/img/favicon.ico'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)

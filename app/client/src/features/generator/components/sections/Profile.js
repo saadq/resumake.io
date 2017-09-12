@@ -8,7 +8,7 @@ import LabeledInput from '../layout/LabeledInput'
 
 function Profile() {
   return (
-    <Section heading="Profile">
+    <Section heading="Your Personal Info">
       <LabeledInput label="Full Name" />
       <LabeledInput label="Email" />
       <LabeledInput label="Phone Number" />

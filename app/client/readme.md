@@ -1,37 +1,46 @@
-# latexresu.me client
-This contains the code for the client side app for latexresu.me.
+# saadq-boilerplate
+A boilerplate with my preferences for creating a client-side app with React. This boilerplate is quite opinionated and is mainly for personal use.
 
-### Install dependencies
-```
-npm install
-```
+If you're looking for something more general to get started with Flowtype and React/Redux, check out [flow-boilerplate](https://github.com/saadq/flow-boilerplate).
 
-### Starting the dev server (localhost:3000)
-```
-npm start
-```
+This boilerplate contains:
 
-### Create production bundle
-```
-npm run build
-```
+* Webpack 3 (Dev/Prod configs) w/ Hot Reloading
+* React
+* Styled Components
+* Flowtype for types
+* Jest and Enzyme for testing
+* Blyss for JS linting
+* Prettier for formatting
 
-### Lint code
-```
-npm run lint
-```
+## Usage
+Just clone the repo, and then run:
 
-### Fix lint issues
-```
-npm run fix
+```shell
+$ npm install
 ```
 
-### Format code
-```
-npm run format
-```
+## Scripts
+### npm start
+Starts the dev server at `http://localhost:3000`.
 
-### Run tests
-```
-npm test
-```
+### npm run build
+Creates a production bundle for your app.
+
+### npm run flow <cmd>
+Run the `flow` binary.
+
+### npm run flow-typed <cmd>
+Runs the `flow-typed` binary.
+
+### npm run lint
+Lints code with `blyss`.
+
+### npm run fix
+Tries to fix as many lint errors as it can.
+
+### npm run format
+Uses `prettier` to format code.
+
+### npm test
+Tests code by running `flow` and `eslint` and then runs all `ava` tests.

@@ -2,7 +2,7 @@
  * @flow
  */
 
-import React from 'reac'
+import React from 'react'
 import { injectGlobal } from 'styled-components'
 import Generator from './pages/generator/Generator'
 

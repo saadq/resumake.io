@@ -3,21 +3,24 @@
  */
 
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './App'
 
-function renderApp() {
-  render(
+function render(Component) {
+  ReactDOM.render(
     <AppContainer>
-      <App />
+      <Component />
     </AppContainer>,
-    document.querySelector('#root')
+    document.querySelector('#app')
   )
 }
 
-renderApp()
+render(App)
 
 if (module.hot) {
-  module.hot.accept('./App', () => renderApp())
+  module.hot.accept('./App', () => {
+    const newApp = require('./App').default
+    render(newApp)
+  })
 }

@@ -1,55 +1,71 @@
 {
-  "name": "latexresume-client",
-  "version": "0.1.0",
-  "description": "A webapp for generating stunning LaTeX resumes.",
+  "name": "saadq-boilerplate",
+  "version": "1.0.0",
+  "description": "Minimal React boilerplate for personal projects",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
-    "test": "npm run lint --silent && flow status",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --profile --colors",
+    "clean": "rimraf dist",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
-    "prebuild": "npm run clean",
-    "build": "cross-env NODE_ENV=production webpack --optimize-minimize -p --config webpack.prod.config.js",
-    "postbuild": "cp src/assets/img/favicon.ico dist/static",
-    "clean": "rimraf dist",
+    "test": "npm run lint && flow status && jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "flow": "flow",
-    "flow-typed": "flow-typed"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/saadq/resume-generator-client"
+    "flow-typed": "flow-typed",
+    "preinstall:types": "rm -rf flow/flow-typed",
+    "install:types": "flow-typed install && mv flow-typed flow"
   },
   "author": "Saad Quadri",
   "license": "MIT",
-  "homepage": "https://github.com/saadq/saadq-client-boilerplate",
+  "blyss": {
+    "ignore": [
+      "flow/flow-typed/**/*.js"
+    ]
+  },
+  "jest": {
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}"
+    ],
+    "testMatch": [
+      "**/tests/**/*.js"
+    ]
+  },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router-dom": "^4.2.2",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "blyss": "^7.0.3",
+    "babel-preset-react-boilerplate": "1.1.1",
+    "babel-preset-react-hmre": "1.1.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "blyss": "^8.0.1",
     "blyss-loader": "^1.0.0",
+    "copy-webpack-plugin": "4.0.1",
     "cross-env": "^5.0.5",
-    "file-loader": "^0.11.2",
+    "enzyme": "2.9.1",
+    "file-loader": "0.11.2",
     "flow-bin": "^0.54.1",
     "flow-typed": "^2.1.5",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "2.30.0",
+    "jest": "^21.0.2",
+    "open-browser-webpack-plugin": "0.0.5",
     "prettier": "^1.6.1",
+    "react-addons-test-utils": "15.6.0",
     "react-hot-loader": "^3.0.0-beta.7",
-    "url-loader": "^0.5.9",
-    "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.7.1"
-  },
-  "blyss": {
-    "ignore": [
-      "flow/flow-typed/**/*.*"
-    ]
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "2.6.2",
+    "url-loader": "0.5.8",
+    "webpack": "3.5.6",
+    "webpack-dev-server": "2.7.1"
   }
 }

@@ -4,9 +4,9 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import Header from '../features/generator/components/layout/Header'
-import SideNav from '../features/generator/components/layout/SideNav'
-import Content from '../features/generator/components/layout/Content'
+import Header from './components/layout/Header'
+import SideNav from './components/layout/SideNav'
+import Content from './components/layout/Content'
 
 const Wrapper = styled.div`
   display: flex;

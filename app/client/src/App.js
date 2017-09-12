@@ -2,9 +2,9 @@
  * @flow
  */
 
-import React from 'react'
+import React from 'reac'
 import { injectGlobal } from 'styled-components'
-import Generator from './pages/Generator'
+import Generator from './pages/generator/Generator'
 
 injectGlobal`
   html, body {

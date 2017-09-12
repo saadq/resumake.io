@@ -25,6 +25,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {
@@ -36,13 +37,14 @@
     "blyss": "^7.0.3",
     "blyss-loader": "^1.0.0",
     "cross-env": "^5.0.5",
+    "file-loader": "^0.11.2",
     "flow-bin": "^0.54.1",
     "flow-typed": "^2.1.5",
     "html-webpack-plugin": "^2.30.1",
     "prettier": "^1.6.1",
     "react-hot-loader": "^3.0.0-beta.7",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.6",
+    "webpack": "^2.7.0",
     "webpack-dev-server": "^2.7.1"
   },
   "blyss": {

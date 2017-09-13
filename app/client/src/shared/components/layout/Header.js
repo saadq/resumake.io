@@ -12,7 +12,7 @@ const Heading = styled.header`
   text-align: center;
   letter-spacing: 0.5em;
   color: gray;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1);
 
   em {
     color: black;
@@ -23,7 +23,9 @@ const Heading = styled.header`
 
 function Header() {
   return (
-    <Heading>LaTeX <em>Resume</em></Heading>
+    <Heading>
+      LaTeX <em>Resume</em>
+    </Heading>
   )
 }
 

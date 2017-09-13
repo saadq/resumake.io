@@ -14,6 +14,11 @@ const Aside = styled.aside`
   }
 `
 
+const Nav = styled.nav`
+  position: sticky;
+  top: 50px;
+`
+
 const List = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -27,7 +32,7 @@ const Item = styled.li`
 function SideNav() {
   return (
     <Aside>
-      <nav>
+      <Nav>
         <List>
           <Item>Templates</Item>
           <Item>Profile</Item>
@@ -37,7 +42,7 @@ function SideNav() {
           <Item>Projects</Item>
           <Item>Awards</Item>
         </List>
-      </nav>
+      </Nav>
     </Aside>
   )
 }

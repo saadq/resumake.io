@@ -6,7 +6,7 @@ import React, { type Node } from 'react'
 import styled from 'styled-components'
 
 const Main = styled.main`
-  margin-left: 125px;
+  margin-left: 130px;
   display: flex;
   flex-grow: 1;
   @media screen and (max-width: 768px) {

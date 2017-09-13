@@ -3,24 +3,28 @@
  */
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import App from './App'
+import store from './shared/store'
 
-function render(Component) {
-  ReactDOM.render(
+function renderApp(Component) {
+  render(
     <AppContainer>
-      <Component />
+      <Provider store={store}>
+        <Component />
+      </Provider>
     </AppContainer>,
     document.querySelector('#app')
   )
 }
 
-render(App)
+renderApp(App)
 
 if (module.hot) {
   module.hot.accept('./App', () => {
     const newApp = require('./App').default
-    render(newApp)
+    renderApp(newApp)
   })
 }

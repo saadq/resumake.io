@@ -75,6 +75,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: './index.html',
+      favicon: './shared/assets/img/favicon.ico',
       inject: 'body'
     }),
     new OpenBrowserPlugin({ url: 'http://localhost:3000' }),

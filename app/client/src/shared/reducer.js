@@ -3,10 +3,10 @@
  */
 
 import { combineReducers } from 'redux'
-import form from '../features/form/reducer'
+import generator from '../features/templates/reducer'
 
 const reducer = combineReducers({
-  form
+  generator
 })
 
 export default reducer

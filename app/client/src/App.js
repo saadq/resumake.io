@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { injectGlobal } from 'styled-components'
-import Generator from './pages/Generator'
+import Templates from './pages/Generator'
 
 injectGlobal`
   html, body {
@@ -18,7 +18,7 @@ injectGlobal`
 function App() {
   return (
     <div>
-      <Generator />
+      <Templates />
     </div>
   )
 }

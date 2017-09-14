@@ -1,5 +1,5 @@
 {
-  "name": "saadq-boilerplate",
+  "name": "latexresu.me-client",
   "version": "1.0.0",
   "description": "Minimal React boilerplate for personal projects",
   "scripts": {
@@ -37,6 +37,7 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-image-lightbox": "^4.2.1",
+    "react-router-dom": "^4.2.2",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {

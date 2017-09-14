@@ -16,7 +16,7 @@ const config = {
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, 'dist'),
-    publicPath: ''
+    publicPath: '/'
   },
 
   context: resolve(__dirname, 'src'),
@@ -24,8 +24,10 @@ const config = {
   devServer: {
     port: 3000,
     hot: true,
-    contentBase: resolve(__dirname, 'build'),
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: {
+      disableDotRule: true
+    }
   },
 
   module: {

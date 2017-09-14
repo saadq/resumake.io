@@ -2,9 +2,8 @@
  * @flow
  */
 
-import React from 'react'
+import React, { type Node } from 'react'
 import { injectGlobal } from 'styled-components'
-import Templates from './pages/Generator'
 
 injectGlobal`
   html, body {
@@ -15,10 +14,14 @@ injectGlobal`
   }
 `
 
-function App() {
+type Props = {
+  children: Node
+}
+
+function App({ children }: Props) {
   return (
     <div>
-      <Templates />
+      {children}
     </div>
   )
 }

@@ -9,7 +9,7 @@ import type {
 } from '../features/templates/types'
 
 type State = {
-  generator: TemplatesState
+  templates: TemplatesState
 }
 
 type GetState = () => State

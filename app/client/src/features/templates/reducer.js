@@ -16,15 +16,15 @@ const initialState = {
   }
 }
 
-function getPrev(images, index) {
+function getPrevIndex(images, index) {
   return (index + images.length - 1) % images.length
 }
 
-function getNext(images, index) {
+function getNextIndex(images, index) {
   return (index + 1) % images.length
 }
 
-function generator(state: State = initialState, action: Action): State {
+function templates(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'LOAD_IMAGES':
       return {
@@ -33,8 +33,8 @@ function generator(state: State = initialState, action: Action): State {
           ...state.lightbox,
           images: action.images,
           index: 0,
-          prevIndex: getPrev(action.images, 0),
-          nextIndex: getNext(action.images, 0)
+          prevIndex: getPrevIndex(action.images, 0),
+          nextIndex: getNextIndex(action.images, 0)
         }
       }
 
@@ -45,8 +45,8 @@ function generator(state: State = initialState, action: Action): State {
           ...state.lightbox,
           isOpen: true,
           index: action.index,
-          prevIndex: getPrev(state.lightbox.images, action.index),
-          nextIndex: getNext(state.lightbox.images, action.index)
+          prevIndex: getPrevIndex(state.lightbox.images, action.index),
+          nextIndex: getNextIndex(state.lightbox.images, action.index)
         }
       }
 
@@ -66,8 +66,14 @@ function generator(state: State = initialState, action: Action): State {
         lightbox: {
           ...state.lightbox,
           index: state.lightbox.prevIndex,
-          prevIndex: getPrev(state.lightbox.images, state.lightbox.prevIndex),
-          nextIndex: getNext(state.lightbox.images, state.lightbox.prevIndex)
+          prevIndex: getPrevIndex(
+            state.lightbox.images,
+            state.lightbox.prevIndex
+          ),
+          nextIndex: getNextIndex(
+            state.lightbox.images,
+            state.lightbox.prevIndex
+          )
         }
       }
 
@@ -77,8 +83,14 @@ function generator(state: State = initialState, action: Action): State {
         lightbox: {
           ...state.lightbox,
           index: state.lightbox.nextIndex,
-          prevIndex: getPrev(state.lightbox.images, state.lightbox.nextIndex),
-          nextIndex: getNext(state.lightbox.images, state.lightbox.nextIndex)
+          prevIndex: getPrevIndex(
+            state.lightbox.images,
+            state.lightbox.nextIndex
+          ),
+          nextIndex: getNextIndex(
+            state.lightbox.images,
+            state.lightbox.nextIndex
+          )
         }
       }
 
@@ -87,4 +99,4 @@ function generator(state: State = initialState, action: Action): State {
   }
 }
 
-export default generator
+export default templates

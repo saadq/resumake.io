@@ -89,11 +89,11 @@ class Templates extends Component<Props> {
 
 function mapStateToProps(state: State) {
   return {
-    images: state.generator.lightbox.images,
-    index: state.generator.lightbox.index,
-    prevIndex: state.generator.lightbox.prevIndex,
-    nextIndex: state.generator.lightbox.nextIndex,
-    isOpen: state.generator.lightbox.isOpen
+    images: state.templates.lightbox.images,
+    index: state.templates.lightbox.index,
+    prevIndex: state.templates.lightbox.prevIndex,
+    nextIndex: state.templates.lightbox.nextIndex,
+    isOpen: state.templates.lightbox.isOpen
   }
 }
 

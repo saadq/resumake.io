@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Home() {
   return (
     <div>
-      <Link to="/generator">Home</Link>
+      <Link to="/generator">Templates</Link>
     </div>
   )
 }

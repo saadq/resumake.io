@@ -24,6 +24,7 @@ const config = {
   devServer: {
     port: 3000,
     hot: true,
+    overlay: true,
     publicPath: '/',
     historyApiFallback: {
       disableDotRule: true
@@ -32,6 +33,16 @@ const config = {
 
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        loader: 'blyss-loader',
+        exclude: /(node_modules|bower_components)/,
+        options: {
+          error: true,
+          snazzy: true
+        }
+      },
       {
         test: /\.js$/,
         loaders: ['babel-loader'],

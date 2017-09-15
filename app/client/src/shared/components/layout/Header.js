@@ -3,16 +3,22 @@
  */
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Heading = styled.header`
-  font-family: 'Earth Orbiter Title';
   width: 100%;
   padding: 25px 0;
   text-align: center;
-  letter-spacing: 0.5em;
-  color: gray;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1);
+`
+
+const Logo = styled(Link)`
+  text-transform: lowercase;
+  text-decoration: none;
+  font-family: 'Earth Orbiter Title';
+  color: gray;
+  letter-spacing: 0.5em;
 
   em {
     color: black;
@@ -24,7 +30,9 @@ const Heading = styled.header`
 function Header() {
   return (
     <Heading>
-      LaTeX <em>Resume</em>
+      <Logo to="/">
+        Resu<em>make</em>
+      </Logo>
     </Heading>
   )
 }

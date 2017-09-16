@@ -3,12 +3,14 @@
  */
 
 import type { Dispatch as ReduxDispatch } from 'redux'
+import type { FormState } from '../features/form/types'
 import type {
   TemplatesState,
   TemplatesAction
 } from '../features/templates/types'
 
 type State = {
+  form: FormState,
   templates: TemplatesState
 }
 

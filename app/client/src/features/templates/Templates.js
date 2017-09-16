@@ -24,6 +24,7 @@ const Grid = styled.div`
 `
 
 const Image = styled.img`
+  ${boxShadow};
   position: relative;
   border: 1px solid #ddd;
   color: #fff;
@@ -31,10 +32,10 @@ const Image = styled.img`
   max-width: 100%;
   transform: translateY(0);
   transition: all 0.4s ease-out;
-  ${boxShadow} &:hover {
+  &:hover {
+    ${boxShadowHover};
     transform: translateY(-3px);
     cursor: pointer;
-    ${boxShadowHover};
   }
 `
 

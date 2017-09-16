@@ -4,7 +4,7 @@ import { lighten, darken } from 'polished'
  * Colors
  */
 
-const primary = '#f783ac'
+const primary = '#ff679c'
 const light = lighten(0.21, primary)
 const dark = darken(0.21, primary)
 

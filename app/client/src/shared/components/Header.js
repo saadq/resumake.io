@@ -5,6 +5,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { primary } from '../styles'
 
 const Heading = styled.header`
   width: 100%;
@@ -21,7 +22,7 @@ const Logo = styled(Link)`
   letter-spacing: 0.5em;
 
   em {
-    color: black;
+    color: ${primary};
     font-weight: bold;
     font-style: normal;
   }

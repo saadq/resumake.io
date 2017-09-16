@@ -4,6 +4,7 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
+import Form from '../../features/form/Form'
 
 const Main = styled.main`
   margin-left: 130px;
@@ -12,10 +13,6 @@ const Main = styled.main`
   @media screen and (max-width: 768px) {
     margin-left: 0;
   }
-`
-
-const Form = styled.form`
-  width: 100%;
 `
 
 type Props = {

@@ -5,9 +5,9 @@
 import React from 'react'
 import { Switch, Route, Redirect, type Match } from 'react-router-dom'
 import styled from 'styled-components'
-import Header from '../shared/components/layout/Header'
-import SideNav from '../shared/components/layout/SideNav'
-import Content from '../shared/components/layout/Content'
+import Header from '../shared/components/Header'
+import SideNav from '../shared/components/SideNav'
+import Content from '../shared/components/Content'
 import Templates from '../features/templates/Templates'
 import Profile from '../features/form/components/sections/Profile'
 

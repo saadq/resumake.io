@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { primary, light } from '../../styles'
+import { primary, light } from '../styles'
 
 const Label = styled.label`
   display: block;
@@ -40,7 +40,7 @@ const Input = styled.input`
 
 type Props = {
   label: string,
-  type?: string
+  type: string
 }
 
 function LabeledInput({ label, type = 'text' }: Props) {

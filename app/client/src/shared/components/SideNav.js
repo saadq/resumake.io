@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Aside = styled.aside`
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1);
   @media screen and (max-width: 768px) {
     display: none;
   }

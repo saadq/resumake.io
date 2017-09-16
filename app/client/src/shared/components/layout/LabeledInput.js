@@ -4,6 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { primary, light } from '../../styles'
 
 const Label = styled.label`
   display: block;
@@ -13,25 +14,22 @@ const Label = styled.label`
 
 const Input = styled.input`
   width: 100%;
-  padding: 9px 20px 10px 15px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  padding: 9px 20px 10px 5px;
   appearance: none;
   outline: 0;
-  background: #fff;
   font-size: .9em;
   font-family: inherit;
   border: none;
-  border: 1px solid #e6edf4;
+  border-bottom: 1px solid ${light};
   color: #7e899b;
-  -webkit-transition: all .2s;
   transition: all .2s;
-  border-radius: 2px;
+  background: transparent;
+  outline: none;
+  border-radius: 0;
 
   &:focus {
     color: #333c46;
-    border-color: #007eff;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 0 3px rgba(0,126,255,.1);
+    border-color: ${primary};
   }
 
   @media screen and (max-width: 768px) {

@@ -7,6 +7,7 @@ import { Switch, Route, Redirect, type Match } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../shared/components/Header'
 import SideNav from '../shared/components/SideNav'
+import Footer from '../shared/components/Footer'
 import Content from '../shared/components/Content'
 import Templates from '../features/templates/Templates'
 import Profile from '../features/form/components/sections/Profile'
@@ -14,7 +15,7 @@ import Profile from '../features/form/components/sections/Profile'
 const Wrapper = styled.div`
   display: flex;
   width: 85vw;
-  margin: 75px auto;
+  margin: 25px auto;
 `
 
 type Props = {
@@ -40,6 +41,7 @@ function Generator({ match }: Props) {
           </Switch>
         </Content>
       </Wrapper>
+      <Footer />
     </div>
   )
 }

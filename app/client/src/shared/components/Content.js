@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import Form from '../../features/form/Form'
 
 const Main = styled.main`
-  margin-left: 130px;
+  margin-left: 115px;
   display: flex;
   flex-grow: 1;
   @media screen and (max-width: 768px) {

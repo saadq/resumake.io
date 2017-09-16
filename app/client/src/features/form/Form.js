@@ -2,12 +2,10 @@
  * @flow
  */
 
-import React from 'react'
+import React, { type Node } from 'react'
 import styled from 'styled-components'
 
-const StyledForm = styled.form`
-  width: 100%;
-`
+const StyledForm = styled.form`width: 100%;`
 
 type Props = {
   children: Node

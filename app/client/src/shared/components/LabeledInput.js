@@ -10,6 +10,8 @@ const Label = styled.label`
   display: block;
   margin-top: 25px;
   margin-bottom: 5px;
+  color: #818b94;
+  font-weight: 300;
 `
 
 const Input = styled.input`
@@ -40,7 +42,7 @@ const Input = styled.input`
 
 type Props = {
   label: string,
-  type: string
+  type?: string
 }
 
 function LabeledInput({ label, type = 'text' }: Props) {

@@ -8,10 +8,10 @@ import styled from 'styled-components'
 import { primary } from '../styles'
 
 const Heading = styled.header`
+  z-index: 1;
   width: 100%;
-  padding: 25px 0;
+  padding: 55px 0;
   text-align: center;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1);
 `
 
 const Logo = styled(Link)`

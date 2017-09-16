@@ -1,5 +1,5 @@
-// flow-typed signature: 4a2c8d62c7f2f12c625f3269b0500ac0
-// flow-typed version: 061be1f95c/react-router-dom_v4.x.x/flow_>=v0.53.x
+// flow-typed signature: 4d8e947f2e396ef2f26ecbd1ed7f04ab
+// flow-typed version: 97d98ab83e/react-router-dom_v4.x.x/flow_>=v0.53.x
 
 declare module "react-router-dom" {
   declare export class BrowserRouter extends React$Component<{
@@ -130,7 +130,7 @@ declare module "react-router-dom" {
   declare export class Route extends React$Component<{
     component?: React$ComponentType<*>,
     render?: (router: ContextRouter) => React$Node,
-    children?: React$ComponentType<ContextRouter>,
+    children?: React$ComponentType<ContextRouter> | React$Node,
     path?: string,
     exact?: boolean,
     strict?: boolean

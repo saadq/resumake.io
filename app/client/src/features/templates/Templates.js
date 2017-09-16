@@ -35,7 +35,7 @@ const Image = styled.img`
   &:hover {
     ${boxShadowHover};
     transform: translateY(-3px);
-    cursor: pointer;
+    cursor: zoom-in;
   }
 `
 

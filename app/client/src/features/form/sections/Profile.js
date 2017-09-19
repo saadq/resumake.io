@@ -3,8 +3,8 @@
  */
 
 import React from 'react'
-import Section from '../../../../shared/components/Section'
-import LabeledInput from '../../../../shared/components/LabeledInput'
+import Section from '../../../shared/components/Section'
+import LabeledInput from '../../../shared/components/LabeledInput'
 
 function Profile() {
   return (

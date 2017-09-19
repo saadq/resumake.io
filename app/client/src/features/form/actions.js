@@ -4,6 +4,18 @@
 
 import type { FormAction } from './types'
 
+function addSchool(): FormAction {
+  return {
+    type: 'ADD_SCHOOL'
+  }
+}
+
+function removeSchool(): FormAction {
+  return {
+    type: 'REMOVE_SCHOOL'
+  }
+}
+
 function clearSchoolField(schoolCount: number): FormAction {
   return {
     type: 'CLEAR_SCHOOL_FIELD',
@@ -48,6 +60,8 @@ function clearAwardField(awardCount: number): FormAction {
 }
 
 export {
+  addSchool,
+  removeSchool,
   clearSchoolField,
   clearJobField,
   clearJobDutyField,

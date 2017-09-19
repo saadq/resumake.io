@@ -63,10 +63,17 @@ type FormValues = {
 }
 
 type FormState = {
-  values?: FormValues
+  values?: FormValues,
+  schoolCount: number,
+  jobCount: number,
+  skillCount: number,
+  projectCount: number,
+  awardCount: number
 }
 
 type FormAction =
+  | { type: 'ADD_SCHOOL' }
+  | { type: 'REMOVE_SCHOOL' }
   | { type: 'CLEAR_SCHOOL_FIELD', schoolCount: number }
   | { type: 'CLEAR_JOB_FIELD', jobCount: number }
   | { type: 'CLEAR_JOB_DUTY_FIELD', index: number, jobDutyCount: number }

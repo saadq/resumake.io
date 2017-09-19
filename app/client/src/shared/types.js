@@ -10,7 +10,9 @@ import type {
 } from '../features/templates/types'
 
 type State = {
-  form: FormState,
+  form: {
+    resume: FormState
+  },
   templates: TemplatesState
 }
 

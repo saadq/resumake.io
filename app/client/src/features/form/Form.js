@@ -7,6 +7,8 @@ import { reduxForm } from 'redux-form'
 
 type Props = {
   children: Node,
+  initialized?: boolean,
+  initializeForm: () => void,
   handleSubmit: *
 }
 
@@ -20,7 +22,6 @@ class Form extends Component<Props> {
     return (
       <form onSubmit={handleSubmit(values => this.onSubmit(values))}>
         {this.props.children}
-        <button>Submit</button>
       </form>
     )
   }

@@ -6,6 +6,14 @@ import { reducer } from 'redux-form'
 import type { FormState } from './types'
 import type { Action } from '../../shared/types'
 
+const initialState = {
+  schoolCount: 1,
+  jobCount: 1,
+  skillCount: 1,
+  projectCount: 1,
+  awardCount: 1
+}
+
 /**
  * redux-form is being used to handle form state, so whenever
  * input fields are changed the form stuff in our redux store
@@ -14,8 +22,20 @@ import type { Action } from '../../shared/types'
  * field removals with this reducer.
  */
 
-function form(state: FormState, action: Action): FormState {
+function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
+    case 'ADD_SCHOOL':
+      return {
+        ...state,
+        schoolCount: state.schoolCount + 1
+      }
+
+    case 'REMOVE_SCHOOL':
+      return {
+        ...state,
+        schoolCount: Math.max(state.schoolCount - 1, 1)
+      }
+
     case 'CLEAR_SCHOOL_FIELD':
       if (
         !state.values ||

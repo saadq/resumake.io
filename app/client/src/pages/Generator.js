@@ -9,7 +9,8 @@ import SideNav from '../shared/components/SideNav'
 import Footer from '../shared/components/Footer'
 import Content from '../shared/components/Content'
 import Templates from '../features/templates/Templates'
-import Profile from '../features/form/components/sections/Profile'
+import Profile from '../features/form/sections/Profile'
+import Education from '../features/form/sections/Education'
 
 type Props = {
   match: Match
@@ -29,6 +30,7 @@ function Generator({ match }: Props) {
           />
           <Route exact path="/generator/templates" component={Templates} />
           <Route exact path="/generator/profile" component={Profile} />
+          <Route exact path="/generator/education" component={Education} />
           <Route path="*" render={() => <h1>404</h1>} />
         </Switch>
       </Content>

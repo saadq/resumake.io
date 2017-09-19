@@ -25,12 +25,12 @@ function Profile() {
         placeholder="(555) 123-4567"
       />
       <LabeledInput
-        name="profile.location.address"
+        name="basics.location.address"
         label="Location"
         placeholder="New York, NY"
       />
       <LabeledInput
-        name="profile.website"
+        name="basics.website"
         label="Link"
         placeholder="mycoolportfolio.com/myname"
       />

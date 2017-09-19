@@ -9,11 +9,7 @@ type Basics = {
   website?: string,
   summary?: string,
   location?: {
-    address?: string,
-    postalCode?: string,
-    city?: string,
-    countryCode?: string,
-    region?: string
+    address?: string
   }
 }
 
@@ -67,7 +63,7 @@ type FormValues = {
 }
 
 type FormState = {
-  values: FormValues
+  values?: FormValues
 }
 
 type FormAction =

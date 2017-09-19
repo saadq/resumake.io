@@ -27,5 +27,6 @@ class Form extends Component<Props> {
 }
 
 export default reduxForm({
-  form: 'form'
+  form: 'resume',
+  destroyOnUnmount: false
 })(Form)

@@ -112,4 +112,4 @@ function form(state: FormState, action: Action): FormState {
 }
 
 export { form }
-export default reducer.plugin({ form: form })
+export default reducer.plugin({ resume: form })

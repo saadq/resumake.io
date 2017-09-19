@@ -40,6 +40,7 @@
     "react-image-lightbox": "^4.2.1",
     "react-router-dom": "^4.2.2",
     "react-router-transition": "^1.0.1",
+    "redux-form": "^7.0.4",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {

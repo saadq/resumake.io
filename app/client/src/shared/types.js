@@ -3,7 +3,7 @@
  */
 
 import type { Dispatch as ReduxDispatch } from 'redux'
-import type { FormState } from '../features/form/types'
+import type { FormState, FormAction } from '../features/form/types'
 import type {
   TemplatesState,
   TemplatesAction
@@ -15,7 +15,7 @@ type State = {
 }
 
 type GetState = () => State
-type Action = TemplatesAction
+type Action = TemplatesAction | FormAction
 type Dispatch = ReduxDispatch<Action>
 type AsyncAction = (dispatch: Dispatch, getState: GetState) => any
 

@@ -17,7 +17,7 @@ type Basics = {
   }
 }
 
-type Work = {
+type Job = {
   company?: string,
   position?: string,
   website?: string,
@@ -37,6 +37,13 @@ type School = {
   courses?: Array<string>
 }
 
+type Project = {
+  name?: string,
+  description?: string,
+  url?: string,
+  keywords?: Array<string>
+}
+
 type Award = {
   title?: string,
   date?: string,
@@ -50,12 +57,25 @@ type Skill = {
   keywords?: Array<string>
 }
 
-type FormState = {
+type FormValues = {
   basics?: Basics,
-  work?: Array<Work>,
+  work?: Array<Job>,
   education?: Array<School>,
   awards?: Array<Award>,
-  skills?: Array<Skill>
+  skills?: Array<Skill>,
+  projects: Array<Project>
 }
 
-export type { FormState }
+type FormState = {
+  values: FormValues
+}
+
+type FormAction =
+  | { type: 'CLEAR_SCHOOL_FIELD', schoolCount: number }
+  | { type: 'CLEAR_JOB_FIELD', jobCount: number }
+  | { type: 'CLEAR_JOB_DUTY_FIELD', index: number, jobDutyCount: number }
+  | { type: 'CLEAR_PROJECT_FIELD', projectCount: number }
+  | { type: 'CLEAR_SKILL_FIELD', skillCount: number }
+  | { type: 'CLEAR_AWARD_FIELD', awardCount: number }
+
+export type { FormState, FormAction, FormValues }

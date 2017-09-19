@@ -3,6 +3,7 @@
  */
 
 import React from 'react'
+import { Field } from 'redux-form'
 import styled from 'styled-components'
 import { primary, light } from '../styles'
 
@@ -14,17 +15,17 @@ const Label = styled.label`
   font-weight: 300;
 `
 
-const Input = styled.input`
+const Input = styled(Field)`
   width: 80%;
   padding: 9px 10px 10px 5px;
   appearance: none;
   outline: 0;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: inherit;
   border: none;
   border-bottom: 1px solid ${light};
   color: #7e899b;
-  transition: all .2s;
+  transition: all 0.2s;
   background: transparent;
   outline: none;
   border-radius: 0;
@@ -32,6 +33,11 @@ const Input = styled.input`
   &:focus {
     color: #333c46;
     border-color: ${primary};
+  }
+
+  &::placeholder {
+    color: #7e899b;
+    opacity: 0.4;
   }
 
   @media screen and (max-width: 768px) {
@@ -43,14 +49,21 @@ const Input = styled.input`
 
 type Props = {
   label: string,
+  name: string,
+  placeholder: string,
   type?: string
 }
 
-function LabeledInput({ label, type = 'text' }: Props) {
+function LabeledInput({ label, name, placeholder, type = 'text' }: Props) {
   return (
     <div>
       <Label>{label}</Label>
-      <Input type={type} />
+      <Input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        component="input"
+      />
     </div>
   )
 }

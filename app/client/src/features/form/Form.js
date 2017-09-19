@@ -2,17 +2,30 @@
  * @flow
  */
 
-import React, { type Node } from 'react'
-import styled from 'styled-components'
-
-const StyledForm = styled.form`width: 100%;`
+import React, { Component, type Node } from 'react'
+import { reduxForm } from 'redux-form'
 
 type Props = {
-  children: Node
+  children: Node,
+  handleSubmit: *
 }
 
-function Form({ children }: Props) {
-  return <StyledForm>{children}</StyledForm>
+class Form extends Component<Props> {
+  onSubmit(values) {
+    console.log(values)
+  }
+
+  render() {
+    const { handleSubmit } = this.props
+    return (
+      <form onSubmit={handleSubmit(values => this.onSubmit(values))}>
+        {this.props.children}
+        <button>Submit</button>
+      </form>
+    )
+  }
 }
 
-export default Form
+export default reduxForm({
+  form: 'form'
+})(Form)

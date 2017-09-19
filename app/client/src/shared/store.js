@@ -11,7 +11,9 @@ import reducer from './reducer'
 const middleware = [thunk]
 
 if (process.env.NODE_ENV === 'development') {
-  middleware.push(createLogger())
+  middleware.push(createLogger({
+    predicate: (_, action) => !action.type.startsWith('@@redux-form')
+  }))
 }
 
 const composedMiddleware = composeWithDevTools(applyMiddleware(...middleware))

@@ -9,11 +9,31 @@ import LabeledInput from '../../../../shared/components/LabeledInput'
 function Profile() {
   return (
     <Section heading="Your Personal Info">
-      <LabeledInput label="Full Name" />
-      <LabeledInput label="Email" />
-      <LabeledInput label="Phone Number" />
-      <LabeledInput label="Address" />
-      <LabeledInput label="Link" />
+      <LabeledInput
+        name="basics.name"
+        label="Full Name"
+        placeholder="John Smith"
+      />
+      <LabeledInput
+        name="basics.email"
+        label="Email"
+        placeholder="johnsmith@gmail.com"
+      />
+      <LabeledInput
+        name="basics.phone"
+        label="Phone Number"
+        placeholder="(555) 123-4567"
+      />
+      <LabeledInput
+        name="profile.location.address"
+        label="Location"
+        placeholder="New York, NY"
+      />
+      <LabeledInput
+        name="profile.website"
+        label="Link"
+        placeholder="mycoolportfolio.com/myname"
+      />
     </Section>
   )
 }

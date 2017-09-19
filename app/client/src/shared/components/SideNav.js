@@ -5,18 +5,21 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { primary } from '../styles'
+import { primary, header, sideNav } from '../styles'
 
 const Aside = styled.aside`
+  width: ${sideNav.width};
+  position: fixed;
+  left: 0;
+  top: calc(${header.height});
+  bottom: 0;
+  display: flex;
+  justify-content: center;
   @media screen and (max-width: 768px) {
     display: none;
   }
 `
-
-const Nav = styled.nav`
-  position: sticky;
-  top: 50px;
-`
+const Nav = styled.nav``
 
 const List = styled.ul`
   list-style-type: none;
@@ -69,37 +72,37 @@ function SideNav() {
       <Nav>
         <List>
           <li>
-            <NavItem activeClassName="active" to="/generator/templates">
+            <NavItem to="/generator/templates" activeClassName="active">
               Templates
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/profile">
+            <NavItem to="/generator/profile" activeClassName="active">
               Profile
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/education">
+            <NavItem to="/generator/education" activeClassName="active">
               Education
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/experience">
+            <NavItem to="/generator/experience" activeClassName="active">
               Experience
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/skills">
+            <NavItem to="/generator/skills" activeClassName="active">
               Skills
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/projects">
+            <NavItem to="/generator/projects" activeClassName="active">
               Projects
             </NavItem>
           </li>
           <li>
-            <NavItem activeClassName="active" to="/generator/award  s">
+            <NavItem to="/generator/awards" activeClassName="active">
               Awards
             </NavItem>
           </li>

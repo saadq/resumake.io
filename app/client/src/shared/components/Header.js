@@ -10,8 +10,10 @@ import { primary } from '../styles'
 const Heading = styled.header`
   z-index: 1;
   width: 100%;
-  padding: 55px 0;
-  text-align: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Logo = styled(Link)`

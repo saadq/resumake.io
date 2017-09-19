@@ -8,15 +8,15 @@ import { primary, light } from '../styles'
 
 const Label = styled.label`
   display: block;
-  margin-top: 25px;
+  margin-top: 30px;
   margin-bottom: 5px;
   color: #818b94;
   font-weight: 300;
 `
 
 const Input = styled.input`
-  width: 100%;
-  padding: 9px 20px 10px 5px;
+  width: 80%;
+  padding: 9px 10px 10px 5px;
   appearance: none;
   outline: 0;
   font-size: .9em;
@@ -37,6 +37,7 @@ const Input = styled.input`
   @media screen and (max-width: 768px) {
     padding-right: 5px;
     padding-left: 5px;
+    width: 100%;
   }
 `
 

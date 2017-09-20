@@ -5,15 +5,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { primary } from '../styles'
+import { primary, header } from '../styles'
 
 const Heading = styled.header`
   z-index: 1;
   width: 100%;
-  height: 100px;
+  height: ${header.height};
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    background: white;
+    position: fixed;
+    top: 0;
+  }
 `
 
 const Logo = styled(Link)`

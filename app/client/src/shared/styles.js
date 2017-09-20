@@ -13,7 +13,7 @@ const dark = darken(0.21, primary)
  */
 
 const header = {
-  height: '100px'
+  height: '125px'
 }
 
 const sideNav = {

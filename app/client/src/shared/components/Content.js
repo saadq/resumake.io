@@ -5,7 +5,7 @@
 import React, { type Node } from 'react'
 import styled from 'styled-components'
 import Form from '../../features/form/Form'
-import { sideNav } from '../../shared/styles'
+import { sideNav, header } from '../../shared/styles'
 
 const Main = styled.main`
   position: relative;
@@ -13,7 +13,9 @@ const Main = styled.main`
   margin-left: ${sideNav.width};
   @media screen and (max-width: 768px) {
     width: 80%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: ${header.height};
   }
 `
 

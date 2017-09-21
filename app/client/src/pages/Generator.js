@@ -6,7 +6,6 @@ import React from 'react'
 import { Switch, Route, Redirect, type Match } from 'react-router-dom'
 import Header from '../shared/components/Header'
 import SideNav from '../shared/components/SideNav'
-import Footer from '../shared/components/Footer'
 import Content from '../shared/components/Content'
 import Templates from '../features/templates/Templates'
 import Profile from '../features/form/sections/Profile'
@@ -34,7 +33,6 @@ function Generator({ match }: Props) {
           <Route path="*" render={() => <h1>404</h1>} />
         </Switch>
       </Content>
-      <Footer />
     </div>
   )
 }

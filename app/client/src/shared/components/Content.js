@@ -12,7 +12,7 @@ const Main = styled.main`
   padding: 0;
   margin-left: ${sideNav.width};
   @media screen and (max-width: 768px) {
-    width: 80%;
+    width: 80vw;
     margin-left: auto;
     margin-right: auto;
     margin-top: ${header.height};

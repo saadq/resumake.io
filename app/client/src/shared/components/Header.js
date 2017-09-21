@@ -9,7 +9,7 @@ import { primary, header } from '../styles'
 
 const Heading = styled.header`
   z-index: 1;
-  width: 100%;
+  width: 100vw;
   height: ${header.height};
   display: flex;
   justify-content: center;

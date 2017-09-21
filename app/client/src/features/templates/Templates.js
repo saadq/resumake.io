@@ -67,7 +67,7 @@ class Templates extends Component<Props> {
   render() {
     const { images, isOpen, index, prevIndex, nextIndex, actions } = this.props
     return (
-      <Section heading="Choose a Template">
+      <Section heading="Your Personal Info">
         <Grid>
           {images.map((src, i) => (
             <Image key={i} src={src} onClick={() => actions.showLightbox(i)} />

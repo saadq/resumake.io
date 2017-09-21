@@ -33,7 +33,11 @@ function School({ index }: Props) {
         label="Major"
         placeholder="Computer Science"
       />
-      <LabeledInput name={`education[${index}].gpa`} label="GPA" placeholder="3.6" />
+      <LabeledInput
+        name={`education[${index}].gpa`}
+        label="GPA"
+        placeholder="3.6"
+      />
       <LabeledInput
         name={`education[${index}].graduationDate`}
         label="Graduation Date"

@@ -26,9 +26,7 @@ type Props = {
 function Content({ children }: Props) {
   return (
     <Main>
-      <Form>
-        {children}
-      </Form>
+      <Form>{children}</Form>
     </Main>
   )
 }

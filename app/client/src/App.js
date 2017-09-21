@@ -19,11 +19,7 @@ type Props = {
 }
 
 function App({ children }: Props) {
-  return (
-    <div>
-      {children}
-    </div>
-  )
+  return <div>{children}</div>
 }
 
 export default App

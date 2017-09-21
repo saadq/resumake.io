@@ -16,10 +16,9 @@ function removeSchool(): FormAction {
   }
 }
 
-function clearSchoolField(schoolCount: number): FormAction {
+function clearSchoolField(): FormAction {
   return {
-    type: 'CLEAR_SCHOOL_FIELD',
-    schoolCount
+    type: 'CLEAR_SCHOOL_FIELD'
   }
 }
 

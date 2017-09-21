@@ -4,6 +4,7 @@
 
 import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
+import type { FormValues } from './types'
 
 type Props = {
   children: Node,
@@ -13,7 +14,7 @@ type Props = {
 }
 
 class Form extends Component<Props> {
-  onSubmit(values) {
+  onSubmit(values: FormValues) {
     console.log(values)
   }
 

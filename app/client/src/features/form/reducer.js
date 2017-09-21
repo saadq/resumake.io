@@ -40,8 +40,7 @@ function form(state: FormState = initialState, action: Action): FormState {
       if (
         !state.values ||
         !state.values.education ||
-        state.values.education.length <= 1 ||
-        state.values.education.length !== action.schoolCount
+        state.values.education.length <= 1
       ) {
         return state
       }
@@ -50,7 +49,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          schools: state.values.education.slice(0, -1)
+          education: state.values.education.slice(0, -1)
         }
       }
 

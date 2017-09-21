@@ -74,7 +74,7 @@ type FormState = {
 type FormAction =
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
-  | { type: 'CLEAR_SCHOOL_FIELD', schoolCount: number }
+  | { type: 'CLEAR_SCHOOL_FIELD' }
   | { type: 'CLEAR_JOB_FIELD', jobCount: number }
   | { type: 'CLEAR_JOB_DUTY_FIELD', index: number, jobDutyCount: number }
   | { type: 'CLEAR_PROJECT_FIELD', projectCount: number }

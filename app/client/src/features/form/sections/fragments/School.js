@@ -14,28 +14,28 @@ function School({ index }: Props) {
     <div className="school">
       {index > 0 ? <hr /> : null}
       <LabeledInput
-        name={`schools[${index}][name]`}
+        name={`education[${index}].name`}
         label="School Name"
         placeholder="Stanford University"
       />
       <LabeledInput
-        name={`schools[${index}][location]`}
+        name={`education[${index}].location`}
         label="School Location"
         placeholder="Stanford, CA"
       />
       <LabeledInput
-        name={`schools[${index}][degree]`}
+        name={`education[${index}].degree`}
         label="Degree"
         placeholder="BS"
       />
       <LabeledInput
-        name={`schools[${index}][major]`}
+        name={`education[${index}].major`}
         label="Major"
         placeholder="Computer Science"
       />
-      <LabeledInput name={`schools[${index}][gpa]`} label="GPA" placeholder="3.6" />
+      <LabeledInput name={`education[${index}].gpa`} label="GPA" placeholder="3.6" />
       <LabeledInput
-        name={`schools[${index}][graduationDate]`}
+        name={`education[${index}].graduationDate`}
         label="Graduation Date"
         placeholder="May 2017"
       />

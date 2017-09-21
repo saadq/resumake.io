@@ -6,16 +6,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Section from '../../../shared/components/Section'
 import School from './fragments/School'
-import { addSchool, removeSchool } from '../actions'
+import { addSchool, removeSchool, clearSchoolField } from '../actions'
 import type { State } from '../../../shared/types'
 
 type Props = {
   schoolCount: number,
   addSchool: () => void,
-  removeSchool: () => void
+  removeSchool: () => void,
+  clearSchoolField: () => void
 }
 
-function Education({ schoolCount, addSchool, removeSchool }: Props) {
+function Education({
+  schoolCount,
+  addSchool,
+  removeSchool,
+  clearSchoolField
+}: Props) {
   return (
     <Section heading="Your Educational Background">
       {Array.from({ length: schoolCount }).map((_, index) => (
@@ -25,7 +31,13 @@ function Education({ schoolCount, addSchool, removeSchool }: Props) {
         <button onClick={addSchool} type="button">
           Add School
         </button>
-        <button onClick={removeSchool} type="button">
+        <button
+          onClick={() => {
+            removeSchool()
+            clearSchoolField()
+          }}
+          type="button"
+        >
           Remove School
         </button>
       </div>
@@ -41,7 +53,8 @@ function mapState(state: State) {
 
 const actions = {
   addSchool,
-  removeSchool
+  removeSchool,
+  clearSchoolField
 }
 
 export default connect(mapState, actions)(Education)

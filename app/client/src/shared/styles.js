@@ -17,7 +17,7 @@ const header = {
 }
 
 const sideNav = {
-  width: '20vw'
+  width: '15vw'
 }
 
 /**

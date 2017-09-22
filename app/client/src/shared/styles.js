@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 import { lighten, darken } from 'polished'
 
 /**
@@ -17,7 +21,7 @@ const header = {
 }
 
 const sideNav = {
-  width: '15vw'
+  width: '20vw'
 }
 
 /**

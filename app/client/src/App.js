@@ -2,7 +2,7 @@
  * @flow
  */
 
-import React, { type Node } from 'react'
+import React from 'react'
 import { injectGlobal } from 'styled-components'
 
 injectGlobal`

@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import Section from '../../../shared/components/Section'
+import { Section, Button } from '../../../shared/components'
 import School from './fragments/School'
 import { addSchool, removeSchool, clearSchoolField } from '../actions'
 import type { State } from '../../../shared/types'
@@ -28,10 +28,10 @@ function Education({
         <School key={index} index={index} />
       ))}
       <div className="section-buttons">
-        <button onClick={addSchool} type="button">
+        <Button onClick={addSchool} type="button">
           Add School
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             removeSchool()
             clearSchoolField()
@@ -39,7 +39,7 @@ function Education({
           type="button"
         >
           Remove School
-        </button>
+        </Button>
       </div>
     </Section>
   )

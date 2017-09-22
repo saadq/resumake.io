@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import LabeledInput from '../../../../shared/components/LabeledInput'
+import { Divider, LabeledInput } from '../../../../shared/components'
 
 type Props = {
   index: number
@@ -11,8 +11,8 @@ type Props = {
 
 function School({ index }: Props) {
   return (
-    <div className="school">
-      {index > 0 ? <hr /> : null}
+    <div>
+      {index > 0 ? <Divider /> : null}
       <LabeledInput
         name={`education[${index}].name`}
         label="School Name"

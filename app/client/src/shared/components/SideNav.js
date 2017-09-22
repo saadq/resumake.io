@@ -87,7 +87,7 @@ function SideNav() {
             </NavItem>
           </li>
           <li>
-            <NavItem to="/generator/experience" activeClassName="active">
+            <NavItem to="/generator/work" activeClassName="active">
               Experience
             </NavItem>
           </li>

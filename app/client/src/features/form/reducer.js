@@ -53,6 +53,18 @@ function form(state: FormState = initialState, action: Action): FormState {
         }
       }
 
+    case 'ADD_JOB':
+      return {
+        ...state,
+        jobCount: state.jobCount + 1
+      }
+
+    case 'REMOVE_JOB':
+      return {
+        ...state,
+        jobCount: Math.max(state.jobCount - 1, 1)
+      }
+
     case 'CLEAR_JOB_FIELD':
       if (
         !state.values ||

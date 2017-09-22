@@ -16,6 +16,18 @@ function removeSchool(): FormAction {
   }
 }
 
+function addJob(): FormAction {
+  return {
+    type: 'ADD_JOB'
+  }
+}
+
+function removeJob(): FormAction {
+  return {
+    type: 'REMOVE_JOB'
+  }
+}
+
 function clearSchoolField(): FormAction {
   return {
     type: 'CLEAR_SCHOOL_FIELD'
@@ -61,6 +73,8 @@ function clearAwardField(awardCount: number): FormAction {
 export {
   addSchool,
   removeSchool,
+  addJob,
+  removeJob,
   clearSchoolField,
   clearJobField,
   clearJobDutyField,

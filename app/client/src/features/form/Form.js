@@ -2,7 +2,7 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import type { FormValues } from './types'
 

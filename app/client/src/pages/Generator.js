@@ -10,6 +10,7 @@ import Content from '../shared/components/Content'
 import Templates from '../features/templates/Templates'
 import Profile from '../features/form/sections/Profile'
 import Education from '../features/form/sections/Education'
+import Work from '../features/form/sections/Work'
 
 type Props = {
   match: Match
@@ -30,6 +31,7 @@ function Generator({ match }: Props) {
           <Route exact path="/generator/templates" component={Templates} />
           <Route exact path="/generator/profile" component={Profile} />
           <Route exact path="/generator/education" component={Education} />
+          <Route exact path="/generator/work" component={Work} />
           <Route path="*" render={() => <h1>404</h1>} />
         </Switch>
       </Content>

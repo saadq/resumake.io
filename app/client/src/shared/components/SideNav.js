@@ -11,7 +11,7 @@ const Aside = styled.aside`
   width: ${sideNav.width};
   position: fixed;
   left: 0;
-  top: calc(${header.height});
+  top: calc(${header.height} + 25px);
   bottom: 0;
   display: flex;
   justify-content: center;

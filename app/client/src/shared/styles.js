@@ -8,8 +8,8 @@ import { lighten, darken } from 'polished'
  * Colors
  */
 
-const primary = '#ff679c'
-const light = lighten(0.21, primary)
+const primary = '#2b303b'
+const light = lighten(0.5, primary)
 const dark = darken(0.21, primary)
 
 /**
@@ -17,7 +17,7 @@ const dark = darken(0.21, primary)
  */
 
 const header = {
-  height: '125px'
+  height: '100px'
 }
 
 const sideNav = {

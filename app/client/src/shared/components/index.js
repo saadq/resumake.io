@@ -10,12 +10,4 @@ import LabeledInput from './LabeledInput'
 import Divider from './Divider'
 import Button from './Button'
 
-export {
-  SideNav,
-  Content,
-  Section,
-  Header,
-  LabeledInput,
-  Divider,
-  Button
-}
+export { SideNav, Content, Section, Header, LabeledInput, Divider, Button }

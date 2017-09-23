@@ -8,8 +8,6 @@ import type { FormValues } from './types'
 
 type Props = {
   children: Node,
-  initialized?: boolean,
-  initializeForm: () => void,
   handleSubmit: *
 }
 

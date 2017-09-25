@@ -13,8 +13,8 @@ const Main = styled.main`
   top: calc(${header.height} + 25px);
   left: ${sideNav.width};
   width: 80vw;
+
   @media screen and (max-width: 768px) {
-    display: block;
     margin: 0 auto;
     left: initial;
   }

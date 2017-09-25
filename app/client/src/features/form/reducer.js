@@ -18,8 +18,13 @@ const initialState = {
  * redux-form is being used to handle form state, so whenever
  * input fields are changed the form stuff in our redux store
  * will auto-update. However, redux-form doesn't update the state
- * when input fields are removed, so we need to manually handle input
- * field removals with this reducer.
+ * when input fields are removed from the current section,
+ * so we need to manually handle input field removals with this reducer.
+ * That is what the 'CLEAR_X' cases are for.
+ *
+ * We are also keeping counts of the fragments in our state so that we know
+ * how many to render for the section that we are in.
+ * That is what the ADD_X and REMOVE_X cases for.
  */
 
 function form(state: FormState = initialState, action: Action): FormState {

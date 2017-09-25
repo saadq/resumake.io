@@ -19,14 +19,16 @@ const Aside = styled.aside`
     display: none;
   }
 `
-const Nav = styled.nav``
 
 const List = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  text-transform: uppercase;
   font-weight: 300;
+
+  li {
+    min-width: 75px;
+  }
 `
 
 const NavItem = styled(NavLink)`
@@ -48,7 +50,7 @@ const NavItem = styled(NavLink)`
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: left;
-    transition: all 0.4s;
+    transition: all 0.4s cubic-bezier(.82, 0, .12, 1);
   }
 
   &:hover {
@@ -69,7 +71,7 @@ const NavItem = styled(NavLink)`
 function SideNav() {
   return (
     <Aside>
-      <Nav>
+      <nav>
         <List>
           <li>
             <NavItem to="/generator/templates" activeClassName="active">
@@ -107,7 +109,7 @@ function SideNav() {
             </NavItem>
           </li>
         </List>
-      </Nav>
+      </nav>
     </Aside>
   )
 }

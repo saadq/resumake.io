@@ -5,7 +5,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
-import { primary, light } from '../styles'
+import { border, darkBorder } from '../styles'
 
 const Label = styled.label`
   display: block;
@@ -23,7 +23,7 @@ const Input = styled(Field)`
   font-size: 0.9em;
   font-family: inherit;
   border: none;
-  border-bottom: 1px solid ${light};
+  border-bottom: 1px solid ${border};
   color: #7e899b;
   transition: all 0.2s;
   background: transparent;
@@ -32,7 +32,7 @@ const Input = styled(Field)`
 
   &:focus {
     color: #333c46;
-    border-color: ${primary};
+    border-color: ${darkBorder};
   }
 
   &::placeholder {

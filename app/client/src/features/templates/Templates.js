@@ -16,7 +16,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 30% 30% 30%;
   grid-gap: 20px;
-  margin-top: 20px;
+  margin: 20px 0;
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 100%;

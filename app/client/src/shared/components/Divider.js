@@ -3,7 +3,6 @@
  */
 
 import styled from 'styled-components'
-import { primary } from '../styles'
 
 const Divider = styled.hr`
   height: 10px;
@@ -14,7 +13,7 @@ const Divider = styled.hr`
   padding-right: 10px;
   padding-left: 5px;
   border: none;
-  background: ${primary};
+  background: #bbb;
   opacity: 0.75;
   @media screen and (max-width: 768px) {
     width: 100%;

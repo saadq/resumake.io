@@ -2,22 +2,22 @@
  * @flow
  */
 
-import { lighten, darken } from 'polished'
+import { darken } from 'polished'
 
 /**
  * Colors
  */
 
 const primary = '#2b303b'
-const light = lighten(0.5, primary)
-const dark = darken(0.21, primary)
+const border = '#ddd'
+const darkBorder = darken(0.20, border)
 
 /**
  * Sizes
  */
 
 const header = {
-  height: '100px'
+  height: '10vh'
 }
 
 const sideNav = {
@@ -34,4 +34,4 @@ const boxShadow =
 const boxShadowHover =
   'box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 15px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)'
 
-export { primary, light, dark, boxShadow, boxShadowHover, header, sideNav }
+export { primary, border, darkBorder, boxShadow, boxShadowHover, header, sideNav }

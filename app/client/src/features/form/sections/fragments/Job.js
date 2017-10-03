@@ -1,13 +1,34 @@
 /**
- * @flow
- */
+* @flow
+*/
 
 import React from 'react'
-import { Divider, LabeledInput } from '../../../../shared/components'
+import {
+  Divider,
+  LabeledInput,
+  Label,
+  Input,
+  Button
+} from '../../../../shared/components'
+
+const RoundButton = Button.extend`
+  margin: 0;
+  border-color: silver;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: black;
+
+  &:hover {
+    background: silver;
+  }
+`
 
 type Props = {
   index: number
 }
+
+const length = 3
 
 function Job({ index }: Props) {
   return (
@@ -38,11 +59,19 @@ function Job({ index }: Props) {
         label="End Date"
         placeholder="May 2017 / Present / Etc."
       />
-      <LabeledInput
-        name={`work[${index}].highlights`}
-        label="Job Responsibilities"
-        placeholder="Created developer tools for the programmers at Google."
-      />
+      <Label>Job Responsibilities</Label>
+      {Array.from({ length }).map((_, i) => (
+        <div>
+          <Input
+            key={i}
+            type="text"
+            name={`jobs[${index}].duties[${i}]`}
+            placeholder="Did cool stuff at company"
+            component="input"
+          />
+          {i === length - 1 && <RoundButton inverted>+</RoundButton>}
+        </div>
+      ))}
     </div>
   )
 }

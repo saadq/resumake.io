@@ -8,11 +8,11 @@ import styled from 'styled-components'
 import { primary, header, sideNav } from '../styles'
 
 const Aside = styled.aside`
-  width: ${sideNav.width};
   position: fixed;
   left: 0;
   top: calc(${header.height} + 25px);
-  bottom: 0;
+  width: ${sideNav.width};
+  height: 100%;
   display: flex;
   justify-content: center;
   @media screen and (max-width: 768px) {

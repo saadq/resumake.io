@@ -6,8 +6,9 @@ import React, { type Node } from 'react'
 import styled from 'styled-components'
 
 const Fieldset = styled.fieldset`
+  display: block;
   border: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width: 100%;
 `

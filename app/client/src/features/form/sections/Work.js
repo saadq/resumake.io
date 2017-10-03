@@ -23,10 +23,11 @@ function Work({ jobCount, addJob, removeJob, clearJobField }: Props) {
         <Job key={index} index={index} />
       ))}
       <div className="section-buttons">
-        <Button onClick={addJob} type="button">
+        <Button inverted onClick={addJob} type="button">
           Add Job
         </Button>
         <Button
+          inverted
           onClick={() => {
             removeJob()
             clearJobField()

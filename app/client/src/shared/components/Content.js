@@ -8,14 +8,15 @@ import Form from '../../features/form/Form'
 import { sideNav, header } from '../../shared/styles'
 
 const Main = styled.main`
-  position: relative;
+  flex: 1;
   padding: 0;
-  top: calc(${header.height} + 25px);
-  left: ${sideNav.width};
-  width: 80vw;
+  margin-top: calc(${header.height} + 25px);
+  margin-left: ${sideNav.width};
+  width: calc(100% - ${sideNav.width});
 
   @media screen and (max-width: 768px) {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     left: initial;
   }
 `

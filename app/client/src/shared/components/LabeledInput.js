@@ -17,7 +17,7 @@ const Label = styled.label`
 
 const Input = styled(Field)`
   width: 80%;
-  padding: 9px 10px 10px 5px;
+  padding: 10px 0;
   appearance: none;
   outline: 0;
   font-size: 0.9em;
@@ -68,4 +68,5 @@ function LabeledInput({ label, name, placeholder, type = 'text' }: Props) {
   )
 }
 
+export { Label, Input }
 export default LabeledInput

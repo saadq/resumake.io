@@ -4,9 +4,11 @@
 
 import React from 'react'
 import { Switch, Route, Redirect, type Match } from 'react-router-dom'
+import styled from 'styled-components'
 import Header from '../shared/components/Header'
 import SideNav from '../shared/components/SideNav'
 import Content from '../shared/components/Content'
+import Footer from '../shared/components/Footer'
 import Templates from '../features/templates/Templates'
 import Profile from '../features/form/sections/Profile'
 import Education from '../features/form/sections/Education'
@@ -16,9 +18,15 @@ type Props = {
   match: Match
 }
 
+const Layout = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`
+
 function Generator({ match }: Props) {
   return (
-    <div>
+    <Layout>
       <Header />
       <SideNav />
       <Content>
@@ -35,7 +43,8 @@ function Generator({ match }: Props) {
           <Route path="*" render={() => <h1>404</h1>} />
         </Switch>
       </Content>
-    </div>
+      <Footer />
+    </Layout>
   )
 }
 

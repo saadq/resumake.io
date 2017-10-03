@@ -10,7 +10,7 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-family: Lato;
-    font-size: .95em;
+    font-size: 0.95em;
   }
 `
 

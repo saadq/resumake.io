@@ -24,7 +24,6 @@ const Logo = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
   font-family: 'Earth Orbiter Title';
-  font-size: 1.1em;
   color: #777;
   letter-spacing: 0.4em;
 

@@ -38,7 +38,7 @@ function Work({
   clearJobHighlightField
 }: Props) {
   return (
-    <Section heading="YOUR WORK EXPERIENCE">
+    <Section heading="Your Work Experience">
       {Array.from({ length: jobCount }).map((_, index) => (
         <Job
           key={index}

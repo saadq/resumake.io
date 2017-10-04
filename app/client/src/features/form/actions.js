@@ -55,7 +55,10 @@ function clearJobField(jobCount: number): FormAction {
   }
 }
 
-function clearJobHighlightField(index: number, jobHighlightCount: number): FormAction {
+function clearJobHighlightField(
+  index: number,
+  jobHighlightCount: number
+): FormAction {
   return {
     type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
     index,

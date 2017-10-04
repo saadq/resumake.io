@@ -3,6 +3,7 @@
  */
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledFooter = styled.footer`
@@ -33,15 +34,30 @@ const Item = styled.li`
   &:last-child:after {
     content: none;
   }
+
+  a {
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 function Footer() {
   return (
     <StyledFooter>
       <List>
-        <Item>About</Item>
-        <Item>Source</Item>
-        <Item>Issues</Item>
+        <Item>
+          <Link to="/about">About</Link>
+        </Item>
+        <Item>
+          <a href="https://github.com/saadq/latexresu.me">Source</a>
+        </Item>
+        <Item>
+          <a href="https://github.com/saadq/latexresu.me/issues">Issues</a>
+        </Item>
       </List>
     </StyledFooter>
   )

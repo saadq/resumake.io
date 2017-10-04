@@ -1,6 +1,6 @@
 /**
-* @flow
-*/
+ * @flow
+ */
 
 import React from 'react'
 import {
@@ -17,8 +17,9 @@ const RoundButton = Button.extend`
   margin-right: 5px;
   border-color: silver;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
+  padding: 0px;
   color: silver;
 
   &:hover {
@@ -35,7 +36,13 @@ type Props = {
   clearHighlightField: (index: number, highlightsCount: number) => void
 }
 
-function Job({ index, highlightsCount, addHighlight, removeHighlight, clearHighlightField }: Props) {
+function Job({
+  index,
+  highlightsCount,
+  addHighlight,
+  removeHighlight,
+  clearHighlightField
+}: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}

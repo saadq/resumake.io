@@ -70,7 +70,8 @@ function form(state: FormState = initialState, action: Action): FormState {
       return {
         ...state,
         jobCount: Math.max(state.jobCount - 1, 1),
-        jobHighlights: state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : [1]
+        jobHighlights:
+          state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : [1]
       }
 
     case 'CLEAR_JOB_FIELD':
@@ -126,6 +127,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         return state
       }
 
+      // prettier-ignore
       return {
         ...state,
         values: {

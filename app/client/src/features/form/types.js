@@ -81,7 +81,11 @@ type FormAction =
   | { type: 'REMOVE_JOB_HIGHLIGHT', index: number }
   | { type: 'CLEAR_SCHOOL_FIELD' }
   | { type: 'CLEAR_JOB_FIELD', jobCount: number }
-  | { type: 'CLEAR_JOB_HIGHLIGHT_FIELD', index: number, jobHighlightCount: number }
+  | {
+      type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
+      index: number,
+      jobHighlightCount: number
+    }
   | { type: 'CLEAR_PROJECT_FIELD', projectCount: number }
   | { type: 'CLEAR_SKILL_FIELD', skillCount: number }
   | { type: 'CLEAR_AWARD_FIELD', awardCount: number }

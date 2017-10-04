@@ -10,7 +10,7 @@ import { darken } from 'polished'
 
 const primary = '#2b303b'
 const border = '#ddd'
-const darkBorder = darken(0.20, border)
+const darkBorder = darken(0.2, border)
 
 /**
  * Sizes
@@ -34,4 +34,12 @@ const boxShadow =
 const boxShadowHover =
   'box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 15px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)'
 
-export { primary, border, darkBorder, boxShadow, boxShadowHover, header, sideNav }
+export {
+  primary,
+  border,
+  darkBorder,
+  boxShadow,
+  boxShadowHover,
+  header,
+  sideNav
+}

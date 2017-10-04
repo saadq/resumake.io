@@ -13,7 +13,7 @@ type Props = {
   schoolCount: number,
   addSchool: () => void,
   removeSchool: () => void,
-  clearSchoolField: () => void
+  clearSchoolField: (schoolCount: number) => void
 }
 
 function Education({
@@ -35,7 +35,7 @@ function Education({
           inverted
           onClick={() => {
             removeSchool()
-            clearSchoolField()
+            clearSchoolField(schoolCount)
           }}
           type="button"
         >

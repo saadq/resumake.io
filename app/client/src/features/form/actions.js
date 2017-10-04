@@ -28,6 +28,20 @@ function removeJob(): FormAction {
   }
 }
 
+function addJobHighlight(index: number): FormAction {
+  return {
+    type: 'ADD_JOB_HIGHLIGHT',
+    index
+  }
+}
+
+function removeJobHighlight(index: number): FormAction {
+  return {
+    type: 'REMOVE_JOB_HIGHLIGHT',
+    index
+  }
+}
+
 function clearSchoolField(): FormAction {
   return {
     type: 'CLEAR_SCHOOL_FIELD'
@@ -41,11 +55,11 @@ function clearJobField(jobCount: number): FormAction {
   }
 }
 
-function clearJobDutyField(index: number, jobDutyCount: number): FormAction {
+function clearJobHighlightField(index: number, jobHighlightCount: number): FormAction {
   return {
-    type: 'CLEAR_JOB_DUTY_FIELD',
+    type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
     index,
-    jobDutyCount
+    jobHighlightCount
   }
 }
 
@@ -75,9 +89,11 @@ export {
   removeSchool,
   addJob,
   removeJob,
+  addJobHighlight,
+  removeJobHighlight,
   clearSchoolField,
   clearJobField,
-  clearJobDutyField,
+  clearJobHighlightField,
   clearProjectField,
   clearSkillField,
   clearAwardField

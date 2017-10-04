@@ -11,10 +11,10 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
   color: black;
   font-family: 'Helvetica Neue';
   font-size: 0.75em;
+  opacity: 0.6;
 `
 
 const List = styled.ul`
@@ -26,7 +26,7 @@ const Item = styled.li`
   display: inline;
 
   &:after {
-    content: '\00B7';
+    content: '·';
     padding: 0 10px;
   }
 

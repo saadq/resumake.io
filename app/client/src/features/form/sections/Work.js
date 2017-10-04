@@ -6,21 +6,48 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../shared/components'
 import Job from './fragments/Job'
-import { addJob, removeJob, clearJobField } from '../actions'
+import {
+  addJob,
+  removeJob,
+  addJobHighlight,
+  removeJobHighlight,
+  clearJobField,
+  clearJobHighlightField
+} from '../actions'
 import type { State } from '../../../shared/types'
 
 type Props = {
   jobCount: number,
+  jobHighlights: Array<number>,
   addJob: () => void,
   removeJob: () => void,
-  clearJobField: () => void
+  addJobHighlight: (index: number) => void,
+  removeJobHighlight: (index: number) => void,
+  clearJobHighlightField: (index: number, jobHighlightCount: number) => void,
+  clearJobField: (jobCount: number) => void
 }
 
-function Work({ jobCount, addJob, removeJob, clearJobField }: Props) {
+function Work({
+  jobCount,
+  jobHighlights,
+  addJob,
+  removeJob,
+  addJobHighlight,
+  removeJobHighlight,
+  clearJobField,
+  clearJobHighlightField
+}: Props) {
   return (
     <Section heading="YOUR WORK EXPERIENCE">
       {Array.from({ length: jobCount }).map((_, index) => (
-        <Job key={index} index={index} />
+        <Job
+          key={index}
+          index={index}
+          highlightsCount={jobHighlights[index]}
+          addHighlight={addJobHighlight}
+          removeHighlight={removeJobHighlight}
+          clearHighlightField={clearJobHighlightField}
+        />
       ))}
       <div className="section-buttons">
         <Button inverted onClick={addJob} type="button">
@@ -30,7 +57,7 @@ function Work({ jobCount, addJob, removeJob, clearJobField }: Props) {
           inverted
           onClick={() => {
             removeJob()
-            clearJobField()
+            clearJobField(jobCount)
           }}
           type="button"
         >
@@ -43,14 +70,18 @@ function Work({ jobCount, addJob, removeJob, clearJobField }: Props) {
 
 function mapState(state: State) {
   return {
-    jobCount: state.form.resume.jobCount
+    jobCount: state.form.resume.jobCount,
+    jobHighlights: state.form.resume.jobHighlights
   }
 }
 
 const actions = {
   addJob,
   removeJob,
-  clearJobField
+  addJobHighlight,
+  removeJobHighlight,
+  clearJobField,
+  clearJobHighlightField
 }
 
 export default connect(mapState, actions)(Work)

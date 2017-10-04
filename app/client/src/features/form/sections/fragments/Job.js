@@ -12,25 +12,30 @@ import {
 } from '../../../../shared/components'
 
 const RoundButton = Button.extend`
-  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
   border-color: silver;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  color: black;
+  color: silver;
 
   &:hover {
     background: silver;
+    color: white;
   }
 `
 
 type Props = {
-  index: number
+  index: number,
+  highlightsCount: number,
+  addHighlight: (index: number) => void,
+  removeHighlight: (index: number) => void,
+  clearHighlightField: (index: number, highlightsCount: number) => void
 }
 
-const length = 3
-
-function Job({ index }: Props) {
+function Job({ index, highlightsCount, addHighlight, removeHighlight, clearHighlightField }: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -60,16 +65,35 @@ function Job({ index }: Props) {
         placeholder="May 2017 / Present / Etc."
       />
       <Label>Job Responsibilities</Label>
-      {Array.from({ length }).map((_, i) => (
-        <div>
+      {Array.from({ length: highlightsCount }).map((_, i) => (
+        <div key={i}>
           <Input
-            key={i}
             type="text"
-            name={`jobs[${index}].duties[${i}]`}
+            name={`work[${index}].highlights[${i}]`}
             placeholder="Did cool stuff at company"
             component="input"
           />
-          {i === length - 1 && <RoundButton inverted>+</RoundButton>}
+          {i === highlightsCount - 1 && (
+            <div>
+              <RoundButton
+                inverted
+                type="button"
+                onClick={() => addHighlight(index)}
+              >
+                +
+              </RoundButton>
+              <RoundButton
+                inverted
+                type="button"
+                onClick={() => {
+                  removeHighlight(index)
+                  clearHighlightField(index, highlightsCount)
+                }}
+              >
+                -
+              </RoundButton>
+            </div>
+          )}
         </div>
       ))}
     </div>

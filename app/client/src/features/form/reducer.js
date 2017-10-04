@@ -9,6 +9,7 @@ import type { Action } from '../../shared/types'
 const initialState = {
   schoolCount: 1,
   jobCount: 1,
+  jobHighlights: [1],
   skillCount: 1,
   projectCount: 1,
   awardCount: 1
@@ -61,13 +62,15 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_JOB':
       return {
         ...state,
-        jobCount: state.jobCount + 1
+        jobCount: state.jobCount + 1,
+        jobHighlights: [...state.jobHighlights, 1]
       }
 
     case 'REMOVE_JOB':
       return {
         ...state,
-        jobCount: Math.max(state.jobCount - 1, 1)
+        jobCount: Math.max(state.jobCount - 1, 1),
+        jobHighlights: state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : [1]
       }
 
     case 'CLEAR_JOB_FIELD':
@@ -85,6 +88,56 @@ function form(state: FormState = initialState, action: Action): FormState {
         values: {
           ...state.values,
           work: state.values.work.slice(0, -1)
+        }
+      }
+
+    case 'ADD_JOB_HIGHLIGHT':
+      return {
+        ...state,
+        jobHighlights: [
+          ...state.jobHighlights.slice(0, action.index),
+          state.jobHighlights[action.index] + 1,
+          ...state.jobHighlights.slice(action.index + 1)
+        ]
+      }
+
+    case 'REMOVE_JOB_HIGHLIGHT':
+      return {
+        ...state,
+        jobHighlights: [
+          ...state.jobHighlights.slice(0, action.index),
+          state.jobHighlights[action.index] > 1
+            ? state.jobHighlights[action.index] - 1
+            : 1,
+          ...state.jobHighlights.slice(action.index + 1)
+        ]
+      }
+
+    case 'CLEAR_JOB_HIGHLIGHT_FIELD':
+      if (
+        !state.values ||
+        !state.values.work ||
+        !state.values.work[action.index] ||
+        !state.values.work[action.index].highlights ||
+        state.values.work[action.index].highlights.length <= 1 ||
+        action.jobHighlightCount !==
+          state.values.work[action.index].highlights.length
+      ) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          work: [
+            ...(state.values: any).work.slice(0, action.index),
+            {
+              ...(state.values: any).work[action.index],
+              highlights: (state.values: any).work[action.index].highlights.slice(0, -1)
+            },
+            ...(state.values: any).work.slice(action.index + 1)
+          ]
         }
       }
 

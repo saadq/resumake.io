@@ -15,6 +15,7 @@ const Aside = styled.aside`
   height: 100%;
   display: flex;
   justify-content: center;
+
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -50,7 +51,7 @@ const NavItem = styled(NavLink)`
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: left;
-    transition: all 0.4s cubic-bezier(.82, 0, .12, 1);
+    transition: all 0.4s cubic-bezier(0.82, 0, 0.12, 1);
   }
 
   &:hover {

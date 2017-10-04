@@ -3,7 +3,7 @@
  */
 
 import styled from 'styled-components'
-import { lighten } from 'polished'
+import { darken } from 'polished'
 import { darkBorder } from '../styles'
 
 const Button = styled.button`
@@ -19,8 +19,7 @@ const Button = styled.button`
   outline: none;
 
   &:hover {
-    background: ${lighten(0.05, darkBorder)};
-    color: ${props => (props.inverted ? 'white' : darkBorder)};
+    background: ${darken(0.05, darkBorder)};
     cursor: pointer;
   }
 

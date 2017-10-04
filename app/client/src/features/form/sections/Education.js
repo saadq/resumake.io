@@ -28,11 +28,10 @@ function Education({
         <School key={index} index={index} />
       ))}
       <div className="section-buttons">
-        <Button inverted onClick={addSchool} type="button">
+        <Button onClick={addSchool} type="button">
           Add School
         </Button>
         <Button
-          inverted
           onClick={() => {
             removeSchool()
             clearSchoolField(schoolCount)

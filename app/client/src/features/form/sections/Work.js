@@ -49,12 +49,11 @@ function Work({
           clearHighlightField={clearJobHighlightField}
         />
       ))}
-      <div className="section-buttons">
-        <Button inverted onClick={addJob} type="button">
+      <div>
+        <Button onClick={addJob} type="button">
           Add Job
         </Button>
         <Button
-          inverted
           onClick={() => {
             removeJob()
             clearJobField(jobCount)

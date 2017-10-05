@@ -38,7 +38,7 @@ const FAQ = styled.div`
 
 const Question = styled.p`
   font-weight: bold;
-  margin: 25px 0 0 0;
+  margin: 30px 0 0 0;
 `
 
 const Answer = styled.div`
@@ -76,13 +76,20 @@ function About() {
               <li>Fill in as much (or as little) info as you want.</li>
               <li>
                 Press the <code>Generate</code> button whenever you want to see
-                your current progress.
+                how your current resume looks.
               </li>
               <li>
-                Once you're done, you can save your resume as a PDF or download
-                the LaTeX source.
+                Once you're satisfied, you can save your resume as a PDF or
+                download the LaTeX source.
               </li>
             </OrderedList>
+          </Answer>
+          <Question>Where can I report any bugs or feature requests?</Question>
+          <Answer>
+            Feel free to open an issue{' '}
+            <Link href="https://github.com/saadq/latexresu.me/issues">
+              here
+            </Link>.
           </Answer>
           <Question>Can I help contribute to this project?</Question>
           <Answer>
@@ -93,13 +100,6 @@ function About() {
             </Link>{' '}
             for an in-depth guide on how to get started on working on this
             project.
-          </Answer>
-          <Question>Where can I report any bugs or feature requests?</Question>
-          <Answer>
-            Feel free to open an issue{' '}
-            <Link href="https://github.com/saadq/latexresu.me/issues">
-              here
-            </Link>.
           </Answer>
           <Question>How can I donate or say thanks?</Question>
           <Answer>

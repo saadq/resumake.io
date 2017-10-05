@@ -1,6 +1,6 @@
 /**
-* @flow
-*/
+ * @flow
+ */
 
 import type { FormAction } from './types'
 

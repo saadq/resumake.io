@@ -5,40 +5,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { header } from '../styles'
+import { sizes, styles } from '../theme'
 
 const Heading = styled.header`
   position: fixed;
-  top: 0;
   z-index: 1;
   width: 100vw;
-  height: ${header.height};
-  background: #fbfbfb;
+  height: ${sizes.header};
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 3px 10px -4px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+  background: ${styles.gradient};
 `
 
 const Logo = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
   font-family: 'Earth Orbiter Title';
-  color: #777;
   letter-spacing: 0.4em;
-
-  em {
-    color: black;
-    font-style: normal;
-  }
+  color: white;
 `
 
 function Header() {
   return (
     <Heading>
-      <Logo to="/">
-        Resu<em>make</em>
-      </Logo>
+      <Logo to="/">Resumake</Logo>
     </Heading>
   )
 }

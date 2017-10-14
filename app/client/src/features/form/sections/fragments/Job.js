@@ -3,15 +3,28 @@
  */
 
 import React from 'react'
+import styled from 'styled-components'
 import {
   Divider,
   LabeledInput,
   Label,
   Input,
-  Button
+  Button,
+  Icon
 } from '../../../../shared/components'
+import { colors } from '../../../../shared/theme'
+
+const ButtonRow = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+`
 
 const RoundButton = Button.extend`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 5px;
@@ -21,10 +34,17 @@ const RoundButton = Button.extend`
   height: 30px;
   padding: 0px;
   color: silver;
+  transition: transform 0.6s;
 
   &:hover {
-    background: silver;
+    background: ${colors.accent};
     color: white;
+    transform: rotate(180deg);
+  }
+
+  &:focus {
+    outline-color: silver;
+    border-color: silver;
   }
 `
 
@@ -81,13 +101,13 @@ function Job({
             component="input"
           />
           {i === highlightsCount - 1 && (
-            <div>
+            <ButtonRow>
               <RoundButton
                 inverted
                 type="button"
                 onClick={() => addHighlight(index)}
               >
-                +
+                <Icon type="add" />
               </RoundButton>
               <RoundButton
                 inverted
@@ -97,9 +117,9 @@ function Job({
                   clearHighlightField(index, highlightsCount)
                 }}
               >
-                -
+                <Icon type="remove" />
               </RoundButton>
-            </div>
+            </ButtonRow>
           )}
         </div>
       ))}

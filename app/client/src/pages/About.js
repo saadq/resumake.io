@@ -5,23 +5,31 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { styles } from '../shared/theme'
 
 const Main = styled.main`
+  font-family: 'Open Sans';
+  font-size: 0.9em;
+  background: ${styles.gradient};
+  color: #c0c5ce;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `
 
 const Content = styled.div`
-  margin: 5%;
+  margin: 2% 5%;
 `
 
 const Logo = styled(RouterLink)`
-  color: black;
   font-family: 'Earth Orbiter Title';
+  font-size: 15px;
+  display: block;
+  margin: 4em 0;
+  text-align: center;
+  color: white;
   letter-spacing: 0.4em;
   text-decoration: none;
 `
@@ -37,17 +45,17 @@ const FAQ = styled.div`
 `
 
 const Question = styled.p`
-  font-weight: bold;
+  font-size: 16px;
   margin: 30px 0 0 0;
 `
 
 const Answer = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   margin: 10px;
 `
 
 const Link = styled.a`
-  color: black;
+  color: white;
 `
 
 const OrderedList = styled.ol`
@@ -61,7 +69,7 @@ function About() {
       <Content>
         <Line>
           <Logo to="/">Resumake</Logo>
-          is a tool for automatically generating beautiful resumes.
+          Resumake is a tool for automatically generating beautiful resumes.
         </Line>
         <Line>
           The webapp was made by <Link href="#">Saad Quadri</Link> and was built

@@ -5,13 +5,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { primary, header, sideNav } from '../styles'
+import { colors, sizes } from '../theme'
 
 const Aside = styled.aside`
   position: fixed;
   left: 0;
-  top: calc(${header.height} + 25px);
-  width: ${sideNav.width};
+  top: calc(${sizes.header} + 40px);
+  width: ${sizes.sideNav};
   height: 100%;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@ const NavItem = styled(NavLink)`
     height: 1px;
     bottom: -5px;
     left: 0;
-    background-color: ${primary};
+    background-color: ${colors.primary};
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: left;
@@ -64,7 +64,7 @@ const NavItem = styled(NavLink)`
   }
 
   &.active {
-    color: ${primary};
+    color: ${colors.primary};
     font-weight: 400;
   }
 `
@@ -91,7 +91,7 @@ function SideNav() {
           </li>
           <li>
             <NavItem to="/generator/work" activeClassName="active">
-              Experience
+              Work
             </NavItem>
           </li>
           <li>

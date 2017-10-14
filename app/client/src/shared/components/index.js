@@ -9,6 +9,7 @@ import Header from './Header'
 import LabeledInput, { Label, Input } from './LabeledInput'
 import Divider from './Divider'
 import Button from './Button'
+import Icon from './Icon'
 
 export {
   SideNav,
@@ -19,5 +20,6 @@ export {
   Label,
   Input,
   Divider,
-  Button
+  Button,
+  Icon
 }

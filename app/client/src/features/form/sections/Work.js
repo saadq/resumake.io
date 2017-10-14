@@ -23,7 +23,7 @@ type Props = {
   removeJob: () => void,
   addJobHighlight: (index: number) => void,
   removeJobHighlight: (index: number) => void,
-  clearJobHighlightField: (index: number, jobHighlightCount: number) => void,
+  clearJobHighlightField: (index: number, highlightCount: number) => void,
   clearJobField: (jobCount: number) => void
 }
 

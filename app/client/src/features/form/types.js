@@ -68,6 +68,7 @@ type FormState = {
   jobCount: number,
   jobHighlights: Array<number>,
   skillCount: number,
+  skillKeywords: Array<number>,
   projectCount: number,
   awardCount: number
 }
@@ -79,15 +80,16 @@ type FormAction =
   | { type: 'REMOVE_JOB' }
   | { type: 'ADD_JOB_HIGHLIGHT', index: number }
   | { type: 'REMOVE_JOB_HIGHLIGHT', index: number }
+  | { type: 'ADD_SKILL' }
+  | { type: 'REMOVE_SKILL' }
+  | { type: 'ADD_SKILL_KEYWORD', index: number }
+  | { type: 'REMOVE_SKILL_KEYWORD', index: number }
   | { type: 'CLEAR_SCHOOL_FIELD' }
   | { type: 'CLEAR_JOB_FIELD', jobCount: number }
-  | {
-      type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
-      index: number,
-      jobHighlightCount: number
-    }
+  | { type: 'CLEAR_JOB_HIGHLIGHT_FIELD', index: number, highlightCount: number }
   | { type: 'CLEAR_PROJECT_FIELD', projectCount: number }
   | { type: 'CLEAR_SKILL_FIELD', skillCount: number }
+  | { type: 'CLEAR_SKILL_KEYWORD_FIELD', index: number, keywordCount: number }
   | { type: 'CLEAR_AWARD_FIELD', awardCount: number }
 
 export type { FormState, FormAction, FormValues }

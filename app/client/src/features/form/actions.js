@@ -16,6 +16,12 @@ function removeSchool(): FormAction {
   }
 }
 
+function clearSchoolField(): FormAction {
+  return {
+    type: 'CLEAR_SCHOOL_FIELD'
+  }
+}
+
 function addJob(): FormAction {
   return {
     type: 'ADD_JOB'
@@ -25,6 +31,13 @@ function addJob(): FormAction {
 function removeJob(): FormAction {
   return {
     type: 'REMOVE_JOB'
+  }
+}
+
+function clearJobField(jobCount: number): FormAction {
+  return {
+    type: 'CLEAR_JOB_FIELD',
+    jobCount
   }
 }
 
@@ -42,34 +55,26 @@ function removeJobHighlight(index: number): FormAction {
   }
 }
 
-function clearSchoolField(): FormAction {
-  return {
-    type: 'CLEAR_SCHOOL_FIELD'
-  }
-}
-
-function clearJobField(jobCount: number): FormAction {
-  return {
-    type: 'CLEAR_JOB_FIELD',
-    jobCount
-  }
-}
-
 function clearJobHighlightField(
   index: number,
-  jobHighlightCount: number
+  highlightCount: number
 ): FormAction {
   return {
     type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
     index,
-    jobHighlightCount
+    highlightCount
   }
 }
 
-function clearProjectField(projectCount: number): FormAction {
+function addSkill(): FormAction {
   return {
-    type: 'CLEAR_PROJECT_FIELD',
-    projectCount
+    type: 'ADD_SKILL'
+  }
+}
+
+function removeSkill(): FormAction {
+  return {
+    type: 'REMOVE_SKILL'
   }
 }
 
@@ -80,10 +85,28 @@ function clearSkillField(skillCount: number): FormAction {
   }
 }
 
-function clearAwardField(awardCount: number): FormAction {
+function addSkillKeyword(index: number): FormAction {
   return {
-    type: 'CLEAR_AWARD_FIELD',
-    awardCount
+    type: 'ADD_SKILL_KEYWORD',
+    index
+  }
+}
+
+function removeSkillKeyword(index: number): FormAction {
+  return {
+    type: 'REMOVE_SKILL_KEYWORD',
+    index
+  }
+}
+
+function clearSkillKeywordField(
+  index: number,
+  keywordCount: number
+): FormAction {
+  return {
+    type: 'CLEAR_SKILL_KEYWORD_FIELD',
+    index,
+    keywordCount
   }
 }
 
@@ -94,10 +117,13 @@ export {
   removeJob,
   addJobHighlight,
   removeJobHighlight,
+  addSkill,
+  removeSkill,
+  addSkillKeyword,
+  removeSkillKeyword,
   clearSchoolField,
   clearJobField,
   clearJobHighlightField,
-  clearProjectField,
   clearSkillField,
-  clearAwardField
+  clearSkillKeywordField
 }

@@ -6,11 +6,14 @@ import { reducer } from 'redux-form'
 import type { FormState } from './types'
 import type { Action } from '../../shared/types'
 
+// Keep track of fragment counts so that we know how many to render in our view.
+// This state will be merged with redux-form's form values state.
 const initialState = {
   schoolCount: 1,
   jobCount: 1,
   jobHighlights: [1],
   skillCount: 1,
+  skillKeywords: [1],
   projectCount: 1,
   awardCount: 1
 }
@@ -19,12 +22,13 @@ const initialState = {
  * redux-form is being used to handle form state, so whenever
  * input fields are changed the form stuff in our redux store
  * will auto-update. However, redux-form doesn't update the state
- * when input fields are removed from the current section,
- * so we need to manually handle input field removals with this reducer.
+ * when input fields are removed from the view, so we need to
+ * manually handle input field removals with this reducer.
  * That is what the 'CLEAR_X' cases are for.
  *
  * We are also keeping counts of the fragments in our state so that we know
- * how many to render for the section that we are in.
+ * how many to render in our view (redux-form will automatically set
+ * the values inside those fragments, we just need to keep track of how many to render).
  * That is what the ADD_X and REMOVE_X cases for.
  */
 
@@ -121,44 +125,42 @@ function form(state: FormState = initialState, action: Action): FormState {
         !state.values.work[action.index] ||
         !state.values.work[action.index].highlights ||
         state.values.work[action.index].highlights.length <= 1 ||
-        action.jobHighlightCount !==
+        action.highlightCount !==
           state.values.work[action.index].highlights.length
       ) {
         return state
       }
 
-      // prettier-ignore
+      const { work } = (state.values: any)
+
       return {
         ...state,
         values: {
           ...state.values,
           work: [
-            ...(state.values: any).work.slice(0, action.index),
+            ...work.slice(0, action.index),
             {
-              ...(state.values: any).work[action.index],
-              highlights: (state.values: any).work[action.index].highlights.slice(0, -1)
+              ...work[action.index],
+              highlights: work[action.index].highlights.slice(0, -1)
             },
-            ...(state.values: any).work.slice(action.index + 1)
+            ...work.slice(action.index + 1)
           ]
         }
       }
 
-    case 'CLEAR_PROJECT_FIELD':
-      if (
-        !state.values ||
-        !state.values.projects ||
-        state.values.projects.length <= 1 ||
-        state.values.projects.length !== action.projectCount
-      ) {
-        return state
-      }
-
+    case 'ADD_SKILL':
       return {
         ...state,
-        values: {
-          ...state.values,
-          projects: state.values.projects.slice(0, -1)
-        }
+        skillCount: state.skillCount + 1,
+        skillKeywords: [...state.skillKeywords, 1]
+      }
+
+    case 'REMOVE_SKILL':
+      return {
+        ...state,
+        skillCount: Math.max(state.skillCount - 1, 1),
+        skillKeywords:
+          state.skillCount > 1 ? state.skillKeywords.slice(0, -1) : [1]
       }
 
     case 'CLEAR_SKILL_FIELD':
@@ -179,21 +181,55 @@ function form(state: FormState = initialState, action: Action): FormState {
         }
       }
 
-    case 'CLEAR_AWARD_FIELD':
+    case 'ADD_SKILL_KEYWORD':
+      return {
+        ...state,
+        skillKeywords: [
+          ...state.skillKeywords.slice(0, action.index),
+          state.skillKeywords[action.index] + 1,
+          ...state.skillKeywords.slice(action.index + 1)
+        ]
+      }
+
+    case 'REMOVE_SKILL_KEYWORD':
+      return {
+        ...state,
+        skillKeywords: [
+          ...state.skillKeywords.slice(0, action.index),
+          state.skillKeywords[action.index] > 1
+            ? state.skillKeywords[action.index] - 1
+            : 1,
+          ...state.skillKeywords.slice(action.index + 1)
+        ]
+      }
+
+    case 'CLEAR_SKILL_KEYWORD_FIELD':
       if (
         !state.values ||
-        !state.values.awards ||
-        state.values.awards.length <= 1 ||
-        state.values.awards.length !== action.awardCount
+        !state.values.skills ||
+        !state.values.skills[action.index] ||
+        !state.values.skills[action.index].keywords ||
+        state.values.skills[action.index].keywords.length <= 1 ||
+        action.keywordCount !==
+          state.values.skills[action.index].keywords.length
       ) {
         return state
       }
+
+      const { skills } = (state.values: any)
 
       return {
         ...state,
         values: {
           ...state.values,
-          awards: state.values.awards.slice(0, -1)
+          skills: [
+            ...skills.slice(0, action.index),
+            {
+              ...skills[action.index],
+              keywords: skills[action.index].keywords.slice(0, -1)
+            },
+            ...skills.slice(action.index + 1)
+          ]
         }
       }
 

@@ -9,7 +9,6 @@ import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
 import Section from '../../shared/components/Section'
 import * as actions from './actions'
-import { boxShadow, boxShadowHover } from '../../shared/styles'
 import type { State } from '../../shared/types'
 
 const Grid = styled.div`
@@ -24,7 +23,8 @@ const Grid = styled.div`
 `
 
 const Image = styled.img`
-  ${boxShadow};
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   position: relative;
   border: 1px solid #ddd;
   color: #fff;
@@ -33,7 +33,8 @@ const Image = styled.img`
   transform: translateY(0);
   transition: all 0.4s ease-out;
   &:hover {
-    ${boxShadowHover};
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
+      0 1px 15px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
     cursor: zoom-in;
   }

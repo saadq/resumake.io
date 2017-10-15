@@ -85,7 +85,6 @@ function Skill({
         <div key={i}>
           <MiniInput
             name={`skills[${index}].keywords[${i}]`}
-            label="Skill Details"
             placeholder="Java"
             component="input"
           />

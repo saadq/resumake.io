@@ -90,12 +90,11 @@ function Project({
         label="Link to Project"
         placeholder="http://piperchat.com"
       />
-      <Label>Project Details</Label>
+      <Label>Tools Used</Label>
       {Array.from({ length: keywordsCount }).map((_, i) => (
         <div key={i}>
           <MiniInput
             name={`projects[${index}].keywords[${i}]`}
-            label="Tools Used"
             placeholder="Java"
             component="input"
           />

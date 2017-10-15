@@ -9,9 +9,7 @@ type Props = {
   type: string
 }
 
-const StyledIcon = styled.i`
-  font-size: 14px;
-`
+const StyledIcon = styled.i`font-size: 14px;`
 
 function Icon({ type }: Props) {
   return <StyledIcon className="material-icons">{type}</StyledIcon>

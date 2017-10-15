@@ -3,6 +3,7 @@
  */
 
 import styled from 'styled-components'
+import { colors } from '../theme'
 
 const Divider = styled.hr`
   height: 10px;
@@ -13,7 +14,7 @@ const Divider = styled.hr`
   padding-right: 10px;
   padding-left: 5px;
   border: none;
-  background: #bbb;
+  background: ${colors.accent};
   opacity: 0.75;
   @media screen and (max-width: 768px) {
     width: 100%;

@@ -15,6 +15,7 @@ const initialState = {
   skillCount: 1,
   skillKeywords: [1],
   projectCount: 1,
+  projectKeywords: [1],
   awardCount: 1
 }
 
@@ -233,6 +234,90 @@ function form(state: FormState = initialState, action: Action): FormState {
         }
       }
 
+    case 'ADD_PROJECT':
+      return {
+        ...state,
+        projectCount: state.projectCount + 1,
+        projectKeywords: [...state.projectKeywords, 1]
+      }
+
+    case 'REMOVE_PROJECT':
+      return {
+        ...state,
+        projectCount: Math.max(state.projectCount - 1, 1),
+        projectKeywords:
+          state.skillCount > 1 ? state.projectKeywords.slice(0, -1) : [1]
+      }
+
+    case 'CLEAR_PROJECT_FIELD':
+      if (
+        !state.values ||
+        !state.values.projects ||
+        state.values.projects.length <= 1 ||
+        state.values.projects.length !== action.skillCount
+      ) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          projects: state.values.projects.slice(0, -1)
+        }
+      }
+
+    case 'ADD_PROJECT_KEYWORD':
+      return {
+        ...state,
+        projectKeywords: [
+          ...state.projectKeywords.slice(0, action.index),
+          state.projectKeywords[action.index] + 1,
+          ...state.projectKeywords.slice(action.index + 1)
+        ]
+      }
+
+    case 'REMOVE_PROJECT_KEYWORD':
+      return {
+        ...state,
+        projectKeywords: [
+          ...state.projectKeywords.slice(0, action.index),
+          state.projectKeywords[action.index] > 1
+            ? state.projectKeywords[action.index] - 1
+            : 1,
+          ...state.projectKeywords.slice(action.index + 1)
+        ]
+      }
+
+    case 'CLEAR_PROJECT_KEYWORD_FIELD':
+      if (
+        !state.values ||
+        !state.values.projects ||
+        !state.values.projects[action.index] ||
+        !state.values.projects[action.index].keywords ||
+        state.values.projects[action.index].keywords.length <= 1 ||
+        action.keywordCount !==
+          state.values.projects[action.index].keywords.length
+      ) {
+        return state
+      }
+
+      const { projects } = (state.values: any)
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          projects: [
+            ...projects.slice(0, action.index),
+            {
+              ...projects[action.index],
+              keywords: projects[action.index].keywords.slice(0, -1)
+            },
+            ...projects.slice(action.index + 1)
+          ]
+        }
+      }
     default:
       return state
   }

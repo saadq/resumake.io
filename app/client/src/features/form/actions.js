@@ -110,20 +110,70 @@ function clearSkillKeywordField(
   }
 }
 
+function addProject(): FormAction {
+  return {
+    type: 'ADD_PROJECT'
+  }
+}
+
+function removeProject(): FormAction {
+  return {
+    type: 'REMOVE_PROJECT'
+  }
+}
+
+function clearProjectField(skillCount: number): FormAction {
+  return {
+    type: 'CLEAR_PROJECT_FIELD',
+    skillCount
+  }
+}
+
+function addProjectKeyword(index: number): FormAction {
+  return {
+    type: 'ADD_PROJECT_KEYWORD',
+    index
+  }
+}
+
+function removeProjectKeyword(index: number): FormAction {
+  return {
+    type: 'REMOVE_PROJECT_KEYWORD',
+    index
+  }
+}
+
+function clearProjectKeywordField(
+  index: number,
+  keywordCount: number
+): FormAction {
+  return {
+    type: 'CLEAR_PROJECT_KEYWORD_FIELD',
+    index,
+    keywordCount
+  }
+}
+
 export {
   addSchool,
   removeSchool,
+  clearSchoolField,
   addJob,
   removeJob,
+  clearJobField,
   addJobHighlight,
   removeJobHighlight,
+  clearJobHighlightField,
   addSkill,
   removeSkill,
+  clearSkillField,
   addSkillKeyword,
   removeSkillKeyword,
-  clearSchoolField,
-  clearJobField,
-  clearJobHighlightField,
-  clearSkillField,
-  clearSkillKeywordField
+  clearSkillKeywordField,
+  addProject,
+  removeProject,
+  clearProjectField,
+  addProjectKeyword,
+  removeProjectKeyword,
+  clearProjectKeywordField
 }

@@ -96,5 +96,8 @@ type FormAction =
   | { type: 'ADD_PROJECT_KEYWORD', index: number }
   | { type: 'REMOVE_PROJECT_KEYWORD', index: number }
   | { type: 'CLEAR_PROJECT_KEYWORD_FIELD', index: number, keywordCount: number }
+  | { type: 'ADD_AWARD' }
+  | { type: 'REMOVE_AWARD' }
+  | { type: 'CLEAR_AWARD_FIELD' }
 
 export type { FormState, FormAction, FormValues }

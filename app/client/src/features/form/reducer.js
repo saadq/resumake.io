@@ -318,6 +318,36 @@ function form(state: FormState = initialState, action: Action): FormState {
           ]
         }
       }
+
+    case 'ADD_AWARD':
+      return {
+        ...state,
+        awardCount: state.awardCount + 1
+      }
+
+    case 'REMOVE_AWARD':
+      return {
+        ...state,
+        awardCount: Math.max(state.awardCount - 1, 1)
+      }
+
+    case 'CLEAR_AWARD_FIELD':
+      if (
+        !state.values ||
+        !state.values.awards ||
+        state.values.awards.length <= 1
+      ) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          awards: state.values.awards.slice(0, -1)
+        }
+      }
+
     default:
       return state
   }

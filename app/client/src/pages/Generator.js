@@ -15,6 +15,7 @@ import Education from '../features/form/sections/Education'
 import Work from '../features/form/sections/Work'
 import Skills from '../features/form/sections/Skills'
 import Projects from '../features/form/sections/Projects'
+import Awards from '../features/form/sections/Awards'
 
 type Props = {
   match: Match
@@ -44,6 +45,7 @@ function Generator({ match }: Props) {
           <Route exact path="/generator/work" component={Work} />
           <Route exact path="/generator/skills" component={Skills} />
           <Route exact path="/generator/projects" component={Projects} />
+          <Route exact path="/generator/awards" component={Awards} />
           <Route path="*" render={() => <h1>404</h1>} />
         </Switch>
       </Content>

@@ -154,6 +154,24 @@ function clearProjectKeywordField(
   }
 }
 
+function addAward(): FormAction {
+  return {
+    type: 'ADD_AWARD'
+  }
+}
+
+function removeAward(): FormAction {
+  return {
+    type: 'REMOVE_AWARD'
+  }
+}
+
+function clearAwardField(): FormAction {
+  return {
+    type: 'CLEAR_AWARD_FIELD'
+  }
+}
+
 export {
   addSchool,
   removeSchool,
@@ -175,5 +193,8 @@ export {
   clearProjectField,
   addProjectKeyword,
   removeProjectKeyword,
-  clearProjectKeywordField
+  clearProjectKeywordField,
+  addAward,
+  removeAward,
+  clearAwardField
 }

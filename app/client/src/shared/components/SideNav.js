@@ -73,27 +73,28 @@ const NavItem = styled(NavLink)`
 `
 
 const Button = styled.button`
-  width: 65px;
-  height: 65px;
+  width: 75px;
+  height: 75px;
   margin-top: 25px;
   border: 1px solid transparent;
   border-radius: 50%;
-  background: #151919;
+  background: white;
   color: white;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.16);
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
 
   &:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09), 0 4px 40px rgba(0, 0, 0, 0.24);
-    background-color: white;
+    background-color: ${colors.primary};
     cursor: pointer;
-    border: 20px solid white;
-    color: black;
+    border: 20px solid ${colors.primary};
+    color: white;
   }
 
   &:active {

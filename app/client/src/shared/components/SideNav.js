@@ -10,16 +10,19 @@ import { colors, sizes } from '../theme'
 const Aside = styled.aside`
   position: fixed;
   left: 0;
-  top: calc(${sizes.header} + 40px);
+  top: calc(${sizes.header});
   width: ${sizes.sideNav};
-  height: 100%;
+  height: calc(100% - ${sizes.header});
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   @media screen and (max-width: 768px) {
     display: none;
   }
 `
+
+const Nav = styled.nav`margin-top: 40px;`
 
 const List = styled.ul`
   list-style-type: none;
@@ -69,10 +72,43 @@ const NavItem = styled(NavLink)`
   }
 `
 
+const Button = styled.button`
+  width: 65px;
+  height: 65px;
+  margin-top: 25px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: #151919;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+  transition: all 0.4s ease;
+  font-family: 'Earth Orbiter title';
+  text-transform: lowercase;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09), 0 4px 40px rgba(0, 0, 0, 0.24);
+    background-color: white;
+    cursor: pointer;
+    border: 20px solid white;
+    color: black;
+  }
+
+  &:active {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
 function SideNav() {
   return (
     <Aside>
-      <nav>
+      <Nav>
         <List>
           <li>
             <NavItem to="/generator/templates" activeClassName="active">
@@ -110,7 +146,10 @@ function SideNav() {
             </NavItem>
           </li>
         </List>
-      </nav>
+      </Nav>
+      <Button type="submit" form="resume-form">
+        make
+      </Button>
     </Aside>
   )
 }

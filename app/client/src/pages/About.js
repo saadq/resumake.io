@@ -79,7 +79,7 @@ function About() {
               <li>Choose a template.</li>
               <li>Fill in as much (or as little) info as you want.</li>
               <li>
-                Press the <code>Generate</code> button whenever you want to see
+                Press the <code>MAKE</code> button whenever you want to see
                 how your current resume looks.
               </li>
               <li>

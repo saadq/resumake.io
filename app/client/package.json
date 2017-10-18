@@ -38,6 +38,7 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-image-lightbox": "^4.2.1",
+    "react-pdf": "^2.1.6",
     "react-router-dom": "^4.2.2",
     "react-router-transition": "^1.0.1",
     "redux-form": "^7.0.4",

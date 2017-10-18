@@ -3,8 +3,9 @@
  */
 
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import { lighten } from 'polished'
 import { colors, sizes } from '../theme'
 
 const Aside = styled.aside`
@@ -99,6 +100,8 @@ const Button = styled.button`
 
   &:active {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+    background-color: ${lighten(0.25, colors.primary)};
+    border-color: ${lighten(0.25, colors.primary)};
   }
 
   &:focus {
@@ -106,7 +109,13 @@ const Button = styled.button`
   }
 `
 
-function SideNav() {
+type Props = {
+  history: {
+    push: (path: string) => void
+  }
+}
+
+function SideNav({ history }: Props) {
   return (
     <Aside>
       <Nav>
@@ -148,11 +157,15 @@ function SideNav() {
           </li>
         </List>
       </Nav>
-      <Button type="submit" form="resume-form">
+      <Button
+        onClick={() => history.push('/generator/preview')}
+        type="submit"
+        form="resume-form"
+      >
         make
       </Button>
     </Aside>
   )
 }
 
-export default SideNav
+export default withRouter(SideNav)

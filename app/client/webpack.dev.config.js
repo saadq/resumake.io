@@ -49,7 +49,7 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(jpg|jpeg|png|gif|ico|svg|pdf|eof)$/,
         use: 'url-loader?limit=15000&name=images/[name].[ext]'
       },
       {

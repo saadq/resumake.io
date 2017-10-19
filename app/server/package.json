@@ -33,7 +33,8 @@
     "blyss": "^8.0.2",
     "flow-bin": "^0.57.3",
     "flow-typed": "^2.2.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "prettier": "^1.7.4"
   },
   "blyss": {
     "ignore": [

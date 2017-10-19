@@ -12,8 +12,22 @@ type Props = {
 }
 
 class Form extends Component<Props> {
-  onSubmit(values: FormValues) {
-    console.log(values)
+  async onSubmit(values: FormValues) {
+    const { fetch } = window
+
+    const request = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    }
+
+    const response = await fetch('/api/test', request)
+    const json = await response.json()
+
+    console.log(json)
   }
 
   render() {

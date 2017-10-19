@@ -16,7 +16,7 @@ const sizes = {
 }
 
 const styles = {
-  gradient: `linear-gradient(to right, #120a1b, ${colors.primary}, #120a1b)`
+  gradient: `linear-gradient(to right, #111, ${colors.primary}, #111)`
 }
 
 export { colors, sizes, styles }

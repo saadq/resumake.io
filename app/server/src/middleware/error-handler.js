@@ -1,10 +1,15 @@
 /**
+ * @flow
+ */
+
+import type { Middleware } from 'koa'
+
+/**
  * Top level error handler middleware that
  * catches any errors thrown from downstream.
- *
- * @return {Function}
  */
-function errorHandler() {
+
+function errorHandler(): Middleware {
   return async (ctx, next) => {
     try {
       await next()

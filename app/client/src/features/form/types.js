@@ -59,7 +59,7 @@ type FormValues = {
   education?: Array<School>,
   awards?: Array<Award>,
   skills?: Array<Skill>,
-  projects: Array<Project>
+  projects?: Array<Project>
 }
 
 type FormState = {

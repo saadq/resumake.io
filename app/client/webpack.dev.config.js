@@ -7,6 +7,7 @@ const config = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
+    'babel-polyfill',
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
@@ -28,6 +29,12 @@ const config = {
     publicPath: '/',
     historyApiFallback: {
       disableDotRule: true
+    },
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:3001',
+        secure: false
+      }
     }
   },
 

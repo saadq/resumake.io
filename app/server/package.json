@@ -9,37 +9,35 @@
   },
   "homepage": "https://github.com/saadq/saadq-client-boilerplate",
   "scripts": {
-    "start": "node src/index.js",
-    "watch": "nodemon src/index.js",
+    "start": "nodemon src/index.js --exec babel-node",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "test": "npm run lint --silent && ava src/tests/**/*.js --fail-fast --verbose",
-    "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js"
+    "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js",
+    "flow": "flow",
+    "install:types": "flow-typed install"
   },
   "dependencies": {
-    "archiver": "1.3.0",
-    "common-tags": "1.4.0",
-    "koa": "2.2.0",
-    "koa-bodyparser": "4.2.0",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-combine-routers": "^1.0.0",
-    "koa-router": "7.1.1",
-    "koa-static": "3.0.0",
-    "node-latex": "2.4.1",
-    "pretty-latex": "0.1.0",
-    "sanitize-latex": "0.1.2"
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1"
   },
   "devDependencies": {
-    "ava": "0.19.1",
-    "babel-eslint": "7.2.1",
-    "blyss": "4.0.2",
-    "inspect-process": "0.4.2",
-    "nodemon": "1.11.0",
-    "prettier": "1.3.1",
-    "snazzy": "7.0.0",
-    "supertest": "3.0.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "blyss": "^8.0.2",
+    "flow-bin": "^0.57.3",
+    "flow-typed": "^2.2.0",
+    "nodemon": "^1.12.1"
   },
   "blyss": {
-    "parser": "babel-eslint"
+    "ignore": [
+      "flow-typed/**/*.js"
+    ]
   }
 }

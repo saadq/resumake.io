@@ -22,7 +22,7 @@
     "format:client": "cd app/client && npm run format",
     "test:client": "cd app/client && npm test",
     "build:server": "cd app/server && npm install",
-    "start:server": "cd app/server && npm run watch",
+    "start:server": "cd app/server && npm run start",
     "fix:server": "cd app/server && npm run fix",
     "format:server": "cd app/server && npm run format",
     "lint:server": "cd app/server && npm run lint",

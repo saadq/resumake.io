@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const serve = require('koa-static')

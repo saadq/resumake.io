@@ -21,4 +21,4 @@ function errorHandler(): Middleware {
   }
 }
 
-module.exports = errorHandler
+export default errorHandler

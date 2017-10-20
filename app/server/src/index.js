@@ -2,12 +2,12 @@
  * @flow
  */
 
-const Koa = require('koa')
-const bodyParser = require('koa-bodyparser')
-const serve = require('koa-static')
-const router = require('./routes')
-const { errorHandler } = require('./middleware')
-const { join } = require('path')
+import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
+import serve from 'koa-static'
+import router from './routes'
+import { errorHandler } from './middleware'
+import { join } from 'path'
 
 const app = new Koa()
 
@@ -22,4 +22,4 @@ app.use(router)
 
 app.listen(3001)
 
-module.exports = app
+export default app

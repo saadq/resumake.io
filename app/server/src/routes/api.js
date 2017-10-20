@@ -2,7 +2,7 @@
  * @flow
  */
 
-const Router = require('koa-router')
+import Router from 'koa-router'
 
 const router = new Router({ prefix: '/api' })
 
@@ -15,4 +15,4 @@ router.post('/test', async ctx => {
   ctx.body = { status: 'post success' }
 })
 
-module.exports = router
+export default router

@@ -2,8 +2,8 @@
  * @flow
  */
 
-const errorHandler = require('./error-handler')
+import errorHandler from './error-handler'
 
-module.exports = {
+export {
   errorHandler
 }

@@ -2,10 +2,10 @@
  * @flow
  */
 
-const combineRouters = require('koa-combine-routers')
-const api = require('./api')
-const root = require('./root')
+import combineRouters from 'koa-combine-routers'
+import api from './api'
+import root from './root'
 
 const router = combineRouters(api, root)
 
-module.exports = router
+export default router

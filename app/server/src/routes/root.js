@@ -2,9 +2,9 @@
  * @flow
  */
 
-const Router = require('koa-router')
-const { createReadStream } = require('fs')
-const { join } = require('path')
+import Router from 'koa-router'
+import { createReadStream } from 'fs'
+import { join } from 'path'
 
 const router = new Router()
 
@@ -19,4 +19,4 @@ router.get('*', async ctx => {
   ctx.type = 'text/html'
 })
 
-module.exports = router
+export default router

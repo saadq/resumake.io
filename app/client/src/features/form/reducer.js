@@ -76,7 +76,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         jobCount: Math.max(state.jobCount - 1, 1),
         jobHighlights:
-          state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : [1]
+          state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : state.jobHighlights
       }
 
     case 'CLEAR_JOB_FIELD':
@@ -161,7 +161,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         skillCount: Math.max(state.skillCount - 1, 1),
         skillKeywords:
-          state.skillCount > 1 ? state.skillKeywords.slice(0, -1) : [1]
+          state.skillCount > 1 ? state.skillKeywords.slice(0, -1) : state.skillKeywords
       }
 
     case 'CLEAR_SKILL_FIELD':
@@ -246,7 +246,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         projectCount: Math.max(state.projectCount - 1, 1),
         projectKeywords:
-          state.skillCount > 1 ? state.projectKeywords.slice(0, -1) : [1]
+          state.projectCount > 1 ? state.projectKeywords.slice(0, -1) : state.projectKeywords
       }
 
     case 'CLEAR_PROJECT_FIELD':

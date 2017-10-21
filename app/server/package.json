@@ -1,6 +1,6 @@
 {
-  "name": "saadq-server-boilerplate",
-  "description": "Server-side boilerplate for Koa 2",
+  "name": "resumake-server",
+  "description": "The server side source for Resumake.",
   "version": "0.1.0",
   "license": "MIT",
   "repository": {

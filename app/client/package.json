@@ -1,7 +1,7 @@
 {
   "name": "resumake-client",
-  "version": "1.0.0",
-  "description": "Minimal React boilerplate for personal projects",
+  "version": "0.1.0",
+  "description": "The client side source for Resumake.",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --profile --colors",

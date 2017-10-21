@@ -1,5 +1,5 @@
 {
-  "name": "latexresu.me-client",
+  "name": "resumake-client",
   "version": "1.0.0",
   "description": "Minimal React boilerplate for personal projects",
   "scripts": {

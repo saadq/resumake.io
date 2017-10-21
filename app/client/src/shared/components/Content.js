@@ -10,9 +10,9 @@ import { sizes } from '../../shared/theme'
 const Main = styled.main`
   flex: 1;
   padding: 0;
-  margin-top: calc(${sizes.header} + 40px);
+  margin-top: calc(${sizes.header} + 30px);
   margin-left: ${sizes.sideNav};
-  width: calc(100% - ${sizes.sideNav});
+  width: calc(80% - ${sizes.sideNav});
 
   @media screen and (max-width: 768px) {
     margin-left: auto;

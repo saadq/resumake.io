@@ -10,7 +10,7 @@ const Fieldset = styled.fieldset`
   border: none;
   margin: 0 auto;
   padding: 0;
-  width: 100%;
+  width: 80%;
 `
 
 const Heading = styled.h1`

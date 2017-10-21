@@ -17,7 +17,7 @@ const Label = styled.label`
 `
 
 const Input = styled(Field)`
-  width: 80%;
+  width: 100%;
   padding: 10px 0;
   appearance: none;
   outline: 0;

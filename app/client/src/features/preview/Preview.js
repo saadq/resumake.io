@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import PDF from './resume.pdf'
 
 const Div = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

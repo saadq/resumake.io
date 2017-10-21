@@ -14,9 +14,14 @@ import {
 } from '../../../../shared/components'
 import { colors } from '../../../../shared/theme'
 
-const ButtonRow = styled.div`
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const Buttons = styled.div`
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-left: 10px;
 `
@@ -25,14 +30,15 @@ const RoundButton = Button.extend`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   margin-right: 5px;
-  border-color: silver;
+  border-color: white;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   padding: 0px;
+  background: black;
   color: silver;
   transition: transform 0.6s;
 
@@ -47,6 +53,8 @@ const RoundButton = Button.extend`
     border-color: silver;
   }
 `
+
+const SmallInput = Input.extend`width: 85%;`
 
 type Props = {
   index: number,
@@ -93,15 +101,15 @@ function Job({
       />
       <Label>Job Responsibilities</Label>
       {Array.from({ length: highlightsCount }).map((_, i) => (
-        <div key={i}>
-          <Input
+        <Row key={i}>
+          <SmallInput
             type="text"
             name={`work[${index}].highlights[${i}]`}
             placeholder="Did cool stuff at company"
             component="input"
           />
           {i === highlightsCount - 1 && (
-            <ButtonRow>
+            <Buttons>
               <RoundButton
                 inverted
                 type="button"
@@ -119,9 +127,9 @@ function Job({
               >
                 <Icon type="remove" />
               </RoundButton>
-            </ButtonRow>
+            </Buttons>
           )}
-        </div>
+        </Row>
       ))}
     </div>
   )

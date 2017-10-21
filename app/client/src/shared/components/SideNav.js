@@ -23,7 +23,7 @@ const Aside = styled.aside`
   }
 `
 
-const Nav = styled.nav`margin-top: 40px;`
+const Nav = styled.nav`margin-top: 30px;`
 
 const List = styled.ul`
   list-style-type: none;
@@ -39,7 +39,7 @@ const List = styled.ul`
 const NavItem = styled(NavLink)`
   text-decoration: none;
   font-weight: 300;
-  color: #454c52;
+  color: #5f6971;
   display: inline-block;
   margin-bottom: 20px;
   position: relative;
@@ -55,16 +55,12 @@ const NavItem = styled(NavLink)`
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: left;
-    transition: all 0.4s cubic-bezier(0.82, 0, 0.12, 1);
+    transition: all 0.25s cubic-bezier(0.82, 0, 0.12, 1);
   }
 
-  &:hover {
-    color: #474e53;
-
-    &:before {
-      visibility: visible;
-      transform: scaleX(1);
-    }
+  &:hover :before {
+    visibility: visible;
+    transform: scaleX(1);
   }
 
   &.active {
@@ -77,31 +73,32 @@ const Button = styled.button`
   width: 75px;
   height: 75px;
   margin-top: 25px;
-  border: 1px solid transparent;
-  border-radius: 50%;
-  background: white;
-  color: white;
-  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.16);
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09), 0 4px 40px rgba(0, 0, 0, 0.24);
-    background-color: ${colors.primary};
+    box-shadow: none;
     cursor: pointer;
-    border: 20px solid ${colors.primary};
-    color: white;
+    background: white;
+    color: black;
+    border: 20px solid white;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06),
+      0 2px 6px rgba(255, 255, 255, 0.85);
   }
 
   &:active {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
     background-color: ${lighten(0.25, colors.primary)};
     border-color: ${lighten(0.25, colors.primary)};
+    color: black;
   }
 
   &:focus {

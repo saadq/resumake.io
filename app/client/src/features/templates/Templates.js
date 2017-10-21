@@ -13,7 +13,7 @@ import type { State } from '../../shared/types'
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33.33% 33.33% 33.33%;
   grid-gap: 20px;
   margin: 20px 0;
 
@@ -27,12 +27,14 @@ const Image = styled.img`
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   position: relative;
   border: 1px solid #ddd;
+  border-radius: 2px;
   color: #fff;
-  border-radius: 5px;
   max-width: 100%;
   transform: translateY(0);
   transition: all 0.4s ease-out;
+  opacity: 0.75;
   &:hover {
+    opacity: 1;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
       0 1px 15px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);

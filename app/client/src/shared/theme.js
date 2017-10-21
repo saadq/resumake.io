@@ -2,21 +2,19 @@
  * @flow
  */
 
-import { lighten } from 'polished'
-
 const colors = {
-  primary: '#2b303b',
-  accent: lighten(0.1, '#2b303b'),
-  borders: '#ddd'
+  primary: '#fff',
+  accent: '#111',
+  borders: '#222'
 }
 
 const sizes = {
-  header: '11vh',
+  header: '15vh',
   sideNav: '20vw'
 }
 
 const styles = {
-  gradient: `linear-gradient(to right, #111, ${colors.primary}, #111)`
+  gradient: `linear-gradient(to right, #050505, #080808, #050505)`
 }
 
 export { colors, sizes, styles }

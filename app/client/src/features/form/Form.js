@@ -18,7 +18,7 @@ class Form extends Component<Props> {
     const request = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(values)
@@ -33,7 +33,10 @@ class Form extends Component<Props> {
   render() {
     const { handleSubmit } = this.props
     return (
-      <form id="resume-form" onSubmit={handleSubmit(values => this.onSubmit(values))}>
+      <form
+        id="resume-form"
+        onSubmit={handleSubmit(values => this.onSubmit(values))}
+      >
         {this.props.children}
       </form>
     )

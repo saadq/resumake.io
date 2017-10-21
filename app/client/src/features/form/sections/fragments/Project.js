@@ -33,14 +33,15 @@ const RoundButton = Button.extend`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
   margin-right: 5px;
-  border-color: silver;
+  border-color: white;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   padding: 0px;
+  background: black;
   color: silver;
   transition: transform 0.6s;
 
@@ -54,7 +55,6 @@ const RoundButton = Button.extend`
     outline-color: silver;
     border-color: silver;
   }
-}
 `
 
 type Props = {

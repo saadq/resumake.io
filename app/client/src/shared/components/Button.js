@@ -27,11 +27,6 @@ const Button = styled.button`
     position: relative;
     top: 1px;
   }
-
-  &:focus {
-    border-color: ${colors.borders};
-    outline-color: ${colors.borders};
-  }
 `
 
 export default Button

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
-import Section from '../../shared/components/Section'
+import { Section, Button } from '../../shared/components'
 import * as actions from './actions'
 import type { State } from '../../shared/types'
 
@@ -22,27 +22,43 @@ const Grid = styled.div`
   }
 `
 
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const Image = styled.img`
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   position: relative;
   border: 1px solid #ddd;
-  border-radius: 2px;
+  border-radius: 1px;
   color: #fff;
   max-width: 100%;
   transform: translateY(0);
   transition: all 0.4s ease-out;
-  opacity: 0.75;
+  opacity: ${props => (props.active ? '1' : '0.65')};
+
   &:hover {
-    opacity: 1;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
-      0 1px 15px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    opacity: ${props => (props.active ? '1' : '0.9')};
     transform: translateY(-3px);
     cursor: zoom-in;
   }
 `
 
+const TemplateButton = Button.extend`
+  border-color: ${props => (props.active ? 'white' : 'silver')};
+  color: ${props => (props.active ? 'white' : 'silver')};
+  transition: all 0.4s ease;
+  padding: 10px 20px;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
+`
+
 type Props = {
+  selectedTemplate: number,
   images: Array<string>,
   index: number,
   prevIndex: number,
@@ -50,6 +66,7 @@ type Props = {
   isOpen: boolean,
   actions: {
     loadImages: (images: Array<string>) => mixed,
+    selectTemplate: (templateId: number) => mixed,
     hideLightbox: () => mixed,
     showLightbox: (index: number) => mixed,
     prevImage: () => mixed,
@@ -68,12 +85,34 @@ class Templates extends Component<Props> {
   }
 
   render() {
-    const { images, isOpen, index, prevIndex, nextIndex, actions } = this.props
+    const {
+      selectedTemplate,
+      images,
+      isOpen,
+      index,
+      prevIndex,
+      nextIndex,
+      actions
+    } = this.props
+
     return (
       <Section heading="Choose a Template">
         <Grid>
           {images.map((src, i) => (
-            <Image key={i} src={src} onClick={() => actions.showLightbox(i)} />
+            <Div key={i}>
+              <Image
+                active={i + 1 === selectedTemplate}
+                src={src}
+                onClick={() => actions.showLightbox(i)}
+              />
+              <TemplateButton
+                active={i + 1 === selectedTemplate}
+                type="button"
+                onClick={() => actions.selectTemplate(i + 1)}
+              >
+                Template {i + 1}
+              </TemplateButton>
+            </Div>
           ))}
         </Grid>
         {isOpen && (
@@ -93,6 +132,7 @@ class Templates extends Component<Props> {
 
 function mapStateToProps(state: State) {
   return {
+    selectedTemplate: state.templates.selectedTemplate,
     images: state.templates.lightbox.images,
     index: state.templates.lightbox.index,
     prevIndex: state.templates.lightbox.prevIndex,

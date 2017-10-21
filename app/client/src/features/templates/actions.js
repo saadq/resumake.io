@@ -11,6 +11,13 @@ function loadImages(images: Array<string>): Action {
   }
 }
 
+function selectTemplate(templateId: number): Action {
+  return {
+    type: 'SELECT_TEMPLATE',
+    templateId
+  }
+}
+
 function showLightbox(index: number): Action {
   return {
     type: 'SHOW_LIGHTBOX',
@@ -36,4 +43,11 @@ function prevImage(): Action {
   }
 }
 
-export { loadImages, showLightbox, hideLightbox, nextImage, prevImage }
+export {
+  loadImages,
+  selectTemplate,
+  showLightbox,
+  hideLightbox,
+  nextImage,
+  prevImage
+}

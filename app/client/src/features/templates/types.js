@@ -15,6 +15,7 @@ type TemplatesState = {
 
 type TemplatesAction =
   | { type: 'LOAD_IMAGES', images: Array<string> }
+  | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'SHOW_LIGHTBOX', index: number }
   | { type: 'HIDE_LIGHTBOX' }
   | { type: 'PREV_IMAGE' }

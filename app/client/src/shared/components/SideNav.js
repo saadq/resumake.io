@@ -39,7 +39,7 @@ const List = styled.ul`
 const NavItem = styled(NavLink)`
   text-decoration: none;
   font-weight: 300;
-  color: #5f6971;
+  color: #8a97a1;
   display: inline-block;
   margin-bottom: 20px;
   position: relative;

@@ -38,6 +38,12 @@ function templates(state: State = initialState, action: Action): State {
         }
       }
 
+    case 'SELECT_TEMPLATE':
+      return {
+        ...state,
+        selectedTemplate: action.templateId
+      }
+
     case 'SHOW_LIGHTBOX':
       return {
         ...state,

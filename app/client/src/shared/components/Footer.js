@@ -12,8 +12,7 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  font-family: 'Helvetica Neue';
+  color: white;
   font-size: 0.75em;
   opacity: 0.6;
 `
@@ -36,7 +35,7 @@ const Item = styled.li`
   }
 
   a {
-    color: black;
+    color: white;
     text-decoration: none;
 
     &:hover {

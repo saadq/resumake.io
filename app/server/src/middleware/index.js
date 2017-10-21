@@ -4,6 +4,4 @@
 
 import errorHandler from './error-handler'
 
-export {
-  errorHandler
-}
+export { errorHandler }

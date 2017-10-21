@@ -117,6 +117,7 @@ class Templates extends Component<Props> {
         </Grid>
         {isOpen && (
           <Lightbox
+            imageCaption={`Template ${index + 1}`}
             mainSrc={images[index]}
             prevSrc={images[prevIndex]}
             nextSrc={images[nextIndex]}

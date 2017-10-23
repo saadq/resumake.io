@@ -1,8 +1,13 @@
-const latex = require('node-latex')
-const prettify = require('pretty-latex')
-const Archiver = require('archiver')
-const sanitize = require('./sanitizer')
-const getTemplateData = require('./templates')
+/**
+ * @flow
+ */
+
+import latex from 'node-latex'
+import prettify from 'pretty-latex'
+import Archiver from 'archiver'
+import sanitize from './sanitizer'
+import getTemplateData from './templates'
+import type { FormValues } from './types'
 
 /**
  * Generates a LaTeX document from the request body,
@@ -12,7 +17,8 @@ const getTemplateData = require('./templates')
  *
  * @return {TransformStream} - The generated PDF.
  */
-function generatePDF(formData) {
+
+function generatePDF(formData: FormValues) {
   const { texDoc, opts } = generateTex(formData)
   const pdf = latex(texDoc, opts)
 
@@ -27,7 +33,8 @@ function generatePDF(formData) {
  *
  * @return {TransformStream} - The generated zip.
  */
-function generateSourceCode(formData) {
+
+function generateSourceCode(formData: FormValues) {
   const { texDoc, opts } = generateTex(formData)
   const prettyDoc = prettify(texDoc)
   const zip = Archiver('zip')
@@ -52,6 +59,7 @@ function generateSourceCode(formData) {
  * @return {Object} - An object which contains the generated LaTeX doc (texDoc)
  *                    as well as the opts needed to create a PDF from it (opts).
  */
+
 function generateTex(formData) {
   const data = sanitize(formData)
 

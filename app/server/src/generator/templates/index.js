@@ -29,6 +29,7 @@ const {
  *
  * @return {Object} - The generated LaTeX document as well as its additional opts.
  */
+
 function getTemplateData(data) {
   switch (data.template) {
     case TEMPLATE1:

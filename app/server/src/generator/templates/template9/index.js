@@ -85,38 +85,38 @@ function generateExperienceSection(jobs) {
     %%% ------------------------------------------------------------
     \\NewPart{Work Experience}{}
 
-    ${jobs.map((job, i) => {
-      const { name, title, location, startDate, endDate, duties } = job
+  ${jobs.map((job, i) => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      const nameLine = [name, location].filter(Boolean).join(', ')
-      let dateRange = ''
-      let dutyLines = ''
+    const nameLine = [name, location].filter(Boolean).join(', ')
+    let dateRange = ''
+    let dutyLines = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} - ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} - Present`
-      } else {
-        dateRange = endDate
-      }
+    if (startDate && endDate) {
+      dateRange = `${startDate} - ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} - Present`
+    } else {
+      dateRange = endDate
+    }
 
-      if (duties) {
-        dutyLines = source`
+    if (duties) {
+      dutyLines = source`
           \\begin{itemize} \\itemsep -1pt
             ${duties.map(duty => `\\item ${duty}`)}
           \\end{itemize}
         `
-      }
+    }
 
-      return stripIndent`
+    return stripIndent`
         \\WorkEntry
           {${title || ''}}
           {${dateRange || ''}}
           {${nameLine}}
           {${dutyLines}}
           ${i < jobs.length - 1 ? '\\sepspace' : ''}
-      `
-    })}
+    `
+  })}
   `
 }
 
@@ -129,7 +129,9 @@ function generateSkillsSection(skills) {
     %%% Skills
     %%% ------------------------------------------------------------
     \\NewPart{Skills}{}
-    ${skills.map(skill => `\\SkillsEntry{${skill.name || ''}}{${skill.details || ''}}`)}
+    ${skills.map(
+      skill => `\\SkillsEntry{${skill.name || ''}}{${skill.details || ''}}`
+    )}
   `
 }
 
@@ -143,16 +145,16 @@ function generateProjectsSection(projects) {
     %%% ------------------------------------------------------------
     \\NewPart{Projects}{}
 
-    ${projects.map((project, i) => {
-      const { name, description, technologies, link } = project
+  ${projects.map((project, i) => {
+    const { name, description, technologies, link } = project
 
-      return stripIndent`
+    return stripIndent`
         \\ProjectEntry{${name || ''}}{${link || ''}}
         {${technologies || ''}}
         {${description || ''}}
         ${i < projects.length - 1 ? '\\sepspace' : ''}
-      `
-    })}
+    `
+  })}
 
   `
 }
@@ -167,16 +169,16 @@ function generateAwardsSection(awards) {
     %%% ------------------------------------------------------------
     \\NewPart{Awards}{}
 
-    ${awards.map((award, i) => {
-      const { name, details, date, location } = award
+  ${awards.map((award, i) => {
+    const { name, details, date, location } = award
 
-      return stripIndent`
+    return stripIndent`
         \\AwardEntry{${name || ''}}{${location || ''}}
         {${date || ''}}
         {${details || ''}}
         ${i < awards.length - 1 ? '\\sepspace' : ''}
-      `
-    })}
+    `
+  })}
 
   `
 }

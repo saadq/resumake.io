@@ -80,7 +80,7 @@ function generateEducationSection(schools) {
           {${schoolLine}}
           {${location || ''}}
           {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
-      `
+    `
     })}
     \\end{entrylist}
   `
@@ -114,7 +114,7 @@ function generateExperienceSection(jobs) {
             \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
             ${duties.map(duty => `\\item ${duty}`)}
             \\end{itemize}
-          `
+        `
         }
 
         if (startDate && endDate) {
@@ -131,7 +131,7 @@ function generateExperienceSection(jobs) {
             {${jobLine}}
             {${location || ''}}
             {${dutyLines}}
-        `
+    `
       })}
     \\end{entrylist}
   `
@@ -182,7 +182,7 @@ function generateProjectsSection(projects) {
           {${nameLine}}
           {${link || ''}}
           {${description || ''}}
-      `
+    `
     })}
     \\end{entrylist}
   `
@@ -205,7 +205,7 @@ function generateAwardsSection(awards) {
             {${name || ''}}
             {${location || ''}}
             {${details || ''}}
-        `
+    `
       })}
     \\end{entrylist}
   `

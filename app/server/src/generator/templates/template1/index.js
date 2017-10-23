@@ -124,7 +124,7 @@ function generateEducationSection(schools) {
           ${line1}
           ${line2}
           \\vspace{2mm}
-        `
+    `
       })}
   `
 }
@@ -139,51 +139,51 @@ function generateExperienceSection(jobs) {
     \\header{Experience}
     \\vspace{1mm}
 
-    ${jobs.map(job => {
-      const { name, title, location, startDate, endDate, duties } = job
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      let line1 = ''
-      let line2 = ''
-      let dutyLines = ''
+    let line1 = ''
+    let line2 = ''
+    let dutyLines = ''
 
-      if (name) {
-        line1 += `\\textbf{${name}}`
-      }
+    if (name) {
+      line1 += `\\textbf{${name}}`
+    }
 
-      if (location) {
-        line1 += ` \\hfill ${location}`
-      }
+    if (location) {
+      line1 += ` \\hfill ${location}`
+    }
 
-      if (title) {
-        line2 += `\\textit{${title}}`
-      }
+    if (title) {
+      line2 += `\\textit{${title}}`
+    }
 
-      if (startDate && endDate) {
-        line2 += ` \\hfill ${startDate} | ${endDate}`
-      } else if (startDate) {
-        line2 += ` \\hfill ${startDate} | Present`
-      } else if (endDate) {
-        line2 += ` \\hfill ${endDate}`
-      }
+    if (startDate && endDate) {
+      line2 += ` \\hfill ${startDate} | ${endDate}`
+    } else if (startDate) {
+      line2 += ` \\hfill ${startDate} | Present`
+    } else if (endDate) {
+      line2 += ` \\hfill ${endDate}`
+    }
 
-      if (line1) line1 += '\\\\'
-      if (line2) line2 += '\\\\'
+    if (line1) line1 += '\\\\'
+    if (line2) line2 += '\\\\'
 
-      if (duties) {
-        dutyLines = source`
+    if (duties) {
+      dutyLines = source`
           \\vspace{-1mm}
           \\begin{itemize} \\itemsep 1pt
             ${duties.map(duty => `\\item ${duty}`)}
           \\end{itemize}
         `
-      }
+    }
 
-      return stripIndent`
+    return stripIndent`
         ${line1}
         ${line2}
         ${dutyLines}
-      `
-    })}
+    `
+  })}
   `
 }
 
@@ -241,7 +241,7 @@ function generateProjectsSection(projects) {
         ${line1}
         ${line2}
         \\vspace*{2mm}
-      `
+    `
     })}
   `
 }
@@ -278,7 +278,7 @@ function generateAwardsSection(awards) {
         ${line1}
         ${line2}
         \\vspace*{2mm}
-      `
+    `
     })}
   `
 }

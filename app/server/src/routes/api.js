@@ -3,16 +3,14 @@
  */
 
 import Router from 'koa-router'
+import { generatePDF } from '../generator'
 
 const router = new Router({ prefix: '/api' })
 
-router.get('/yo', async ctx => {
+router.post('/generate/resume', async ctx => {
+  const formData = ctx.request.body
+  console.log({ formData, generatePDF })
   ctx.body = { status: 'get success' }
-})
-
-router.post('/test', async ctx => {
-  console.log(ctx.request.body)
-  ctx.body = { status: 'post success' }
 })
 
 export default router

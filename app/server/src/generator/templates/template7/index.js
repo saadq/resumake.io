@@ -56,7 +56,7 @@ function generateEducationSection(schools) {
           {${gpa ? `GPA: ${gpa}` : ''}}
           {\\textit{${location || ''}}}
           {}
-      `
+    `
     })}
   `
 }
@@ -98,7 +98,7 @@ function generateExperienceSection(jobs) {
           {${location || ''}}
           {}
           {${dutyLines}}
-      `
+    `
     })}
   `
 }
@@ -110,7 +110,9 @@ function generateSkillsSection(skills) {
 
   return source`
     \\section{Skills}
-    ${skills.map(skill => `\\cvitem{${skill.name || ''}}{${skill.details || ''}}`)}
+    ${skills.map(
+      skill => `\\cvitem{${skill.name || ''}}{${skill.details || ''}}`
+    )}
   `
 }
 
@@ -143,7 +145,7 @@ function generateProjectsSection(projects) {
           {}
           {${detailsLine}}
         \\vspace{1mm}
-      `
+    `
     })}
   `
 }
@@ -177,7 +179,7 @@ function generateAwardsSection(awards) {
           {}
           {${detailsLine}}
         \\vspace{1mm}
-      `
+    `
     })}
   `
 }

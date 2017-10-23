@@ -78,12 +78,13 @@ function generateEducationSection(schools) {
         }
 
         return stripIndent`
-          \\begin{cvsubsection}{${location || ''}}{${name || ''}}{${graduationDate || ''}}
+          \\begin{cvsubsection}{${location || ''}}{${name ||
+          ''}}{${graduationDate || ''}}
             \\begin{itemize}
               \\item ${degreeLine}
             \\end{itemize}
           \\end{cvsubsection}
-        `
+    `
       })}
     \\end{cvsection}
   `
@@ -115,15 +116,16 @@ function generateExperienceSection(jobs) {
             \\begin{itemize}%
               ${duties.map(duty => `\\item ${duty}`)}
             \\end{itemize}
-          `
+        `
         }
 
         return stripIndent`
-          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange || ''}}
+          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange ||
+          ''}}
             ${location || ''}
             ${dutyLines || ''}
           \\end{cvsubsection}
-        `
+    `
       })}
     \\end{cvsection}
   `
@@ -138,7 +140,11 @@ function generateSkillsSection(skills) {
     \\begin{cvsection}{Skills}
       \\begin{cvsubsection}{}{}{}
         \\begin{itemize}
-          ${skills.map(skill => `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`)}
+          ${skills.map(
+            skill =>
+              `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details ||
+                ''}`
+          )}
         \\end{itemize}
       \\end{cvsubsection}
     \\end{cvsection}

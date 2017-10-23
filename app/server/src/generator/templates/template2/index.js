@@ -89,7 +89,7 @@ function generateEducationSection(schools) {
           {${location || ''}}
           {${graduationDate || ''}}
           {${gpa ? `GPA: ${gpa}` : ''}}
-      `
+    `
     })}
     \\end{cventries}
 
@@ -137,7 +137,7 @@ function generateExperienceSection(jobs) {
           {${location || ''}}
           {${dateRange || ''}}
           {${dutyLines}}
-      `
+    `
     })}
     \\end{cventries}
   `
@@ -179,7 +179,8 @@ function generateProjectsSection(projects) {
   return source`
     \\cvsection{Projects}
     \\begin{cventries}
-    ${projects.map(project => stripIndent`
+    ${projects.map(
+      project => stripIndent`
         \\cventry
           {${project.description || ''}}
           {${project.name || ''}}
@@ -189,7 +190,8 @@ function generateProjectsSection(projects) {
 
         \\vspace{-5mm}
 
-      `)}
+    `
+    )}
     \\end{cventries}
   `
 }
@@ -211,7 +213,7 @@ function generateAwardsSection(awards) {
             {${details || ''}}
             {${location || ''}}
             {${date || ''}}
-        `
+    `
       })}
     \\end{cvhonors}
   `

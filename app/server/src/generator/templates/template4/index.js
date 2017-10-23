@@ -179,7 +179,7 @@ function generateExperienceSection(jobs) {
         ${line1}
         ${dutyLines}
         \\sectionsep
-      `
+    `
     })}
   `
 }
@@ -198,7 +198,10 @@ function generateSkillsSection(skills) {
     \\section{Skills}
     \\raggedright
     \\begin{tabular}{ l l }
-      ${skills.map(skill => `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`)}
+      ${skills.map(
+        skill =>
+          `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`
+      )}
     \\end{tabular}
     \\sectionsep
   `
@@ -249,7 +252,7 @@ function generateProjectsSection(projects) {
         ${line2}
         ${line3}
         \\sectionsep
-      `
+    `
     })}
   `
 }
@@ -327,7 +330,7 @@ function generateAwardsSection(awards) {
         \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
         ${details ? `${details}\\\\` : ''}
         \\sectionsep
-      `
+    `
     })}
   `
 }

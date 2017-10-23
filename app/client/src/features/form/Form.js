@@ -33,7 +33,7 @@ class Form extends Component<Props> {
       body: JSON.stringify(payload)
     }
 
-    const response = await fetch('/api/test', request)
+    const response = await fetch('/api/generate/resume', request)
     const json = await response.json()
 
     console.log(json)

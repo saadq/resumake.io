@@ -64,7 +64,7 @@ function generateEducationSection(schools) {
             {${location || ''}}
             {${degreeLine}}
             {${graduationDate || ''}}
-      `
+    `
     })}
 
     \\end{itemize}
@@ -111,7 +111,7 @@ function generateExperienceSection(jobs) {
             {${title || ''}}
             {${dateRange || ''}}
             ${dutyLines}
-      `
+    `
     })}
     \\end{itemize}
   `
@@ -153,7 +153,7 @@ function generateProjectsSection(projects) {
                 {${technologies || ''}}
                 {${link || ''}}
                 {${description || ''}}
-      `
+    `
     })}
     \\end{itemize}
   `
@@ -179,7 +179,7 @@ function generateAwardsSection(awards) {
                 {${date || ''}}
                 {${location || ''}}
                 {${details || ''}}
-      `
+    `
     })}
     \\end{itemize}
   `

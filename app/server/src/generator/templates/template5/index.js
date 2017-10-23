@@ -149,7 +149,9 @@ function generateSkillsSection(skills) {
   return source`
     \\section{SKILLS}
     \\begin{tabular}{@{}ll}
-    ${skills.map(skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`)}
+    ${skills.map(
+      skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`
+    )}
     \\end{tabular}
   `
 }
@@ -202,9 +204,10 @@ function generateAwardsSection(awards) {
       const { name, details, date, location } = award
 
       return stripIndent`
-          \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date || ''} \\\\
+          \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date ||
+        ''} \\\\
           ${details || ''} \\\\\\\\
-      `
+    `
     })}
   `
 }

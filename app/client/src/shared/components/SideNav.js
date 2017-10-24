@@ -77,9 +77,9 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   background-color: black;
-  border: 2px solid white;
+  border: 3px solid ${colors.primary};
   border-radius: 50%;
-  color: white;
+  color: ${colors.primary};
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
@@ -87,9 +87,9 @@ const Button = styled.button`
   &:hover {
     box-shadow: none;
     cursor: pointer;
-    background: white;
+    background: ${colors.primary};
     color: black;
-    border: 20px solid white;
+    border: 20px solid ${colors.primary};
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06),
       0 2px 6px rgba(255, 255, 255, 0.85);
   }

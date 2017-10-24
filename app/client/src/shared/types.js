@@ -8,16 +8,19 @@ import type {
   TemplatesState,
   TemplatesAction
 } from '../features/templates/types'
+import type {
+  PreviewState,
+  PreviewAction
+} from '../features/preview/types'
 
 type State = {
-  form: {
-    resume: FormState
-  },
-  templates: TemplatesState
+  form: { resume: FormState },
+  templates: TemplatesState,
+  preview: PreviewState
 }
 
 type GetState = () => State
-type Action = TemplatesAction | FormAction
+type Action = TemplatesAction | FormAction | PreviewAction
 type Dispatch = ReduxDispatch<Action>
 type AsyncAction = (dispatch: Dispatch, getState: GetState) => any
 

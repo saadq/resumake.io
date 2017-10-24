@@ -3,9 +3,11 @@
  */
 
 import React from 'react'
+import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf'
 import styled from 'styled-components'
-import PDF from './resume.pdf'
+import BlankPDF from './blank.pdf'
+import type { State } from '../../shared/types'
 
 const Div = styled.div`
   width: 100%;
@@ -14,19 +16,24 @@ const Div = styled.div`
   align-items: center;
 `
 
-const Resume = styled(Document)`
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 15px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -1px rgba(0, 0, 0, 0.2);
-`
+type Props = {
+  resumeURL?: string
+}
 
-function Preview() {
+function Preview({ resumeURL }: Props) {
   return (
     <Div>
-      <Resume file={PDF}>
+      <Document file={resumeURL || BlankPDF}>
         <Page pageNumber={1} />
-      </Resume>
+      </Document>
     </Div>
   )
 }
 
-export default Preview
+function mapState(state: State) {
+  return {
+    resumeURL: state.preview.resumeURL
+  }
+}
+
+export default connect(mapState)(Preview)

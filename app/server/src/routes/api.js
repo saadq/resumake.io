@@ -3,14 +3,12 @@
  */
 
 import Router from 'koa-router'
-import { generatePDF } from '../generator'
+import { createReadStream } from 'fs'
 
 const router = new Router({ prefix: '/api' })
 
 router.post('/generate/resume', async ctx => {
-  const formData = ctx.request.body
-  console.log({ formData, generatePDF })
-  ctx.body = { status: 'get success' }
+  ctx.body = createReadStream(`${__dirname}/resume.pdf`)
 })
 
 export default router

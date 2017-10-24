@@ -5,19 +5,21 @@
 import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { setResumeURL } from '../preview/actions'
 import type { FormValues } from './types'
 import type { State } from '../../shared/types'
 
 type Props = {
   children: Node,
   template: number,
+  setResumeURL: (url: string) => void,
   handleSubmit: *
 }
 
 class Form extends Component<Props> {
   async onSubmit(values: FormValues) {
-    const { template } = this.props
-    const { fetch } = window
+    const { fetch, URL } = window
+    const { template, setResumeURL } = this.props
 
     const payload = {
       ...values,
@@ -34,17 +36,17 @@ class Form extends Component<Props> {
     }
 
     const response = await fetch('/api/generate/resume', request)
-    const json = await response.json()
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
 
-    console.log(json)
+    setResumeURL(url)
   }
 
   render() {
-    const { handleSubmit } = this.props
     return (
       <form
         id="resume-form"
-        onSubmit={handleSubmit(values => this.onSubmit(values))}
+        onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
         {this.props.children}
       </form>
@@ -58,7 +60,11 @@ function mapState(state: State) {
   }
 }
 
-const ConnectedForm = connect(mapState)(Form)
+const actions = {
+  setResumeURL
+}
+
+const ConnectedForm = connect(mapState, actions)(Form)
 
 export default reduxForm({
   form: 'resume',

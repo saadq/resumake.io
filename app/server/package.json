@@ -19,11 +19,16 @@
     "install:types": "flow-typed install"
   },
   "dependencies": {
+    "archiver": "^2.1.0",
+    "common-tags": "^1.4.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-combine-routers": "^1.0.0",
     "koa-router": "^7.2.1",
-    "koa-static": "^4.0.1"
+    "koa-static": "^4.0.1",
+    "node-latex": "^2.5.0",
+    "pretty-latex": "^0.1.0",
+    "sanitize-latex": "^0.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

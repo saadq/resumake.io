@@ -1,7 +1,19 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template1({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { FormValues } from '../../types'
+
+function template1({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: FormValues) {
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}
@@ -15,43 +27,32 @@ function template1({ profile, schools, jobs, projects, skills, awards }) {
     ${generateResumeDefinitions()}
 
     \\begin{document}
-
         \\vspace*{-40pt}
-
-        ${generateProfileSection(profile)}
-
+        ${generateProfileSection(basics)}
         \\vspace*{2mm}
-
-        ${generateEducationSection(schools)}
-
+        generateEducationSection(schools)
         \\vspace*{2mm}
-
-        ${generateExperienceSection(jobs)}
-
-        ${generateSkillsSection(skills)}
-
+        generateExperienceSection(jobs)
+        generateSkillsSection(skills)
         \\vspace*{2mm}
-
-        ${generateProjectsSection(projects)}
-
+        generateProjectsSection(projects)
         \\vspace*{2mm}
-
-        ${generateAwardsSection(awards)}
-
+        generateAwardsSection(awards)
         ${WHITESPACE}
     \\end{document}
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
+  const { name, email, phone, location, website } = basics
+  const address = (location && location.address) || ''
 
-  let line1 = fullName ? `{\\Huge \\scshape {${fullName}}}` : ''
-  let line2 = [address, email, phoneNumber, link]
+  let line1 = name ? `{\\Huge \\scshape {${name}}}` : ''
+  let line2 = [address, email, phone, website]
     .filter(Boolean)
     .join(' $\\cdot$ ')
 

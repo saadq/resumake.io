@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 const TEMPLATE1 = 1
 const TEMPLATE2 = 2
 const TEMPLATE3 = 3
@@ -11,7 +15,7 @@ const TEMPLATE9 = 9
 const NEWLINE = '\\\\'
 const WHITESPACE = '\\ '
 
-module.exports = {
+export {
   TEMPLATE1,
   TEMPLATE2,
   TEMPLATE3,

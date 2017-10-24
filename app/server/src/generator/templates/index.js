@@ -1,14 +1,18 @@
-const { join } = require('path')
-const template1 = require('./template1')
-const template2 = require('./template2')
-const template3 = require('./template3')
-const template4 = require('./template4')
-const template5 = require('./template5')
-const template6 = require('./template6')
-const template7 = require('./template7')
-const template8 = require('./template8')
-const template9 = require('./template9')
-const {
+/**
+ * @flow
+ */
+
+import { join } from 'path'
+import template1 from './template1'
+import template2 from './template2'
+import template3 from './template3'
+import template4 from './template4'
+import template5 from './template5'
+import template6 from './template6'
+import template7 from './template7'
+import template8 from './template8'
+import template9 from './template9'
+import {
   TEMPLATE1,
   TEMPLATE2,
   TEMPLATE3,
@@ -18,7 +22,8 @@ const {
   TEMPLATE7,
   TEMPLATE8,
   TEMPLATE9
-} = require('./constants')
+} from './constants'
+import type { FormValues } from '../types'
 
 /**
  * Generates the LaTeX document based on the selected template
@@ -30,7 +35,7 @@ const {
  * @return {Object} - The generated LaTeX document as well as its additional opts.
  */
 
-function getTemplateData(data) {
+function getTemplateData(data: FormValues) {
   switch (data.template) {
     case TEMPLATE1:
       return {
@@ -105,7 +110,13 @@ function getTemplateData(data) {
         texDoc: template9(data),
         opts: {}
       }
+
+    default:
+      return {
+        texDoc: template1(data),
+        opts: {}
+      }
   }
 }
 
-module.exports = getTemplateData
+export default getTemplateData

@@ -14,7 +14,7 @@ function School({ index }: Props) {
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`education[${index}].name`}
+        name={`education[${index}].institution`}
         label="School Name"
         placeholder="Stanford University"
       />
@@ -24,12 +24,12 @@ function School({ index }: Props) {
         placeholder="Stanford, CA"
       />
       <LabeledInput
-        name={`education[${index}].degree`}
+        name={`education[${index}].studyType`}
         label="Degree"
         placeholder="BS"
       />
       <LabeledInput
-        name={`education[${index}].major`}
+        name={`education[${index}].area`}
         label="Major"
         placeholder="Computer Science"
       />
@@ -39,9 +39,14 @@ function School({ index }: Props) {
         placeholder="3.6"
       />
       <LabeledInput
-        name={`education[${index}].graduationDate`}
-        label="Graduation Date"
-        placeholder="May 2017"
+        name={`education[${index}].startDate`}
+        label="Start Date"
+        placeholder="Sep 2015"
+      />
+      <LabeledInput
+        name={`education[${index}].endDate`}
+        label="End Date"
+        placeholder="Jun 2019"
       />
     </div>
   )

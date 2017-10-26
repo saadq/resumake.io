@@ -15,6 +15,7 @@ type Basics = {
 
 type Job = {
   company?: string,
+  location?: string,
   position?: string,
   website?: string,
   startDate?: string,
@@ -25,6 +26,7 @@ type Job = {
 
 type School = {
   institution?: string,
+  location?: string,
   area?: string,
   studyType?: string,
   startDate?: string,

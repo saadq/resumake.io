@@ -20,7 +20,6 @@ type Job = {
   website?: string,
   startDate?: string,
   endDate?: string,
-  summary?: string,
   highlights?: Array<string>
 }
 

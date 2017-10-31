@@ -74,53 +74,53 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Education
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Education}
-    \\raggedright
-    ${schools.map(school => {
-      const { name, location, degree, major, gpa, graduationDate } = school
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Education
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Education}
+  \\raggedright
+  ${schools.map(school => {
+    const { name, location, degree, major, gpa, graduationDate } = school
 
-      let line1 = ''
-      let line2 = ''
+    let line1 = ''
+    let line2 = ''
 
-      if (name) {
-        line1 += `\\runsubsection{${name}}`
-      }
+    if (name) {
+      line1 += `\\runsubsection{${name}}`
+    }
 
-      if (degree && major) {
-        line1 += `\\descript{| ${degree} ${major}}`
-      } else if (degree) {
-        line1 += `\\descript{| ${degree}}`
-      } else if (major) {
-        line1 += `\\descript{| ${major}}`
-      }
+    if (degree && major) {
+      line1 += `\\descript{| ${degree} ${major}}`
+    } else if (degree) {
+      line1 += `\\descript{| ${degree}}`
+    } else if (major) {
+      line1 += `\\descript{| ${major}}`
+    }
 
-      const locationAndDate = [location, graduationDate]
-        .filter(Boolean)
-        .join(' | ')
+    const locationAndDate = [location, graduationDate]
+      .filter(Boolean)
+      .join(' | ')
 
-      if (locationAndDate) {
-        line1 += `\\hfill \\location{${locationAndDate}}`
-      }
+    if (locationAndDate) {
+      line1 += `\\hfill \\location{${locationAndDate}}`
+    }
 
-      if (line1) {
-        line1 += '\\\\'
-      }
+    if (line1) {
+      line1 += '\\\\'
+    }
 
-      if (gpa) {
-        line2 += `GPA: ${gpa}\\\\`
-      }
+    if (gpa) {
+      line2 += `GPA: ${gpa}\\\\`
+    }
 
-      return `
-        ${line1}
-        ${line2}
-        \\sectionsep
-      `
-    })}
+    return `
+      ${line1}
+      ${line2}
+      \\sectionsep
+    `
+  })}
   `
 }
 
@@ -130,57 +130,57 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Experience
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Experience}
-    ${jobs.map(job => {
-      const { name, title, location, startDate, endDate, duties } = job
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Experience
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Experience}
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      let line1 = ''
-      let dateRange = ''
-      let dutyLines = ''
+    let line1 = ''
+    let dateRange = ''
+    let dutyLines = ''
 
-      if (name) {
-        line1 += `\\runsubsection{${name}}`
-      }
+    if (name) {
+      line1 += `\\runsubsection{${name}}`
+    }
 
-      if (title) {
-        line1 += `\\descript{| ${title}}`
-      }
+    if (title) {
+      line1 += `\\descript{| ${title}}`
+    }
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} – ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} – Present`
-      } else {
-        dateRange = endDate
-      }
+    if (startDate && endDate) {
+      dateRange = `${startDate} – ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} – Present`
+    } else {
+      dateRange = endDate
+    }
 
-      if (location && dateRange) {
-        line1 += `\\hfill \\location{${location} | ${dateRange}}`
-      } else if (location) {
-        line1 += `\\hfill \\location{${location}}`
-      } else if (dateRange) {
-        line1 += `\\hfill \\location{${dateRange}}`
-      }
+    if (location && dateRange) {
+      line1 += `\\hfill \\location{${location} | ${dateRange}}`
+    } else if (location) {
+      line1 += `\\hfill \\location{${location}}`
+    } else if (dateRange) {
+      line1 += `\\hfill \\location{${dateRange}}`
+    }
 
-      if (duties) {
-        dutyLines = source`
-          \\begin{tightemize}
-            ${duties.map(duty => `\\item ${duty}`)}
-          \\end{tightemize}
+    if (duties) {
+      dutyLines = source`
+        \\begin{tightemize}
+          ${duties.map(duty => `\\item ${duty}`)}
+        \\end{tightemize}
         `
-      }
+    }
 
-      return stripIndent`
-        ${line1}
-        ${dutyLines}
-        \\sectionsep
+    return stripIndent`
+      ${line1}
+      ${dutyLines}
+      \\sectionsep
     `
-    })}
+  })}
   `
 }
 
@@ -190,20 +190,19 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Skills
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Skills}
-    \\raggedright
-    \\begin{tabular}{ l l }
-      ${skills.map(
-        skill =>
-          `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`
-      )}
-    \\end{tabular}
-    \\sectionsep
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Skills
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Skills}
+  \\raggedright
+  \\begin{tabular}{ l l }
+  ${skills.map(
+    skill => `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`
+  )}
+  \\end{tabular}
+  \\sectionsep
   `
 }
 
@@ -213,47 +212,47 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Projects
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Projects}
-    \\raggedright
-    ${projects.map(project => {
-      const { name, description, technologies, link } = project
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Projects
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Projects}
+  \\raggedright
+  ${projects.map(project => {
+    const { name, description, technologies, link } = project
 
-      let line1 = ''
-      let line2 = ''
-      let line3 = ''
+    let line1 = ''
+    let line2 = ''
+    let line3 = ''
 
-      if (name) {
-        line1 += `\\runsubsection{\\large{${name}}}`
-      }
+    if (name) {
+      line1 += `\\runsubsection{\\large{${name}}}`
+    }
 
-      if (technologies) {
-        line2 += `\\descript{| ${technologies}}`
-      }
+    if (technologies) {
+      line2 += `\\descript{| ${technologies}}`
+    }
 
-      if (link) {
-        line2 += `\\hfill \\location{${link}}`
-      }
+    if (link) {
+      line2 += `\\hfill \\location{${link}}`
+    }
 
-      if (line2) {
-        line2 += '\\\\'
-      }
+    if (line2) {
+      line2 += '\\\\'
+    }
 
-      if (description) {
-        line3 += `${description}\\\\`
-      }
+    if (description) {
+      line3 += `${description}\\\\`
+    }
 
-      return `
-        ${line1}
-        ${line2}
-        ${line3}
-        \\sectionsep
+    return `
+      ${line1}
+      ${line2}
+      ${line3}
+      \\sectionsep
     `
-    })}
+  })}
   `
 }
 
@@ -316,22 +315,22 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Awards
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\section{Awards}
-    ${awards.map(award => {
-      const { name, details, date, location } = award
-      const info = [date, location].filter(Boolean).join(' | ')
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Awards
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Awards}
+  ${awards.map(award => {
+    const { name, details, date, location } = award
+    const info = [date, location].filter(Boolean).join(' | ')
 
-      return stripIndent`
-        \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
-        ${details ? `${details}\\\\` : ''}
-        \\sectionsep
+    return stripIndent`
+      \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
+      ${details ? `${details}\\\\` : ''}
+      \\sectionsep
     `
-    })}
+  })}
   `
 }
 

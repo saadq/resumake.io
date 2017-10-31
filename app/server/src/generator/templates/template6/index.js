@@ -57,32 +57,32 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    \\section{education}
-    \\begin{entrylist}
-    ${schools.map(school => {
-      const { name, location, degree, major, gpa, graduationDate } = school
+  \\section{education}
+  \\begin{entrylist}
+  ${schools.map(school => {
+    const { name, location, degree, major, gpa, graduationDate } = school
 
-      let schoolLine = ''
+    let schoolLine = ''
 
-      if (name) {
-        schoolLine += name
-      }
+    if (name) {
+      schoolLine += name
+    }
 
-      if (degree && major) {
-        schoolLine += `, {\\normalfont ${degree} in ${major}}`
-      } else if (degree || major) {
-        schoolLine += `, {\\normalfont ${degree || major}}`
-      }
+    if (degree && major) {
+      schoolLine += `, {\\normalfont ${degree} in ${major}}`
+    } else if (degree || major) {
+      schoolLine += `, {\\normalfont ${degree || major}}`
+    }
 
-      return `
-        \\entry
-          {${graduationDate || ''}}
-          {${schoolLine}}
-          {${location || ''}}
-          {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
+    return `
+      \\entry
+        {${graduationDate || ''}}
+        {${schoolLine}}
+        {${location || ''}}
+        {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
     `
-    })}
-    \\end{entrylist}
+  })}
+  \\end{entrylist}
   `
 }
 
@@ -92,48 +92,48 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    \\section{experience}
-    \\begin{entrylist}
-      ${jobs.map(job => {
-        const { name, title, location, startDate, endDate, duties } = job
+  \\section{experience}
+  \\begin{entrylist}
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-        let jobLine = ''
-        let dateRange = ''
-        let dutyLines = ''
+    let jobLine = ''
+    let dateRange = ''
+    let dutyLines = ''
 
-        if (name) {
-          jobLine += name
-        }
+    if (name) {
+      jobLine += name
+    }
 
-        if (title) {
-          jobLine += `, ${title}`
-        }
+    if (title) {
+      jobLine += `, ${title}`
+    }
 
-        if (duties) {
-          dutyLines = source`
-            \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-            ${duties.map(duty => `\\item ${duty}`)}
-            \\end{itemize}
+    if (duties) {
+      dutyLines = source`
+        \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
+        ${duties.map(duty => `\\item ${duty}`)}
+        \\end{itemize}
         `
-        }
+    }
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} – ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} – Present`
-        } else {
-          dateRange = endDate
-        }
+    if (startDate && endDate) {
+      dateRange = `${startDate} – ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} – Present`
+    } else {
+      dateRange = endDate
+    }
 
-        return `
-          \\entry
-            {${dateRange || ''}}
-            {${jobLine}}
-            {${location || ''}}
-            {${dutyLines}}
+    return `
+      \\entry
+        {${dateRange || ''}}
+        {${jobLine}}
+        {${location || ''}}
+        {${dutyLines}}
     `
-      })}
-    \\end{entrylist}
+  })}
+  \\end{entrylist}
   `
 }
 
@@ -143,15 +143,15 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\section{skills}
-    \\begin{entrylist}
-    ${skills.map(({ name, details }) => {
-      const nameLine = name ? `${name}: ` : ''
-      const detailsLine = details ? `{\\normalfont ${details}}` : ''
+  \\section{skills}
+  \\begin{entrylist}
+  ${skills.map(({ name, details }) => {
+    const nameLine = name ? `${name}: ` : ''
+    const detailsLine = details ? `{\\normalfont ${details}}` : ''
 
-      return `\\skill{}{${nameLine}${detailsLine}}`
-    })}
-    \\end{entrylist}
+    return `\\skill{}{${nameLine}${detailsLine}}`
+  })}
+  \\end{entrylist}
   `
 }
 
@@ -161,30 +161,30 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\section{projects}
-    \\begin{entrylist}
-    ${projects.map(project => {
-      const { name, description, technologies, link } = project
+  \\section{projects}
+  \\begin{entrylist}
+  ${projects.map(project => {
+    const { name, description, technologies, link } = project
 
-      let nameLine = ''
+    let nameLine = ''
 
-      if (name) {
-        nameLine += name
-      }
+    if (name) {
+      nameLine += name
+    }
 
-      if (technologies) {
-        nameLine += ` {\\normalfont ${technologies}}`
-      }
+    if (technologies) {
+      nameLine += ` {\\normalfont ${technologies}}`
+    }
 
-      return `
-        \\entry
-          {}
-          {${nameLine}}
-          {${link || ''}}
-          {${description || ''}}
+    return `
+      \\entry
+        {}
+        {${nameLine}}
+        {${link || ''}}
+        {${description || ''}}
     `
-    })}
-    \\end{entrylist}
+  })}
+  \\end{entrylist}
   `
 }
 
@@ -194,20 +194,20 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    \\section{awards}
-    \\begin{entrylist}
-      ${awards.map(award => {
-        const { name, details, date, location } = award
+  \\section{awards}
+  \\begin{entrylist}
+  ${awards.map(award => {
+    const { name, details, date, location } = award
 
-        return stripIndent`
-          \\entry
-            {${date || ''}}
-            {${name || ''}}
-            {${location || ''}}
-            {${details || ''}}
+    return stripIndent`
+      \\entry
+        {${date || ''}}
+        {${name || ''}}
+        {${location || ''}}
+        {${details || ''}}
     `
-      })}
-    \\end{entrylist}
+  })}
+  \\end{entrylist}
   `
 }
 

@@ -61,32 +61,32 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    \\begin{cvsection}{Education}
-      ${schools.map(school => {
-        const { name, degree, major, gpa, location, graduationDate } = school
+  \\begin{cvsection}{Education}
+  ${schools.map(school => {
+    const { name, degree, major, gpa, location, graduationDate } = school
 
-        let degreeLine = ''
+    let degreeLine = ''
 
-        if (degree && major) {
-          degreeLine = `${degree} in ${major}.`
-        } else if (degree || major) {
-          degreeLine = (degree || major) + '.'
-        }
+    if (degree && major) {
+      degreeLine = `${degree} in ${major}.`
+    } else if (degree || major) {
+      degreeLine = (degree || major) + '.'
+    }
 
-        if (gpa) {
-          degreeLine += ` GPA: ${gpa}`
-        }
+    if (gpa) {
+      degreeLine += ` GPA: ${gpa}`
+    }
 
-        return stripIndent`
-          \\begin{cvsubsection}{${location || ''}}{${name ||
-          ''}}{${graduationDate || ''}}
-            \\begin{itemize}
-              \\item ${degreeLine}
-            \\end{itemize}
-          \\end{cvsubsection}
+    return stripIndent`
+      \\begin{cvsubsection}{${location || ''}}{${name ||
+      ''}}{${graduationDate || ''}}
+        \\begin{itemize}
+          \\item ${degreeLine}
+        \\end{itemize}
+      \\end{cvsubsection}
     `
-      })}
-    \\end{cvsection}
+  })}
+  \\end{cvsection}
   `
 }
 
@@ -96,38 +96,37 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    \\begin{cvsection}{Experience}
-      ${jobs.map(job => {
-        const { name, title, location, startDate, endDate, duties } = job
+  \\begin{cvsection}{Experience}
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-        let dateRange = ''
-        let dutyLines = ''
+    let dateRange = ''
+    let dutyLines = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} -- ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} -- Present`
-        } else {
-          dateRange = endDate
-        }
+    if (startDate && endDate) {
+      dateRange = `${startDate} -- ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} -- Present`
+    } else {
+      dateRange = endDate
+    }
 
-        if (duties) {
-          dutyLines = source`
-            \\begin{itemize}%
-              ${duties.map(duty => `\\item ${duty}`)}
-            \\end{itemize}
+    if (duties) {
+      dutyLines = source`
+        \\begin{itemize}%
+          ${duties.map(duty => `\\item ${duty}`)}
+        \\end{itemize}
         `
-        }
+    }
 
-        return stripIndent`
-          \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange ||
-          ''}}
-            ${location || ''}
-            ${dutyLines || ''}
-          \\end{cvsubsection}
+    return stripIndent`
+      \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange || ''}}
+        ${location || ''}
+        ${dutyLines || ''}
+      \\end{cvsubsection}
     `
-      })}
-    \\end{cvsection}
+  })}
+  \\end{cvsection}
   `
 }
 
@@ -137,17 +136,16 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\begin{cvsection}{Skills}
-      \\begin{cvsubsection}{}{}{}
-        \\begin{itemize}
-          ${skills.map(
-            skill =>
-              `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details ||
-                ''}`
-          )}
-        \\end{itemize}
-      \\end{cvsubsection}
-    \\end{cvsection}
+  \\begin{cvsection}{Skills}
+  \\begin{cvsubsection}{}{}{}
+  \\begin{itemize}
+  ${skills.map(
+    skill =>
+      `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`
+  )}
+  \\end{itemize}
+  \\end{cvsubsection}
+  \\end{cvsection}
   `
 }
 
@@ -157,36 +155,36 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\begin{cvsection}{Projects}
-      \\begin{cvsubsection}{}{}{}
-          \\begin{itemize}
-          \\setlength\\itemsep{3pt}
-            ${projects.map(project => {
-              const { name, description, technologies, link } = project
+  \\begin{cvsection}{Projects}
+  \\begin{cvsubsection}{}{}{}
+  \\begin{itemize}
+  \\setlength\\itemsep{3pt}
+  ${projects.map(project => {
+    const { name, description, technologies, link } = project
 
-              let line = ''
+    let line = ''
 
-              if (name) {
-                line += `\\textbf{${name}} `
-              }
+    if (name) {
+      line += `\\textbf{${name}} `
+    }
 
-              if (link) {
-                line += `(${link}) `
-              }
+    if (link) {
+      line += `(${link}) `
+    }
 
-              if (description) {
-                line += ` ${description}`
-              }
+    if (description) {
+      line += ` ${description}`
+    }
 
-              if (technologies) {
-                line += ` ${technologies}`
-              }
+    if (technologies) {
+      line += ` ${technologies}`
+    }
 
-              return `\\item ${line}`
-            })}
-          \\end{itemize}
-        \\end{cvsubsection}
-    \\end{cvsection}
+    return `\\item ${line}`
+  })}
+  \\end{itemize}
+  \\end{cvsubsection}
+  \\end{cvsection}
   `
 }
 
@@ -196,36 +194,36 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    \\begin{cvsection}{Awards}
-      \\begin{cvsubsection}{}{}{}
-          \\begin{itemize}
-          \\setlength\\itemsep{3pt}
-            ${awards.map(award => {
-              const { name, details, date, location } = award
+  \\begin{cvsection}{Awards}
+  \\begin{cvsubsection}{}{}{}
+  \\begin{itemize}
+  \\setlength\\itemsep{3pt}
+  ${awards.map(award => {
+    const { name, details, date, location } = award
 
-              let line = ''
+    let line = ''
 
-              if (name) {
-                line += `\\textbf{${name}} `
-              }
+    if (name) {
+      line += `\\textbf{${name}} `
+    }
 
-              if (location) {
-                line += `(${location}) `
-              }
+    if (location) {
+      line += `(${location}) `
+    }
 
-              if (details) {
-                line += ` ${details}`
-              }
+    if (details) {
+      line += ` ${details}`
+    }
 
-              if (date) {
-                line += ` ${date}`
-              }
+    if (date) {
+      line += ` ${date}`
+    }
 
-              return `\\item ${line}`
-            })}
-          \\end{itemize}
-        \\end{cvsubsection}
-    \\end{cvsection}
+    return `\\item ${line}`
+  })}
+  \\end{itemize}
+  \\end{cvsubsection}
+  \\end{cvsection}
   `
 }
 

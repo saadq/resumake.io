@@ -41,49 +41,49 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    \\section{EDUCATION}
-    ${schools.map((school, i) => {
-      const { name, location, degree, major, gpa, graduationDate } = school
+  \\section{EDUCATION}
+  ${schools.map((school, i) => {
+    const { name, location, degree, major, gpa, graduationDate } = school
 
-      let schoolLine = ''
-      let degreeLine = ''
+    let schoolLine = ''
+    let degreeLine = ''
 
-      if (name) {
-        schoolLine += `\\textbf{${name}}, `
-      }
+    if (name) {
+      schoolLine += `\\textbf{${name}}, `
+    }
 
-      if (degree && major) {
-        degreeLine = `${degree} in ${major}`
-      } else if (degree || major) {
-        degreeLine = degree || major
-      }
+    if (degree && major) {
+      degreeLine = `${degree} in ${major}`
+    } else if (degree || major) {
+      degreeLine = degree || major
+    }
 
-      if (degreeLine) {
-        schoolLine += `{\\sl ${degreeLine}} `
-      }
+    if (degreeLine) {
+      schoolLine += `{\\sl ${degreeLine}} `
+    }
 
-      if (gpa) {
-        schoolLine += `GPA: ${gpa}`
-      }
+    if (gpa) {
+      schoolLine += `GPA: ${gpa}`
+    }
 
-      if (graduationDate) {
-        schoolLine += `\\hfill ${graduationDate}`
-      }
+    if (graduationDate) {
+      schoolLine += `\\hfill ${graduationDate}`
+    }
 
-      if (schoolLine) {
-        schoolLine += '\\\\'
-      }
+    if (schoolLine) {
+      schoolLine += '\\\\'
+    }
 
-      if (location) {
-        schoolLine += `${location}`
-      }
+    if (location) {
+      schoolLine += `${location}`
+    }
 
-      if (i !== schools.length - 1) {
-        schoolLine += '\\\\\\\\'
-      }
+    if (i !== schools.length - 1) {
+      schoolLine += '\\\\\\\\'
+    }
 
-      return schoolLine
-    })}
+    return schoolLine
+  })}
   `
 }
 
@@ -93,51 +93,51 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    \\section{EXPERIENCE}
-    ${jobs.map(job => {
-      const { name, title, location, startDate, endDate, duties } = job
+  \\section{EXPERIENCE}
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      let jobLine = ''
-      let dateRange = ''
+    let jobLine = ''
+    let dateRange = ''
 
-      if (name) {
-        jobLine += `\\textbf{${name}}, `
-      }
+    if (name) {
+      jobLine += `\\textbf{${name}}, `
+    }
 
-      if (title) {
-        jobLine += `{\\sl ${title}}`
-      }
+    if (title) {
+      jobLine += `{\\sl ${title}}`
+    }
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} | ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} | Present`
-      } else {
-        dateRange = endDate
-      }
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
+    }
 
-      if (dateRange) {
-        jobLine += `\\hfill ${dateRange}`
-      }
+    if (dateRange) {
+      jobLine += `\\hfill ${dateRange}`
+    }
 
-      if (jobLine) {
-        jobLine += '\\\\'
-      }
+    if (jobLine) {
+      jobLine += '\\\\'
+    }
 
-      if (location) {
-        jobLine += `${location}\\\\`
-      }
+    if (location) {
+      jobLine += `${location}\\\\`
+    }
 
-      if (duties) {
-        jobLine += source`
-          \\begin{itemize} \\itemsep 3pt
-          ${duties.map(duty => `\\item ${duty}`)}
-          \\end{itemize}
+    if (duties) {
+      jobLine += source`
+        \\begin{itemize} \\itemsep 3pt
+        ${duties.map(duty => `\\item ${duty}`)}
+        \\end{itemize}
         `
-      }
+    }
 
-      return jobLine
-    })}
+    return jobLine
+  })}
   `
 }
 
@@ -147,12 +147,12 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\section{SKILLS}
-    \\begin{tabular}{@{}ll}
-    ${skills.map(
-      skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`
-    )}
-    \\end{tabular}
+  \\section{SKILLS}
+  \\begin{tabular}{@{}ll}
+  ${skills.map(
+    skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`
+  )}
+  \\end{tabular}
   `
 }
 
@@ -162,34 +162,34 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\section{PROJECTS}
-      ${projects.map(project => {
-        const { name, description, technologies, link } = project
+  \\section{PROJECTS}
+  ${projects.map(project => {
+    const { name, description, technologies, link } = project
 
-        let projectLine = ''
+    let projectLine = ''
 
-        if (name) {
-          projectLine += `\\textbf{${name}}`
-        }
+    if (name) {
+      projectLine += `\\textbf{${name}}`
+    }
 
-        if (technologies) {
-          projectLine += `, {\\sl ${technologies}}`
-        }
+    if (technologies) {
+      projectLine += `, {\\sl ${technologies}}`
+    }
 
-        if (description) {
-          projectLine += projectLine ? `\\\\ ${description}` : description
-        }
+    if (description) {
+      projectLine += projectLine ? `\\\\ ${description}` : description
+    }
 
-        if (link) {
-          projectLine += projectLine ? `\\\\ ${link}` : link
-        }
+    if (link) {
+      projectLine += projectLine ? `\\\\ ${link}` : link
+    }
 
-        if (projectLine) {
-          projectLine += '\\\\\\\\'
-        }
+    if (projectLine) {
+      projectLine += '\\\\\\\\'
+    }
 
-        return projectLine
-      })}
+    return projectLine
+  })}
   `
 }
 
@@ -199,16 +199,16 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    \\section{Awards}
-    ${awards.map(award => {
-      const { name, details, date, location } = award
+  \\section{Awards}
+  ${awards.map(award => {
+    const { name, details, date, location } = award
 
-      return stripIndent`
-          \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date ||
-        ''} \\\\
-          ${details || ''} \\\\\\\\
+    return stripIndent`
+        \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date ||
+      ''} \\\\
+        ${details || ''} \\\\\\\\
     `
-    })}
+  })}
   `
 }
 

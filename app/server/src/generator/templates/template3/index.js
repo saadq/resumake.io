@@ -37,37 +37,37 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Education}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\begin{itemize}[leftmargin=*]
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\resheading{Education}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\begin{itemize}[leftmargin=*]
 
-    ${schools.map(school => {
-      const { name, location, degree, major, gpa, graduationDate } = school
+  ${schools.map(school => {
+    const { name, location, degree, major, gpa, graduationDate } = school
 
-      let degreeLine = ''
+    let degreeLine = ''
 
-      if (degree && major) {
-        degreeLine = `${degree} in ${major}`
-      } else if (degree || major) {
-        degreeLine = degree || major
-      }
+    if (degree && major) {
+      degreeLine = `${degree} in ${major}`
+    } else if (degree || major) {
+      degreeLine = degree || major
+    }
 
-      if (gpa) {
-        degreeLine += degreeLine ? `, GPA: ${gpa}` : gpa
-      }
+    if (gpa) {
+      degreeLine += degreeLine ? `, GPA: ${gpa}` : gpa
+    }
 
-      return stripIndent`
-        \\item[]
-          \\school
-            {${name || ''}}
-            {${location || ''}}
-            {${degreeLine}}
-            {${graduationDate || ''}}
+    return stripIndent`
+      \\item[]
+        \\school
+          {${name || ''}}
+          {${location || ''}}
+          {${degreeLine}}
+          {${graduationDate || ''}}
     `
-    })}
+  })}
 
-    \\end{itemize}
+  \\end{itemize}
   `
 }
 
@@ -77,43 +77,43 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Experience}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\begin{itemize}[leftmargin=*]
-    ${jobs.map(job => {
-      const { name, title, location, startDate, endDate, duties } = job
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\resheading{Experience}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\begin{itemize}[leftmargin=*]
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      let dateRange = ''
-      let dutyLines = ''
+    let dateRange = ''
+    let dutyLines = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} | ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} | Present`
-      } else {
-        dateRange = endDate
-      }
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
+    }
 
-      if (duties) {
-        dutyLines = source`
-          \\begin{itemize}
-            ${duties.map(duty => `\\item ${duty}`)}
-          \\end{itemize}
+    if (duties) {
+      dutyLines = source`
+        \\begin{itemize}
+          ${duties.map(duty => `\\item ${duty}`)}
+        \\end{itemize}
         `
-      }
+    }
 
-      return stripIndent`
-        \\item[]
-          \\job
-            {${name || ''}}
-            {${location || ''}}
-            {${title || ''}}
-            {${dateRange || ''}}
-            ${dutyLines}
+    return stripIndent`
+      \\item[]
+        \\job
+          {${name || ''}}
+          {${location || ''}}
+          {${title || ''}}
+          {${dateRange || ''}}
+          ${dutyLines}
     `
-    })}
-    \\end{itemize}
+  })}
+  \\end{itemize}
   `
 }
 
@@ -139,23 +139,23 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Projects}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\begin{itemize}[leftmargin=*]
-    ${projects.map(project => {
-      const { name, description, technologies, link } = project
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\resheading{Projects}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\begin{itemize}[leftmargin=*]
+  ${projects.map(project => {
+    const { name, description, technologies, link } = project
 
-      return stripIndent`
-        \\item[]
-            \\project
-                {${name || ''}}
-                {${technologies || ''}}
-                {${link || ''}}
-                {${description || ''}}
+    return stripIndent`
+      \\item[]
+          \\project
+              {${name || ''}}
+              {${technologies || ''}}
+              {${link || ''}}
+              {${description || ''}}
     `
-    })}
-    \\end{itemize}
+  })}
+  \\end{itemize}
   `
 }
 
@@ -165,23 +165,23 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Awards}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\begin{itemize}[leftmargin=*]
-    ${awards.map(award => {
-      const { name, details, date, location } = award
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\resheading{Awards}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\begin{itemize}[leftmargin=*]
+  ${awards.map(award => {
+    const { name, details, date, location } = award
 
-      return stripIndent`
-        \\item[]
-            \\award
-                {${name || ''}}
-                {${date || ''}}
-                {${location || ''}}
-                {${details || ''}}
+    return stripIndent`
+      \\item[]
+          \\award
+              {${name || ''}}
+              {${date || ''}}
+              {${location || ''}}
+              {${details || ''}}
     `
-    })}
-    \\end{itemize}
+  })}
+  \\end{itemize}
   `
 }
 

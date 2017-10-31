@@ -66,34 +66,34 @@ function generateEducationSection(schools) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %     Education
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\cvsection{Education}
-    \\begin{cventries}
-    ${schools.map(school => {
-      const { name, location, degree, major, gpa, graduationDate } = school
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %     Education
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\cvsection{Education}
+  \\begin{cventries}
+  ${schools.map(school => {
+    const { name, location, degree, major, gpa, graduationDate } = school
 
-      let degreeLine = ''
+    let degreeLine = ''
 
-      if (degree && major) {
-        degreeLine = `${degree} in ${major}`
-      } else if (degree || major) {
-        degreeLine = degree || major
-      }
+    if (degree && major) {
+      degreeLine = `${degree} in ${major}`
+    } else if (degree || major) {
+      degreeLine = degree || major
+    }
 
-      return stripIndent`
-        \\cventry
-          {${degreeLine}}
-          {${name || ''}}
-          {${location || ''}}
-          {${graduationDate || ''}}
-          {${gpa ? `GPA: ${gpa}` : ''}}
+    return stripIndent`
+      \\cventry
+        {${degreeLine}}
+        {${name || ''}}
+        {${location || ''}}
+        {${graduationDate || ''}}
+        {${gpa ? `GPA: ${gpa}` : ''}}
     `
-    })}
-    \\end{cventries}
+  })}
+  \\end{cventries}
 
-    \\vspace{-2mm}
+  \\vspace{-2mm}
   `
 }
 
@@ -103,43 +103,43 @@ function generateExperienceSection(jobs) {
   }
 
   return source`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %     Experience
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\cvsection{Experience}
-    \\begin{cventries}
-    ${jobs.map(job => {
-      const { name, title, location, startDate, endDate, duties } = job
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %     Experience
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\cvsection{Experience}
+  \\begin{cventries}
+  ${jobs.map(job => {
+    const { name, title, location, startDate, endDate, duties } = job
 
-      let dateRange = ''
-      let dutyLines = ''
+    let dateRange = ''
+    let dutyLines = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} – ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} – Present`
-      } else {
-        dateRange = endDate
-      }
+    if (startDate && endDate) {
+      dateRange = `${startDate} – ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} – Present`
+    } else {
+      dateRange = endDate
+    }
 
-      if (duties) {
-        dutyLines = source`
-          \\begin{cvitems}
-            ${duties.map(duty => `\\item {${duty}}`)}
-          \\end{cvitems}
+    if (duties) {
+      dutyLines = source`
+        \\begin{cvitems}
+          ${duties.map(duty => `\\item {${duty}}`)}
+        \\end{cvitems}
         `
-      }
+    }
 
-      return stripIndent`
-        \\cventry
-          {${title || ''}}
-          {${name || ''}}
-          {${location || ''}}
-          {${dateRange || ''}}
-          {${dutyLines}}
+    return stripIndent`
+      \\cventry
+        {${title || ''}}
+        {${name || ''}}
+        {${location || ''}}
+        {${dateRange || ''}}
+        {${dutyLines}}
     `
-    })}
-    \\end{cventries}
+  })}
+  \\end{cventries}
   `
 }
 
@@ -149,25 +149,25 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-      \\cvsection{Skills}
-      \\begin{cventries}
-      \\cventry
-        {}
-        {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
-          ${skills.map(skill => {
-            const { name, details } = skill
-            const nameLine = name ? `${name}: ` : ''
-            const detailsLine = `{\\skill{ ${details || ''}}}`
+  \\cvsection{Skills}
+  \\begin{cventries}
+  \\cventry
+  {}
+  {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
+  ${skills.map(skill => {
+    const { name, details } = skill
+    const nameLine = name ? `${name}: ` : ''
+    const detailsLine = `{\\skill{ ${details || ''}}}`
 
-            return `${nameLine} & ${detailsLine} \\\\`
-          })}
-        \\end{tabular}}}
-        {}
-        {}
-        {}
-      \\end{cventries}
+    return `${nameLine} & ${detailsLine} \\\\`
+  })}
+  \\end{tabular}}}
+  {}
+  {}
+  {}
+  \\end{cventries}
 
-      \\vspace{-7mm}
+  \\vspace{-7mm}
   `
 }
 
@@ -177,22 +177,22 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\cvsection{Projects}
-    \\begin{cventries}
-    ${projects.map(
-      project => stripIndent`
-        \\cventry
-          {${project.description || ''}}
-          {${project.name || ''}}
-          {${project.technologies || ''}}
-          {${project.link || ''}}
-          {}
+  \\cvsection{Projects}
+  \\begin{cventries}
+  ${projects.map(
+    project => stripIndent`
+      \\cventry
+        {${project.description || ''}}
+        {${project.name || ''}}
+        {${project.technologies || ''}}
+        {${project.link || ''}}
+        {}
 
-        \\vspace{-5mm}
+      \\vspace{-5mm}
 
-    `
-    )}
-    \\end{cventries}
+      `
+  )}
+  \\end{cventries}
   `
 }
 
@@ -202,20 +202,20 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    \\cvsection{Honors \\& Awards}
-    \\begin{cvhonors}
-      ${awards.map(award => {
-        const { name, details, date, location } = award
+  \\cvsection{Honors \\& Awards}
+  \\begin{cvhonors}
+  ${awards.map(award => {
+    const { name, details, date, location } = award
 
-        return stripIndent`
-          \\cvhonor
-            {${name || ''}}
-            {${details || ''}}
-            {${location || ''}}
-            {${date || ''}}
+    return stripIndent`
+      \\cvhonor
+        {${name || ''}}
+        {${details || ''}}
+        {${location || ''}}
+        {${date || ''}}
     `
-      })}
-    \\end{cvhonors}
+  })}
+  \\end{cvhonors}
   `
 }
 

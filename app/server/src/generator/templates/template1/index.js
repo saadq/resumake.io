@@ -27,18 +27,31 @@ function template1({
     ${generateResumeDefinitions()}
 
     \\begin{document}
-        \\vspace*{-40pt}
-        ${generateProfileSection(basics)}
-        \\vspace*{2mm}
-        generateEducationSection(schools)
-        \\vspace*{2mm}
-        generateExperienceSection(jobs)
-        generateSkillsSection(skills)
-        \\vspace*{2mm}
-        generateProjectsSection(projects)
-        \\vspace*{2mm}
-        generateAwardsSection(awards)
-        ${WHITESPACE}
+    \\vspace*{-40pt}
+
+    ${generateProfileSection(basics)}
+
+    \\vspace*{2mm}
+
+    ${generateEducationSection(education)}
+
+    \\vspace*{2mm}
+
+    ${generateExperienceSection(work)}
+
+    \\vspace*{2mm}
+
+    ${generateSkillsSection(skills)}
+
+    \\vspace*{2mm}
+
+    ${generateProjectsSection(projects)}
+
+    \\vspace*{2mm}
+
+    ${generateAwardsSection(awards)}
+
+    ${WHITESPACE}
     \\end{document}
   `
 }
@@ -71,62 +84,67 @@ function generateProfileSection(basics) {
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
   return source`
-    %==== Education ====%
-    \\header{Education}
-      ${schools.map(school => {
-        const { name, location, degree, major, gpa, graduationDate } = school
+  %==== Education ====%
+  \\header{Education}
+  ${education.map(school => {
+    const {
+      institution,
+      location,
+      studyType,
+      area,
+      gpa,
+      startDate,
+      endDate
+    } = school
 
-        let line1 = ''
-        let line2 = ''
+    let line1 = ''
+    let line2 = ''
 
-        if (name) {
-          line1 += `\\textbf{${name}}`
-        }
+    if (institution) {
+      line1 += `\\textbf{${institution}}`
+    }
 
-        if (location) {
-          line1 += `\\hfill ${location}`
-        }
+    if (location) {
+      line1 += `\\hfill ${location}`
+    }
 
-        if (degree) {
-          line2 += degree
-        }
+    if (studyType) {
+      line2 += studyType
+    }
 
-        if (major) {
-          line2 += degree ? ` ${major}` : `Degree in ${major}`
-        }
+    if (area) {
+      line2 += studyType ? ` ${area}` : `Degree in ${area}`
+    }
 
-        if (gpa) {
-          line2 += ` \\textit{GPA: ${gpa}}`
-        }
+    if (gpa) {
+      line2 += ` \\textit{GPA: ${gpa}}`
+    }
 
-        if (graduationDate) {
-          const gradLine = `Grad: ${graduationDate}`
+    if (startDate || endDate) {
+      const gradLine = `${startDate || ''} - ${endDate || ''}`
+      line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
+    }
 
-          line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
-        }
+    if (line1) {
+      line1 += '\\\\'
+    }
 
-        if (line1) {
-          line1 += '\\\\'
-        }
+    if (line2) {
+      line2 += '\\\\'
+    }
 
-        if (line2) {
-          line2 += '\\\\'
-        }
-
-        line2.trim()
-
-        return stripIndent`
-          ${line1}
-          ${line2}
-          \\vspace{2mm}
+    return stripIndent`
+      ${line1}
+      ${line2.trim()}
+      \\vspace{2mm}
     `
-      })}
+  })}
   `
 }
 
@@ -141,22 +159,22 @@ function generateExperienceSection(jobs) {
     \\vspace{1mm}
 
   ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let line1 = ''
     let line2 = ''
-    let dutyLines = ''
+    let highlightLines = ''
 
-    if (name) {
-      line1 += `\\textbf{${name}}`
+    if (company) {
+      line1 += `\\textbf{${company}}`
     }
 
     if (location) {
       line1 += ` \\hfill ${location}`
     }
 
-    if (title) {
-      line2 += `\\textit{${title}}`
+    if (position) {
+      line2 += `\\textit{${position}}`
     }
 
     if (startDate && endDate) {
@@ -170,19 +188,19 @@ function generateExperienceSection(jobs) {
     if (line1) line1 += '\\\\'
     if (line2) line2 += '\\\\'
 
-    if (duties) {
-      dutyLines = source`
+    if (highlights) {
+      highlightLines = source`
           \\vspace{-1mm}
           \\begin{itemize} \\itemsep 1pt
-            ${duties.map(duty => `\\item ${duty}`)}
+            ${highlights.map(highlight => `\\item ${highlight}`)}
           \\end{itemize}
         `
     }
 
     return stripIndent`
-        ${line1}
-        ${line2}
-        ${dutyLines}
+      ${line1}
+      ${line2}
+      ${highlightLines}
     `
   })}
   `
@@ -194,10 +212,13 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-    \\header{Skills}
-    \\begin{tabular}{ l l }
-      ${skills.map(skill => `${skill.name}: & ${skill.details} \\\\`)}
-    \\end{tabular}
+  \\header{Skills}
+  \\begin{tabular}{ l l }
+  ${skills.map(skill => {
+    const { name = 'Misc', keywords = [] } = skill
+    return `${name}: & ${keywords.join(', ')} \\\\`
+  })}
+  \\end{tabular}
   `
 }
 
@@ -207,43 +228,43 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-    \\header{Projects}
-    ${projects.map(project => {
-      if (Object.keys(project) === 0) {
-        return ''
-      }
+  \\header{Projects}
+  ${projects.map(project => {
+    if (Object.keys(project) === 0) {
+      return ''
+    }
 
-      const { name, description, technologies, link } = project
+    const { name, description, keywords, url } = project
 
-      let line1 = ''
-      let line2 = description || ''
+    let line1 = ''
+    let line2 = description || ''
 
-      if (name) {
-        line1 += `{\\textbf{${name}}`
-      }
+    if (name) {
+      line1 += `{\\textbf{${name}}`
+    }
 
-      if (technologies) {
-        line1 += ` \\sl ${technologies}} `
-      }
+    if (keywords) {
+      line1 += ` \\sl {${keywords.join(', ')}} `
+    }
 
-      if (link) {
-        line1 += `\\hfill ${link}`
-      }
+    if (url) {
+      line1 += `\\hfill ${url}`
+    }
 
-      if (line1) {
-        line1 += '\\\\'
-      }
+    if (line1) {
+      line1 += '\\\\'
+    }
 
-      if (line2) {
-        line2 += '\\\\'
-      }
+    if (line2) {
+      line2 += '\\\\'
+    }
 
-      return stripIndent`
-        ${line1}
-        ${line2}
-        \\vspace*{2mm}
+    return stripIndent`
+      ${line1}
+      ${line2}
+      \\vspace*{2mm}
     `
-    })}
+  })}
   `
 }
 
@@ -253,34 +274,34 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-    \\header{Awards}
-    ${awards.map(award => {
-      const { name, details, date, location } = award
+  \\header{Awards}
+  ${awards.map(award => {
+    const { title, summary, date, awarder } = award
 
-      let line1 = ''
-      let line2 = details || ''
+    let line1 = ''
+    let line2 = summary || ''
 
-      if (name) {
-        line1 += `\\textbf{${name}}`
-      }
+    if (title) {
+      line1 += `\\textbf{${title}}`
+    }
 
-      if (location) {
-        line1 += ` \\hfill ${location}`
-      }
+    if (awarder) {
+      line1 += ` \\hfill ${awarder}`
+    }
 
-      if (date) {
-        line2 += ` \\hfill ${date}`
-      }
+    if (date) {
+      line2 += ` \\hfill ${date}`
+    }
 
-      if (line1) line1 += '\\\\'
-      if (line2) line2 += '\\\\'
+    if (line1) line1 += '\\\\'
+    if (line2) line2 += '\\\\'
 
-      return stripIndent`
-        ${line1}
-        ${line2}
-        \\vspace*{2mm}
+    return stripIndent`
+      ${line1}
+      ${line2}
+      \\vspace*{2mm}
     `
-    })}
+  })}
   `
 }
 
@@ -339,7 +360,7 @@ function generateResumeDefinitions() {
         \\textbf{#1} #2 $\\bullet$ #3\\\\
         #4 \\\\
     }
-        % END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+    % END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
   `
 }
 

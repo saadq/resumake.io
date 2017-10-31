@@ -38,6 +38,7 @@ import type { FormValues } from '../types'
 function getTemplateData(data: FormValues) {
   switch (data.template) {
     case TEMPLATE1:
+      console.log(template1(data))
       return {
         texDoc: template1(data),
         opts: {}

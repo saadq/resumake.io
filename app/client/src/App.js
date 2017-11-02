@@ -5,6 +5,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
+import ScrollToTop from './shared/components/ScrollToTop'
 import { Home, Generator, About } from './pages'
 
 injectGlobal`
@@ -21,12 +22,14 @@ injectGlobal`
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/generator" component={Generator} />
-        <Route path="/about" component={About} />
-        <Route path="*" render={() => <h1>ono 404</h1>} />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/generator" component={Generator} />
+          <Route path="/about" component={About} />
+          <Route path="*" render={() => <h1>ono 404</h1>} />
+        </Switch>
+      </ScrollToTop>
     </Router>
   )
 }

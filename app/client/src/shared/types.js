@@ -4,23 +4,17 @@
 
 import type { Dispatch as ReduxDispatch } from 'redux'
 import type { FormState, FormAction } from '../features/form/types'
-import type {
-  TemplatesState,
-  TemplatesAction
-} from '../features/templates/types'
-import type {
-  PreviewState,
-  PreviewAction
-} from '../features/preview/types'
+import type { PreviewState, PreviewAction } from '../features/preview/types'
+import type { UIState, UIAction } from '../features/ui/types'
 
 type State = {
   form: { resume: FormState },
-  templates: TemplatesState,
-  preview: PreviewState
+  preview: PreviewState,
+  ui: UIState
 }
 
 type GetState = () => State
-type Action = TemplatesAction | FormAction | PreviewAction
+type Action = FormAction | PreviewAction | UIAction
 type Dispatch = ReduxDispatch<Action>
 type AsyncAction = (dispatch: Dispatch, getState: GetState) => any
 

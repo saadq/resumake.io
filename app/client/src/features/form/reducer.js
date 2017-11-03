@@ -9,6 +9,7 @@ import type { Action } from '../../shared/types'
 // Keep track of fragment counts so that we know how many to render in our view.
 // This state will be merged with redux-form's form values state.
 const initialState = {
+  selectedTemplate: 1,
   schoolCount: 1,
   jobCount: 1,
   jobHighlights: [1],
@@ -35,6 +36,12 @@ const initialState = {
 
 function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
+    case 'SELECT_TEMPLATE':
+      return {
+        ...state,
+        selectedTemplate: action.templateId
+      }
+
     case 'ADD_SCHOOL':
       return {
         ...state,
@@ -76,7 +83,9 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         jobCount: Math.max(state.jobCount - 1, 1),
         jobHighlights:
-          state.jobCount > 1 ? state.jobHighlights.slice(0, -1) : state.jobHighlights
+          state.jobCount > 1
+            ? state.jobHighlights.slice(0, -1)
+            : state.jobHighlights
       }
 
     case 'CLEAR_JOB_FIELD':
@@ -161,7 +170,9 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         skillCount: Math.max(state.skillCount - 1, 1),
         skillKeywords:
-          state.skillCount > 1 ? state.skillKeywords.slice(0, -1) : state.skillKeywords
+          state.skillCount > 1
+            ? state.skillKeywords.slice(0, -1)
+            : state.skillKeywords
       }
 
     case 'CLEAR_SKILL_FIELD':
@@ -246,7 +257,9 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         projectCount: Math.max(state.projectCount - 1, 1),
         projectKeywords:
-          state.projectCount > 1 ? state.projectKeywords.slice(0, -1) : state.projectKeywords
+          state.projectCount > 1
+            ? state.projectKeywords.slice(0, -1)
+            : state.projectKeywords
       }
 
     case 'CLEAR_PROJECT_FIELD':

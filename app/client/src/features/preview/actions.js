@@ -11,6 +11,4 @@ function setResumeURL(resumeURL: string): Action {
   }
 }
 
-export {
-  setResumeURL
-}
+export { setResumeURL }

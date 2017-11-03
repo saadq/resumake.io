@@ -4,13 +4,13 @@
 
 import { combineReducers } from 'redux'
 import form from '../features/form/reducer'
-import templates from '../features/templates/reducer'
 import preview from '../features/preview/reducer'
+import ui from '../features/ui/reducer'
 
 const reducer = combineReducers({
   form,
-  templates,
-  preview
+  preview,
+  ui
 })
 
 export default reducer

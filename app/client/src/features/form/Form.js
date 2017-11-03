@@ -56,7 +56,7 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    template: state.templates.selectedTemplate
+    template: state.form.resume.selectedTemplate
   }
 }
 

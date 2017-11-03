@@ -65,6 +65,7 @@ type FormValues = {
 
 type FormState = {
   values?: FormValues,
+  selectedTemplate: number,
   schoolCount: number,
   jobCount: number,
   jobHighlights: Array<number>,
@@ -76,6 +77,7 @@ type FormState = {
 }
 
 type FormAction =
+  | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
   | { type: 'CLEAR_SCHOOL_FIELD' }

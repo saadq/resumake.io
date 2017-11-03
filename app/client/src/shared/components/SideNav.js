@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { lighten } from 'polished'
 import { colors, sizes } from '../theme'
 
@@ -69,6 +69,12 @@ const NavItem = styled(NavLink)`
   }
 `
 
+const pulse = keyframes`
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+`
+
 const Button = styled.button`
   width: 75px;
   height: 75px;
@@ -79,19 +85,19 @@ const Button = styled.button`
   background-color: black;
   border: 3px solid ${colors.primary};
   border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
   color: ${colors.primary};
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
+  animation: ${pulse} 2s infinite cubic-bezier(0.66, 0, 0, 1);
 
   &:hover {
-    box-shadow: none;
+    animation: none;
     cursor: pointer;
     background: ${colors.primary};
     color: black;
     border: 20px solid ${colors.primary};
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06),
-      0 2px 6px rgba(255, 255, 255, 0.85);
   }
 
   &:active {

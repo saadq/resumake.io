@@ -2,50 +2,31 @@
  * @flow
  */
 
-import React, { Component, type Node } from 'react'
+import React, { type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { generateResume } from '../preview/actions'
-import type { FormValues, Payload } from './types'
-import type { State } from '../../shared/types'
+import type { FormValues } from './types'
 
 type Props = {
-  selectedTemplate: number,
-  generateResume: (payload: Payload) => void,
   handleSubmit: *,
+  generateResume: (payload: FormValues) => void,
   children: Node
 }
 
-class Form extends Component<Props> {
-  async onSubmit(values: FormValues) {
-    const { selectedTemplate, generateResume } = this.props
-    const payload = { ...values, selectedTemplate }
-    generateResume(payload)
-  }
-
-  render() {
-    return (
-      <form
-        id="resume-form"
-        onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
-      >
-        {this.props.children}
-      </form>
-    )
-  }
-}
-
-function mapState(state: State) {
-  return {
-    selectedTemplate: state.form.resume.selectedTemplate
-  }
+function Form({ handleSubmit, generateResume, children }: Props) {
+  return (
+    <form id="resume-form" onSubmit={handleSubmit(generateResume)}>
+      {children}
+    </form>
+  )
 }
 
 const actions = {
   generateResume
 }
 
-const ConnectedForm = connect(mapState, actions)(Form)
+const ConnectedForm = connect(null, actions)(Form)
 
 export default reduxForm({
   form: 'resume',

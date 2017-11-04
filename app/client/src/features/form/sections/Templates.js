@@ -111,7 +111,7 @@ function Templates({
 
 function mapStateToProps(state: State) {
   return {
-    selectedTemplate: state.form.resume.selectedTemplate,
+    selectedTemplate: state.form.resume.values.selectedTemplate,
     index: state.ui.lightbox.index,
     isOpen: state.ui.lightbox.isOpen
   }

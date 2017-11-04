@@ -9,7 +9,6 @@ import type { Action } from '../../shared/types'
 // Keep track of fragment counts so that we know how many to render in our view.
 // This state will be merged with redux-form's form values state.
 const initialState = {
-  selectedTemplate: 1,
   schoolCount: 1,
   jobCount: 1,
   jobHighlights: [1],
@@ -17,7 +16,10 @@ const initialState = {
   skillKeywords: [1],
   projectCount: 1,
   projectKeywords: [1],
-  awardCount: 1
+  awardCount: 1,
+  values: {
+    selectedTemplate: 1
+  }
 }
 
 /**
@@ -39,7 +41,10 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'SELECT_TEMPLATE':
       return {
         ...state,
-        selectedTemplate: action.templateId
+        values: {
+          ...state.values,
+          selectedTemplate: action.templateId
+        }
       }
 
     case 'ADD_SCHOOL':

@@ -55,6 +55,7 @@ type Skill = {
 }
 
 type FormValues = {
+  selectedTemplate: number,
   basics?: Basics,
   work?: Array<Job>,
   education?: Array<School>,
@@ -63,13 +64,8 @@ type FormValues = {
   projects?: Array<Project>
 }
 
-type Payload = FormValues & {
-  selectedTemplate: number
-}
-
 type FormState = {
-  values?: FormValues,
-  selectedTemplate: number,
+  values: FormValues,
   schoolCount: number,
   jobCount: number,
   jobHighlights: Array<number>,
@@ -107,4 +103,4 @@ type FormAction =
   | { type: 'REMOVE_AWARD' }
   | { type: 'CLEAR_AWARD_FIELD' }
 
-export type { FormState, FormAction, FormValues, Payload }
+export type { FormState, FormAction, FormValues }

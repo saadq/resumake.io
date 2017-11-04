@@ -3,7 +3,7 @@
  */
 
 import type { PreviewAction as Action } from './types'
-import type { Payload } from '../form/types'
+import type { FormValues } from '../form/types'
 import type { AsyncAction } from '../../shared/types'
 
 function generateResumeRequest(): Action {
@@ -25,7 +25,7 @@ function generateResumeFailure(): Action {
   }
 }
 
-function generateResume(payload: Payload): AsyncAction {
+function generateResume(payload: FormValues): AsyncAction {
   return async (dispatch, getState) => {
     dispatch(generateResumeRequest())
 

@@ -23,8 +23,6 @@ type Props = {
 }
 
 const ResumePage = styled(Page)`
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-
   canvas {
     max-width: 100%;
     height: auto !important;
@@ -35,10 +33,7 @@ function Preview({ resumeURL }: Props) {
   return (
     <Div>
       <Document file={resumeURL || BlankPDF}>
-        <ResumePage
-          width={sizes.preview}
-          pageNumber={1}
-        />
+        <ResumePage width={sizes.preview} pageNumber={1} />
       </Document>
     </Div>
   )

@@ -10,7 +10,8 @@ const colors = {
 
 const sizes = {
   header: '15vh',
-  sideNav: '20vw'
+  sideNav: '20vw',
+  preview: Math.min(600, (document.body: any).clientWidth - 52)
 }
 
 const styles = {

@@ -9,10 +9,23 @@ const initialState = {}
 
 function preview(state: State = initialState, action: Action) {
   switch (action.type) {
-    case 'SET_RESUME_URL':
+    case 'GENERATE_RESUME_REQUEST':
       return {
         ...state,
+        status: 'pending'
+      }
+
+    case 'GENERATE_RESUME_SUCCESS':
+      return {
+        ...state,
+        status: 'success',
         resumeURL: action.resumeURL
+      }
+
+    case 'GENERATE_RESUME_FAILURE':
+      return {
+        ...state,
+        status: 'failure'
       }
 
     default:

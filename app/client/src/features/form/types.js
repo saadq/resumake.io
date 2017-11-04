@@ -63,6 +63,10 @@ type FormValues = {
   projects?: Array<Project>
 }
 
+type Payload = FormValues & {
+  selectedTemplate: number
+}
+
 type FormState = {
   values?: FormValues,
   selectedTemplate: number,
@@ -103,4 +107,4 @@ type FormAction =
   | { type: 'REMOVE_AWARD' }
   | { type: 'CLEAR_AWARD_FIELD' }
 
-export type { FormState, FormAction, FormValues }
+export type { FormState, FormAction, FormValues, Payload }

@@ -5,41 +5,22 @@
 import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { setResumeURL } from '../preview/actions'
-import type { FormValues } from './types'
+import { generateResume } from '../preview/actions'
+import type { FormValues, Payload } from './types'
 import type { State } from '../../shared/types'
 
 type Props = {
-  children: Node,
-  template: number,
-  setResumeURL: (url: string) => void,
-  handleSubmit: *
+  selectedTemplate: number,
+  generateResume: (payload: Payload) => void,
+  handleSubmit: *,
+  children: Node
 }
 
 class Form extends Component<Props> {
   async onSubmit(values: FormValues) {
-    const { fetch, URL } = window
-    const { template, setResumeURL } = this.props
-
-    const payload = {
-      ...values,
-      template
-    }
-
-    const request = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }
-
-    const response = await fetch('/api/generate/resume', request)
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-
-    setResumeURL(url)
+    const { selectedTemplate, generateResume } = this.props
+    const payload = { ...values, selectedTemplate }
+    generateResume(payload)
   }
 
   render() {
@@ -56,12 +37,12 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    template: state.form.resume.selectedTemplate
+    selectedTemplate: state.form.resume.selectedTemplate
   }
 }
 
 const actions = {
-  setResumeURL
+  generateResume
 }
 
 const ConnectedForm = connect(mapState, actions)(Form)

@@ -90,7 +90,7 @@ const Button = styled.button`
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
-  animation: ${pulse} 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: ${pulse} 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
 
   &:hover {
     animation: none;
@@ -101,7 +101,7 @@ const Button = styled.button`
   }
 
   &:active {
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 40px rgba(0, 0, 0, 0.16);
     background-color: ${lighten(0.25, colors.primary)};
     border-color: ${lighten(0.25, colors.primary)};
     color: black;

@@ -11,16 +11,10 @@ import { sizes } from '../../shared/theme'
 import type { State } from '../../shared/types'
 
 const Div = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 `
-
-type Props = {
-  resumeURL?: string
-}
 
 const ResumePage = styled(Page)`
   canvas {
@@ -28,6 +22,10 @@ const ResumePage = styled(Page)`
     height: auto !important;
   }
 `
+
+type Props = {
+  resumeURL?: string
+}
 
 function Preview({ resumeURL }: Props) {
   return (

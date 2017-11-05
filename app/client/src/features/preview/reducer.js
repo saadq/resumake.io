@@ -5,7 +5,9 @@
 import type { PreviewState as State } from './types'
 import type { Action } from '../../shared/types'
 
-const initialState = {}
+const initialState = {
+  isDownloading: false
+}
 
 function preview(state: State = initialState, action: Action) {
   switch (action.type) {
@@ -26,6 +28,25 @@ function preview(state: State = initialState, action: Action) {
       return {
         ...state,
         status: 'failure'
+      }
+
+    case 'SAVE_RESUME_DATA':
+      return {
+        ...state,
+        resumeData: action.resumeData
+      }
+
+    case 'DOWNLOAD_SOURCE_REQUEST':
+      return {
+        ...state,
+        isDownloading: true
+      }
+
+    case 'DOWNLOAD_SOURCE_SUCCESS':
+    case 'DOWNLOAD_SOURCE_FAILURE':
+      return {
+        ...state,
+        isDownloading: false
       }
 
     default:

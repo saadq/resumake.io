@@ -6,8 +6,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf'
 import styled from 'styled-components'
-import BlankPDF from './blank.pdf'
+import { Toolbar } from './components'
+import { downloadSource } from './actions'
 import { sizes } from '../../shared/theme'
+import BlankPDF from './blank.pdf'
 import type { State } from '../../shared/types'
 
 const Div = styled.div`
@@ -24,12 +26,14 @@ const ResumePage = styled(Page)`
 `
 
 type Props = {
+  downloadSource: () => void,
   resumeURL?: string
 }
 
-function Preview({ resumeURL }: Props) {
+function Preview({ resumeURL, downloadSource }: Props) {
   return (
     <Div>
+      <Toolbar downloadSource={downloadSource} src={resumeURL || BlankPDF} />
       <Document file={resumeURL || BlankPDF}>
         <ResumePage width={sizes.preview} pageNumber={1} />
       </Document>
@@ -43,4 +47,8 @@ function mapState(state: State) {
   }
 }
 
-export default connect(mapState)(Preview)
+const actions = {
+  downloadSource
+}
+
+export default connect(mapState, actions)(Preview)

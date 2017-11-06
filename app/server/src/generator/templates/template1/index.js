@@ -4,7 +4,7 @@
 
 import { stripIndent, source } from 'common-tags'
 import { WHITESPACE } from '../constants'
-import type { FormValues } from '../../types'
+import type { FormValues } from '../../../types'
 
 function template1({
   basics,

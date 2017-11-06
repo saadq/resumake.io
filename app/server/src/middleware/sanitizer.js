@@ -87,7 +87,7 @@ function isEmptyString(val: any) {
 
 /**
  * Converts multiple spaces in a string to a single space,
- * and removes leading and traililng whitespace in the string.
+ * and removes leading and traililng whitespace.
  */
 
 function trim(str: string) {

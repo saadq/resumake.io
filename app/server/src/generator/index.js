@@ -5,9 +5,8 @@
 import latex from 'node-latex'
 import prettify from 'pretty-latex'
 import Archiver from 'archiver'
-import sanitize from './sanitizer'
 import getTemplateData from './templates'
-import type { FormValues } from './types'
+import type { FormValues } from '../types'
 
 /**
  * Generates a LaTeX document from the request body,
@@ -19,7 +18,7 @@ import type { FormValues } from './types'
  */
 
 function generatePDF(formData: FormValues) {
-  const { texDoc, opts } = generateTex(formData)
+  const { texDoc, opts } = getTemplateData(formData)
   const pdf = latex(texDoc, opts)
 
   return pdf
@@ -35,7 +34,7 @@ function generatePDF(formData: FormValues) {
  */
 
 function generateSourceCode(formData: FormValues) {
-  const { texDoc, opts } = generateTex(formData)
+  const { texDoc, opts } = getTemplateData(formData)
   const prettyDoc = prettify(texDoc)
   const zip = Archiver('zip')
 
@@ -50,23 +49,4 @@ function generateSourceCode(formData: FormValues) {
   return zip
 }
 
-/**
- * Sanitizes the data in the request body and then generates
- * a LaTeX document based on the data and template chosen.
- *
- * @param {Object} formData - The request body received from the client.
- *
- * @return {Object} - An object which contains the generated LaTeX doc (texDoc)
- *                    as well as the opts needed to create a PDF from it (opts).
- */
-
-function generateTex(formData) {
-  const data = sanitize(formData)
-
-  return getTemplateData(data)
-}
-
-module.exports = {
-  generatePDF,
-  generateSourceCode
-}
+export { generatePDF, generateSourceCode }

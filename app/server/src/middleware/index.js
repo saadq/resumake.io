@@ -3,5 +3,6 @@
  */
 
 import errorHandler from './error-handler'
+import sanitizer from './sanitizer'
 
-export { errorHandler }
+export { errorHandler, sanitizer }

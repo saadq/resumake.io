@@ -23,7 +23,7 @@ import {
   TEMPLATE8,
   TEMPLATE9
 } from './constants'
-import type { FormValues } from '../types'
+import type { FormValues } from '../../types'
 
 /**
  * Generates the LaTeX document based on the selected template

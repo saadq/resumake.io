@@ -7,6 +7,7 @@ import type { Action } from '../../shared/types'
 
 const initialState = {
   isDownloading: false,
+  data: {},
   resume: {
     pageCount: 1,
     page: 1
@@ -18,9 +19,13 @@ function preview(state: State = initialState, action: Action) {
     case 'SAVE_RESUME_DATA':
       return {
         ...state,
+        data: {
+          ...state.data,
+          json: action.data,
+          url: action.url
+        },
         resume: {
-          ...state.resume,
-          data: action.resumeData
+          ...state.resume
         }
       }
 

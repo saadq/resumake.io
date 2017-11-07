@@ -92,18 +92,26 @@ const PageNumber = styled.span`
 `
 
 type Props = {
-  url: string,
   page: number,
+  resumeURL: string,
+  jsonURL?: string,
   downloadSource: () => void,
   prevPage: () => void,
   nextPage: () => void
 }
 
-function Toolbar({ url, page, downloadSource, prevPage, nextPage }: Props) {
+function Toolbar({
+  resumeURL,
+  jsonURL,
+  page,
+  downloadSource,
+  prevPage,
+  nextPage
+}: Props) {
   return (
     <Div>
       <ButtonGroup>
-        <ToolButton href={url} download="resume.pdf">
+        <ToolButton href={resumeURL} download="resume.pdf">
           <Icon type="picture_as_pdf" /> PDF
         </ToolButton>
         <ToolButton onClick={downloadSource} type="button">
@@ -120,7 +128,7 @@ function Toolbar({ url, page, downloadSource, prevPage, nextPage }: Props) {
         </Button>
       </Pagination>
       <ButtonGroup>
-        <ToolButton type="button">
+        <ToolButton href={jsonURL} download="resume.json" type="button">
           <Icon type="file_download" /> Export JSON
         </ToolButton>
         <ToolButton type="button">

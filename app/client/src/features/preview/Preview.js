@@ -33,7 +33,8 @@ const ResumePage = styled(Page)`
 
 type Props = {
   page: number,
-  url?: string,
+  resumeURL?: string,
+  jsonURL?: string,
   status?: 'pending' | 'success' | 'failure',
   setPageCount: (pageCount: number) => void,
   downloadSource: () => void,
@@ -47,20 +48,29 @@ class Preview extends Component<Props> {
   }
 
   render() {
-    const { url, page, status, downloadSource, prevPage, nextPage } = this.props
+    const {
+      resumeURL,
+      jsonURL,
+      page,
+      status,
+      downloadSource,
+      prevPage,
+      nextPage
+    } = this.props
     return (
       <Div>
         <Toolbar
-          url={url || BlankPDF}
+          resumeURL={resumeURL || BlankPDF}
+          jsonURL={jsonURL}
           page={page}
           prevPage={prevPage}
           nextPage={nextPage}
           downloadSource={downloadSource}
         />
         <LoadingBar status={status} />
-        <a href={url} target="_blank">
+        <a href={resumeURL} target="_blank">
           <Document
-            file={url}
+            file={resumeURL}
             onLoadSuccess={this.onDocumentLoad}
             loading={null}
             noData={null}
@@ -75,7 +85,8 @@ class Preview extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    url: state.preview.resume.url,
+    resumeURL: state.preview.resume.url,
+    jsonURL: state.preview.data.url,
     page: state.preview.resume.page,
     status: state.preview.resume.status
   }

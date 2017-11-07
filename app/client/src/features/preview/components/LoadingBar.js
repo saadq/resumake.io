@@ -48,7 +48,7 @@ const OuterBar = styled.div`
   display: block;
   background: #222;
   overflow: hidden;
-  opacity: ${props => props.status === 'pending' ? 1 : 0};
+  opacity: ${props => (props.status === 'pending' ? 1 : 0)};
   transition: opacity 0.7s ease-in-out;
   margin-bottom: 10px;
 `

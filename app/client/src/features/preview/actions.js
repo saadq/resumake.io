@@ -7,10 +7,16 @@ import type { PreviewAction as Action } from './types'
 import type { FormValues } from '../form/types'
 import type { AsyncAction } from '../../shared/types'
 
-function saveResumeData(resumeData: FormValues): Action {
+function saveResumeData(data: FormValues): Action {
+  const { Blob, URL } = window
+  const jsonString = JSON.stringify(data, null, 2)
+  const blob = new Blob([jsonString], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+
   return {
     type: 'SAVE_RESUME_DATA',
-    resumeData
+    data,
+    url
   }
 }
 
@@ -100,14 +106,13 @@ function downloadSourceFailure(): Action {
 function downloadSource(): AsyncAction {
   return async (dispatch, getState) => {
     const { fetch } = window
-    const { resume, isDownloading } = getState().preview
-    const { status, data } = resume
+    const { resume, isDownloading, data } = getState().preview
 
     if (
       isDownloading ||
-      status === 'pending' ||
-      data == null ||
-      Object.keys(data).length === 0
+      resume.status === 'pending' ||
+      data.json == null ||
+      Object.keys(data.json).length === 0
     ) {
       return
     }
@@ -133,4 +138,4 @@ function downloadSource(): AsyncAction {
   }
 }
 
-export { generateResume, downloadSource, setPageCount, prevPage, nextPage }
+export { generateResume, setPageCount, prevPage, nextPage, downloadSource }

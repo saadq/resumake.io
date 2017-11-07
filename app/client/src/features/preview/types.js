@@ -5,18 +5,22 @@
 import type { FormValues } from '../form/types'
 
 type PreviewState = {
+  data: {
+    json?: FormValues,
+    url?: string
+  },
   resume: {
     pageCount: number,
     page: number,
     status?: 'pending' | 'success' | 'failure',
-    url?: string,
-    data?: FormValues
+    url?: string
   },
   isDownloading: boolean
 }
 
 type PreviewAction =
-  | { type: 'SAVE_RESUME_DATA', resumeData: FormValues }
+  | { type: 'SAVE_RESUME_DATA', data: FormValues, url: string }
+  | { type: 'DOWNLOAD_RESUME_DATA' }
   | { type: 'GENERATE_RESUME_REQUEST' }
   | { type: 'GENERATE_RESUME_SUCCESS', resumeURL: string }
   | { type: 'GENERATE_RESUME_FAILURE' }

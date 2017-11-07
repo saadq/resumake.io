@@ -15,7 +15,10 @@ const Div = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  margin: 10px;
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
   border: 1px solid white;
   border-radius: 2px;
 `

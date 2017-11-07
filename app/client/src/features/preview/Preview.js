@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf'
 import styled from 'styled-components'
-import { Toolbar } from './components'
+import { Toolbar, LoadingBar } from './components'
 import { downloadSource, setPageCount, prevPage, nextPage } from './actions'
 import { sizes } from '../../shared/theme'
 import BlankPDF from './blank.pdf'
@@ -28,6 +28,7 @@ const ResumePage = styled(Page)`
 type Props = {
   page: number,
   url?: string,
+  status?: 'pending' | 'success' | 'failure',
   setPageCount: (pageCount: number) => void,
   downloadSource: () => void,
   prevPage: () => void,
@@ -40,7 +41,7 @@ class Preview extends Component<Props> {
   }
 
   render() {
-    const { url, page, downloadSource, prevPage, nextPage } = this.props
+    const { url, page, status, downloadSource, prevPage, nextPage } = this.props
     return (
       <Div>
         <Toolbar
@@ -50,7 +51,8 @@ class Preview extends Component<Props> {
           nextPage={nextPage}
           downloadSource={downloadSource}
         />
-        <Document file={url || BlankPDF} onLoadSuccess={this.onDocumentLoad}>
+        <LoadingBar status={status} />
+        <Document file={url} onLoadSuccess={this.onDocumentLoad} loading={null} noData={null}>
           <ResumePage width={sizes.preview} pageNumber={page} />
         </Document>
       </Div>
@@ -61,7 +63,8 @@ class Preview extends Component<Props> {
 function mapState(state: State) {
   return {
     url: state.preview.resume.url,
-    page: state.preview.resume.page
+    page: state.preview.resume.page,
+    status: state.preview.resume.status
   }
 }
 

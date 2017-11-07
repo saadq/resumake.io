@@ -19,11 +19,12 @@ const Div = styled.div`
   margin-right: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 2px;
 `
 
 const Button = styled.a`
+  text-align: center;
   text-decoration: none;
   font-size: 12px;
   display: inline-flex;
@@ -33,17 +34,17 @@ const Button = styled.a`
   min-width: 65px;
   background: transparent;
   border-radius: 2px;
-  color: #ccc;
+  color: #ddd;
   padding: 0 2px;
 
   i {
     margin-right: 5px;
-    color: #ccc;
+    color: #ddd;
     font-size: 14px;
   }
 
   &:hover {
-    background: #ccc;
+    background: #ddd;
     color: black;
     cursor: pointer;
 
@@ -82,10 +83,11 @@ const Pagination = styled.div`
 
 const PageNumber = styled.span`
   font-size: 12px;
-  color: #ccc;
+  color: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding: 0 10px;
 `
 
@@ -119,7 +121,7 @@ function Toolbar({ url, page, downloadSource, prevPage, nextPage }: Props) {
       </Pagination>
       <ButtonGroup>
         <ToolButton type="button">
-          <Icon type="file_download" /> Export
+          <Icon type="file_download" /> Export JSON
         </ToolButton>
         <ToolButton type="button">
           <Icon type="print" /> Print

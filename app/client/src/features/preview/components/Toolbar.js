@@ -45,11 +45,19 @@ const Button = styled.a`
   }
 `
 
-const DownloadButtons = styled.div`
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const ToolButton = Button.extend`
   border: 1px solid white;
+  border-radius: 2px;
   margin: 0 2px;
 
   :first-of-type {
@@ -59,14 +67,22 @@ const ToolButton = Button.extend`
   :last-of-type {
     margin-right: 0;
   }
+
+  @media screen and (max-width: 768px) {
+    margin: 2px 0;
+  }
 `
 
 const Pagination = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid white;
+  border-radius: 2px;
 `
 
 const PageNumber = styled.span`
+  font-size: 12px;
   color: white;
   display: flex;
   justify-content: center;
@@ -95,14 +111,14 @@ type Props = {
 function Toolbar({ src, downloadSource }: Props) {
   return (
     <Div>
-      <DownloadButtons>
+      <ButtonGroup>
         <ToolButton href={src} download="resume.pdf">
           <Icon color="white" size={14} type="picture_as_pdf" /> PDF
         </ToolButton>
         <ToolButton onClick={downloadSource} type="button">
           <Icon color="white" size={14} type="code" /> Source
         </ToolButton>
-      </DownloadButtons>
+      </ButtonGroup>
       <Pagination>
         <PageButton type="button">
           <Icon color="white" size={14} type="arrow_back" />
@@ -112,14 +128,14 @@ function Toolbar({ src, downloadSource }: Props) {
           <Icon color="white" size={14} type="arrow_forward" />
         </PageButton>
       </Pagination>
-      <div>
+      <ButtonGroup>
         <ToolButton type="button">
           <Icon color="white" size={14} type="file_download" /> Export
         </ToolButton>
         <ToolButton type="button">
           <Icon color="white" size={14} type="print" /> Print
         </ToolButton>
-      </div>
+      </ButtonGroup>
     </Div>
   )
 }

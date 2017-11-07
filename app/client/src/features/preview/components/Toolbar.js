@@ -15,7 +15,9 @@ const Div = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  margin-bottom: 10px;
+  margin: 10px;
+  border: 1px solid white;
+  border-radius: 2px;
 `
 
 const Button = styled.a`
@@ -25,10 +27,11 @@ const Button = styled.a`
   justify-content: center;
   align-items: center;
   height: 35px;
-  min-width: 70px;
+  min-width: 65px;
   background: transparent;
+  border-radius: 2px;
   color: white;
-  box-sizing: border-box;
+  padding: 0 2px;
 
   i {
     margin-right: 5px;
@@ -49,6 +52,7 @@ const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 5px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -56,17 +60,8 @@ const ButtonGroup = styled.div`
 `
 
 const ToolButton = Button.extend`
-  border: 1px solid white;
   border-radius: 2px;
   margin: 0 2px;
-
-  :first-of-type {
-    margin-left: 0;
-  }
-
-  :last-of-type {
-    margin-right: 0;
-  }
 
   @media screen and (max-width: 768px) {
     margin: 2px 0;
@@ -77,7 +72,6 @@ const Pagination = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
   border-radius: 2px;
 `
 
@@ -88,19 +82,6 @@ const PageNumber = styled.span`
   justify-content: center;
   align-items: center;
   padding: 0 10px;
-`
-
-const PageButton = Button.extend`
-  :first-of-type {
-    border-right: none;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-  }
-  :last-of-type {
-    border-left: none;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-  }
 `
 
 type Props = {
@@ -120,13 +101,13 @@ function Toolbar({ src, downloadSource }: Props) {
         </ToolButton>
       </ButtonGroup>
       <Pagination>
-        <PageButton type="button">
+        <Button type="button">
           <Icon color="white" size={14} type="arrow_back" />
-        </PageButton>
+        </Button>
         <PageNumber>Page 1</PageNumber>
-        <PageButton type="button">
+        <Button type="button">
           <Icon color="white" size={14} type="arrow_forward" />
-        </PageButton>
+        </Button>
       </Pagination>
       <ButtonGroup>
         <ToolButton type="button">

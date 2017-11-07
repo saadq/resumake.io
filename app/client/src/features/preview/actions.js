@@ -7,6 +7,13 @@ import type { PreviewAction as Action } from './types'
 import type { FormValues } from '../form/types'
 import type { AsyncAction } from '../../shared/types'
 
+function saveResumeData(resumeData: FormValues): Action {
+  return {
+    type: 'SAVE_RESUME_DATA',
+    resumeData
+  }
+}
+
 function generateResumeRequest(): Action {
   return {
     type: 'GENERATE_RESUME_REQUEST'
@@ -23,13 +30,6 @@ function generateResumeSuccess(resumeURL: string): Action {
 function generateResumeFailure(): Action {
   return {
     type: 'GENERATE_RESUME_FAILURE'
-  }
-}
-
-function saveResumeData(resumeData: FormValues): Action {
-  return {
-    type: 'SAVE_RESUME_DATA',
-    resumeData
   }
 }
 
@@ -59,6 +59,25 @@ function generateResume(resumeData: FormValues): AsyncAction {
   }
 }
 
+function setPageCount(pageCount: number): Action {
+  return {
+    type: 'SET_PAGE_COUNT',
+    pageCount
+  }
+}
+
+function prevPage(): Action {
+  return {
+    type: 'PREV_PAGE'
+  }
+}
+
+function nextPage(): Action {
+  return {
+    type: 'NEXT_PAGE'
+  }
+}
+
 function downloadSourceRequest(): Action {
   return {
     type: 'DOWNLOAD_SOURCE_REQUEST'
@@ -80,13 +99,14 @@ function downloadSourceFailure(): Action {
 function downloadSource(): AsyncAction {
   return async (dispatch, getState) => {
     const { fetch } = window
-    const { status, isDownloading, resumeData } = getState().preview
+    const { resume, isDownloading } = getState().preview
+    const { status, data } = resume
 
     if (
       isDownloading ||
       status === 'pending' ||
-      resumeData == null ||
-      Object.keys(resumeData).length === 0
+      data == null ||
+      Object.keys(data).length === 0
     ) {
       return
     }
@@ -96,7 +116,7 @@ function downloadSource(): AsyncAction {
     const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(resumeData),
+      body: JSON.stringify(data),
       credentials: 'same-origin'
     }
 
@@ -112,4 +132,4 @@ function downloadSource(): AsyncAction {
   }
 }
 
-export { generateResume, downloadSource }
+export { generateResume, downloadSource, setPageCount, prevPage, nextPage }

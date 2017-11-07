@@ -85,15 +85,18 @@ const PageNumber = styled.span`
 `
 
 type Props = {
-  src: string,
-  downloadSource: () => void
+  url: string,
+  page: number,
+  downloadSource: () => void,
+  prevPage: () => void,
+  nextPage: () => void
 }
 
-function Toolbar({ src, downloadSource }: Props) {
+function Toolbar({ url, page, downloadSource, prevPage, nextPage }: Props) {
   return (
     <Div>
       <ButtonGroup>
-        <ToolButton href={src} download="resume.pdf">
+        <ToolButton href={url} download="resume.pdf">
           <Icon color="white" size={14} type="picture_as_pdf" /> PDF
         </ToolButton>
         <ToolButton onClick={downloadSource} type="button">
@@ -101,11 +104,11 @@ function Toolbar({ src, downloadSource }: Props) {
         </ToolButton>
       </ButtonGroup>
       <Pagination>
-        <Button type="button">
+        <Button onClick={prevPage} type="button">
           <Icon color="white" size={14} type="arrow_back" />
         </Button>
-        <PageNumber>Page 1</PageNumber>
-        <Button type="button">
+        <PageNumber>Page {page}</PageNumber>
+        <Button onClick={nextPage} type="button">
           <Icon color="white" size={14} type="arrow_forward" />
         </Button>
       </Pagination>

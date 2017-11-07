@@ -12,7 +12,7 @@
     "start": "nodemon src/index.js --exec babel-node",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\"",
     "test": "npm run lint --silent",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js",
     "flow": "flow",

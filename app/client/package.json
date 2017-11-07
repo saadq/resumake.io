@@ -8,7 +8,7 @@
     "clean": "rimraf dist",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
-    "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\"",
     "test": "npm run lint && flow status && jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

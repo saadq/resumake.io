@@ -19,7 +19,7 @@ const Div = styled.div`
   margin-right: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
-  border: 1px solid white;
+  border: 1px solid #ccc;
   border-radius: 2px;
 `
 
@@ -33,15 +33,17 @@ const Button = styled.a`
   min-width: 65px;
   background: transparent;
   border-radius: 2px;
-  color: white;
+  color: #ccc;
   padding: 0 2px;
 
   i {
     margin-right: 5px;
+    color: #ccc;
+    font-size: 14px;
   }
 
   &:hover {
-    background: white;
+    background: #ccc;
     color: black;
     cursor: pointer;
 
@@ -80,7 +82,7 @@ const Pagination = styled.div`
 
 const PageNumber = styled.span`
   font-size: 12px;
-  color: white;
+  color: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,27 +102,27 @@ function Toolbar({ url, page, downloadSource, prevPage, nextPage }: Props) {
     <Div>
       <ButtonGroup>
         <ToolButton href={url} download="resume.pdf">
-          <Icon color="white" size={14} type="picture_as_pdf" /> PDF
+          <Icon type="picture_as_pdf" /> PDF
         </ToolButton>
         <ToolButton onClick={downloadSource} type="button">
-          <Icon color="white" size={14} type="code" /> Source
+          <Icon type="code" /> Source
         </ToolButton>
       </ButtonGroup>
       <Pagination>
         <Button onClick={prevPage} type="button">
-          <Icon color="white" size={14} type="arrow_back" />
+          <Icon type="arrow_back" />
         </Button>
         <PageNumber>Page {page}</PageNumber>
         <Button onClick={nextPage} type="button">
-          <Icon color="white" size={14} type="arrow_forward" />
+          <Icon type="arrow_forward" />
         </Button>
       </Pagination>
       <ButtonGroup>
         <ToolButton type="button">
-          <Icon color="white" size={14} type="file_download" /> Export
+          <Icon type="file_download" /> Export
         </ToolButton>
         <ToolButton type="button">
-          <Icon color="white" size={14} type="print" /> Print
+          <Icon type="print" /> Print
         </ToolButton>
       </ButtonGroup>
     </Div>

@@ -122,7 +122,7 @@ function downloadSource(): AsyncAction {
     const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data.json),
       credentials: 'same-origin'
     }
 

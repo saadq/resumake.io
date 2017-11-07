@@ -240,7 +240,7 @@ function generateProjectsSection(projects) {
     let line2 = description || ''
 
     if (name) {
-      line1 += `{\\textbf{${name}}`
+      line1 += `{\\textbf{${name}}}`
     }
 
     if (keywords) {

@@ -28,7 +28,7 @@ const ResumePage = styled(Page)`
 
   canvas {
     max-width: 100%;
-    width: ${sizes.preview}px;
+    width: ${sizes.preview}px !important;
     height: auto !important;
   }
 `
@@ -69,10 +69,8 @@ function Preview({
       <LoadingBar status={status} />
       <a href={resumeURL} target="_blank">
         <Document
-          file={resumeURL}
+          file={resumeURL || BlankPDF}
           onLoadSuccess={({ numPages }) => setPageCount(numPages)}
-          noData={BlankPDF}
-          loading={resumeURL || BlankPDF}
         >
           <ResumePage pageNumber={page} />
         </Document>

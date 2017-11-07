@@ -18,13 +18,14 @@ const Div = styled.div`
   margin-bottom: 10px;
 `
 
-const Button = styled.button`
+const Button = styled.a`
+  text-decoration: none;
+  font-size: 12px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   height: 35px;
-  min-width: 60px;
-  border: 1px solid white;
+  min-width: 70px;
   background: transparent;
   color: white;
   box-sizing: border-box;
@@ -44,12 +45,46 @@ const Button = styled.button`
   }
 `
 
-const DownloadButton = Button.withComponent('a').extend`
-  text-decoration: none;
+const DownloadButtons = styled.div`
+`
+
+const ToolButton = Button.extend`
+  border: 1px solid white;
+  margin: 0 2px;
+
+  :first-of-type {
+    margin-left: 0;
+  }
+
+  :last-of-type {
+    margin-right: 0;
+  }
 `
 
 const Pagination = styled.div`
   display: flex;
+  border: 1px solid white;
+`
+
+const PageNumber = styled.span`
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+`
+
+const PageButton = Button.extend`
+  :first-of-type {
+    border-right: none;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+  :last-of-type {
+    border-left: none;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
 `
 
 type Props = {
@@ -60,30 +95,30 @@ type Props = {
 function Toolbar({ src, downloadSource }: Props) {
   return (
     <Div>
-      <div>
-        <DownloadButton href={src} download="resume.pdf">
+      <DownloadButtons>
+        <ToolButton href={src} download="resume.pdf">
           <Icon color="white" size={14} type="picture_as_pdf" /> PDF
-        </DownloadButton>
-        <Button onClick={downloadSource} type="button">
+        </ToolButton>
+        <ToolButton onClick={downloadSource} type="button">
           <Icon color="white" size={14} type="code" /> Source
-        </Button>
-      </div>
+        </ToolButton>
+      </DownloadButtons>
       <Pagination>
-        <Button type="button">
+        <PageButton type="button">
           <Icon color="white" size={14} type="arrow_back" />
-        </Button>
-        <span>Page 1</span>
-        <Button type="button">
+        </PageButton>
+        <PageNumber>Page 1</PageNumber>
+        <PageButton type="button">
           <Icon color="white" size={14} type="arrow_forward" />
-        </Button>
+        </PageButton>
       </Pagination>
       <div>
-        <Button type="button">
-          <Icon color="white" size={14} type="code" /> Code
-        </Button>
-        <Button type="button">
-          <Icon color="white" size={14} type="code" /> Code
-        </Button>
+        <ToolButton type="button">
+          <Icon color="white" size={14} type="file_download" /> Export
+        </ToolButton>
+        <ToolButton type="button">
+          <Icon color="white" size={14} type="print" /> Print
+        </ToolButton>
       </div>
     </Div>
   )

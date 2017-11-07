@@ -2,12 +2,13 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from './components'
 import { downloadSource, setPageCount, prevPage, nextPage } from './actions'
+import { print } from '../ui/actions'
 import { sizes } from '../../shared/theme'
 import BlankPDF from './blank.pdf'
 import type { State } from '../../shared/types'
@@ -27,6 +28,7 @@ const ResumePage = styled(Page)`
 
   canvas {
     max-width: 100%;
+    width: ${sizes.preview}px;
     height: auto !important;
   }
 `
@@ -39,48 +41,44 @@ type Props = {
   setPageCount: (pageCount: number) => void,
   downloadSource: () => void,
   prevPage: () => void,
-  nextPage: () => void
+  nextPage: () => void,
+  print: (url: string) => void
 }
 
-class Preview extends Component<Props> {
-  onDocumentLoad = ({ numPages }) => {
-    this.props.setPageCount(numPages)
-  }
-
-  render() {
-    const {
-      resumeURL,
-      jsonURL,
-      page,
-      status,
-      downloadSource,
-      prevPage,
-      nextPage
-    } = this.props
-    return (
-      <Div>
-        <Toolbar
-          resumeURL={resumeURL || BlankPDF}
-          jsonURL={jsonURL}
-          page={page}
-          prevPage={prevPage}
-          nextPage={nextPage}
-          downloadSource={downloadSource}
-        />
-        <LoadingBar status={status} />
-        <a href={resumeURL} target="_blank">
-          <Document
-            file={resumeURL}
-            onLoadSuccess={this.onDocumentLoad}
-            loading={null}
-            noData={null}
-          >
-            <ResumePage width={sizes.preview} pageNumber={page} />
-          </Document>
-        </a>
-      </Div>
-    )
-  }
+function Preview({
+  resumeURL,
+  jsonURL,
+  page,
+  status,
+  downloadSource,
+  prevPage,
+  nextPage,
+  print
+}: Props) {
+  return (
+    <Div>
+      <Toolbar
+        resumeURL={resumeURL || BlankPDF}
+        jsonURL={jsonURL}
+        page={page}
+        prevPage={prevPage}
+        nextPage={nextPage}
+        downloadSource={downloadSource}
+        print={print}
+      />
+      <LoadingBar status={status} />
+      <a href={resumeURL} target="_blank">
+        <Document
+          file={resumeURL}
+          onLoadSuccess={({ numPages }) => setPageCount(numPages)}
+          noData={BlankPDF}
+          loading={resumeURL || BlankPDF}
+        >
+          <ResumePage pageNumber={page} />
+        </Document>
+      </a>
+    </Div>
+  )
 }
 
 function mapState(state: State) {
@@ -96,7 +94,8 @@ const actions = {
   downloadSource,
   setPageCount,
   prevPage,
-  nextPage
+  nextPage,
+  print
 }
 
 export default connect(mapState, actions)(Preview)

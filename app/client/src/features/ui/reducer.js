@@ -9,7 +9,8 @@ const initialState = {
   lightbox: {
     index: 0,
     isOpen: false
-  }
+  },
+  isPrinting: false
 }
 
 function ui(state: State = initialState, action: Action): State {
@@ -32,6 +33,18 @@ function ui(state: State = initialState, action: Action): State {
           isOpen: false,
           index: 0
         }
+      }
+
+    case 'START_PRINT':
+      return {
+        ...state,
+        isPrinting: true
+      }
+
+    case 'STOP_PRINT':
+      return {
+        ...state,
+        isPrinting: false
       }
 
     default:

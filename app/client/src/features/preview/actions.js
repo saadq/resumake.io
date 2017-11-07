@@ -41,7 +41,7 @@ function generateResume(resumeData: FormValues): AsyncAction {
     const request = {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
+        Accept: 'application/pdf',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(resumeData)
@@ -51,6 +51,7 @@ function generateResume(resumeData: FormValues): AsyncAction {
       const response = await fetch('/api/generate/resume', request)
       const blob = await response.blob()
       const url = URL.createObjectURL(blob)
+
       dispatch(saveResumeData(resumeData))
       dispatch(generateResumeSuccess(url))
     } catch (err) {

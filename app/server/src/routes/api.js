@@ -20,6 +20,7 @@ router.use(sanitizer())
 
 router.post('/generate/resume', async ctx => {
   ctx.body = generatePDF(ctx.request.body)
+  ctx.type = 'application/pdf'
 })
 
 /**
@@ -28,6 +29,7 @@ router.post('/generate/resume', async ctx => {
 
 router.post('/generate/source', async ctx => {
   ctx.body = generateSourceCode(ctx.request.body)
+  ctx.type = 'application/zip'
 })
 
 export default router

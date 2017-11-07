@@ -19,6 +19,12 @@ const Div = styled.div`
 `
 
 const ResumePage = styled(Page)`
+  transition: opacity 0.4s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
   canvas {
     max-width: 100%;
     height: auto !important;
@@ -52,9 +58,16 @@ class Preview extends Component<Props> {
           downloadSource={downloadSource}
         />
         <LoadingBar status={status} />
-        <Document file={url} onLoadSuccess={this.onDocumentLoad} loading={null} noData={null}>
-          <ResumePage width={sizes.preview} pageNumber={page} />
-        </Document>
+        <a href={url} target="_blank">
+          <Document
+            file={url}
+            onLoadSuccess={this.onDocumentLoad}
+            loading={null}
+            noData={null}
+          >
+            <ResumePage width={sizes.preview} pageNumber={page} />
+          </Document>
+        </a>
       </Div>
     )
   }

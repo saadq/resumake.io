@@ -1,3 +1,6 @@
+// flow-typed signature: 0064107d79ce108f7f850f51a09dea69
+// flow-typed version: 2bbd7637ed/koa-router_v7.2.x/flow_>=v0.25.x
+
 /**
  * @flow
  */

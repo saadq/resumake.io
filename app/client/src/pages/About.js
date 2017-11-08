@@ -68,8 +68,9 @@ function About() {
           Resumake is a tool for automatically generating beautiful resumes.
         </Line>
         <Line>
-          The webapp was made by <Link href="http://saadq.com">Saad Quadri</Link> and was built
-          with Node.js, Koa, React, and Redux.
+          The webapp was made by{' '}
+          <Link href="http://saadq.com">Saad Quadri</Link>
+          and was built with Node.js, Koa, React, and Redux.
         </Line>
         <FAQ>
           <h1>FAQs</h1>
@@ -87,7 +88,8 @@ function About() {
                 download the LaTeX source.
               </li>
               <li>
-                You can go back and change your template or info at any point to see the different results.
+                You can go back and change your template or info at any point to
+                see the different results.
               </li>
             </OrderedList>
           </Answer>

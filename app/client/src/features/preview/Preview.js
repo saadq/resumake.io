@@ -21,16 +21,25 @@ const Div = styled.div`
 
 const ResumePage = styled(Page)`
   transition: opacity 0.4s ease;
+  height: 100% !important;
 
   &:hover {
     opacity: 0.8;
   }
 
-  canvas {
+  /* Unfortunately this is the only way to style the inner react-pdf stuff */
+  canvas,
+  .ReactPDF__Page,
+  .ReactPDF__Page__textContent {
     max-width: 100%;
     width: ${sizes.preview}px !important;
     height: auto !important;
   }
+`
+
+const Link = styled.a`
+  color: white;
+  text-decoration: none;
 `
 
 type Props = {
@@ -67,14 +76,14 @@ function Preview({
         print={print}
       />
       <LoadingBar status={status} />
-      <a href={resumeURL} target="_blank">
+      <Link href={resumeURL} target="_blank">
         <Document
           file={resumeURL || BlankPDF}
           onLoadSuccess={({ numPages }) => setPageCount(numPages)}
         >
-          <ResumePage pageNumber={page} />
+          <ResumePage scale={2} pageNumber={page} />
         </Document>
-      </a>
+      </Link>
     </Div>
   )
 }

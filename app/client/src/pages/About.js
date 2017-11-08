@@ -68,7 +68,7 @@ function About() {
           Resumake is a tool for automatically generating beautiful resumes.
         </Line>
         <Line>
-          The webapp was made by <Link href="#">Saad Quadri</Link> and was built
+          The webapp was made by <Link href="http://saadq.com">Saad Quadri</Link> and was built
           with Node.js, Koa, React, and Redux.
         </Line>
         <FAQ>
@@ -86,6 +86,9 @@ function About() {
                 Once you're satisfied, you can save your resume as a PDF or
                 download the LaTeX source.
               </li>
+              <li>
+                You can go back and change your template or info at any point to see the different results.
+              </li>
             </OrderedList>
           </Answer>
           <Question>Where can I report any bugs or feature requests?</Question>
@@ -95,7 +98,7 @@ function About() {
               here
             </Link>.
           </Answer>
-          <Question>Can I help contribute to this project?</Question>
+          <Question>Can I contribute to this project?</Question>
           <Answer>
             Definitely! I'm always happy to help out first-time contributors to
             the project. You can check out the{' '}
@@ -111,7 +114,7 @@ function About() {
             <Link href="https://www.paypal.me/saadquadri">donations</Link> are
             very much appreciated. Or, if you'd to reach out directly and say
             thanks, you can send me an{' '}
-            <Link href="mailto:saad@saadq.com">email</Link> and make my day :)
+            <Link href="mailto:saad@saadq.com">email</Link> and make my day. :)
           </Answer>
         </FAQ>
       </Content>

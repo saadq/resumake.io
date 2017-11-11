@@ -10,6 +10,4 @@ function clearState(): Action {
   }
 }
 
-export {
-  clearState
-}
+export { clearState }

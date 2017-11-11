@@ -69,8 +69,8 @@ function About() {
         </Line>
         <Line>
           The webapp was made by{' '}
-          <Link href="http://saadq.com">Saad Quadri</Link>{' '}
-          and was built with Node.js, Koa, React, and Redux.
+          <Link href="http://saadq.com">Saad Quadri</Link> and was built with
+          Node.js, Koa, React, and Redux.
         </Line>
         <FAQ>
           <h1>FAQs</h1>

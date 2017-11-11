@@ -73,10 +73,16 @@ type FormState = {
   skillKeywords: Array<number>,
   projectCount: number,
   projectKeywords: Array<number>,
-  awardCount: number
+  awardCount: number,
+
+  // These three fields should not be manipulated manually (let redux-form handle them)
+  anyTouched: boolean,
+  registeredFields: Object,
+  fields: Object
 }
 
 type FormAction =
+  | { type: 'CLEAR_FORM' }
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }

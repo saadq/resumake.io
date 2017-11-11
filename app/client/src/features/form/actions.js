@@ -4,12 +4,6 @@
 
 import type { FormAction as Action } from './types'
 
-function clearForm(): Action {
-  return {
-    type: 'CLEAR_FORM'
-  }
-}
-
 function selectTemplate(templateId: number): Action {
   return {
     type: 'SELECT_TEMPLATE',
@@ -177,7 +171,6 @@ function clearAwardField(): Action {
 }
 
 export {
-  clearForm,
   selectTemplate,
   addSchool,
   removeSchool,

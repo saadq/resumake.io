@@ -38,7 +38,7 @@ const initialState = {
 
 function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
-    case 'CLEAR_FORM':
+    case 'CLEAR_STATE':
       return initialState
 
     case 'SELECT_TEMPLATE':

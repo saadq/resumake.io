@@ -80,6 +80,7 @@ function Preview({
         <Document
           file={resumeURL || BlankPDF}
           onLoadSuccess={({ numPages }) => setPageCount(numPages)}
+          loading={null}
         >
           <ResumePage scale={2} pageNumber={page} />
         </Document>

@@ -6,8 +6,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { clearForm } from '../features/form/actions'
-import type { FormState } from '../features/form/types'
+import { clearPreview } from '../features/preview/actions'
+import { clearState } from '../shared/actions'
 import type { State } from '../shared/types'
 
 const Wrapper = styled.div`
@@ -37,31 +37,41 @@ const Button = styled(Link)`
 `
 
 type Props = {
-  form: FormState,
-  clearForm: () => void
+  hasPrevSession: boolean,
+  clearState: () => void,
+  clearPreview: () => void
 }
 
-function Home({ clearForm, form }: Props) {
+function Home({ hasPrevSession, clearState, clearPreview }: Props) {
   return (
     <Wrapper>
-      <Button to="/generator" onClick={clearForm}>
+      {/**
+        * Clear Preview state even if continuing session
+        * because the old resume URL will most likely be expired.
+        */}
+      {hasPrevSession && (
+        <Button to="/generator" onClick={clearPreview}>
+          Continue Session
+        </Button>
+      )}
+
+      {/* Clear all state if starting with new resume */}
+      <Button to="/generator" onClick={clearState}>
         Make New Resume
       </Button>
-      {Object.keys(form.values).length > 1 && (
-        <Button to="/generator">Continue Last Session</Button>
-      )}
     </Wrapper>
   )
 }
 
 function mapState(state: State) {
   return {
-    form: state.form.resume
+    hasPrevSession: Object.keys(state.form.resume.values).length > 1
   }
 }
 
 const actions = {
-  clearForm
+  clearState,
+  clearPreview
 }
 
 export default connect(mapState, actions)(Home)

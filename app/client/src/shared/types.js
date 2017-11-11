@@ -13,9 +13,11 @@ type State = {
   ui: UIState
 }
 
+type AppAction = { type: 'CLEAR_STATE' }
+
 type GetState = () => State
-type Action = FormAction | PreviewAction | UIAction
+type Action = AppAction | FormAction | PreviewAction | UIAction
 type Dispatch = ReduxDispatch<Action>
 type AsyncAction = (dispatch: Dispatch, getState: GetState) => any
 
-export type { State, Dispatch, Action, AsyncAction }
+export type { AppAction, State, Dispatch, Action, AsyncAction }

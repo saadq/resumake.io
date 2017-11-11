@@ -7,6 +7,12 @@ import type { PreviewAction as Action } from './types'
 import type { FormValues } from '../form/types'
 import type { AsyncAction } from '../../shared/types'
 
+function clearPreview(): Action {
+  return {
+    type: 'CLEAR_PREVIEW'
+  }
+}
+
 function saveResumeData(data: FormValues): Action {
   const { Blob, URL } = window
   const jsonString = JSON.stringify(data, null, 2)
@@ -138,4 +144,11 @@ function downloadSource(): AsyncAction {
   }
 }
 
-export { generateResume, setPageCount, prevPage, nextPage, downloadSource }
+export {
+  clearPreview,
+  generateResume,
+  setPageCount,
+  prevPage,
+  nextPage,
+  downloadSource
+}

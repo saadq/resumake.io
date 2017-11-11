@@ -19,6 +19,7 @@ type PreviewState = {
 }
 
 type PreviewAction =
+  | { type: 'CLEAR_PREVIEW' }
   | { type: 'SAVE_RESUME_DATA', data: FormValues, url: string }
   | { type: 'DOWNLOAD_RESUME_DATA' }
   | { type: 'GENERATE_RESUME_REQUEST' }

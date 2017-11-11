@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
+import persistState from 'redux-localstorage'
 import reducer from './reducer'
 
 const middleware = [thunk]
@@ -18,7 +19,11 @@ if (process.env.NODE_ENV === 'development') {
   )
 }
 
-const composedMiddleware = composeWithDevTools(applyMiddleware(...middleware))
-const store = createStore(reducer, composedMiddleware)
+const enhancer = composeWithDevTools(
+  applyMiddleware(...middleware),
+  persistState('form', { key: 'resumake' })
+)
+
+const store = createStore(reducer, enhancer)
 
 export default store

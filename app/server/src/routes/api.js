@@ -9,10 +9,10 @@ import { sanitizer } from '../middleware'
 const router = new Router({ prefix: '/api' })
 
 /**
- * Sanitize form data before handling any API requests
+ * Sanitize form data before handling PDF or source code generation
  */
 
-router.use(sanitizer())
+router.use('/generate', sanitizer())
 
 /**
  * Generate PDF from form data

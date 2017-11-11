@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const enhancer = composeWithDevTools(
   applyMiddleware(...middleware),
-  persistState('form.resume', { key: 'resumake' })
+  persistState('form', { key: 'resumake' })
 )
 
 const store = createStore(reducer, enhancer)

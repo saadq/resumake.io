@@ -26,8 +26,15 @@ const Button = styled(Link)`
   margin: 5px 0;
   padding: 5px 15px;
   border-radius: 2px;
+  height: 30px;
   width: 150px;
   text-align: center;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 1.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     cursor: pointer;

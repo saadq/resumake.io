@@ -25,6 +25,7 @@ const config = {
   devServer: {
     port: 3000,
     hot: true,
+    overlay: true,
     publicPath: '/',
     historyApiFallback: {
       disableDotRule: true

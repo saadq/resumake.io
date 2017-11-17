@@ -3,16 +3,19 @@
  */
 
 import Router from 'koa-router'
+import formidable from 'koa2-formidable'
+import { readFile } from 'fs-promise'
 import { generatePDF, generateSourceCode } from '../generator'
 import { sanitizer } from '../middleware'
 
 const router = new Router({ prefix: '/api' })
 
 /**
- * Sanitize form data before handling PDF or source code generation
+ * Router middleware
  */
 
 router.use('/generate', sanitizer())
+router.use('/upload', formidable())
 
 /**
  * Generate PDF from form data
@@ -30,6 +33,19 @@ router.post('/generate/resume', async ctx => {
 router.post('/generate/source', async ctx => {
   ctx.body = generateSourceCode(ctx.request.body)
   ctx.type = 'application/zip'
+})
+
+/**
+ * Handle JSON upload from input file
+ */
+
+router.post('/upload', async ctx => {
+  const { path } = ctx.request.files['json-file']
+  const file = await readFile(path)
+  const json = JSON.parse(file)
+
+  ctx.body = json
+  ctx.type = 'application/json'
 })
 
 export default router

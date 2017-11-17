@@ -64,6 +64,7 @@ type FormValues = {
 }
 
 type FormState = {
+  isUploading: boolean,
   values: FormValues,
   skillCount: number,
   skillKeywords: Array<number>,
@@ -76,6 +77,9 @@ type FormState = {
 }
 
 type FormAction =
+  | { type: 'UPLOAD_JSON_REQUEST' }
+  | { type: 'UPLOAD_JSON_SUCCESS', json: FormValues }
+  | { type: 'UPLOAD_JSON_FAILURE' }
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }

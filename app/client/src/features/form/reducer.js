@@ -7,6 +7,7 @@ import type { FormState } from './types'
 import type { Action } from '../../shared/types'
 
 const initialState = {
+  isUploading: false,
   skillCount: 1,
   skillKeywords: [1],
   projectCount: 1,
@@ -27,6 +28,25 @@ function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
     case 'CLEAR_STATE':
       return initialState
+
+    case 'UPLOAD_JSON_REQUEST':
+      return {
+        ...state,
+        isUploading: true
+      }
+
+    case 'UPLOAD_JSON_SUCCESS':
+      return {
+        ...state,
+        isUploading: false,
+        values: action.json
+      }
+
+    case 'UPLOAD_JSON_FAILURE':
+      return {
+        ...state,
+        isUploading: false
+      }
 
     case 'SELECT_TEMPLATE':
       return {

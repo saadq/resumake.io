@@ -2,7 +2,52 @@
  * @flow
  */
 
-import type { FormAction as Action } from './types'
+import type { FormAction as Action, FormValues } from './types'
+import type { AsyncAction } from '../../shared/types'
+
+function uploadJSONRequest(): Action {
+  return {
+    type: 'UPLOAD_JSON_REQUEST'
+  }
+}
+
+function uploadJSONSuccess(json: FormValues): Action {
+  return {
+    type: 'UPLOAD_JSON_SUCCESS',
+    json
+  }
+}
+
+function uploadJSONFailure(): Action {
+  return {
+    type: 'UPLOAD_JSON_FAILURE'
+  }
+}
+
+function uploadJSON(file: File): AsyncAction {
+  return async (dispatch, getState) => {
+    dispatch(uploadJSONRequest())
+
+    const { fetch, FormData } = window
+    const data = new FormData()
+
+    data.append('json-file', file)
+
+    const request = {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: data
+    }
+
+    try {
+      const response = await fetch('/api/upload', request)
+      const json = await response.json()
+      dispatch(uploadJSONSuccess(json))
+    } catch (err) {
+      dispatch(uploadJSONFailure())
+    }
+  }
+}
 
 function selectTemplate(templateId: number): Action {
   return {
@@ -150,6 +195,7 @@ function clearAwardField(): Action {
 }
 
 export {
+  uploadJSON,
   selectTemplate,
   addSchool,
   removeSchool,

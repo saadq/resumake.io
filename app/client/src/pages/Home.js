@@ -2,10 +2,11 @@
  * @flow
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { uploadJSON } from '../features/form/actions'
 import { clearPreview } from '../features/preview/actions'
 import { clearState } from '../shared/actions'
 import { hasPrevSession } from '../shared/selectors'
@@ -44,31 +45,46 @@ const Button = styled(Link)`
   }
 `
 
+const FormLabel = Button.withComponent('label').extend`
+  background: black;
+`
+
+const FormInput = styled.input`display: none;`
+
 type Props = {
   hasPrevSession: boolean,
   clearState: () => void,
-  clearPreview: () => void
+  clearPreview: () => void,
+  uploadJSON: (file: File) => Promise<void>,
+  history: RouterHistory
 }
 
-function Home({ hasPrevSession, clearState, clearPreview }: Props) {
-  return (
-    <Wrapper>
-      {/**
-        * Clear Preview state even if continuing session
-        * because the old resume URL will most likely be expired.
-        */}
-      {hasPrevSession && (
-        <Button to="/generator" onClick={clearPreview}>
-          Continue Session
-        </Button>
-      )}
+class Home extends Component<Props> {
+  onFileUpload = async (e: SyntheticInputEvent<*>) => {
+    const { uploadJSON, history } = this.props
+    const file = e.target.files[0]
 
-      {/* Clear all state if starting with new resume */}
-      <Button to="/generator" onClick={clearState}>
-        Make New Resume
-      </Button>
-    </Wrapper>
-  )
+    await uploadJSON(file)
+    history.push('/generator')
+  }
+
+  render() {
+    const { hasPrevSession, clearState, clearPreview } = this.props
+    return (
+      <Wrapper>
+        {hasPrevSession && (
+          <Button to="/generator" onClick={clearPreview}>
+            Continue Session
+          </Button>
+        )}
+        <Button to="/generator" onClick={clearState}>
+          Make New Resume
+        </Button>
+        <FormLabel htmlFor="import-json">Import JSON</FormLabel>
+        <FormInput id="import-json" type="file" onChange={this.onFileUpload} />
+      </Wrapper>
+    )
+  }
 }
 
 function mapState(state: State) {
@@ -79,7 +95,8 @@ function mapState(state: State) {
 
 const actions = {
   clearState,
-  clearPreview
+  clearPreview,
+  uploadJSON
 }
 
-export default connect(mapState, actions)(Home)
+export default withRouter(connect(mapState, actions)(Home))

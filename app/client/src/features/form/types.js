@@ -20,7 +20,7 @@ type Job = {
   website?: ?string,
   startDate?: ?string,
   endDate?: ?string,
-  highlights?: Array<?string>
+  highlights: Array<?string>
 }
 
 type School = {
@@ -30,8 +30,7 @@ type School = {
   studyType?: ?string,
   startDate?: ?string,
   endDate?: ?string,
-  gpa?: ?string,
-  courses?: Array<?string>
+  gpa?: ?string
 }
 
 type Project = {
@@ -56,26 +55,21 @@ type Skill = {
 
 type FormValues = {
   selectedTemplate: number,
-  basics?: Basics,
-  work?: Array<?Job>,
-  education?: Array<?School>,
-  awards?: Array<?Award>,
-  skills?: Array<?Skill>,
-  projects?: Array<?Project>
+  basics: Basics,
+  work: Array<Job>,
+  education: Array<School>,
+  awards: Array<Award>,
+  skills: Array<Skill>,
+  projects: Array<Project>
 }
 
 type FormState = {
   values: FormValues,
-  schoolCount: number,
-  jobCount: number,
-  jobHighlights: Array<number>,
   skillCount: number,
   skillKeywords: Array<number>,
   projectCount: number,
   projectKeywords: Array<number>,
   awardCount: number,
-
-  // These three fields should not be manipulated manually (let redux-form handle them)
   anyTouched?: boolean,
   registeredFields?: Object,
   fields?: Object
@@ -85,13 +79,10 @@ type FormAction =
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
-  | { type: 'CLEAR_SCHOOL_FIELD' }
   | { type: 'ADD_JOB' }
   | { type: 'REMOVE_JOB' }
-  | { type: 'CLEAR_JOB_FIELD', jobCount: number }
   | { type: 'ADD_JOB_HIGHLIGHT', index: number }
   | { type: 'REMOVE_JOB_HIGHLIGHT', index: number }
-  | { type: 'CLEAR_JOB_HIGHLIGHT_FIELD', index: number, highlightCount: number }
   | { type: 'ADD_SKILL' }
   | { type: 'REMOVE_SKILL' }
   | { type: 'CLEAR_SKILL_FIELD', skillCount: number }

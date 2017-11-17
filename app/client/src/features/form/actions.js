@@ -23,12 +23,6 @@ function removeSchool(): Action {
   }
 }
 
-function clearSchoolField(): Action {
-  return {
-    type: 'CLEAR_SCHOOL_FIELD'
-  }
-}
-
 function addJob(): Action {
   return {
     type: 'ADD_JOB'
@@ -38,13 +32,6 @@ function addJob(): Action {
 function removeJob(): Action {
   return {
     type: 'REMOVE_JOB'
-  }
-}
-
-function clearJobField(jobCount: number): Action {
-  return {
-    type: 'CLEAR_JOB_FIELD',
-    jobCount
   }
 }
 
@@ -59,14 +46,6 @@ function removeJobHighlight(index: number): Action {
   return {
     type: 'REMOVE_JOB_HIGHLIGHT',
     index
-  }
-}
-
-function clearJobHighlightField(index: number, highlightCount: number): Action {
-  return {
-    type: 'CLEAR_JOB_HIGHLIGHT_FIELD',
-    index,
-    highlightCount
   }
 }
 
@@ -174,13 +153,10 @@ export {
   selectTemplate,
   addSchool,
   removeSchool,
-  clearSchoolField,
   addJob,
   removeJob,
-  clearJobField,
   addJobHighlight,
   removeJobHighlight,
-  clearJobHighlightField,
   addSkill,
   removeSkill,
   clearSkillField,

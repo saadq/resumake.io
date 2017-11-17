@@ -57,20 +57,13 @@ const RoundButton = Button.extend`
 const SmallInput = Input.extend`width: 85%;`
 
 type Props = {
+  highlights: Array<?string>,
   index: number,
-  highlightsCount: number,
   addHighlight: (index: number) => void,
-  removeHighlight: (index: number) => void,
-  clearHighlightField: (index: number, highlightsCount: number) => void
+  removeHighlight: (index: number) => void
 }
 
-function Job({
-  index,
-  highlightsCount,
-  addHighlight,
-  removeHighlight,
-  clearHighlightField
-}: Props) {
+function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -100,7 +93,7 @@ function Job({
         placeholder="May 2017 / Present / Etc."
       />
       <Label>Job Responsibilities</Label>
-      {Array.from({ length: highlightsCount }).map((_, i) => (
+      {highlights.map((highlight, i) => (
         <Row key={i}>
           <SmallInput
             type="text"
@@ -108,7 +101,7 @@ function Job({
             placeholder="Did cool stuff at company"
             component="input"
           />
-          {i === highlightsCount - 1 && (
+          {i === highlights.length - 1 && (
             <Buttons>
               <RoundButton
                 inverted
@@ -120,10 +113,7 @@ function Job({
               <RoundButton
                 inverted
                 type="button"
-                onClick={() => {
-                  removeHighlight(index)
-                  clearHighlightField(index, highlightsCount)
-                }}
+                onClick={() => removeHighlight(index)}
               >
                 <Icon type="remove" />
               </RoundButton>

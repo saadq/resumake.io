@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { clearPreview } from '../features/preview/actions'
 import { clearState } from '../shared/actions'
+import { hasPrevSession } from '../shared/selectors'
 import type { State } from '../shared/types'
 
 const Wrapper = styled.div`
@@ -72,7 +73,7 @@ function Home({ hasPrevSession, clearState, clearPreview }: Props) {
 
 function mapState(state: State) {
   return {
-    hasPrevSession: Object.keys(state.form.resume.values).length > 1
+    hasPrevSession: hasPrevSession(state)
   }
 }
 

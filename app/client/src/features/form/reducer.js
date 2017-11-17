@@ -6,35 +6,22 @@ import { reducer } from 'redux-form'
 import type { FormState } from './types'
 import type { Action } from '../../shared/types'
 
-// Keep track of fragment counts so that we know how many to render in our view.
-// This state will be merged with redux-form's form values state.
 const initialState = {
-  schoolCount: 1,
-  jobCount: 1,
-  jobHighlights: [1],
   skillCount: 1,
   skillKeywords: [1],
   projectCount: 1,
   projectKeywords: [1],
   awardCount: 1,
   values: {
-    selectedTemplate: 1
+    selectedTemplate: 1,
+    basics: {},
+    work: [{ highlights: [''] }],
+    education: [{}],
+    awards: [{}],
+    skills: [{}],
+    projects: [{}]
   }
 }
-
-/**
- * redux-form is being used to handle form state, so whenever
- * input fields are changed the form stuff in our redux store
- * will auto-update. However, redux-form doesn't update the state
- * when input fields are removed from the view, so we need to
- * manually handle input field removals with this reducer.
- * That is what the 'CLEAR_X' cases are for.
- *
- * We are also keeping counts of the fragments in our state so that we know
- * how many to render in our view (redux-form will automatically set
- * the values inside those fragments, we just need to keep track of how many to render).
- * That is what the ADD_X and REMOVE_X cases for.
- */
 
 function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
@@ -53,21 +40,14 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_SCHOOL':
       return {
         ...state,
-        schoolCount: state.schoolCount + 1
+        values: {
+          ...state.values,
+          education: [...state.values.education, {}]
+        }
       }
 
     case 'REMOVE_SCHOOL':
-      return {
-        ...state,
-        schoolCount: Math.max(state.schoolCount - 1, 1)
-      }
-
-    case 'CLEAR_SCHOOL_FIELD':
-      if (
-        !state.values ||
-        !state.values.education ||
-        state.values.education.length <= 1
-      ) {
+      if (state.values.education.length <= 1) {
         return state
       }
 
@@ -82,27 +62,19 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_JOB':
       return {
         ...state,
-        jobCount: state.jobCount + 1,
-        jobHighlights: [...state.jobHighlights, 1]
+        values: {
+          ...state.values,
+          work: [
+            ...state.values.work,
+            {
+              highlights: [' ']
+            }
+          ]
+        }
       }
 
     case 'REMOVE_JOB':
-      return {
-        ...state,
-        jobCount: Math.max(state.jobCount - 1, 1),
-        jobHighlights:
-          state.jobCount > 1
-            ? state.jobHighlights.slice(0, -1)
-            : state.jobHighlights
-      }
-
-    case 'CLEAR_JOB_FIELD':
-      if (
-        !state.values ||
-        !state.values.work ||
-        state.values.work.length <= 1 ||
-        state.values.work.length !== action.jobCount
-      ) {
+      if (state.values.work.length <= 1) {
         return state
       }
 
@@ -115,41 +87,33 @@ function form(state: FormState = initialState, action: Action): FormState {
       }
 
     case 'ADD_JOB_HIGHLIGHT':
+      const { work } = (state.values: any)
+
       return {
         ...state,
-        jobHighlights: [
-          ...state.jobHighlights.slice(0, action.index),
-          state.jobHighlights[action.index] + 1,
-          ...state.jobHighlights.slice(action.index + 1)
-        ]
+        values: {
+          ...state.values,
+          work: [
+            ...work.slice(0, action.index),
+            {
+              ...work[action.index],
+              highlights: [...work[action.index].highlights, ' ']
+            },
+            ...work.slice(action.index + 1)
+          ]
+        }
       }
 
-    case 'REMOVE_JOB_HIGHLIGHT':
-      return {
-        ...state,
-        jobHighlights: [
-          ...state.jobHighlights.slice(0, action.index),
-          state.jobHighlights[action.index] > 1
-            ? state.jobHighlights[action.index] - 1
-            : 1,
-          ...state.jobHighlights.slice(action.index + 1)
-        ]
-      }
+    case 'REMOVE_JOB_HIGHLIGHT': {
+      const { work } = (state.values: any)
 
-    case 'CLEAR_JOB_HIGHLIGHT_FIELD':
       if (
-        !state.values ||
-        !state.values.work ||
-        !state.values.work[action.index] ||
-        !state.values.work[action.index].highlights ||
-        state.values.work[action.index].highlights.length <= 1 ||
-        action.highlightCount !==
-          state.values.work[action.index].highlights.length
+        !work[action.index] ||
+        !work[action.index].highlights ||
+        work[action.index].highlights.length <= 1
       ) {
         return state
       }
-
-      const { work } = (state.values: any)
 
       return {
         ...state,
@@ -165,15 +129,17 @@ function form(state: FormState = initialState, action: Action): FormState {
           ]
         }
       }
+    }
 
-    case 'ADD_SKILL':
+    case 'ADD_SKILL': {
       return {
         ...state,
         skillCount: state.skillCount + 1,
         skillKeywords: [...state.skillKeywords, 1]
       }
+    }
 
-    case 'REMOVE_SKILL':
+    case 'REMOVE_SKILL': {
       return {
         ...state,
         skillCount: Math.max(state.skillCount - 1, 1),
@@ -182,8 +148,9 @@ function form(state: FormState = initialState, action: Action): FormState {
             ? state.skillKeywords.slice(0, -1)
             : state.skillKeywords
       }
+    }
 
-    case 'CLEAR_SKILL_FIELD':
+    case 'CLEAR_SKILL_FIELD': {
       if (
         !state.values ||
         !state.values.skills ||
@@ -200,8 +167,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           skills: state.values.skills.slice(0, -1)
         }
       }
+    }
 
-    case 'ADD_SKILL_KEYWORD':
+    case 'ADD_SKILL_KEYWORD': {
       return {
         ...state,
         skillKeywords: [
@@ -210,8 +178,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...state.skillKeywords.slice(action.index + 1)
         ]
       }
+    }
 
-    case 'REMOVE_SKILL_KEYWORD':
+    case 'REMOVE_SKILL_KEYWORD': {
       return {
         ...state,
         skillKeywords: [
@@ -222,8 +191,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...state.skillKeywords.slice(action.index + 1)
         ]
       }
+    }
 
-    case 'CLEAR_SKILL_KEYWORD_FIELD':
+    case 'CLEAR_SKILL_KEYWORD_FIELD': {
       if (
         !state.values ||
         !state.values.skills ||
@@ -252,15 +222,17 @@ function form(state: FormState = initialState, action: Action): FormState {
           ]
         }
       }
+    }
 
-    case 'ADD_PROJECT':
+    case 'ADD_PROJECT': {
       return {
         ...state,
         projectCount: state.projectCount + 1,
         projectKeywords: [...state.projectKeywords, 1]
       }
+    }
 
-    case 'REMOVE_PROJECT':
+    case 'REMOVE_PROJECT': {
       return {
         ...state,
         projectCount: Math.max(state.projectCount - 1, 1),
@@ -269,8 +241,9 @@ function form(state: FormState = initialState, action: Action): FormState {
             ? state.projectKeywords.slice(0, -1)
             : state.projectKeywords
       }
+    }
 
-    case 'CLEAR_PROJECT_FIELD':
+    case 'CLEAR_PROJECT_FIELD': {
       if (
         !state.values ||
         !state.values.projects ||
@@ -287,8 +260,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           projects: state.values.projects.slice(0, -1)
         }
       }
+    }
 
-    case 'ADD_PROJECT_KEYWORD':
+    case 'ADD_PROJECT_KEYWORD': {
       return {
         ...state,
         projectKeywords: [
@@ -297,8 +271,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...state.projectKeywords.slice(action.index + 1)
         ]
       }
+    }
 
-    case 'REMOVE_PROJECT_KEYWORD':
+    case 'REMOVE_PROJECT_KEYWORD': {
       return {
         ...state,
         projectKeywords: [
@@ -309,8 +284,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...state.projectKeywords.slice(action.index + 1)
         ]
       }
+    }
 
-    case 'CLEAR_PROJECT_KEYWORD_FIELD':
+    case 'CLEAR_PROJECT_KEYWORD_FIELD': {
       if (
         !state.values ||
         !state.values.projects ||
@@ -339,20 +315,23 @@ function form(state: FormState = initialState, action: Action): FormState {
           ]
         }
       }
+    }
 
-    case 'ADD_AWARD':
+    case 'ADD_AWARD': {
       return {
         ...state,
         awardCount: state.awardCount + 1
       }
+    }
 
-    case 'REMOVE_AWARD':
+    case 'REMOVE_AWARD': {
       return {
         ...state,
         awardCount: Math.max(state.awardCount - 1, 1)
       }
+    }
 
-    case 'CLEAR_AWARD_FIELD':
+    case 'CLEAR_AWARD_FIELD': {
       if (
         !state.values ||
         !state.values.awards ||
@@ -368,7 +347,7 @@ function form(state: FormState = initialState, action: Action): FormState {
           awards: state.values.awards.slice(0, -1)
         }
       }
-
+    }
     default:
       return state
   }

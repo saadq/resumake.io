@@ -6,55 +6,39 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../shared/components'
 import School from './fragments/School'
-import { addSchool, removeSchool, clearSchoolField } from '../actions'
+import { addSchool, removeSchool } from '../actions'
+import type { FormValues } from '../types'
 import type { State } from '../../../shared/types'
 
 type Props = {
-  schoolCount: number,
+  education: $PropertyType<FormValues, 'education'>,
   addSchool: () => void,
-  removeSchool: () => void,
-  clearSchoolField: (schoolCount: number) => void
+  removeSchool: () => void
 }
 
-function Education({
-  schoolCount,
-  addSchool,
-  removeSchool,
-  clearSchoolField
-}: Props) {
+function Education({ education, addSchool, removeSchool }: Props) {
   return (
     <Section heading="Your Educational Background">
-      {Array.from({ length: schoolCount }).map((_, index) => (
-        <School key={index} index={index} />
-      ))}
-      <div className="section-buttons">
-        <Button onClick={addSchool} type="button">
-          Add School
-        </Button>
-        <Button
-          onClick={() => {
-            removeSchool()
-            clearSchoolField(schoolCount)
-          }}
-          type="button"
-        >
-          Remove School
-        </Button>
-      </div>
+      {education.map((school, i) => school && <School key={i} index={i} />)}
+      <Button onClick={addSchool} type="button">
+        Add School
+      </Button>
+      <Button onClick={removeSchool} type="button">
+        Remove School
+      </Button>
     </Section>
   )
 }
 
 function mapState(state: State) {
   return {
-    schoolCount: state.form.resume.schoolCount
+    education: state.form.resume.values.education
   }
 }
 
 const actions = {
   addSchool,
-  removeSchool,
-  clearSchoolField
+  removeSchool
 }
 
 export default connect(mapState, actions)(Education)

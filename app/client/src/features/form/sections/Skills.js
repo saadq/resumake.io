@@ -32,18 +32,15 @@ function Skills({
 }: Props) {
   return (
     <Section heading="Your Skills">
-      {skills.map(
-        (skill, i) =>
-          skill != null && (
-            <Skill
-              key={i}
-              index={i}
-              keywords={skill.keywords}
-              addKeyword={addSkillKeyword}
-              removeKeyword={removeSkillKeyword}
-            />
-          )
-      )}
+      {skills.map((skill, i) => (
+        <Skill
+          key={i}
+          index={i}
+          keywords={skill.keywords}
+          addKeyword={addSkillKeyword}
+          removeKeyword={removeSkillKeyword}
+        />
+      ))}
       <Button onClick={addSkill} type="button">
         Add Skill
       </Button>

@@ -34,18 +34,15 @@ function Work({
 }: Props) {
   return (
     <Section heading="Your Work Experience">
-      {work.map(
-        (job, i) =>
-          job != null && (
-            <Job
-              key={i}
-              index={i}
-              highlights={job.highlights}
-              addHighlight={addJobHighlight}
-              removeHighlight={removeJobHighlight}
-            />
-          )
-      )}
+      {work.map((job, i) => (
+        <Job
+          key={i}
+          index={i}
+          highlights={job.highlights}
+          addHighlight={addJobHighlight}
+          removeHighlight={removeJobHighlight}
+        />
+      ))}
       <Button onClick={addJob} type="button">
         Add Job
       </Button>

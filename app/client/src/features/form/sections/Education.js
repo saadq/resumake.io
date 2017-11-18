@@ -19,7 +19,7 @@ type Props = {
 function Education({ education, addSchool, removeSchool }: Props) {
   return (
     <Section heading="Your Educational Background">
-      {education.map((school, i) => school && <School key={i} index={i} />)}
+      {education.map((school, i) => <School key={i} index={i} />)}
       <Button onClick={addSchool} type="button">
         Add School
       </Button>

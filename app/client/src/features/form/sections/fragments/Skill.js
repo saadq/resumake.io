@@ -74,36 +74,33 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
         placeholder="Programming Languages"
       />
       <Label>Skill Details</Label>
-      {keywords.map(
-        (keyword, i) =>
-          keyword != null && (
-            <div key={i}>
-              <MiniInput
-                name={`skills[${index}].keywords[${i}]`}
-                placeholder="Java"
-                component="input"
-              />
-              {i === keywords.length - 1 && (
-                <Row>
-                  <RoundButton
-                    inverted
-                    type="button"
-                    onClick={() => addKeyword(index)}
-                  >
-                    <Icon type="add" />
-                  </RoundButton>
-                  <RoundButton
-                    inverted
-                    type="button"
-                    onClick={() => removeKeyword(index)}
-                  >
-                    <Icon type="remove" />
-                  </RoundButton>
-                </Row>
-              )}
-            </div>
-          )
-      )}
+      {keywords.map((keyword, i) => (
+        <div key={i}>
+          <MiniInput
+            name={`skills[${index}].keywords[${i}]`}
+            placeholder="Java"
+            component="input"
+          />
+          {i === keywords.length - 1 && (
+            <Row>
+              <RoundButton
+                inverted
+                type="button"
+                onClick={() => addKeyword(index)}
+              >
+                <Icon type="add" />
+              </RoundButton>
+              <RoundButton
+                inverted
+                type="button"
+                onClick={() => removeKeyword(index)}
+              >
+                <Icon type="remove" />
+              </RoundButton>
+            </Row>
+          )}
+        </div>
+      ))}
     </div>
   )
 }

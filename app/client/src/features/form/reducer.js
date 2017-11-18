@@ -39,7 +39,10 @@ function form(state: FormState = initialState, action: Action): FormState {
       return {
         ...state,
         isUploading: false,
-        values: action.json
+        values: {
+          ...state.values,
+          ...action.json
+        }
       }
 
     case 'UPLOAD_JSON_FAILURE':

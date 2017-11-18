@@ -132,13 +132,6 @@ function removeProject(): Action {
   }
 }
 
-function clearProjectField(skillCount: number): Action {
-  return {
-    type: 'CLEAR_PROJECT_FIELD',
-    skillCount
-  }
-}
-
 function addProjectKeyword(index: number): Action {
   return {
     type: 'ADD_PROJECT_KEYWORD',
@@ -150,14 +143,6 @@ function removeProjectKeyword(index: number): Action {
   return {
     type: 'REMOVE_PROJECT_KEYWORD',
     index
-  }
-}
-
-function clearProjectKeywordField(index: number, keywordCount: number): Action {
-  return {
-    type: 'CLEAR_PROJECT_KEYWORD_FIELD',
-    index,
-    keywordCount
   }
 }
 
@@ -194,10 +179,8 @@ export {
   removeSkillKeyword,
   addProject,
   removeProject,
-  clearProjectField,
   addProjectKeyword,
   removeProjectKeyword,
-  clearProjectKeywordField,
   addAward,
   removeAward,
   clearAwardField

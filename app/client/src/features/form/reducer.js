@@ -10,8 +10,6 @@ const initialState = {
   isUploading: false,
   skillCount: 1,
   skillKeywords: [1],
-  projectCount: 1,
-  projectKeywords: [1],
   awardCount: 1,
   values: {
     selectedTemplate: 1,
@@ -27,7 +25,11 @@ const initialState = {
         keywords: ['']
       }
     ],
-    projects: [{}],
+    projects: [
+      {
+        keywords: ['']
+      }
+    ],
     awards: [{}]
   }
 }
@@ -250,29 +252,20 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_PROJECT': {
       return {
         ...state,
-        projectCount: state.projectCount + 1,
-        projectKeywords: [...state.projectKeywords, 1]
+        values: {
+          ...state.values,
+          projects: [
+            ...state.values.projects,
+            {
+              keywords: ['']
+            }
+          ]
+        }
       }
     }
 
     case 'REMOVE_PROJECT': {
-      return {
-        ...state,
-        projectCount: Math.max(state.projectCount - 1, 1),
-        projectKeywords:
-          state.projectCount > 1
-            ? state.projectKeywords.slice(0, -1)
-            : state.projectKeywords
-      }
-    }
-
-    case 'CLEAR_PROJECT_FIELD': {
-      if (
-        !state.values ||
-        !state.values.projects ||
-        state.values.projects.length <= 1 ||
-        state.values.projects.length !== action.skillCount
-      ) {
+      if (state.values.projects.length <= 1) {
         return state
       }
 
@@ -286,43 +279,34 @@ function form(state: FormState = initialState, action: Action): FormState {
     }
 
     case 'ADD_PROJECT_KEYWORD': {
+      const { projects } = (state.values: any)
+
       return {
         ...state,
-        projectKeywords: [
-          ...state.projectKeywords.slice(0, action.index),
-          state.projectKeywords[action.index] + 1,
-          ...state.projectKeywords.slice(action.index + 1)
-        ]
+        values: {
+          ...state.values,
+          projects: [
+            ...projects.slice(0, action.index),
+            {
+              ...projects[action.index],
+              keywords: [...projects[action.index].keywords, '']
+            },
+            ...projects.slice(action.index + 1)
+          ]
+        }
       }
     }
 
     case 'REMOVE_PROJECT_KEYWORD': {
-      return {
-        ...state,
-        projectKeywords: [
-          ...state.projectKeywords.slice(0, action.index),
-          state.projectKeywords[action.index] > 1
-            ? state.projectKeywords[action.index] - 1
-            : 1,
-          ...state.projectKeywords.slice(action.index + 1)
-        ]
-      }
-    }
+      const { projects } = (state.values: any)
 
-    case 'CLEAR_PROJECT_KEYWORD_FIELD': {
       if (
-        !state.values ||
-        !state.values.projects ||
-        !state.values.projects[action.index] ||
-        !state.values.projects[action.index].keywords ||
-        state.values.projects[action.index].keywords.length <= 1 ||
-        action.keywordCount !==
-          state.values.projects[action.index].keywords.length
+        !projects[action.index] ||
+        !projects[action.index].keywords ||
+        projects[action.index].keywords.length <= 1
       ) {
         return state
       }
-
-      const { projects } = (state.values: any)
 
       return {
         ...state,

@@ -58,20 +58,13 @@ const RoundButton = Button.extend`
 `
 
 type Props = {
+  keywords: Array<?string>,
   index: number,
-  keywordsCount: number,
   addKeyword: (index: number) => void,
-  removeKeyword: (index: number) => void,
-  clearKeywordField: (index: number, keywordsCount: number) => void
+  removeKeyword: (index: number) => void
 }
 
-function Project({
-  index,
-  keywordsCount,
-  addKeyword,
-  removeKeyword,
-  clearKeywordField
-}: Props) {
+function Project({ keywords, index, addKeyword, removeKeyword }: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -91,25 +84,19 @@ function Project({
         placeholder="http://piperchat.com"
       />
       <Label>Tools Used</Label>
-      {Array.from({ length: keywordsCount }).map((_, i) => (
+      {keywords.map((_, i) => (
         <div key={i}>
           <MiniInput
             name={`projects[${index}].keywords[${i}]`}
             placeholder="Java"
             component="input"
           />
-          {i === keywordsCount - 1 && (
+          {i === keywords.length - 1 && (
             <ButtonRow>
-              <RoundButton onClick={() => addKeyword(index)} inverted>
+              <RoundButton inverted onClick={() => addKeyword(index)}>
                 <Icon type="add" />
               </RoundButton>
-              <RoundButton
-                onClick={() => {
-                  removeKeyword(index)
-                  clearKeywordField(index, keywordsCount)
-                }}
-                inverted
-              >
+              <RoundButton inverted onClick={() => removeKeyword(index)}>
                 <Icon type="remove" />
               </RoundButton>
             </ButtonRow>

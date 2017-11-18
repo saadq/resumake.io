@@ -37,7 +37,7 @@ type Project = {
   name?: ?string,
   description?: ?string,
   url?: ?string,
-  keywords?: Array<?string>
+  keywords: Array<?string>
 }
 
 type Award = {
@@ -66,8 +66,6 @@ type FormValues = {
 type FormState = {
   isUploading: boolean,
   values: FormValues,
-  projectCount: number,
-  projectKeywords: Array<number>,
   awardCount: number,
   anyTouched?: boolean,
   registeredFields?: Object,
@@ -91,10 +89,8 @@ type FormAction =
   | { type: 'REMOVE_SKILL_KEYWORD', index: number }
   | { type: 'ADD_PROJECT' }
   | { type: 'REMOVE_PROJECT' }
-  | { type: 'CLEAR_PROJECT_FIELD', skillCount: number }
   | { type: 'ADD_PROJECT_KEYWORD', index: number }
   | { type: 'REMOVE_PROJECT_KEYWORD', index: number }
-  | { type: 'CLEAR_PROJECT_KEYWORD_FIELD', index: number, keywordCount: number }
   | { type: 'ADD_AWARD' }
   | { type: 'REMOVE_AWARD' }
   | { type: 'CLEAR_AWARD_FIELD' }

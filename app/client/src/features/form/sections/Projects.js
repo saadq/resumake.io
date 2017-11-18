@@ -9,57 +9,43 @@ import Project from './fragments/Project'
 import {
   addProject,
   removeProject,
-  clearProjectField,
   addProjectKeyword,
-  removeProjectKeyword,
-  clearProjectKeywordField
+  removeProjectKeyword
 } from '../actions'
+import type { FormValues } from '../types'
 import type { State } from '../../../shared/types'
 
 type Props = {
-  projectCount: number,
-  projectKeywords: Array<number>,
+  projects: $PropertyType<FormValues, 'projects'>,
   addProject: () => void,
   removeProject: () => void,
   addProjectKeyword: (index: number) => void,
-  removeProjectKeyword: (index: number) => void,
-  clearProjectKeywordField: (index: number, keywordCount: number) => void,
-  clearProjectField: (projectCount: number) => void
+  removeProjectKeyword: (index: number) => void
 }
 
 function Projects({
-  projectCount,
-  projectKeywords,
+  projects,
   addProject,
   removeProject,
   addProjectKeyword,
-  removeProjectKeyword,
-  clearProjectKeywordField,
-  clearProjectField
+  removeProjectKeyword
 }: Props) {
   return (
     <Section heading="Your Projects">
-      {Array.from({ length: projectCount }).map((_, index) => (
+      {projects.map((project, i) => (
         <Project
-          key={index}
-          index={index}
-          keywordsCount={projectKeywords[index]}
+          key={i}
+          index={i}
+          keywords={project.keywords}
           addKeyword={addProjectKeyword}
           removeKeyword={removeProjectKeyword}
-          clearKeywordField={clearProjectKeywordField}
         />
       ))}
       <div>
         <Button onClick={addProject} type="button">
           Add Project
         </Button>
-        <Button
-          onClick={() => {
-            removeProject()
-            clearProjectField(projectCount)
-          }}
-          type="button"
-        >
+        <Button onClick={removeProject} type="button">
           Remove Project
         </Button>
       </div>
@@ -69,18 +55,15 @@ function Projects({
 
 function mapState(state: State) {
   return {
-    projectCount: state.form.resume.projectCount,
-    projectKeywords: state.form.resume.projectKeywords
+    projects: state.form.resume.values.projects
   }
 }
 
 const actions = {
   addProject,
   removeProject,
-  clearProjectField,
   addProjectKeyword,
-  removeProjectKeyword,
-  clearProjectKeywordField
+  removeProjectKeyword
 }
 
 export default connect(mapState, actions)(Projects)

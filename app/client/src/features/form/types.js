@@ -13,6 +13,16 @@ type Basics = {
   }
 }
 
+type School = {
+  institution?: ?string,
+  location?: ?string,
+  area?: ?string,
+  studyType?: ?string,
+  startDate?: ?string,
+  endDate?: ?string,
+  gpa?: ?string
+}
+
 type Job = {
   company?: ?string,
   location?: ?string,
@@ -23,14 +33,10 @@ type Job = {
   highlights: Array<?string>
 }
 
-type School = {
-  institution?: ?string,
-  location?: ?string,
-  area?: ?string,
-  studyType?: ?string,
-  startDate?: ?string,
-  endDate?: ?string,
-  gpa?: ?string
+type Skill = {
+  name?: ?string,
+  level?: ?string,
+  keywords: Array<?string>
 }
 
 type Project = {
@@ -45,12 +51,6 @@ type Award = {
   date?: ?string,
   awarder?: ?string,
   summary?: ?string
-}
-
-type Skill = {
-  name?: ?string,
-  level?: ?string,
-  keywords: Array<?string>
 }
 
 type FormValues = {

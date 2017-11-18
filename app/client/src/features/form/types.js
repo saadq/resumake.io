@@ -50,7 +50,7 @@ type Award = {
 type Skill = {
   name?: ?string,
   level?: ?string,
-  keywords?: Array<?string>
+  keywords: Array<?string>
 }
 
 type FormValues = {
@@ -66,8 +66,6 @@ type FormValues = {
 type FormState = {
   isUploading: boolean,
   values: FormValues,
-  skillCount: number,
-  skillKeywords: Array<number>,
   projectCount: number,
   projectKeywords: Array<number>,
   awardCount: number,

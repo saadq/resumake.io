@@ -14,7 +14,7 @@ import {
   Icon
 } from '../../../../shared/components'
 
-const ButtonRow = styled.div`
+const Row = styled.div`
   margin-left: 10px;
   display: inline-flex;
   justify-content: center;
@@ -58,20 +58,13 @@ const RoundButton = Button.extend`
 `
 
 type Props = {
+  keywords: Array<?string>,
   index: number,
-  keywordsCount: number,
   addKeyword: (index: number) => void,
-  removeKeyword: (index: number) => void,
-  clearKeywordField: (index: number, keywordsCount: number) => void
+  removeKeyword: (index: number) => void
 }
 
-function Skill({
-  index,
-  keywordsCount,
-  addKeyword,
-  removeKeyword,
-  clearKeywordField
-}: Props) {
+function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -81,31 +74,36 @@ function Skill({
         placeholder="Programming Languages"
       />
       <Label>Skill Details</Label>
-      {Array.from({ length: keywordsCount }).map((_, i) => (
-        <div key={i}>
-          <MiniInput
-            name={`skills[${index}].keywords[${i}]`}
-            placeholder="Java"
-            component="input"
-          />
-          {i === keywordsCount - 1 && (
-            <ButtonRow>
-              <RoundButton onClick={() => addKeyword(index)} inverted>
-                <Icon type="add" />
-              </RoundButton>
-              <RoundButton
-                onClick={() => {
-                  removeKeyword(index)
-                  clearKeywordField(index, keywordsCount)
-                }}
-                inverted
-              >
-                <Icon type="remove" />
-              </RoundButton>
-            </ButtonRow>
-          )}
-        </div>
-      ))}
+      {keywords.map(
+        (keyword, i) =>
+          keyword != null && (
+            <div key={i}>
+              <MiniInput
+                name={`skills[${index}].keywords[${i}]`}
+                placeholder="Java"
+                component="input"
+              />
+              {i === keywords.length - 1 && (
+                <Row>
+                  <RoundButton
+                    inverted
+                    type="button"
+                    onClick={() => addKeyword(index)}
+                  >
+                    <Icon type="add" />
+                  </RoundButton>
+                  <RoundButton
+                    inverted
+                    type="button"
+                    onClick={() => removeKeyword(index)}
+                  >
+                    <Icon type="remove" />
+                  </RoundButton>
+                </Row>
+              )}
+            </div>
+          )
+      )}
     </div>
   )
 }

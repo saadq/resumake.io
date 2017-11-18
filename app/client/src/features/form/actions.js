@@ -106,13 +106,6 @@ function removeSkill(): Action {
   }
 }
 
-function clearSkillField(skillCount: number): Action {
-  return {
-    type: 'CLEAR_SKILL_FIELD',
-    skillCount
-  }
-}
-
 function addSkillKeyword(index: number): Action {
   return {
     type: 'ADD_SKILL_KEYWORD',
@@ -124,14 +117,6 @@ function removeSkillKeyword(index: number): Action {
   return {
     type: 'REMOVE_SKILL_KEYWORD',
     index
-  }
-}
-
-function clearSkillKeywordField(index: number, keywordCount: number): Action {
-  return {
-    type: 'CLEAR_SKILL_KEYWORD_FIELD',
-    index,
-    keywordCount
   }
 }
 
@@ -205,10 +190,8 @@ export {
   removeJobHighlight,
   addSkill,
   removeSkill,
-  clearSkillField,
   addSkillKeyword,
   removeSkillKeyword,
-  clearSkillKeywordField,
   addProject,
   removeProject,
   clearProjectField,

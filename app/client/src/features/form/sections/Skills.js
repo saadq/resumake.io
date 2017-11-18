@@ -9,78 +9,62 @@ import Skill from './fragments/Skill'
 import {
   addSkill,
   removeSkill,
-  clearSkillField,
   addSkillKeyword,
-  removeSkillKeyword,
-  clearSkillKeywordField
+  removeSkillKeyword
 } from '../actions'
+import type { FormValues } from '../types'
 import type { State } from '../../../shared/types'
 
 type Props = {
-  skillCount: number,
-  skillKeywords: Array<number>,
+  skills: $PropertyType<FormValues, 'skills'>,
   addSkill: () => void,
   removeSkill: () => void,
   addSkillKeyword: (index: number) => void,
-  removeSkillKeyword: (index: number) => void,
-  clearSkillKeywordField: (index: number, keywordCount: number) => void,
-  clearSkillField: (skillCount: number) => void
+  removeSkillKeyword: (index: number) => void
 }
 
 function Skills({
-  skillCount,
-  skillKeywords,
+  skills,
   addSkill,
   removeSkill,
   addSkillKeyword,
-  removeSkillKeyword,
-  clearSkillKeywordField,
-  clearSkillField
+  removeSkillKeyword
 }: Props) {
   return (
     <Section heading="Your Skills">
-      {Array.from({ length: skillCount }).map((_, index) => (
-        <Skill
-          key={index}
-          index={index}
-          keywordsCount={skillKeywords[index]}
-          addKeyword={addSkillKeyword}
-          removeKeyword={removeSkillKeyword}
-          clearKeywordField={clearSkillKeywordField}
-        />
-      ))}
-      <div>
-        <Button onClick={addSkill} type="button">
-          Add Skill
-        </Button>
-        <Button
-          onClick={() => {
-            removeSkill()
-            clearSkillField(skillCount)
-          }}
-          type="button"
-        >
-          Remove Skill
-        </Button>
-      </div>
+      {skills.map(
+        (skill, i) =>
+          skill != null && (
+            <Skill
+              key={i}
+              index={i}
+              keywords={skill.keywords}
+              addKeyword={addSkillKeyword}
+              removeKeyword={removeSkillKeyword}
+            />
+          )
+      )}
+      <Button onClick={addSkill} type="button">
+        Add Skill
+      </Button>
+      <Button onClick={removeSkill} type="button">
+        Remove Skill
+      </Button>
     </Section>
   )
 }
 
 function mapState(state: State) {
   return {
-    skillCount: state.form.resume.skillCount,
-    skillKeywords: state.form.resume.skillKeywords
+    skills: state.form.resume.values.skills
   }
 }
 
 const actions = {
   addSkill,
   removeSkill,
-  clearSkillField,
   addSkillKeyword,
-  removeSkillKeyword,
-  clearSkillKeywordField
+  removeSkillKeyword
 }
 
 export default connect(mapState, actions)(Skills)

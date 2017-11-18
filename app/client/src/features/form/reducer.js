@@ -16,26 +16,36 @@ const initialState = {
   values: {
     selectedTemplate: 1,
     basics: {},
-    work: [{ highlights: [''] }],
     education: [{}],
-    awards: [{}],
-    skills: [{}],
-    projects: [{}]
+    work: [
+      {
+        highlights: ['']
+      }
+    ],
+    skills: [
+      {
+        keywords: ['']
+      }
+    ],
+    projects: [{}],
+    awards: [{}]
   }
 }
 
 function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
-    case 'CLEAR_STATE':
+    case 'CLEAR_STATE': {
       return initialState
+    }
 
-    case 'UPLOAD_JSON_REQUEST':
+    case 'UPLOAD_JSON_REQUEST': {
       return {
         ...state,
         isUploading: true
       }
+    }
 
-    case 'UPLOAD_JSON_SUCCESS':
+    case 'UPLOAD_JSON_SUCCESS': {
       return {
         ...state,
         isUploading: false,
@@ -44,14 +54,16 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...action.json
         }
       }
+    }
 
-    case 'UPLOAD_JSON_FAILURE':
+    case 'UPLOAD_JSON_FAILURE': {
       return {
         ...state,
         isUploading: false
       }
+    }
 
-    case 'SELECT_TEMPLATE':
+    case 'SELECT_TEMPLATE': {
       return {
         ...state,
         values: {
@@ -59,8 +71,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           selectedTemplate: action.templateId
         }
       }
+    }
 
-    case 'ADD_SCHOOL':
+    case 'ADD_SCHOOL': {
       return {
         ...state,
         values: {
@@ -68,8 +81,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           education: [...state.values.education, {}]
         }
       }
+    }
 
-    case 'REMOVE_SCHOOL':
+    case 'REMOVE_SCHOOL': {
       if (state.values.education.length <= 1) {
         return state
       }
@@ -81,8 +95,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           education: state.values.education.slice(0, -1)
         }
       }
+    }
 
-    case 'ADD_JOB':
+    case 'ADD_JOB': {
       return {
         ...state,
         values: {
@@ -90,13 +105,14 @@ function form(state: FormState = initialState, action: Action): FormState {
           work: [
             ...state.values.work,
             {
-              highlights: [' ']
+              highlights: ['']
             }
           ]
         }
       }
+    }
 
-    case 'REMOVE_JOB':
+    case 'REMOVE_JOB': {
       if (state.values.work.length <= 1) {
         return state
       }
@@ -108,8 +124,9 @@ function form(state: FormState = initialState, action: Action): FormState {
           work: state.values.work.slice(0, -1)
         }
       }
+    }
 
-    case 'ADD_JOB_HIGHLIGHT':
+    case 'ADD_JOB_HIGHLIGHT': {
       const { work } = (state.values: any)
 
       return {
@@ -120,12 +137,13 @@ function form(state: FormState = initialState, action: Action): FormState {
             ...work.slice(0, action.index),
             {
               ...work[action.index],
-              highlights: [...work[action.index].highlights, ' ']
+              highlights: [...work[action.index].highlights, '']
             },
             ...work.slice(action.index + 1)
           ]
         }
       }
+    }
 
     case 'REMOVE_JOB_HIGHLIGHT': {
       const { work } = (state.values: any)
@@ -157,29 +175,20 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_SKILL': {
       return {
         ...state,
-        skillCount: state.skillCount + 1,
-        skillKeywords: [...state.skillKeywords, 1]
+        values: {
+          ...state.values,
+          skills: [
+            ...state.values.skills,
+            {
+              keywords: ['']
+            }
+          ]
+        }
       }
     }
 
     case 'REMOVE_SKILL': {
-      return {
-        ...state,
-        skillCount: Math.max(state.skillCount - 1, 1),
-        skillKeywords:
-          state.skillCount > 1
-            ? state.skillKeywords.slice(0, -1)
-            : state.skillKeywords
-      }
-    }
-
-    case 'CLEAR_SKILL_FIELD': {
-      if (
-        !state.values ||
-        !state.values.skills ||
-        state.values.skills.length <= 1 ||
-        state.values.skills.length !== action.skillCount
-      ) {
+      if (state.values.skills.length <= 1) {
         return state
       }
 
@@ -193,43 +202,34 @@ function form(state: FormState = initialState, action: Action): FormState {
     }
 
     case 'ADD_SKILL_KEYWORD': {
+      const { skills } = (state.values: any)
+
       return {
         ...state,
-        skillKeywords: [
-          ...state.skillKeywords.slice(0, action.index),
-          state.skillKeywords[action.index] + 1,
-          ...state.skillKeywords.slice(action.index + 1)
-        ]
+        values: {
+          ...state.values,
+          skills: [
+            ...skills.slice(0, action.index),
+            {
+              ...skills[action.index],
+              keywords: [...skills[action.index].keywords, '']
+            },
+            ...skills.slice(action.index + 1)
+          ]
+        }
       }
     }
 
     case 'REMOVE_SKILL_KEYWORD': {
-      return {
-        ...state,
-        skillKeywords: [
-          ...state.skillKeywords.slice(0, action.index),
-          state.skillKeywords[action.index] > 1
-            ? state.skillKeywords[action.index] - 1
-            : 1,
-          ...state.skillKeywords.slice(action.index + 1)
-        ]
-      }
-    }
+      const { skills } = (state.values: any)
 
-    case 'CLEAR_SKILL_KEYWORD_FIELD': {
       if (
-        !state.values ||
-        !state.values.skills ||
-        !state.values.skills[action.index] ||
-        !state.values.skills[action.index].keywords ||
-        state.values.skills[action.index].keywords.length <= 1 ||
-        action.keywordCount !==
-          state.values.skills[action.index].keywords.length
+        !skills[action.index] ||
+        !skills[action.index].keywords ||
+        skills[action.index].keywords.length <= 1
       ) {
         return state
       }
-
-      const { skills } = (state.values: any)
 
       return {
         ...state,

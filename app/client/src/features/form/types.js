@@ -87,10 +87,8 @@ type FormAction =
   | { type: 'REMOVE_JOB_HIGHLIGHT', index: number }
   | { type: 'ADD_SKILL' }
   | { type: 'REMOVE_SKILL' }
-  | { type: 'CLEAR_SKILL_FIELD', skillCount: number }
   | { type: 'ADD_SKILL_KEYWORD', index: number }
   | { type: 'REMOVE_SKILL_KEYWORD', index: number }
-  | { type: 'CLEAR_SKILL_KEYWORD_FIELD', index: number, keywordCount: number }
   | { type: 'ADD_PROJECT' }
   | { type: 'REMOVE_PROJECT' }
   | { type: 'CLEAR_PROJECT_FIELD', skillCount: number }

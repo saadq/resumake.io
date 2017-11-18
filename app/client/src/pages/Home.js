@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 `
 
 const Button = styled(Link)`
+  background: black;
   color: white;
   text-decoration: none;
   border: 1px solid white;
@@ -45,9 +46,7 @@ const Button = styled(Link)`
   }
 `
 
-const FormLabel = Button.withComponent('label').extend`
-  background: black;
-`
+const FormLabel = Button.withComponent('label')
 
 const FormInput = styled.input`display: none;`
 

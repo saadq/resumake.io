@@ -6,33 +6,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../shared/components'
 import Award from './fragments/Award'
-import { addAward, removeAward, clearAwardField } from '../actions'
+import { addAward, removeAward } from '../actions'
+import type { FormValues } from '../types'
 import type { State } from '../../../shared/types'
 
 type Props = {
-  awardCount: number,
+  awards: $PropertyType<FormValues, 'awards'>,
   addAward: () => void,
-  removeAward: () => void,
-  clearAwardField: (awardCount: number) => void
+  removeAward: () => void
 }
 
-function Awards({ awardCount, addAward, removeAward, clearAwardField }: Props) {
+function Awards({ awards, addAward, removeAward }: Props) {
   return (
     <Section heading="Honors & Awards">
-      {Array.from({ length: awardCount }).map((_, index) => (
-        <Award key={index} index={index} />
-      ))}
+      {awards.map((award, i) => <Award key={i} index={i} />)}
       <div className="section-buttons">
         <Button onClick={addAward} type="button">
           Add Award
         </Button>
-        <Button
-          onClick={() => {
-            removeAward()
-            clearAwardField(awardCount)
-          }}
-          type="button"
-        >
+        <Button onClick={removeAward} type="button">
           Remove Award
         </Button>
       </div>
@@ -42,14 +34,13 @@ function Awards({ awardCount, addAward, removeAward, clearAwardField }: Props) {
 
 function mapState(state: State) {
   return {
-    awardCount: state.form.resume.awardCount
+    awards: state.form.resume.values.awards
   }
 }
 
 const actions = {
   addAward,
-  removeAward,
-  clearAwardField
+  removeAward
 }
 
 export default connect(mapState, actions)(Awards)

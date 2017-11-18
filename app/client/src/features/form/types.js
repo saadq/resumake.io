@@ -66,7 +66,6 @@ type FormValues = {
 type FormState = {
   isUploading: boolean,
   values: FormValues,
-  awardCount: number,
   anyTouched?: boolean,
   registeredFields?: Object,
   fields?: Object
@@ -93,6 +92,5 @@ type FormAction =
   | { type: 'REMOVE_PROJECT_KEYWORD', index: number }
   | { type: 'ADD_AWARD' }
   | { type: 'REMOVE_AWARD' }
-  | { type: 'CLEAR_AWARD_FIELD' }
 
 export type { FormState, FormAction, FormValues }

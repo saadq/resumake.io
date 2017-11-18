@@ -8,9 +8,6 @@ import type { Action } from '../../shared/types'
 
 const initialState = {
   isUploading: false,
-  skillCount: 1,
-  skillKeywords: [1],
-  awardCount: 1,
   values: {
     selectedTemplate: 1,
     basics: {},
@@ -327,23 +324,15 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'ADD_AWARD': {
       return {
         ...state,
-        awardCount: state.awardCount + 1
+        values: {
+          ...state.values,
+          awards: [...state.values.awards, {}]
+        }
       }
     }
 
     case 'REMOVE_AWARD': {
-      return {
-        ...state,
-        awardCount: Math.max(state.awardCount - 1, 1)
-      }
-    }
-
-    case 'CLEAR_AWARD_FIELD': {
-      if (
-        !state.values ||
-        !state.values.awards ||
-        state.values.awards.length <= 1
-      ) {
+      if (state.values.awards.length <= 1) {
         return state
       }
 
@@ -355,6 +344,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         }
       }
     }
+
     default:
       return state
   }

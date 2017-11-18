@@ -158,12 +158,6 @@ function removeAward(): Action {
   }
 }
 
-function clearAwardField(): Action {
-  return {
-    type: 'CLEAR_AWARD_FIELD'
-  }
-}
-
 export {
   uploadJSON,
   selectTemplate,
@@ -182,6 +176,5 @@ export {
   addProjectKeyword,
   removeProjectKeyword,
   addAward,
-  removeAward,
-  clearAwardField
+  removeAward
 }

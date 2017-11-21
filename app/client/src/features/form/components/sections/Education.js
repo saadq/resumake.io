@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../ui/components'
-import School from '../fragments/School'
+import School from '..'
 import { addSchool, removeSchool } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../shared/types'

@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../ui/components'
-import Award from '../fragments/Award'
+import Award from '..'
 import { addAward, removeAward } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../shared/types'

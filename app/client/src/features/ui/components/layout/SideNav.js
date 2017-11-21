@@ -159,14 +159,14 @@ function SideNav({ history }: Props) {
             </NavItem>
           </li>
         </List>
+        <Button
+          onClick={() => history.push('/generator/preview')}
+          type="submit"
+          form="resume-form"
+        >
+          make
+        </Button>
       </Nav>
-      <Button
-        onClick={() => history.push('/generator/preview')}
-        type="submit"
-        form="resume-form"
-      >
-        make
-      </Button>
     </Aside>
   )
 }

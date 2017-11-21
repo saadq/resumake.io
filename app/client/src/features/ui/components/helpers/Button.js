@@ -27,6 +27,11 @@ const Button = styled.button`
     position: relative;
     top: 1px;
   }
+
+  &:disabled {
+    border-color: #444;
+    color: #444;
+  }
 `
 
 export default Button

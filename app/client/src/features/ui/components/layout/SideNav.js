@@ -6,7 +6,7 @@ import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { colors, sizes, margins, animations } from '../../theme'
+import { colors, sizes, animations } from '../../theme'
 
 const Aside = styled.aside`
   position: fixed;
@@ -28,7 +28,6 @@ const Aside = styled.aside`
 `
 
 const Nav = styled.nav`
-  margin-top: calc(${sizes.progress} + ${margins.progress});
 `
 
 const List = styled.ul`

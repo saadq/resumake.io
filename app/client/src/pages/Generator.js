@@ -5,7 +5,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Switch, Route, Redirect, type Match } from 'react-router-dom'
-import Form, { Templates, Profile, Education, Work, Skills, Projects, Awards } from '../features/form/components'
+import Form, {
+  Templates,
+  Profile,
+  Education,
+  Work,
+  Skills,
+  Projects,
+  Awards
+} from '../features/form/components'
 import Preview from '../features/preview/components'
 import { Header, SideNav, Content, Footer } from '../features/ui/components'
 

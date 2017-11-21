@@ -9,7 +9,7 @@ import { sizes } from '../../theme'
 const Main = styled.main`
   flex: 1;
   padding: 0;
-  margin-top: calc(${sizes.header} + 30px);
+  margin-top: ${sizes.header};
   margin-left: ${sizes.sideNav};
   width: calc(80% - ${sizes.sideNav});
 

@@ -13,7 +13,7 @@ import type { State } from '../../../../shared/types'
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
   margin: 20px 0;
 

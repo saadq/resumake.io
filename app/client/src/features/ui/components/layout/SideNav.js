@@ -6,12 +6,12 @@ import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import { lighten } from 'polished'
-import { colors, sizes } from '../../theme'
+import { colors, sizes, margins } from '../../theme'
 
 const Aside = styled.aside`
   position: fixed;
   left: 0;
-  top: calc(${sizes.header});
+  top: ${sizes.header};
   width: ${sizes.sideNav};
   height: calc(100% - ${sizes.header});
   display: flex;
@@ -23,7 +23,11 @@ const Aside = styled.aside`
   }
 `
 
-const Nav = styled.nav`margin-top: 30px;`
+const Nav = styled.nav`
+  margin-top: calc(
+    ${sizes.progress} + (${margins.progress} * 2)
+  );
+`
 
 const List = styled.ul`
   list-style-type: none;

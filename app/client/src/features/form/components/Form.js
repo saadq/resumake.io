@@ -2,7 +2,7 @@
  * @flow
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect, type Location } from 'react-router-dom'
@@ -17,42 +17,85 @@ import {
 } from '.'
 import Preview from '../../preview/components'
 import { generateResume } from '../../preview/actions'
+import { setProgress } from '../../progress/actions'
 import type { FormValues } from '../types'
+import type { State } from '../../../shared/types'
 
 type Props = {
+  sections: Array<string>,
+  location: Location,
   handleSubmit: *,
-  generateResume: (payload: FormValues) => void,
-  location: Location
+  setProgress: (progress: number) => void,
+  generateResume: (payload: FormValues) => void
 }
 
-function Form({ handleSubmit, generateResume }: Props) {
-  return (
-    <form id="resume-form" onSubmit={handleSubmit(generateResume)}>
-      <Switch>
-        <Route
-          exact
-          path="/generator"
-          render={() => <Redirect to="/generator/templates" />}
-        />
-        <Route exact path="/generator/templates" component={Templates} />
-        <Route exact path="/generator/profile" component={Profile} />
-        <Route exact path="/generator/education" component={Education} />
-        <Route exact path="/generator/work" component={Work} />
-        <Route exact path="/generator/skills" component={Skills} />
-        <Route exact path="/generator/projects" component={Projects} />
-        <Route exact path="/generator/awards" component={Awards} />
-        <Route exact path="/generator/preview" component={Preview} />
-        <Route path="*" render={() => <h1>404</h1>} />
-      </Switch>
-    </form>
-  )
+class Form extends Component<Props> {
+  setProgress() {
+    const { location, setProgress, sections } = this.props
+
+    if (!location.pathname.startsWith('/generator/')) {
+      return
+    }
+
+    const section = location.pathname.slice(11, location.pathname.length)
+    const progressStep = Math.ceil(100 / sections.length)
+    const progress = progressStep * (sections.indexOf(section) + 1)
+
+    setProgress(progress)
+  }
+
+  componentWillMount() {
+    if (this.props.progress === 0) {
+      this.setProgress()
+    }
+  }
+
+  shouldComponentUpdate(prevProps) {
+    return prevProps.location !== this.props.location
+  }
+
+  componentDidUpdate() {
+    this.setProgress()
+  }
+
+  render() {
+    const { handleSubmit, generateResume } = this.props
+    return (
+      <form id="resume-form" onSubmit={handleSubmit(generateResume)}>
+        <Switch>
+          <Route
+            exact
+            path="/generator"
+            render={() => <Redirect to="/generator/templates" />}
+          />
+          <Route exact path="/generator/templates" component={Templates} />
+          <Route exact path="/generator/profile" component={Profile} />
+          <Route exact path="/generator/education" component={Education} />
+          <Route exact path="/generator/work" component={Work} />
+          <Route exact path="/generator/skills" component={Skills} />
+          <Route exact path="/generator/projects" component={Projects} />
+          <Route exact path="/generator/awards" component={Awards} />
+          <Route exact path="/generator/preview" component={Preview} />
+          <Route path="*" render={() => <h1>404</h1>} />
+        </Switch>
+      </form>
+    )
+  }
+}
+
+function mapState(state: State) {
+  return {
+    sections: state.progress.sections,
+    progress: state.progress.progress
+  }
 }
 
 const mapActions = {
-  generateResume
+  generateResume,
+  setProgress
 }
 
-const ConnectedForm = connect(null, mapActions)(Form)
+const ConnectedForm = connect(mapState, mapActions)(Form)
 
 export default reduxForm({
   form: 'resume',

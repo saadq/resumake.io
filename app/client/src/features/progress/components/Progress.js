@@ -3,9 +3,13 @@
  */
 
 import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { prevSection, nextSection } from '../actions'
 import { Button, Icon } from '../../ui/components'
 import { colors } from '../../ui/theme'
+import type { State } from '../../../shared/types'
 
 const Footer = styled.footer`
   width: 100%;
@@ -41,7 +45,8 @@ const Bar = styled.div`
 
   &:before {
     content: '';
-    width: 50%;
+    transition: width 0.75s ease;
+    width: ${props => props.progress}%;
     height: 100%;
     position: absolute;
     top: 0;
@@ -51,6 +56,8 @@ const Bar = styled.div`
   }
 `
 
+const SectionLink = styled(Link)`text-decoration: none;`
+
 const SectionButton = Button.extend`
   display: flex;
   align-items: center;
@@ -58,20 +65,45 @@ const SectionButton = Button.extend`
   text-align: center;
 `
 
-function Progress() {
+type Props = {
+  progress: number,
+  prev: string,
+  next: string,
+  prevSection: () => void,
+  nextSection: () => void
+}
+
+function Progress({ progress, prev, next, prevSection, nextSection }: Props) {
   return (
     <Footer>
       <Wrapper>
-        <SectionButton>
-          <Icon type="arrow_back" />
-        </SectionButton>
-        <Bar />
-        <SectionButton>
-          <Icon type="arrow_forward" />
-        </SectionButton>
+        <SectionLink to={`/generator/${prev}`}>
+          <SectionButton type="button" onClick={prevSection}>
+            <Icon type="arrow_back" />
+          </SectionButton>
+        </SectionLink>
+        <Bar progress={progress} />
+        <SectionLink to={`/generator/${next}`}>
+          <SectionButton type="button" onClick={nextSection}>
+            <Icon type="arrow_forward" />
+          </SectionButton>
+        </SectionLink>
       </Wrapper>
     </Footer>
   )
 }
 
-export default Progress
+function mapState(state: State) {
+  return {
+    progress: state.progress.progress,
+    prev: state.progress.prev,
+    next: state.progress.next
+  }
+}
+
+const mapActions = {
+  prevSection,
+  nextSection
+}
+
+export default connect(mapState, mapActions)(Progress)

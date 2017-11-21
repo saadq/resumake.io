@@ -16,4 +16,11 @@ function nextSection(): Action {
   }
 }
 
-export { prevSection, nextSection }
+function setProgress(progress: number): Action {
+  return {
+    type: 'SET_PROGRESS',
+    progress
+  }
+}
+
+export { prevSection, nextSection, setProgress }

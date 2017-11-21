@@ -60,7 +60,7 @@
     "babel-preset-react-hmre": "1.1.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "6.24.1",
-    "blyss": "^8.0.2",
+    "blyss": "^8.1.0",
     "blyss-loader": "^1.0.0",
     "copy-webpack-plugin": "4.0.1",
     "cross-env": "^5.0.5",

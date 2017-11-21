@@ -20,11 +20,11 @@ const Div = styled.div`
 `
 
 const ResumePage = styled(Page)`
-  transition: opacity 0.4s ease;
+  transition: box-shadow 0.4s ease;
   height: 100% !important;
 
   &:hover {
-    opacity: 0.8;
+    box-shadow: 1px -1px 20px rgba(255, 255, 255, 1);
   }
 
   canvas,

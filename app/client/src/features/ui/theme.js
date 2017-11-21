@@ -13,8 +13,8 @@ const colors = {
 const sizes = {
   header: '15vh',
   sideNav: '20vw',
-  progress: '15px',
-  preview: Math.min(850, (document.body: any).clientWidth - 52)
+  progress: '10px',
+  preview: Math.min(800, (document.body: any).clientWidth - 52)
 }
 
 const margins = {

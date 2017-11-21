@@ -28,7 +28,7 @@ const Aside = styled.aside`
 `
 
 const Nav = styled.nav`
-  margin-top: calc(${sizes.progress} + (${margins.progress} * 2));
+  margin-top: calc(${sizes.progress} + ${margins.progress});
 `
 
 const List = styled.ul`

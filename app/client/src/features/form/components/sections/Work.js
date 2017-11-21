@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Section, Button } from '../../../ui/components'
-import Job from '..'
+import { Job } from '..'
 import {
   addJob,
   removeJob,

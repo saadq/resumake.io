@@ -5,7 +5,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Header, SideNav, Content } from '../features/ui/components'
-import Progress from '../features/Progress'
+import Progress from '../features/progress/components'
 import Form from '../features/form/components'
 import type { Location } from 'react-router-dom'
 

@@ -3,97 +3,74 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Icon } from '../../ui/components'
-import { sizes, margins } from '../../ui/theme'
+import { Button, Icon } from '../../ui/components'
+import { colors } from '../../ui/theme'
+
+const Footer = styled.footer`
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 75px;
+  background: black;
+  border-top: 1px solid ${colors.borders};
+`
 
 const Wrapper = styled.div`
-  height: ${sizes.progress};
-  width: ${sizes.preview}px;
+  margin: 0 auto;
+  width: 800px;
   max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: ${margins.progress};
-`
-
-const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
-`
+  align-items: center;
 
-const Button = styled(Link)`
-  color: white;
-  opacity: 0.5;
-  text-decoration: none;
-  transition: opacity 0.4s ease;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.75em;
-
-  &:hover {
-    opacity: 1;
+  @media screen and (max-width: 1000px) {
+    width: 80%;
   }
-
-  i {
-    font-size: 0.75em;
-    margin: 0 5px;
-  }
-`
-
-const PrevButton = Button.extend`
-  opacity: ${props => (props.section === 'templates' ? 0 : 0.65)};
-`
-const NextButton = Button.extend`
-  opacity: ${props => (props.section === 'preview' ? 0 : 0.65)};
 `
 
 const Bar = styled.div`
   position: relative;
+  width: 50%;
   height: 5px;
   background: #222;
-  border-radius: 10px;
 
-  :before {
-    transition: width 0.75s ease;
+  &:before {
     content: '';
+    width: 50%;
+    height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
     bottom: 0;
-    height: 100%;
-    width: 85%;
+    left: 0;
     background: white;
-    border-radius: 10px;
   }
 `
 
-const Row = styled.div`
+const SectionButton = Button.extend`
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 `
-
-const section = ''
 
 function Progress() {
   return (
-    <Wrapper>
-      <Buttons>
-        <PrevButton section={section} to="/">
-          <Row>
-            <Icon type="arrow_back" /> Prev
-          </Row>
-        </PrevButton>
-        <NextButton section={section} to="/">
-          <Row>
-            Next <Icon type="arrow_forward" />
-          </Row>
-        </NextButton>
-      </Buttons>
-      <Bar />
-    </Wrapper>
+    <Footer>
+      <Wrapper>
+        <SectionButton>
+          <Icon type="arrow_back" />
+        </SectionButton>
+        <Bar />
+        <SectionButton>
+          <Icon type="arrow_forward" />
+        </SectionButton>
+      </Wrapper>
+    </Footer>
   )
 }
 

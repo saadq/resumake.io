@@ -4,8 +4,8 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { Icon } from '../../../shared/components'
-import { sizes } from '../../../shared/theme'
+import { Icon } from '../../ui/components'
+import { sizes } from '../../ui/theme'
 
 const Div = styled.div`
   max-width: 100%;

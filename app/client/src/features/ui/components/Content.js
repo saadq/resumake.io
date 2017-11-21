@@ -4,8 +4,7 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
-import Form from '../../features/form/Form'
-import { sizes } from '../../shared/theme'
+import { sizes } from '../theme'
 
 const Main = styled.main`
   flex: 1;
@@ -27,11 +26,7 @@ type Props = {
 }
 
 function Content({ children }: Props) {
-  return (
-    <Main>
-      <Form>{children}</Form>
-    </Main>
-  )
+  return <Main>{children}</Main>
 }
 
 export default Content

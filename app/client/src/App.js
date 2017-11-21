@@ -5,7 +5,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
-import ScrollToTop from './shared/components/ScrollToTop'
+import { ScrollToTop } from './features/ui/components'
 import { Home, Generator, About } from './pages'
 
 injectGlobal`

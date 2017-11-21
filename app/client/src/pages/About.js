@@ -5,7 +5,7 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { styles } from '../shared/theme'
+import { styles } from '../features/ui/theme'
 
 const Main = styled.main`
   font-family: 'Open Sans';

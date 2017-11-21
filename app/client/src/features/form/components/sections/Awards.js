@@ -4,11 +4,11 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Section, Button } from '../../../shared/components'
-import Award from './fragments/Award'
-import { addAward, removeAward } from '../actions'
-import type { FormValues } from '../types'
-import type { State } from '../../../shared/types'
+import { Section, Button } from '../../../ui/components'
+import Award from '../fragments/Award'
+import { addAward, removeAward } from '../../actions'
+import type { FormValues } from '../../types'
+import type { State } from '../../../../shared/types'
 
 type Props = {
   awards: $PropertyType<FormValues, 'awards'>,
@@ -38,9 +38,9 @@ function mapState(state: State) {
   }
 }
 
-const actions = {
+const mapActions = {
   addAward,
   removeAward
 }
 
-export default connect(mapState, actions)(Awards)
+export default connect(mapState, mapActions)(Awards)

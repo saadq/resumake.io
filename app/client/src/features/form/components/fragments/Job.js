@@ -11,8 +11,8 @@ import {
   Input,
   Button,
   Icon
-} from '../../../../shared/components'
-import { colors } from '../../../../shared/theme'
+} from '../../../ui/components'
+import { colors } from '../../../ui/theme'
 
 const Row = styled.div`
   display: flex;

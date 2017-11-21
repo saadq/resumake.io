@@ -92,10 +92,10 @@ function mapState(state: State) {
   }
 }
 
-const actions = {
+const mapActions = {
   clearState,
   clearPreview,
   uploadJSON
 }
 
-export default withRouter(connect(mapState, actions)(Home))
+export default withRouter(connect(mapState, mapActions)(Home))

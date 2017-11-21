@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { sizes } from '../../../shared/theme'
+import { sizes } from '../../ui/theme'
 
 const indeterminate = keyframes`
   0% {

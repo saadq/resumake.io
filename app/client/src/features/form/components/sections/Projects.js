@@ -4,16 +4,16 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Section, Button } from '../../../shared/components'
-import Project from './fragments/Project'
+import { Section, Button } from '../../../ui/components'
+import Project from '../fragments/Project'
 import {
   addProject,
   removeProject,
   addProjectKeyword,
   removeProjectKeyword
-} from '../actions'
-import type { FormValues } from '../types'
-import type { State } from '../../../shared/types'
+} from '../../actions'
+import type { FormValues } from '../../types'
+import type { State } from '../../../../shared/types'
 
 type Props = {
   projects: $PropertyType<FormValues, 'projects'>,
@@ -59,11 +59,11 @@ function mapState(state: State) {
   }
 }
 
-const actions = {
+const mapActions = {
   addProject,
   removeProject,
   addProjectKeyword,
   removeProjectKeyword
 }
 
-export default connect(mapState, actions)(Projects)
+export default connect(mapState, mapActions)(Projects)

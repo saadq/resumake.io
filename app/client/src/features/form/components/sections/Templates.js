@@ -6,10 +6,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
-import { Section, Button } from '../../../shared/components'
-import { selectTemplate } from '../actions'
-import { hideLightbox, showLightbox } from '../../ui/actions'
-import type { State } from '../../../shared/types'
+import { Section, Button } from '../../../ui/components'
+import { selectTemplate } from '../../actions'
+import { hideLightbox, showLightbox } from '../../../ui/actions'
+import type { State } from '../../../../shared/types'
 
 const Grid = styled.div`
   display: grid;
@@ -67,7 +67,7 @@ type Props = {
   showLightbox: (index: number) => void
 }
 
-const ctx = require.context('./img', true)
+const ctx = require.context('../../assets/img', true)
 const images = ctx.keys().map(ctx)
 
 function Templates({

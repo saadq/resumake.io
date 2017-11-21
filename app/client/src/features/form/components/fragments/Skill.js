@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { colors } from '../../../../shared/theme'
+import { colors } from '../../../ui/theme'
 import {
   Divider,
   LabeledInput,
@@ -12,7 +12,7 @@ import {
   Input,
   Button,
   Icon
-} from '../../../../shared/components'
+} from '../../../ui/components'
 
 const Row = styled.div`
   margin-left: 10px;

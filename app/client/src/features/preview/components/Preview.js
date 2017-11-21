@@ -6,12 +6,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf'
 import styled from 'styled-components'
-import { Toolbar, LoadingBar } from './components'
-import { downloadSource, setPageCount, prevPage, nextPage } from './actions'
-import { print } from '../ui/actions'
-import { sizes } from '../../shared/theme'
-import BlankPDF from './blank.pdf'
-import type { State } from '../../shared/types'
+import { Toolbar, LoadingBar } from '.'
+import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
+import { print } from '../../ui/actions'
+import { sizes } from '../../ui/theme'
+import BlankPDF from '../assets/blank.pdf'
+import type { State } from '../../../shared/types'
 
 const Div = styled.div`
   display: flex;
@@ -98,7 +98,7 @@ function mapState(state: State) {
   }
 }
 
-const actions = {
+const mapActions = {
   downloadSource,
   setPageCount,
   prevPage,
@@ -106,4 +106,4 @@ const actions = {
   print
 }
 
-export default connect(mapState, actions)(Preview)
+export default connect(mapState, mapActions)(Preview)

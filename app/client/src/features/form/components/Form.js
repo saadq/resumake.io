@@ -5,8 +5,8 @@
 import React, { type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { generateResume } from '../preview/actions'
-import type { FormValues } from './types'
+import { generateResume } from '../../preview/actions'
+import type { FormValues } from '../types'
 
 type Props = {
   handleSubmit: *,
@@ -22,11 +22,11 @@ function Form({ handleSubmit, generateResume, children }: Props) {
   )
 }
 
-const actions = {
+const mapActions = {
   generateResume
 }
 
-const ConnectedForm = connect(null, actions)(Form)
+const ConnectedForm = connect(null, mapActions)(Form)
 
 export default reduxForm({
   form: 'resume',

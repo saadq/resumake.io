@@ -4,11 +4,11 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Section, Button } from '../../../shared/components'
-import School from './fragments/School'
-import { addSchool, removeSchool } from '../actions'
-import type { FormValues } from '../types'
-import type { State } from '../../../shared/types'
+import { Section, Button } from '../../../ui/components'
+import School from '../fragments/School'
+import { addSchool, removeSchool } from '../../actions'
+import type { FormValues } from '../../types'
+import type { State } from '../../../../shared/types'
 
 type Props = {
   education: $PropertyType<FormValues, 'education'>,
@@ -36,9 +36,9 @@ function mapState(state: State) {
   }
 }
 
-const actions = {
+const mapActions = {
   addSchool,
   removeSchool
 }
 
-export default connect(mapState, actions)(Education)
+export default connect(mapState, mapActions)(Education)

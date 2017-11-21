@@ -31,6 +31,10 @@ const Button = styled.button`
   &:disabled {
     border-color: #444;
     color: #444;
+
+    &:active {
+      position: initial;
+    }
   }
 `
 

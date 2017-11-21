@@ -66,25 +66,43 @@ const SectionButton = Button.extend`
 `
 
 type Props = {
+  sections: Array<string>,
   progress: number,
   prev: string,
+  curr: string,
   next: string,
   prevSection: () => void,
   nextSection: () => void
 }
 
-function Progress({ progress, prev, next, prevSection, nextSection }: Props) {
+function Progress({
+  sections,
+  progress,
+  prev,
+  curr,
+  next,
+  prevSection,
+  nextSection
+}: Props) {
   return (
     <Footer>
       <Wrapper>
         <SectionLink to={`/generator/${prev}`}>
-          <SectionButton type="button" onClick={prevSection}>
+          <SectionButton
+            type="button"
+            onClick={prevSection}
+            disabled={curr === sections[0]}
+          >
             <Icon type="arrow_back" />
           </SectionButton>
         </SectionLink>
         <Bar progress={progress} />
         <SectionLink to={`/generator/${next}`}>
-          <SectionButton type="button" onClick={nextSection}>
+          <SectionButton
+            type="button"
+            onClick={nextSection}
+            disabled={curr === sections[sections.length - 1]}
+          >
             <Icon type="arrow_forward" />
           </SectionButton>
         </SectionLink>
@@ -95,8 +113,10 @@ function Progress({ progress, prev, next, prevSection, nextSection }: Props) {
 
 function mapState(state: State) {
   return {
+    sections: state.progress.sections,
     progress: state.progress.progress,
     prev: state.progress.prev,
+    curr: state.progress.curr,
     next: state.progress.next
   }
 }

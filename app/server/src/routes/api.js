@@ -14,8 +14,8 @@ const router = new Router({ prefix: '/api' })
  * Router middleware
  */
 
-router.use('/generate', sanitizer())
-router.use('/upload', formidable())
+router.use('/generate', sanitizer()) // Remove falsy values and empty objects/arrays from request body
+router.use('/upload', formidable()) // Parse multipart/form-data
 
 /**
  * Generate PDF from form data

@@ -4,9 +4,9 @@
 
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { lighten } from 'polished'
-import { colors, sizes, margins } from '../../theme'
+import { colors, sizes, margins, animations } from '../../theme'
 
 const Aside = styled.aside`
   position: fixed;
@@ -16,17 +16,19 @@ const Aside = styled.aside`
   height: calc(100% - ${sizes.header});
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1500px) {
+    align-items: center;
+  }
+
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `
 
 const Nav = styled.nav`
-  margin-top: calc(
-    ${sizes.progress} + (${margins.progress} * 2)
-  );
+  margin-top: calc(${sizes.progress} + (${margins.progress} * 2));
 `
 
 const List = styled.ul`
@@ -73,12 +75,6 @@ const NavItem = styled(NavLink)`
   }
 `
 
-const pulse = keyframes`
-  to {
-    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
-  }
-`
-
 const Button = styled.button`
   width: 75px;
   height: 75px;
@@ -94,7 +90,7 @@ const Button = styled.button`
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';
   text-transform: lowercase;
-  animation: ${pulse} 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: ${animations.pulse} 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
 
   &:hover {
     animation: none;

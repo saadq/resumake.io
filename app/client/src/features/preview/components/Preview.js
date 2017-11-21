@@ -27,7 +27,6 @@ const ResumePage = styled(Page)`
     opacity: 0.8;
   }
 
-  /* Unfortunately this is the only way to style the inner react-pdf stuff */
   canvas,
   .ReactPDF__Page,
   .ReactPDF__Page__textContent {

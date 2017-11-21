@@ -2,6 +2,8 @@
  * @flow
  */
 
+import { keyframes } from 'styled-components'
+
 const colors = {
   primary: '#fff',
   accent: '#111',
@@ -12,7 +14,7 @@ const sizes = {
   header: '15vh',
   sideNav: '20vw',
   progress: '15px',
-  preview: Math.min(600, (document.body: any).clientWidth - 52)
+  preview: Math.min(850, (document.body: any).clientWidth - 52)
 }
 
 const margins = {
@@ -23,4 +25,46 @@ const styles = {
   gradient: `linear-gradient(to right, #050505, #080808, #050505)`
 }
 
-export { colors, sizes, margins, styles }
+const animations = {
+  indeterminate: keyframes`
+    0% {
+      left: -35%;
+      right: 100%;
+    }
+
+    60% {
+      left: 100%;
+      right: -90%;
+    }
+
+    100% {
+      left: 100%;
+      right: -90%;
+    }
+  `,
+
+  indeterminateShort: keyframes`
+    0% {
+      left: -200%;
+      right: 100%;
+    }
+
+    60% {
+      left: 107%;
+      right: -8%;
+    }
+
+    100% {
+      left: 107%;
+      right: -8%;
+    }
+  `,
+
+  pulse: keyframes`
+    to {
+      box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+    }
+  `
+}
+
+export { colors, sizes, margins, styles, animations }

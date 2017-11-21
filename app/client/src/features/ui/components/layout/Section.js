@@ -4,13 +4,15 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
+import { sizes } from '../../theme'
 
 const Fieldset = styled.fieldset`
   display: block;
   border: none;
   margin: 0 auto;
   padding: 0;
-  width: 80%;
+  width: ${sizes.preview}px;
+  max-width: 100%;
 `
 
 const Heading = styled.h1`

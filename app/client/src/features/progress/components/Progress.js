@@ -7,17 +7,15 @@ import styled from 'styled-components'
 import { sizes, margins } from '../../ui/theme'
 
 const Bar = styled.div`
-  width: 80%;
+  max-width: 100%;
+  width: ${sizes.preview}px;
   height: ${sizes.progress};
   margin: ${margins.progress} auto;
   background: white;
-  border-radius: 10px;
 `
 
 function Progress() {
-  return (
-    <Bar />
-  )
+  return <Bar />
 }
 
 export default Progress

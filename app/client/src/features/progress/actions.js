@@ -16,7 +16,4 @@ function nextSection(): Action {
   }
 }
 
-export {
-  prevSection,
-  nextSection
-}
+export { prevSection, nextSection }

@@ -6,7 +6,7 @@ import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import { lighten } from 'polished'
-import { colors, sizes } from '../theme'
+import { colors, sizes } from '../../theme'
 
 const Aside = styled.aside`
   position: fixed;

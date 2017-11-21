@@ -4,7 +4,7 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
-import { sizes } from '../theme'
+import { sizes } from '../../theme'
 
 const Main = styled.main`
   flex: 1;

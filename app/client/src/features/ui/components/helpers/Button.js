@@ -4,7 +4,7 @@
 
 import styled from 'styled-components'
 import { darken } from 'polished'
-import { colors } from '../theme'
+import { colors } from '../../theme'
 
 const Button = styled.button`
   padding: 5px 10px;

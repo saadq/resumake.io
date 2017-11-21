@@ -27,9 +27,6 @@ const Aside = styled.aside`
   }
 `
 
-const Nav = styled.nav`
-`
-
 const List = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -120,7 +117,7 @@ type Props = {
 function SideNav({ history }: Props) {
   return (
     <Aside>
-      <Nav>
+      <nav>
         <List>
           <li>
             <NavItem to="/generator/templates" activeClassName="active">
@@ -165,7 +162,7 @@ function SideNav({ history }: Props) {
         >
           make
         </Button>
-      </Nav>
+      </nav>
     </Aside>
   )
 }

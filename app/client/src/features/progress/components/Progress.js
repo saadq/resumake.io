@@ -57,7 +57,7 @@ const Bar = styled.div`
   border-radius: 10px;
 
   :before {
-    transition: width .75s ease;
+    transition: width 0.75s ease;
     content: '';
     position: absolute;
     top: 0;

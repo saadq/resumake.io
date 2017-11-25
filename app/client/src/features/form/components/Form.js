@@ -22,31 +22,27 @@ import type { FormValues } from '../types'
 import type { State } from '../../../shared/types'
 
 type Props = {
-  sections: Array<string>,
   location: Location,
   handleSubmit: *,
-  setProgress: (progress: number) => void,
+  setProgress: (currSection: string) => void,
   generateResume: (payload: FormValues) => void
 }
 
 class Form extends Component<Props> {
-  setProgress() {
-    const { location, setProgress, sections } = this.props
+  updateProgress() {
+    const { location, setProgress } = this.props
 
     if (!location.pathname.startsWith('/generator/')) {
       return
     }
 
-    const section = location.pathname.slice(11, location.pathname.length)
-    const progressStep = Math.ceil(100 / sections.length)
-    const progress = progressStep * (sections.indexOf(section) + 1)
-
-    setProgress(progress)
+    const section = location.pathname.slice(11)
+    setProgress(section)
   }
 
   componentWillMount() {
     if (this.props.progress === 0) {
-      this.setProgress()
+      this.updateProgress()
     }
   }
 
@@ -55,7 +51,7 @@ class Form extends Component<Props> {
   }
 
   componentDidUpdate() {
-    this.setProgress()
+    this.updateProgress()
   }
 
   render() {
@@ -85,7 +81,6 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    sections: state.progress.sections,
     progress: state.progress.progress
   }
 }

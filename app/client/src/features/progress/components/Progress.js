@@ -4,10 +4,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { prevSection, nextSection } from '../actions'
 import { Button, Icon } from '../../ui/components'
 import { colors, sizes } from '../../ui/theme'
 import type { State } from '../../../shared/types'
@@ -59,13 +58,6 @@ const Bar = styled.div`
   }
 `
 
-const SectionLink = styled(Link)`
-  text-decoration: none;
-  i {
-    color: ${colors.primary};
-  }
-`
-
 const SectionButton = Button.extend`
   color: ${colors.primary};
   border-color: ${colors.primary};
@@ -73,49 +65,39 @@ const SectionButton = Button.extend`
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  i {
+    color: ${colors.primary};
+  }
 `
 
 type Props = {
-  sections: Array<string>,
+  history: RouterHistory,
   progress: number,
   prev: string,
   curr: string,
-  next: string,
-  prevSection: () => void,
-  nextSection: () => void
+  next: string
 }
 
-function Progress({
-  sections,
-  progress,
-  prev,
-  curr,
-  next,
-  prevSection,
-  nextSection
-}: Props) {
+function Progress({ history, progress, prev, curr, next }: Props) {
   return (
     <Footer>
       <Wrapper>
-        <SectionLink to={`/generator/${prev}`}>
-          <SectionButton
-            type="button"
-            onClick={prevSection}
-            disabled={curr === sections[0]}
-          >
-            <Icon type="arrow_back" />
-          </SectionButton>
-        </SectionLink>
+        <SectionButton
+          form="resume-form"
+          onClick={() => history.push(`/generator/${prev}`)}
+          disabled={curr === 'templates'}
+        >
+          <Icon type="arrow_back" />
+        </SectionButton>
         <Bar progress={progress} />
-        <SectionLink to={`/generator/${next}`}>
-          <SectionButton
-            type="button"
-            onClick={nextSection}
-            disabled={curr === sections[sections.length - 1]}
-          >
-            <Icon type="arrow_forward" />
-          </SectionButton>
-        </SectionLink>
+        <SectionButton
+          form="resume-form"
+          onClick={() => history.push(`/generator/${next}`)}
+          disabled={curr === 'preview'}
+        >
+          <Icon type="arrow_forward" />
+        </SectionButton>
       </Wrapper>
     </Footer>
   )
@@ -123,7 +105,6 @@ function Progress({
 
 function mapState(state: State) {
   return {
-    sections: state.progress.sections,
     progress: state.progress.progress,
     prev: state.progress.prev,
     curr: state.progress.curr,
@@ -131,9 +112,4 @@ function mapState(state: State) {
   }
 }
 
-const mapActions = {
-  prevSection,
-  nextSection
-}
-
-export default connect(mapState, mapActions)(Progress)
+export default withRouter(connect(mapState)(Progress))

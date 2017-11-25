@@ -4,23 +4,28 @@
 
 import type { ProgressAction as Action } from './types'
 
-function prevSection(): Action {
-  return {
-    type: 'PREV_SECTION'
-  }
-}
+const sections = [
+  'templates',
+  'profile',
+  'education',
+  'work',
+  'skills',
+  'projects',
+  'awards',
+  'preview'
+]
 
-function nextSection(): Action {
-  return {
-    type: 'NEXT_SECTION'
-  }
-}
+function setProgress(curr: string): Action {
+  const progressStep = Math.ceil(100 / sections.length)
+  const progress = progressStep * (sections.indexOf(curr) + 1)
 
-function setProgress(progress: number): Action {
   return {
     type: 'SET_PROGRESS',
-    progress
+    progress,
+    curr,
+    prev: sections[Math.max(0, sections.indexOf(curr) - 1)],
+    next: sections[Math.min(sections.length - 1, sections.indexOf(curr) + 1)]
   }
 }
 
-export { prevSection, nextSection, setProgress }
+export { setProgress }

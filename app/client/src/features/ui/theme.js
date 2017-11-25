@@ -6,7 +6,7 @@ import { keyframes } from 'styled-components'
 
 const colors = {
   background: '#000',
-  primary: '#0fc',
+  primary: '#35dbdb',
   accent: '#111',
   borders: '#222'
 }
@@ -14,7 +14,7 @@ const colors = {
 const sizes = {
   header: '15vh',
   sideNav: '20vw',
-  progress: '75px',
+  footer: '75px',
   preview: Math.min(800, (document.body: any).clientWidth - 52)
 }
 

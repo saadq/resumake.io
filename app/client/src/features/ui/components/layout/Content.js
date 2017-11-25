@@ -11,7 +11,7 @@ const Main = styled.main`
   padding: 0;
   margin-top: ${sizes.header};
   margin-left: ${sizes.sideNav};
-  margin-bottom: calc(${sizes.progress} + 15px);
+  margin-bottom: calc(${sizes.footer} + 15px);
   width: calc(80% - ${sizes.sideNav});
 
   @media screen and (max-width: 1000px) {

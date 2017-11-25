@@ -9,18 +9,18 @@ import styled from 'styled-components'
 import { lighten } from 'polished'
 import { prevSection, nextSection } from '../actions'
 import { Button, Icon } from '../../ui/components'
-import { colors } from '../../ui/theme'
+import { colors, sizes } from '../../ui/theme'
 import type { State } from '../../../shared/types'
 
 const Footer = styled.footer`
   width: 100%;
+  height: ${sizes.footer};
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   align-items: center;
-  height: 75px;
   background: ${colors.background};
   border-top: 1px solid ${colors.borders};
 `

@@ -26,10 +26,17 @@ const Logo = styled(Link)`
   color: white;
 `
 
+const Accent = styled.em`
+  font-style: normal;
+  color: ${colors.primary};
+`
+
 function Header() {
   return (
     <Heading>
-      <Logo to="/">Resumake</Logo>
+      <Logo to="/">
+        Resu<Accent>make</Accent>
+      </Logo>
     </Heading>
   )
 }

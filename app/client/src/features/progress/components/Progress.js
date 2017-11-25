@@ -6,6 +6,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { lighten } from 'polished'
 import { prevSection, nextSection } from '../actions'
 import { Button, Icon } from '../../ui/components'
 import { colors } from '../../ui/theme'
@@ -20,7 +21,7 @@ const Footer = styled.footer`
   display: flex;
   align-items: center;
   height: 75px;
-  background: black;
+  background: ${colors.background};
   border-top: 1px solid ${colors.borders};
 `
 
@@ -38,13 +39,15 @@ const Wrapper = styled.div`
 `
 
 const Bar = styled.div`
+  border-radius: 100px;
   position: relative;
   width: 50%;
   height: 5px;
-  background: #222;
+  background: ${lighten(0.1, colors.background)};
 
   &:before {
     content: '';
+    border-radius: 100px;
     transition: width 0.75s ease;
     width: ${props => props.progress}%;
     height: 100%;
@@ -52,13 +55,20 @@ const Bar = styled.div`
     top: 0;
     bottom: 0;
     left: 0;
-    background: white;
+    background: ${colors.primary};
   }
 `
 
-const SectionLink = styled(Link)`text-decoration: none;`
+const SectionLink = styled(Link)`
+  text-decoration: none;
+  i {
+    color: ${colors.primary};
+  }
+`
 
 const SectionButton = Button.extend`
+  color: ${colors.primary};
+  border-color: ${colors.primary};
   display: flex;
   align-items: center;
   justify-content: center;

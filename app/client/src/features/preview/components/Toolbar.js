@@ -5,12 +5,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Icon } from '../../ui/components'
-import { sizes } from '../../ui/theme'
+import { sizes, colors } from '../../ui/theme'
 
 const Div = styled.div`
   max-width: 100%;
   width: ${sizes.preview}px;
-  background: black;
+  background: ${colors.background};
   display: flex;
   justify-content: space-between;
   align-items: center;

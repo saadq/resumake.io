@@ -5,7 +5,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { sizes } from '../../theme'
+import { sizes, colors } from '../../theme'
 
 const Heading = styled.header`
   position: fixed;
@@ -15,7 +15,7 @@ const Heading = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: ${colors.background};
 `
 
 const Logo = styled(Link)`

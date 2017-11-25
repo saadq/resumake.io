@@ -41,7 +41,7 @@ const RoundButton = Button.extend`
   width: 30px;
   height: 30px;
   padding: 0px;
-  background: black;
+  background: ${colors.background};
   color: silver;
   transition: transform 0.6s;
 

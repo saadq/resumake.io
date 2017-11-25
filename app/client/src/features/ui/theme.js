@@ -5,7 +5,8 @@
 import { keyframes } from 'styled-components'
 
 const colors = {
-  primary: '#fff',
+  background: '#000',
+  primary: '#0fc',
   accent: '#111',
   borders: '#222'
 }
@@ -62,7 +63,7 @@ const animations = {
 
   pulse: keyframes`
     to {
-      box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
     }
   `
 }

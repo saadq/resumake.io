@@ -10,6 +10,7 @@ import { uploadJSON } from '../features/form/actions'
 import { clearPreview } from '../features/preview/actions'
 import { clearState } from '../shared/actions'
 import { hasPrevSession } from '../shared/selectors'
+import { colors } from '../features/ui/theme'
 import type { State } from '../shared/types'
 
 const Wrapper = styled.div`
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
 `
 
 const Button = styled(Link)`
-  background: black;
+  background: ${colors.background};
   color: white;
   text-decoration: none;
   border: 1px solid white;

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
 import { ScrollToTop } from './features/ui/components'
 import { Home, Generator, About } from './pages'
+import { colors } from './features/ui/theme'
 
 injectGlobal`
   html, body {
@@ -14,7 +15,7 @@ injectGlobal`
     padding: 0;
     font-family: Lato;
     font-size: 0.95em;
-    background: black;
+    background: ${colors.background};
     color: #ababab;
   }
 `

@@ -11,7 +11,7 @@ const Button = styled.button`
   border: 1px solid;
   border-color: ${props => (props.inverted ? colors.borders : 'white')};
   border-radius: 2px;
-  background: ${props => (props.inverted ? 'white' : colors.accent)};
+  background: ${props => (props.inverted ? 'white' : colors.background)};
   color: ${props => (props.inverted ? colors.borders : 'white')};
   margin-right: 10px;
   margin-top: 10px;
@@ -19,7 +19,7 @@ const Button = styled.button`
   outline: none;
 
   &:hover {
-    background: ${darken(0.1, colors.accent)};
+    background: ${darken(0.1, colors.background)};
     cursor: pointer;
   }
 
@@ -31,6 +31,10 @@ const Button = styled.button`
   &:disabled {
     border-color: #444;
     color: #444;
+
+    i {
+      color: #444;
+    }
 
     &:active {
       position: initial;

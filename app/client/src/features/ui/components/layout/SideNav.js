@@ -5,7 +5,7 @@
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { lighten } from 'polished'
+import { lighten, rgba } from 'polished'
 import { colors, sizes, animations } from '../../theme'
 
 const Aside = styled.aside`
@@ -78,10 +78,10 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: ${colors.background};
   border: 3px solid ${colors.primary};
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 0 ${rgba(colors.primary, 0.7)};
   color: ${colors.primary};
   transition: all 0.4s ease;
   font-family: 'Earth Orbiter title';

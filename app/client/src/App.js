@@ -18,6 +18,11 @@ injectGlobal`
     background: ${colors.background};
     color: #ababab;
   }
+
+  ::selection {
+    background: ${colors.primary};
+    color: white;
+  }
 `
 
 function App() {

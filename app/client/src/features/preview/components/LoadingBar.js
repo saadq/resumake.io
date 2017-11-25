@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { sizes, animations } from '../../ui/theme'
+import { sizes, colors, animations } from '../../ui/theme'
 
 const OuterBar = styled.div`
   max-width: 100%;
@@ -21,7 +21,7 @@ const OuterBar = styled.div`
 
 const InnerBar = styled.div`
   width: 100%;
-  background: white;
+  background: ${colors.primary};
 
   &:before {
     content: '';

@@ -40,6 +40,22 @@ const Input = styled(Field)`
     opacity: 0.4;
   }
 
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px ${colors.background} inset;
+    -webkit-text-fill-color: #ccc;
+    
+    &:hover,
+    &:focus,
+    &:active {
+      -webkit-box-shadow: 0 0 0 50px ${colors.background} inset;
+      -webkit-text-fill-color: #ccc;
+    }
+
+    &:focus {
+      -webkit-text-fill-color: ${colors.primary};
+    }
+  }
+
   @media screen and (max-width: 768px) {
     padding-left: 0;
     padding-right: 0;

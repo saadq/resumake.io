@@ -12,7 +12,7 @@ const OuterBar = styled.div`
   position: relative;
   height: 4px;
   display: block;
-  background: #222;
+  background: ${colors.borders};
   overflow: hidden;
   opacity: ${props => (props.status === 'pending' ? 1 : 0)};
   transition: opacity 0.7s ease-in-out;

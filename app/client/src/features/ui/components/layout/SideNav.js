@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten, rgba } from 'polished'
 import { colors, sizes, animations } from '../../theme'
@@ -45,24 +45,25 @@ const NavItem = styled(NavLink)`
   display: inline-block;
   margin-bottom: 20px;
   position: relative;
+  transition: all 200ms ease;
 
-  &::before {
+  &:after {
     content: '';
-    position: absolute;
-    width: 100%;
     height: 1px;
+    background: ${colors.primary};
+    position: absolute;
+    pointer-events: none;
     bottom: -5px;
     left: 0;
-    background-color: ${colors.primary};
-    visibility: hidden;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: all 0.25s cubic-bezier(0.82, 0, 0.12, 1);
+    right: 0;
+    opacity: 0;
+    transform: scale(0, 1);
+    transition: all 200ms;
   }
 
-  &:hover :before {
-    visibility: visible;
-    transform: scaleX(1);
+  &:hover:after {
+    opacity: 1;
+    transform: scale(1, 1);
   }
 
   &.active {
@@ -109,9 +110,7 @@ const Button = styled.button`
 `
 
 type Props = {
-  history: {
-    push: (path: string) => void
-  }
+  history: RouterHistory
 }
 
 function SideNav({ history }: Props) {

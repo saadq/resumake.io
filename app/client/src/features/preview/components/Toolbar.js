@@ -19,11 +19,21 @@ const Div = styled.div`
   margin-right: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
-  border: 1px solid #ddd;
   border-radius: 2px;
 `
 
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
 const Button = styled.a`
+  border: 1px solid ${colors.borders};
   text-align: center;
   text-decoration: none;
   font-size: 12px;
@@ -40,28 +50,16 @@ const Button = styled.a`
   i {
     margin-right: 5px;
     color: #ddd;
-    font-size: 14px;
+    font-size: 20px;
   }
 
   &:hover {
-    background: #ddd;
-    color: black;
+    color: ${colors.primary};
     cursor: pointer;
 
     i {
-      color: black;
+      color: ${colors.primary};
     }
-  }
-`
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
   }
 `
 
@@ -83,12 +81,25 @@ const Pagination = styled.div`
 
 const PageNumber = styled.span`
   font-size: 12px;
+  height: 35px;
+  border-top: 1px solid ${colors.borders};
+  border-bottom: 1px solid ${colors.borders};
   color: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 0 10px;
+`
+
+const PageButton = Button.extend`
+  &:first-of-type {
+    border-right: none;
+  }
+
+  &:last-of-type {
+    border-left: none;
+  }
 `
 
 type Props = {
@@ -119,22 +130,28 @@ function Toolbar({
         <ToolButton onClick={downloadSource}>
           <Icon type="code" /> Source
         </ToolButton>
+        <ToolButton href={jsonURL} download="resume.json">
+          <Icon type="file_download" /> JSON
+        </ToolButton>
       </ButtonGroup>
       <Pagination>
-        <Button onClick={prevPage}>
+        <PageButton onClick={prevPage}>
           <Icon type="arrow_back" />
-        </Button>
+        </PageButton>
         <PageNumber>Page {page}</PageNumber>
-        <Button onClick={nextPage}>
+        <PageButton onClick={nextPage}>
           <Icon type="arrow_forward" />
-        </Button>
+        </PageButton>
       </Pagination>
       <ButtonGroup>
-        <ToolButton href={jsonURL} download="resume.json">
-          <Icon type="file_download" /> Export JSON
+        <ToolButton>
+          <Icon type="zoom_out" />
+        </ToolButton>
+        <ToolButton>
+          <Icon type="zoom_in" />
         </ToolButton>
         <ToolButton onClick={() => print(resumeURL)}>
-          <Icon type="print" /> Print
+          <Icon type="print" />
         </ToolButton>
       </ButtonGroup>
     </Div>

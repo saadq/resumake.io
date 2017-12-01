@@ -65,9 +65,20 @@ const SectionButton = Button.extend`
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: all 0.4s ease;
 
   i {
     color: ${colors.primary};
+    transition: all 0.4s ease;
+  }
+
+  &:hover {
+    background: ${colors.primary};
+    color: ${colors.background};
+
+    i {
+      color: ${colors.background};
+    }
   }
 `
 

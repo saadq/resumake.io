@@ -30,7 +30,6 @@ const Div = styled.div`
 
 const Image = styled.img`
   position: relative;
-  border: 1px solid #ddd;
   border-radius: 1px;
   color: #fff;
   max-width: 100%;

@@ -32,6 +32,12 @@ const Button = styled.button`
     border-color: #444;
     color: #444;
 
+    &:hover {
+      background: ${colors.background};
+      border-color: #444;
+      color: #444;
+    }
+
     i {
       color: #444;
     }

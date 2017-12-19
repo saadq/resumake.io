@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Document, Page } from 'react-pdf'
+import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
@@ -79,6 +79,7 @@ function Preview({
         <Document
           file={resumeURL}
           onLoadSuccess={({ numPages }) => setPageCount(numPages)}
+          loading={<div />}
         >
           <ResumePage scale={2} pageNumber={page} />
         </Document>

@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { Button, Icon } from '../../ui/components'
+import { Button } from '../../ui/components'
 import { colors, sizes } from '../../ui/theme'
 import type { State } from '../../../shared/types'
 
@@ -66,6 +66,7 @@ const SectionButton = Button.extend`
   justify-content: center;
   text-align: center;
   transition: all 0.4s ease;
+  margin: 0;
 
   i {
     color: ${colors.primary};
@@ -99,7 +100,7 @@ function Progress({ history, progress, prev, curr, next }: Props) {
           onClick={() => history.push(`/generator/${prev}`)}
           disabled={curr === 'templates'}
         >
-          <Icon type="arrow_back" />
+          ← Prev
         </SectionButton>
         <Bar progress={progress} />
         <SectionButton
@@ -107,7 +108,7 @@ function Progress({ history, progress, prev, curr, next }: Props) {
           onClick={() => history.push(`/generator/${next}`)}
           disabled={curr === 'preview'}
         >
-          <Icon type="arrow_forward" />
+          Next →
         </SectionButton>
       </Wrapper>
     </Footer>

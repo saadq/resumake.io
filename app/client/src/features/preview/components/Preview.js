@@ -54,7 +54,7 @@ type Props = {
 }
 
 function Preview({
-  resumeURL,
+  resumeURL = BlankPDF,
   jsonURL,
   page,
   status,
@@ -77,9 +77,8 @@ function Preview({
       <LoadingBar status={status} />
       <Link href={resumeURL} target="_blank">
         <Document
-          file={resumeURL || BlankPDF}
+          file={resumeURL}
           onLoadSuccess={({ numPages }) => setPageCount(numPages)}
-          loading={null}
         >
           <ResumePage scale={2} pageNumber={page} />
         </Document>

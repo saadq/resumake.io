@@ -45,30 +45,32 @@ const NavItem = styled(NavLink)`
   display: inline-block;
   margin-bottom: 20px;
   position: relative;
-  transition: all 200ms ease;
 
-  &:after {
-    content: '';
-    height: 1px;
-    background: ${colors.primary};
-    position: absolute;
-    pointer-events: none;
-    bottom: -5px;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    transform: scale(0, 1);
-    transition: all 200ms;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: scale(1, 1);
+  &:hover {
+    color: ${colors.primary};
   }
 
   &.active {
+    transform: scale(1, 1);
     color: ${colors.primary};
-    font-weight: 400;
+
+    &:before {
+      transform: scale(1, 1);
+      opacity: 1;
+    }
+  }
+
+  &:before {
+    content: '';
+    width: 2px;
+    background: ${colors.primary};
+    position: absolute;
+    pointer-events: none;
+    bottom: 0px;
+    left: -15px;
+    top: 0px;
+    opacity: 1;
+    transform: scale(0, 1);
   }
 `
 

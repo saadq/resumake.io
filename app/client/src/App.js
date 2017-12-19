@@ -13,7 +13,7 @@ injectGlobal`
   html, body {
     margin: 0;
     padding: 0;
-    font-family: Lato;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 0.95em;
     background: ${colors.background};
     color: #ababab;

@@ -87,8 +87,8 @@ const Button = styled.button`
   box-shadow: 0 0 0 0 ${rgba(colors.primary, 0.7)};
   color: ${colors.primary};
   transition: all 0.4s ease;
-  font-family: 'Earth Orbiter title';
-  text-transform: lowercase;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   animation: ${animations.pulse} 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
 
   &:hover {
@@ -161,7 +161,7 @@ function SideNav({ history }: Props) {
           type="submit"
           form="resume-form"
         >
-          make
+          Make
         </Button>
       </nav>
     </Aside>

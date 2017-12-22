@@ -115,7 +115,7 @@ class Preview extends Component<Props, State> {
   }
 
   render() {
-    const { resumeURL = BlankPDF, jsonURL, status, downloadSource } = this.props
+    const { resumeURL, jsonURL, status, downloadSource } = this.props
     const { currPage } = this.state
 
     return (

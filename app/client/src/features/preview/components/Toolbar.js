@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { Icon } from '../../ui/components'
 import { colors } from '../../ui/theme'
 
-const Div = styled.div`
+const Wrapper = styled.div`
   max-width: 100%;
   width: 85%;
   background: ${colors.background};
@@ -20,6 +20,7 @@ const Div = styled.div`
   margin-bottom: 10px;
   margin-left: 10px;
   border-radius: 2px;
+  user-select: none;
 `
 
 const ButtonGroup = styled.div`
@@ -136,7 +137,7 @@ function Toolbar({
   zoomOut
 }: Props) {
   return (
-    <Div>
+    <Wrapper>
       <ButtonGroup>
         <ToolButton href={resumeURL} download="resume.pdf">
           <Icon type="picture_as_pdf" /> PDF
@@ -168,7 +169,7 @@ function Toolbar({
           <Icon type="print" />
         </ToolButton>
       </ButtonGroup>
-    </Div>
+    </Wrapper>
   )
 }
 

@@ -14,8 +14,7 @@ const colors = {
 const sizes = {
   header: '15vh',
   sideNav: '20vw',
-  footer: '50px',
-  preview: Math.min(800, (document.body: any).clientWidth - 52)
+  footer: '50px'
 }
 
 const margins = {

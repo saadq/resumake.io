@@ -4,11 +4,11 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { sizes, colors, animations } from '../../ui/theme'
+import { colors, animations } from '../../ui/theme'
 
 const OuterBar = styled.div`
   max-width: 100%;
-  width: ${sizes.preview}px;
+  width: 85%;
   position: relative;
   height: 4px;
   display: block;

@@ -5,11 +5,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Icon } from '../../ui/components'
-import { sizes, colors } from '../../ui/theme'
+import { colors } from '../../ui/theme'
 
 const Div = styled.div`
   max-width: 100%;
-  width: ${sizes.preview}px;
+  width: 85%;
   background: ${colors.background};
   display: flex;
   justify-content: space-between;
@@ -23,9 +23,18 @@ const Div = styled.div`
 `
 
 const ButtonGroup = styled.div`
+  width: calc(100% / 3);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:first-child {
+    justify-content: flex-start;
+  }
+
+  &:last-child {
+    justify-content: flex-end;
+  }
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -73,6 +82,7 @@ const ToolButton = Button.extend`
 `
 
 const Pagination = styled.div`
+  width: calc(100% / 3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,6 +119,8 @@ type Props = {
   downloadSource: () => void,
   prevPage: () => void,
   nextPage: () => void,
+  zoomIn: () => void,
+  zoomOut: () => void,
   print: (url: string) => void
 }
 
@@ -119,7 +131,9 @@ function Toolbar({
   downloadSource,
   prevPage,
   nextPage,
-  print
+  print,
+  zoomIn,
+  zoomOut
 }: Props) {
   return (
     <Div>
@@ -144,10 +158,10 @@ function Toolbar({
         </PageButton>
       </Pagination>
       <ButtonGroup>
-        <ToolButton>
+        <ToolButton onClick={zoomOut}>
           <Icon type="zoom_out" />
         </ToolButton>
-        <ToolButton>
+        <ToolButton onClick={zoomIn}>
           <Icon type="zoom_in" />
         </ToolButton>
         <ToolButton onClick={() => print(resumeURL)}>

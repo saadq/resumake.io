@@ -4,14 +4,13 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
-import { sizes } from '../../theme'
 
 const Fieldset = styled.fieldset`
   display: block;
   border: none;
   margin: 0 auto;
   padding: 0;
-  width: ${sizes.preview}px;
+  width: 85%;
   max-width: 100%;
 `
 

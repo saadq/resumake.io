@@ -2,14 +2,13 @@
  * @flow
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
 import { Section, Button } from '../../../ui/components'
 import { selectTemplate } from '../../actions'
-import { hideLightbox, showLightbox } from '../../../ui/actions'
-import type { State } from '../../../../shared/types'
+import type { State as ReduxState } from '../../../../shared/types'
 
 const Grid = styled.div`
   display: grid;
@@ -58,68 +57,82 @@ const TemplateButton = Button.extend`
 
 type Props = {
   selectedTemplate: number,
-  index: number,
-  isOpen: boolean,
-  setImageCount: (count: number) => void,
-  selectTemplate: (templateId: number) => void,
-  hideLightbox: () => void,
-  showLightbox: (index: number) => void
+  selectTemplate: (templateId: number) => void
+}
+
+type State = {
+  isLightboxOpen: boolean,
+  lightboxImageIndex?: number
 }
 
 const ctx = require.context('../../assets/img', true)
 const images = ctx.keys().map(ctx)
 
-function Templates({
-  selectedTemplate,
-  isOpen,
-  index,
-  selectTemplate,
-  hideLightbox,
-  showLightbox
-}: Props) {
-  return (
-    <Section heading="Choose a Template">
-      <Grid>
-        {images.map((src, i) => (
-          <Div key={i}>
-            <Image
-              active={i + 1 === selectedTemplate}
-              src={src}
-              onClick={() => showLightbox(i)}
-            />
-            <TemplateButton
-              active={i + 1 === selectedTemplate}
-              type="button"
-              onClick={() => selectTemplate(i + 1)}
-            >
-              Template {i + 1}
-            </TemplateButton>
-          </Div>
-        ))}
-      </Grid>
-      {isOpen && (
-        <Lightbox
-          imageCaption={`Template ${index + 1}`}
-          mainSrc={images[index]}
-          onCloseRequest={hideLightbox}
-        />
-      )}
-    </Section>
-  )
-}
+class Templates extends Component<Props, State> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLightboxOpen: false
+    }
+  }
 
-function mapStateToProps(state: State) {
-  return {
-    selectedTemplate: state.form.resume.values.selectedTemplate,
-    index: state.ui.lightbox.index,
-    isOpen: state.ui.lightbox.isOpen
+  showLightbox = (lightboxImageIndex: number) => {
+    this.setState(prevState => ({
+      isLightboxOpen: true,
+      lightboxImageIndex
+    }))
+  }
+
+  hideLightbox = () => {
+    this.setState(prevState => ({
+      isLightboxOpen: false
+    }))
+  }
+
+  render() {
+    const { selectedTemplate, selectTemplate } = this.props
+    const { isLightboxOpen, lightboxImageIndex } = this.state
+
+    return (
+      <Section heading="Choose a Template">
+        <Grid>
+          {images.map((src, i) => (
+            <Div key={i}>
+              <Image
+                active={i + 1 === selectedTemplate}
+                src={src}
+                onClick={() => this.showLightbox(i)}
+              />
+              <TemplateButton
+                active={i + 1 === selectedTemplate}
+                type="button"
+                onClick={() => selectTemplate(i + 1)}
+              >
+                Template {i + 1}
+              </TemplateButton>
+            </Div>
+          ))}
+        </Grid>
+        {isLightboxOpen && (
+          <Lightbox
+            imageCaption={`Template ${lightboxImageIndex + 1}`}
+            mainSrc={images[lightboxImageIndex]}
+            onCloseRequest={this.hideLightbox}
+          />
+        )}
+      </Section>
+    )
   }
 }
 
-const mapDispatchToProps = {
-  selectTemplate,
-  hideLightbox,
-  showLightbox
+function mapState(state: ReduxState) {
+  return {
+    selectedTemplate: state.form.resume.values.selectedTemplate
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Templates)
+const mapActions = {
+  selectTemplate
+}
+
+export default connect(mapState, mapActions)(Templates)

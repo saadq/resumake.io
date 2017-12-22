@@ -8,7 +8,6 @@ import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
-import { print } from '../../ui/actions'
 import BlankPDF from '../assets/blank.pdf'
 import type { State as ReduxState } from '../../../shared/types'
 
@@ -35,27 +34,45 @@ const ResumePage = styled(Page)`
 `
 
 type Props = {
-  page: number,
   resumeURL?: string,
   jsonURL?: string,
   status?: 'pending' | 'success' | 'failure',
   setPageCount: (pageCount: number) => void,
-  downloadSource: () => void,
-  prevPage: () => void,
-  nextPage: () => void,
-  print: (url: string) => void
+  downloadSource: () => void
 }
 
 type State = {
-  zoom: number
+  numPages: number,
+  currPage: number,
+  zoom: number,
+  isPrinting: boolean
 }
 
 class Preview extends Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
-      zoom: 85
+      numPages: 1,
+      currPage: 1,
+      zoom: 85,
+      isPrinting: false
     }
+  }
+
+  setPageCount = ({ numPages }: { numPages: number }) => {
+    this.setState(() => ({ numPages }))
+  }
+
+  nextPage = () => {
+    this.setState(prevState => ({
+      currPage: Math.min(prevState.currPage + 1, this.state.numPages)
+    }))
+  }
+
+  prevPage = () => {
+    this.setState(prevState => ({
+      currPage: Math.max(prevState.currPage - 1, 1)
+    }))
   }
 
   zoomIn = () => {
@@ -70,37 +87,63 @@ class Preview extends Component<Props, State> {
     }))
   }
 
+  print = (url: string) => {
+    if (/Android/i.test(navigator.userAgent) || this.state.isPrinting) {
+      return
+    }
+
+    const frame = document.createElement('iframe')
+
+    frame.addEventListener('load', () => {
+      const win = frame.contentWindow
+      win.focus()
+      win.print()
+      win.addEventListener('focus', () =>
+        (document.body: any).removeChild(frame)
+      )
+    })
+
+    Object.assign(frame.style, {
+      visibility: 'hidden',
+      position: 'fixed',
+      right: '0',
+      bottom: '0'
+    })
+
+    frame.src = url
+    ;(document.body: any).appendChild(frame)
+  }
+
   render() {
-    const {
-      resumeURL = BlankPDF,
-      jsonURL,
-      page,
-      status,
-      downloadSource,
-      prevPage,
-      nextPage,
-      print
-    } = this.props
+    const { resumeURL = BlankPDF, jsonURL, status, downloadSource } = this.props
+    const { currPage } = this.state
+
     return (
       <Div>
         <Toolbar
           resumeURL={resumeURL || BlankPDF}
           jsonURL={jsonURL}
-          page={page}
-          prevPage={prevPage}
-          nextPage={nextPage}
           downloadSource={downloadSource}
-          print={print}
+          currPage={currPage}
+          prevPage={this.prevPage}
+          nextPage={this.nextPage}
+          print={this.print}
           zoomIn={this.zoomIn}
           zoomOut={this.zoomOut}
         />
         <LoadingBar status={status} />
         <Document
           file={resumeURL}
-          onLoadSuccess={({ numPages }) => setPageCount(numPages)}
+          onLoadSuccess={this.setPageCount}
           loading={<div />}
         >
-          <ResumePage zoom={this.state.zoom} scale={2} pageNumber={page} />
+          <ResumePage
+            pageNumber={currPage}
+            zoom={this.state.zoom}
+            scale={2}
+            renderAnnotations={false}
+            renderTextLayer={false}
+          />
         </Document>
       </Div>
     )
@@ -120,8 +163,7 @@ const mapActions = {
   downloadSource,
   setPageCount,
   prevPage,
-  nextPage,
-  print
+  nextPage
 }
 
 export default connect(mapState, mapActions)(Preview)

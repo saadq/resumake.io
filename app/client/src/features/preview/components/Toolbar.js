@@ -113,7 +113,7 @@ const PageButton = Button.extend`
 `
 
 type Props = {
-  page: number,
+  currPage: number,
   resumeURL: string,
   jsonURL?: string,
   downloadSource: () => void,
@@ -127,7 +127,7 @@ type Props = {
 function Toolbar({
   resumeURL,
   jsonURL,
-  page,
+  currPage,
   downloadSource,
   prevPage,
   nextPage,
@@ -152,7 +152,7 @@ function Toolbar({
         <PageButton onClick={prevPage}>
           <Icon type="arrow_back" />
         </PageButton>
-        <PageNumber>Page {page}</PageNumber>
+        <PageNumber>Page {currPage}</PageNumber>
         <PageButton onClick={nextPage}>
           <Icon type="arrow_forward" />
         </PageButton>

@@ -8,7 +8,6 @@ import styled from 'styled-components'
 import { styles } from '../features/ui/theme'
 
 const Main = styled.main`
-  font-family: 'Open Sans';
   font-size: 0.9em;
   background: ${styles.gradient};
   color: #c0c5ce;

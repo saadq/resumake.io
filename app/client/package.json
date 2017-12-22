@@ -13,9 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "flow": "flow",
-    "flow-typed": "flow-typed",
-    "preinstall:types": "rm -rf flow/flow-typed",
-    "install:types": "flow-typed install && mv flow-typed flow"
+    "flow-typed": "flow-typed"
   },
   "author": "Saad Quadri",
   "license": "MIT",

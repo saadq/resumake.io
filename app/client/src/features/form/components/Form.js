@@ -19,7 +19,7 @@ import Preview from '../../preview/components'
 import { generateResume } from '../../preview/actions'
 import { setProgress } from '../../progress/actions'
 import type { FormValues } from '../types'
-import type { State } from '../../../shared/types'
+import type { State } from '../../../app/types'
 
 type Props = {
   location: Location,

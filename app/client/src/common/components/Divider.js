@@ -3,7 +3,7 @@
  */
 
 import styled from 'styled-components'
-import { colors } from '../../theme'
+import { colors } from '../../common/theme'
 
 const Divider = styled.hr`
   height: 10px;

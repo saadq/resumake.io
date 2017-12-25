@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
 import BlankPDF from '../assets/blank.pdf'
-import type { State as ReduxState } from '../../../shared/types'
+import type { State as ReduxState } from '../../../app/types'
 
 const Div = styled.div`
   display: flex;

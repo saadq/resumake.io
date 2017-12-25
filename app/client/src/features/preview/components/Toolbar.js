@@ -4,8 +4,8 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { Icon } from '../../ui/components'
-import { colors } from '../../ui/theme'
+import { Icon } from '../../../common/components'
+import { colors } from '../../../common/theme'
 
 const Wrapper = styled.div`
   max-width: 100%;

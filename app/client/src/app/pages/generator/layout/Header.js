@@ -5,7 +5,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { sizes, colors } from '../../theme'
+import { sizes, colors } from '../../../../common/theme'
 
 const Heading = styled.header`
   position: fixed;

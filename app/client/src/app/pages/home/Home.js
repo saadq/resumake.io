@@ -6,12 +6,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { uploadJSON } from '../features/form/actions'
-import { clearPreview } from '../features/preview/actions'
-import { clearState } from '../shared/actions'
-import { hasPrevSession } from '../shared/selectors'
-import { colors } from '../features/ui/theme'
-import type { State } from '../shared/types'
+import { uploadJSON } from '../../../features/form/actions'
+import { clearPreview } from '../../../features/preview/actions'
+import { clearState } from '../../actions'
+import { hasPrevSession } from '../../selectors'
+import { colors } from '../../../common/theme'
+import type { State } from '../../types'
 
 const Wrapper = styled.div`
   width: 100%;

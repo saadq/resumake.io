@@ -16,7 +16,7 @@ type State = {
 type AppAction = { type: 'CLEAR_STATE' }
 
 type GetState = () => State
-type Action = AppAction | FormAction | ProgressAction | PreviewAction 
+type Action = AppAction | FormAction | ProgressAction | PreviewAction
 type Dispatch = ReduxDispatch<Action>
 type AsyncAction = (dispatch: Dispatch, getState: GetState) => any
 

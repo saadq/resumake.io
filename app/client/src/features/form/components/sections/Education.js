@@ -4,11 +4,12 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Section, Button } from '../../../ui/components'
+import Section from './Section'
+import { Button } from '../../../../common/components'
 import { School } from '..'
 import { addSchool, removeSchool } from '../../actions'
 import type { FormValues } from '../../types'
-import type { State } from '../../../../shared/types'
+import type { State } from '../../../../app/types'
 
 type Props = {
   education: $PropertyType<FormValues, 'education'>,

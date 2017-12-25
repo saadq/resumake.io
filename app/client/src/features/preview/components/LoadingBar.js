@@ -4,7 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { colors, animations } from '../../ui/theme'
+import { colors, animations } from '../../../common/theme'
 
 const OuterBar = styled.div`
   max-width: 100%;

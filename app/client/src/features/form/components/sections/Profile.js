@@ -3,7 +3,8 @@
  */
 
 import React from 'react'
-import { Section, LabeledInput } from '../../../ui/components'
+import Section from './Section'
+import { LabeledInput } from '../../../../common/components'
 
 function Profile() {
   return (

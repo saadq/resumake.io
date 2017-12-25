@@ -3,7 +3,7 @@
  */
 
 import type { FormAction as Action, FormValues } from './types'
-import type { AsyncAction } from '../../shared/types'
+import type { AsyncAction } from '../../app/types'
 
 function uploadJSONRequest(): Action {
   return {

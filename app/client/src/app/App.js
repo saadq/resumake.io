@@ -5,9 +5,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
-import { ScrollToTop } from './features/ui/components'
+import { ScrollToTop } from '../common/components'
 import { Home, Generator, About } from './pages'
-import { colors } from './features/ui/theme'
+import { colors } from '../common/theme'
 
 injectGlobal`
   html, body {

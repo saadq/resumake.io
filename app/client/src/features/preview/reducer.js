@@ -3,7 +3,7 @@
  */
 
 import type { PreviewState as State } from './types'
-import type { Action } from '../../shared/types'
+import type { Action } from '../../app/types'
 
 const initialState = {
   isDownloading: false,

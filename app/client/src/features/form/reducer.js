@@ -4,7 +4,7 @@
 
 import { reducer } from 'redux-form'
 import type { FormState } from './types'
-import type { Action } from '../../shared/types'
+import type { Action } from '../../app/types'
 
 const initialState = {
   isUploading: false,

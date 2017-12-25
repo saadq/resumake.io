@@ -5,7 +5,7 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { styles } from '../features/ui/theme'
+import { styles } from '../../../common/theme'
 
 const Main = styled.main`
   font-size: 0.9em;

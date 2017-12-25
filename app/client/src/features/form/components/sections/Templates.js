@@ -6,9 +6,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
-import { Section, Button } from '../../../ui/components'
+import Section from './Section'
+import { Button } from '../../../../common/components'
 import { selectTemplate } from '../../actions'
-import type { State as ReduxState } from '../../../../shared/types'
+import type { State as ReduxState } from '../../../../app/types'
 
 const Grid = styled.div`
   display: grid;

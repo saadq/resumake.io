@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import { withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { Button } from '../../ui/components'
-import { colors, sizes } from '../../ui/theme'
-import type { State } from '../../../shared/types'
+import { Button } from '../../../common/components'
+import { colors, sizes } from '../../../common/theme'
+import type { State } from '../../../app/types'
 
 const Footer = styled.footer`
   width: 100%;

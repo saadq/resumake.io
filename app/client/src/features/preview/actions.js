@@ -5,7 +5,7 @@
 import FileSaver from 'file-saver'
 import type { PreviewAction as Action } from './types'
 import type { FormValues } from '../form/types'
-import type { AsyncAction } from '../../shared/types'
+import type { AsyncAction } from '../../app/types'
 
 function clearPreview(): Action {
   return {

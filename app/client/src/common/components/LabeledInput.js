@@ -5,7 +5,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
-import { colors } from '../../theme'
+import { colors } from '../../common/theme'
 
 const Label = styled.label`
   display: block;

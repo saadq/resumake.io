@@ -6,8 +6,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
-import App from './App'
-import store from './shared/store'
+import App from './app/App'
+import store from './app/store'
 
 function renderApp(Component) {
   render(
@@ -23,8 +23,8 @@ function renderApp(Component) {
 renderApp(App)
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    const newRouter = require('./App').default
+  module.hot.accept('./app/App', () => {
+    const newRouter = require('./app/App').default
     renderApp(newRouter)
   })
 }

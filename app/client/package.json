@@ -26,7 +26,7 @@
     "testMatch": ["**/tests/**/*.js"]
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "file-saver": "^1.3.3",

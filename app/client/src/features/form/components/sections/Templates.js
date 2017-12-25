@@ -63,18 +63,16 @@ type Props = {
 
 type State = {
   isLightboxOpen: boolean,
-  lightboxImageIndex?: number
+  lightboxImageIndex: number
 }
 
 const ctx = require.context('../../assets/img', true)
 const images = ctx.keys().map(ctx)
 
 class Templates extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLightboxOpen: false
-    }
+  state = {
+    isLightboxOpen: false,
+    lightboxImageIndex: 0
   }
 
   showLightbox = (lightboxImageIndex: number) => {

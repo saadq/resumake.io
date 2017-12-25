@@ -17,9 +17,7 @@ const Div = styled.div`
   flex-direction: column;
 `
 
-const ResumeDocument = styled(Document)`
-  width: 100%;
-`
+const ResumeDocument = styled(Document)`width: 100%;`
 
 const ResumePage = styled(Page)`
   display: flex;
@@ -53,14 +51,11 @@ type State = {
 }
 
 class Preview extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      numPages: 1,
-      currPage: 1,
-      zoom: 85,
-      isPrinting: false
-    }
+  state = {
+    numPages: 1,
+    currPage: 1,
+    zoom: 85,
+    isPrinting: false
   }
 
   setPageCount = ({ numPages }) => {
@@ -100,6 +95,7 @@ class Preview extends Component<Props, State> {
 
     frame.addEventListener('load', () => {
       const win = frame.contentWindow
+
       win.focus()
       win.print()
       win.addEventListener('focus', () =>

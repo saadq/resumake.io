@@ -36,6 +36,7 @@ const Button = styled.button`
       background: ${colors.background};
       border-color: #444;
       color: #444;
+      cursor: not-allowed;
     }
 
     i {

@@ -6,7 +6,7 @@ import { keyframes } from 'styled-components'
 
 const colors = {
   background: '#000',
-  primary: '#00ebdc',
+  primary: '#1ceb9a',
   accent: '#111',
   borders: '#222'
 }

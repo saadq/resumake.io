@@ -17,6 +17,10 @@ const Div = styled.div`
   flex-direction: column;
 `
 
+const ResumeDocument = styled(Document)`
+  width: 100%;
+`
+
 const ResumePage = styled(Page)`
   display: flex;
   justify-content: center;
@@ -132,7 +136,7 @@ class Preview extends Component<Props, State> {
           zoomOut={this.zoomOut}
         />
         <LoadingBar status={status} />
-        <Document
+        <ResumeDocument
           file={resumeURL}
           onLoadSuccess={this.setPageCount}
           loading={<div />}
@@ -144,7 +148,7 @@ class Preview extends Component<Props, State> {
             renderAnnotations={false}
             renderTextLayer={false}
           />
-        </Document>
+        </ResumeDocument>
       </Div>
     )
   }

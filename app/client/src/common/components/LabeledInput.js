@@ -25,7 +25,7 @@ const Input = styled(Field)`
   border: none;
   border-bottom: 1px solid #171717;
   color: #ccc;
-  transition: all 0.2s;
+  transition: all 0.4s;
   background: transparent;
   outline: none;
   border-radius: 0;

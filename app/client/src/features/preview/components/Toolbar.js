@@ -140,10 +140,10 @@ function Toolbar({
     <Wrapper>
       <ButtonGroup>
         <ToolButton href={resumeURL} download="resume.pdf">
-          <Icon type="picture_as_pdf" /> PDF
+          <Icon type="file_download" /> PDF
         </ToolButton>
         <ToolButton onClick={downloadSource}>
-          <Icon type="code" /> Source
+          <Icon type="file_download" /> LaTeX
         </ToolButton>
         <ToolButton href={jsonURL} download="resume.json">
           <Icon type="file_download" /> JSON

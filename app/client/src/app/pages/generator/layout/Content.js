@@ -20,6 +20,13 @@ const Main = styled.main`
     margin-right: auto;
     left: initial;
   }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    left: initial;
+  }
 `
 
 type Props = {

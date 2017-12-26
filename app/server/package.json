@@ -5,9 +5,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/saadq/saadq-client-boilerplate"
+    "url": "https://github.com/saadq/latexresu.me"
   },
-  "homepage": "https://github.com/saadq/saadq-client-boilerplate",
+  "homepage": "https://github.com/saadq/latexresu.me",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
     "lint": "blyss | snazzy",
@@ -16,7 +16,7 @@
     "test": "npm run lint --silent",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js",
     "flow": "flow",
-    "install:types": "flow-typed install"
+    "flow-typed": "flow-typed"
   },
   "dependencies": {
     "archiver": "^2.1.0",

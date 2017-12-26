@@ -38,7 +38,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "blyss": "^9.0.7",
-    "flow-bin": "^0.57.3",
+    "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.0",
     "nodemon": "^1.12.1",
     "prettier": "^1.9.2",

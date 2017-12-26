@@ -4,7 +4,7 @@
 
 import { stripIndent, source } from 'common-tags'
 import { WHITESPACE } from '../constants'
-import type { FormValues } from '../../../types'
+import type { SanitizedValues } from '../../../types'
 
 function template1({
   basics,
@@ -13,7 +13,7 @@ function template1({
   projects,
   skills,
   awards
-}: FormValues) {
+}: SanitizedValues) {
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}

@@ -1,32 +1,44 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template2({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template2({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     ${generateHeader()}
     \\begin{document}
-    ${generateProfileSection(profile)}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
-    ${generateSkillsSection(skills)}
-    ${generateProjectsSection(projects)}
+    ${generateProfileSection(basics)}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
+    ${generateSkillsSection(projects)}
+    ${generateProjectsSection(skills)}
     ${generateAwardsSection(awards)}
     ${WHITESPACE}
     \\end{document}
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
+  const { name, email, phone, location = {}, website } = basics
 
   let nameLine = ''
 
-  if (fullName) {
-    const names = fullName.split(' ')
+  if (name) {
+    const names = name.split(' ')
     let nameStart = ''
     let nameEnd = ''
 
@@ -41,10 +53,12 @@ function generateProfileSection(profile) {
   }
 
   const emailLine = email ? `{\\faEnvelope\\ ${email}}` : ''
-  const phoneLine = phoneNumber ? `{\\faMobile\\ ${phoneNumber}}` : ''
-  const addressLine = address ? `{\\faMapMarker\\ ${address}}` : ''
-  const linkLine = link ? `{\\faLink\\ ${link}}` : ''
-  const info = [emailLine, phoneLine, addressLine, linkLine]
+  const phoneLine = phone ? `{\\faMobile\\ ${phone}}` : ''
+  const addressLine = location.address
+    ? `{\\faMapMarker\\ ${location.address}}`
+    : ''
+  const websiteLine = website ? `{\\faLink\\ ${website}}` : ''
+  const info = [emailLine, phoneLine, addressLine, websiteLine]
     .filter(Boolean)
     .join(' | ')
 
@@ -60,8 +74,8 @@ function generateProfileSection(profile) {
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
@@ -71,23 +85,41 @@ function generateEducationSection(schools) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\cvsection{Education}
   \\begin{cventries}
-  ${schools.map(school => {
-    const { name, location, degree, major, gpa, graduationDate } = school
+  ${education.map(school => {
+    const {
+      institution,
+      location,
+      area,
+      studyType,
+      gpa,
+      startDate,
+      endDate
+    } = school
 
     let degreeLine = ''
 
-    if (degree && major) {
-      degreeLine = `${degree} in ${major}`
-    } else if (degree || major) {
-      degreeLine = degree || major
+    if (studyType && area) {
+      degreeLine = `${studyType} in ${area}`
+    } else if (studyType || area) {
+      degreeLine = studyType || area
+    }
+
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} – ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} – Present`
+    } else {
+      dateRange = endDate
     }
 
     return stripIndent`
       \\cventry
         {${degreeLine}}
-        {${name || ''}}
+        {${institution || ''}}
         {${location || ''}}
-        {${graduationDate || ''}}
+        {${dateRange}}
         {${gpa ? `GPA: ${gpa}` : ''}}
     `
   })}

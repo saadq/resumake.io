@@ -23,7 +23,7 @@ import {
   TEMPLATE8,
   TEMPLATE9
 } from './constants'
-import type { FormValues } from '../../types'
+import type { SanitizedValues } from '../../types'
 
 /**
  * Generates the LaTeX document based on the selected template
@@ -35,7 +35,7 @@ import type { FormValues } from '../../types'
  * @return {Object} - The generated LaTeX document as well as its additional opts.
  */
 
-function getTemplateData(data: FormValues) {
+function getTemplateData(data: SanitizedValues) {
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {

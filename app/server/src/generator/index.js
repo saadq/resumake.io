@@ -6,7 +6,7 @@ import latex from 'node-latex'
 import prettify from 'pretty-latex'
 import Archiver from 'archiver'
 import getTemplateData from './templates'
-import type { FormValues } from '../types'
+import type { SanitizedValues } from '../types'
 
 /**
  * Generates a LaTeX document from the request body,
@@ -17,7 +17,7 @@ import type { FormValues } from '../types'
  * @return {TransformStream} - The generated PDF.
  */
 
-function generatePDF(formData: FormValues) {
+function generatePDF(formData: SanitizedValues) {
   const { texDoc, opts } = getTemplateData(formData)
   const pdf = latex(texDoc, opts)
 
@@ -33,7 +33,7 @@ function generatePDF(formData: FormValues) {
  * @return {TransformStream} - The generated zip.
  */
 
-function generateSourceCode(formData: FormValues) {
+function generateSourceCode(formData: SanitizedValues) {
   const { texDoc, opts } = getTemplateData(formData)
   const prettyDoc = prettify(texDoc)
   const zip = Archiver('zip')

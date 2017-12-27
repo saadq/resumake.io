@@ -238,13 +238,13 @@ function generateAwardsSection(awards) {
   \\cvsection{Honors \\& Awards}
   \\begin{cvhonors}
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     return stripIndent`
       \\cvhonor
-        {${name || ''}}
-        {${details || ''}}
-        {${location || ''}}
+        {${title || ''}}
+        {${summary || ''}}
+        {${awarder || ''}}
         {${date || ''}}
     `
   })}

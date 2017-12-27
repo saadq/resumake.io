@@ -18,7 +18,9 @@ const Main = styled.main`
   align-items: center;
 `
 
-const Content = styled.div`margin: 2% 5%;`
+const Content = styled.div`
+  margin: 2% 5%;
+`
 
 const Logo = styled(RouterLink)`
   font-family: 'Earth Orbiter Title';
@@ -51,7 +53,9 @@ const Answer = styled.div`
   margin: 10px;
 `
 
-const Link = styled.a`color: white;`
+const Link = styled.a`
+  color: white;
+`
 
 const OrderedList = styled.ol`
   padding: 0;

@@ -49,7 +49,9 @@ const Button = styled(Link)`
 
 const FormLabel = Button.withComponent('label')
 
-const FormInput = styled.input`display: none;`
+const FormInput = styled.input`
+  display: none;
+`
 
 type Props = {
   hasPrevSession: boolean,

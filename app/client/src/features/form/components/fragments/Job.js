@@ -54,7 +54,9 @@ const RoundButton = Button.extend`
   }
 `
 
-const SmallInput = Input.extend`width: 85%;`
+const SmallInput = Input.extend`
+  width: 85%;
+`
 
 type Props = {
   highlights: Array<?string>,

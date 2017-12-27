@@ -17,7 +17,9 @@ const Div = styled.div`
   flex-direction: column;
 `
 
-const ResumeDocument = styled(Document)`width: 100%;`
+const ResumeDocument = styled(Document)`
+  width: 100%;
+`
 
 const ResumePage = styled(Page)`
   display: flex;

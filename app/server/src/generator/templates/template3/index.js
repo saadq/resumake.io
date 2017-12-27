@@ -45,8 +45,8 @@ function generateProfileSection(basics) {
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
@@ -56,7 +56,7 @@ function generateEducationSection(schools) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
 
-  ${schools.map(school => {
+  ${education.map(school => {
     const {
       institution = '',
       location = '',
@@ -103,8 +103,8 @@ function generateEducationSection(schools) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
@@ -113,8 +113,8 @@ function generateExperienceSection(jobs) {
   \\resheading{Experience}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
     let dutyLines = ''
@@ -127,10 +127,10 @@ function generateExperienceSection(jobs) {
       dateRange = endDate
     }
 
-    if (duties) {
+    if (highlights) {
       dutyLines = source`
         \\begin{itemize}
-          ${duties.map(duty => `\\item ${duty}`)}
+          ${highlights.map(duty => `\\item ${duty}`)}
         \\end{itemize}
         `
     }
@@ -138,9 +138,9 @@ function generateExperienceSection(jobs) {
     return stripIndent`
       \\item[]
         \\job
-          {${name || ''}}
+          {${company || ''}}
           {${location || ''}}
-          {${title || ''}}
+          {${position || ''}}
           {${dateRange || ''}}
           ${dutyLines}
     `
@@ -160,7 +160,10 @@ function generateSkillsSection(skills) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
     \\setlength\\itemsep{0em}
-    ${skills.map(skill => `\\item[] \\skill{${skill.name}}{${skill.details}}`)}
+    ${skills.map(skill => {
+      const { name = '', keywords = [] } = skill
+      return `\\item[] \\skill{${name}}{${keywords.join(', ')}}`
+    })}
     \\end{itemize}
   `
 }

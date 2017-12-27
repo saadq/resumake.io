@@ -1,13 +1,25 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template3({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template3({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     ${generateHeader()}
     \\begin{document}
-    ${generateProfileSection(profile)}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
+    ${generateProfileSection(basics)}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
@@ -16,17 +28,19 @@ function template3({ profile, schools, jobs, projects, skills, awards }) {
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
-  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+  const { name, email, phone, location = {}, website } = basics
+  const info = [email, phone, location.address, website]
+    .filter(Boolean)
+    .join(' | ')
 
   return stripIndent`
     \\begin{tabular*}{7in}{l@{\\extracolsep{\\fill}}r}
-    \\textbf{\\Large ${fullName}} & \\textit{${info}}
+    \\textbf{\\Large ${name}} & \\textit{${info}}
     \\end{tabular*}
   `
 }
@@ -43,27 +57,45 @@ function generateEducationSection(schools) {
   \\begin{itemize}[leftmargin=*]
 
   ${schools.map(school => {
-    const { name, location, degree, major, gpa, graduationDate } = school
+    const {
+      institution = '',
+      location = '',
+      studyType = '',
+      area = '',
+      gpa = '',
+      startDate = '',
+      endDate = ''
+    } = school
 
     let degreeLine = ''
 
-    if (degree && major) {
-      degreeLine = `${degree} in ${major}`
-    } else if (degree || major) {
-      degreeLine = degree || major
+    if (studyType && area) {
+      degreeLine = `${studyType} ${area}`
+    } else if (studyType || area) {
+      degreeLine = studyType || area
     }
 
     if (gpa) {
-      degreeLine += degreeLine ? `, GPA: ${gpa}` : gpa
+      degreeLine += degreeLine ? `, GPA: ${gpa}` : `GPA: ${gpa}`
+    }
+
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
     }
 
     return stripIndent`
       \\item[]
         \\school
-          {${name || ''}}
+          {${institution || ''}}
           {${location || ''}}
           {${degreeLine}}
-          {${graduationDate || ''}}
+          {${dateRange || ''}}
     `
   })}
 

@@ -129,8 +129,8 @@ function generateEducationSection(education) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
@@ -140,8 +140,8 @@ function generateExperienceSection(jobs) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\cvsection{Experience}
   \\begin{cventries}
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
     let dutyLines = ''
@@ -154,18 +154,18 @@ function generateExperienceSection(jobs) {
       dateRange = endDate
     }
 
-    if (duties) {
+    if (highlights) {
       dutyLines = source`
         \\begin{cvitems}
-          ${duties.map(duty => `\\item {${duty}}`)}
+          ${highlights.map(duty => `\\item {${duty}}`)}
         \\end{cvitems}
         `
     }
 
     return stripIndent`
       \\cventry
-        {${title || ''}}
-        {${name || ''}}
+        {${position || ''}}
+        {${company || ''}}
         {${location || ''}}
         {${dateRange || ''}}
         {${dutyLines}}

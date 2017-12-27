@@ -20,8 +20,8 @@ function template2({
     ${generateProfileSection(basics)}
     ${generateEducationSection(education)}
     ${generateExperienceSection(work)}
-    ${generateSkillsSection(projects)}
-    ${generateProjectsSection(skills)}
+    ${generateSkillsSection(skills)}
+    ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
     ${WHITESPACE}
     \\end{document}
@@ -187,9 +187,9 @@ function generateSkillsSection(skills) {
   {}
   {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
   ${skills.map(skill => {
-    const { name, details } = skill
+    const { name, keywords = [] } = skill
     const nameLine = name ? `${name}: ` : ''
-    const detailsLine = `{\\skill{ ${details || ''}}}`
+    const detailsLine = `{\\skill{ ${keywords.join(', ') || ''}}}`
 
     return `${nameLine} & ${detailsLine} \\\\`
   })}

@@ -49,7 +49,6 @@ type Award = {
 
 type Skill = {
   name?: string,
-  level?: string,
   keywords?: Array<string>
 }
 

@@ -15,14 +15,7 @@ const Main = styled.main`
   width: calc(80% - ${sizes.sideNav});
 
   @media screen and (max-width: 1000px) {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    left: initial;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     left: initial;

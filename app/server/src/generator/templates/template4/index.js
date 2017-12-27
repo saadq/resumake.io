@@ -1,15 +1,27 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template4({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template4({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     ${generateCommentHeader()}
     \\documentclass[]{deedy-resume-openfont}
 
     \\begin{document}
-    ${generateProfileSection(profile)}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
+    ${generateProfileSection(basics)}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
@@ -23,13 +35,13 @@ function generateProfileSection(profile) {
     return '\\namesection{Your}{Name}{}'
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
+  const { name, email, phone, location = {}, website } = profile
 
   let nameStart = ''
   let nameEnd = ''
 
-  if (fullName) {
-    const names = fullName.split(' ')
+  if (name) {
+    const names = name.split(' ')
 
     if (names.length === 1) {
       nameStart = names[0]
@@ -40,7 +52,9 @@ function generateProfileSection(profile) {
     }
   }
 
-  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+  const info = [email, phone, location.address, website]
+    .filter(Boolean)
+    .join(' | ')
 
   const sectionHeader = stripIndent`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,7 +64,7 @@ function generateProfileSection(profile) {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   `
 
-  if (!fullName) {
+  if (!name) {
     return stripIndent`
       ${sectionHeader}
       \\centering{
@@ -68,8 +82,8 @@ function generateProfileSection(profile) {
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
@@ -81,27 +95,43 @@ function generateEducationSection(schools) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\section{Education}
   \\raggedright
-  ${schools.map(school => {
-    const { name, location, degree, major, gpa, graduationDate } = school
+  ${education.map(school => {
+    const {
+      institution,
+      location,
+      studyType,
+      area,
+      gpa,
+      startDate,
+      endDate
+    } = school
 
     let line1 = ''
     let line2 = ''
 
-    if (name) {
-      line1 += `\\runsubsection{${name}}`
+    if (institution) {
+      line1 += `\\runsubsection{${institution}}`
     }
 
-    if (degree && major) {
-      line1 += `\\descript{| ${degree} ${major}}`
-    } else if (degree) {
-      line1 += `\\descript{| ${degree}}`
-    } else if (major) {
-      line1 += `\\descript{| ${major}}`
+    if (studyType && area) {
+      line1 += `\\descript{| ${studyType} ${area}}`
+    } else if (studyType) {
+      line1 += `\\descript{| ${studyType}}`
+    } else if (area) {
+      line1 += `\\descript{| ${area}}`
     }
 
-    const locationAndDate = [location, graduationDate]
-      .filter(Boolean)
-      .join(' | ')
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} - ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} - Present`
+    } else {
+      dateRange = endDate
+    }
+
+    const locationAndDate = [location, dateRange].filter(Boolean).join(' | ')
 
     if (locationAndDate) {
       line1 += `\\hfill \\location{${locationAndDate}}`
@@ -124,8 +154,8 @@ function generateEducationSection(schools) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
@@ -136,19 +166,19 @@ function generateExperienceSection(jobs) {
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\section{Experience}
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let line1 = ''
     let dateRange = ''
-    let dutyLines = ''
+    let highlightLines = ''
 
-    if (name) {
-      line1 += `\\runsubsection{${name}}`
+    if (company) {
+      line1 += `\\runsubsection{${company}}`
     }
 
-    if (title) {
-      line1 += `\\descript{| ${title}}`
+    if (position) {
+      line1 += `\\descript{| ${position}}`
     }
 
     if (startDate && endDate) {
@@ -167,17 +197,17 @@ function generateExperienceSection(jobs) {
       line1 += `\\hfill \\location{${dateRange}}`
     }
 
-    if (duties) {
-      dutyLines = source`
+    if (highlights) {
+      highlightLines = source`
         \\begin{tightemize}
-          ${duties.map(duty => `\\item ${duty}`)}
+          ${highlights.map(highlight => `\\item ${highlight}`)}
         \\end{tightemize}
         `
     }
 
     return stripIndent`
       ${line1}
-      ${dutyLines}
+      ${highlightLines}
       \\sectionsep
     `
   })}
@@ -198,9 +228,10 @@ function generateSkillsSection(skills) {
   \\section{Skills}
   \\raggedright
   \\begin{tabular}{ l l }
-  ${skills.map(
-    skill => `\\descript{${skill.name}} & {\\location{${skill.details}}} \\\\`
-  )}
+  ${skills.map(skill => {
+    const { name = '', keywords = [] } = skill
+    return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
+  })}
   \\end{tabular}
   \\sectionsep
   `
@@ -220,7 +251,7 @@ function generateProjectsSection(projects) {
   \\section{Projects}
   \\raggedright
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords, url } = project
 
     let line1 = ''
     let line2 = ''
@@ -230,12 +261,12 @@ function generateProjectsSection(projects) {
       line1 += `\\runsubsection{\\large{${name}}}`
     }
 
-    if (technologies) {
-      line2 += `\\descript{| ${technologies}}`
+    if (keywords) {
+      line2 += `\\descript{| ${keywords.join(', ')}}`
     }
 
-    if (link) {
-      line2 += `\\hfill \\location{${link}}`
+    if (url) {
+      line2 += `\\hfill \\location{${url}}`
     }
 
     if (line2) {
@@ -250,6 +281,31 @@ function generateProjectsSection(projects) {
       ${line1}
       ${line2}
       ${line3}
+      \\sectionsep
+    `
+  })}
+  `
+}
+
+function generateAwardsSection(awards) {
+  if (!awards) {
+    return ''
+  }
+
+  return source`
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %     Awards
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \\section{Awards}
+  ${awards.map(award => {
+    const { title, summary, date, awarder } = award
+    const info = [awarder, date].filter(Boolean).join(' | ')
+
+    return stripIndent`
+      \\runsubsection{\\large{${title || ''}}} \\descript{${info}} \\\\
+      ${summary ? `${summary}\\\\` : ''}
       \\sectionsep
     `
   })}
@@ -306,31 +362,6 @@ function generateCommentHeader() {
     % 2. Hacky space on the first bullet point on the second column.
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  `
-}
-
-function generateAwardsSection(awards) {
-  if (!awards) {
-    return ''
-  }
-
-  return source`
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %
-  %     Awards
-  %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Awards}
-  ${awards.map(award => {
-    const { name, details, date, location } = award
-    const info = [date, location].filter(Boolean).join(' | ')
-
-    return stripIndent`
-      \\runsubsection{\\large{${name || ''}}} \\descript{${info}} \\\\
-      ${details ? `${details}\\\\` : ''}
-      \\sectionsep
-    `
-  })}
   `
 }
 

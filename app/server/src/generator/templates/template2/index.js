@@ -211,19 +211,20 @@ function generateProjectsSection(projects) {
   return source`
   \\cvsection{Projects}
   \\begin{cventries}
-  ${projects.map(
-    project => stripIndent`
+  ${projects.map(project => {
+    const { name, description, keywords = [], url } = project
+
+    return stripIndent`
       \\cventry
-        {${project.description || ''}}
-        {${project.name || ''}}
-        {${project.technologies || ''}}
-        {${project.link || ''}}
+        {${description || ''}}
+        {${name || ''}}
+        {${keywords.join(', ') || ''}}
+        {${url || ''}}
         {}
 
       \\vspace{-5mm}
-
-      `
-  )}
+    `
+  })}
   \\end{cventries}
   `
 }

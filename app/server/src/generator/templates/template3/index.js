@@ -179,14 +179,14 @@ function generateProjectsSection(projects) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords = [], url } = project
 
     return stripIndent`
       \\item[]
           \\project
               {${name || ''}}
-              {${technologies || ''}}
-              {${link || ''}}
+              {${keywords.join(', ') || ''}}
+              {${url || ''}}
               {${description || ''}}
     `
   })}
@@ -205,15 +205,15 @@ function generateAwardsSection(awards) {
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     return stripIndent`
       \\item[]
           \\award
-              {${name || ''}}
+              {${title || ''}}
               {${date || ''}}
-              {${location || ''}}
-              {${details || ''}}
+              {${awarder || ''}}
+              {${summary || ''}}
     `
   })}
   \\end{itemize}

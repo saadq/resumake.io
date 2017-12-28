@@ -2,8 +2,8 @@
  * @flow
  */
 
-import Home from './home/Home'
-import Generator from './generator/Generator'
-import About from './about/About'
+import Home from './Home'
+import Generator from './Generator'
+import About from './About'
 
 export { Home, Generator, About }

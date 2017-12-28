@@ -4,8 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { Switch, Route, Redirect, type Location } from 'react-router-dom'
-import { Header, SideNav, Content } from './layout'
+import { Switch, Route, Redirect, Link, type Location } from 'react-router-dom'
 import Form, {
   Templates,
   Profile,
@@ -14,14 +13,56 @@ import Form, {
   Skills,
   Projects,
   Awards
-} from '../../../features/form/components'
-import Preview from '../../../features/preview/components'
-import Progress from '../../../features/progress/components'
+} from '../../features/form/components'
+import SideNav from '../../features/side-nav/components'
+import Preview from '../../features/preview/components'
+import Progress from '../../features/progress/components'
+import { colors, sizes } from '../../common/theme'
 
 const Layout = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+`
+
+const Content = styled.main`
+  flex: 1;
+  padding: 0;
+  margin-top: ${sizes.header};
+  margin-left: ${sizes.sideNav};
+  margin-bottom: calc(${sizes.footer} + 15px);
+  width: calc(80% - ${sizes.sideNav});
+
+  @media screen and (max-width: 1000px) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    left: initial;
+  }
+`
+
+const Header = styled.header`
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: ${sizes.header};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${colors.background};
+`
+
+const Logo = styled(Link)`
+  text-transform: lowercase;
+  text-decoration: none;
+  font-family: 'Earth Orbiter Title';
+  letter-spacing: 0.4em;
+  color: white;
+`
+
+const Accent = styled.em`
+  font-style: normal;
+  color: ${colors.primary};
 `
 
 type Props = {
@@ -31,7 +72,11 @@ type Props = {
 function Generator({ location }: Props) {
   return (
     <Layout>
-      <Header />
+      <Header>
+        <Logo to="/">
+          Resu<Accent>make</Accent>
+        </Logo>
+      </Header>
       <SideNav />
       <Content>
         <Form location={location}>

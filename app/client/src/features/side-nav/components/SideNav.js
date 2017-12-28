@@ -12,7 +12,7 @@ import {
 } from 'react-sortable-hoc'
 import styled from 'styled-components'
 import { lighten, rgba } from 'polished'
-import { colors, sizes, animations } from '../../../../common/theme'
+import { colors, sizes, animations } from '../../../common/theme'
 
 const Aside = styled.aside`
   position: fixed;

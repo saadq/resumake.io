@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { withRouter, type RouterHistory } from 'react-router-dom'
+import { withRouter, type RouterHistory, type Location } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { arrayMove } from 'react-sortable-hoc'
 import styled from 'styled-components'
@@ -11,7 +11,7 @@ import SortableList from './SortableList'
 import MakeButton from './MakeButton'
 import { setSectionOrder } from '../actions'
 import { sizes } from '../../../common/theme'
-import type { Section } from '../types'
+import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
 
 const Aside = styled.aside`
@@ -35,8 +35,12 @@ const Aside = styled.aside`
 
 type Props = {
   history: RouterHistory,
+  location: Location,
   sectionOrder: Array<Section>,
-  setSectionOrder: (newSectionOrder: Array<Section>) => void
+  setSectionOrder: (
+    newSectionOrder: Array<Section>,
+    currSection: Section
+  ) => void
 }
 
 class SideNav extends Component<Props> {
@@ -45,10 +49,11 @@ class SideNav extends Component<Props> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { sectionOrder, setSectionOrder } = this.props
+    const { location, sectionOrder, setSectionOrder } = this.props
     const newSectionOrder = arrayMove(sectionOrder, oldIndex, newIndex)
+    const currSection: Section = (location.pathname.slice(11): any)
 
-    setSectionOrder(newSectionOrder)
+    setSectionOrder(newSectionOrder, currSection)
     this.toggleGrabCursor()
   }
 
@@ -58,13 +63,14 @@ class SideNav extends Component<Props> {
 
   render() {
     const { sectionOrder, history } = this.props
+    const sections = sectionOrder.filter(item => item !== 'preview')
 
     return (
       <Aside>
         <nav>
           <SortableList
             useDragHandle
-            items={sectionOrder}
+            items={sections}
             onSortStart={this.onSortStart}
             onSortEnd={this.onSortEnd}
           />
@@ -83,7 +89,7 @@ class SideNav extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    sectionOrder: state.sectionOrder
+    sectionOrder: state.sectionOrder.sections
   }
 }
 

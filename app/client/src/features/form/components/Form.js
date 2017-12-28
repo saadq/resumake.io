@@ -6,29 +6,31 @@ import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { generateResume } from '../../preview/actions'
-import { setProgress } from '../../progress/actions'
+import { setProgress } from '../../section-order/actions'
 import type { FormValues } from '../types'
 import type { State } from '../../../app/types'
+import type { Section } from '../../../common/types'
 import type { Location } from 'react-router-dom'
 
 type Props = {
+  sections: Array<Section>,
   children: Node,
   location: Location,
   handleSubmit: *,
-  setProgress: (currSection: string) => void,
+  setProgress: (sections: Array<Section>, curr: Section) => void,
   generateResume: (payload: FormValues) => void
 }
 
 class Form extends Component<Props> {
   updateProgress() {
-    const { location, setProgress } = this.props
+    const { sections, location, setProgress } = this.props
 
     if (!location.pathname.startsWith('/generator/')) {
       return
     }
 
-    const section = location.pathname.slice(11)
-    setProgress(section)
+    const currSection: Section = (location.pathname.slice(11): any)
+    setProgress(sections, currSection)
   }
 
   componentWillMount() {
@@ -57,7 +59,8 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    progress: state.progress.progress
+    sections: state.sectionOrder.sections,
+    progress: state.sectionOrder.progress
   }
 }
 

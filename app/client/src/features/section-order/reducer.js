@@ -5,20 +5,42 @@
 import type { SectionOrderState as State } from './types'
 import type { Action } from '../../app/types'
 
-const initialState = [
-  'Templates',
-  'Profile',
-  'Education',
-  'Work',
-  'Skills',
-  'Projects',
-  'Awards'
-]
+const initialState = {
+  progress: 0,
+  prev: 'templates',
+  curr: 'templates',
+  next: 'profile',
+  sections: [
+    'templates',
+    'profile',
+    'education',
+    'work',
+    'skills',
+    'projects',
+    'awards',
+    'preview'
+  ]
+}
 
 function sectionOrder(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'SET_SECTION_ORDER':
-      return action.sections
+      return {
+        ...state,
+        sections: action.sections,
+        prev: action.prev,
+        curr: action.curr,
+        next: action.next
+      }
+
+    case 'SET_PROGRESS':
+      return {
+        ...state,
+        progress: action.progress,
+        prev: action.prev,
+        curr: action.curr,
+        next: action.next
+      }
 
     default:
       return state

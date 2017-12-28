@@ -3,5 +3,6 @@
  */
 
 import SideNav from './SideNav'
+import Progress from './Progress'
 
-export default SideNav
+export { SideNav, Progress }

@@ -14,9 +14,8 @@ import Form, {
   Projects,
   Awards
 } from '../../features/form/components'
-import SideNav from '../../features/section-order/components'
+import { SideNav, Progress } from '../../features/section-order/components'
 import Preview from '../../features/preview/components'
-import Progress from '../../features/progress/components'
 import { colors, sizes } from '../../common/theme'
 
 const Layout = styled.div`

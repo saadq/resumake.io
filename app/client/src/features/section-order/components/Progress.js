@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { lighten } from 'polished'
 import { Button } from '../../../common/components'
 import { colors, sizes } from '../../../common/theme'
+import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
 
 const Footer = styled.footer`
@@ -86,19 +87,20 @@ const SectionButton = Button.extend`
 type Props = {
   history: RouterHistory,
   progress: number,
-  prev: string,
-  curr: string,
-  next: string
+  sections: Array<Section>,
+  prev: Section,
+  curr: Section,
+  next: Section
 }
 
-function Progress({ history, progress, prev, curr, next }: Props) {
+function Progress({ history, progress, sections, prev, curr, next }: Props) {
   return (
     <Footer>
       <Wrapper>
         <SectionButton
           form="resume-form"
           onClick={() => history.push(`/generator/${prev}`)}
-          disabled={curr === 'templates'}
+          disabled={curr === sections[0]}
         >
           ← Prev
         </SectionButton>
@@ -106,7 +108,7 @@ function Progress({ history, progress, prev, curr, next }: Props) {
         <SectionButton
           form="resume-form"
           onClick={() => history.push(`/generator/${next}`)}
-          disabled={curr === 'preview'}
+          disabled={curr === sections[sections.length - 1]}
         >
           Next →
         </SectionButton>
@@ -117,10 +119,11 @@ function Progress({ history, progress, prev, curr, next }: Props) {
 
 function mapState(state: State) {
   return {
-    progress: state.progress.progress,
-    prev: state.progress.prev,
-    curr: state.progress.curr,
-    next: state.progress.next
+    sections: state.sectionOrder.sections,
+    progress: state.sectionOrder.progress,
+    prev: state.sectionOrder.prev,
+    curr: state.sectionOrder.curr,
+    next: state.sectionOrder.next
   }
 }
 

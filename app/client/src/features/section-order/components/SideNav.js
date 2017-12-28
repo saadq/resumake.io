@@ -4,11 +4,15 @@
 
 import React, { Component } from 'react'
 import { withRouter, type RouterHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import { connect } from 'react-redux'
 import { arrayMove } from 'react-sortable-hoc'
+import styled from 'styled-components'
 import SortableList from './SortableList'
 import MakeButton from './MakeButton'
+import { setSectionOrder } from '../actions'
 import { sizes } from '../../../common/theme'
+import type { Section } from '../types'
+import type { State } from '../../../app/types'
 
 const Aside = styled.aside`
   position: fixed;
@@ -29,36 +33,22 @@ const Aside = styled.aside`
   }
 `
 
-type State = {
-  items: Array<string>
-}
-
 type Props = {
-  history: RouterHistory
+  history: RouterHistory,
+  sectionOrder: Array<Section>,
+  setSectionOrder: (newSectionOrder: Array<Section>) => void
 }
 
-class SideNav extends Component<Props, State> {
-  state = {
-    items: [
-      'Templates',
-      'Profile',
-      'Education',
-      'Work',
-      'Skills',
-      'Projects',
-      'Awards'
-    ]
-  }
-
+class SideNav extends Component<Props> {
   onSortStart = () => {
     this.toggleGrabCursor()
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(prevState => ({
-      items: arrayMove(prevState.items, oldIndex, newIndex)
-    }))
+    const { sectionOrder, setSectionOrder } = this.props
+    const newSectionOrder = arrayMove(sectionOrder, oldIndex, newIndex)
 
+    setSectionOrder(newSectionOrder)
     this.toggleGrabCursor()
   }
 
@@ -67,15 +57,14 @@ class SideNav extends Component<Props, State> {
   }
 
   render() {
-    const { items } = this.state
-    const { history } = this.props
+    const { sectionOrder, history } = this.props
 
     return (
       <Aside>
         <nav>
           <SortableList
             useDragHandle
-            items={items}
+            items={sectionOrder}
             onSortStart={this.onSortStart}
             onSortEnd={this.onSortEnd}
           />
@@ -92,4 +81,16 @@ class SideNav extends Component<Props, State> {
   }
 }
 
-export default withRouter(SideNav)
+function mapState(state: State) {
+  return {
+    sectionOrder: state.sectionOrder
+  }
+}
+
+const mapActions = {
+  setSectionOrder
+}
+
+const ConnectedSideNav = connect(mapState, mapActions)(SideNav)
+
+export default withRouter(ConnectedSideNav)

@@ -23,6 +23,11 @@ injectGlobal`
     background: ${colors.primary};
     color: white;
   }
+
+  .grabbing {
+    cursor: move; /* fallback */
+    cursor: grabbing;
+  }
 `
 
 function App() {

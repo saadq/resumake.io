@@ -16,17 +16,18 @@
 
 \RequirePackage{xcolor}
 
-\definecolor{white}{RGB}{255,255,255}
+\definecolor{headerbackground}{HTML}{333333}
+\definecolor{headerforeground}{HTML}{ffffff}
 
 \definecolor{darkgray}{HTML}{333333}
-\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{gray}{HTML}{333333}
 \definecolor{lightgray}{HTML}{999999}
 
-\definecolor{green}{HTML}{C2E15F}
-\definecolor{orange}{HTML}{FDA333}
-\definecolor{purple}{HTML}{D3A4F9}
-\definecolor{red}{HTML}{FB4485}
-\definecolor{blue}{HTML}{6CE0F1}
+\definecolor{green}{HTML}{333333}
+\definecolor{orange}{HTML}{333333}
+\definecolor{purple}{HTML}{333333}
+\definecolor{red}{HTML}{333333}
+\definecolor{blue}{HTML}{333333}
 
 \ifdefined\@cv@print
   \colorlet{green}{gray}
@@ -37,8 +38,8 @@
   \colorlet{fillheader}{white}
   \colorlet{header}{gray}
 \else
-  \colorlet{fillheader}{gray}
-  \colorlet{header}{white}
+  \colorlet{fillheader}{headerbackground}
+  \colorlet{header}{headerforeground}
 \fi
 \colorlet{textcolor}{gray}
 \colorlet{headercolor}{gray}

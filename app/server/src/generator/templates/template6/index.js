@@ -1,15 +1,27 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template6({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template6({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     %!TEX TS-program = xelatex
     \\documentclass[]{friggeri-cv}
 
     \\begin{document}
-    ${generateProfileSection(profile)}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
+    ${generateProfileSection(basics)}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
@@ -18,18 +30,18 @@ function template6({ profile, schools, jobs, projects, skills, awards }) {
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return '\\header{}{}{}'
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
+  const { name, email, phone, location = {}, website } = basics
 
   let nameStart = ''
   let nameEnd = ''
 
-  if (fullName) {
-    const names = fullName.split(' ')
+  if (name) {
+    const names = name.split(' ')
 
     if (names.length === 1) {
       nameStart = names[0]
@@ -44,39 +56,49 @@ function generateProfileSection(profile) {
     nameStart += ' '
   }
 
-  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+  const info = [email, phone, location.address, website].filter(Boolean).join(' | ')
 
   return stripIndent`
     \\header{${nameStart}}{${nameEnd}}{${info}}
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
   return source`
-  \\section{education}
+  \\section{Education}
   \\begin{entrylist}
-  ${schools.map(school => {
-    const { name, location, degree, major, gpa, graduationDate } = school
+  ${education.map(school => {
+    const { institution, location, studyType = '', area = '', gpa, startDate = '', endDate = '' } = school
 
     let schoolLine = ''
 
-    if (name) {
-      schoolLine += name
+    if (institution) {
+      schoolLine += institution
     }
 
-    if (degree && major) {
-      schoolLine += `, {\\normalfont ${degree} in ${major}}`
-    } else if (degree || major) {
-      schoolLine += `, {\\normalfont ${degree || major}}`
+    if (studyType && area) {
+      schoolLine += `, {\\normalfont ${studyType} in ${area}}`
+    } else if (studyType || area) {
+      schoolLine += `, {\\normalfont ${studyType || area}}`
+    }
+
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} - ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} - Present`
+    } else {
+      dateRange = endDate
     }
 
     return `
       \\entry
-        {${graduationDate || ''}}
+        {${dateRange}}
         {${schoolLine}}
         {${location || ''}}
         {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
@@ -86,33 +108,33 @@ function generateEducationSection(schools) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
   return source`
-  \\section{experience}
+  \\section{Experience}
   \\begin{entrylist}
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let jobLine = ''
     let dateRange = ''
-    let dutyLines = ''
+    let highlightLines = ''
 
-    if (name) {
-      jobLine += name
+    if (company) {
+      jobLine += company
     }
 
-    if (title) {
-      jobLine += `, ${title}`
+    if (position) {
+      jobLine += `, ${position}`
     }
 
-    if (duties) {
-      dutyLines = source`
+    if (highlights) {
+      highlightLines = source`
         \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-        ${duties.map(duty => `\\item ${duty}`)}
+        ${highlights.map(highlight => `\\item ${highlight}`)}
         \\end{itemize}
         `
     }
@@ -130,7 +152,7 @@ function generateExperienceSection(jobs) {
         {${dateRange || ''}}
         {${jobLine}}
         {${location || ''}}
-        {${dutyLines}}
+        {${highlightLines}}
     `
   })}
   \\end{entrylist}
@@ -143,13 +165,13 @@ function generateSkillsSection(skills) {
   }
 
   return source`
-  \\section{skills}
+  \\section{Skills}
   \\begin{entrylist}
-  ${skills.map(({ name, details }) => {
+  ${skills.map(({ name, keywords = [] }) => {
     const nameLine = name ? `${name}: ` : ''
-    const detailsLine = details ? `{\\normalfont ${details}}` : ''
+    const keywordsLine = keywords ? `{\\normalfont ${keywords.join(', ')}}` : ''
 
-    return `\\skill{}{${nameLine}${detailsLine}}`
+    return `\\skill{}{${nameLine}${keywordsLine}}`
   })}
   \\end{entrylist}
   `
@@ -161,10 +183,10 @@ function generateProjectsSection(projects) {
   }
 
   return source`
-  \\section{projects}
+  \\section{Projects}
   \\begin{entrylist}
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords = [], url } = project
 
     let nameLine = ''
 
@@ -172,15 +194,15 @@ function generateProjectsSection(projects) {
       nameLine += name
     }
 
-    if (technologies) {
-      nameLine += ` {\\normalfont ${technologies}}`
+    if (keywords) {
+      nameLine += ` {\\normalfont ${keywords.join(', ')}}`
     }
 
     return `
       \\entry
         {}
         {${nameLine}}
-        {${link || ''}}
+        {${url || ''}}
         {${description || ''}}
     `
   })}
@@ -194,17 +216,17 @@ function generateAwardsSection(awards) {
   }
 
   return source`
-  \\section{awards}
+  \\section{Awards}
   \\begin{entrylist}
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     return stripIndent`
       \\entry
         {${date || ''}}
-        {${name || ''}}
-        {${location || ''}}
-        {${details || ''}}
+        {${title || ''}}
+        {${awarder || ''}}
+        {${summary || ''}}
     `
   })}
   \\end{entrylist}

@@ -70,6 +70,7 @@ const Handle = styled.span`
 const DragHandle = SortableHandle(() => <Handle>::</Handle>)
 
 const Item = styled.div`
+  z-index: 2;
   min-width: 80px;
 `
 

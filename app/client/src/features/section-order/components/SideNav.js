@@ -70,6 +70,8 @@ class SideNav extends Component<Props> {
         <nav>
           <SortableList
             useDragHandle
+            lockToContainerEdges
+            lockAxis="y"
             items={sections}
             onSortStart={this.onSortStart}
             onSortEnd={this.onSortEnd}

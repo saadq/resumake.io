@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const enhancer = composeWithDevTools(
   applyMiddleware(...middleware),
-  persistState(['form', 'sectionOrder'], { key: 'resumake' })
+  persistState(['form', 'orderedSections'], { key: 'resumake' })
 )
 
 const store = createStore(reducer, enhancer)

@@ -119,11 +119,11 @@ function Progress({ history, progress, sections, prev, curr, next }: Props) {
 
 function mapState(state: State) {
   return {
-    sections: state.sectionOrder.sections,
-    progress: state.sectionOrder.progress,
-    prev: state.sectionOrder.prev,
-    curr: state.sectionOrder.curr,
-    next: state.sectionOrder.next
+    sections: state.orderedSections.sections,
+    progress: state.orderedSections.progress,
+    prev: state.orderedSections.prev,
+    curr: state.orderedSections.curr,
+    next: state.orderedSections.next
   }
 }
 

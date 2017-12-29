@@ -36,7 +36,7 @@ const Aside = styled.aside`
 type Props = {
   history: RouterHistory,
   location: Location,
-  sectionOrder: Array<Section>,
+  orderedSections: Array<Section>,
   setSectionOrder: (
     newSectionOrder: Array<Section>,
     currSection: Section
@@ -49,8 +49,8 @@ class SideNav extends Component<Props> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { location, sectionOrder, setSectionOrder } = this.props
-    const newSectionOrder = arrayMove(sectionOrder, oldIndex, newIndex)
+    const { location, orderedSections, setSectionOrder } = this.props
+    const newSectionOrder = arrayMove(orderedSections, oldIndex, newIndex)
     const currSection: Section = (location.pathname.slice(11): any)
 
     setSectionOrder(newSectionOrder, currSection)
@@ -62,8 +62,8 @@ class SideNav extends Component<Props> {
   }
 
   render() {
-    const { sectionOrder, history } = this.props
-    const sections = sectionOrder.filter(item => item !== 'preview')
+    const { orderedSections, history } = this.props
+    const sections = orderedSections.filter(item => item !== 'preview')
 
     return (
       <Aside>
@@ -91,7 +91,7 @@ class SideNav extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    sectionOrder: state.sectionOrder.sections
+    orderedSections: state.orderedSections.sections
   }
 }
 

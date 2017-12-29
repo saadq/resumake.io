@@ -14,7 +14,7 @@ import Form, {
   Projects,
   Awards
 } from '../../features/form/components'
-import { SideNav, Progress } from '../../features/section-order/components'
+import { SideNav, Progress } from '../../features/ordered-sections/components'
 import Preview from '../../features/preview/components'
 import { colors, sizes } from '../../common/theme'
 

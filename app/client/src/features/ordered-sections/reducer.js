@@ -22,7 +22,7 @@ const initialState = {
   ]
 }
 
-function sectionOrder(state: State = initialState, action: Action): State {
+function orderedSections(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'CLEAR_STATE':
       return initialState
@@ -50,4 +50,4 @@ function sectionOrder(state: State = initialState, action: Action): State {
   }
 }
 
-export default sectionOrder
+export default orderedSections

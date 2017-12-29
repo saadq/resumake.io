@@ -8,11 +8,11 @@ import type { PreviewState, PreviewAction } from '../features/preview/types'
 import type {
   SectionOrderState,
   SectionOrderAction
-} from '../features/section-order/types'
+} from '../features/ordered-sections/types'
 
 type State = {
   form: { resume: FormState },
-  sectionOrder: SectionOrderState,
+  orderedSections: SectionOrderState,
   preview: PreviewState
 }
 

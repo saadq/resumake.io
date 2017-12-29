@@ -6,7 +6,7 @@ import React, { Component, type Node } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { generateResume } from '../../preview/actions'
-import { setProgress } from '../../section-order/actions'
+import { setProgress } from '../../ordered-sections/actions'
 import type { FormValues } from '../types'
 import type { State } from '../../../app/types'
 import type { Section } from '../../../common/types'
@@ -59,8 +59,8 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    sections: state.sectionOrder.sections,
-    progress: state.sectionOrder.progress
+    sections: state.orderedSections.sections,
+    progress: state.orderedSections.progress
   }
 }
 

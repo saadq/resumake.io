@@ -64,6 +64,7 @@ class SideNav extends Component<Props> {
     this.toggleGrabCursor()
   }
 
+  // Pretty hacky, but meh
   toggleGrabCursor() {
     document.body && document.body.classList.toggle('grabbing')
   }

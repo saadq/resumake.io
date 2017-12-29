@@ -23,7 +23,7 @@ const Input = styled(Field)`
   font-size: 0.9em;
   font-family: inherit;
   border: none;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1px solid ${colors.borders};
   color: #ccc;
   transition: all 0.4s;
   background: transparent;

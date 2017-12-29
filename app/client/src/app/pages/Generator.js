@@ -54,9 +54,10 @@ const Header = styled.header`
 const Logo = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
-  font-family: 'Earth Orbiter Title';
-  letter-spacing: 0.4em;
+  font-family: 'nexalight';
+  font-size: 2.5em;
   color: white;
+  letter-spacing: 2px;
 `
 
 const Accent = styled.em`

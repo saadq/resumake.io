@@ -29,7 +29,10 @@ const NavItem = styled(NavLink)`
   position: relative;
 
   &:hover {
-    color: ${colors.primary};
+    &::before {
+      width: 100% !important;
+      opacity: 1;
+    }
   }
 
   &.active {
@@ -37,22 +40,21 @@ const NavItem = styled(NavLink)`
     color: ${colors.primary};
 
     &:before {
-      transform: scale(1, 1);
       opacity: 1;
     }
   }
 
   &:before {
+    transition: all 0.4s ease;
     content: '';
     height: 1px;
     background: ${colors.primary};
     position: absolute;
     pointer-events: none;
     bottom: -2px;
-    left: 0;
-    right: 0;
+    margin: 0 auto;
+    width: 0%;
     opacity: 1;
-    transform: scale(0, 1);
   }
 `
 

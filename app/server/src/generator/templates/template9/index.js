@@ -1,14 +1,26 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template9({ profile, schools, jobs, skills, projects, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template9({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     \\documentclass[fontsize=11pt]{article}
-    ${generateHeader(profile)}
+    ${generateHeader()}
     \\begin{document}
-    ${generateProfileSection(profile)}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
+    ${generateProfileSection(basics)}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
@@ -17,78 +29,55 @@ function template9({ profile, schools, jobs, skills, projects, awards }) {
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
-  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+  const { name, email, phone, location = {}, website } = basics
+  const info = [email, phone, location.address, website]
+    .filter(Boolean)
+    .join(' | ')
 
   return stripIndent`
-    \\MyName{${fullName || ''}}
+    \\MyName{${name || ''}}
     \\bigskip
     {\\small \\hfill ${info || ''}}
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
-  return `
+  const lastSchoolIndex = education.length - 1
+
+  return source`
   %%% Education
   %%% ------------------------------------------------------------
   \\NewPart{Education}{}
-  ${schools.map((school, i) => {
-    const { name, degree, major, gpa, location, graduationDate } = school
+  ${education.map((school, i) => {
+    const {
+      institution = '',
+      studyType,
+      area,
+      gpa = '',
+      location = '',
+      startDate = '',
+      endDate = ''
+    } = school
 
     let degreeLine = ''
     let nameLine = ''
 
-    if (degree && major) {
-      degreeLine = `${degree} ${major}`
-    } else if (degree || major) {
-      degreeLine = degree || major
+    if (studyType && area) {
+      degreeLine = `${studyType} ${area}`
+    } else if (studyType || area) {
+      degreeLine = studyType || area
     }
 
-    if (name && location) {
-      nameLine += `${name}, ${location}`
-    } else if (name || location) {
-      nameLine = name || location
-    }
-
-    if (gpa) {
-      nameLine += ` ${gpa}`
-    }
-
-    return stripIndent`
-    \\EducationEntry
-        {${degreeLine}}
-        {${graduationDate || ''}}
-        {${nameLine}${i < schools.length - 1 ? '\\\\' : ''}}
-    `
-  })}
-  `
-}
-
-function generateExperienceSection(jobs) {
-  if (!jobs) {
-    return ''
-  }
-
-  return source`
-    %%% Work experience
-    %%% ------------------------------------------------------------
-    \\NewPart{Work Experience}{}
-
-  ${jobs.map((job, i) => {
-    const { name, title, location, startDate, endDate, duties } = job
-
-    const nameLine = [name, location].filter(Boolean).join(', ')
     let dateRange = ''
-    let dutyLines = ''
 
     if (startDate && endDate) {
       dateRange = `${startDate} - ${endDate}`
@@ -98,23 +87,77 @@ function generateExperienceSection(jobs) {
       dateRange = endDate
     }
 
-    if (duties) {
-      dutyLines = source`
-          \\begin{itemize} \\itemsep -1pt
-            ${duties.map(duty => `\\item ${duty}`)}
-          \\end{itemize}
-        `
+    if (institution && location) {
+      nameLine += `${institution}, ${location}`
+    } else if (institution || location) {
+      nameLine = institution || location
+    }
+
+    if (gpa) {
+      nameLine += ` ${gpa}`
     }
 
     return stripIndent`
-        \\WorkEntry
-          {${title || ''}}
-          {${dateRange || ''}}
-          {${nameLine}}
-          {${dutyLines}}
-          ${i < jobs.length - 1 ? '\\sepspace' : ''}
+    \\EducationEntry
+        {${degreeLine}}
+        {${dateRange || ''}}
+        {${nameLine}${i < lastSchoolIndex ? '\\\\' : ''}}
     `
   })}
+  `
+}
+
+function generateExperienceSection(work) {
+  if (!work) {
+    return ''
+  }
+
+  const lastJobIndex = work.length - 1
+
+  return source`
+    %%% Work experience
+    %%% ------------------------------------------------------------
+    \\NewPart{Work Experience}{}
+
+    ${work.map((job, i) => {
+      const {
+        company,
+        position,
+        location,
+        startDate,
+        endDate,
+        highlights
+      } = job
+
+      const nameLine = [company, location].filter(Boolean).join(', ')
+      let dateRange = ''
+      let dutyLines = ''
+
+      if (startDate && endDate) {
+        dateRange = `${startDate} - ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} - Present`
+      } else {
+        dateRange = endDate
+      }
+
+      if (highlights) {
+        dutyLines = source`
+            \\begin{itemize} \\itemsep -1pt
+              ${highlights.map(duty => `\\item ${duty}`)}
+            \\end{itemize}
+          `
+      }
+
+      return stripIndent`
+          \\WorkEntry
+            {${position || ''}}
+            {${dateRange || ''}}
+            {${nameLine}}
+            {${dutyLines}}
+            ${i < lastJobIndex ? '\\sepspace' : ''}
+      `
+    })}
   `
 }
 
@@ -127,9 +170,10 @@ function generateSkillsSection(skills) {
   %%% Skills
   %%% ------------------------------------------------------------
   \\NewPart{Skills}{}
-  ${skills.map(
-    skill => `\\SkillsEntry{${skill.name || ''}}{${skill.details || ''}}`
-  )}
+  ${skills.map(skill => {
+    const { name, keywords = [] } = skill
+    return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
+  })}
   `
 }
 
@@ -138,21 +182,23 @@ function generateProjectsSection(projects) {
     return ''
   }
 
+  const lastProjectIndex = projects.length - 1
+
   return source`
     %%% Projects
     %%% ------------------------------------------------------------
     \\NewPart{Projects}{}
 
-  ${projects.map((project, i) => {
-    const { name, description, technologies, link } = project
+    ${projects.map((project, i) => {
+      const { name, description, keywords = [], url } = project
 
-    return stripIndent`
-        \\ProjectEntry{${name || ''}}{${link || ''}}
-        {${technologies || ''}}
-        {${description || ''}}
-        ${i < projects.length - 1 ? '\\sepspace' : ''}
-    `
-  })}
+      return stripIndent`
+          \\ProjectEntry{${name || ''}}{${url || ''}}
+          {${keywords.join(', ')}}
+          {${description || ''}}
+          ${i < lastProjectIndex ? '\\sepspace' : ''}
+      `
+    })}
 
   `
 }
@@ -162,21 +208,23 @@ function generateAwardsSection(awards) {
     return ''
   }
 
+  const lastAwardIndex = awards.length - 1
+
   return source`
     %%% Awards
     %%% ------------------------------------------------------------
     \\NewPart{Awards}{}
 
-  ${awards.map((award, i) => {
-    const { name, details, date, location } = award
+    ${awards.map((award, i) => {
+      const { title, summary, date, awarder } = award
 
-    return stripIndent`
-        \\AwardEntry{${name || ''}}{${location || ''}}
-        {${date || ''}}
-        {${details || ''}}
-        ${i < awards.length - 1 ? '\\sepspace' : ''}
-    `
-  })}
+      return stripIndent`
+          \\AwardEntry{${title || ''}}{${awarder || ''}}
+          {${date || ''}}
+          {${summary || ''}}
+          ${i < lastAwardIndex ? '\\sepspace' : ''}
+      `
+    })}
 
   `
 }

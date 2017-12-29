@@ -1,7 +1,19 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template8({ profile, schools, jobs, skills, projects, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template8({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     ${generateCommentHeader()}
     % The font could be set to Windows-specific Calibri by using the 'calibri' option
@@ -10,13 +22,13 @@ function template8({ profile, schools, jobs, skills, projects, awards }) {
     % For mathematical symbols
     \\usepackage{amsmath}
 
-    ${generateProfileSection(profile)}
+    ${generateProfileSection(basics)}
 
     \\begin{document}
       % Print the header
       \\makeheader
-      ${generateEducationSection(schools)}
-      ${generateExperienceSection(jobs)}
+      ${generateEducationSection(education)}
+      ${generateExperienceSection(work)}
       ${generateSkillsSection(skills)}
       ${generateProjectsSection(projects)}
       ${generateAwardsSection(awards)}
@@ -25,52 +37,70 @@ function template8({ profile, schools, jobs, skills, projects, awards }) {
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
+  const { name, email, phone = '', location = {}, website = '' } = basics
 
   let addressLine = ''
   let contactsLine = ''
 
-  if (address && phoneNumber) {
-    addressLine = `\\address{${address} \\linebreak ${phoneNumber}}`
-  } else if (address || phoneNumber) {
-    addressLine = `\\address{${address || phoneNumber}}`
+  if (location.address && phone) {
+    addressLine = `\\address{${location.address} \\linebreak ${phone}}`
+  } else if (location.address || phone) {
+    addressLine = `\\address{${location.address || phone}}`
   }
 
-  if (email && link) {
-    contactsLine = `\\contacts{${email} \\linebreak ${link}}`
-  } else if (email || link) {
-    contactsLine = `\\contacts{${email || link}}`
+  if (email && website) {
+    contactsLine = `\\contacts{${email} \\linebreak ${website}}`
+  } else if (email || website) {
+    contactsLine = `\\contacts{${email || website}}`
   }
 
   return `
     % Set applicant's personal data for header
-    \\name{${fullName || ''}}
+    \\name{${name || ''}}
     ${addressLine}
     ${contactsLine}
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
   return source`
   \\begin{cvsection}{Education}
-  ${schools.map(school => {
-    const { name, degree, major, gpa, location, graduationDate } = school
+  ${education.map(school => {
+    const {
+      institution,
+      studyType = '',
+      area = '',
+      gpa,
+      location,
+      startDate,
+      endDate
+    } = school
 
     let degreeLine = ''
 
-    if (degree && major) {
-      degreeLine = `${degree} in ${major}.`
-    } else if (degree || major) {
-      degreeLine = (degree || major) + '.'
+    if (studyType && area) {
+      degreeLine = `${studyType} in ${area}.`
+    } else if (studyType || area) {
+      degreeLine = (studyType || area) + '.'
+    }
+
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
     }
 
     if (gpa) {
@@ -78,8 +108,8 @@ function generateEducationSection(schools) {
     }
 
     return stripIndent`
-      \\begin{cvsubsection}{${location || ''}}{${name ||
-      ''}}{${graduationDate || ''}}
+      \\begin{cvsubsection}{${location || ''}}{${institution ||
+      ''}}{${dateRange || ''}}
         \\begin{itemize}
           \\item ${degreeLine}
         \\end{itemize}
@@ -90,18 +120,18 @@ function generateEducationSection(schools) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
   return source`
   \\begin{cvsection}{Experience}
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
-    let dutyLines = ''
+    let highlightLines = ''
 
     if (startDate && endDate) {
       dateRange = `${startDate} -- ${endDate}`
@@ -111,18 +141,19 @@ function generateExperienceSection(jobs) {
       dateRange = endDate
     }
 
-    if (duties) {
-      dutyLines = source`
+    if (highlights) {
+      highlightLines = source`
         \\begin{itemize}%
-          ${duties.map(duty => `\\item ${duty}`)}
+          ${highlights.map(highlight => `\\item ${highlight}`)}
         \\end{itemize}
         `
     }
 
     return stripIndent`
-      \\begin{cvsubsection}{${title || ''}}{${name || ''}}{${dateRange || ''}}
+      \\begin{cvsubsection}{${position || ''}}{${company || ''}}{${dateRange ||
+      ''}}
         ${location || ''}
-        ${dutyLines || ''}
+        ${highlightLines || ''}
       \\end{cvsubsection}
     `
   })}
@@ -139,10 +170,10 @@ function generateSkillsSection(skills) {
   \\begin{cvsection}{Skills}
   \\begin{cvsubsection}{}{}{}
   \\begin{itemize}
-  ${skills.map(
-    skill =>
-      `\\item ${skill.name ? `${skill.name}: ` : ''} ${skill.details || ''}`
-  )}
+  ${skills.map(skill => {
+    const { name, keywords = [] } = skill
+    return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
+  })}
   \\end{itemize}
   \\end{cvsubsection}
   \\end{cvsection}
@@ -160,7 +191,7 @@ function generateProjectsSection(projects) {
   \\begin{itemize}
   \\setlength\\itemsep{3pt}
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords = [], url } = project
 
     let line = ''
 
@@ -168,16 +199,16 @@ function generateProjectsSection(projects) {
       line += `\\textbf{${name}} `
     }
 
-    if (link) {
-      line += `(${link}) `
+    if (url) {
+      line += `(${url}) `
     }
 
     if (description) {
       line += ` ${description}`
     }
 
-    if (technologies) {
-      line += ` ${technologies}`
+    if (keywords) {
+      line += ` ${keywords.join(', ')}`
     }
 
     return `\\item ${line}`
@@ -199,20 +230,20 @@ function generateAwardsSection(awards) {
   \\begin{itemize}
   \\setlength\\itemsep{3pt}
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     let line = ''
 
-    if (name) {
-      line += `\\textbf{${name}} `
+    if (title) {
+      line += `\\textbf{${title}} `
     }
 
-    if (location) {
-      line += `(${location}) `
+    if (awarder) {
+      line += `(${awarder}) `
     }
 
-    if (details) {
-      line += ` ${details}`
+    if (summary) {
+      line += ` ${summary}`
     }
 
     if (date) {

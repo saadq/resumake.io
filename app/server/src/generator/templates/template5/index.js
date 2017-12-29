@@ -1,17 +1,29 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template5({ profile, schools, jobs, projects, skills, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template5({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     \\documentclass[line,margin]{res}
     \\usepackage[none]{hyphenat}
     \\usepackage{textcomp}
     \\begin{document}
-        ${generateProfileSection(profile)}
+        ${generateProfileSection(basics)}
         \\begin{resume}
           \\vspace{-5mm}
-          ${generateEducationSection(schools)}
-          ${generateExperienceSection(jobs)}
+          ${generateEducationSection(education)}
+          ${generateExperienceSection(work)}
           ${generateSkillsSection(skills)}
           ${generateProjectsSection(projects)}
           ${generateAwardsSection(awards)}
@@ -21,41 +33,53 @@ function template5({ profile, schools, jobs, projects, skills, awards }) {
   `
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
+function generateProfileSection(basics) {
+  if (!basics) {
     return ''
   }
 
-  const { fullName, email, phoneNumber, address, link } = profile
-  const info = [email, phoneNumber, address, link].filter(Boolean).join(' | ')
+  const { name, email, phone, location = {}, website } = basics
+  const info = [email, phone, location.address, website]
+    .filter(Boolean)
+    .join(' | ')
 
   return stripIndent`
-    \\name{{\\LARGE ${fullName || ''}}}
+    \\name{{\\LARGE ${name || ''}}}
     \\address{${info}}
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
+  const lastSchoolIndex = education.length - 1
+
   return source`
   \\section{EDUCATION}
-  ${schools.map((school, i) => {
-    const { name, location, degree, major, gpa, graduationDate } = school
+  ${education.map((school, i) => {
+    const {
+      institution,
+      location,
+      studyType,
+      area,
+      gpa,
+      startDate,
+      endDate
+    } = school
 
     let schoolLine = ''
     let degreeLine = ''
 
-    if (name) {
-      schoolLine += `\\textbf{${name}}, `
+    if (institution) {
+      schoolLine += `\\textbf{${institution}}, `
     }
 
-    if (degree && major) {
-      degreeLine = `${degree} in ${major}`
-    } else if (degree || major) {
-      degreeLine = degree || major
+    if (studyType && area) {
+      degreeLine = `${studyType} in ${area}`
+    } else if (studyType || area) {
+      degreeLine = studyType || area
     }
 
     if (degreeLine) {
@@ -66,8 +90,18 @@ function generateEducationSection(schools) {
       schoolLine += `GPA: ${gpa}`
     }
 
-    if (graduationDate) {
-      schoolLine += `\\hfill ${graduationDate}`
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
+    }
+
+    if (dateRange) {
+      schoolLine += `\\hfill ${dateRange}`
     }
 
     if (schoolLine) {
@@ -78,7 +112,7 @@ function generateEducationSection(schools) {
       schoolLine += `${location}`
     }
 
-    if (i !== schools.length - 1) {
+    if (i !== lastSchoolIndex) {
       schoolLine += '\\\\\\\\'
     }
 
@@ -95,17 +129,17 @@ function generateExperienceSection(jobs) {
   return source`
   \\section{EXPERIENCE}
   ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let jobLine = ''
     let dateRange = ''
 
-    if (name) {
-      jobLine += `\\textbf{${name}}, `
+    if (company) {
+      jobLine += `\\textbf{${company}}, `
     }
 
-    if (title) {
-      jobLine += `{\\sl ${title}}`
+    if (position) {
+      jobLine += `{\\sl ${position}}`
     }
 
     if (startDate && endDate) {
@@ -128,12 +162,12 @@ function generateExperienceSection(jobs) {
       jobLine += `${location}\\\\`
     }
 
-    if (duties) {
+    if (highlights) {
       jobLine += source`
         \\begin{itemize} \\itemsep 3pt
-        ${duties.map(duty => `\\item ${duty}`)}
+        ${highlights.map(highlight => `\\item ${highlight}`)}
         \\end{itemize}
-        `
+      `
     }
 
     return jobLine
@@ -149,9 +183,10 @@ function generateSkillsSection(skills) {
   return source`
   \\section{SKILLS}
   \\begin{tabular}{@{}ll}
-  ${skills.map(
-    skill => `\\textbf{${skill.name || ''}}: & ${skill.details || ''}\\\\`
-  )}
+  ${skills.map(skill => {
+    const { name, keywords = [] } = skill
+    return `\\textbf{${name || ''}}: & ${keywords.join(', ') || ''}\\\\`
+  })}
   \\end{tabular}
   `
 }
@@ -164,7 +199,7 @@ function generateProjectsSection(projects) {
   return source`
   \\section{PROJECTS}
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords = [], url } = project
 
     let projectLine = ''
 
@@ -172,16 +207,16 @@ function generateProjectsSection(projects) {
       projectLine += `\\textbf{${name}}`
     }
 
-    if (technologies) {
-      projectLine += `, {\\sl ${technologies}}`
+    if (keywords) {
+      projectLine += `, {\\sl ${keywords.join(', ')}}`
     }
 
     if (description) {
       projectLine += projectLine ? `\\\\ ${description}` : description
     }
 
-    if (link) {
-      projectLine += projectLine ? `\\\\ ${link}` : link
+    if (url) {
+      projectLine += projectLine ? `\\\\ ${url}` : url
     }
 
     if (projectLine) {
@@ -201,12 +236,12 @@ function generateAwardsSection(awards) {
   return source`
   \\section{Awards}
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     return stripIndent`
-        \\textbf{${name || ''}}, {\\sl ${location || ''}} \\hfill ${date ||
+        \\textbf{${title || ''}}, {\\sl ${awarder || ''}} \\hfill ${date ||
       ''} \\\\
-        ${details || ''} \\\\\\\\
+        ${summary || ''} \\\\\\\\
     `
   })}
   `

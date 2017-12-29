@@ -40,16 +40,6 @@ const config = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        loader: 'blyss-loader',
-        exclude: /(node_modules|bower_components)/,
-        options: {
-          error: true,
-          snazzy: true
-        }
-      },
-      {
         test: /\.js$/,
         loaders: ['babel-loader'],
         exclude: /node_modules/

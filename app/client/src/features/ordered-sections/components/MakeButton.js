@@ -10,9 +10,6 @@ const Button = styled.button`
   width: 125px;
   height: 45px;
   margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(40deg, #031f3a, #232f7a);
   color: #8aafda;
   border-radius: 100px;

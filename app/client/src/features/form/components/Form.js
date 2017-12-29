@@ -40,7 +40,7 @@ class Form extends Component<Props> {
   }
 
   shouldComponentUpdate(prevProps) {
-    return prevProps.location !== this.props.location
+    return prevProps.location.pathname !== this.props.location.pathname
   }
 
   componentDidUpdate() {

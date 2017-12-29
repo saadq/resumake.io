@@ -62,12 +62,14 @@ const Handle = styled.span`
   position: relative;
   right: 25px;
   color: ${colors.primary};
-  opacity: ${props => (props.hide ? '0' : '1')};
+  opacity: ${props => (props.disabled ? '0' : '1')};
   cursor: grab;
   user-select: none;
 `
 
-const DragHandle = SortableHandle(() => <Handle>::</Handle>)
+const DragHandle = SortableHandle(({ disabled }) => {
+  return <Handle disabled={disabled}>::</Handle>
+})
 
 const Item = styled.div`
   z-index: 2;
@@ -77,7 +79,7 @@ const Item = styled.div`
 const SortableItem = SortableElement(({ value }) => {
   return (
     <Item>
-      <DragHandle />
+      <DragHandle disabled={value === 'templates' || value === 'profile'} />
       <NavItem to={`/generator/${value}`}>{titleCase(value)}</NavItem>
     </Item>
   )
@@ -87,7 +89,12 @@ const SortableList = SortableContainer(({ items }) => {
   return (
     <List>
       {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} />
+        <SortableItem
+          disabled={value === 'templates' || value === 'profile'}
+          key={`item-${index}`}
+          index={index}
+          value={value}
+        />
       ))}
     </List>
   )

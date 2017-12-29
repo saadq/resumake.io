@@ -24,6 +24,11 @@ injectGlobal`
     color: white;
   }
 
+  ::-moz-selection {
+    background: ${colors.primary};
+    color: white;
+  }
+
   .grabbing {
     cursor: move; /* fallback */
     cursor: grabbing;

@@ -33,6 +33,13 @@ const Aside = styled.aside`
   }
 `
 
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
 type Props = {
   history: RouterHistory,
   location: Location,
@@ -67,7 +74,7 @@ class SideNav extends Component<Props> {
 
     return (
       <Aside>
-        <nav>
+        <Nav>
           <SortableList
             useDragHandle
             lockToContainerEdges
@@ -83,7 +90,7 @@ class SideNav extends Component<Props> {
           >
             Make
           </MakeButton>
-        </nav>
+        </Nav>
       </Aside>
     )
   }

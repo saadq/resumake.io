@@ -1,14 +1,26 @@
-const { stripIndent, source } = require('common-tags')
-const { WHITESPACE } = require('../constants')
+/**
+ * @flow
+ */
 
-function template7({ profile, schools, jobs, skills, projects, awards }) {
+import { stripIndent, source } from 'common-tags'
+import { WHITESPACE } from '../constants'
+import type { SanitizedValues } from '../../../types'
+
+function template7({
+  basics,
+  education,
+  work,
+  projects,
+  skills,
+  awards
+}: SanitizedValues) {
   return stripIndent`
     ${generateHeader()}
-    ${generateProfileSection(profile)}
+    ${generateProfileSection(basics)}
     \\begin{document}
-    ${profile ? '\\makecvtitle' : ''}
-    ${generateEducationSection(schools)}
-    ${generateExperienceSection(jobs)}
+    ${basics ? '\\makecvtitle' : ''}
+    ${generateEducationSection(education)}
+    ${generateExperienceSection(work)}
     ${generateSkillsSection(skills)}
     ${generateProjectsSection(projects)}
     ${generateAwardsSection(awards)}
@@ -17,42 +29,60 @@ function template7({ profile, schools, jobs, skills, projects, awards }) {
   `
 }
 
-function generateProfileSection(profile = {}) {
-  const { fullName, email, phoneNumber, address, link } = profile
+function generateProfileSection(basics = {}) {
+  const { name, email, phone, location = {}, website } = basics
 
   return stripIndent`
     % Profile
-    \\name{${fullName || ''}}{}
-    \\address{${address || ''}}
-    ${phoneNumber ? `\\phone[mobile]{${phoneNumber}}` : ''}
+    \\name{${name || ''}}{}
+    \\address{${location.address || ''}}
+    ${phone ? `\\phone[mobile]{${phone}}` : ''}
     ${email ? `\\email{${email || ''}}` : ''}
-    ${link ? `\\homepage{${link || ''}}` : ''}
+    ${website ? `\\homepage{${website || ''}}` : ''}
   `
 }
 
-function generateEducationSection(schools) {
-  if (!schools) {
+function generateEducationSection(education) {
+  if (!education) {
     return ''
   }
 
   return source`
   \\section{Education}
-  ${schools.map(school => {
-    const { name, degree, major, gpa, location, graduationDate } = school
+  ${education.map(school => {
+    const {
+      institution,
+      studyType,
+      area,
+      gpa,
+      location,
+      startDate,
+      endDate
+    } = school
 
     let degreeLine = ''
 
-    if (degree && major) {
-      degreeLine = `${degree} in ${major}`
-    } else if (degree || major) {
-      degreeLine = degree || major
+    if (studyType && area) {
+      degreeLine = `${studyType} in ${area}`
+    } else if (studyType || area) {
+      degreeLine = studyType || area
+    }
+
+    let dateRange = ''
+
+    if (startDate && endDate) {
+      dateRange = `${startDate} | ${endDate}`
+    } else if (startDate) {
+      dateRange = `${startDate} | Present`
+    } else {
+      dateRange = endDate
     }
 
     return stripIndent`
       \\cventry
-        {${graduationDate || ''}}
+        {${dateRange || ''}}
         {${degreeLine}}
-        {${name || ''}}
+        {${institution || ''}}
         {${gpa ? `GPA: ${gpa}` : ''}}
         {\\textit{${location || ''}}}
         {}
@@ -61,18 +91,18 @@ function generateEducationSection(schools) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work) {
     return ''
   }
 
   return source`
   \\section{Experience}
-  ${jobs.map(job => {
-    const { name, title, location, startDate, endDate, duties } = job
+  ${work.map(job => {
+    const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
-    let dutyLines = ''
+    let highlightLines = ''
 
     if (startDate && endDate) {
       dateRange = `${startDate} -- ${endDate}`
@@ -82,10 +112,10 @@ function generateExperienceSection(jobs) {
       dateRange = endDate
     }
 
-    if (duties) {
-      dutyLines = source`
+    if (highlights) {
+      highlightLines = source`
         \\begin{itemize}%
-          ${duties.map(duty => `\\item ${duty}`)}
+          ${highlights.map(highlight => `\\item ${highlight}`)}
         \\end{itemize}
         `
     }
@@ -93,11 +123,11 @@ function generateExperienceSection(jobs) {
     return stripIndent`
       \\cventry
         {${dateRange || ''}}
-        {${title || ''}}
-        {${name || ''}}
+        {${position || ''}}
+        {${company || ''}}
         {${location || ''}}
         {}
-        {${dutyLines}}
+        {${highlightLines}}
     `
   })}
   `
@@ -110,9 +140,10 @@ function generateSkillsSection(skills) {
 
   return source`
   \\section{Skills}
-  ${skills.map(
-    skill => `\\cvitem{${skill.name || ''}}{${skill.details || ''}}`
-  )}
+  ${skills.map(skill => {
+    const { name, keywords = [] } = skill
+    return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
+  })}
   `
 }
 
@@ -124,7 +155,7 @@ function generateProjectsSection(projects) {
   return source`
   \\section{Projects}
   ${projects.map(project => {
-    const { name, description, technologies, link } = project
+    const { name, description, keywords = [], url } = project
 
     let detailsLine = ''
 
@@ -132,8 +163,8 @@ function generateProjectsSection(projects) {
       detailsLine += `${description}\\\\`
     }
 
-    if (link) {
-      detailsLine += link
+    if (url) {
+      detailsLine += url
     }
 
     return stripIndent`
@@ -141,7 +172,7 @@ function generateProjectsSection(projects) {
         {}
         {${name || ''}}
         {}
-        {\\textit{${technologies || ''}}}
+        {\\textit{${keywords.join(', ')}}}
         {}
         {${detailsLine}}
       \\vspace{1mm}
@@ -158,22 +189,22 @@ function generateAwardsSection(awards) {
   return source`
   \\section{Awards}
   ${awards.map(award => {
-    const { name, details, date, location } = award
+    const { title, summary, date, awarder } = award
 
     let detailsLine = ''
 
-    if (details) {
-      detailsLine += `${details}\\\\`
+    if (summary) {
+      detailsLine += `${summary}\\\\`
     }
 
-    if (location) {
-      detailsLine += location
+    if (awarder) {
+      detailsLine += awarder
     }
 
     return stripIndent`
       \\cventry
         {}
-        {${name || ''}}
+        {${title || ''}}
         {}
         {\\textit{${date || ''}}}
         {}

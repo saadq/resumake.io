@@ -46,17 +46,17 @@ function generateProfileSection(basics) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
   return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{Education}
+  \\resheading{${education.heading || 'Education'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
 
-  ${education.map(school => {
+  ${education.schools.map(school => {
     const {
       institution = '',
       location = '',
@@ -104,16 +104,16 @@ function generateEducationSection(education) {
 }
 
 function generateExperienceSection(work) {
-  if (!work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
   return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{Experience}
+  \\resheading{${work.heading || 'Experience'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${work.map(job => {
+  ${work.jobs.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
@@ -150,17 +150,17 @@ function generateExperienceSection(work) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
   return source`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{Skills}
+    \\resheading{${skills.heading || 'Skills'}}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
     \\setlength\\itemsep{0em}
-    ${skills.map(skill => {
+    ${skills.skills.map(skill => {
       const { name = '', keywords = [] } = skill
       return `\\item[] \\skill{${name}}{${keywords.join(', ')}}`
     })}
@@ -169,16 +169,16 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
   return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{Projects}
+  \\resheading{${projects.heading || 'Projects'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${projects.map(project => {
+  ${projects.projects.map(project => {
     const { name, description, keywords = [], url } = project
 
     return stripIndent`
@@ -195,16 +195,16 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
   return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{Awards}
+  \\resheading{${awards.heading || 'Awards'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${awards.map(award => {
+  ${awards.awards.map(award => {
     const { title, summary, date, awarder } = award
 
     return stripIndent`

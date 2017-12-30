@@ -69,7 +69,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`skills[${index}].name`}
+        name={`skills.skills[${index}].name`}
         label="Skill Name"
         placeholder="Programming Languages"
       />
@@ -77,7 +77,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
       {keywords.map((keyword, i) => (
         <div key={i}>
           <MiniInput
-            name={`skills[${index}].keywords[${i}]`}
+            name={`skills.skills[${index}].keywords[${i}]`}
             placeholder="Java"
             component="input"
           />

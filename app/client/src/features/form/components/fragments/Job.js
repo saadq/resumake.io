@@ -70,27 +70,27 @@ function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`work[${index}].company`}
+        name={`work.jobs[${index}].company`}
         label="Company Name"
         placeholder="Google"
       />
       <LabeledInput
-        name={`work[${index}].position`}
+        name={`work.jobs[${index}].position`}
         label="Job Title"
         placeholder="Software Engineer"
       />
       <LabeledInput
-        name={`work[${index}].location`}
+        name={`work.jobs[${index}].location`}
         label="Job Location"
         placeholder="Mountain View, CA"
       />
       <LabeledInput
-        name={`work[${index}].startDate`}
+        name={`work.jobs[${index}].startDate`}
         label="Start Date"
         placeholder="May 2015"
       />
       <LabeledInput
-        name={`work[${index}].endDate`}
+        name={`work.jobs[${index}].endDate`}
         label="End Date"
         placeholder="May 2017 / Present / Etc."
       />
@@ -99,7 +99,7 @@ function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
         <Row key={i}>
           <SmallInput
             type="text"
-            name={`work[${index}].highlights[${i}]`}
+            name={`work.jobs[${index}].highlights[${i}]`}
             placeholder="Did cool stuff at company"
             component="input"
           />

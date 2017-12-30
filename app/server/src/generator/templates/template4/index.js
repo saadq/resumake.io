@@ -83,7 +83,7 @@ function generateProfileSection(profile) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
@@ -93,9 +93,9 @@ function generateEducationSection(education) {
   %     Education
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Education}
+  \\section{${education.heading || 'Education'}}
   \\raggedright
-  ${education.map(school => {
+  ${education.schools.map(school => {
     const {
       institution,
       location,
@@ -155,7 +155,7 @@ function generateEducationSection(education) {
 }
 
 function generateExperienceSection(work) {
-  if (!work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
@@ -165,8 +165,8 @@ function generateExperienceSection(work) {
   %     Experience
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Experience}
-  ${work.map(job => {
+  \\section{${work.heading || 'Experience'}}
+  ${work.jobs.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let line1 = ''
@@ -215,7 +215,7 @@ function generateExperienceSection(work) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
@@ -225,10 +225,10 @@ function generateSkillsSection(skills) {
   %     Skills
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Skills}
+  \\section{${skills.heading || 'Skills'}}
   \\raggedright
   \\begin{tabular}{ l l }
-  ${skills.map(skill => {
+  ${skills.skills.map(skill => {
     const { name = '', keywords = [] } = skill
     return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
   })}
@@ -238,7 +238,7 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
@@ -248,9 +248,9 @@ function generateProjectsSection(projects) {
   %     Projects
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Projects}
+  \\section{${projects.heading || 'Projects'}}
   \\raggedright
-  ${projects.map(project => {
+  ${projects.projects.map(project => {
     const { name, description, keywords, url } = project
 
     let line1 = ''
@@ -288,7 +288,7 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
@@ -298,8 +298,8 @@ function generateAwardsSection(awards) {
   %     Awards
   %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{Awards}
-  ${awards.map(award => {
+  \\section{${awards.heading || 'Awards'}}
+  ${awards.awards.map(award => {
     const { title, summary, date, awarder } = award
     const info = [awarder, date].filter(Boolean).join(' | ')
 

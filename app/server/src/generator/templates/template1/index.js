@@ -85,14 +85,14 @@ function generateProfileSection(basics) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
   return source`
   %==== Education ====%
-  \\header{Education}
-  ${education.map(school => {
+  \\header{${education.heading || 'Education'}}
+  ${education.schools.map(school => {
     const {
       institution,
       location,
@@ -148,17 +148,17 @@ function generateEducationSection(education) {
   `
 }
 
-function generateExperienceSection(jobs) {
-  if (!jobs) {
+function generateExperienceSection(work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
   return source`
     %==== Experience ====%
-    \\header{Experience}
+    \\header{${work.heading || 'Experience'}}
     \\vspace{1mm}
 
-  ${jobs.map(job => {
+  ${work.jobs.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let line1 = ''
@@ -207,29 +207,29 @@ function generateExperienceSection(jobs) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
   return source`
-  \\header{Skills}
-  \\begin{tabular}{ l l }
-  ${skills.map(skill => {
-    const { name = 'Misc', keywords = [] } = skill
-    return `${name}: & ${keywords.join(', ')} \\\\`
-  })}
-  \\end{tabular}
+    \\header{${skills.heading || 'Skills'}}
+    \\begin{tabular}{ l l }
+    ${skills.skills.map(skill => {
+      const { name = 'Misc', keywords = [] } = skill
+      return `${name}: & ${keywords.join(', ')} \\\\`
+    })}
+    \\end{tabular}
   `
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
   return source`
-  \\header{Projects}
-  ${projects.map(project => {
+  \\header{${projects.heading || 'Projects'}}
+  ${projects.projects.map(project => {
     if (Object.keys(project) === 0) {
       return ''
     }
@@ -269,13 +269,13 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
   return source`
-  \\header{Awards}
-  ${awards.map(award => {
+  \\header{${awards.heading || 'Awards'}}
+  ${awards.awards.map(award => {
     const { title, summary, date, awarder } = award
 
     let line1 = ''

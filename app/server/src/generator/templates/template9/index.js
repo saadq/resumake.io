@@ -47,17 +47,17 @@ function generateProfileSection(basics) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
-  const lastSchoolIndex = education.length - 1
+  const lastSchoolIndex = education.schools.length - 1
 
   return source`
   %%% Education
   %%% ------------------------------------------------------------
-  \\NewPart{Education}{}
-  ${education.map((school, i) => {
+  \\NewPart{${education.heading || 'Education'}}{}
+  ${education.schools.map((school, i) => {
     const {
       institution = '',
       studyType,
@@ -108,18 +108,19 @@ function generateEducationSection(education) {
 }
 
 function generateExperienceSection(work) {
-  if (!work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
-  const lastJobIndex = work.length - 1
+  const lastJobIndex = work.jobs.length - 1
 
   return source`
     %%% Work experience
     %%% ------------------------------------------------------------
-    \\NewPart{Work Experience}{}
 
-    ${work.map((job, i) => {
+    \\NewPart{${work.heading || 'Experience'}}{}
+
+    ${work.jobs.map((job, i) => {
       const {
         company,
         position,
@@ -162,15 +163,15 @@ function generateExperienceSection(work) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
   return source`
   %%% Skills
   %%% ------------------------------------------------------------
-  \\NewPart{Skills}{}
-  ${skills.map(skill => {
+  \\NewPart{${skills.heading || 'Skills'}}{}
+  ${skills.skills.map(skill => {
     const { name, keywords = [] } = skill
     return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
   })}
@@ -178,18 +179,18 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
-  const lastProjectIndex = projects.length - 1
+  const lastProjectIndex = projects.projects.length - 1
 
   return source`
     %%% Projects
     %%% ------------------------------------------------------------
-    \\NewPart{Projects}{}
+    \\NewPart{${projects.heading || 'Projects'}}{}
 
-    ${projects.map((project, i) => {
+    ${projects.projects.map((project, i) => {
       const { name, description, keywords = [], url } = project
 
       return stripIndent`
@@ -204,18 +205,18 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
-  const lastAwardIndex = awards.length - 1
+  const lastAwardIndex = awards.awards.length - 1
 
   return source`
     %%% Awards
     %%% ------------------------------------------------------------
-    \\NewPart{Awards}{}
+    \\NewPart{${awards.heading || 'Awards'}}{}
 
-    ${awards.map((award, i) => {
+    ${awards.awards.map((award, i) => {
       const { title, summary, date, awarder } = award
 
       return stripIndent`

@@ -69,17 +69,17 @@ function Project({ keywords, index, addKeyword, removeKeyword }: Props) {
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`projects[${index}].name`}
+        name={`projects.projects[${index}].name`}
         label="Project Name"
         placeholder="Piper Chat"
       />
       <LabeledInput
-        name={`projects[${index}].description`}
+        name={`projects.projects[${index}].description`}
         label="Project Description"
         placeholder="A video chat app with great picture quality."
       />
       <LabeledInput
-        name={`projects[${index}].url`}
+        name={`projects.projects[${index}].url`}
         label="Link to Project"
         placeholder="http://piperchat.com"
       />
@@ -87,7 +87,7 @@ function Project({ keywords, index, addKeyword, removeKeyword }: Props) {
       {keywords.map((_, i) => (
         <div key={i}>
           <MiniInput
-            name={`projects[${index}].keywords[${i}]`}
+            name={`projects.projects[${index}].keywords[${i}]`}
             placeholder="Java"
             component="input"
           />

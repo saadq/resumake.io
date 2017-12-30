@@ -5,14 +5,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button } from '../../../../common/components'
+import { Button, LabeledInput } from '../../../../common/components'
 import { School } from '..'
 import { addSchool, removeSchool } from '../../actions'
-import type { FormValues } from '../../types'
+import type { Education as EducationType } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  education: $PropertyType<FormValues, 'education'>,
+  education: $PropertyType<EducationType, 'schools'>,
   addSchool: () => void,
   removeSchool: () => void
 }
@@ -20,6 +20,11 @@ type Props = {
 function Education({ education, addSchool, removeSchool }: Props) {
   return (
     <Section heading="Your Educational Background">
+      <LabeledInput
+        name="education.heading"
+        label="Section Heading"
+        placeholder="Education"
+      />
       {education.map((school, i) => <School key={i} index={i} />)}
       <Button onClick={addSchool} type="button">
         Add School
@@ -33,7 +38,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
 
 function mapState(state: State) {
   return {
-    education: state.form.resume.values.education
+    education: state.form.resume.values.education.schools
   }
 }
 

@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button } from '../../../../common/components'
+import { Button, LabeledInput } from '../../../../common/components'
 import { Project } from '..'
 import {
   addProject,
@@ -13,11 +13,11 @@ import {
   addProjectKeyword,
   removeProjectKeyword
 } from '../../actions'
-import type { FormValues } from '../../types'
+import type { Projects as ProjectsType } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  projects: $PropertyType<FormValues, 'projects'>,
+  projects: $PropertyType<ProjectsType, 'projects'>,
   addProject: () => void,
   removeProject: () => void,
   addProjectKeyword: (index: number) => void,
@@ -33,6 +33,11 @@ function Projects({
 }: Props) {
   return (
     <Section heading="Your Projects">
+      <LabeledInput
+        name="projects.heading"
+        label="Section Heading"
+        placeholder="Projects"
+      />
       {projects.map((project, i) => (
         <Project
           key={i}
@@ -56,7 +61,7 @@ function Projects({
 
 function mapState(state: State) {
   return {
-    projects: state.form.resume.values.projects
+    projects: state.form.resume.values.projects.projects
   }
 }
 

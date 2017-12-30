@@ -12,16 +12,6 @@ type Basics = {
   }
 }
 
-type Job = {
-  company?: string,
-  location?: string,
-  position?: string,
-  website?: string,
-  startDate?: string,
-  endDate?: string,
-  highlights?: Array<string>
-}
-
 type School = {
   institution?: string,
   location?: string,
@@ -29,15 +19,50 @@ type School = {
   studyType?: string,
   startDate?: string,
   endDate?: string,
-  gpa?: string,
-  courses?: Array<string>
+  gpa?: string
+}
+
+type Education = {
+  schools?: Array<School>,
+  heading?: string
+}
+
+type Job = {
+  company?: string,
+  location?: string,
+  position?: string,
+  website?: string,
+  startDate?: string,
+  endDate?: string,
+  highlights: Array<string>
+}
+
+type Work = {
+  jobs?: Array<Job>,
+  heading?: string
+}
+
+type Skill = {
+  name?: string,
+  level?: string,
+  keywords: Array<string>
+}
+
+type Skills = {
+  skills?: Array<Skill>,
+  heading?: string
 }
 
 type Project = {
   name?: string,
   description?: string,
   url?: string,
-  keywords?: Array<string>
+  keywords: Array<string>
+}
+
+type Projects = {
+  projects?: Array<Project>,
+  heading?: string
 }
 
 type Award = {
@@ -47,19 +72,26 @@ type Award = {
   summary?: string
 }
 
-type Skill = {
-  name?: string,
-  keywords?: Array<string>
+type Awards = {
+  awards?: Array<Award>,
+  heading?: string
 }
 
 type SanitizedValues = {
   selectedTemplate: number,
-  basics?: Basics,
-  work?: Array<Job>,
-  education?: Array<School>,
-  awards?: Array<Award>,
-  skills?: Array<Skill>,
-  projects?: Array<Project>
+  basics: Basics,
+  work: Work,
+  education: Education,
+  skills: Skills,
+  projects: Projects,
+  awards: Awards
 }
 
-export type { SanitizedValues }
+export type {
+  SanitizedValues,
+  Education,
+  Work,
+  Skills,
+  Projects,
+  Awards
+}

@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button } from '../../../../common/components'
+import { Button, LabeledInput } from '../../../../common/components'
 import { Job } from '..'
 import {
   addJob,
@@ -13,11 +13,11 @@ import {
   addJobHighlight,
   removeJobHighlight
 } from '../../actions'
-import type { FormValues } from '../../types'
+import type { Work as WorkType } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  work: $PropertyType<FormValues, 'work'>,
+  work: $PropertyType<WorkType, 'jobs'>,
   jobCount: number,
   jobHighlights: Array<number>,
   addJob: () => void,
@@ -35,6 +35,11 @@ function Work({
 }: Props) {
   return (
     <Section heading="Your Work Experience">
+      <LabeledInput
+        name="work.heading"
+        label="Section Heading"
+        placeholder="Work Experience"
+      />
       {work.map((job, i) => (
         <Job
           key={i}
@@ -56,7 +61,7 @@ function Work({
 
 function mapState(state: State) {
   return {
-    work: state.form.resume.values.work
+    work: state.form.resume.values.work.jobs
   }
 }
 

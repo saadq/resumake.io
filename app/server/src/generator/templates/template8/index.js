@@ -68,13 +68,13 @@ function generateProfileSection(basics) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
   return source`
-  \\begin{cvsection}{Education}
-  ${education.map(school => {
+  \\begin{cvsection}{${education.heading || 'Education'}}
+  ${education.schools.map(school => {
     const {
       institution,
       studyType = '',
@@ -121,13 +121,13 @@ function generateEducationSection(education) {
 }
 
 function generateExperienceSection(work) {
-  if (!work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
   return source`
-  \\begin{cvsection}{Experience}
-  ${work.map(job => {
+  \\begin{cvsection}{${work.heading || 'Experience'}}
+  ${work.jobs.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
@@ -162,15 +162,15 @@ function generateExperienceSection(work) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
   return source`
-  \\begin{cvsection}{Skills}
+  \\begin{cvsection}{${skills.heading || 'Skills'}}
   \\begin{cvsubsection}{}{}{}
   \\begin{itemize}
-  ${skills.map(skill => {
+  ${skills.skills.map(skill => {
     const { name, keywords = [] } = skill
     return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
   })}
@@ -181,16 +181,16 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
   return source`
-  \\begin{cvsection}{Projects}
+  \\begin{cvsection}{${projects.heading || 'Projects'}}
   \\begin{cvsubsection}{}{}{}
   \\begin{itemize}
   \\setlength\\itemsep{3pt}
-  ${projects.map(project => {
+  ${projects.projects.map(project => {
     const { name, description, keywords = [], url } = project
 
     let line = ''
@@ -220,16 +220,16 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
   return source`
-  \\begin{cvsection}{Awards}
+  \\begin{cvsection}{${awards.heading || 'Awards'}}
   \\begin{cvsubsection}{}{}{}
   \\begin{itemize}
   \\setlength\\itemsep{3pt}
-  ${awards.map(award => {
+  ${awards.awards.map(award => {
     const { title, summary, date, awarder } = award
 
     let line = ''

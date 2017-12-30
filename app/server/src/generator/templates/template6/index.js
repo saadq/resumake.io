@@ -64,14 +64,14 @@ function generateProfileSection(basics) {
 }
 
 function generateEducationSection(education) {
-  if (!education) {
+  if (!education || !education.schools) {
     return ''
   }
 
   return source`
-  \\section{Education}
+  \\section{${education.heading || 'Education'}}
   \\begin{entrylist}
-  ${education.map(school => {
+  ${education.schools.map(school => {
     const { institution, location, studyType = '', area = '', gpa, startDate = '', endDate = '' } = school
 
     let schoolLine = ''
@@ -109,14 +109,14 @@ function generateEducationSection(education) {
 }
 
 function generateExperienceSection(work) {
-  if (!work) {
+  if (!work || !work.jobs) {
     return ''
   }
 
   return source`
-  \\section{Experience}
+  \\section{${work.heading || 'Experience'}}
   \\begin{entrylist}
-  ${work.map(job => {
+  ${work.jobs.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let jobLine = ''
@@ -160,14 +160,14 @@ function generateExperienceSection(work) {
 }
 
 function generateSkillsSection(skills) {
-  if (!skills) {
+  if (!skills || !skills.skills) {
     return ''
   }
 
   return source`
-  \\section{Skills}
+  \\section{${skills.heading || 'Skills'}}
   \\begin{entrylist}
-  ${skills.map(({ name, keywords = [] }) => {
+  ${skills.skills.map(({ name, keywords = [] }) => {
     const nameLine = name ? `${name}: ` : ''
     const keywordsLine = keywords ? `{\\normalfont ${keywords.join(', ')}}` : ''
 
@@ -178,14 +178,14 @@ function generateSkillsSection(skills) {
 }
 
 function generateProjectsSection(projects) {
-  if (!projects) {
+  if (!projects || !projects.projects) {
     return ''
   }
 
   return source`
-  \\section{Projects}
+  \\section{${projects.heading || 'Projects'}}
   \\begin{entrylist}
-  ${projects.map(project => {
+  ${projects.projects.map(project => {
     const { name, description, keywords = [], url } = project
 
     let nameLine = ''
@@ -211,14 +211,14 @@ function generateProjectsSection(projects) {
 }
 
 function generateAwardsSection(awards) {
-  if (!awards) {
+  if (!awards || !awards.awards) {
     return ''
   }
 
   return source`
-  \\section{Awards}
+  \\section{${awards.heading || 'Awards'}}
   \\begin{entrylist}
-  ${awards.map(award => {
+  ${awards.awards.map(award => {
     const { title, summary, date, awarder } = award
 
     return stripIndent`

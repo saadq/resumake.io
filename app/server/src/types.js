@@ -87,11 +87,4 @@ type SanitizedValues = {
   awards: Awards
 }
 
-export type {
-  SanitizedValues,
-  Education,
-  Work,
-  Skills,
-  Projects,
-  Awards
-}
+export type { SanitizedValues, Education, Work, Skills, Projects, Awards }

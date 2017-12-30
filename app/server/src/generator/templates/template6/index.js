@@ -56,7 +56,9 @@ function generateProfileSection(basics) {
     nameStart += ' '
   }
 
-  const info = [email, phone, location.address, website].filter(Boolean).join(' | ')
+  const info = [email, phone, location.address, website]
+    .filter(Boolean)
+    .join(' | ')
 
   return stripIndent`
     \\header{${nameStart}}{${nameEnd}}{${info}}
@@ -72,7 +74,15 @@ function generateEducationSection(education) {
   \\section{${education.heading || 'Education'}}
   \\begin{entrylist}
   ${education.schools.map(school => {
-    const { institution, location, studyType = '', area = '', gpa, startDate = '', endDate = '' } = school
+    const {
+      institution,
+      location,
+      studyType = '',
+      area = '',
+      gpa,
+      startDate = '',
+      endDate = ''
+    } = school
 
     let schoolLine = ''
 

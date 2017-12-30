@@ -24,9 +24,6 @@ const initialState = {
 
 function orderedSections(state: State = initialState, action: Action): State {
   switch (action.type) {
-    case 'CLEAR_STATE':
-      return initialState
-
     case 'SET_SECTION_ORDER':
       return {
         ...state,

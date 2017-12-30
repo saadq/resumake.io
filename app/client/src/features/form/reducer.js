@@ -84,10 +84,6 @@ const initialState = {
 
 function form(state: FormState = initialState, action: Action): FormState {
   switch (action.type) {
-    case 'CLEAR_STATE': {
-      return initialState
-    }
-
     case 'UPLOAD_JSON_REQUEST': {
       return {
         ...state,

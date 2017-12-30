@@ -6,11 +6,20 @@ import { combineReducers } from 'redux'
 import form from '../features/form/reducer'
 import orderedSections from '../features/ordered-sections/reducer'
 import preview from '../features/preview/reducer'
+import type { State, Action } from './types'
 
-const reducer = combineReducers({
+const appReducer = combineReducers({
   form,
   orderedSections,
   preview
 })
 
-export default reducer
+function rootReducer(state?: State, action: Action) {
+  if (action.type === 'CLEAR_STATE') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
+
+export default rootReducer

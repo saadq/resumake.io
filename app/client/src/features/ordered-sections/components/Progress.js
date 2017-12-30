@@ -62,6 +62,8 @@ const Bar = styled.div`
 const SectionButton = Button.extend`
   color: ${colors.primary};
   border-color: ${colors.primary};
+  border-radius: 100px;
+  padding: 5px 15px;
   display: flex;
   align-items: center;
   justify-content: center;

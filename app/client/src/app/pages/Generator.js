@@ -55,7 +55,7 @@ const Logo = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
   font-family: 'nexalight';
-  font-size: 2.5em;
+  font-size: 2.25em;
   color: white;
   letter-spacing: 2px;
 `

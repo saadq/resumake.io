@@ -9,10 +9,9 @@ import {
   LabeledInput,
   Label,
   Input,
-  Button,
+  RoundButton,
   Icon
 } from '../../../../common/components'
-import { colors } from '../../../../common/theme'
 
 const Row = styled.div`
   display: flex;
@@ -24,34 +23,6 @@ const Buttons = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-left: 10px;
-`
-
-const RoundButton = Button.extend`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 5px;
-  border-color: white;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  padding: 0px;
-  background: ${colors.background};
-  color: silver;
-  transition: transform 0.6s;
-
-  &:hover {
-    background: ${colors.accent};
-    color: white;
-    transform: rotate(180deg);
-  }
-
-  &:focus {
-    outline-color: silver;
-    border-color: silver;
-  }
 `
 
 const SmallInput = Input.extend`

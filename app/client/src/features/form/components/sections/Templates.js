@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import Lightbox from 'react-image-lightbox'
 import Section from './Section'
 import { Button } from '../../../../common/components'
+import { colors } from '../../../../common/theme'
 import { selectTemplate } from '../../actions'
 import type { State as ReduxState } from '../../../../app/types'
 
@@ -36,6 +37,7 @@ const Image = styled.img`
   transform: translateY(0);
   transition: all 0.4s ease-out;
   opacity: ${props => (props.active ? '1' : '0.65')};
+  border: 3px solid ${props => props.active ? colors.primary : 'transparent'};
 
   &:hover {
     opacity: ${props => (props.active ? '1' : '0.9')};
@@ -45,14 +47,14 @@ const Image = styled.img`
 `
 
 const TemplateButton = Button.extend`
-  border-color: ${props => (props.active ? 'white' : 'silver')};
+  border-color: ${colors.primary};
   color: ${props => (props.active ? 'white' : 'silver')};
   transition: all 0.4s ease;
   padding: 10px 20px;
 
   &:hover {
-    background: white;
-    color: black;
+    background: ${colors.primary};
+    color: ${colors.background};
   }
 `
 

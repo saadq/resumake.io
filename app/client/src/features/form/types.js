@@ -7,7 +7,6 @@ type Basics = {
   email?: ?string,
   phone?: ?string,
   website?: ?string,
-  summary?: ?string,
   location?: {
     address?: ?string
   }

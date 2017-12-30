@@ -10,38 +10,74 @@ const initialState = {
   isUploading: false,
   values: {
     selectedTemplate: 1,
-    basics: {},
+    basics: {
+      name: '',
+      email: '',
+      phone: '',
+      website: '',
+      location: {
+        address: ''
+      }
+    },
     education: {
-      heading: 'Education',
-      schools: [{}]
+      heading: '',
+      schools: [
+        {
+          institution: '',
+          location: '',
+          area: '',
+          studyType: '',
+          startDate: '',
+          endDate: '',
+          gpa: ''
+        }
+      ]
     },
     work: {
-      heading: 'Work Experience',
+      heading: '',
       jobs: [
         {
+          company: '',
+          location: '',
+          position: '',
+          website: '',
+          startDate: '',
+          endDate: '',
           highlights: ['']
         }
       ]
     },
     skills: {
-      heading: 'Skills',
+      heading: '',
       skills: [
         {
+          name: '',
+          level: '',
           keywords: ['']
         }
       ]
     },
     projects: {
-      heading: 'Projects',
+      heading: '',
       projects: [
         {
+          name: '',
+          description: '',
+          url: '',
           keywords: ['']
         }
       ]
     },
     awards: {
-      heading: 'Awards',
-      awards: [{}]
+      heading: '',
+      awards: [
+        {
+          title: '',
+          date: '',
+          awarder: '',
+          summary: ''
+        }
+      ]
     }
   }
 }

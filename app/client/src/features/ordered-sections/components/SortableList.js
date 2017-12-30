@@ -22,7 +22,7 @@ const List = styled.div`
 const NavItem = styled(NavLink)`
   text-decoration: none;
   font-weight: 300;
-  color: #8a97a1;
+  color: ${colors.foreground};
   list-style: none;
   display: inline-block;
   margin-bottom: 20px;

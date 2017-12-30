@@ -56,7 +56,7 @@ class Preview extends Component<Props, State> {
   state = {
     numPages: 1,
     currPage: 1,
-    zoom: 85,
+    zoom: 65,
     isPrinting: false
   }
 

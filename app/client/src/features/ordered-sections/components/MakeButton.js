@@ -10,7 +10,11 @@ const Button = styled.button`
   width: 125px;
   height: 45px;
   margin-top: 25px;
-  background: linear-gradient(40deg, ${darken(0.3, colors.primary)}, ${colors.primary});
+  background: linear-gradient(
+    40deg,
+    ${darken(0.3, colors.primary)},
+    ${colors.primary}
+  );
   color: white;
   border-radius: 100px;
   border: 1px solid ${darken(0.1, colors.primary)};
@@ -20,7 +24,11 @@ const Button = styled.button`
   letter-spacing: 2px;
 
   &:hover {
-    background: linear-gradient(40deg, ${darken(0.4, colors.primary)}, ${colors.primary});
+    background: linear-gradient(
+      40deg,
+      ${darken(0.4, colors.primary)},
+      ${colors.primary}
+    );
     animation: none;
     cursor: pointer;
   }

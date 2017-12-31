@@ -4,53 +4,36 @@
 
 import { stripIndent, source } from 'common-tags'
 import { WHITESPACE } from '../constants'
-import type { SanitizedValues } from '../../../types'
+import type { SanitizedValues, Generator } from '../../../types'
 
-function template3({
-  basics,
-  education,
-  work,
-  projects,
-  skills,
-  awards
-}: SanitizedValues) {
-  return stripIndent`
-    ${generateHeader()}
-    \\begin{document}
-    ${generateProfileSection(basics)}
-    ${generateEducationSection(education)}
-    ${generateExperienceSection(work)}
-    ${generateSkillsSection(skills)}
-    ${generateProjectsSection(projects)}
-    ${generateAwardsSection(awards)}
-    ${WHITESPACE}
-    \\end{document}
-  `
+type Template3Generator = Generator & {
+  resumeHeader: () => string
 }
 
-function generateProfileSection(basics) {
-  if (!basics) {
-    return ''
-  }
+const generator: Template3Generator = {
+  profileSection(basics) {
+    if (!basics) {
+      return ''
+    }
 
-  const { name, email, phone, location = {}, website } = basics
-  const info = [email, phone, location.address, website]
-    .filter(Boolean)
-    .join(' | ')
+    const { name, email, phone, location = {}, website } = basics
+    const info = [email, phone, location.address, website]
+      .filter(Boolean)
+      .join(' | ')
 
-  return stripIndent`
+    return stripIndent`
     \\begin{tabular*}{7in}{l@{\\extracolsep{\\fill}}r}
     \\textbf{\\Large ${name}} & \\textit{${info}}
     \\end{tabular*}
   `
-}
+  },
 
-function generateEducationSection(education) {
-  if (!education || !education.schools) {
-    return ''
-  }
+  educationSection(education) {
+    if (!education || !education.schools) {
+      return ''
+    }
 
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\resheading{${education.heading || 'Education'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,14 +84,14 @@ function generateEducationSection(education) {
 
   \\end{itemize}
   `
-}
+  },
 
-function generateExperienceSection(work) {
-  if (!work || !work.jobs) {
-    return ''
-  }
+  workSection(work) {
+    if (!work || !work.jobs) {
+      return ''
+    }
 
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\resheading{${work.heading || 'Experience'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,14 +130,14 @@ function generateExperienceSection(work) {
   })}
   \\end{itemize}
   `
-}
+  },
 
-function generateSkillsSection(skills) {
-  if (!skills || !skills.skills) {
-    return ''
-  }
+  skillsSection(skills) {
+    if (!skills || !skills.skills) {
+      return ''
+    }
 
-  return source`
+    return source`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\resheading{${skills.heading || 'Skills'}}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,14 +149,14 @@ function generateSkillsSection(skills) {
     })}
     \\end{itemize}
   `
-}
+  },
 
-function generateProjectsSection(projects) {
-  if (!projects || !projects.projects) {
-    return ''
-  }
+  projectsSection(projects) {
+    if (!projects || !projects.projects) {
+      return ''
+    }
 
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\resheading{${projects.heading || 'Projects'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -192,14 +175,14 @@ function generateProjectsSection(projects) {
   })}
   \\end{itemize}
   `
-}
+  },
 
-function generateAwardsSection(awards) {
-  if (!awards || !awards.awards) {
-    return ''
-  }
+  awardsSection(awards) {
+    if (!awards || !awards.awards) {
+      return ''
+    }
 
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\resheading{${awards.heading || 'Awards'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -218,10 +201,10 @@ function generateAwardsSection(awards) {
   })}
   \\end{itemize}
   `
-}
+  },
 
-function generateHeader() {
-  return stripIndent`
+  resumeHeader() {
+    return stripIndent`
     % (c) 2002 Matthew Boedicker <mboedick@mboedick.org> (original author) http://mboedick.org
     % (c) 2003-2007 David J. Grant <davidgrant-at-gmail.com> http://www.davidgrant.ca
     % (c) 2008 Nathaniel Johnston <nathaniel@nathanieljohnston.com> http://www.nathanieljohnston.com
@@ -302,6 +285,42 @@ function generateHeader() {
       \\textbf{#1} #2 \\hfill \\textit{#3} \\\\ #4 \\\\ \\vspace{1.5mm}
     }
     %-----------------------------------------------------------
+  `
+  }
+}
+
+function template3(values: SanitizedValues) {
+  return stripIndent`
+    ${generator.resumeHeader()}
+    \\begin{document}
+    ${values.orderedSections
+      .map(section => {
+        switch (section) {
+          case 'profile':
+            return generator.profileSection(values.basics)
+
+          case 'education':
+            return generator.educationSection(values.education)
+
+          case 'work':
+            return generator.workSection(values.work)
+
+          case 'skills':
+            return generator.skillsSection(values.skills)
+
+          case 'projects':
+            return generator.projectsSection(values.projects)
+
+          case 'awards':
+            return generator.awardsSection(values.awards)
+
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
+    ${WHITESPACE}
+    \\end{document}
   `
 }
 

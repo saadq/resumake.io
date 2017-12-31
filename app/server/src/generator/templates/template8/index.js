@@ -308,4 +308,4 @@ function template8(values: SanitizedValues) {
   `
 }
 
-module.exports = template8
+export default template8

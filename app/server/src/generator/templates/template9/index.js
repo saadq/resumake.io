@@ -343,4 +343,4 @@ function template9(values: SanitizedValues) {
   `
 }
 
-module.exports = template9
+export default template9

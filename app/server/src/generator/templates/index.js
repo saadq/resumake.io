@@ -39,6 +39,7 @@ function getTemplateData(data: SanitizedValues) {
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {
+        cmd: 'pdflatex',
         texDoc: template1(data),
         opts: {}
       }
@@ -55,6 +56,7 @@ function getTemplateData(data: SanitizedValues) {
 
     case TEMPLATE3:
       return {
+        cmd: 'pdflatex',
         texDoc: template3(data),
         opts: {}
       }
@@ -73,6 +75,7 @@ function getTemplateData(data: SanitizedValues) {
       return {
         texDoc: template5(data),
         opts: {
+          cmd: 'pdflatex',
           inputs: join(__dirname, 'template5', 'inputs')
         }
       }
@@ -92,6 +95,7 @@ function getTemplateData(data: SanitizedValues) {
       return {
         texDoc: template7(data),
         opts: {
+          cmd: 'pdflatex',
           inputs: join(__dirname, 'template7', 'inputs')
         }
       }
@@ -107,12 +111,14 @@ function getTemplateData(data: SanitizedValues) {
 
     case TEMPLATE9:
       return {
+        cmd: 'pdflatex',
         texDoc: template9(data),
         opts: {}
       }
 
     default:
       return {
+        cmd: 'pdflatex',
         texDoc: template1(data),
         opts: {}
       }

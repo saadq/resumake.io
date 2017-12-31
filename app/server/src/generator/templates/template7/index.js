@@ -4,35 +4,17 @@
 
 import { stripIndent, source } from 'common-tags'
 import { WHITESPACE } from '../constants'
-import type { SanitizedValues } from '../../../types'
+import type { SanitizedValues, Generator } from '../../../types'
 
-function template7({
-  basics,
-  education,
-  work,
-  projects,
-  skills,
-  awards
-}: SanitizedValues) {
-  return stripIndent`
-    ${generateHeader()}
-    ${generateProfileSection(basics)}
-    \\begin{document}
-    ${basics ? '\\makecvtitle' : ''}
-    ${generateEducationSection(education)}
-    ${generateExperienceSection(work)}
-    ${generateSkillsSection(skills)}
-    ${generateProjectsSection(projects)}
-    ${generateAwardsSection(awards)}
-    ${WHITESPACE}
-    \\end{document}
-  `
+type Template7Generator = Generator & {
+  resumeHeader: () => string
 }
 
-function generateProfileSection(basics = {}) {
-  const { name, email, phone, location = {}, website } = basics
+const generator: Template7Generator = {
+  profileSection(basics = {}) {
+    const { name, email, phone, location = {}, website } = basics
 
-  return stripIndent`
+    return stripIndent`
     % Profile
     \\name{${name || ''}}{}
     \\address{${location.address || ''}}
@@ -40,207 +22,249 @@ function generateProfileSection(basics = {}) {
     ${email ? `\\email{${email || ''}}` : ''}
     ${website ? `\\homepage{${website || ''}}` : ''}
   `
-}
+  },
 
-function generateEducationSection(education) {
-  if (!education || !education.schools) {
-    return ''
-  }
-
-  return source`
-  \\section{${education.heading || 'Education'}}
-  ${education.schools.map(school => {
-    const {
-      institution,
-      studyType,
-      area,
-      gpa,
-      location,
-      startDate,
-      endDate
-    } = school
-
-    let degreeLine = ''
-
-    if (studyType && area) {
-      degreeLine = `${studyType} in ${area}`
-    } else if (studyType || area) {
-      degreeLine = studyType || area
+  educationSection(education) {
+    if (!education || !education.schools) {
+      return ''
     }
 
-    let dateRange = ''
+    return source`
+      \\section{${education.heading || 'Education'}}
+      ${education.schools.map(school => {
+        const {
+          institution,
+          studyType,
+          area,
+          gpa,
+          location,
+          startDate,
+          endDate
+        } = school
 
-    if (startDate && endDate) {
-      dateRange = `${startDate} | ${endDate}`
-    } else if (startDate) {
-      dateRange = `${startDate} | Present`
-    } else {
-      dateRange = endDate
-    }
+        let degreeLine = ''
 
-    return stripIndent`
-      \\cventry
-        {${dateRange || ''}}
-        {${degreeLine}}
-        {${institution || ''}}
-        {${gpa ? `GPA: ${gpa}` : ''}}
-        {\\textit{${location || ''}}}
-        {}
-    `
-  })}
-  `
-}
+        if (studyType && area) {
+          degreeLine = `${studyType} in ${area}`
+        } else if (studyType || area) {
+          degreeLine = studyType || area
+        }
 
-function generateExperienceSection(work) {
-  if (!work || !work.jobs) {
-    return ''
-  }
+        let dateRange = ''
 
-  return source`
-  \\section{${work.heading || 'Experience'}}
-  ${work.jobs.map(job => {
-    const { company, position, location, startDate, endDate, highlights } = job
+        if (startDate && endDate) {
+          dateRange = `${startDate} | ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} | Present`
+        } else {
+          dateRange = endDate
+        }
 
-    let dateRange = ''
-    let highlightLines = ''
-
-    if (startDate && endDate) {
-      dateRange = `${startDate} -- ${endDate}`
-    } else if (startDate) {
-      dateRange = `${startDate} -- Present`
-    } else {
-      dateRange = endDate
-    }
-
-    if (highlights) {
-      highlightLines = source`
-        \\begin{itemize}%
-          ${highlights.map(highlight => `\\item ${highlight}`)}
-        \\end{itemize}
+        return stripIndent`
+          \\cventry
+            {${dateRange || ''}}
+            {${degreeLine}}
+            {${institution || ''}}
+            {${gpa ? `GPA: ${gpa}` : ''}}
+            {\\textit{${location || ''}}}
+            {}
         `
-    }
-
-    return stripIndent`
-      \\cventry
-        {${dateRange || ''}}
-        {${position || ''}}
-        {${company || ''}}
-        {${location || ''}}
-        {}
-        {${highlightLines}}
+      })}
     `
-  })}
-  `
-}
+  },
 
-function generateSkillsSection(skills) {
-  if (!skills || !skills.skills) {
-    return ''
-  }
-
-  return source`
-  \\section{${skills.heading || 'Skills'}}
-  ${skills.skills.map(skill => {
-    const { name, keywords = [] } = skill
-    return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
-  })}
-  `
-}
-
-function generateProjectsSection(projects) {
-  if (!projects || !projects.projects) {
-    return ''
-  }
-
-  return source`
-  \\section{${projects.heading || 'Projects'}}
-  ${projects.projects.map(project => {
-    const { name, description, keywords = [], url } = project
-
-    let detailsLine = ''
-
-    if (description) {
-      detailsLine += `${description}\\\\`
+  workSection(work) {
+    if (!work || !work.jobs) {
+      return ''
     }
 
-    if (url) {
-      detailsLine += url
-    }
+    return source`
+      \\section{${work.heading || 'Experience'}}
+      ${work.jobs.map(job => {
+        const {
+          company,
+          position,
+          location,
+          startDate,
+          endDate,
+          highlights
+        } = job
 
-    return stripIndent`
-      \\cventry
-        {}
-        {${name || ''}}
-        {}
-        {\\textit{${keywords.join(', ')}}}
-        {}
-        {${detailsLine}}
-      \\vspace{1mm}
+        let dateRange = ''
+        let highlightLines = ''
+
+        if (startDate && endDate) {
+          dateRange = `${startDate} -- ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} -- Present`
+        } else {
+          dateRange = endDate
+        }
+
+        if (highlights) {
+          highlightLines = source`
+            \\begin{itemize}%
+              ${highlights.map(highlight => `\\item ${highlight}`)}
+            \\end{itemize}
+            `
+        }
+
+        return stripIndent`
+          \\cventry
+            {${dateRange || ''}}
+            {${position || ''}}
+            {${company || ''}}
+            {${location || ''}}
+            {}
+            {${highlightLines}}
+        `
+      })}
     `
-  })}
-  `
-}
+  },
 
-function generateAwardsSection(awards) {
-  if (!awards || !awards.awards) {
-    return ''
-  }
-
-  return source`
-  \\section{${awards.heading || 'Awards'}}
-  ${awards.awards.map(award => {
-    const { title, summary, date, awarder } = award
-
-    let detailsLine = ''
-
-    if (summary) {
-      detailsLine += `${summary}\\\\`
+  skillsSection(skills) {
+    if (!skills || !skills.skills) {
+      return ''
     }
 
-    if (awarder) {
-      detailsLine += awarder
-    }
-
-    return stripIndent`
-      \\cventry
-        {}
-        {${title || ''}}
-        {}
-        {\\textit{${date || ''}}}
-        {}
-        {${detailsLine}}
-      \\vspace{1mm}
+    return source`
+      \\section{${skills.heading || 'Skills'}}
+      ${skills.skills.map(skill => {
+        const { name, keywords = [] } = skill
+        return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
+      })}
     `
-  })}
-  `
+  },
+
+  projectsSection(projects) {
+    if (!projects || !projects.projects) {
+      return ''
+    }
+
+    return source`
+      \\section{${projects.heading || 'Projects'}}
+      ${projects.projects.map(project => {
+        const { name, description, keywords = [], url } = project
+
+        let detailsLine = ''
+
+        if (description) {
+          detailsLine += `${description}\\\\`
+        }
+
+        if (url) {
+          detailsLine += url
+        }
+
+        return stripIndent`
+          \\cventry
+            {}
+            {${name || ''}}
+            {}
+            {\\textit{${keywords.join(', ')}}}
+            {}
+            {${detailsLine}}
+          \\vspace{1mm}
+        `
+      })}
+    `
+  },
+
+  awardsSection(awards) {
+    if (!awards || !awards.awards) {
+      return ''
+    }
+
+    return source`
+      \\section{${awards.heading || 'Awards'}}
+      ${awards.awards.map(award => {
+        const { title, summary, date, awarder } = award
+
+        let detailsLine = ''
+
+        if (summary) {
+          detailsLine += `${summary}\\\\`
+        }
+
+        if (awarder) {
+          detailsLine += awarder
+        }
+
+        return stripIndent`
+          \\cventry
+            {}
+            {${title || ''}}
+            {}
+            {\\textit{${date || ''}}}
+            {}
+            {${detailsLine}}
+          \\vspace{1mm}
+        `
+      })}
+    `
+  },
+
+  resumeHeader() {
+    return stripIndent`
+      %% start of file 'template.tex'.
+      %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+      %
+      % This work may be distributed and/or modified under the
+      % conditions of the LaTeX Project Public License version 1.3c,
+      % available at http://www.latex-project.org/lppl/.
+
+
+      \\documentclass[letterpaper]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+      \\usepackage{textcomp}
+      % moderncv themes
+      \\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+      \\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+      %\\renewcommand{\\familydefault}{\\sfdefault}         % to set the default font; use '\\sfdefault' for the default sans serif font, '\\rmdefault' for the default roman one, or any tex font name
+      %\\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+      % character encoding
+      \\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+      %\\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+      % adjust the page margins
+      \\usepackage[scale=0.75]{geometry}
+      %\\setlength{\\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+      %\\setlength{\\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+    `
+  }
 }
 
-function generateHeader() {
+function template7(values: SanitizedValues) {
   return stripIndent`
-    %% start of file 'template.tex'.
-    %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
-    %
-    % This work may be distributed and/or modified under the
-    % conditions of the LaTeX Project Public License version 1.3c,
-    % available at http://www.latex-project.org/lppl/.
+    ${generator.resumeHeader()}
+    ${generator.profileSection(values.basics)}
+    \\begin{document}
+    ${values.basics ? '\\makecvtitle' : ''}
+    ${values.orderedSections
+      .map(section => {
+        switch (section) {
+          case 'education':
+            return generator.educationSection(values.education)
 
+          case 'work':
+            return generator.workSection(values.work)
 
-    \\documentclass[letterpaper]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
-    \\usepackage{textcomp}
-    % moderncv themes
-    \\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-    \\moderncvcolor{blue}                               % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
-    %\\renewcommand{\\familydefault}{\\sfdefault}         % to set the default font; use '\\sfdefault' for the default sans serif font, '\\rmdefault' for the default roman one, or any tex font name
-    %\\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+          case 'skills':
+            return generator.skillsSection(values.skills)
 
-    % character encoding
-    \\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
-    %\\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+          case 'projects':
+            return generator.projectsSection(values.projects)
 
-    % adjust the page margins
-    \\usepackage[scale=0.75]{geometry}
-    %\\setlength{\\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
-    %\\setlength{\\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+          case 'awards':
+            return generator.awardsSection(values.awards)
+
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
+    ${WHITESPACE}
+    \\end{document}
   `
 }
 

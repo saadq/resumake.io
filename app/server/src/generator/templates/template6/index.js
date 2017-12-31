@@ -48,50 +48,50 @@ const generator: Generator = {
     }
 
     return source`
-    \\section{${education.heading || 'Education'}}
-    \\begin{entrylist}
-    ${education.schools.map(school => {
-      const {
-        institution,
-        location,
-        studyType = '',
-        area = '',
-        gpa,
-        startDate = '',
-        endDate = ''
-      } = school
+      \\section{${education.heading || 'Education'}}
+      \\begin{entrylist}
+      ${education.schools.map(school => {
+        const {
+          institution,
+          location,
+          studyType = '',
+          area = '',
+          gpa,
+          startDate = '',
+          endDate = ''
+        } = school
 
-      let schoolLine = ''
+        let schoolLine = ''
 
-      if (institution) {
-        schoolLine += institution
-      }
+        if (institution) {
+          schoolLine += institution
+        }
 
-      if (studyType && area) {
-        schoolLine += `, {\\normalfont ${studyType} in ${area}}`
-      } else if (studyType || area) {
-        schoolLine += `, {\\normalfont ${studyType || area}}`
-      }
+        if (studyType && area) {
+          schoolLine += `, {\\normalfont ${studyType} in ${area}}`
+        } else if (studyType || area) {
+          schoolLine += `, {\\normalfont ${studyType || area}}`
+        }
 
-      let dateRange = ''
+        let dateRange = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} - ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} - Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} - ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} - Present`
+        } else {
+          dateRange = endDate
+        }
 
-      return `
-        \\entry
-          {${dateRange}}
-          {${schoolLine}}
-          {${location || ''}}
-          {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
-      `
-    })}
-    \\end{entrylist}
+        return `
+          \\entry
+            {${dateRange}}
+            {${schoolLine}}
+            {${location || ''}}
+            {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
+        `
+      })}
+      \\end{entrylist}
     `
   },
 
@@ -101,55 +101,55 @@ const generator: Generator = {
     }
 
     return source`
-    \\section{${work.heading || 'Experience'}}
-    \\begin{entrylist}
-    ${work.jobs.map(job => {
-      const {
-        company,
-        position,
-        location,
-        startDate,
-        endDate,
-        highlights
-      } = job
+      \\section{${work.heading || 'Experience'}}
+      \\begin{entrylist}
+      ${work.jobs.map(job => {
+        const {
+          company,
+          position,
+          location,
+          startDate,
+          endDate,
+          highlights
+        } = job
 
-      let jobLine = ''
-      let dateRange = ''
-      let highlightLines = ''
+        let jobLine = ''
+        let dateRange = ''
+        let highlightLines = ''
 
-      if (company) {
-        jobLine += company
-      }
+        if (company) {
+          jobLine += company
+        }
 
-      if (position) {
-        jobLine += `, ${position}`
-      }
+        if (position) {
+          jobLine += `, ${position}`
+        }
 
-      if (highlights) {
-        highlightLines = source`
-          \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-          ${highlights.map(highlight => `\\item ${highlight}`)}
-          \\end{itemize}
-          `
-      }
+        if (highlights) {
+          highlightLines = source`
+            \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
+            ${highlights.map(highlight => `\\item ${highlight}`)}
+            \\end{itemize}
+            `
+        }
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} – ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} – Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
 
-      return `
-        \\entry
-          {${dateRange || ''}}
-          {${jobLine}}
-          {${location || ''}}
-          {${highlightLines}}
-      `
-    })}
-    \\end{entrylist}
+        return `
+          \\entry
+            {${dateRange || ''}}
+            {${jobLine}}
+            {${location || ''}}
+            {${highlightLines}}
+        `
+      })}
+      \\end{entrylist}
     `
   },
 

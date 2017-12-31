@@ -69,70 +69,70 @@ const generator: Template4Generator = {
     }
 
     return source`
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %
-  %     Education
-  %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{${education.heading || 'Education'}}
-  \\raggedright
-  ${education.schools.map(school => {
-    const {
-      institution,
-      location,
-      studyType,
-      area,
-      gpa,
-      startDate,
-      endDate
-    } = school
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Education
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\section{${education.heading || 'Education'}}
+      \\raggedright
+      ${education.schools.map(school => {
+        const {
+          institution,
+          location,
+          studyType,
+          area,
+          gpa,
+          startDate,
+          endDate
+        } = school
 
-    let line1 = ''
-    let line2 = ''
+        let line1 = ''
+        let line2 = ''
 
-    if (institution) {
-      line1 += `\\runsubsection{${institution}}`
-    }
+        if (institution) {
+          line1 += `\\runsubsection{${institution}}`
+        }
 
-    if (studyType && area) {
-      line1 += `\\descript{| ${studyType} ${area}}`
-    } else if (studyType) {
-      line1 += `\\descript{| ${studyType}}`
-    } else if (area) {
-      line1 += `\\descript{| ${area}}`
-    }
+        if (studyType && area) {
+          line1 += `\\descript{| ${studyType} ${area}}`
+        } else if (studyType) {
+          line1 += `\\descript{| ${studyType}}`
+        } else if (area) {
+          line1 += `\\descript{| ${area}}`
+        }
 
-    let dateRange = ''
+        let dateRange = ''
 
-    if (startDate && endDate) {
-      dateRange = `${startDate} - ${endDate}`
-    } else if (startDate) {
-      dateRange = `${startDate} - Present`
-    } else {
-      dateRange = endDate
-    }
+        if (startDate && endDate) {
+          dateRange = `${startDate} - ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} - Present`
+        } else {
+          dateRange = endDate
+        }
 
-    const locationAndDate = [location, dateRange].filter(Boolean).join(' | ')
+        const locationAndDate = [location, dateRange].filter(Boolean).join(' | ')
 
-    if (locationAndDate) {
-      line1 += `\\hfill \\location{${locationAndDate}}`
-    }
+        if (locationAndDate) {
+          line1 += `\\hfill \\location{${locationAndDate}}`
+        }
 
-    if (line1) {
-      line1 += '\\\\'
-    }
+        if (line1) {
+          line1 += '\\\\'
+        }
 
-    if (gpa) {
-      line2 += `GPA: ${gpa}\\\\`
-    }
+        if (gpa) {
+          line2 += `GPA: ${gpa}\\\\`
+        }
 
-    return `
-      ${line1}
-      ${line2}
-      \\sectionsep
+        return `
+          ${line1}
+          ${line2}
+          \\sectionsep
+        `
+      })}
     `
-  })}
-  `
   },
 
   workSection(work) {

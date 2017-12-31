@@ -6,15 +6,15 @@ import { keyframes } from 'styled-components'
 
 const colors = {
   background: '#1a1d25',
-  foreground: '#afafaf',
+  foreground: '#c0c5ce',
   primary: '#30be9d',
   accent: '#111',
   borders: '#262c39'
 }
 
 const sizes = {
-  header: '15vh',
-  sideNav: '20vw',
+  header: '10vh',
+  sideNav: '15vw',
   footer: '50px'
 }
 

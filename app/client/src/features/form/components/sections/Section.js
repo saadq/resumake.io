@@ -4,6 +4,8 @@
 
 import React, { type Node } from 'react'
 import styled from 'styled-components'
+import { lighten } from 'polished'
+import { colors } from '../../../../common/theme'
 
 const Fieldset = styled.fieldset`
   display: block;
@@ -12,6 +14,8 @@ const Fieldset = styled.fieldset`
   padding: 0;
   width: 85%;
   max-width: 100%;
+  position: relative;
+  top: 25px;
 `
 
 const Heading = styled.h1`
@@ -20,7 +24,7 @@ const Heading = styled.h1`
   margin: 0;
   font-size: inherit;
   font-weight: normal;
-  color: #ccc;
+  color: ${lighten(0.15, colors.foreground)};
 `
 
 type Props = {

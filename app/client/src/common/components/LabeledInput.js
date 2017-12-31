@@ -5,13 +5,14 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
+import { darken } from 'polished'
 import { colors } from '../../common/theme'
 
 const Label = styled.label`
   display: block;
   margin-top: 30px;
   margin-bottom: 5px;
-  color: #818b94;
+  color: ${darken(0.25, colors.foreground)};
   font-weight: 300;
 `
 
@@ -24,7 +25,7 @@ const Input = styled(Field)`
   font-family: inherit;
   border: none;
   border-bottom: 1px solid ${colors.borders};
-  color: #ccc;
+  color: ${colors.foreground};
   transition: all 0.4s;
   background: transparent;
   outline: none;

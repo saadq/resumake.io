@@ -30,7 +30,8 @@ const Content = styled.main`
   margin-top: ${sizes.header};
   margin-left: ${sizes.sideNav};
   margin-bottom: calc(${sizes.footer} + 15px);
-  width: calc(80% - ${sizes.sideNav});
+  width: calc(100% - ${sizes.sideNav});
+  position: relative;
 
   @media screen and (max-width: 1000px) {
     width: 90%;
@@ -49,12 +50,13 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   background: ${colors.background};
+  border-bottom: 1px solid ${colors.borders};
 `
 
 const Logo = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
-  font-family: 'nexalight';
+  font-family: 'Nexa Light';
   font-size: 2.25em;
   color: white;
   letter-spacing: 2px;

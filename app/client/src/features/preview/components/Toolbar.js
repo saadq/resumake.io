@@ -4,21 +4,18 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { darken } from 'polished'
 import { Icon } from '../../../common/components'
 import { colors } from '../../../common/theme'
 
 const Wrapper = styled.div`
-  max-width: 100%;
-  width: 85%;
-  background: ${colors.background};
+  width: calc(100% - 2px);
+  background: ${darken(0.02, colors.background)};
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  margin-top: 0px;
-  margin-right: 10px;
   margin-bottom: 10px;
-  margin-left: 10px;
   border-radius: 2px;
   user-select: none;
 `
@@ -43,7 +40,6 @@ const ButtonGroup = styled.div`
 `
 
 const Button = styled.a`
-  border: 1px solid ${colors.borders};
   text-align: center;
   text-decoration: none;
   font-size: 12px;
@@ -93,8 +89,6 @@ const Pagination = styled.div`
 const PageNumber = styled.span`
   font-size: 12px;
   height: 35px;
-  border-top: 1px solid ${colors.borders};
-  border-bottom: 1px solid ${colors.borders};
   color: #ddd;
   display: flex;
   justify-content: center;

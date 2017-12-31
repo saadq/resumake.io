@@ -16,6 +16,7 @@ injectGlobal`
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 0.95em;
     background: ${colors.background};
+    color: ${colors.foreground};
   }
 
   ::selection {

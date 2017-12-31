@@ -37,7 +37,7 @@ const Image = styled.img`
   transform: translateY(0);
   transition: all 0.4s ease-out;
   opacity: ${props => (props.active ? '1' : '0.65')};
-  border: 3px solid ${props => props.active ? colors.primary : 'transparent'};
+  border: 3px solid ${props => props.active ? 'silver' : 'transparent'};
 
   &:hover {
     opacity: ${props => (props.active ? '1' : '0.9')};

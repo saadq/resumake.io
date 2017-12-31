@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import SortableList from './SortableList'
 import MakeButton from './MakeButton'
 import { setSectionOrder } from '../actions'
-import { sizes } from '../../../common/theme'
+import { sizes, colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
 
@@ -23,6 +23,7 @@ const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  border-right: 1px solid ${colors.borders};
 
   @media screen and (max-width: 1500px) {
     align-items: center;
@@ -38,6 +39,8 @@ const Nav = styled.nav`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  top: 25px;
 `
 
 type Props = {

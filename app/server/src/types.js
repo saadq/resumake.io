@@ -77,7 +77,18 @@ type Awards = {
   heading?: string
 }
 
+type Section =
+  | 'templates'
+  | 'profile'
+  | 'education'
+  | 'work'
+  | 'skills'
+  | 'projects'
+  | 'awards'
+  | 'preview'
+
 type SanitizedValues = {
+  orderedSections: Array<Section>,
   selectedTemplate: number,
   basics: Basics,
   work: Work,
@@ -87,4 +98,13 @@ type SanitizedValues = {
   awards: Awards
 }
 
-export type { SanitizedValues, Education, Work, Skills, Projects, Awards }
+type Generator = {
+  profileSection: (basics: Basics) => string,
+  educationSection: (education: Education) => string,
+  workSection: (work: Work) => string,
+  skillsSection: (skills: Skills) => string,
+  projectsSection: (projects: Projects) => string,
+  awardsSection: (awards: Awards) => string
+}
+
+export type { SanitizedValues, Generator }

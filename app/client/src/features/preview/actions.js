@@ -4,6 +4,7 @@
 
 import FileSaver from 'file-saver'
 import type { PreviewAction as Action } from './types'
+import type { Section } from '../../common/types'
 import type { FormValues } from '../form/types'
 import type { AsyncAction } from '../../app/types'
 
@@ -45,7 +46,11 @@ function generateResumeFailure(): Action {
   }
 }
 
-function generateResume(resumeData: FormValues): AsyncAction {
+type ValuesWithSectionOrder = FormValues & {
+  orderedSections: Array<Section>
+}
+
+function generateResume(resumeData: ValuesWithSectionOrder): AsyncAction {
   return async dispatch => {
     dispatch(generateResumeRequest())
 

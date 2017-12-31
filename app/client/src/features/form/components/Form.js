@@ -13,7 +13,7 @@ import type { Section } from '../../../common/types'
 import type { Location } from 'react-router-dom'
 
 type Props = {
-  sections: Array<Section>,
+  orderedSections: Array<Section>,
   children: Node,
   location: Location,
   handleSubmit: *,
@@ -22,15 +22,20 @@ type Props = {
 }
 
 class Form extends Component<Props> {
+  onSubmit = (values: FormValues) => {
+    const { orderedSections, generateResume } = this.props
+    generateResume({ ...values, orderedSections })
+  }
+
   updateProgress() {
-    const { sections, location, setProgress } = this.props
+    const { orderedSections, location, setProgress } = this.props
 
     if (!location.pathname.startsWith('/generator/')) {
       return
     }
 
     const currSection: Section = (location.pathname.slice(11): any)
-    setProgress(sections, currSection)
+    setProgress(orderedSections, currSection)
   }
 
   componentWillMount() {
@@ -48,9 +53,9 @@ class Form extends Component<Props> {
   }
 
   render() {
-    const { children, handleSubmit, generateResume } = this.props
+    const { children, handleSubmit } = this.props
     return (
-      <form id="resume-form" onSubmit={handleSubmit(generateResume)}>
+      <form id="resume-form" onSubmit={handleSubmit(this.onSubmit)}>
         {children}
       </form>
     )
@@ -59,7 +64,7 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    sections: state.orderedSections.sections,
+    orderedSections: state.orderedSections.sections,
     progress: state.orderedSections.progress
   }
 }

@@ -4,90 +4,71 @@
 
 import { stripIndent, source } from 'common-tags'
 import { WHITESPACE } from '../constants'
-import type { SanitizedValues } from '../../../types'
+import type { SanitizedValues, Generator } from '../../../types'
 
-function template4({
-  basics,
-  education,
-  work,
-  projects,
-  skills,
-  awards
-}: SanitizedValues) {
-  return stripIndent`
-    ${generateCommentHeader()}
-    \\documentclass[]{deedy-resume-openfont}
-
-    \\begin{document}
-    ${generateProfileSection(basics)}
-    ${generateEducationSection(education)}
-    ${generateExperienceSection(work)}
-    ${generateSkillsSection(skills)}
-    ${generateProjectsSection(projects)}
-    ${generateAwardsSection(awards)}
-    ${WHITESPACE}
-    \\end{document}
-  `
+type Template4Generator = Generator & {
+  resumeHeader: () => string
 }
 
-function generateProfileSection(profile) {
-  if (!profile) {
-    return '\\namesection{Your}{Name}{}'
-  }
-
-  const { name, email, phone, location = {}, website } = profile
-
-  let nameStart = ''
-  let nameEnd = ''
-
-  if (name) {
-    const names = name.split(' ')
-
-    if (names.length === 1) {
-      nameStart = names[0]
-      nameEnd = ''
-    } else {
-      nameStart = names[0]
-      nameEnd = names.slice(1, names.length).join(' ')
+const generator: Template4Generator = {
+  profileSection(profile) {
+    if (!profile) {
+      return '\\namesection{Your}{Name}{}'
     }
-  }
 
-  const info = [email, phone, location.address, website]
-    .filter(Boolean)
-    .join(' | ')
+    const { name, email, phone, location = {}, website } = profile
 
-  const sectionHeader = stripIndent`
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %
-    %     Profile
-    %
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  `
+    let nameStart = ''
+    let nameEnd = ''
 
-  if (!name) {
+    if (name) {
+      const names = name.split(' ')
+
+      if (names.length === 1) {
+        nameStart = names[0]
+        nameEnd = ''
+      } else {
+        nameStart = names[0]
+        nameEnd = names.slice(1, names.length).join(' ')
+      }
+    }
+
+    const info = [email, phone, location.address, website]
+      .filter(Boolean)
+      .join(' | ')
+
+    const sectionHeader = stripIndent`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Profile
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    `
+
+    if (!name) {
+      return stripIndent`
+        ${sectionHeader}
+        \\centering{
+          \\color{headings}
+          \\fontspec[Path = fonts/raleway/]{Raleway-Medium}
+          \\fontsize{11pt}{14pt}
+          \\selectfont ${info}
+        }
+      `
+    }
+
     return stripIndent`
       ${sectionHeader}
-      \\centering{
-        \\color{headings}
-        \\fontspec[Path = fonts/raleway/]{Raleway-Medium}
-        \\fontsize{11pt}{14pt}
-        \\selectfont ${info}
-      }
+      \\namesection{${nameStart}}{${nameEnd}}{${info}}
     `
-  }
+  },
 
-  return stripIndent`
-    ${sectionHeader}
-    \\namesection{${nameStart}}{${nameEnd}}{${info}}
-  `
-}
+  educationSection(education) {
+    if (!education || !education.schools) {
+      return ''
+    }
 
-function generateEducationSection(education) {
-  if (!education || !education.schools) {
-    return ''
-  }
-
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %
   %     Education
@@ -152,147 +133,147 @@ function generateEducationSection(education) {
     `
   })}
   `
-}
+  },
 
-function generateExperienceSection(work) {
-  if (!work || !work.jobs) {
-    return ''
-  }
-
-  return source`
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %
-  %     Experience
-  %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{${work.heading || 'Experience'}}
-  ${work.jobs.map(job => {
-    const { company, position, location, startDate, endDate, highlights } = job
-
-    let line1 = ''
-    let dateRange = ''
-    let highlightLines = ''
-
-    if (company) {
-      line1 += `\\runsubsection{${company}}`
+  workSection(work) {
+    if (!work || !work.jobs) {
+      return ''
     }
 
-    if (position) {
-      line1 += `\\descript{| ${position}}`
-    }
+    return source`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Experience
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\section{${work.heading || 'Experience'}}
+      ${work.jobs.map(job => {
+        const { company, position, location, startDate, endDate, highlights } = job
 
-    if (startDate && endDate) {
-      dateRange = `${startDate} – ${endDate}`
-    } else if (startDate) {
-      dateRange = `${startDate} – Present`
-    } else {
-      dateRange = endDate
-    }
+        let line1 = ''
+        let dateRange = ''
+        let highlightLines = ''
 
-    if (location && dateRange) {
-      line1 += `\\hfill \\location{${location} | ${dateRange}}`
-    } else if (location) {
-      line1 += `\\hfill \\location{${location}}`
-    } else if (dateRange) {
-      line1 += `\\hfill \\location{${dateRange}}`
-    }
+        if (company) {
+          line1 += `\\runsubsection{${company}}`
+        }
 
-    if (highlights) {
-      highlightLines = source`
-        \\begin{tightemize}
-          ${highlights.map(highlight => `\\item ${highlight}`)}
-        \\end{tightemize}
+        if (position) {
+          line1 += `\\descript{| ${position}}`
+        }
+
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
+
+        if (location && dateRange) {
+          line1 += `\\hfill \\location{${location} | ${dateRange}}`
+        } else if (location) {
+          line1 += `\\hfill \\location{${location}}`
+        } else if (dateRange) {
+          line1 += `\\hfill \\location{${dateRange}}`
+        }
+
+        if (highlights) {
+          highlightLines = source`
+            \\begin{tightemize}
+              ${highlights.map(highlight => `\\item ${highlight}`)}
+            \\end{tightemize}
+            `
+        }
+
+        return stripIndent`
+          ${line1}
+          ${highlightLines}
+          \\sectionsep
         `
+      })}
+    `
+  },
+
+  skillsSection(skills) {
+    if (!skills || !skills.skills) {
+      return ''
     }
 
-    return stripIndent`
-      ${line1}
-      ${highlightLines}
+    return source`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Skills
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\section{${skills.heading || 'Skills'}}
+      \\raggedright
+      \\begin{tabular}{ l l }
+      ${skills.skills.map(skill => {
+        const { name = '', keywords = [] } = skill
+        return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
+      })}
+      \\end{tabular}
       \\sectionsep
     `
-  })}
-  `
-}
+  },
 
-function generateSkillsSection(skills) {
-  if (!skills || !skills.skills) {
-    return ''
-  }
-
-  return source`
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %
-  %     Skills
-  %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{${skills.heading || 'Skills'}}
-  \\raggedright
-  \\begin{tabular}{ l l }
-  ${skills.skills.map(skill => {
-    const { name = '', keywords = [] } = skill
-    return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
-  })}
-  \\end{tabular}
-  \\sectionsep
-  `
-}
-
-function generateProjectsSection(projects) {
-  if (!projects || !projects.projects) {
-    return ''
-  }
-
-  return source`
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %
-  %     Projects
-  %
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\section{${projects.heading || 'Projects'}}
-  \\raggedright
-  ${projects.projects.map(project => {
-    const { name, description, keywords, url } = project
-
-    let line1 = ''
-    let line2 = ''
-    let line3 = ''
-
-    if (name) {
-      line1 += `\\runsubsection{\\large{${name}}}`
+  projectsSection(projects) {
+    if (!projects || !projects.projects) {
+      return ''
     }
 
-    if (keywords) {
-      line2 += `\\descript{| ${keywords.join(', ')}}`
-    }
+    return source`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %
+      %     Projects
+      %
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\section{${projects.heading || 'Projects'}}
+      \\raggedright
+      ${projects.projects.map(project => {
+        const { name, description, keywords, url } = project
 
-    if (url) {
-      line2 += `\\hfill \\location{${url}}`
-    }
+        let line1 = ''
+        let line2 = ''
+        let line3 = ''
 
-    if (line2) {
-      line2 += '\\\\'
-    }
+        if (name) {
+          line1 += `\\runsubsection{\\large{${name}}}`
+        }
 
-    if (description) {
-      line3 += `${description}\\\\`
-    }
+        if (keywords) {
+          line2 += `\\descript{| ${keywords.join(', ')}}`
+        }
 
-    return `
-      ${line1}
-      ${line2}
-      ${line3}
-      \\sectionsep
+        if (url) {
+          line2 += `\\hfill \\location{${url}}`
+        }
+
+        if (line2) {
+          line2 += '\\\\'
+        }
+
+        if (description) {
+          line3 += `${description}\\\\`
+        }
+
+        return `
+          ${line1}
+          ${line2}
+          ${line3}
+          \\sectionsep
+        `
+      })}
     `
-  })}
-  `
-}
+  },
 
-function generateAwardsSection(awards) {
-  if (!awards || !awards.awards) {
-    return ''
-  }
+  awardsSection(awards) {
+    if (!awards || !awards.awards) {
+      return ''
+    }
 
-  return source`
+    return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %
   %     Awards
@@ -310,10 +291,10 @@ function generateAwardsSection(awards) {
     `
   })}
   `
-}
+  },
 
-function generateCommentHeader() {
-  return stripIndent`
+  resumeHeader() {
+    return stripIndent`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % This is a modified ONE COLUMN version of
     % the following template:
@@ -362,6 +343,44 @@ function generateCommentHeader() {
     % 2. Hacky space on the first bullet point on the second column.
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  `
+  }
+}
+
+function template4(values: SanitizedValues) {
+  return stripIndent`
+    ${generator.resumeHeader()}
+    \\documentclass[]{deedy-resume-openfont}
+
+    \\begin{document}
+    ${values.orderedSections
+      .map(section => {
+        switch (section) {
+          case 'profile':
+            return generator.profileSection(values.basics)
+
+          case 'education':
+            return generator.educationSection(values.education)
+
+          case 'work':
+            return generator.workSection(values.work)
+
+          case 'skills':
+            return generator.skillsSection(values.skills)
+
+          case 'projects':
+            return generator.projectsSection(values.projects)
+
+          case 'awards':
+            return generator.awardsSection(values.awards)
+
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
+    ${WHITESPACE}
+    \\end{document}
   `
 }
 

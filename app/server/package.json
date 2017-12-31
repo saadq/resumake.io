@@ -13,7 +13,7 @@
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "npm run lint --silent",
+    "test": "npm run lint --silent && flow status",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js",
     "flow": "flow",
     "flow-typed": "flow-typed"

@@ -22,12 +22,8 @@ const Aside = styled.aside`
   height: calc(100% - ${sizes.header});
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   border-right: 1px solid ${colors.borders};
-
-  @media screen and (max-width: 1500px) {
-    align-items: center;
-  }
 
   @media screen and (max-width: 1000px) {
     display: none;

@@ -9,7 +9,7 @@ import { arrayMove } from 'react-sortable-hoc'
 import styled from 'styled-components'
 import SortableList from './SortableList'
 import MakeButton from './MakeButton'
-import { setSectionOrder } from '../actions'
+import { setSectionOrder, setProgress } from '../actions'
 import { sizes, colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
@@ -45,7 +45,8 @@ type Props = {
   setSectionOrder: (
     newSectionOrder: Array<Section>,
     currSection: Section
-  ) => void
+  ) => void,
+  setProgress: (newSectionOrder: Array<Section>, currSection: Section) => void
 }
 
 class SideNav extends Component<Props> {
@@ -54,11 +55,17 @@ class SideNav extends Component<Props> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { location, orderedSections, setSectionOrder } = this.props
+    const {
+      location,
+      orderedSections,
+      setSectionOrder,
+      setProgress
+    } = this.props
     const newSectionOrder = arrayMove(orderedSections, oldIndex, newIndex)
     const currSection: Section = (location.pathname.slice(11): any)
 
     setSectionOrder(newSectionOrder, currSection)
+    setProgress(newSectionOrder, currSection)
     this.toggleGrabCursor()
   }
 
@@ -98,7 +105,8 @@ function mapState(state: State) {
 }
 
 const mapActions = {
-  setSectionOrder
+  setSectionOrder,
+  setProgress
 }
 
 const ConnectedSideNav = connect(mapState, mapActions)(SideNav)

@@ -17,8 +17,7 @@ const initialState = {
     'work',
     'skills',
     'projects',
-    'awards',
-    'preview'
+    'awards'
   ]
 }
 

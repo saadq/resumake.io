@@ -86,7 +86,7 @@ function Progress({ history, progress, sections, prev, curr, next }: Props) {
   return (
     <Wrapper>
       <SectionButton
-        form="resume-form"
+        type="button"
         onClick={() => history.push(`/generator/${prev}`)}
         disabled={curr === sections[0]}
       >
@@ -94,7 +94,7 @@ function Progress({ history, progress, sections, prev, curr, next }: Props) {
       </SectionButton>
       <Bar progress={progress} />
       <SectionButton
-        form="resume-form"
+        type="button"
         onClick={() => history.push(`/generator/${next}`)}
         disabled={curr === sections[sections.length - 1]}
       >

@@ -16,7 +16,6 @@ import {
   Projects,
   Awards
 } from '.'
-import Preview from '../../preview/components'
 import { generateResume } from '../../preview/actions'
 import { setProgress } from '../../ordered-sections/actions'
 import { colors } from '../../../common/theme'
@@ -88,7 +87,6 @@ class Form extends Component<Props> {
           <Route exact path="/generator/skills" component={Skills} />
           <Route exact path="/generator/projects" component={Projects} />
           <Route exact path="/generator/awards" component={Awards} />
-          <Route exact path="/generator/preview" component={Preview} />
           <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />
         </Switch>
       </StyledForm>

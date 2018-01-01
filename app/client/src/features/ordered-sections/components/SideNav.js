@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { withRouter, type RouterHistory, type Location } from 'react-router-dom'
+import { withRouter, type Location } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { arrayMove } from 'react-sortable-hoc'
 import styled from 'styled-components'
@@ -40,7 +40,6 @@ const Nav = styled.nav`
 `
 
 type Props = {
-  history: RouterHistory,
   location: Location,
   orderedSections: Array<Section>,
   setSectionOrder: (
@@ -69,7 +68,7 @@ class SideNav extends Component<Props> {
   }
 
   render() {
-    const { orderedSections, history } = this.props
+    const { orderedSections } = this.props
     const sections = orderedSections.filter(item => item !== 'preview')
 
     return (
@@ -83,11 +82,7 @@ class SideNav extends Component<Props> {
             onSortStart={this.onSortStart}
             onSortEnd={this.onSortEnd}
           />
-          <MakeButton
-            onClick={() => history.push('/generator/preview')}
-            type="submit"
-            form="resume-form"
-          >
+          <MakeButton type="submit" form="resume-form">
             Make
           </MakeButton>
         </Nav>

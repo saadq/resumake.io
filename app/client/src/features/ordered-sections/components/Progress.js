@@ -8,22 +8,9 @@ import { withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 import { Button } from '../../../common/components'
-import { colors, sizes } from '../../../common/theme'
+import { colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
-
-const Footer = styled.footer`
-  width: 100%;
-  height: ${sizes.footer};
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  background: ${colors.background};
-  border-top: 1px solid ${colors.borders};
-`
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -97,25 +84,23 @@ type Props = {
 
 function Progress({ history, progress, sections, prev, curr, next }: Props) {
   return (
-    <Footer>
-      <Wrapper>
-        <SectionButton
-          form="resume-form"
-          onClick={() => history.push(`/generator/${prev}`)}
-          disabled={curr === sections[0]}
-        >
-          ← Prev
-        </SectionButton>
-        <Bar progress={progress} />
-        <SectionButton
-          form="resume-form"
-          onClick={() => history.push(`/generator/${next}`)}
-          disabled={curr === sections[sections.length - 1]}
-        >
-          Next →
-        </SectionButton>
-      </Wrapper>
-    </Footer>
+    <Wrapper>
+      <SectionButton
+        form="resume-form"
+        onClick={() => history.push(`/generator/${prev}`)}
+        disabled={curr === sections[0]}
+      >
+        ← Prev
+      </SectionButton>
+      <Bar progress={progress} />
+      <SectionButton
+        form="resume-form"
+        onClick={() => history.push(`/generator/${next}`)}
+        disabled={curr === sections[sections.length - 1]}
+      >
+        Next →
+      </SectionButton>
+    </Wrapper>
   )
 }
 

@@ -8,13 +8,12 @@ import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
-import BlankPDF from '../assets/blank.pdf'
 import type { State as ReduxState } from '../../../app/types'
+import BlankPDF from '../assets/blank.pdf'
 
-const Div = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+const Wrapper = styled.div`
+  width: 50%;
+  position: relative;
 `
 
 const ResumeDocument = styled(Document)`
@@ -121,7 +120,7 @@ class Preview extends Component<Props, State> {
     const { currPage } = this.state
 
     return (
-      <Div>
+      <Wrapper>
         <Toolbar
           resumeURL={resumeURL || BlankPDF}
           jsonURL={jsonURL}
@@ -135,7 +134,7 @@ class Preview extends Component<Props, State> {
         />
         <LoadingBar status={status} />
         <ResumeDocument
-          file={resumeURL}
+          file={resumeURL || BlankPDF}
           onLoadSuccess={this.setPageCount}
           loading={<div />}
         >
@@ -147,7 +146,7 @@ class Preview extends Component<Props, State> {
             renderTextLayer={false}
           />
         </ResumeDocument>
-      </Div>
+      </Wrapper>
     )
   }
 }

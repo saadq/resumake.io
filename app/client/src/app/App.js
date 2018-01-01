@@ -10,7 +10,9 @@ import { Home, Generator, About } from './pages'
 import { colors } from '../common/theme'
 
 injectGlobal`
-  html, body {
+  html, body, #app {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

@@ -6,6 +6,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, type Location } from 'react-router-dom'
 import Form from '../../features/form/components'
+import Preview from '../../features/preview/components'
 import { SideNav, Progress } from '../../features/ordered-sections/components'
 import { colors, sizes } from '../../common/theme'
 
@@ -13,22 +14,20 @@ const Layout = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 `
 
 const Content = styled.main`
-  flex: 1;
-  padding: 0;
+  display: flex;
   margin-top: ${sizes.header};
   margin-left: ${sizes.sideNav};
-  margin-bottom: calc(${sizes.footer} + 15px);
   width: calc(100% - ${sizes.sideNav});
-  position: relative;
+  height: calc(100% - ${sizes.header} - ${sizes.footer} - 1px);
 
   @media screen and (max-width: 1000px) {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    left: initial;
+    width: 100%;
+    margin-left: 0;
   }
 `
 
@@ -58,6 +57,19 @@ const Accent = styled.em`
   color: ${colors.primary};
 `
 
+const Footer = styled.footer`
+  width: 100%;
+  height: ${sizes.footer};
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: ${colors.background};
+  border-top: 1px solid ${colors.borders};
+`
+
 type Props = {
   location: Location
 }
@@ -73,8 +85,11 @@ function Generator({ location }: Props) {
       <SideNav />
       <Content>
         <Form location={location} />
+        <Preview />
       </Content>
-      <Progress />
+      <Footer>
+        <Progress />
+      </Footer>
     </Layout>
   )
 }

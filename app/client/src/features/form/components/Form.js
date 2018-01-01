@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect, type Location } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   Templates,
   Profile,
@@ -18,9 +19,18 @@ import {
 import Preview from '../../preview/components'
 import { generateResume } from '../../preview/actions'
 import { setProgress } from '../../ordered-sections/actions'
+import { colors } from '../../../common/theme'
 import type { FormValues } from '../types'
 import type { State } from '../../../app/types'
 import type { Section } from '../../../common/types'
+
+const StyledForm = styled.form`
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid ${colors.borders};
+  overflow-y: auto;
+`
 
 type Props = {
   orderedSections: Array<Section>,
@@ -64,7 +74,7 @@ class Form extends Component<Props> {
   render() {
     const { handleSubmit } = this.props
     return (
-      <form id="resume-form" onSubmit={handleSubmit(this.onSubmit)}>
+      <StyledForm id="resume-form" onSubmit={handleSubmit(this.onSubmit)}>
         <Switch>
           <Route
             exact
@@ -81,7 +91,7 @@ class Form extends Component<Props> {
           <Route exact path="/generator/preview" component={Preview} />
           <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />
         </Switch>
-      </form>
+      </StyledForm>
     )
   }
 }

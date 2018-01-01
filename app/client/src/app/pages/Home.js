@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { uploadJSON } from '../../features/form/actions'
+import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearPreview } from '../../features/preview/actions'
 import { clearState } from '../actions'
 import { hasPrevSession } from '../selectors'
@@ -57,16 +57,16 @@ type Props = {
   hasPrevSession: boolean,
   clearState: () => void,
   clearPreview: () => void,
-  uploadJSON: (file: File) => Promise<void>,
+  uploadFileAndGenerateResume: (file: File) => Promise<void>,
   history: RouterHistory
 }
 
 class Home extends Component<Props> {
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
-    const { uploadJSON, history } = this.props
+    const { uploadFileAndGenerateResume, history } = this.props
     const file = e.target.files[0]
 
-    await uploadJSON(file)
+    await uploadFileAndGenerateResume(file)
     history.push('/generator')
   }
 
@@ -98,7 +98,7 @@ function mapState(state: State) {
 const mapActions = {
   clearState,
   clearPreview,
-  uploadJSON
+  uploadFileAndGenerateResume
 }
 
 export default withRouter(connect(mapState, mapActions)(Home))

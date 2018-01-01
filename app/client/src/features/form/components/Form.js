@@ -37,7 +37,7 @@ type Props = {
   location: Location,
   handleSubmit: *,
   setProgress: (sections: Array<Section>, curr: Section) => void,
-  generateResume: (payload: FormValues) => void
+  generateResume: (payload: FormValues) => Promise<void>
 }
 
 class Form extends Component<Props> {

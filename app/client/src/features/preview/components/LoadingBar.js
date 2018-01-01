@@ -8,7 +8,8 @@ import { colors, animations } from '../../../common/theme'
 
 const OuterBar = styled.div`
   max-width: 100%;
-  width: 85%;
+  width: 90%;
+  margin: 0 auto;
   position: relative;
   height: 4px;
   display: block;

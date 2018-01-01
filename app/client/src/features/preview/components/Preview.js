@@ -42,7 +42,7 @@ type Props = {
   jsonURL?: string,
   status?: 'pending' | 'success' | 'failure',
   setPageCount: (pageCount: number) => void,
-  downloadSource: () => void
+  downloadSource: () => Promise<void>
 }
 
 type State = {

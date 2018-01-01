@@ -2,6 +2,7 @@
  * @flow
  */
 
+import { generateResume } from '../preview/actions'
 import type { FormAction as Action, FormValues } from './types'
 import type { AsyncAction } from '../../app/types'
 
@@ -46,6 +47,15 @@ function uploadJSON(file: File): AsyncAction {
     } catch (err) {
       dispatch(uploadJSONFailure())
     }
+  }
+}
+
+function uploadFileAndGenerateResume(file: File): AsyncAction {
+  return async (dispatch, getState) => {
+    await dispatch(uploadJSON(file))
+    const resumeData = getState().form.resume.values
+    const orderedSections = getState().orderedSections.sections
+    await dispatch(generateResume({ ...resumeData, orderedSections }))
   }
 }
 
@@ -176,5 +186,6 @@ export {
   addProjectKeyword,
   removeProjectKeyword,
   addAward,
-  removeAward
+  removeAward,
+  uploadFileAndGenerateResume
 }

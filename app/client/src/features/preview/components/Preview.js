@@ -14,6 +14,7 @@ import BlankPDF from '../assets/blank.pdf'
 const Wrapper = styled.div`
   width: 50%;
   position: relative;
+  overflow-y: auto;
 `
 
 const ResumeDocument = styled(Document)`
@@ -55,7 +56,7 @@ class Preview extends Component<Props, State> {
   state = {
     numPages: 1,
     currPage: 1,
-    zoom: 65,
+    zoom: 90,
     isPrinting: false
   }
 
@@ -77,13 +78,13 @@ class Preview extends Component<Props, State> {
 
   zoomIn = () => {
     this.setState(prevState => ({
-      zoom: Math.min(prevState.zoom + 10, 85)
+      zoom: Math.min(prevState.zoom + 10, 90)
     }))
   }
 
   zoomOut = () => {
     this.setState(prevState => ({
-      zoom: Math.max(prevState.zoom - 10, 45)
+      zoom: Math.max(prevState.zoom - 10, 40)
     }))
   }
 

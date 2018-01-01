@@ -10,12 +10,13 @@ import { colors } from '../../../common/theme'
 
 const Wrapper = styled.div`
   width: calc(100% - 2px);
-  background: ${darken(0.02, colors.background)};
   display: flex;
+  background: ${darken(0.01, colors.background)};
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
   margin-bottom: 10px;
+  border-bottom: 1px solid ${colors.borders};
   border-radius: 2px;
   user-select: none;
 `

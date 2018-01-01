@@ -8,5 +8,16 @@ import LabeledInput, { Label, Input } from './LabeledInput'
 import Button from './Button'
 import RoundButton from './RoundButton'
 import ScrollToTop from './ScrollToTop'
+import Loader from './Loader'
 
-export { Button, RoundButton, Divider, Icon, LabeledInput, Label, Input, ScrollToTop }
+export {
+  Button,
+  RoundButton,
+  Divider,
+  Icon,
+  LabeledInput,
+  Label,
+  Input,
+  ScrollToTop,
+  Loader
+}

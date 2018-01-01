@@ -51,7 +51,11 @@ type ValuesWithSectionOrder = FormValues & {
 }
 
 function generateResume(resumeData: ValuesWithSectionOrder): AsyncAction {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    if (getState().preview.resume.status === 'pending') {
+      return
+    }
+
     dispatch(generateResumeRequest())
 
     const { fetch, URL } = window

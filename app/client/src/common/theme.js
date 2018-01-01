@@ -65,6 +65,18 @@ const animations = {
     to {
       box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
     }
+  `,
+
+  load: keyframes`
+    0%, 80%, 100% {
+      box-shadow: 0 0;
+      height: 4em;
+    }
+
+  40% {
+      box-shadow: 0 -2em;
+      height: 5em;
+    }
   `
 }
 

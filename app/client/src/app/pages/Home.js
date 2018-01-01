@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { Loader } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearPreview } from '../../features/preview/actions'
 import { clearState } from '../actions'
@@ -53,8 +54,18 @@ const FormInput = styled.input`
   display: none;
 `
 
+const LoadWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 type Props = {
   hasPrevSession: boolean,
+  status: string,
+  isUploading: boolean,
   clearState: () => void,
   clearPreview: () => void,
   uploadFileAndGenerateResume: (file: File) => Promise<void>,
@@ -71,7 +82,23 @@ class Home extends Component<Props> {
   }
 
   render() {
-    const { hasPrevSession, clearState, clearPreview } = this.props
+    const {
+      hasPrevSession,
+      status,
+      isUploading,
+      clearState,
+      clearPreview
+    } = this.props
+
+    // Show loading screen if resume is generating or if file is still uploading
+    if (status === 'pending' || isUploading) {
+      return (
+        <LoadWrapper>
+          <Loader />
+        </LoadWrapper>
+      )
+    }
+
     return (
       <Wrapper>
         {hasPrevSession && (
@@ -91,7 +118,9 @@ class Home extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    hasPrevSession: hasPrevSession(state)
+    hasPrevSession: hasPrevSession(state),
+    status: state.preview.resume.status,
+    isUploading: state.form.resume.isUploading
   }
 }
 

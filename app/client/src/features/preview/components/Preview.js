@@ -8,6 +8,7 @@ import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
+import { Loader } from '../../../common/components'
 import type { State as ReduxState } from '../../../app/types'
 import BlankPDF from '../assets/blank.pdf'
 
@@ -137,7 +138,7 @@ class Preview extends Component<Props, State> {
         <ResumeDocument
           file={resumeURL || BlankPDF}
           onLoadSuccess={this.setPageCount}
-          loading={<div />}
+          loading={<Loader />}
         >
           <ResumePage
             pageNumber={currPage}

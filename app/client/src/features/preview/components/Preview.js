@@ -13,7 +13,7 @@ import type { State as ReduxState } from '../../../app/types'
 import BlankPDF from '../assets/blank.pdf'
 
 const Wrapper = styled.div`
-  width: 50%;
+  width: 60%;
   position: relative;
   overflow-y: auto;
 `

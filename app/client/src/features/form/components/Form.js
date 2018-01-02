@@ -24,7 +24,7 @@ import type { State } from '../../../app/types'
 import type { Section } from '../../../common/types'
 
 const StyledForm = styled.form`
-  width: 50%;
+  width: 40%;
   margin: 0;
   padding: 0;
   border-right: 1px solid ${colors.borders};

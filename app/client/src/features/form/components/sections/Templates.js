@@ -18,8 +18,12 @@ const Grid = styled.div`
   grid-gap: 20px;
   margin: 20px 0;
 
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
   @media screen and (max-width: 768px) {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
   }
 `
 

@@ -23,7 +23,7 @@ const Content = styled.main`
   margin-top: ${sizes.header};
   margin-left: ${sizes.sideNav};
   width: calc(100% - ${sizes.sideNav});
-  height: calc(100% - ${sizes.header} - ${sizes.footer} - 1px);
+  height: calc(100% - ${sizes.header} - ${sizes.footer} - 2px);
 
   @media screen and (max-width: 1000px) {
     width: 100%;

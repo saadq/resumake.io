@@ -16,7 +16,7 @@
 \usepackage[absolute]{textpos}
 \usepackage[UKenglish]{babel}
 \usepackage[UKenglish]{isodate}
-\usepackage{fontspec,xltxtra,xunicode}
+\usepackage{fontspec,xltxtra,xunicode,fontenc}
 \usepackage{textcomp}
 
 % Color definitions
@@ -27,9 +27,9 @@
 
 % Set main fonts
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Color=primary, Path = fonts/lato/]{Lato-Lig}
+\setmainfont[Color=primary, Path = fonts/raleway/]{Raleway-ExtraLight}
 \setsansfont[Scale=MatchLowercase,Mapping=tex-text, Path = fonts/raleway/]{Raleway-ExtraLight}
-\newcommand{\custombold}[1]{\color{subheadings}\fontspec[Path = fonts/lato/]{Lato-Reg}\selectfont #1 \normalfont}
+\newcommand{\custombold}[1]{\color{subheadings}\fontspec[Path = fonts/raleway/]{Raleway-Regular}\selectfont #1 \normalfont}
 
 % Date command
 \setlength{\TPHorizModule}{1mm}
@@ -45,8 +45,8 @@ Last Updated on
 \newcommand{\namesection}[3]{
 	\centering{
 		\sffamily
-		\fontspec[Path = fonts/lato/]{Lato-Hai}\fontsize{40pt}{10cm}\selectfont #1
-		\fontspec[Path = fonts/lato/]{Lato-Lig}\selectfont #2
+		\fontspec[Path = fonts/raleway/]{Raleway-ExtraLight}\fontsize{40pt}{10cm}\selectfont #1
+		\fontspec[Path = fonts/raleway/]{Raleway-ExtraLight}\selectfont #2
 	} \\
 	\vspace{5pt}
 	\centering{ \color{headings}\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{14pt}\selectfont #3}
@@ -57,15 +57,15 @@ Last Updated on
 
 % Headings command
 \titleformat{\section}{\color{headings}
-\scshape\fontspec[Path = fonts/lato/]{Lato-Lig}\fontsize{16pt}{24pt}\selectfont \raggedright\uppercase}{} {0em}{}
+\scshape\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{16pt}{24pt}\selectfont \raggedright\uppercase}{} {0em}{}
 
 % Subeadings command
 \titleformat{\subsection}{\color{subheadings}
-\fontspec[Path = fonts/lato/]{Lato-Bol}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase}{}{0em}{}
+\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase}{}{0em}{}
 \titlespacing{\subsection}{0pt}{\parskip}{-\parskip}
 \titlespacing{\subsubsection}{0pt}{\parskip}{-\parskip}
 \newcommand{\runsubsection}[1]{\color{subheadings}
-\fontspec[Path = fonts/lato/]{Lato-Bol}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase {#1} \normalfont}
+\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{12pt}{12pt}\selectfont\bfseries\uppercase {#1} \normalfont}
 
 % Descriptors command
 \newcommand{\descript}[1]{\color{subheadings}\raggedright\scshape\fontspec[Path = fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{13pt}\selectfont {#1} \normalfont}

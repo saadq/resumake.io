@@ -223,6 +223,8 @@ const generator: Template3Generator = {
     \\usepackage{tocloft}
     \\usepackage{enumitem}
     \\usepackage{textcomp}
+    \\usepackage[utf8]{inputenc}
+    \\usepackage[T1]{fontenc}
 
 
     %-----------------------------------------------------------

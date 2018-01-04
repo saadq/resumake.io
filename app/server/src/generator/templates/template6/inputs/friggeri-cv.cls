@@ -68,7 +68,7 @@
 ItalicFont=texgyreheros-italic.otf,
 BoldItalicFont=texgyreheros-bolditalic.otf]
 {texgyreheros-regular.otf}
-\newfontfamily\thinfont[]{Lato-Light.ttf}
+\newfontfamily\thinfont[]{Raleway-ExtraLight.otf}
 \newfontfamily\headingfont[]{texgyreheros-bold.otf}
 
 \defaultfontfeatures{Mapping=tex-text}

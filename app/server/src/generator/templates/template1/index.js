@@ -335,6 +335,8 @@ function template1(values: SanitizedValues) {
     \\usepackage{amsmath}
     \\usepackage{amssymb}
     \\usepackage{textcomp}
+    \\usepackage[utf8]{inputenc}
+    \\usepackage[T1]{fontenc}
     \\textheight=10in
     \\pagestyle{empty}
     \\raggedright

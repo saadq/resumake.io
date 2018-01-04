@@ -234,6 +234,8 @@ function template5(values: SanitizedValues) {
     \\documentclass[line,margin]{res}
     \\usepackage[none]{hyphenat}
     \\usepackage{textcomp}
+    \\usepackage[utf8]{inputenc}
+    \\usepackage[T1]{fontenc}
     \\begin{document}
       ${generator.profileSection(values.basics)}
       \\begin{resume}

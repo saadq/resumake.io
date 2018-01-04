@@ -213,7 +213,9 @@ const generator: Template9Generator = {
   resumeHeader() {
     return stripIndent`
       \\usepackage[english]{babel}
-      \\usepackage[utf8x]{inputenc}
+      \\usepackage[utf8]{inputenc}
+      \\usepackage[T1]{fontenc}
+      \\usepackage{lmodern}      
       \\usepackage[protrusion=true,expansion=true]{microtype}
       \\usepackage[svgnames]{xcolor}  % Colours by their 'svgnames'
       \\usepackage[margin=0.75in]{geometry}

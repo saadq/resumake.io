@@ -18,7 +18,8 @@ const Loader = styled.div`
   transform: translateZ(0);
   animation-delay: -0.16s;
 
-  &:before, &:after {
+  &:before,
+  &:after {
     background: ${colors.primary};
     animation: ${animations.load} 1s infinite ease-in-out;
     width: 1em;

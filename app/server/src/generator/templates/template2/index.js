@@ -295,30 +295,32 @@ function template2(values: SanitizedValues) {
   return stripIndent`
     ${generator.resumeHeader()}
     \\begin{document}
-    ${values.orderedSections.map(section => {
-      switch (section) {
-        case 'profile':
-          return generator.profileSection(values.basics)
+    ${values.orderedSections
+      .map(section => {
+        switch (section) {
+          case 'profile':
+            return generator.profileSection(values.basics)
 
-        case 'education':
-          return generator.educationSection(values.education)
+          case 'education':
+            return generator.educationSection(values.education)
 
-        case 'work':
-          return generator.workSection(values.work)
+          case 'work':
+            return generator.workSection(values.work)
 
-        case 'skills':
-          return generator.skillsSection(values.skills)
+          case 'skills':
+            return generator.skillsSection(values.skills)
 
-        case 'projects':
-          return generator.projectsSection(values.projects)
+          case 'projects':
+            return generator.projectsSection(values.projects)
 
-        case 'awards':
-          return generator.awardsSection(values.awards)
+          case 'awards':
+            return generator.awardsSection(values.awards)
 
-        default:
-          return ''
-      }
-    }).join('\n')}
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
     ${WHITESPACE}
     \\end{document}
   `

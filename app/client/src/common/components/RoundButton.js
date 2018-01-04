@@ -19,7 +19,7 @@ const RoundButton = Button.extend`
   background: ${colors.background};
 
   i {
-    transition: all .4s ease;
+    transition: all 0.4s ease;
   }
 
   &:hover {

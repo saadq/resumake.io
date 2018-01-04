@@ -112,7 +112,9 @@ const generator: Template4Generator = {
           dateRange = endDate
         }
 
-        const locationAndDate = [location, dateRange].filter(Boolean).join(' | ')
+        const locationAndDate = [location, dateRange]
+          .filter(Boolean)
+          .join(' | ')
 
         if (locationAndDate) {
           line1 += `\\hfill \\location{${locationAndDate}}`
@@ -148,7 +150,14 @@ const generator: Template4Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\section{${work.heading || 'Experience'}}
       ${work.jobs.map(job => {
-        const { company, position, location, startDate, endDate, highlights } = job
+        const {
+          company,
+          position,
+          location,
+          startDate,
+          endDate,
+          highlights
+        } = job
 
         let line1 = ''
         let dateRange = ''

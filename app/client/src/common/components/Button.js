@@ -16,7 +16,7 @@ const Button = styled.button`
   margin-top: 10px;
   margin-bottom: 10px;
   outline: none;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
   user-select: none;
 
   &:hover {

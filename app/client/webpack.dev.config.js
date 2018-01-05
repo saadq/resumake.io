@@ -1,16 +1,12 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 const config = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
     'babel-polyfill',
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
     './index.js'
   ],
 
@@ -71,23 +67,12 @@ const config = {
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      test: /\.js$/,
-      options: {
-        eslint: {
-          configFile: resolve(__dirname, '.eslintrc'),
-          cache: false
-        }
-      }
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: './index.html',
       favicon: './app/assets/favicon.ico',
       inject: 'body'
     }),
-    new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)

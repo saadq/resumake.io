@@ -5,6 +5,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
+import { hot } from 'react-hot-loader'
 import { ScrollToTop } from '../common/components'
 import { Home, Generator, About } from './pages'
 import { colors } from '../common/theme'
@@ -50,4 +51,4 @@ function App() {
   )
 }
 
-export default App
+export default hot(module)(App)

@@ -2,7 +2,6 @@
  * @flow
  */
 
-// Sections must be lowercased due to them being used directly for routes
 type Section =
   | 'templates'
   | 'profile'

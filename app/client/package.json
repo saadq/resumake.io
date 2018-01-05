@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "The client side source for Resumake.",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --config webpack.dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.config.js --progress --profile --colors",
     "clean": "rimraf dist",
     "lint": "blyss | snazzy",
@@ -63,10 +63,9 @@
     "flow-typed": "^2.1.5",
     "html-webpack-plugin": "2.30.0",
     "jest": "^20.0.0",
-    "open-browser-webpack-plugin": "0.0.5",
     "prettier": "^1.9.2",
     "react-addons-test-utils": "15.6.0",
-    "react-hot-loader": "^3.0.0-beta.7",
+    "react-hot-loader": "^4.0.0-beta.12",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
     "redux": "^3.7.2",
@@ -75,7 +74,7 @@
     "redux-thunk": "^2.2.0",
     "rimraf": "2.6.2",
     "url-loader": "0.5.8",
-    "webpack": "3.5.6",
-    "webpack-dev-server": "2.7.1"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   }
 }

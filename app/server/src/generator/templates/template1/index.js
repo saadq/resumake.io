@@ -30,13 +30,13 @@ const generator: Template1Generator = {
     }
 
     return stripIndent`
-    %==== Profile ====%
-    \\vspace*{-10pt}
-    \\begin{center}
-      ${line1}
-      ${line2}
-    \\end{center}
-  `
+      %==== Profile ====%
+      \\vspace*{-10pt}
+      \\begin{center}
+        ${line1}
+        ${line2}
+      \\end{center}
+    `
   },
 
   educationSection(education) {
@@ -109,63 +109,63 @@ const generator: Template1Generator = {
     }
 
     return source`
-    %==== Experience ====%
-    \\header{${work.heading || 'Experience'}}
-    \\vspace{1mm}
+      %==== Experience ====%
+      \\header{${work.heading || 'Experience'}}
+      \\vspace{1mm}
 
-    ${work.jobs.map(job => {
-      const {
-        company,
-        position,
-        location,
-        startDate,
-        endDate,
-        highlights
-      } = job
+      ${work.jobs.map(job => {
+        const {
+          company,
+          position,
+          location,
+          startDate,
+          endDate,
+          highlights
+        } = job
 
-      let line1 = ''
-      let line2 = ''
-      let highlightLines = ''
+        let line1 = ''
+        let line2 = ''
+        let highlightLines = ''
 
-      if (company) {
-        line1 += `\\textbf{${company}}`
-      }
+        if (company) {
+          line1 += `\\textbf{${company}}`
+        }
 
-      if (location) {
-        line1 += ` \\hfill ${location}`
-      }
+        if (location) {
+          line1 += ` \\hfill ${location}`
+        }
 
-      if (position) {
-        line2 += `\\textit{${position}}`
-      }
+        if (position) {
+          line2 += `\\textit{${position}}`
+        }
 
-      if (startDate && endDate) {
-        line2 += ` \\hfill ${startDate} | ${endDate}`
-      } else if (startDate) {
-        line2 += ` \\hfill ${startDate} | Present`
-      } else if (endDate) {
-        line2 += ` \\hfill ${endDate}`
-      }
+        if (startDate && endDate) {
+          line2 += ` \\hfill ${startDate} | ${endDate}`
+        } else if (startDate) {
+          line2 += ` \\hfill ${startDate} | Present`
+        } else if (endDate) {
+          line2 += ` \\hfill ${endDate}`
+        }
 
-      if (line1) line1 += '\\\\'
-      if (line2) line2 += '\\\\'
+        if (line1) line1 += '\\\\'
+        if (line2) line2 += '\\\\'
 
-      if (highlights) {
-        highlightLines = source`
-            \\vspace{-1mm}
-            \\begin{itemize} \\itemsep 1pt
-              ${highlights.map(highlight => `\\item ${highlight}`)}
-            \\end{itemize}
-          `
-      }
+        if (highlights) {
+          highlightLines = source`
+              \\vspace{-1mm}
+              \\begin{itemize} \\itemsep 1pt
+                ${highlights.map(highlight => `\\item ${highlight}`)}
+              \\end{itemize}
+            `
+        }
 
-      return stripIndent`
-        ${line1}
-        ${line2}
-        ${highlightLines}
-      `
-    })}
-  `
+        return stripIndent`
+          ${line1}
+          ${line2}
+          ${highlightLines}
+        `
+      })}
+    `
   },
 
   skillsSection(skills) {

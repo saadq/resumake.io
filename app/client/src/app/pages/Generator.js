@@ -28,6 +28,7 @@ const Content = styled.main`
   @media screen and (max-width: 1000px) {
     width: 100%;
     margin-left: 0;
+    flex-direction: column;
   }
 `
 

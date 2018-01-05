@@ -14,8 +14,6 @@ const Fieldset = styled.fieldset`
   padding: 0;
   width: 85%;
   max-width: 100%;
-  position: relative;
-  top: 25px;
 `
 
 const Heading = styled.h1`

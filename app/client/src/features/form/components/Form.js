@@ -26,9 +26,15 @@ import type { Section } from '../../../common/types'
 const StyledForm = styled.form`
   width: 40%;
   margin: 0;
-  padding: 0;
+  padding: 25px 0 0 0;
   border-right: 1px solid ${colors.borders};
   overflow-y: auto;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    margin-bottom: 25px;
+    overflow: visible;
+  }
 `
 
 type Props = {

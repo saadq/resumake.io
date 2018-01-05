@@ -5,13 +5,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
+import MakeButton from '../../ordered-sections/components/MakeButton'
 import { Icon } from '../../../common/components'
 import { colors } from '../../../common/theme'
 
 const Wrapper = styled.div`
   width: calc(100% - 2px);
   display: flex;
-  background: ${darken(0.01, colors.background)};
+  background: ${darken(0.02, colors.background)};
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
@@ -19,6 +20,10 @@ const Wrapper = styled.div`
   border-bottom: 1px solid ${colors.borders};
   border-radius: 2px;
   user-select: none;
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
 `
 
 const ButtonGroup = styled.div`
@@ -35,8 +40,21 @@ const ButtonGroup = styled.div`
     justify-content: flex-end;
   }
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    ${props => (props.hideOnMobile ? 'display: none;' : '')} &:first-child,
+      last-child {
+      justify-content: center;
+    }
+  }
+`
+
+const MobileButton = MakeButton.extend`
+  margin: 0px;
+  @media screen and (min-width: 1000px) {
+    display: none;
   }
 `
 
@@ -74,8 +92,12 @@ const ToolButton = Button.extend`
   border-radius: 2px;
   margin: 0 2px;
 
-  @media screen and (max-width: 768px) {
-    margin: 2px 0;
+  @media screen and (max-width: 1000px) {
+    border: 1px solid ${colors.borders};
+    
+    i {
+      display: none;
+    }
   }
 `
 
@@ -85,6 +107,10 @@ const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 2px;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
 `
 
 const PageNumber = styled.span`
@@ -153,7 +179,7 @@ function Toolbar({
           <Icon type="arrow_forward" />
         </PageButton>
       </Pagination>
-      <ButtonGroup>
+      <ButtonGroup hideOnMobile>
         <ToolButton onClick={zoomOut}>
           <Icon type="zoom_out" />
         </ToolButton>
@@ -164,6 +190,9 @@ function Toolbar({
           <Icon type="print" />
         </ToolButton>
       </ButtonGroup>
+      <MobileButton type="submit" form="resume-form">
+        Make
+      </MobileButton>
     </Wrapper>
   )
 }

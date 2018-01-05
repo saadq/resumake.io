@@ -63,6 +63,11 @@ const SectionButton = Button.extend`
     transition: all 0.4s ease;
   }
 
+  &:active {
+    outline: none;
+    background: transparent;
+  }
+
   &:hover {
     background: ${colors.primary};
     color: ${colors.background};

@@ -30,6 +30,12 @@ const Button = styled.button`
     top: 1px;
   }
 
+  &:focus {
+    position: relative;
+    background: transparent;
+    top: 1px;
+  }
+
   i {
     color: ${colors.primary};
   }

@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
 import { Loader } from '../../../common/components'
+import { sizes } from '../../../common/theme'
 import type { State as ReduxState } from '../../../app/types'
 import BlankPDF from '../assets/blank.pdf'
 
@@ -16,6 +17,13 @@ const Wrapper = styled.div`
   width: 60%;
   position: relative;
   overflow-y: auto;
+  padding-bottom: 25px;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    overflow: visible;
+    margin-bottom: calc(${sizes.footer} + 25px);
+  }
 `
 
 const ResumeDocument = styled(Document)`
@@ -143,7 +151,6 @@ class Preview extends Component<Props, State> {
           <ResumePage
             pageNumber={currPage}
             zoom={this.state.zoom}
-            scale={2}
             renderAnnotations={false}
             renderTextLayer={false}
           />

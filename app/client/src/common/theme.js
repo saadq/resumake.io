@@ -8,7 +8,6 @@ const colors = {
   background: '#14171d',
   foreground: '#c0c5ce',
   primary: '#5b56b8',
-  accent: '#111',
   borders: '#202530'
 }
 
@@ -70,12 +69,10 @@ const animations = {
   load: keyframes`
     0%, 80%, 100% {
       box-shadow: 0 0;
-      height: 4em;
     }
 
   40% {
       box-shadow: 0 -2em;
-      height: 5em;
     }
   `,
 

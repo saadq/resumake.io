@@ -26,23 +26,14 @@ const Wrapper = styled.div`
   }
 `
 
-const ResumeDocument = styled(Document)`
-  width: 100%;
-`
-
 const ResumePage = styled(Page)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100% !important;
 
-  canvas,
-  .ReactPDF__Page__textContent {
-    max-width: 100%;
-    width: ${props => props.zoom}% !important;
-    min-width: 50%;
+  canvas {
+    max-width: 100% !important;
     height: auto !important;
-    transition: box-shadow 0.4s ease;
   }
 `
 
@@ -57,7 +48,7 @@ type Props = {
 type State = {
   numPages: number,
   currPage: number,
-  zoom: number,
+  scale: number,
   isPrinting: boolean
 }
 
@@ -65,7 +56,7 @@ class Preview extends Component<Props, State> {
   state = {
     numPages: 1,
     currPage: 1,
-    zoom: 90,
+    scale: 1,
     isPrinting: false
   }
 
@@ -87,13 +78,13 @@ class Preview extends Component<Props, State> {
 
   zoomIn = () => {
     this.setState(prevState => ({
-      zoom: Math.min(prevState.zoom + 10, 90)
+      scale: Math.min(prevState.scale + 0.1, 1)
     }))
   }
 
   zoomOut = () => {
     this.setState(prevState => ({
-      zoom: Math.max(prevState.zoom - 10, 40)
+      scale: Math.max(prevState.scale - 0.1, 0.5)
     }))
   }
 
@@ -143,18 +134,18 @@ class Preview extends Component<Props, State> {
           zoomOut={this.zoomOut}
         />
         <LoadingBar status={status} />
-        <ResumeDocument
+        <Document
           file={resumeURL || BlankPDF}
           onLoadSuccess={this.setPageCount}
           loading={<Loader />}
         >
           <ResumePage
             pageNumber={currPage}
-            zoom={this.state.zoom}
+            scale={this.state.scale}
             renderAnnotations={false}
             renderTextLayer={false}
           />
-        </ResumeDocument>
+        </Document>
       </Wrapper>
     )
   }

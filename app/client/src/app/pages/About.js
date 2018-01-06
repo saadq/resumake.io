@@ -5,7 +5,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { darken, rgba } from 'polished'
-import { Logo, Divider, RoundButton, Icon, Label, Input, Loader } from '../../common/components'
+import {
+  Logo,
+  Divider,
+  RoundButton,
+  Icon,
+  Label,
+  Input,
+  Loader
+} from '../../common/components'
 import { LoadingBar } from '../../features/preview/components'
 import { colors } from '../../common/theme'
 
@@ -228,7 +236,9 @@ function About() {
               document.
             </li>
           </ListAnswer>
-          <Question>How do I report a bug or submit a feature request?</Question>
+          <Question>
+            How do I report a bug or submit a feature request?
+          </Question>
           <Answer>
             Feel free to open an issue{' '}
             <Link href="https://github.com/saadq/latexresu.me/issues">
@@ -249,8 +259,8 @@ function About() {
           <Answer>
             Glad you liked the project! If you want to show your appreciation,{' '}
             <Link href="https://www.paypal.me/saadquadri">donations</Link> are
-            very much appreciated. Or, if you'd just like to send me a message, you can send me an{' '}
-            <Link href="mailto:saad@saadq.com">email</Link>.
+            very much appreciated. Or, if you'd just like to send me a message,
+            you can send me an <Link href="mailto:saad@saadq.com">email</Link>.
           </Answer>
         </section>
         <SectionDivider />

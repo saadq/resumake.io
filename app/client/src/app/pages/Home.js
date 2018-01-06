@@ -221,8 +221,14 @@ class Home extends Component<Props> {
         <Main>
           <LeftSection>
             <Logo big />
-            <PrimaryButton to="/generator" onClick={clearState}>Make New Resume</PrimaryButton>
-            {hasPrevSession && <Button to="/generator" onClick={clearPreview}>Continue Session</Button>}
+            <PrimaryButton to="/generator" onClick={clearState}>
+              Make New Resume
+            </PrimaryButton>
+            {hasPrevSession && (
+              <Button to="/generator" onClick={clearPreview}>
+                Continue Session
+              </Button>
+            )}
             <Label htmlFor="import-json">Import JSON</Label>
             <Input id="import-json" type="file" onChange={this.onFileUpload} />
           </LeftSection>

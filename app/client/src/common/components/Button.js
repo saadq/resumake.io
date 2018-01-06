@@ -25,17 +25,6 @@ const Button = styled.button`
     cursor: pointer;
   }
 
-  &:active {
-    position: relative;
-    top: 1px;
-  }
-
-  &:focus {
-    position: relative;
-    background: transparent;
-    top: 1px;
-  }
-
   i {
     color: ${colors.primary};
   }

@@ -5,11 +5,11 @@
 import { keyframes } from 'styled-components'
 
 const colors = {
-  background: '#1a1d25',
+  background: '#14171d',
   foreground: '#c0c5ce',
-  primary: '#30be9d',
+  primary: '#5b56b8',
   accent: '#111',
-  borders: '#262c39'
+  borders: '#202530'
 }
 
 const sizes = {

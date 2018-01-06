@@ -6,61 +6,177 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { lighten, darken, rgba } from 'polished'
 import { Loader } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
-import { clearPreview } from '../../features/preview/actions'
 import { clearState } from '../actions'
+import { clearPreview } from '../../features/preview/actions'
 import { hasPrevSession } from '../selectors'
 import { colors } from '../../common/theme'
 import type { State } from '../types'
 
 const Wrapper = styled.div`
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `
 
-const Button = styled(Link)`
-  background: ${colors.background};
-  color: white;
-  text-decoration: none;
-  border: 1px solid white;
-  margin: 5px 0;
-  padding: 5px 15px;
-  border-radius: 2px;
-  height: 30px;
-  width: 150px;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 0.75em;
-  letter-spacing: 1.5px;
+const Main = styled.main`
+  flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
 
-  &:hover {
-    cursor: pointer;
-    background: white;
-    color: black;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `
 
-const FormLabel = Button.withComponent('label')
-
-const FormInput = styled.input`
-  display: none;
-`
-
-const LoadWrapper = styled.div`
-  width: 100%;
-  height: 100%;
+const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
 `
+
+const LeftSection = Section.extend`
+  width: 40%;
+  flex-direction: column;
+`
+
+const RightSection = Section.extend`
+  width: 60%;
+`
+
+const Logo = styled.h1`
+  text-transform: lowercase;
+  text-decoration: none;
+  font-family: 'Nexa Bold';
+  font-size: 3.5em;
+  margin: 0;
+  color: white;
+  margin-bottom: 5px;
+`
+
+const Accent = styled.em`
+  font-style: normal;
+  color: ${colors.primary};
+`
+
+const Button = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85em;
+  text-align: center;
+  text-decoration: none;
+  width: 175px;
+  height: 45px;
+  margin: 7px 0;
+  background: transparent;
+  color: white;
+  border-radius: 100px;
+  border: 1px solid ${darken(0.1, colors.primary)};
+  box-shadow: 0 0 0 0 ${rgba(colors.primary, 0.7)};
+  transition: all 0.4s ease;
+
+  &:hover {
+    background: linear-gradient(
+      40deg,
+      ${darken(0.5, colors.primary)},
+      ${darken(0.3, colors.primary)}
+    );
+    animation: none;
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 40px rgba(0, 0, 0, 0.16);
+    border-color: ${lighten(0.15, colors.primary)};
+    color: ${lighten(0.15, colors.primary)};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const PrimaryButton = Button.extend`
+  background: linear-gradient(
+    40deg,
+    ${darken(0.3, colors.primary)},
+    ${colors.primary}
+  );
+
+  &:hover {
+    background: linear-gradient(
+      40deg,
+      ${darken(0.4, colors.primary)},
+      ${colors.primary}
+    );
+  }
+`
+
+const ResumePreview = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const Image = styled.img`
+  width: 50%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+  box-shadow: 0 2px 25px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background: white;
+
+  &:first-child {
+    top: 10em;
+    left: -15em;
+    z-index: 3;
+  }
+
+  &:last-child {
+    z-index: 1;
+    top: -10em;
+    left: 15em;
+  }
+`
+
+const Footer = styled.footer`
+  width: 100%;
+  height: 75px;
+  background: ${darken(0.02, colors.background)};
+  border-top: 1px solid ${colors.borders};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: ${lighten(0.3, colors.background)};
+    margin: 0 1em;
+    font-size: 0.8em;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+const ctx = require.context('../../features/form/assets/img', true)
+const images = ctx.keys().map(ctx)
 
 type Props = {
   hasPrevSession: boolean,
@@ -72,8 +188,23 @@ type Props = {
   history: RouterHistory
 }
 
+const LoadWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const Label = Button.withComponent('label')
+
+const Input = styled.input`
+  display: none;
+`
+
 class Home extends Component<Props> {
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
+    console.log('running')
     const { uploadFileAndGenerateResume, history } = this.props
     const file = e.target.files[0]
 
@@ -101,16 +232,31 @@ class Home extends Component<Props> {
 
     return (
       <Wrapper>
-        {hasPrevSession && (
-          <Button to="/generator" onClick={clearPreview}>
-            Continue Session
-          </Button>
-        )}
-        <Button to="/generator" onClick={clearState}>
-          Make New Resume
-        </Button>
-        <FormLabel htmlFor="import-json">Import JSON</FormLabel>
-        <FormInput id="import-json" type="file" onChange={this.onFileUpload} />
+        <Main>
+          <LeftSection>
+            <Logo>
+              resu<Accent>make</Accent>
+            </Logo>
+            <PrimaryButton to="/generator" onClick={clearState}>Make New Resume</PrimaryButton>
+            {hasPrevSession && <Button to="/generator" onClick={clearPreview}>Continue Session</Button>}
+            <Label htmlFor="import-json">Import JSON</Label>
+            <Input id="import-json" type="file" onChange={this.onFileUpload} />
+          </LeftSection>
+          <RightSection>
+            <ResumePreview>
+              <Image src={images[0]} />
+              <Image src={images[1]} />
+              <Image src={images[2]} />
+            </ResumePreview>
+          </RightSection>
+        </Main>
+        <Footer>
+          <Link to="/about">About</Link>
+          <a href="https://github.com/saadq/resumake">Source</a>
+          <a href="https://github.com/saadq/resumake/issues">Issues</a>
+          <a href="mailto:saad@saadq.com">Contact</a>
+          <a href="https://www.paypal.me/saadquadri">Donate</a>
+        </Footer>
       </Wrapper>
     )
   }

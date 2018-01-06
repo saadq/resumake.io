@@ -7,7 +7,6 @@ import { Switch, Route } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 import { ScrollToTop } from '../common/components'
-import NewHome from './pages/NewHome'
 import { Home, Generator, About } from './pages'
 import { colors } from '../common/theme'
 
@@ -43,8 +42,7 @@ function App() {
   return (
     <ScrollToTop>
       <Switch>
-        <Route exact path="/" component={NewHome} />
-        <Route path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/generator" component={Generator} />
         <Route path="/about" component={About} />
         <Route path="*" render={() => <h1>ono 404</h1>} />

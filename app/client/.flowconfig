@@ -15,3 +15,7 @@ module.file_ext=.json
 module.file_ext=.jsx
 module.file_ext=.pdf
 module.file_ext=.png
+module.file_ext=.jpg
+module.file_ext=.svg
+module.file_ext=.otf
+module.file_ext=.ttf

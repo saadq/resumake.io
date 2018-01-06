@@ -9,6 +9,7 @@ import Button from './Button'
 import RoundButton from './RoundButton'
 import ScrollToTop from './ScrollToTop'
 import Loader from './Loader'
+import Logo from './Logo'
 
 export {
   Button,
@@ -19,5 +20,6 @@ export {
   Label,
   Input,
   ScrollToTop,
-  Loader
+  Loader,
+  Logo
 }

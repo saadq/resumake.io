@@ -4,11 +4,12 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { Link, type Location } from 'react-router-dom'
 import Form from '../../features/form/components'
 import Preview from '../../features/preview/components'
 import { SideNav, Progress } from '../../features/ordered-sections/components'
+import { Logo } from '../../common/components'
 import { colors, sizes } from '../../common/theme'
+import type { Location } from 'react-router-dom'
 
 const Layout = styled.div`
   display: flex;
@@ -44,19 +45,6 @@ const Header = styled.header`
   border-bottom: 1px solid ${colors.borders};
 `
 
-const Logo = styled(Link)`
-  text-transform: lowercase;
-  text-decoration: none;
-  font-family: 'Nexa Bold';
-  font-size: 2.5em;
-  color: white;
-`
-
-const Accent = styled.em`
-  font-style: normal;
-  color: ${colors.primary};
-`
-
 const Footer = styled.footer`
   width: 100%;
   height: ${sizes.footer};
@@ -78,9 +66,7 @@ function Generator({ location }: Props) {
   return (
     <Layout>
       <Header>
-        <Logo to="/">
-          Resu<Accent>make</Accent>
-        </Logo>
+        <Logo />
       </Header>
       <SideNav />
       <Content>

@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
-import { Loader } from '../../common/components'
+import { Loader, Logo } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearState } from '../actions'
 import { clearPreview } from '../../features/preview/actions'
@@ -46,21 +46,6 @@ const LeftSection = Section.extend`
 
 const RightSection = Section.extend`
   width: 60%;
-`
-
-const Logo = styled.h1`
-  text-transform: lowercase;
-  text-decoration: none;
-  font-family: 'Nexa Bold';
-  font-size: 3.5em;
-  margin: 0;
-  color: white;
-  margin-bottom: 5px;
-`
-
-const Accent = styled.em`
-  font-style: normal;
-  color: ${colors.primary};
 `
 
 const Button = styled(Link)`
@@ -102,6 +87,7 @@ const Button = styled(Link)`
 `
 
 const PrimaryButton = Button.extend`
+  margin-top: 15px;
   background: linear-gradient(
     40deg,
     ${darken(0.3, colors.primary)},
@@ -234,9 +220,7 @@ class Home extends Component<Props> {
       <Wrapper>
         <Main>
           <LeftSection>
-            <Logo>
-              resu<Accent>make</Accent>
-            </Logo>
+            <Logo big />
             <PrimaryButton to="/generator" onClick={clearState}>Make New Resume</PrimaryButton>
             {hasPrevSession && <Button to="/generator" onClick={clearPreview}>Continue Session</Button>}
             <Label htmlFor="import-json">Import JSON</Label>

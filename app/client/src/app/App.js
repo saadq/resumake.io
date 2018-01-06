@@ -9,6 +9,7 @@ import { hot } from 'react-hot-loader'
 import { ScrollToTop } from '../common/components'
 import { Home, Generator, About } from './pages'
 import { colors } from '../common/theme'
+import Nexa from './assets/nexa.otf'
 
 injectGlobal`
   html, body, #app {
@@ -35,6 +36,11 @@ injectGlobal`
   .grabbing {
     cursor: move; /* fallback */
     cursor: grabbing;
+  }
+
+  @font-face {
+    font-family: Nexa;
+    src: url('${Nexa}') format('opentype');
   }
 `
 

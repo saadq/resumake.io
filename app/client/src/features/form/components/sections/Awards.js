@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput } from '../../../../common/components'
+import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { Award } from '..'
 import { addAward, removeAward } from '../../actions'
 import type { Awards as AwardsType } from '../../types'
@@ -25,6 +25,7 @@ function Awards({ awards, addAward, removeAward }: Props) {
         label="Section Heading"
         placeholder="Awards"
       />
+      <Divider />
       {awards.map((award, i) => <Award key={i} index={i} />)}
       <div className="section-buttons">
         <Button onClick={addAward} type="button">

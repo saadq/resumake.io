@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput } from '../../../../common/components'
+import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { Project } from '..'
 import {
   addProject,
@@ -38,6 +38,7 @@ function Projects({
         label="Section Heading"
         placeholder="Projects"
       />
+      <Divider />
       {projects.map((project, i) => (
         <Project
           key={i}

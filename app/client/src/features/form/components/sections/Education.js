@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput } from '../../../../common/components'
+import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { School } from '..'
 import { addSchool, removeSchool } from '../../actions'
 import type { Education as EducationType } from '../../types'
@@ -25,6 +25,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
         label="Section Heading"
         placeholder="Education"
       />
+      <Divider />
       {education.map((school, i) => <School key={i} index={i} />)}
       <Button onClick={addSchool} type="button">
         Add School

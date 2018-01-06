@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput } from '../../../../common/components'
+import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { Skill } from '..'
 import {
   addSkill,
@@ -38,6 +38,7 @@ function Skills({
         label="Section Heading"
         placeholder="Skills"
       />
+      <Divider />
       {skills.map((skill, i) => (
         <Skill
           key={i}

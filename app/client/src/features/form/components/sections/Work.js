@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput } from '../../../../common/components'
+import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { Job } from '..'
 import {
   addJob,
@@ -40,6 +40,7 @@ function Work({
         label="Section Heading"
         placeholder="Work Experience"
       />
+      <Divider />
       {work.map((job, i) => (
         <Job
           key={i}

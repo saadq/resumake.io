@@ -8,7 +8,7 @@ import { colors, animations } from '../../../common/theme'
 
 const OuterBar = styled.div`
   max-width: 100%;
-  width: 90%;
+  width: 612px;
   margin: 0 auto;
   position: relative;
   height: 4px;
@@ -17,7 +17,6 @@ const OuterBar = styled.div`
   overflow: hidden;
   opacity: ${props => (props.status === 'pending' ? 1 : 0)};
   transition: opacity 0.7s ease-in-out;
-  margin-bottom: 10px;
 `
 
 const InnerBar = styled.div`

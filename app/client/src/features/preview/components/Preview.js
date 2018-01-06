@@ -8,6 +8,7 @@ import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
+import MakeButton from '../../ordered-sections/components/MakeButton'
 import { Loader } from '../../../common/components'
 import { sizes } from '../../../common/theme'
 import type { State as ReduxState } from '../../../app/types'
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
   position: relative;
   overflow-y: auto;
   padding-bottom: 25px;
+  text-align: center;
 
   @media screen and (max-width: 1000px) {
     width: 100%;
@@ -34,6 +36,13 @@ const ResumePage = styled(Page)`
   canvas {
     max-width: 100% !important;
     height: auto !important;
+  }
+`
+
+const MobileButton = MakeButton.extend`
+  margin: 25px 0px;
+  @media screen and (min-width: 1000px) {
+    display: none;
   }
 `
 
@@ -122,6 +131,9 @@ class Preview extends Component<Props, State> {
 
     return (
       <Wrapper>
+        <MobileButton type="submit" form="resume-form">
+          Make
+        </MobileButton>
         <Toolbar
           resumeURL={resumeURL || BlankPDF}
           jsonURL={jsonURL}

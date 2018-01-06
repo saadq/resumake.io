@@ -5,7 +5,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
-import MakeButton from '../../ordered-sections/components/MakeButton'
 import { Icon } from '../../../common/components'
 import { colors } from '../../../common/theme'
 
@@ -51,13 +50,6 @@ const ButtonGroup = styled.div`
   }
 `
 
-const MobileButton = MakeButton.extend`
-  margin: 0px;
-  @media screen and (min-width: 1000px) {
-    display: none;
-  }
-`
-
 const Button = styled.a`
   text-align: center;
   text-decoration: none;
@@ -94,7 +86,7 @@ const ToolButton = Button.extend`
 
   @media screen and (max-width: 1000px) {
     border: 1px solid ${colors.borders};
-    
+
     i {
       display: none;
     }
@@ -190,9 +182,6 @@ function Toolbar({
           <Icon type="print" />
         </ToolButton>
       </ButtonGroup>
-      <MobileButton type="submit" form="resume-form">
-        Make
-      </MobileButton>
     </Wrapper>
   )
 }

@@ -77,6 +77,18 @@ const animations = {
       box-shadow: 0 -2em;
       height: 5em;
     }
+  `,
+
+  fadeIn: keyframes`
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
   `
 }
 

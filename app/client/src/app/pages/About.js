@@ -47,7 +47,7 @@ const Content = styled.main`
 
 const Heading = styled.h2`
   color: white;
-  font-size: 2.5em;
+  font-size: 2.25em;
   margin: 10px 0;
 `
 

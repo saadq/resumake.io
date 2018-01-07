@@ -9,7 +9,7 @@ import { colors } from '../theme'
 
 const Text = styled.h1`
   font-family: 'Nexa';
-  font-size: ${props => (props.big ? 3.5 : 2.5)}em;
+  font-size: ${props => (props.big ? 4 : 2.5)}em;
   margin: 0;
 `
 

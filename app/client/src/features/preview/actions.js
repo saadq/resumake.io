@@ -3,6 +3,7 @@
  */
 
 import FileSaver from 'file-saver'
+import { isEqual } from 'lodash'
 import type { PreviewAction as Action } from './types'
 import type { Section } from '../../common/types'
 import type { FormValues } from '../form/types'
@@ -52,7 +53,8 @@ type ValuesWithSectionOrder = FormValues & {
 
 function generateResume(resumeData: ValuesWithSectionOrder): AsyncAction {
   return async (dispatch, getState) => {
-    if (getState().preview.resume.status === 'pending') {
+    const { resume, data } = getState().preview
+    if (resume.status === 'pending' || isEqual(data.json, resumeData)) {
       return
     }
 

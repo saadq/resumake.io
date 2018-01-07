@@ -166,7 +166,7 @@ const images = ctx.keys().map(ctx)
 
 type Props = {
   hasPrevSession: boolean,
-  status: string,
+  resumeStatus: string,
   isUploading: boolean,
   clearState: () => void,
   clearPreview: () => void,
@@ -190,7 +190,6 @@ const Input = styled.input`
 
 class Home extends Component<Props> {
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
-    console.log('running')
     const { uploadFileAndGenerateResume, history } = this.props
     const file = e.target.files[0]
 
@@ -201,14 +200,14 @@ class Home extends Component<Props> {
   render() {
     const {
       hasPrevSession,
-      status,
+      resumeStatus,
       isUploading,
       clearState,
       clearPreview
     } = this.props
 
     // Show loading screen if resume is generating or if file is still uploading
-    if (status === 'pending' || isUploading) {
+    if (resumeStatus === 'pending' || isUploading) {
       return (
         <LoadWrapper>
           <Loader />
@@ -255,7 +254,7 @@ class Home extends Component<Props> {
 function mapState(state: State) {
   return {
     hasPrevSession: hasPrevSession(state),
-    status: state.preview.resume.status,
+    resumeStatus: state.preview.resume.status,
     isUploading: state.form.resume.isUploading
   }
 }

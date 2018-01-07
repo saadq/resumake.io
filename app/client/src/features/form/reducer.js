@@ -442,5 +442,5 @@ function form(state: FormState = initialState, action: Action): FormState {
   }
 }
 
-export { form }
+export { form, initialState }
 export default reducer.plugin({ resume: form })

@@ -37,7 +37,7 @@ const Link = styled.a`
 
 const SectionDivider = Divider.extend`
   width: 100%;
-  margin: 25px 0;
+  margin: 4em 0;
   padding: 0;
 `
 

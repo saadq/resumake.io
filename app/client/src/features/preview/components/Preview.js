@@ -61,11 +61,13 @@ type State = {
   isPrinting: boolean
 }
 
+const initialScale = (document.body: any).clientWidth > 1440 ? 1.5 : 1
+
 class Preview extends Component<Props, State> {
   state = {
     numPages: 1,
     currPage: 1,
-    scale: 1,
+    scale: initialScale,
     isPrinting: false
   }
 
@@ -87,7 +89,7 @@ class Preview extends Component<Props, State> {
 
   zoomIn = () => {
     this.setState(prevState => ({
-      scale: Math.min(prevState.scale + 0.1, 1)
+      scale: Math.min(prevState.scale + 0.1, initialScale)
     }))
   }
 

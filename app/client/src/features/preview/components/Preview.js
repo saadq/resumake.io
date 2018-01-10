@@ -72,7 +72,7 @@ class Preview extends Component<Props, State> {
   }
 
   setPageCount = ({ numPages }) => {
-    this.setState(() => ({ numPages }))
+    this.setState({ numPages })
   }
 
   nextPage = () => {

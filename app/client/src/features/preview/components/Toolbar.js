@@ -102,6 +102,7 @@ const Pagination = styled.div`
 
   @media screen and (max-width: 1000px) {
     width: 100%;
+    margin-top: 10px;
   }
 `
 
@@ -113,10 +114,17 @@ const PageNumber = styled.span`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 10px;
 `
 
 const PageButton = Button.extend`
+  margin: 0;
+  padding: 0;
+
+  i {
+    margin: 0;
+    padding: 0;
+  }
+
   &:first-of-type {
     border-right: none;
   }

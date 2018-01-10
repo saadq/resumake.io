@@ -103,6 +103,12 @@ const PrimaryButton = Button.extend`
   }
 `
 
+const Label = Button.withComponent('label')
+
+const Input = styled.input`
+  display: none;
+`
+
 const ResumePreview = styled.div`
   position: relative;
   width: 100%;
@@ -146,19 +152,49 @@ const Footer = styled.footer`
   background: ${darken(0.02, colors.background)};
   border-top: 1px solid ${colors.borders};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  font-size: 0.8em;
+  color: ${lighten(0.3, colors.background)};
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75em;
+  }
+`
+
+const Links = styled.div`
+  margin-right: 50px;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 15px;
+  }
 
   a {
     text-decoration: none;
     color: ${lighten(0.3, colors.background)};
     margin: 0 1em;
-    font-size: 0.8em;
 
     &:hover {
       text-decoration: underline;
     }
   }
+`
+
+const Copyright = styled.span`
+  opacity: 0.75;
+  margin-left: 50px;
+
+  @media screen and (max-width: 768px) {
+    margin-left: 15px;
+  }
+`
+
+const LoadWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const ctx = require.context('../../features/form/assets/img', true)
@@ -173,20 +209,6 @@ type Props = {
   uploadFileAndGenerateResume: (file: File) => Promise<void>,
   history: RouterHistory
 }
-
-const LoadWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const Label = Button.withComponent('label')
-
-const Input = styled.input`
-  display: none;
-`
 
 class Home extends Component<Props> {
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
@@ -240,11 +262,14 @@ class Home extends Component<Props> {
           </RightSection>
         </Main>
         <Footer>
-          <Link to="/about">About</Link>
-          <a href="https://github.com/saadq/resumake">Source</a>
-          <a href="https://github.com/saadq/resumake/issues">Issues</a>
-          <a href="mailto:saad@saadq.com">Contact</a>
-          <a href="https://www.paypal.me/saadquadri">Donate</a>
+          <Copyright>© 2018 Saad Quadri</Copyright>
+          <Links>
+            <Link to="/about">About</Link>
+            <a href="https://github.com/saadq/resumake">Source</a>
+            <a href="https://github.com/saadq/resumake/issues">Issues</a>
+            <a href="mailto:saad@saadq.com">Contact</a>
+            <a href="https://www.paypal.me/saadquadri">Donate</a>
+          </Links>
         </Footer>
       </Wrapper>
     )

@@ -13,7 +13,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "flow": "flow",
-    "flow-typed": "flow-typed"
+    "flow-typed": "flow-typed",
+    "jest": "jest"
   },
   "author": "Saad Quadri",
   "license": "MIT",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
+    "babel-jest": "^22.0.4",
     "babel-loader": "7.1.2",
     "babel-plugin-styled-components": "^1.2.0",
     "babel-polyfill": "^6.26.0",
@@ -51,7 +53,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "blyss": "^9.0.1",
+    "blyss": "^10.0.0",
     "copy-webpack-plugin": "4.0.1",
     "cross-env": "^5.0.5",
     "enzyme": "2.9.1",
@@ -59,7 +61,7 @@
     "flow-bin": "^0.54.1",
     "flow-typed": "^2.1.5",
     "html-webpack-plugin": "2.30.0",
-    "jest": "^20.0.0",
+    "jest": "^22.0.5",
     "prettier": "^1.9.2",
     "react-addons-test-utils": "15.6.0",
     "react-hot-loader": "^4.0.0-beta.12",
@@ -69,6 +71,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "rimraf": "2.6.2",
+    "snazzy": "^7.0.0",
     "url-loader": "0.5.8",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"

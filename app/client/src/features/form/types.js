@@ -2,6 +2,8 @@
  * @flow
  */
 
+import type { Section } from '../../common/types'
+
 type Basics = {
   name?: ?string,
   email?: ?string,
@@ -87,6 +89,10 @@ type FormValues = {
   awards: Awards
 }
 
+type FormValuesWithSectionOrder = FormValues & {
+  orderedSections: Array<Section>
+}
+
 type FormState = {
   isUploading: boolean,
   values: FormValues,
@@ -121,6 +127,7 @@ export type {
   FormState,
   FormAction,
   FormValues,
+  FormValuesWithSectionOrder,
   Education,
   Work,
   Skills,

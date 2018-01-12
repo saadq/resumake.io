@@ -272,7 +272,7 @@ function About() {
           </Box>
           <h3>Colors</h3>
           <Box>
-            <Color color={colors.primary}>{colors.primary}</Color>
+            <Color color={colors.primary} dark>{colors.primary}</Color>
             <Color color={colors.background}>{colors.background}</Color>
             <Color color={colors.borders}>{colors.borders}</Color>
             <Color color={colors.foreground} dark>

@@ -28,18 +28,18 @@ const generator: Template3Generator = {
   `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
     return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{${education.heading || 'Education'}}
+  \\resheading{${heading || 'Education'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
 
-  ${education.schools.map(school => {
+  ${education.map(school => {
     const {
       institution = '',
       location = '',
@@ -86,17 +86,17 @@ const generator: Template3Generator = {
   `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{${work.heading || 'Experience'}}
+  \\resheading{${heading || 'Experience'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${work.jobs.map(job => {
+  ${work.map(job => {
     const { company, position, location, startDate, endDate, highlights } = job
 
     let dateRange = ''
@@ -132,18 +132,18 @@ const generator: Template3Generator = {
   `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \\resheading{${skills.heading || 'Skills'}}
+    \\resheading{${heading || 'Skills'}}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \\begin{itemize}[leftmargin=*]
     \\setlength\\itemsep{0em}
-    ${skills.skills.map(skill => {
+    ${skills.map(skill => {
       const { name = '', keywords = [] } = skill
       return `\\item[] \\skill{${name}}{${keywords.join(', ')}}`
     })}
@@ -151,17 +151,17 @@ const generator: Template3Generator = {
   `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{${projects.heading || 'Projects'}}
+  \\resheading{${heading || 'Projects'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${projects.projects.map(project => {
+  ${projects.map(project => {
     const { name, description, keywords = [], url } = project
 
     return stripIndent`
@@ -177,17 +177,17 @@ const generator: Template3Generator = {
   `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \\resheading{${awards.heading || 'Awards'}}
+  \\resheading{${heading || 'Awards'}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \\begin{itemize}[leftmargin=*]
-  ${awards.awards.map(award => {
+  ${awards.map(award => {
     const { title, summary, date, awarder } = award
 
     return stripIndent`
@@ -292,6 +292,8 @@ const generator: Template3Generator = {
 }
 
 function template3(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     ${generator.resumeHeader()}
     \\begin{document}
@@ -302,19 +304,19 @@ function template3(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(values.education, headings.education)
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

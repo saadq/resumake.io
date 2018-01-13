@@ -24,14 +24,14 @@ const generator: Template7Generator = {
   `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
     return source`
-      \\section{${education.heading || 'Education'}}
-      ${education.schools.map(school => {
+      \\section{${heading || 'Education'}}
+      ${education.map(school => {
         const {
           institution,
           studyType,
@@ -73,14 +73,14 @@ const generator: Template7Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
-      \\section{${work.heading || 'Experience'}}
-      ${work.jobs.map(job => {
+      \\section{${heading || 'Experience'}}
+      ${work.map(job => {
         const {
           company,
           position,
@@ -122,28 +122,28 @@ const generator: Template7Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
-      \\section{${skills.heading || 'Skills'}}
-      ${skills.skills.map(skill => {
+      \\section{${heading || 'Skills'}}
+      ${skills.map(skill => {
         const { name, keywords = [] } = skill
         return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
       })}
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
-      \\section{${projects.heading || 'Projects'}}
-      ${projects.projects.map(project => {
+      \\section{${heading || 'Projects'}}
+      ${projects.map(project => {
         const { name, description, keywords = [], url } = project
 
         let detailsLine = ''
@@ -170,14 +170,14 @@ const generator: Template7Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
-      \\section{${awards.heading || 'Awards'}}
-      ${awards.awards.map(award => {
+      \\section{${heading || 'Awards'}}
+      ${awards.map(award => {
         const { title, summary, date, awarder } = award
 
         let detailsLine = ''
@@ -235,6 +235,8 @@ const generator: Template7Generator = {
 }
 
 function template7(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     ${generator.resumeHeader()}
     ${generator.profileSection(values.basics)}
@@ -244,19 +246,19 @@ function template7(values: SanitizedValues) {
       .map(section => {
         switch (section) {
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(values.education, headings.education)
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

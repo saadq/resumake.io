@@ -28,18 +28,18 @@ const generator: Template9Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
-    const lastSchoolIndex = education.schools.length - 1
+    const lastSchoolIndex = education.length - 1
 
     return source`
       %%% Education
       %%% ------------------------------------------------------------
-      \\NewPart{${education.heading || 'Education'}}{}
-      ${education.schools.map((school, i) => {
+      \\NewPart{${heading || 'Education'}}{}
+      ${education.map((school, i) => {
         const {
           institution = '',
           studyType,
@@ -89,20 +89,20 @@ const generator: Template9Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
-    const lastJobIndex = work.jobs.length - 1
+    const lastJobIndex = work.length - 1
 
     return source`
       %%% Work experience
       %%% ------------------------------------------------------------
 
-      \\NewPart{${work.heading || 'Experience'}}{}
+      \\NewPart{${heading || 'Experience'}}{}
 
-      ${work.jobs.map((job, i) => {
+      ${work.map((job, i) => {
         const {
           company,
           position,
@@ -144,35 +144,35 @@ const generator: Template9Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
       %%% Skills
       %%% ------------------------------------------------------------
-      \\NewPart{${skills.heading || 'Skills'}}{}
-      ${skills.skills.map(skill => {
+      \\NewPart{${heading || 'Skills'}}{}
+      ${skills.map(skill => {
         const { name, keywords = [] } = skill
         return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
       })}
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
-    const lastProjectIndex = projects.projects.length - 1
+    const lastProjectIndex = projects.length - 1
 
     return source`
       %%% Projects
       %%% ------------------------------------------------------------
-      \\NewPart{${projects.heading || 'Projects'}}{}
+      \\NewPart{${heading || 'Projects'}}{}
 
-      ${projects.projects.map((project, i) => {
+      ${projects.map((project, i) => {
         const { name, description, keywords = [], url } = project
 
         return stripIndent`
@@ -185,19 +185,19 @@ const generator: Template9Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
-    const lastAwardIndex = awards.awards.length - 1
+    const lastAwardIndex = awards.length - 1
 
     return source`
       %%% Awards
       %%% ------------------------------------------------------------
-      \\NewPart{${awards.heading || 'Awards'}}{}
+      \\NewPart{${heading || 'Awards'}}{}
 
-      ${awards.awards.map((award, i) => {
+      ${awards.map((award, i) => {
         const { title, summary, date, awarder } = award
 
         return stripIndent`
@@ -215,7 +215,7 @@ const generator: Template9Generator = {
       \\usepackage[english]{babel}
       \\usepackage[utf8]{inputenc}
       \\usepackage[T1]{fontenc}
-      \\usepackage{lmodern}      
+      \\usepackage{lmodern}
       \\usepackage[protrusion=true,expansion=true]{microtype}
       \\usepackage[svgnames]{xcolor}  % Colours by their 'svgnames'
       \\usepackage[margin=0.75in]{geometry}
@@ -310,6 +310,8 @@ const generator: Template9Generator = {
 }
 
 function template9(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     \\documentclass[fontsize=11pt]{article}
     ${generator.resumeHeader()}
@@ -321,19 +323,19 @@ function template9(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(values.education, headings.education)
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

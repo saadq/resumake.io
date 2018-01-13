@@ -42,15 +42,15 @@ const generator: Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
     return source`
-      \\section{${education.heading || 'Education'}}
+      \\section{${heading || 'Education'}}
       \\begin{entrylist}
-      ${education.schools.map(school => {
+      ${education.map(school => {
         const {
           institution,
           location,
@@ -95,15 +95,15 @@ const generator: Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
-      \\section{${work.heading || 'Experience'}}
+      \\section{${heading || 'Experience'}}
       \\begin{entrylist}
-      ${work.jobs.map(job => {
+      ${work.map(job => {
         const {
           company,
           position,
@@ -153,15 +153,15 @@ const generator: Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
-    \\section{${skills.heading || 'Skills'}}
+    \\section{${heading || 'Skills'}}
     \\begin{entrylist}
-    ${skills.skills.map(({ name, keywords = [] }) => {
+    ${skills.map(({ name, keywords = [] }) => {
       const nameLine = name ? `${name}: ` : ''
       const keywordsLine = keywords
         ? `{\\normalfont ${keywords.join(', ')}}`
@@ -173,15 +173,15 @@ const generator: Generator = {
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
-    \\section{${projects.heading || 'Projects'}}
+    \\section{${heading || 'Projects'}}
     \\begin{entrylist}
-    ${projects.projects.map(project => {
+    ${projects.map(project => {
       const { name, description, keywords = [], url } = project
 
       let nameLine = ''
@@ -206,15 +206,15 @@ const generator: Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
-    \\section{${awards.heading || 'Awards'}}
+    \\section{${heading || 'Awards'}}
     \\begin{entrylist}
-    ${awards.awards.map(award => {
+    ${awards.map(award => {
       const { title, summary, date, awarder } = award
 
       return stripIndent`
@@ -231,6 +231,8 @@ const generator: Generator = {
 }
 
 function template6(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     %!TEX TS-program = xelatex
     \\documentclass[]{friggeri-cv}
@@ -243,19 +245,19 @@ function template6(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(values.education, headings.education)
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

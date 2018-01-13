@@ -4,6 +4,14 @@
 
 import type { Section } from '../../common/types'
 
+type Headings = {
+  work: string,
+  education: string,
+  skills: string,
+  projects: string,
+  awards: string
+}
+
 type Basics = {
   name?: ?string,
   email?: ?string,
@@ -24,11 +32,6 @@ type School = {
   gpa?: ?string
 }
 
-type Education = {
-  schools: Array<School>,
-  heading?: ?string
-}
-
 type Job = {
   company?: ?string,
   location?: ?string,
@@ -39,20 +42,9 @@ type Job = {
   highlights: Array<?string>
 }
 
-type Work = {
-  jobs: Array<Job>,
-  heading?: ?string
-}
-
 type Skill = {
   name?: ?string,
-  level?: ?string,
   keywords: Array<?string>
-}
-
-type Skills = {
-  skills: Array<Skill>,
-  heading?: ?string
 }
 
 type Project = {
@@ -62,11 +54,6 @@ type Project = {
   keywords: Array<?string>
 }
 
-type Projects = {
-  projects: Array<Project>,
-  heading?: ?string
-}
-
 type Award = {
   title?: ?string,
   date?: ?string,
@@ -74,19 +61,15 @@ type Award = {
   summary?: ?string
 }
 
-type Awards = {
-  awards: Array<Award>,
-  heading?: ?string
-}
-
 type FormValues = {
   selectedTemplate: number,
+  headings: Headings,
   basics: Basics,
-  work: Work,
-  education: Education,
-  skills: Skills,
-  projects: Projects,
-  awards: Awards
+  work: Array<Job>,
+  education: Array<School>,
+  skills: Array<Skill>,
+  projects: Array<Project>,
+  awards: Array<Award>
 }
 
 type FormValuesWithSectionOrder = FormValues & {
@@ -127,10 +110,5 @@ export type {
   FormState,
   FormAction,
   FormValues,
-  FormValuesWithSectionOrder,
-  Education,
-  Work,
-  Skills,
-  Projects,
-  Awards
+  FormValuesWithSectionOrder
 }

@@ -63,8 +63,8 @@ const generator: Template4Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
@@ -74,9 +74,9 @@ const generator: Template4Generator = {
       %     Education
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${education.heading || 'Education'}}
+      \\section{${heading || 'Education'}}
       \\raggedright
-      ${education.schools.map(school => {
+      ${education.map(school => {
         const {
           institution,
           location,
@@ -137,8 +137,8 @@ const generator: Template4Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
@@ -148,8 +148,8 @@ const generator: Template4Generator = {
       %     Experience
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${work.heading || 'Experience'}}
-      ${work.jobs.map(job => {
+      \\section{${heading || 'Experience'}}
+      ${work.map(job => {
         const {
           company,
           position,
@@ -204,8 +204,8 @@ const generator: Template4Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
@@ -215,10 +215,10 @@ const generator: Template4Generator = {
       %     Skills
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${skills.heading || 'Skills'}}
+      \\section{${heading || 'Skills'}}
       \\raggedright
       \\begin{tabular}{ l l }
-      ${skills.skills.map(skill => {
+      ${skills.map(skill => {
         const { name = '', keywords = [] } = skill
         return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
       })}
@@ -227,8 +227,8 @@ const generator: Template4Generator = {
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
@@ -238,9 +238,9 @@ const generator: Template4Generator = {
       %     Projects
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${projects.heading || 'Projects'}}
+      \\section{${heading || 'Projects'}}
       \\raggedright
-      ${projects.projects.map(project => {
+      ${projects.map(project => {
         const { name, description, keywords, url } = project
 
         let line1 = ''
@@ -277,8 +277,8 @@ const generator: Template4Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
@@ -288,8 +288,8 @@ const generator: Template4Generator = {
       %     Awards
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${awards.heading || 'Awards'}}
-      ${awards.awards.map(award => {
+      \\section{${heading || 'Awards'}}
+      ${awards.map(award => {
         const { title, summary, date, awarder } = award
         const info = [awarder, date].filter(Boolean).join(' | ')
 
@@ -357,6 +357,8 @@ const generator: Template4Generator = {
 }
 
 function template4(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     ${generator.resumeHeader()}
     \\documentclass[]{deedy-resume-openfont}
@@ -369,19 +371,19 @@ function template4(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(values.education, headings.education)
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

@@ -13,11 +13,11 @@ import {
   addJobHighlight,
   removeJobHighlight
 } from '../../actions'
-import type { Work as WorkType } from '../../types'
+import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  work: $PropertyType<WorkType, 'jobs'>,
+  work: $PropertyType<FormValues, 'work'>,
   jobCount: number,
   jobHighlights: Array<number>,
   addJob: () => void,
@@ -36,7 +36,7 @@ function Work({
   return (
     <Section heading="Your Work Experience">
       <LabeledInput
-        name="work.heading"
+        name="headings.work"
         label="Section Heading"
         placeholder="Work Experience"
       />
@@ -62,7 +62,7 @@ function Work({
 
 function mapState(state: State) {
   return {
-    work: state.form.resume.values.work.jobs
+    work: state.form.resume.values.work
   }
 }
 

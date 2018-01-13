@@ -252,6 +252,10 @@ type JestExpectType = {
    */
   toHaveProperty(propPath: string, value?: any): void,
   /**
+   * Use .toHaveStyleRule to check that a component has a scertain style.
+   */
+  toHaveStyleRule(styleKey: string, styleValue?: any): void,
+  /**
    * Use .toMatch to check that a string matches a regular expression or string.
    */
   toMatch(regexpOrString: RegExp | string): void,

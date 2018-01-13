@@ -77,7 +77,10 @@ type FormValuesWithSectionOrder = FormValues & {
 }
 
 type FormState = {
-  isUploading: boolean,
+  jsonUpload: {
+    status?: 'pending' | 'success' | 'failure',
+    errMessage?: string
+  },
   values: FormValues,
   anyTouched?: boolean,
   registeredFields?: Object,
@@ -87,7 +90,7 @@ type FormState = {
 type FormAction =
   | { type: 'UPLOAD_JSON_REQUEST' }
   | { type: 'UPLOAD_JSON_SUCCESS', json: FormValues }
-  | { type: 'UPLOAD_JSON_FAILURE' }
+  | { type: 'UPLOAD_JSON_FAILURE', errMessage: string }
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
@@ -106,9 +109,4 @@ type FormAction =
   | { type: 'ADD_AWARD' }
   | { type: 'REMOVE_AWARD' }
 
-export type {
-  FormState,
-  FormAction,
-  FormValues,
-  FormValuesWithSectionOrder
-}
+export type { FormState, FormAction, FormValues, FormValuesWithSectionOrder }

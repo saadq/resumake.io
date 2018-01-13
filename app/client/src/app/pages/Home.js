@@ -5,9 +5,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
-import { Loader, Logo } from '../../common/components'
+import { Loader, Logo, Toast } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearState } from '../actions'
 import { clearPreview } from '../../features/preview/actions'
@@ -203,7 +204,10 @@ const images = ctx.keys().map(ctx)
 type Props = {
   hasPrevSession: boolean,
   resumeStatus: string,
-  isUploading: boolean,
+  jsonUpload: {
+    status?: 'pending' | 'success' | 'failure',
+    errMessage?: string
+  },
   clearState: () => void,
   clearPreview: () => void,
   uploadFileAndGenerateResume: (file: File) => Promise<void>,
@@ -212,24 +216,30 @@ type Props = {
 
 class Home extends Component<Props> {
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
-    const { uploadFileAndGenerateResume, history } = this.props
+    const { uploadFileAndGenerateResume } = this.props
     const file = e.target.files[0]
 
     await uploadFileAndGenerateResume(file)
-    history.push('/generator')
+    const { jsonUpload, history } = this.props
+
+    if (jsonUpload.status === 'success') {
+      history.push('/generator')
+    } else if (jsonUpload.status === 'failure') {
+      toast.error(jsonUpload.errMessage, { position: toast.POSITION.TOP_LEFT })
+    }
   }
 
   render() {
     const {
       hasPrevSession,
       resumeStatus,
-      isUploading,
+      jsonUpload,
       clearState,
       clearPreview
     } = this.props
 
-    // Show loading screen if resume is generating or if file is still uploading
-    if (resumeStatus === 'pending' || isUploading) {
+    // Show loading screen if file is still uploading or if resume is generating
+    if (jsonUpload.status === 'pending' || resumeStatus === 'pending') {
       return (
         <LoadWrapper>
           <Loader />
@@ -239,6 +249,7 @@ class Home extends Component<Props> {
 
     return (
       <Wrapper>
+        <Toast error />
         <Main>
           <LeftSection>
             <Logo big />
@@ -280,7 +291,7 @@ function mapState(state: State) {
   return {
     hasPrevSession: hasPrevSession(state),
     resumeStatus: state.preview.resume.status,
-    isUploading: state.form.resume.isUploading
+    jsonUpload: state.form.resume.jsonUpload
   }
 }
 

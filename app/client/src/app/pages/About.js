@@ -18,7 +18,7 @@ import { LoadingBar } from '../../features/preview/components'
 import { colors } from '../../common/theme'
 
 const Wrapper = styled.div`
-  max-width: 650px;
+  max-width: 800px;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -272,7 +272,10 @@ function About() {
           </Box>
           <h3>Colors</h3>
           <Box>
-            <Color color={colors.primary}>{colors.primary}</Color>
+            <Color color={colors.primary} dark>
+              {colors.primary}
+            </Color>
+            <Color color={colors.error}>{colors.error}</Color>
             <Color color={colors.background}>{colors.background}</Color>
             <Color color={colors.borders}>{colors.borders}</Color>
             <Color color={colors.foreground} dark>

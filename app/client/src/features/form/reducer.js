@@ -7,7 +7,7 @@ import type { FormState } from './types'
 import type { Action } from '../../app/types'
 
 const initialState = {
-  isUploading: false,
+  jsonUpload: {},
   values: {
     selectedTemplate: 1,
     headings: {
@@ -79,14 +79,18 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'UPLOAD_JSON_REQUEST': {
       return {
         ...state,
-        isUploading: true
+        jsonUpload: {
+          status: 'pending'
+        }
       }
     }
 
     case 'UPLOAD_JSON_SUCCESS': {
       return {
         ...state,
-        isUploading: false,
+        jsonUpload: {
+          status: 'success'
+        },
         values: {
           ...state.values,
           ...action.json
@@ -97,7 +101,10 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'UPLOAD_JSON_FAILURE': {
       return {
         ...state,
-        isUploading: false
+        jsonUpload: {
+          status: 'failure',
+          errMessage: action.errMessage
+        }
       }
     }
 

@@ -304,7 +304,10 @@ function template2(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education, headings.education)
+            return generator.educationSection(
+              values.education,
+              headings.education
+            )
 
           case 'work':
             return generator.workSection(values.work, headings.work)

@@ -246,7 +246,10 @@ function template5(values: SanitizedValues) {
           .map(section => {
             switch (section) {
               case 'education':
-                return generator.educationSection(values.education, headings.education)
+                return generator.educationSection(
+                  values.education,
+                  headings.education
+                )
 
               case 'work':
                 return generator.workSection(values.work, headings.work)
@@ -255,7 +258,10 @@ function template5(values: SanitizedValues) {
                 return generator.skillsSection(values.skills, headings.skills)
 
               case 'projects':
-                return generator.projectsSection(values.projects, headings.projects)
+                return generator.projectsSection(
+                  values.projects,
+                  headings.projects
+                )
 
               case 'awards':
                 return generator.awardsSection(values.awards, headings.awards)

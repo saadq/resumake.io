@@ -73,20 +73,20 @@ type SanitizedValues = {
   selectedTemplate: number,
   headings?: Headings,
   basics?: Basics,
-  work: Array<Job>,
-  education: Array<School>,
-  skills: Array<Skill>,
-  projects: Array<Project>,
-  awards: Array<Award>
+  work?: Array<Job>,
+  education?: Array<School>,
+  skills?: Array<Skill>,
+  projects?: Array<Project>,
+  awards?: Array<Award>
 }
 
 type Generator = {
   profileSection: (basics?: Basics) => string,
-  educationSection: (education: Array<School>, heading?: string) => string,
-  workSection: (work: Array<Job>, heading?: string) => string,
-  skillsSection: (skills: Array<Skill>, heading?: string) => string,
-  projectsSection: (projects: Array<Project>, heading?: string) => string,
-  awardsSection: (awards: Array<Award>, heading?: string) => string
+  educationSection: (education?: Array<School>, heading?: string) => string,
+  workSection: (work?: Array<Job>, heading?: string) => string,
+  skillsSection: (skills?: Array<Skill>, heading?: string) => string,
+  projectsSection: (projects?: Array<Project>, heading?: string) => string,
+  awardsSection: (awards?: Array<Award>, heading?: string) => string
 }
 
 export type { SanitizedValues, Generator }

@@ -13,10 +13,21 @@
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "npm run lint --silent && flow status",
+    "test": "npm run lint --silent && flow status && jest",
     "debug": "inspect node_modules/ava/profile.js src/tests/sanitizer.js",
     "flow": "flow",
-    "flow-typed": "flow-typed"
+    "flow-typed": "flow-typed",
+    "jest": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}"
+    ],
+    "testMatch": [
+      "**/tests/**/*.js"
+    ]
   },
   "dependencies": {
     "archiver": "^2.1.0",
@@ -37,11 +48,13 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
-    "blyss": "^9.0.7",
+    "blyss": "^10.0.0",
     "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.0",
+    "jest": "^22.0.6",
     "nodemon": "^1.12.1",
     "prettier": "^1.9.2",
-    "snazzy": "^7.0.0"
+    "snazzy": "^7.0.0",
+    "supertest": "^3.0.0"
   }
 }

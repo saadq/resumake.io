@@ -20,6 +20,4 @@ app.use(serve(join(__dirname, '..', '..', 'client', 'dist')))
 app.use(bodyParser())
 app.use(router)
 
-app.listen(3001)
-
 export default app

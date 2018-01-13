@@ -5,8 +5,7 @@
 import FileSaver from 'file-saver'
 import { isEqual } from 'lodash'
 import type { PreviewAction as Action } from './types'
-import type { Section } from '../../common/types'
-import type { FormValues } from '../form/types'
+import type { FormValuesWithSectionOrder } from '../form/types'
 import type { AsyncAction } from '../../app/types'
 
 function clearPreview(): Action {
@@ -15,7 +14,7 @@ function clearPreview(): Action {
   }
 }
 
-function saveResumeData(data: FormValues): Action {
+function saveResumeData(data: FormValuesWithSectionOrder): Action {
   const { Blob, URL } = window
   const jsonString = JSON.stringify(data, null, 2)
   const blob = new Blob([jsonString], { type: 'application/json' })
@@ -47,11 +46,7 @@ function generateResumeFailure(): Action {
   }
 }
 
-type ValuesWithSectionOrder = FormValues & {
-  orderedSections: Array<Section>
-}
-
-function generateResume(resumeData: ValuesWithSectionOrder): AsyncAction {
+function generateResume(resumeData: FormValuesWithSectionOrder): AsyncAction {
   return async (dispatch, getState) => {
     const { resume, data } = getState().preview
     if (resume.status === 'pending' || isEqual(data.json, resumeData)) {

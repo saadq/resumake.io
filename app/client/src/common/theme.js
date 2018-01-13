@@ -8,7 +8,8 @@ const colors = {
   background: '#14171d',
   foreground: '#c0c5ce',
   primary: '#56c9aa',
-  borders: '#202530'
+  borders: '#202530',
+  error: '#c95757'
 }
 
 const sizes = {

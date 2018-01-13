@@ -39,15 +39,15 @@ const generator: Template1Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
     return source`
       %==== Education ====%
-      \\header{${education.heading || 'Education'}}
-      ${education.schools.map(school => {
+      \\header{${heading || 'Education'}}
+      ${education.map(school => {
         const {
           institution,
           location,
@@ -103,17 +103,17 @@ const generator: Template1Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
       %==== Experience ====%
-      \\header{${work.heading || 'Experience'}}
+      \\header{${heading || 'Experience'}}
       \\vspace{1mm}
 
-      ${work.jobs.map(job => {
+      ${work.map(job => {
         const {
           company,
           position,
@@ -168,15 +168,15 @@ const generator: Template1Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
-      \\header{${skills.heading || 'Skills'}}
+      \\header{${heading || 'Skills'}}
       \\begin{tabular}{ l l }
-      ${skills.skills.map(skill => {
+      ${skills.map(skill => {
         const { name = 'Misc', keywords = [] } = skill
         return `${name}: & ${keywords.join(', ')} \\\\`
       })}
@@ -185,14 +185,14 @@ const generator: Template1Generator = {
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
-      \\header{${projects.heading || 'Projects'}}
-      ${projects.projects.map(project => {
+      \\header{${heading || 'Projects'}}
+      ${projects.map(project => {
         if (Object.keys(project) === 0) {
           return ''
         }
@@ -231,14 +231,14 @@ const generator: Template1Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
-      \\header{${awards.heading || 'Awards'}}
-      ${awards.awards.map(award => {
+      \\header{${heading || 'Awards'}}
+      ${awards.map(award => {
         const { title, summary, date, awarder } = award
 
         let line1 = ''
@@ -329,6 +329,8 @@ const generator: Template1Generator = {
 }
 
 function template1(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}
@@ -353,19 +355,22 @@ function template1(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'education':
-            return generator.educationSection(values.education)
+            return generator.educationSection(
+              values.education,
+              headings.education
+            )
 
           case 'work':
-            return generator.workSection(values.work)
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills)
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects)
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards)
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

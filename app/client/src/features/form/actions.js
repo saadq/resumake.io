@@ -19,9 +19,10 @@ function uploadJSONSuccess(json: FormValues): Action {
   }
 }
 
-function uploadJSONFailure(): Action {
+function uploadJSONFailure(errMessage: string): Action {
   return {
-    type: 'UPLOAD_JSON_FAILURE'
+    type: 'UPLOAD_JSON_FAILURE',
+    errMessage
   }
 }
 
@@ -42,10 +43,15 @@ function uploadJSON(file: File): AsyncAction {
 
     try {
       const response = await fetch('/api/upload', request)
-      const json = await response.json()
-      dispatch(uploadJSONSuccess(json))
+      if (response.ok) {
+        const json = await response.json()
+        dispatch(uploadJSONSuccess(json))
+      } else {
+        const errMessage = await response.text()
+        dispatch(uploadJSONFailure(errMessage))
+      }
     } catch (err) {
-      dispatch(uploadJSONFailure())
+      dispatch(uploadJSONFailure(err.message))
     }
   }
 }

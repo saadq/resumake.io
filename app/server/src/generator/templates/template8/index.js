@@ -41,14 +41,14 @@ const generator: Template8Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
     return source`
-      \\begin{cvsection}{${education.heading || 'Education'}}
-      ${education.schools.map(school => {
+      \\begin{cvsection}{${heading || 'Education'}}
+      ${education.map(school => {
         const {
           institution,
           studyType = '',
@@ -94,14 +94,14 @@ const generator: Template8Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
-      \\begin{cvsection}{${work.heading || 'Experience'}}
-      ${work.jobs.map(job => {
+      \\begin{cvsection}{${heading || 'Experience'}}
+      ${work.map(job => {
         const {
           company,
           position,
@@ -142,16 +142,16 @@ const generator: Template8Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
-      \\begin{cvsection}{${skills.heading || 'Skills'}}
+      \\begin{cvsection}{${heading || 'Skills'}}
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
-      ${skills.skills.map(skill => {
+      ${skills.map(skill => {
         const { name, keywords = [] } = skill
         return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
       })}
@@ -161,17 +161,17 @@ const generator: Template8Generator = {
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
-      \\begin{cvsection}{${projects.heading || 'Projects'}}
+      \\begin{cvsection}{${heading || 'Projects'}}
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
-      ${projects.projects.map(project => {
+      ${projects.map(project => {
         const { name, description, keywords = [], url } = project
 
         let line = ''
@@ -200,17 +200,17 @@ const generator: Template8Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
-      \\begin{cvsection}{${awards.heading || 'Awards'}}
+      \\begin{cvsection}{${heading || 'Awards'}}
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
-      ${awards.awards.map(award => {
+      ${awards.map(award => {
         const { title, summary, date, awarder } = award
 
         let line = ''
@@ -267,6 +267,8 @@ const generator: Template8Generator = {
 }
 
 function template8(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     ${generator.resumeHeader()}
     % The font could be set to Windows-specific Calibri by using the 'calibri' option
@@ -284,19 +286,25 @@ function template8(values: SanitizedValues) {
         .map(section => {
           switch (section) {
             case 'education':
-              return generator.educationSection(values.education)
+              return generator.educationSection(
+                values.education,
+                headings.education
+              )
 
             case 'work':
-              return generator.workSection(values.work)
+              return generator.workSection(values.work, headings.work)
 
             case 'skills':
-              return generator.skillsSection(values.skills)
+              return generator.skillsSection(values.skills, headings.skills)
 
             case 'projects':
-              return generator.projectsSection(values.projects)
+              return generator.projectsSection(
+                values.projects,
+                headings.projects
+              )
 
             case 'awards':
-              return generator.awardsSection(values.awards)
+              return generator.awardsSection(values.awards, headings.awards)
 
             default:
               return ''

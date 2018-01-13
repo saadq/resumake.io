@@ -23,16 +23,16 @@ const generator: Generator = {
     `
   },
 
-  educationSection(education) {
-    if (!education || !education.schools) {
+  educationSection(education, heading) {
+    if (!education) {
       return ''
     }
 
-    const lastSchoolIndex = education.schools.length - 1
+    const lastSchoolIndex = education.length - 1
 
     return source`
-      \\section{${education.heading || 'EDUCATION'}}
-      ${education.schools.map((school, i) => {
+      \\section{${heading || 'EDUCATION'}}
+      ${education.map((school, i) => {
         const {
           institution,
           location,
@@ -95,14 +95,14 @@ const generator: Generator = {
     `
   },
 
-  workSection(work) {
-    if (!work || !work.jobs) {
+  workSection(work, heading) {
+    if (!work) {
       return ''
     }
 
     return source`
-      \\section{${work.heading || 'EXPERIENCE'}}
-      ${work.jobs.map(job => {
+      \\section{${heading || 'EXPERIENCE'}}
+      ${work.map(job => {
         const {
           company,
           position,
@@ -156,15 +156,15 @@ const generator: Generator = {
     `
   },
 
-  skillsSection(skills) {
-    if (!skills || !skills.skills) {
+  skillsSection(skills, heading) {
+    if (!skills) {
       return ''
     }
 
     return source`
-      \\section{${skills.heading || 'SKILLS'}}
+      \\section{${heading || 'SKILLS'}}
       \\begin{tabular}{@{}ll}
-      ${skills.skills.map(skill => {
+      ${skills.map(skill => {
         const { name, keywords = [] } = skill
         return `\\textbf{${name || ''}}: & ${keywords.join(', ') || ''}\\\\`
       })}
@@ -172,14 +172,14 @@ const generator: Generator = {
     `
   },
 
-  projectsSection(projects) {
-    if (!projects || !projects.projects) {
+  projectsSection(projects, heading) {
+    if (!projects) {
       return ''
     }
 
     return source`
-      \\section{${projects.heading || 'PROJECTS'}}
-      ${projects.projects.map(project => {
+      \\section{${heading || 'PROJECTS'}}
+      ${projects.map(project => {
         const { name, description, keywords = [], url } = project
 
         let projectLine = ''
@@ -209,14 +209,14 @@ const generator: Generator = {
     `
   },
 
-  awardsSection(awards) {
-    if (!awards || !awards.awards) {
+  awardsSection(awards, heading) {
+    if (!awards) {
       return ''
     }
 
     return source`
-      \\section{${awards.heading || 'AWARDS'}}
-      ${awards.awards.map(award => {
+      \\section{${heading || 'AWARDS'}}
+      ${awards.map(award => {
         const { title, summary, date, awarder } = award
 
         return stripIndent`
@@ -230,6 +230,8 @@ const generator: Generator = {
 }
 
 function template5(values: SanitizedValues) {
+  const { headings = {} } = values
+
   return stripIndent`
     \\documentclass[line,margin]{res}
     \\usepackage[none]{hyphenat}
@@ -244,19 +246,25 @@ function template5(values: SanitizedValues) {
           .map(section => {
             switch (section) {
               case 'education':
-                return generator.educationSection(values.education)
+                return generator.educationSection(
+                  values.education,
+                  headings.education
+                )
 
               case 'work':
-                return generator.workSection(values.work)
+                return generator.workSection(values.work, headings.work)
 
               case 'skills':
-                return generator.skillsSection(values.skills)
+                return generator.skillsSection(values.skills, headings.skills)
 
               case 'projects':
-                return generator.projectsSection(values.projects)
+                return generator.projectsSection(
+                  values.projects,
+                  headings.projects
+                )
 
               case 'awards':
-                return generator.awardsSection(values.awards)
+                return generator.awardsSection(values.awards, headings.awards)
 
               default:
                 return ''

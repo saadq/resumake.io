@@ -7,9 +7,16 @@ import type { FormState } from './types'
 import type { Action } from '../../app/types'
 
 const initialState = {
-  isUploading: false,
+  jsonUpload: {},
   values: {
     selectedTemplate: 1,
+    headings: {
+      work: '',
+      education: '',
+      skills: '',
+      projects: '',
+      awards: ''
+    },
     basics: {
       name: '',
       email: '',
@@ -19,66 +26,51 @@ const initialState = {
         address: ''
       }
     },
-    education: {
-      heading: '',
-      schools: [
-        {
-          institution: '',
-          location: '',
-          area: '',
-          studyType: '',
-          startDate: '',
-          endDate: '',
-          gpa: ''
-        }
-      ]
-    },
-    work: {
-      heading: '',
-      jobs: [
-        {
-          company: '',
-          location: '',
-          position: '',
-          website: '',
-          startDate: '',
-          endDate: '',
-          highlights: ['']
-        }
-      ]
-    },
-    skills: {
-      heading: '',
-      skills: [
-        {
-          name: '',
-          level: '',
-          keywords: ['']
-        }
-      ]
-    },
-    projects: {
-      heading: '',
-      projects: [
-        {
-          name: '',
-          description: '',
-          url: '',
-          keywords: ['']
-        }
-      ]
-    },
-    awards: {
-      heading: '',
-      awards: [
-        {
-          title: '',
-          date: '',
-          awarder: '',
-          summary: ''
-        }
-      ]
-    }
+    education: [
+      {
+        institution: '',
+        location: '',
+        area: '',
+        studyType: '',
+        startDate: '',
+        endDate: '',
+        gpa: ''
+      }
+    ],
+    work: [
+      {
+        company: '',
+        location: '',
+        position: '',
+        website: '',
+        startDate: '',
+        endDate: '',
+        highlights: ['']
+      }
+    ],
+    skills: [
+      {
+        name: '',
+        level: '',
+        keywords: ['']
+      }
+    ],
+    projects: [
+      {
+        name: '',
+        description: '',
+        url: '',
+        keywords: ['']
+      }
+    ],
+    awards: [
+      {
+        title: '',
+        date: '',
+        awarder: '',
+        summary: ''
+      }
+    ]
   }
 }
 
@@ -87,14 +79,18 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'UPLOAD_JSON_REQUEST': {
       return {
         ...state,
-        isUploading: true
+        jsonUpload: {
+          status: 'pending'
+        }
       }
     }
 
     case 'UPLOAD_JSON_SUCCESS': {
       return {
         ...state,
-        isUploading: false,
+        jsonUpload: {
+          status: 'success'
+        },
         values: {
           ...state.values,
           ...action.json
@@ -105,7 +101,10 @@ function form(state: FormState = initialState, action: Action): FormState {
     case 'UPLOAD_JSON_FAILURE': {
       return {
         ...state,
-        isUploading: false
+        jsonUpload: {
+          status: 'failure',
+          errMessage: action.errMessage
+        }
       }
     }
 
@@ -124,16 +123,13 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          education: {
-            ...state.values.education,
-            schools: [...state.values.education.schools, {}]
-          }
+          education: [...state.values.education, {}]
         }
       }
     }
 
     case 'REMOVE_SCHOOL': {
-      if (state.values.education.schools.length <= 1) {
+      if (state.values.education.length <= 1) {
         return state
       }
 
@@ -141,10 +137,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          education: {
-            ...state.values.education,
-            schools: state.values.education.schools.slice(0, -1)
-          }
+          education: state.values.education.slice(0, -1)
         }
       }
     }
@@ -154,16 +147,13 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          work: {
-            ...state.values.work,
-            jobs: [...state.values.work.jobs, { highlights: [''] }]
-          }
+          work: [...state.values.work, { highlights: [''] }]
         }
       }
     }
 
     case 'REMOVE_JOB': {
-      if (state.values.work.jobs.length <= 1) {
+      if (state.values.work.length <= 1) {
         return state
       }
 
@@ -171,10 +161,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          work: {
-            ...state.values.work,
-            jobs: state.values.work.jobs.slice(0, -1)
-          }
+          work: state.values.work.slice(0, -1)
         }
       }
     }
@@ -184,29 +171,23 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          work: {
-            ...state.values.work,
-            jobs: [
-              ...state.values.work.jobs.slice(0, action.index),
-              {
-                ...state.values.work.jobs[action.index],
-                highlights: [
-                  ...state.values.work.jobs[action.index].highlights,
-                  ''
-                ]
-              },
-              ...state.values.work.jobs.slice(action.index + 1)
-            ]
-          }
+          work: [
+            ...state.values.work.slice(0, action.index),
+            {
+              ...state.values.work[action.index],
+              highlights: [...state.values.work[action.index].highlights, '']
+            },
+            ...state.values.work.slice(action.index + 1)
+          ]
         }
       }
     }
 
     case 'REMOVE_JOB_HIGHLIGHT': {
       if (
-        !state.values.work.jobs[action.index] ||
-        !state.values.work.jobs[action.index].highlights ||
-        state.values.work.jobs[action.index].highlights.length <= 1
+        !state.values.work[action.index] ||
+        !state.values.work[action.index].highlights ||
+        state.values.work[action.index].highlights.length <= 1
       ) {
         return state
       }
@@ -215,18 +196,17 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          work: {
-            ...state.values.work,
-            jobs: [
-              ...state.values.work.jobs.slice(0, action.index),
-              {
-                ...state.values.work.jobs[action.index],
-                highlights: state.values.work.jobs[
-                  action.index
-                ].highlights.slice(0, -1)
-              }
-            ]
-          }
+          work: [
+            ...state.values.work.slice(0, action.index),
+            {
+              ...state.values.work[action.index],
+              highlights: state.values.work[action.index].highlights.slice(
+                0,
+                -1
+              )
+            },
+            ...state.values.work.slice(action.index + 1)
+          ]
         }
       }
     }
@@ -236,21 +216,18 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          skills: {
+          skills: [
             ...state.values.skills,
-            skills: [
-              ...state.values.skills.skills,
-              {
-                keywords: ['']
-              }
-            ]
-          }
+            {
+              keywords: ['']
+            }
+          ]
         }
       }
     }
 
     case 'REMOVE_SKILL': {
-      if (state.values.skills.skills.length <= 1) {
+      if (state.values.skills.length <= 1) {
         return state
       }
 
@@ -258,10 +235,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          skills: {
-            ...state.values.skills,
-            skills: state.values.skills.skills.slice(0, -1)
-          }
+          skills: state.values.skills.slice(0, -1)
         }
       }
     }
@@ -271,29 +245,23 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          skills: {
-            ...state.values.skills,
-            skills: [
-              ...state.values.skills.skills.slice(0, action.index),
-              {
-                ...state.values.skills.skills[action.index],
-                keywords: [
-                  ...state.values.skills.skills[action.index].keywords,
-                  ''
-                ]
-              },
-              ...state.values.skills.skills.slice(action.index + 1)
-            ]
-          }
+          skills: [
+            ...state.values.skills.slice(0, action.index),
+            {
+              ...state.values.skills[action.index],
+              keywords: [...state.values.skills[action.index].keywords, '']
+            },
+            ...state.values.skills.slice(action.index + 1)
+          ]
         }
       }
     }
 
     case 'REMOVE_SKILL_KEYWORD': {
       if (
-        !state.values.skills.skills[action.index] ||
-        !state.values.skills.skills[action.index].keywords ||
-        state.values.skills.skills[action.index].keywords.length <= 1
+        !state.values.skills[action.index] ||
+        !state.values.skills[action.index].keywords ||
+        state.values.skills[action.index].keywords.length <= 1
       ) {
         return state
       }
@@ -302,19 +270,14 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          skills: {
-            ...state.values.skills,
-            skills: [
-              ...state.values.skills.skills.slice(0, action.index),
-              {
-                ...state.values.skills.skills[action.index],
-                keywords: state.values.skills.skills[
-                  action.index
-                ].keywords.slice(0, -1)
-              },
-              ...state.values.skills.skills.slice(action.index + 1)
-            ]
-          }
+          skills: [
+            ...state.values.skills.slice(0, action.index),
+            {
+              ...state.values.skills[action.index],
+              keywords: state.values.skills[action.index].keywords.slice(0, -1)
+            },
+            ...state.values.skills.slice(action.index + 1)
+          ]
         }
       }
     }
@@ -324,21 +287,13 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          projects: {
-            ...state.values.projects,
-            projects: [
-              ...state.values.projects.projects,
-              {
-                keywords: ['']
-              }
-            ]
-          }
+          projects: [...state.values.projects, { keywords: [''] }]
         }
       }
     }
 
     case 'REMOVE_PROJECT': {
-      if (state.values.projects.projects.length <= 1) {
+      if (state.values.projects.length <= 1) {
         return state
       }
 
@@ -346,10 +301,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          projects: {
-            ...state.values.projects,
-            projects: state.values.projects.projects.slice(0, -1)
-          }
+          projects: state.values.projects.slice(0, -1)
         }
       }
     }
@@ -359,29 +311,23 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          projects: {
-            ...state.values.projects,
-            projects: [
-              ...state.values.projects.projects.slice(0, action.index),
-              {
-                ...state.values.projects.projects[action.index],
-                keywords: [
-                  ...state.values.projects.projects[action.index].keywords,
-                  ''
-                ]
-              },
-              ...state.values.projects.projects.slice(action.index + 1)
-            ]
-          }
+          projects: [
+            ...state.values.projects.slice(0, action.index),
+            {
+              ...state.values.projects[action.index],
+              keywords: [...state.values.projects[action.index].keywords, '']
+            },
+            ...state.values.projects.slice(action.index + 1)
+          ]
         }
       }
     }
 
     case 'REMOVE_PROJECT_KEYWORD': {
       if (
-        !state.values.projects.projects[action.index] ||
-        !state.values.projects.projects[action.index].keywords ||
-        state.values.projects.projects[action.index].keywords.length <= 1
+        !state.values.projects[action.index] ||
+        !state.values.projects[action.index].keywords ||
+        state.values.projects[action.index].keywords.length <= 1
       ) {
         return state
       }
@@ -390,19 +336,17 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          projects: {
-            ...state.values.projects,
-            projects: [
-              ...state.values.projects.projects.slice(0, action.index),
-              {
-                ...state.values.projects.projects[action.index],
-                keywords: state.values.projects.projects[
-                  action.index
-                ].keywords.slice(0, -1)
-              },
-              ...state.values.projects.projects.slice(action.index + 1)
-            ]
-          }
+          projects: [
+            ...state.values.projects.slice(0, action.index),
+            {
+              ...state.values.projects[action.index],
+              keywords: state.values.projects[action.index].keywords.slice(
+                0,
+                -1
+              )
+            },
+            ...state.values.projects.slice(action.index + 1)
+          ]
         }
       }
     }
@@ -412,16 +356,13 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          awards: {
-            ...state.values.awards,
-            awards: [...state.values.awards.awards, {}]
-          }
+          awards: [...state.values.awards, {}]
         }
       }
     }
 
     case 'REMOVE_AWARD': {
-      if (state.values.awards.awards.length <= 1) {
+      if (state.values.awards.length <= 1) {
         return state
       }
 
@@ -429,10 +370,7 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          awards: {
-            ...state.values.awards,
-            awards: state.values.awards.awards.slice(0, -1)
-          }
+          awards: state.values.awards.slice(0, -1)
         }
       }
     }

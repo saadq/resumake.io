@@ -8,11 +8,11 @@ import Section from './Section'
 import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { School } from '..'
 import { addSchool, removeSchool } from '../../actions'
-import type { Education as EducationType } from '../../types'
+import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  education: $PropertyType<EducationType, 'schools'>,
+  education: $PropertyType<FormValues, 'education'>,
   addSchool: () => void,
   removeSchool: () => void
 }
@@ -21,7 +21,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
   return (
     <Section heading="Your Educational Background">
       <LabeledInput
-        name="education.heading"
+        name="headings.education"
         label="Section Heading"
         placeholder="Education"
       />
@@ -39,7 +39,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
 
 function mapState(state: State) {
   return {
-    education: state.form.resume.values.education.schools
+    education: state.form.resume.values.education
   }
 }
 

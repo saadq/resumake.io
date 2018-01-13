@@ -8,11 +8,11 @@ import Section from './Section'
 import { Button, LabeledInput, Divider } from '../../../../common/components'
 import { Award } from '..'
 import { addAward, removeAward } from '../../actions'
-import type { Awards as AwardsType } from '../../types'
+import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  awards: $PropertyType<AwardsType, 'awards'>,
+  awards: $PropertyType<FormValues, 'awards'>,
   addAward: () => void,
   removeAward: () => void
 }
@@ -21,7 +21,7 @@ function Awards({ awards, addAward, removeAward }: Props) {
   return (
     <Section heading="Honors & Awards">
       <LabeledInput
-        name="awards.heading"
+        name="headings.awards"
         label="Section Heading"
         placeholder="Awards"
       />
@@ -41,7 +41,7 @@ function Awards({ awards, addAward, removeAward }: Props) {
 
 function mapState(state: State) {
   return {
-    awards: state.form.resume.values.awards.awards
+    awards: state.form.resume.values.awards
   }
 }
 

@@ -13,11 +13,11 @@ import {
   addProjectKeyword,
   removeProjectKeyword
 } from '../../actions'
-import type { Projects as ProjectsType } from '../../types'
+import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  projects: $PropertyType<ProjectsType, 'projects'>,
+  projects: $PropertyType<FormValues, 'projects'>,
   addProject: () => void,
   removeProject: () => void,
   addProjectKeyword: (index: number) => void,
@@ -34,7 +34,7 @@ function Projects({
   return (
     <Section heading="Your Projects">
       <LabeledInput
-        name="projects.heading"
+        name="headings.projects"
         label="Section Heading"
         placeholder="Projects"
       />
@@ -62,7 +62,7 @@ function Projects({
 
 function mapState(state: State) {
   return {
-    projects: state.form.resume.values.projects.projects
+    projects: state.form.resume.values.projects
   }
 }
 

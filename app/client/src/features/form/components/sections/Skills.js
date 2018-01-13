@@ -13,11 +13,11 @@ import {
   addSkillKeyword,
   removeSkillKeyword
 } from '../../actions'
-import type { Skills as SkillsType } from '../../types'
+import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
-  skills: $PropertyType<SkillsType, 'skills'>,
+  skills: $PropertyType<FormValues, 'skills'>,
   addSkill: () => void,
   removeSkill: () => void,
   addSkillKeyword: (index: number) => void,
@@ -34,7 +34,7 @@ function Skills({
   return (
     <Section heading="Your Skills">
       <LabeledInput
-        name="skills.heading"
+        name="headings.skills"
         label="Section Heading"
         placeholder="Skills"
       />
@@ -60,7 +60,7 @@ function Skills({
 
 function mapState(state: State) {
   return {
-    skills: state.form.resume.values.skills.skills
+    skills: state.form.resume.values.skills
   }
 }
 

@@ -2,6 +2,16 @@
  * @flow
  */
 
+import type { Section } from '../../common/types'
+
+type Headings = {
+  work: string,
+  education: string,
+  skills: string,
+  projects: string,
+  awards: string
+}
+
 type Basics = {
   name?: ?string,
   email?: ?string,
@@ -22,11 +32,6 @@ type School = {
   gpa?: ?string
 }
 
-type Education = {
-  schools: Array<School>,
-  heading?: ?string
-}
-
 type Job = {
   company?: ?string,
   location?: ?string,
@@ -37,20 +42,9 @@ type Job = {
   highlights: Array<?string>
 }
 
-type Work = {
-  jobs: Array<Job>,
-  heading?: ?string
-}
-
 type Skill = {
   name?: ?string,
-  level?: ?string,
   keywords: Array<?string>
-}
-
-type Skills = {
-  skills: Array<Skill>,
-  heading?: ?string
 }
 
 type Project = {
@@ -60,11 +54,6 @@ type Project = {
   keywords: Array<?string>
 }
 
-type Projects = {
-  projects: Array<Project>,
-  heading?: ?string
-}
-
 type Award = {
   title?: ?string,
   date?: ?string,
@@ -72,23 +61,26 @@ type Award = {
   summary?: ?string
 }
 
-type Awards = {
-  awards: Array<Award>,
-  heading?: ?string
-}
-
 type FormValues = {
   selectedTemplate: number,
+  headings: Headings,
   basics: Basics,
-  work: Work,
-  education: Education,
-  skills: Skills,
-  projects: Projects,
-  awards: Awards
+  work: Array<Job>,
+  education: Array<School>,
+  skills: Array<Skill>,
+  projects: Array<Project>,
+  awards: Array<Award>
+}
+
+type FormValuesWithSectionOrder = FormValues & {
+  orderedSections: Array<Section>
 }
 
 type FormState = {
-  isUploading: boolean,
+  jsonUpload: {
+    status?: 'pending' | 'success' | 'failure',
+    errMessage?: string
+  },
   values: FormValues,
   anyTouched?: boolean,
   registeredFields?: Object,
@@ -98,7 +90,7 @@ type FormState = {
 type FormAction =
   | { type: 'UPLOAD_JSON_REQUEST' }
   | { type: 'UPLOAD_JSON_SUCCESS', json: FormValues }
-  | { type: 'UPLOAD_JSON_FAILURE' }
+  | { type: 'UPLOAD_JSON_FAILURE', errMessage: string }
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
@@ -117,13 +109,4 @@ type FormAction =
   | { type: 'ADD_AWARD' }
   | { type: 'REMOVE_AWARD' }
 
-export type {
-  FormState,
-  FormAction,
-  FormValues,
-  Education,
-  Work,
-  Skills,
-  Projects,
-  Awards
-}
+export type { FormState, FormAction, FormValues, FormValuesWithSectionOrder }

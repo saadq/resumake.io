@@ -176,6 +176,9 @@ function removeAward(): Action {
 
 export {
   uploadJSON,
+  uploadJSONRequest,
+  uploadJSONSuccess,
+  uploadJSONFailure,
   selectTemplate,
   addSchool,
   removeSchool,

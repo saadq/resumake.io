@@ -20,9 +20,68 @@ describe('preview reducer', () => {
       isDownloading: false,
       data: {
         json: {
+          selectedTemplate: 1,
+          headings: {
+            work: '',
+            education: '',
+            skills: '',
+            projects: '',
+            awards: ''
+          },
           basics: {
-            fullName: 'Saad Quadri'
-          }
+            name: '',
+            email: '',
+            phone: '',
+            website: '',
+            location: {
+              address: ''
+            }
+          },
+          education: [
+            {
+              institution: '',
+              location: '',
+              area: '',
+              studyType: '',
+              startDate: '',
+              endDate: '',
+              gpa: ''
+            }
+          ],
+          work: [
+            {
+              company: '',
+              location: '',
+              position: '',
+              website: '',
+              startDate: '',
+              endDate: '',
+              highlights: ['']
+            }
+          ],
+          skills: [
+            {
+              name: '',
+              level: '',
+              keywords: ['']
+            }
+          ],
+          projects: [
+            {
+              name: '',
+              description: '',
+              url: '',
+              keywords: ['']
+            }
+          ],
+          awards: [
+            {
+              title: '',
+              date: '',
+              awarder: '',
+              summary: ''
+            }
+          ]
         }
       },
       resume: {

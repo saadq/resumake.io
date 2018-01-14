@@ -2,8 +2,8 @@
  * @flow
  */
 
-import type { Middleware } from 'koa'
 import { readFile } from 'fs-promise'
+import type { Middleware } from 'koa'
 
 /**
  * Extracts and validates JSON from file upload

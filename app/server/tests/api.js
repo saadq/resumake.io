@@ -3,10 +3,11 @@
  */
 
 import request from 'supertest'
+import { join } from 'path'
 import app from '../src'
 
-describe('/api/generate/resume', () => {
-  test('it should generate a PDF', async () => {
+describe('POST /api/generate/resume', () => {
+  it('should generate a PDF', async () => {
     const data = {
       selectedTemplate: 1,
       basics: {
@@ -39,8 +40,8 @@ describe('/api/generate/resume', () => {
   })
 })
 
-describe('/api/generate/source', () => {
-  test('it should generate a zip of the LaTeX source code', async () => {
+describe('POST /api/generate/source', () => {
+  it('should generate a zip of the LaTeX source code', async () => {
     const data = {
       selectedTemplate: 1,
       basics: {
@@ -68,5 +69,33 @@ describe('/api/generate/source', () => {
       .expect(200)
 
     expect(response).toBeTruthy()
+  })
+})
+
+describe('POST /api/upload', () => {
+  it('should return the JSON from a file upload', async () => {
+    const response = await request(app.callback())
+      .post('/api/upload')
+      .set('Accept', 'application/json')
+      .attach('json-file', join(__dirname, 'upload.json'))
+      .expect('Content-Type', /json/)
+      .expect(200)
+
+    const expectedJSON = {
+      selectedTemplate: 1,
+      basics: {
+        name: 'Saad Quadri',
+        email: 'saad@saadq.com',
+        website: 'github.com/saadq'
+      },
+      education: [],
+      work: [{ highlights: [] }],
+      skills: [{ keywords: [] }],
+      projects: [{ keywords: [] }],
+      awards: []
+    }
+
+    expect(response).toBeTruthy()
+    expect(response.body).toEqual(expectedJSON)
   })
 })

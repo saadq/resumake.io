@@ -1,0 +1,9 @@
+{
+  "badProperty": "this should be removed",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Saad Quadri",
+    "email": "saad@saadq.com",
+    "website": "github.com/saadq"
+  }
+}

@@ -9,10 +9,6 @@ import { sanitizer, jsonResume } from '../middleware'
 
 const router = new Router({ prefix: '/api' })
 
-router.get('/json', async ctx => {
-  ctx.body = { name: 'saad' }
-})
-
 /**
  * Router middleware
  */

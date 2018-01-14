@@ -32,6 +32,7 @@ const StyledForm = styled.form`
 
   @media screen and (max-width: 1000px) {
     width: 100%;
+    border: none;
     overflow: visible;
   }
 `

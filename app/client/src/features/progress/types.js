@@ -4,7 +4,7 @@
 
 import type { Section } from '../../common/types'
 
-type SectionOrderState = {
+type ProgressState = {
   progress: number,
   prev: Section,
   curr: Section,
@@ -12,7 +12,7 @@ type SectionOrderState = {
   sections: Array<Section>
 }
 
-type SectionOrderAction =
+type ProgressAction =
   | {
       type: 'SET_SECTION_ORDER',
       sections: Array<Section>,
@@ -28,4 +28,4 @@ type SectionOrderAction =
       next: Section
     }
 
-export type { SectionOrderState, SectionOrderAction }
+export type { ProgressState, ProgressAction }

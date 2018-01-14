@@ -2,7 +2,7 @@
  * @flow
  */
 
-import type { SectionOrderAction as Action } from './types'
+import type { ProgressAction as Action } from './types'
 import type { Section } from '../../common/types'
 
 function setSectionOrder(sections: Array<Section>, curr: Section): Action {

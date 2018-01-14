@@ -2,7 +2,7 @@
  * @flow
  */
 
-import type { SectionOrderState as State } from './types'
+import type { ProgressState as State } from './types'
 import type { Action } from '../../app/types'
 
 const initialState = {
@@ -21,7 +21,7 @@ const initialState = {
   ]
 }
 
-function orderedSections(state: State = initialState, action: Action): State {
+function progress(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'SET_SECTION_ORDER':
       return {
@@ -46,4 +46,4 @@ function orderedSections(state: State = initialState, action: Action): State {
   }
 }
 
-export default orderedSections
+export default progress

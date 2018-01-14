@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/saadq/latexresu.me",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node",
+    "start": "nodemon index.js --exec babel-node",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",

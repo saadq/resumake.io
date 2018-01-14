@@ -17,7 +17,7 @@ import {
   Awards
 } from '.'
 import { generateResume } from '../../preview/actions'
-import { setProgress } from '../../ordered-sections/actions'
+import { setProgress } from '../../progress/actions'
 import { colors } from '../../../common/theme'
 import type { FormValues } from '../types'
 import type { State } from '../../../app/types'

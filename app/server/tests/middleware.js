@@ -21,6 +21,7 @@ test('errorHandler should catch all errors downstream', async () => {
   const middleware = errorHandler()
   await middleware(ctx, next)
 
+  expect(next).toHaveBeenCalled()
   expect(ctx.status).toBe(400)
   expect(ctx.body).toBe('Bad user request')
 })

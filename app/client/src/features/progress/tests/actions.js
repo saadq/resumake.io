@@ -3,7 +3,7 @@
  */
 
 import { setSectionOrder, setProgress } from '../actions'
-import type { SectionOrderAction as Action } from '../types'
+import type { ProgressAction as Action } from '../types'
 
 const sections = [
   'templates',

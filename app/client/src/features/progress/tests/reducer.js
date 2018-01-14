@@ -4,7 +4,7 @@
 
 import reducer from '../reducer'
 import { setSectionOrder, setProgress } from '../actions'
-import type { SectionOrderState as State } from '../types'
+import type { ProgressState as State } from '../types'
 
 describe('orderedSections reducer', () => {
   it('should handle SET_SECTION_ORDER', () => {

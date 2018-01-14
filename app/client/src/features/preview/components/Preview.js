@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
-import { downloadSource, setPageCount, prevPage, nextPage } from '../actions'
+import { downloadSource } from '../actions'
 import MakeButton from '../../progress/components/MakeButton'
 import { Loader } from '../../../common/components'
 import { sizes } from '../../../common/theme'
@@ -41,6 +41,7 @@ const ResumePage = styled(Page)`
 
 const MobileButton = MakeButton.extend`
   margin: 25px 0px;
+
   @media screen and (min-width: 1000px) {
     display: none;
   }
@@ -50,7 +51,6 @@ type Props = {
   resumeURL?: string,
   jsonURL?: string,
   status?: 'pending' | 'success' | 'failure',
-  setPageCount: (pageCount: number) => void,
   downloadSource: () => Promise<void>
 }
 
@@ -175,10 +175,7 @@ function mapState(state: ReduxState) {
 }
 
 const mapActions = {
-  downloadSource,
-  setPageCount,
-  prevPage,
-  nextPage
+  downloadSource
 }
 
 export default connect(mapState, mapActions)(Preview)

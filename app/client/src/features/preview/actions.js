@@ -78,25 +78,6 @@ function generateResume(resumeData: FormValuesWithSectionOrder): AsyncAction {
   }
 }
 
-function setPageCount(pageCount: number): Action {
-  return {
-    type: 'SET_PAGE_COUNT',
-    pageCount
-  }
-}
-
-function prevPage(): Action {
-  return {
-    type: 'PREV_PAGE'
-  }
-}
-
-function nextPage(): Action {
-  return {
-    type: 'NEXT_PAGE'
-  }
-}
-
 function downloadSourceRequest(): Action {
   return {
     type: 'DOWNLOAD_SOURCE_REQUEST'
@@ -153,8 +134,11 @@ function downloadSource(): AsyncAction {
 export {
   clearPreview,
   generateResume,
-  setPageCount,
-  prevPage,
-  nextPage,
+  generateResumeRequest,
+  generateResumeSuccess,
+  generateResumeFailure,
+  downloadSourceRequest,
+  downloadSourceSuccess,
+  downloadSourceFailure,
   downloadSource
 }

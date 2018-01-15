@@ -1,3 +1,9 @@
 {
-  "presets": ["flow", "es2015", "stage-0"]
+  "presets": ["flow",
+    ["env", {
+      "targets": {
+        "node": "7.7"
+      }
+    }]
+  ]
 }

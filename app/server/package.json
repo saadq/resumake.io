@@ -10,6 +10,7 @@
   "homepage": "https://github.com/saadq/latexresu.me",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
+    "build": "babel src -d lib",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",

@@ -10,7 +10,7 @@
   "homepage": "https://github.com/saadq/latexresu.me",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --copy-files",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",

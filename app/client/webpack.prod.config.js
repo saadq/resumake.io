@@ -40,7 +40,11 @@ module.exports = {
       sourceMap: true,
       comments: false
     }),
-    new HtmlWebpackPlugin({ template: 'src/index.html', inject: 'body' }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: 'body',
+      favicon: 'src/app/assets/favicon.ico'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)

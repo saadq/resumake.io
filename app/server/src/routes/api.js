@@ -21,7 +21,7 @@ router.use('/upload', formidable(), jsonResume()) // Parse multipart/form-data
  */
 
 router.post('/generate/resume', async ({ request, response }) => {
-  response.body = generatePDF(request.body)
+  response.body = generatePDF((request.body: any))
   response.type = 'application/pdf'
 })
 
@@ -30,7 +30,7 @@ router.post('/generate/resume', async ({ request, response }) => {
  */
 
 router.post('/generate/source', async ({ request, response }) => {
-  response.body = generateSourceCode(request.body)
+  response.body = generateSourceCode((request.body: any))
   response.type = 'application/zip'
 })
 
@@ -39,7 +39,7 @@ router.post('/generate/source', async ({ request, response }) => {
  */
 
 router.post('/upload', async ({ request, response }) => {
-  response.body = request.jsonResume
+  response.body = (request.jsonResume: any)
   response.type = 'application/json'
 })
 

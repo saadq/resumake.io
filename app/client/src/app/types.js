@@ -4,10 +4,7 @@
 
 import type { FormState, FormAction } from '../features/form/types'
 import type { PreviewState, PreviewAction } from '../features/preview/types'
-import type {
-  ProgressState,
-  ProgressAction
-} from '../features/progress/types'
+import type { ProgressState, ProgressAction } from '../features/progress/types'
 
 type State = {
   form: { resume: FormState },

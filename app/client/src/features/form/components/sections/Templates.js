@@ -37,9 +37,10 @@ const Image = styled.img`
   transform: translateY(0);
   transition: all 0.4s ease-out;
   opacity: ${props => (props.active ? '1' : '0.65')};
-  ${props => props.active ? 'box-shadow: 0 2px 20px #fff, 0 0 0 1px #fff;' : ''}
-
-  &:hover {
+  ${props =>
+    props.active
+      ? 'box-shadow: 0 2px 20px #fff, 0 0 0 1px #fff;'
+      : ''} &:hover {
     opacity: ${props => (props.active ? '1' : '0.9')};
     transform: translateY(-3px);
     cursor: zoom-in;

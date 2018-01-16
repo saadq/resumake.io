@@ -12,7 +12,7 @@ import type { Middleware } from 'koa'
 function jsonResume(): Middleware {
   return async (ctx, next) => {
     const { request } = ctx
-    
+
     try {
       if (request.files == null || typeof request.files !== 'object') {
         throw new Error('File upload failure')

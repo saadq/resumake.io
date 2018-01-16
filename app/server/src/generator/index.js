@@ -35,7 +35,7 @@ function generatePDF(formData: SanitizedValues): Transform {
  */
 
 function generateSourceCode(formData: SanitizedValues): Transform {
-  const { texDoc, opts } = getTemplateData(formData)
+  const { texDoc, opts = {} } = getTemplateData(formData)
   const prettyDoc = prettify(texDoc)
   const zip = Archiver('zip')
 

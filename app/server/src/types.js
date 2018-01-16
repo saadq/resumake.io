@@ -90,15 +90,16 @@ type Generator = {
 }
 
 type LaTeXOpts = {
-  cmd: string,
+  cmd?: string,
   inputs?: string | Array<string>,
   fonts?: string | Array<string>,
-  passes?: number
+  passes?: number,
+  errorLogs?: string
 }
 
 type TemplateData = {
   texDoc: string,
-  opts: LaTeXOpts
+  opts?: LaTeXOpts
 }
 
 export type { SanitizedValues, Generator, TemplateData }

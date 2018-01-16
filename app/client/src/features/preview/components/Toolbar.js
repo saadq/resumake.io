@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  margin-bottom: 10px;
   border-bottom: 1px solid ${colors.borders};
   border-radius: 2px;
   user-select: none;

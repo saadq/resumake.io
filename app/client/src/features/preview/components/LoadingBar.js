@@ -7,8 +7,7 @@ import styled from 'styled-components'
 import { colors, animations } from '../../../common/theme'
 
 const OuterBar = styled.div`
-  max-width: 100%;
-  width: 612px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
   height: 4px;

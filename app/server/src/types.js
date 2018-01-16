@@ -89,4 +89,16 @@ type Generator = {
   awardsSection: (awards?: Array<Award>, heading?: string) => string
 }
 
-export type { SanitizedValues, Generator }
+type LaTeXOpts = {
+  cmd: string,
+  inputs?: string | Array<string>,
+  fonts?: string | Array<string>,
+  passes?: number
+}
+
+type TemplateData = {
+  texDoc: string,
+  opts: LaTeXOpts
+}
+
+export type { SanitizedValues, Generator, TemplateData }

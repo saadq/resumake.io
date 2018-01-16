@@ -23,25 +23,26 @@ import {
   TEMPLATE8,
   TEMPLATE9
 } from './constants'
-import type { SanitizedValues } from '../../types'
+import type { SanitizedValues, TemplateData } from '../../types'
 
 /**
  * Generates the LaTeX document based on the selected template
  * as well as the necessary options needed for it to create a
  * pdf via node-latex.
  *
- * @param {Object} data - The sanitized form data from the request body.
+ * @param data - The sanitized form data from the request body.
  *
- * @return {Object} - The generated LaTeX document as well as its additional opts.
+ * @return The generated LaTeX document as well as its additional opts.
  */
 
-function getTemplateData(data: SanitizedValues) {
+function getTemplateData(data: SanitizedValues): TemplateData {
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {
-        cmd: 'pdflatex',
         texDoc: template1(data),
-        opts: {}
+        opts: {
+          cmd: 'pdflatex'
+        }
       }
 
     case TEMPLATE2:
@@ -56,9 +57,10 @@ function getTemplateData(data: SanitizedValues) {
 
     case TEMPLATE3:
       return {
-        cmd: 'pdflatex',
         texDoc: template3(data),
-        opts: {}
+        opts: {
+          cmd: 'pdflatex'
+        }
       }
 
     case TEMPLATE4:
@@ -111,16 +113,18 @@ function getTemplateData(data: SanitizedValues) {
 
     case TEMPLATE9:
       return {
-        cmd: 'pdflatex',
         texDoc: template9(data),
-        opts: {}
+        opts: {
+          cmd: 'pdflatex'
+        }
       }
 
     default:
       return {
-        cmd: 'pdflatex',
         texDoc: template1(data),
-        opts: {}
+        opts: {
+          cmd: 'pdflatex'
+        }
       }
   }
 }

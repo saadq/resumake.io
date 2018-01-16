@@ -9,7 +9,9 @@ test('errorHandler should catch all errors downstream', async () => {
   const ctx: Object = {
     app: {
       emit: jest.fn()
-    }
+    },
+    request: {},
+    response: {}
   }
 
   const next = jest.fn(() => {
@@ -22,8 +24,8 @@ test('errorHandler should catch all errors downstream', async () => {
   await middleware(ctx, next)
 
   expect(next).toHaveBeenCalled()
-  expect(ctx.status).toBe(400)
-  expect(ctx.body).toBe('Bad user request')
+  expect(ctx.response.status).toBe(400)
+  expect(ctx.response.body).toBe('Bad user request')
 })
 
 test('sanitizer should normalize the request body', async () => {
@@ -40,7 +42,8 @@ test('sanitizer should normalize the request body', async () => {
         work: [{ company: 'Johnson & Johnson' }],
         skills: []
       }
-    }
+    },
+    response: {}
   }
 
   const next = jest.fn()
@@ -70,6 +73,7 @@ test('jsonResume should validate and extract the JSON from file', async () => {
         }
       }
     },
+    response: {},
     throw: jest.fn()
   }
 
@@ -77,15 +81,16 @@ test('jsonResume should validate and extract the JSON from file', async () => {
 
   const expected = {
     selectedTemplate: 1,
+    headings: {},
     basics: {
       name: 'Saad Quadri',
       email: 'saad@saadq.com',
       website: 'github.com/saadq'
     },
     education: [],
-    work: [{ highlights: [] }],
-    skills: [{ keywords: [] }],
-    projects: [{ keywords: [] }],
+    work: [{ highlights: [''] }],
+    skills: [{ keywords: [''] }],
+    projects: [{ keywords: [''] }],
     awards: []
   }
 

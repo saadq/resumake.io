@@ -14,9 +14,8 @@ const router = new Router()
 
 router.get('*', async ctx => {
   const path = join(__dirname, '..', '..', '..', 'client', 'dist', 'index.html')
-
-  ctx.body = createReadStream(path)
-  ctx.type = 'text/html'
+  ctx.response.body = createReadStream(path)
+  ctx.response.type = 'text/html'
 })
 
 export default router

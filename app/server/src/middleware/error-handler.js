@@ -11,11 +11,12 @@ import type { Middleware } from 'koa'
 
 function errorHandler(): Middleware {
   return async (ctx, next) => {
+    const { response } = ctx
     try {
       await next()
     } catch (err) {
-      ctx.status = err.status || 500
-      ctx.body = err.message
+      response.status = err.status || 500
+      response.body = err.message
       ctx.app.emit('error', err, ctx)
     }
   }

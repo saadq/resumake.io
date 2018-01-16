@@ -20,27 +20,27 @@ router.use('/upload', formidable(), jsonResume()) // Parse multipart/form-data
  * Generate PDF from form data
  */
 
-router.post('/generate/resume', async ctx => {
-  ctx.body = generatePDF(ctx.request.body)
-  ctx.type = 'application/pdf'
+router.post('/generate/resume', async ({ request, response }) => {
+  response.body = generatePDF(request.body)
+  response.type = 'application/pdf'
 })
 
 /**
  * Generate TeX source from form data
  */
 
-router.post('/generate/source', async ctx => {
-  ctx.body = generateSourceCode(ctx.request.body)
-  ctx.type = 'application/zip'
+router.post('/generate/source', async ({ request, response }) => {
+  response.body = generateSourceCode(request.body)
+  response.type = 'application/zip'
 })
 
 /**
  * Handle JSON upload from input file
  */
 
-router.post('/upload', async ctx => {
-  ctx.body = ctx.request.jsonResume
-  ctx.type = 'application/json'
+router.post('/upload', async ({ request, response }) => {
+  response.body = request.jsonResume
+  response.type = 'application/json'
 })
 
 export default router

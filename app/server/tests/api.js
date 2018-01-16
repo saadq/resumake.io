@@ -78,15 +78,16 @@ test('POST /api/upload should return the JSON from a file upload', async () => {
 
   const expectedJSON = {
     selectedTemplate: 1,
+    headings: {},
     basics: {
       name: 'Saad Quadri',
       email: 'saad@saadq.com',
       website: 'github.com/saadq'
     },
     education: [],
-    work: [{ highlights: [] }],
-    skills: [{ keywords: [] }],
-    projects: [{ keywords: [] }],
+    work: [{ highlights: [''] }],
+    skills: [{ keywords: [''] }],
+    projects: [{ keywords: [''] }],
     awards: []
   }
 

@@ -12,6 +12,10 @@ import { colors } from '../common/theme'
 import Nexa from './assets/nexa.otf'
 
 injectGlobal`
+  * {
+    box-sizing: border-box;
+  }
+
   html, body, #app {
     width: 100%;
     height: 100%;

@@ -15,14 +15,10 @@ import type { State } from '../../../app/types'
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 800px;
-  max-width: 100%;
+  max-width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media screen and (max-width: 1000px) {
-    width: 80%;
-  }
 `
 
 const Bar = styled.div`

@@ -56,10 +56,10 @@ const SectionButton = Button.extend`
   border-color: ${colors.primary};
   border-radius: 100px;
   padding: 5px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex;
+  align-items: flex-end;
   text-align: center;
+  vertical-align: middle;
   transition: all 0.4s ease;
   margin: 0;
 
@@ -88,6 +88,10 @@ const SectionButton = Button.extend`
   }
 `
 
+const MobileButton = MakeButton.extend`
+  letter-spacing: 0;
+`
+
 type Props = {
   history: RouterHistory,
   location: Location,
@@ -98,7 +102,15 @@ type Props = {
   next: Section
 }
 
-function Progress({ history, location, progress, sections, prev, curr, next }: Props) {
+function Progress({
+  history,
+  location,
+  progress,
+  sections,
+  prev,
+  curr,
+  next
+}: Props) {
   const inPreview = location.pathname.includes('mobile-preview')
 
   return (
@@ -111,14 +123,16 @@ function Progress({ history, location, progress, sections, prev, curr, next }: P
         ← Prev
       </SectionButton>
       <Bar progress={progress} hideOnMobile />
-      <MakeButton
+      <MobileButton
         type="submit"
         form="resume-form"
-        onClick={() => history.push(`/generator/${inPreview ? curr : 'mobile-preview'}`)}
+        onClick={() =>
+          history.push(`/generator/${inPreview ? curr : 'mobile-preview'}`)
+        }
         hideOnDesktop
       >
         {location.pathname.includes('mobile') ? 'Go Back' : 'Make'}
-      </MakeButton>
+      </MobileButton>
       <SectionButton
         type="button"
         onClick={() => history.push(`/generator/${next}`)}

@@ -21,8 +21,7 @@ const Wrapper = styled.div`
   text-align: center;
 
   @media screen and (max-width: 850px) {
-    ${props => props.hideOnMobile && 'display: none;'}
-    width: 100%;
+    ${props => props.hideOnMobile && 'display: none;'} width: 100%;
     overflow: visible;
     margin-bottom: calc(${sizes.footer} + 25px);
   }
@@ -121,7 +120,13 @@ class Preview extends Component<Props, State> {
   }
 
   render() {
-    const { resumeURL, jsonURL, status, downloadSource, hideOnMobile } = this.props
+    const {
+      resumeURL,
+      jsonURL,
+      status,
+      downloadSource,
+      hideOnMobile
+    } = this.props
     const { currPage } = this.state
 
     return (

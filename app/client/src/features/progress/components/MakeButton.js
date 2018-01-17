@@ -24,15 +24,15 @@ const Button = styled.button`
   text-transform: uppercase;
   letter-spacing: 2px;
 
-  ${props => props.hideOnDesktop && css`
-    height: 35px;
+  ${props =>
+    props.hideOnDesktop &&
+    css`
+      height: 35px;
 
-    @media screen and (min-width: 850px) {
-      display: none;
-    }
-  `}
-
-  &:hover {
+      @media screen and (min-width: 850px) {
+        display: none;
+      }
+    `} &:hover {
     background: linear-gradient(
       40deg,
       ${darken(0.4, colors.primary)},

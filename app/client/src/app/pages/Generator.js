@@ -13,7 +13,6 @@ import type { Location } from 'react-router-dom'
 
 const Layout = styled.div`
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   width: 100%;
   height: 100%;

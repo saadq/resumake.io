@@ -23,8 +23,7 @@ const ButtonRow = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-left: 15px;
-  ${props => props.hidden && 'opacity: 0;'}
-  transition: none;
+  ${props => props.hidden && 'opacity: 0;'} transition: none;
 `
 
 const MiniInput = Input.extend`

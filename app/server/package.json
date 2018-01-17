@@ -38,7 +38,6 @@
     "koa-bodyparser": "^4.2.0",
     "koa-combine-routers": "^2.0.1",
     "koa-router": "^7.2.1",
-    "koa-static": "^4.0.1",
     "koa2-formidable": "^1.0.2",
     "node-latex": "^2.5.0",
     "pretty-latex": "^0.1.0",

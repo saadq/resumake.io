@@ -9,11 +9,11 @@ import { join } from 'path'
 const router = new Router()
 
 /**
- * Let the client handle all other routes
+ * Let the client handle all other routes (only used in production)
  */
 
 router.get('*', async ({ response }) => {
-  const path = join(__dirname, '..', '..', '..', 'client', 'dist', 'index.html')
+  const path = join(__dirname, '..', '..', 'dist', 'index.html')
   response.body = createReadStream(path)
   response.type = 'text/html'
 })

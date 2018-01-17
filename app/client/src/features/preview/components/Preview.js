@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Document, Page } from 'react-pdf'
+import { Document, Page } from 'react-pdf/build/entry.noworker'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource } from '../actions'

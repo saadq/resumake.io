@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   entry: [
     'babel-polyfill',

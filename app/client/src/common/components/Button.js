@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { colors } from '../../common/theme'
 
 const Button = styled.button`
+  display: inline-block;
   padding: 5px 10px;
   border: 1px solid;
   border-color: ${colors.primary};

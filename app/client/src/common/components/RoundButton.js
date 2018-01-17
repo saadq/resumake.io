@@ -7,6 +7,7 @@ import { colors } from '../theme'
 
 const RoundButton = Button.extend`
   display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
   margin-top: 0px;

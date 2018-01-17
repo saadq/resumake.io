@@ -27,7 +27,7 @@ const ButtonRow = styled.div`
 `
 
 const MiniInput = Input.extend`
-  width: 50%;
+  width: 65%;
 
   @media screen and (max-width: 850px) {
     width: 65%;

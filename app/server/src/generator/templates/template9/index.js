@@ -316,7 +316,7 @@ function template9(values: SanitizedValues) {
     \\documentclass[fontsize=11pt]{article}
     ${generator.resumeHeader()}
     \\begin{document}
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'profile':

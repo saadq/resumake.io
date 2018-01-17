@@ -348,7 +348,7 @@ function template1(values: SanitizedValues) {
     \\begin{document}
     \\vspace*{-40pt}
 
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'profile':

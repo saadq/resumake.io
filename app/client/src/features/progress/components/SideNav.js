@@ -41,7 +41,7 @@ const Nav = styled.nav`
 
 type Props = {
   location: Location,
-  orderedSections: Array<Section>,
+  sections: Array<Section>,
   setSectionOrder: (
     newSectionOrder: Array<Section>,
     currSection: Section
@@ -57,11 +57,11 @@ class SideNav extends Component<Props> {
   onSortEnd = ({ oldIndex, newIndex }) => {
     const {
       location,
-      orderedSections,
+      sections,
       setSectionOrder,
       setProgress
     } = this.props
-    const newSectionOrder = arrayMove(orderedSections, oldIndex, newIndex)
+    const newSectionOrder = arrayMove(sections, oldIndex, newIndex)
     const currSection: Section = (location.pathname.slice(11): any)
 
     setSectionOrder(newSectionOrder, currSection)
@@ -75,8 +75,7 @@ class SideNav extends Component<Props> {
   }
 
   render() {
-    const { orderedSections } = this.props
-    const sections = orderedSections.filter(item => item !== 'preview')
+    const { sections } = this.props
 
     return (
       <Aside>
@@ -100,7 +99,7 @@ class SideNav extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    orderedSections: state.orderedSections.sections
+    sections: state.progress.sections
   }
 }
 

@@ -242,7 +242,7 @@ function template7(values: SanitizedValues) {
     ${generator.profileSection(values.basics)}
     \\begin{document}
     ${values.basics ? '\\makecvtitle' : ''}
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'education':

@@ -8,7 +8,7 @@ import type { ProgressState, ProgressAction } from '../features/progress/types'
 
 type State = {
   form: { resume: FormState },
-  orderedSections: ProgressState,
+  progress: ProgressState,
   preview: PreviewState
 }
 

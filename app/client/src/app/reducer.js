@@ -4,13 +4,13 @@
 
 import { combineReducers } from 'redux'
 import form from '../features/form/reducer'
-import orderedSections from '../features/progress/reducer'
+import progress from '../features/progress/reducer'
 import preview from '../features/preview/reducer'
 import type { State, Action } from './types'
 
 const appReducer = combineReducers({
   form,
-  orderedSections,
+  progress,
   preview
 })
 

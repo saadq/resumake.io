@@ -73,7 +73,7 @@ type FormValues = {
 }
 
 type FormValuesWithSectionOrder = FormValues & {
-  orderedSections: Array<Section>
+  sections: Array<Section>
 }
 
 type FormState = {

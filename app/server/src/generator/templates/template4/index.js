@@ -364,7 +364,7 @@ function template4(values: SanitizedValues) {
     \\documentclass[]{deedy-resume-openfont}
 
     \\begin{document}
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'profile':

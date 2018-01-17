@@ -282,7 +282,7 @@ function template8(values: SanitizedValues) {
     \\begin{document}
       % Print the header
       \\makeheader
-      ${values.orderedSections
+      ${values.sections
         .map(section => {
           switch (section) {
             case 'education':

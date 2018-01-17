@@ -155,7 +155,7 @@ describe('sanitizer', () => {
           summary: ''
         }
       ],
-      orderedSections: [
+      sections: [
         'templates',
         'profile',
         'education',
@@ -227,7 +227,7 @@ describe('sanitizer', () => {
           awarder: 'HackNY'
         }
       ],
-      orderedSections: [
+      sections: [
         'templates',
         'profile',
         'education',

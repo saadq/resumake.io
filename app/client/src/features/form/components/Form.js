@@ -39,7 +39,7 @@ const StyledForm = styled.form`
 `
 
 type Props = {
-  orderedSections: Array<Section>,
+  sections: Array<Section>,
   location: Location,
   handleSubmit: *,
   setProgress: (sections: Array<Section>, curr: Section) => void,
@@ -68,12 +68,12 @@ class Form extends Component<Props> {
   }
 
   onSubmit = (values: FormValues) => {
-    const { orderedSections, generateResume } = this.props
-    generateResume({ ...values, orderedSections })
+    const { sections, generateResume } = this.props
+    generateResume({ ...values, sections })
   }
 
   updateProgress() {
-    const { orderedSections, location, setProgress } = this.props
+    const { sections, location, setProgress } = this.props
 
     if (
       !location.pathname.startsWith('/generator/') ||
@@ -83,7 +83,7 @@ class Form extends Component<Props> {
     }
 
     const currSection: Section = (location.pathname.slice(11): any)
-    setProgress(orderedSections, currSection)
+    setProgress(sections, currSection)
   }
 
   render() {
@@ -120,8 +120,8 @@ class Form extends Component<Props> {
 
 function mapState(state: State) {
   return {
-    orderedSections: state.orderedSections.sections,
-    progress: state.orderedSections.progress
+    sections: state.progress.sections,
+    progress: state.progress.progress
   }
 }
 

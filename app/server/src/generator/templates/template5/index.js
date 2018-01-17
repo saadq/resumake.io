@@ -242,7 +242,7 @@ function template5(values: SanitizedValues) {
       ${generator.profileSection(values.basics)}
       \\begin{resume}
         \\vspace{-5mm}
-        ${values.orderedSections
+        ${values.sections
           .map(section => {
             switch (section) {
               case 'education':

@@ -69,7 +69,7 @@ type Award = {
 }
 
 type SanitizedValues = {
-  orderedSections: Array<Section>,
+  sections: Array<Section>,
   selectedTemplate: number,
   headings?: Headings,
   basics?: Basics,

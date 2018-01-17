@@ -238,7 +238,7 @@ function template6(values: SanitizedValues) {
     \\documentclass[]{friggeri-cv}
 
     \\begin{document}
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'profile':

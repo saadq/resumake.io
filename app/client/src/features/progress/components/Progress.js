@@ -146,11 +146,11 @@ function Progress({
 
 function mapState(state: State) {
   return {
-    sections: state.orderedSections.sections,
-    progress: state.orderedSections.progress,
-    prev: state.orderedSections.prev,
-    curr: state.orderedSections.curr,
-    next: state.orderedSections.next
+    sections: state.progress.sections,
+    progress: state.progress.progress,
+    prev: state.progress.prev,
+    curr: state.progress.curr,
+    next: state.progress.next
   }
 }
 

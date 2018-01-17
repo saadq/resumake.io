@@ -297,7 +297,7 @@ function template3(values: SanitizedValues) {
   return stripIndent`
     ${generator.resumeHeader()}
     \\begin{document}
-    ${values.orderedSections
+    ${values.sections
       .map(section => {
         switch (section) {
           case 'profile':

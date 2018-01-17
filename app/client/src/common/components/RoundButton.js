@@ -22,6 +22,15 @@ const RoundButton = Button.extend`
     transition: all 0.4s ease;
   }
 
+  &:disabled {
+    &:hover {
+      background: ${colors.background};
+      border-color: #444;
+      color: #444;
+      cursor: default;
+    }
+  }
+
   &:hover {
     color: ${colors.background};
 

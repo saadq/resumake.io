@@ -14,7 +14,7 @@ const Divider = styled.hr`
   background: ${colors.primary};
   opacity: 0.75;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
   }
 `

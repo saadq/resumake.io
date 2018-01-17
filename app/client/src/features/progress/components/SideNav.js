@@ -25,7 +25,7 @@ const Aside = styled.aside`
   align-items: center;
   border-right: 1px solid ${colors.borders};
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     display: none;
   }
 `

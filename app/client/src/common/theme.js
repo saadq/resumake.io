@@ -15,7 +15,7 @@ const colors = {
 const sizes = {
   header: '10vh',
   sideNav: '15vw',
-  footer: '50px'
+  footer: '65px'
 }
 
 const margins = {

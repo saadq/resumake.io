@@ -14,16 +14,16 @@ import {
 } from '../../../../common/components'
 
 const ButtonRow = styled.div`
-  margin-left: 10px;
+  margin-left: 15px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
 `
 
 const MiniInput = Input.extend`
-  width: 20%;
+  width: 50%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     width: 60%;
   }
 `

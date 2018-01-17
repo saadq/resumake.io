@@ -18,15 +18,21 @@ const Row = styled.div`
   justify-content: space-between;
 `
 
-const Buttons = styled.div`
+const ButtonRow = styled.div`
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 15px;
+  ${props => props.hidden && 'opacity: 0;'}
+  transition: none;
 `
 
-const SmallInput = Input.extend`
-  width: 85%;
+const MiniInput = Input.extend`
+  width: 50%;
+
+  @media screen and (max-width: 850px) {
+    width: 65%;
+  }
 `
 
 type Props = {
@@ -68,30 +74,30 @@ function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
       <Label>Job Responsibilities</Label>
       {highlights.map((highlight, i) => (
         <Row key={i}>
-          <SmallInput
+          <MiniInput
             type="text"
             name={`work[${index}].highlights[${i}]`}
             placeholder="Did cool stuff at company"
             component="input"
           />
-          {i === highlights.length - 1 && (
-            <Buttons>
-              <RoundButton
-                inverted
-                type="button"
-                onClick={() => addHighlight(index)}
-              >
-                <Icon type="add" />
-              </RoundButton>
-              <RoundButton
-                inverted
-                type="button"
-                onClick={() => removeHighlight(index)}
-              >
-                <Icon type="remove" />
-              </RoundButton>
-            </Buttons>
-          )}
+          <ButtonRow hidden={i !== highlights.length - 1}>
+            <RoundButton
+              inverted
+              disabled={i !== highlights.length - 1}
+              type="button"
+              onClick={() => addHighlight(index)}
+            >
+              <Icon type="add" />
+            </RoundButton>
+            <RoundButton
+              inverted
+              disabled={i !== highlights.length - 1}
+              type="button"
+              onClick={() => removeHighlight(index)}
+            >
+              <Icon type="remove" />
+            </RoundButton>
+          </ButtonRow>
         </Row>
       ))}
     </div>

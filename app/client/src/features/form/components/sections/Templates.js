@@ -18,7 +18,7 @@ const Grid = styled.div`
   grid-gap: 20px;
   margin: 20px 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     grid-template-columns: 1fr;
   }
 `

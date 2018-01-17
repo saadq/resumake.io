@@ -26,7 +26,7 @@ const Content = styled.main`
   width: calc(100% - ${sizes.sideNav});
   height: calc(100% - ${sizes.header} - ${sizes.footer} - 2px);
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
     margin-left: 0;
     flex-direction: column;
@@ -71,7 +71,7 @@ function Generator({ location }: Props) {
       <SideNav />
       <Content>
         <Form location={location} />
-        <Preview />
+        <Preview hideOnMobile />
       </Content>
       <Footer>
         <Progress />

@@ -13,18 +13,18 @@ import {
   Icon
 } from '../../../../common/components'
 
-const Row = styled.div`
-  margin-left: 10px;
+const ButtonRow = styled.div`
+  margin-left: 15px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
 `
 
 const MiniInput = Input.extend`
-  width: 20%;
+  width: 50%;
 
-  @media screen and (max-width: 768px) {
-    width: 60%;
+  @media screen and (max-width: 850px) {
+    width: 65%;
   }
 `
 
@@ -53,7 +53,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
             component="input"
           />
           {i === keywords.length - 1 && (
-            <Row>
+            <ButtonRow>
               <RoundButton
                 inverted
                 type="button"
@@ -68,7 +68,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
               >
                 <Icon type="remove" />
               </RoundButton>
-            </Row>
+            </ButtonRow>
           )}
         </div>
       ))}

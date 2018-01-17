@@ -2,14 +2,15 @@
  * @flow
  */
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
 import { colors } from '../../../common/theme'
 
 const Button = styled.button`
   width: 125px;
   height: 45px;
-  margin-top: 25px;
+  margin: 0;
+  padding: 0;
   background: linear-gradient(
     40deg,
     ${darken(0.3, colors.primary)},
@@ -22,6 +23,14 @@ const Button = styled.button`
   transition: all 0.4s ease;
   text-transform: uppercase;
   letter-spacing: 2px;
+
+  ${props => props.hideOnDesktop && css`
+    height: 35px;
+
+    @media screen and (min-width: 850px) {
+      display: none;
+    }
+  `}
 
   &:hover {
     background: linear-gradient(

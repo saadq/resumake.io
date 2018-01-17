@@ -5,8 +5,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, type RouterHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { lighten } from 'polished'
+import MakeButton from './MakeButton'
 import { Button } from '../../../common/components'
 import { colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
@@ -40,6 +41,14 @@ const Bar = styled.div`
     left: 0;
     background: ${colors.primary};
   }
+
+  ${props =>
+    props.hideOnMobile &&
+    css`
+      @media screen and (max-width: 850px) {
+        display: none;
+      }
+    `};
 `
 
 const SectionButton = Button.extend`
@@ -68,6 +77,11 @@ const SectionButton = Button.extend`
     background: ${colors.primary};
     color: ${colors.background};
 
+    @media screen and (max-width: 850px) {
+      background: transparent;
+      color: ${colors.primary};
+    }
+
     i {
       color: ${colors.background};
     }
@@ -76,6 +90,7 @@ const SectionButton = Button.extend`
 
 type Props = {
   history: RouterHistory,
+  location: Location,
   progress: number,
   sections: Array<Section>,
   prev: Section,
@@ -83,7 +98,9 @@ type Props = {
   next: Section
 }
 
-function Progress({ history, progress, sections, prev, curr, next }: Props) {
+function Progress({ history, location, progress, sections, prev, curr, next }: Props) {
+  const inPreview = location.pathname.includes('mobile-preview')
+
   return (
     <Wrapper>
       <SectionButton
@@ -93,7 +110,15 @@ function Progress({ history, progress, sections, prev, curr, next }: Props) {
       >
         ← Prev
       </SectionButton>
-      <Bar progress={progress} />
+      <Bar progress={progress} hideOnMobile />
+      <MakeButton
+        type="submit"
+        form="resume-form"
+        onClick={() => history.push(`/generator/${inPreview ? curr : 'mobile-preview'}`)}
+        hideOnDesktop
+      >
+        {location.pathname.includes('mobile') ? 'Go Back' : 'Make'}
+      </MakeButton>
       <SectionButton
         type="button"
         onClick={() => history.push(`/generator/${next}`)}

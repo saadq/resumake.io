@@ -14,7 +14,6 @@ const Button = styled.button`
   color: ${colors.primary};
   margin-right: 10px;
   margin-top: 10px;
-  margin-bottom: 10px;
   outline: none;
   transition: all 0.4s ease;
   user-select: none;
@@ -23,6 +22,11 @@ const Button = styled.button`
     background: ${colors.primary};
     color: ${colors.background};
     cursor: pointer;
+
+    @media screen and (max-width: 850px) {
+      background: transparent;
+      color: ${colors.primary};
+    }
   }
 
   i {

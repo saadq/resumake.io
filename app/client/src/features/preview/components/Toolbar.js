@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   border-radius: 2px;
   user-select: none;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     flex-direction: column;
   }
 `
@@ -38,7 +38,7 @@ const ButtonGroup = styled.div`
     justify-content: flex-end;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ const ToolButton = Button.extend`
   border-radius: 2px;
   margin: 0 2px;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     border: 1px solid ${colors.borders};
 
     i {
@@ -99,7 +99,7 @@ const Pagination = styled.div`
   align-items: center;
   border-radius: 2px;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
     margin-top: 10px;
   }

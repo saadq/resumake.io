@@ -16,6 +16,7 @@ import {
   Projects,
   Awards
 } from '.'
+import Preview from '../../preview/components'
 import { ScrollToTop } from '../../../common/components'
 import { generateResume } from '../../preview/actions'
 import { setProgress } from '../../progress/actions'
@@ -74,7 +75,10 @@ class Form extends Component<Props> {
   updateProgress() {
     const { orderedSections, location, setProgress } = this.props
 
-    if (!location.pathname.startsWith('/generator/')) {
+    if (
+      !location.pathname.startsWith('/generator/') ||
+      location.pathname.includes('mobile')
+    ) {
       return
     }
 
@@ -104,6 +108,8 @@ class Form extends Component<Props> {
             <Route exact path="/generator/skills" component={Skills} />
             <Route exact path="/generator/projects" component={Projects} />
             <Route exact path="/generator/awards" component={Awards} />
+            <Route exact path="/generator/awards" component={Awards} />
+            <Route exact path="/generator/mobile-preview" component={Preview} />
             <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />
           </Switch>
         </ScrollToTop>

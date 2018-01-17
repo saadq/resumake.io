@@ -27,7 +27,7 @@ const Main = styled.main`
   flex: 1;
   display: flex;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -115,7 +115,7 @@ const ResumePreview = styled.div`
   width: 100%;
   height: 100%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     display: none;
   }
 `
@@ -158,7 +158,7 @@ const Footer = styled.footer`
   font-size: 0.8em;
   color: ${lighten(0.3, colors.background)};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     font-size: 0.75em;
   }
 `
@@ -166,7 +166,7 @@ const Footer = styled.footer`
 const Links = styled.div`
   margin-right: 50px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     margin-right: 15px;
   }
 
@@ -185,7 +185,7 @@ const Copyright = styled.span`
   opacity: 0.75;
   margin-left: 50px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     margin-left: 15px;
   }
 `

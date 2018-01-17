@@ -18,7 +18,7 @@ import { LoadingBar } from '../../features/preview/components'
 import { colors } from '../../common/theme'
 
 const Wrapper = styled.div`
-  max-width: 800px;
+  max-width: 850px;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -86,7 +86,7 @@ const Color = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     width: 75px;
     height: 75px;
     margin: 2px;
@@ -191,7 +191,7 @@ const FormInput = Input.withComponent('input').extend`
   width: 50%;
   margin-bottom: 25px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     width: 50%;
   }
 `
@@ -201,7 +201,7 @@ const FormDivider = Divider.extend`
   margin: 0;
   padding: 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     width: 50%;
   }
 `

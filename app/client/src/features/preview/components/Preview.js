@@ -8,7 +8,6 @@ import { Document, Page } from 'react-pdf/build/entry.webpack'
 import styled from 'styled-components'
 import { Toolbar, LoadingBar } from '.'
 import { downloadSource } from '../actions'
-import MakeButton from '../../progress/components/MakeButton'
 import { Loader } from '../../../common/components'
 import { sizes } from '../../../common/theme'
 import type { State as ReduxState } from '../../../app/types'
@@ -21,7 +20,8 @@ const Wrapper = styled.div`
   padding-bottom: 25px;
   text-align: center;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
+    ${props => props.hideOnMobile && 'display: none;'}
     width: 100%;
     overflow: visible;
     margin-bottom: calc(${sizes.footer} + 25px);
@@ -34,16 +34,8 @@ const ResumePage = styled(Page)`
   align-items: center;
 
   canvas {
-    max-width: 100% !important;
+    max-width: 95% !important;
     height: auto !important;
-  }
-`
-
-const MobileButton = MakeButton.extend`
-  margin: 25px 0px;
-
-  @media screen and (min-width: 1000px) {
-    display: none;
   }
 `
 
@@ -51,6 +43,7 @@ type Props = {
   resumeURL?: string,
   jsonURL?: string,
   status?: 'pending' | 'success' | 'failure',
+  hideOnMobile?: boolean,
   downloadSource: () => Promise<void>
 }
 
@@ -128,14 +121,11 @@ class Preview extends Component<Props, State> {
   }
 
   render() {
-    const { resumeURL, jsonURL, status, downloadSource } = this.props
+    const { resumeURL, jsonURL, status, downloadSource, hideOnMobile } = this.props
     const { currPage } = this.state
 
     return (
-      <Wrapper>
-        <MobileButton type="submit" form="resume-form">
-          Make
-        </MobileButton>
+      <Wrapper hideOnMobile={hideOnMobile}>
         <Toolbar
           resumeURL={resumeURL || BlankPDF}
           jsonURL={jsonURL}
@@ -155,7 +145,6 @@ class Preview extends Component<Props, State> {
         >
           <ResumePage
             pageNumber={currPage}
-            scale={this.state.scale}
             renderAnnotations={false}
             renderTextLayer={false}
           />

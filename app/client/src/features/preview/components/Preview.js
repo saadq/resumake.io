@@ -53,7 +53,7 @@ type State = {
   isPrinting: boolean
 }
 
-const initialScale = (document.body: any).clientWidth > 1440 ? 1.5 : 1
+const initialScale = (document.body: any).clientWidth > 1440 ? 1.75 : 1
 
 class Preview extends Component<Props, State> {
   state = {
@@ -149,6 +149,7 @@ class Preview extends Component<Props, State> {
           loading={<Loader />}
         >
           <ResumePage
+            scale={this.state.scale}
             pageNumber={currPage}
             renderAnnotations={false}
             renderTextLayer={false}

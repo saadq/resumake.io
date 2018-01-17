@@ -6,6 +6,9 @@ import styled from 'styled-components'
 import { colors, animations } from '../theme'
 
 const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: ${colors.primary};
   animation: ${animations.load} 1s infinite ease-in-out;
   width: 1em;

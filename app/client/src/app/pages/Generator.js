@@ -3,11 +3,11 @@
  */
 
 import React from 'react'
+import Loadable from 'react-loadable'
 import styled from 'styled-components'
 import Form from '../../features/form/components'
-import Preview from '../../features/preview/components'
 import { SideNav, Progress } from '../../features/progress/components'
-import { Logo } from '../../common/components'
+import { Logo, Loader } from '../../common/components'
 import { colors, sizes } from '../../common/theme'
 import type { Location } from 'react-router-dom'
 
@@ -57,6 +57,11 @@ const Footer = styled.footer`
   border-top: 1px solid ${colors.borders};
 `
 
+const LoadablePreview = Loadable({
+  loader: () => import('../../features/preview/components'),
+  loading: Loader
+})
+
 type Props = {
   location: Location
 }
@@ -70,7 +75,7 @@ function Generator({ location }: Props) {
       <SideNav />
       <Content>
         <Form location={location} />
-        <Preview hideOnMobile />
+        <LoadablePreview hideOnMobile />
       </Content>
       <Footer>
         <Progress />

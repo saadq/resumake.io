@@ -80,4 +80,4 @@ function makeReadme(template: number, cmd?: string = 'pdflatex'): string {
   `
 }
 
-export { generatePDF, generateSourceCode }
+export { generatePDF, generateSourceCode, makeReadme }

@@ -16,6 +16,7 @@ import {
   Projects,
   Awards
 } from '.'
+import { ScrollToTop } from '../../../common/components'
 import { generateResume } from '../../preview/actions'
 import { setProgress } from '../../progress/actions'
 import { colors } from '../../../common/theme'
@@ -30,10 +31,9 @@ const StyledForm = styled.form`
   border-right: 1px solid ${colors.borders};
   overflow-y: auto;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
     border: none;
-    overflow: visible;
   }
 `
 
@@ -46,6 +46,26 @@ type Props = {
 }
 
 class Form extends Component<Props> {
+  form: ?HTMLFormElement
+
+  componentWillMount() {
+    if (this.props.progress === 0) {
+      this.updateProgress()
+    }
+  }
+
+  shouldComponentUpdate(prevProps) {
+    return prevProps.location.pathname !== this.props.location.pathname
+  }
+
+  componentDidUpdate() {
+    this.updateProgress()
+
+    if (this.form) {
+      this.form.scrollTop = 0
+    }
+  }
+
   onSubmit = (values: FormValues) => {
     const { orderedSections, generateResume } = this.props
     generateResume({ ...values, orderedSections })
@@ -62,39 +82,31 @@ class Form extends Component<Props> {
     setProgress(orderedSections, currSection)
   }
 
-  componentWillMount() {
-    if (this.props.progress === 0) {
-      this.updateProgress()
-    }
-  }
-
-  shouldComponentUpdate(prevProps) {
-    return prevProps.location.pathname !== this.props.location.pathname
-  }
-
-  componentDidUpdate() {
-    this.updateProgress()
-  }
-
   render() {
     const { handleSubmit } = this.props
     return (
-      <StyledForm id="resume-form" onSubmit={handleSubmit(this.onSubmit)}>
-        <Switch>
-          <Route
-            exact
-            path="/generator"
-            render={() => <Redirect to="/generator/templates" />}
-          />
-          <Route exact path="/generator/templates" component={Templates} />
-          <Route exact path="/generator/profile" component={Profile} />
-          <Route exact path="/generator/education" component={Education} />
-          <Route exact path="/generator/work" component={Work} />
-          <Route exact path="/generator/skills" component={Skills} />
-          <Route exact path="/generator/projects" component={Projects} />
-          <Route exact path="/generator/awards" component={Awards} />
-          <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />
-        </Switch>
+      <StyledForm
+        id="resume-form"
+        onSubmit={handleSubmit(this.onSubmit)}
+        innerRef={form => (this.form = form)}
+      >
+        <ScrollToTop>
+          <Switch>
+            <Route
+              exact
+              path="/generator"
+              render={() => <Redirect to="/generator/templates" />}
+            />
+            <Route exact path="/generator/templates" component={Templates} />
+            <Route exact path="/generator/profile" component={Profile} />
+            <Route exact path="/generator/education" component={Education} />
+            <Route exact path="/generator/work" component={Work} />
+            <Route exact path="/generator/skills" component={Skills} />
+            <Route exact path="/generator/projects" component={Projects} />
+            <Route exact path="/generator/awards" component={Awards} />
+            <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />
+          </Switch>
+        </ScrollToTop>
       </StyledForm>
     )
   }

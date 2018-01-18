@@ -47,7 +47,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
-    "blyss": "^10.0.0",
+    "blyss": "^10.1.0",
     "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.0",
     "jest": "^22.0.6",

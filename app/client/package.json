@@ -55,7 +55,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "blyss": "^10.0.0",
+    "blyss": "^10.1.0",
     "copy-webpack-plugin": "4.0.1",
     "cross-env": "^5.0.5",
     "enzyme": "2.9.1",

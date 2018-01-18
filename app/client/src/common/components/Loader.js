@@ -5,7 +5,7 @@
 import styled from 'styled-components'
 import { colors, animations } from '../theme'
 
-const Loader = styled.div`
+const Bars = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,5 +41,23 @@ const Loader = styled.div`
     left: 1.5em;
   }
 `
+
+type Props = {
+  error?: boolean,
+  timedOut?: boolean,
+  pastDelay?: number
+}
+
+function Loader({ error, timedOut, pastDelay }: Props) {
+  if (error) {
+    return <div>Error!</div>
+  } else if (timedOut) {
+    return <div>Taking a long time...</div>
+  } else if (pastDelay) {
+    return <Bars />
+  } else {
+    return null
+  }
+}
 
 export default Loader

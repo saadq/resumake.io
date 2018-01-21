@@ -229,12 +229,16 @@ class Home extends Component<Props> {
     }
   }
 
+  clearState = () => {
+    this.props.clearState()
+    window.localStorage.clear()
+  }
+
   render() {
     const {
       hasPrevSession,
       resumeStatus,
       jsonUpload,
-      clearState,
       clearPreview
     } = this.props
 
@@ -253,7 +257,7 @@ class Home extends Component<Props> {
         <Main>
           <LeftSection>
             <Logo big />
-            <PrimaryButton to="/generator" onClick={clearState}>
+            <PrimaryButton to="/generator" onClick={this.clearState}>
               Make New Resume
             </PrimaryButton>
             {hasPrevSession && (

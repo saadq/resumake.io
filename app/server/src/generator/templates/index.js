@@ -88,8 +88,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
         opts: {
           cmd: 'xelatex',
           inputs: join(__dirname, 'template6', 'inputs'),
-          fonts: join(__dirname, 'template6', 'inputs'),
-          passes: 2
+          fonts: join(__dirname, 'template6', 'inputs')
         }
       }
 

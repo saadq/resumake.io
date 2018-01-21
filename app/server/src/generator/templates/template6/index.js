@@ -9,36 +9,23 @@ import type { SanitizedValues, Generator } from '../../../types'
 const generator: Generator = {
   profileSection(basics) {
     if (!basics) {
-      return '\\header{}{}{}'
+      return ''
     }
 
-    const { name, email, phone, location = {}, website } = basics
-
-    let nameStart = ''
-    let nameEnd = ''
-
-    if (name) {
-      const names = name.split(' ')
-
-      if (names.length === 1) {
-        nameStart = names[0]
-        nameEnd = ''
-      } else {
-        nameStart = names[0]
-        nameEnd = names.slice(1, names.length).join(' ')
-      }
-    }
-
-    if (nameStart && nameEnd) {
-      nameStart += ' '
-    }
-
-    const info = [email, phone, location.address, website]
-      .filter(Boolean)
-      .join(' | ')
+    const { name = '', email, phone, location = {}, website } = basics
+    const info = [email, phone, location.address, website].filter(Boolean)
 
     return stripIndent`
-      \\header{${nameStart}}{${nameEnd}}{${info}}
+      \\begin{center}
+      % Personal
+      % -----------------------------------------------------
+      {\\fontsize{\\sizeone}{\\sizeone}\\fontspec[Path = fonts/,LetterSpace=15]{Montserrat-Regular} ${name.toUpperCase()}}
+      ${name && info.length > 1 ? '\\\\' : ''}
+      \\vspace{2mm}
+      {\\fontsize{1em}{1em}\\fontspec[Path = fonts/]{Montserrat-Light} ${info.join(
+        ' -- '
+      )}}
+      \\end{center}
     `
   },
 
@@ -48,50 +35,69 @@ const generator: Generator = {
     }
 
     return source`
-      \\section{${heading || 'Education'}}
-      \\begin{entrylist}
       ${education.map(school => {
         const {
           institution,
           location,
-          studyType = '',
-          area = '',
+          area,
+          studyType,
           gpa,
-          startDate = '',
-          endDate = ''
+          startDate,
+          endDate
         } = school
 
-        let schoolLine = ''
-
-        if (institution) {
-          schoolLine += institution
-        }
+        let degreeLine = ''
 
         if (studyType && area) {
-          schoolLine += `, {\\normalfont ${studyType} in ${area}}`
+          degreeLine = `${studyType} in ${area}`
         } else if (studyType || area) {
-          schoolLine += `, {\\normalfont ${studyType || area}}`
+          degreeLine = studyType || area
+        }
+
+        const info = []
+
+        if (location) {
+          info.push(location)
+        }
+
+        if (degreeLine) {
+          info.push(degreeLine)
+        }
+
+        if (gpa) {
+          info.push(`GPA: ${gpa}`)
         }
 
         let dateRange = ''
 
         if (startDate && endDate) {
-          dateRange = `${startDate} - ${endDate}`
+          dateRange = `${startDate} – ${endDate}`
         } else if (startDate) {
-          dateRange = `${startDate} - Present`
+          dateRange = `${startDate} – Present`
         } else {
           dateRange = endDate
         }
 
-        return `
-          \\entry
-            {${dateRange}}
-            {${schoolLine}}
-            {${location || ''}}
-            {${gpa ? `\\emph{GPA: ${gpa}}` : ''}}
+        return stripIndent`
+          % Chapter: Education
+          % ------------------
+
+          \\chap{${heading ? heading.toUpperCase() : 'EDUCATION'}}{
+
+            \\subchap{${institution}}{${dateRange}}{
+              ${
+                info.length > 0
+                  ? `
+                \\begin{newitemize}
+                  ${info.map(item => (item ? `\\item ${item}` : '')).join('\n')}
+                \\end{newitemize}
+              `
+                  : ''
+              }{}
+            }
+          }
         `
       })}
-      \\end{entrylist}
     `
   },
 
@@ -101,8 +107,9 @@ const generator: Generator = {
     }
 
     return source`
-      \\section{${heading || 'Experience'}}
-      \\begin{entrylist}
+      % Chapter: Work Experience
+      % ------------------------
+      \\chap{${heading ? heading.toUpperCase() : 'Experience'}}{
       ${work.map(job => {
         const {
           company,
@@ -113,25 +120,8 @@ const generator: Generator = {
           highlights
         } = job
 
-        let jobLine = ''
         let dateRange = ''
-        let highlightLines = ''
-
-        if (company) {
-          jobLine += company
-        }
-
-        if (position) {
-          jobLine += `, ${position}`
-        }
-
-        if (highlights) {
-          highlightLines = source`
-            \\vspace{-3mm}\\begin{itemize}[leftmargin=10pt,itemsep=4pt]
-            ${highlights.map(highlight => `\\item ${highlight}`)}
-            \\end{itemize}
-            `
-        }
+        let dutyLines = ''
 
         if (startDate && endDate) {
           dateRange = `${startDate} – ${endDate}`
@@ -141,15 +131,23 @@ const generator: Generator = {
           dateRange = endDate
         }
 
-        return `
-          \\entry
-            {${dateRange || ''}}
-            {${jobLine}}
-            {${location || ''}}
-            {${highlightLines}}
+        if (highlights) {
+          dutyLines = source`
+            \\begin{newitemize}
+              ${highlights.map(duty => `\\item {${duty}}`)}
+            \\end{newitemize}
+            `
+        }
+
+        return stripIndent`
+          \\subchap
+            {${company}}
+            {${dateRange}}
+            {${dateRange}}
+            {${dutyLines}}
         `
       })}
-      \\end{entrylist}
+    }
     `
   },
 
@@ -158,19 +156,7 @@ const generator: Generator = {
       return ''
     }
 
-    return source`
-    \\section{${heading || 'Skills'}}
-    \\begin{entrylist}
-    ${skills.map(({ name, keywords = [] }) => {
-      const nameLine = name ? `${name}: ` : ''
-      const keywordsLine = keywords
-        ? `{\\normalfont ${keywords.join(', ')}}`
-        : ''
-
-      return `\\skill{}{${nameLine}${keywordsLine}}`
-    })}
-    \\end{entrylist}
-    `
+    return ''
   },
 
   projectsSection(projects, heading) {
@@ -178,32 +164,7 @@ const generator: Generator = {
       return ''
     }
 
-    return source`
-    \\section{${heading || 'Projects'}}
-    \\begin{entrylist}
-    ${projects.map(project => {
-      const { name, description, keywords = [], url } = project
-
-      let nameLine = ''
-
-      if (name) {
-        nameLine += name
-      }
-
-      if (keywords) {
-        nameLine += ` {\\normalfont ${keywords.join(', ')}}`
-      }
-
-      return `
-        \\entry
-          {}
-          {${nameLine}}
-          {${url || ''}}
-          {${description || ''}}
-      `
-    })}
-    \\end{entrylist}
-    `
+    return ''
   },
 
   awardsSection(awards, heading) {
@@ -211,22 +172,7 @@ const generator: Generator = {
       return ''
     }
 
-    return source`
-    \\section{${heading || 'Awards'}}
-    \\begin{entrylist}
-    ${awards.map(award => {
-      const { title, summary, date, awarder } = award
-
-      return stripIndent`
-        \\entry
-          {${date || ''}}
-          {${title || ''}}
-          {${awarder || ''}}
-          {${summary || ''}}
-      `
-    })}
-    \\end{entrylist}
-    `
+    return ''
   }
 }
 
@@ -234,39 +180,13 @@ function template6(values: SanitizedValues) {
   const { headings = {} } = values
 
   return stripIndent`
-    %!TEX TS-program = xelatex
-    \\documentclass[]{friggeri-cv}
-
+    \\documentclass[10pt]{article}
+    \\usepackage[english]{babel}
+    \\input{config/minimal-resume-config}
     \\begin{document}
-    ${values.sections
-      .map(section => {
-        switch (section) {
-          case 'profile':
-            return generator.profileSection(values.basics)
-
-          case 'education':
-            return generator.educationSection(
-              values.education,
-              headings.education
-            )
-
-          case 'work':
-            return generator.workSection(values.work, headings.work)
-
-          case 'skills':
-            return generator.skillsSection(values.skills, headings.skills)
-
-          case 'projects':
-            return generator.projectsSection(values.projects, headings.projects)
-
-          case 'awards':
-            return generator.awardsSection(values.awards, headings.awards)
-
-          default:
-            return ''
-        }
-      })
-      .join('\n')}
+    ${generator.profileSection(values.basics)}
+    ${generator.educationSection(values.education, headings.education)}
+    ${generator.workSection(values.work, headings.work)}
     ${WHITESPACE}
     \\end{document}
   `

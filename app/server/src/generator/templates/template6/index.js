@@ -68,10 +68,13 @@ const generator: Generator = {
               {${dateRange}}
               {${degreeLine}}
               {${location}}
-              {${gpa ? `\\begin{newitemize}
+              {${
+                gpa
+                  ? `\\begin{newitemize}
                   \\item ${gpa ? `GPA: ${gpa}` : ''}
                 \\end{newitemize}`
-                    : ''}
+                  : ''
+              }
               }
           }
         `
@@ -136,7 +139,30 @@ const generator: Generator = {
       return ''
     }
 
-    return ''
+    return source`
+      % Chapter: Skills
+      % ------------------------
+
+      \\chap{${heading ? heading.toUpperCase() : 'SKILLS'}}{
+      \\begin{newitemize}
+        ${skills.map(skill => {
+          const { name = '', keywords = [] } = skill
+
+          let item = ''
+
+          if (name) {
+            item += `${name}: `
+          }
+
+          if (keywords.length > 0) {
+            item += keywords.join(', ')
+          }
+
+          return `\\item ${item}`
+        })}
+      \\end{newitemize}
+      }
+    `
   },
 
   projectsSection(projects, heading) {
@@ -167,6 +193,7 @@ function template6(values: SanitizedValues) {
     ${generator.profileSection(values.basics)}
     ${generator.educationSection(values.education, headings.education)}
     ${generator.workSection(values.work, headings.work)}
+    ${generator.skillsSection(values.skills, headings.skills)}
     ${WHITESPACE}
     \\end{document}
   `

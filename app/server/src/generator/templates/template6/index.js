@@ -37,37 +37,16 @@ const generator: Generator = {
     return source`
       ${education.map(school => {
         const {
-          institution,
-          location,
-          area,
-          studyType,
-          gpa,
-          startDate,
-          endDate
+          institution = '',
+          location = '',
+          area = '',
+          studyType = '',
+          gpa = '',
+          startDate = '',
+          endDate = ''
         } = school
 
-        let degreeLine = ''
-
-        if (studyType && area) {
-          degreeLine = `${studyType} in ${area}`
-        } else if (studyType || area) {
-          degreeLine = studyType || area
-        }
-
-        const info = []
-
-        if (location) {
-          info.push(location)
-        }
-
-        if (degreeLine) {
-          info.push(degreeLine)
-        }
-
-        if (gpa) {
-          info.push(`GPA: ${gpa}`)
-        }
-
+        const degreeLine = [studyType, area].filter(Boolean).join(' ')
         let dateRange = ''
 
         if (startDate && endDate) {
@@ -84,17 +63,16 @@ const generator: Generator = {
 
           \\chap{${heading ? heading.toUpperCase() : 'EDUCATION'}}{
 
-            \\subchap{${institution}}{${dateRange}}{
-              ${
-                info.length > 0
-                  ? `
-                \\begin{newitemize}
-                  ${info.map(item => (item ? `\\item ${item}` : '')).join('\n')}
-                \\end{newitemize}
-              `
-                  : ''
-              }{}
-            }
+            \\school
+              {${institution}}
+              {${dateRange}}
+              {${degreeLine}}
+              {${location}}
+              {${gpa ? `\\begin{newitemize}
+                  \\item ${gpa ? `GPA: ${gpa}` : ''}
+                \\end{newitemize}`
+                    : ''}
+              }
           }
         `
       })}
@@ -109,15 +87,16 @@ const generator: Generator = {
     return source`
       % Chapter: Work Experience
       % ------------------------
-      \\chap{${heading ? heading.toUpperCase() : 'Experience'}}{
+      \\chap{${heading ? heading.toUpperCase() : 'EXPERIENCE'}}{
+
       ${work.map(job => {
         const {
-          company,
-          position,
-          location,
-          startDate,
-          endDate,
-          highlights
+          company = '',
+          position = '',
+          location = '',
+          startDate = '',
+          endDate = '',
+          highlights = []
         } = job
 
         let dateRange = ''
@@ -140,10 +119,11 @@ const generator: Generator = {
         }
 
         return stripIndent`
-          \\subchap
+          \\job
             {${company}}
             {${dateRange}}
-            {${dateRange}}
+            {${position}}
+            {${location}}
             {${dutyLines}}
         `
       })}

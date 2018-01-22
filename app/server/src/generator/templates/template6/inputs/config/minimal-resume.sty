@@ -75,3 +75,20 @@
   {#3}
   \vspace{\sizefive}
 }
+
+\newcommand{\school}[5]{
+  \vspace{\sizefive}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+
+  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3}\hfill{\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman}#4}\\#5
+  \vspace{\sizefive}
+}
+
+\newcommand{\job}[5]{
+  \vspace{\sizefive}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+
+  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #4}
+  {#5}
+  \vspace{\sizefive}
+}

@@ -35,6 +35,11 @@ const generator: Generator = {
     }
 
     return source`
+      % Chapter: Education
+      % ------------------
+
+      \\chap{${heading ? heading.toUpperCase() : 'EDUCATION'}}{
+
       ${education.map(school => {
         const {
           institution = '',
@@ -58,11 +63,6 @@ const generator: Generator = {
         }
 
         return stripIndent`
-          % Chapter: Education
-          % ------------------
-
-          \\chap{${heading ? heading.toUpperCase() : 'EDUCATION'}}{
-
             \\school
               {${institution}}
               {${dateRange}}
@@ -75,10 +75,10 @@ const generator: Generator = {
                 \\end{newitemize}`
                   : ''
               }
-              }
           }
         `
-      })}
+        })}
+      }
     `
   },
 
@@ -170,7 +170,32 @@ const generator: Generator = {
       return ''
     }
 
-    return ''
+    return source`
+      % Chapter: Projects
+      % ------------------------
+
+      \\chap{${heading ? heading.toUpperCase() : 'PROJECTS'}}{
+
+        ${projects.map(project => {
+          const {
+            name = '',
+            description = '',
+            keywords = [],
+            url = ''
+          } = project
+
+          const descriptionWithNewline = description ? `${description}\\\\` : description
+
+          return stripIndent`
+            \\project
+              {${name}}
+              {${keywords.join(', ')}}
+              {${url}}
+              {${descriptionWithNewline}}
+          `
+        })}
+      }
+    `
   },
 
   awardsSection(awards, heading) {
@@ -194,6 +219,7 @@ function template6(values: SanitizedValues) {
     ${generator.educationSection(values.education, headings.education)}
     ${generator.workSection(values.work, headings.work)}
     ${generator.skillsSection(values.skills, headings.skills)}
+    ${generator.projectsSection(values.projects, headings.projects)}
     ${WHITESPACE}
     \\end{document}
   `

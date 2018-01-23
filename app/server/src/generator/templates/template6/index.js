@@ -77,7 +77,7 @@ const generator: Generator = {
               }
           }
         `
-        })}
+      })}
       }
     `
   },
@@ -184,7 +184,9 @@ const generator: Generator = {
             url = ''
           } = project
 
-          const descriptionWithNewline = description ? `${description}\\\\` : description
+          const descriptionWithNewline = description
+            ? `${description}\\\\`
+            : description
 
           return stripIndent`
             \\project
@@ -203,7 +205,25 @@ const generator: Generator = {
       return ''
     }
 
-    return ''
+    return source`
+      % Chapter: Awards
+      % ------------------------
+
+      \\chap{${heading ? heading.toUpperCase() : 'AWARDS'}}{
+
+        ${awards.map(award => {
+          const { title = '', summary = '', awarder = '', date = '' } = award
+
+          return stripIndent`
+            \\award
+              {${title}}
+              {${date}}
+              {${summary}}
+              {${awarder}}
+          `
+        })}
+      }
+    `
   }
 }
 
@@ -220,6 +240,7 @@ function template6(values: SanitizedValues) {
     ${generator.workSection(values.work, headings.work)}
     ${generator.skillsSection(values.skills, headings.skills)}
     ${generator.projectsSection(values.projects, headings.projects)}
+    ${generator.awardsSection(values.awards, headings.awards)}
     ${WHITESPACE}
     \\end{document}
   `

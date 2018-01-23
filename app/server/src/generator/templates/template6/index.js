@@ -230,17 +230,42 @@ const generator: Generator = {
 function template6(values: SanitizedValues) {
   const { headings = {} } = values
 
+  console.log(values.sections)
+
   return stripIndent`
     \\documentclass[10pt]{article}
     \\usepackage[english]{babel}
     \\input{config/minimal-resume-config}
     \\begin{document}
-    ${generator.profileSection(values.basics)}
-    ${generator.educationSection(values.education, headings.education)}
-    ${generator.workSection(values.work, headings.work)}
-    ${generator.skillsSection(values.skills, headings.skills)}
-    ${generator.projectsSection(values.projects, headings.projects)}
-    ${generator.awardsSection(values.awards, headings.awards)}
+    ${values.sections
+      .map(section => {
+        switch (section) {
+          case 'profile':
+            return generator.profileSection(values.basics)
+
+          case 'education':
+            return generator.educationSection(
+              values.education,
+              headings.education
+            )
+
+          case 'work':
+            return generator.workSection(values.work, headings.work)
+
+          case 'skills':
+            return generator.skillsSection(values.skills, headings.skills)
+
+          case 'projects':
+            return generator.projectsSection(values.projects, headings.projects)
+
+          case 'awards':
+            return generator.awardsSection(values.awards, headings.awards)
+
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
     ${WHITESPACE}
     \\end{document}
   `

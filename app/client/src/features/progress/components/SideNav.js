@@ -55,12 +55,7 @@ class SideNav extends Component<Props> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const {
-      location,
-      sections,
-      setSectionOrder,
-      setProgress
-    } = this.props
+    const { location, sections, setSectionOrder, setProgress } = this.props
     const newSectionOrder = arrayMove(sections, oldIndex, newIndex)
     const currSection: Section = (location.pathname.slice(11): any)
 

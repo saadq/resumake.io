@@ -15,24 +15,24 @@ function jsonResume(): Middleware {
 
     try {
       if (request.files == null || typeof request.files !== 'object') {
-        throw new Error('File upload failure')
+        throw new Error()
       }
 
       const file = request.files['json-file']
 
       if (file == null || typeof file !== 'object') {
-        throw new Error('File upload failure')
+        throw new Error()
       }
 
       const { path } = file
       const data = await readFile(path)
       const json = JSON.parse(data)
-      const validJSON = validateJSON(json)
+      const validJSON = getValidJSON(json)
 
       request.jsonResume = validJSON
       await next()
     } catch (err) {
-      ctx.throw(400, `Invalid JSON: ${err.message}`)
+      ctx.throw(400, 'Invalid JSON')
     }
   }
 }
@@ -41,7 +41,7 @@ function jsonResume(): Middleware {
  * Extracts only the relevant JSON info from the JSON upload
  */
 
-function validateJSON(json: Object): Object {
+function getValidJSON(json: Object): Object {
   const {
     selectedTemplate = 1,
     headings = {},

@@ -1,33 +1,42 @@
-![](http://i.imgur.com/AkxxoCE.png)
+<h1 align="center">resumake.io</h1>
 
-LaTeX Resume Generator is an easy to use tool for creating elegant LaTeX resumes without the need to write any TeX code yourself.
+<p align="center">
+  <a href="https://github.com/saadq/latexresu.me/stargazers">
+      <img src="https://img.shields.io/github/stars/saadq/latexresu.me.svg">
+  </a>
+  <a href="https://github.com/saadq/latexresu.me/issues">
+      <img src="https://img.shields.io/github/issues/saadq/latexresu.me.svg">
+  </a>
+  <a href="https://github.com/saadq/latexresu.me/blob/master/license">
+    <img src="https://img.shields.io/github/license/saadq/latexresu.me.svg?colorB=000000">
+  </a>
+  <a href="https://gitter.im/saadq/resumake">
+    <img src="https://badges.gitter.im/saadq/resumake.svg">
+  </a>  
+<a href="https://saythanks.io/to/saadq">
+      <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
+  </a>
+  <a href="https://www.paypal.me/saadquadri">
+    <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
+  </a>
+</p>
 
-Simply choose a template, fill in as much (or as little) info as you want, and click <kbd>Preview</kbd> at any point to see your generated resume. You can change which template you're using on the fly and once you're satisfied with your result you can download the generated PDF or the source code.
+> A website for automatically generating elegant LaTeX resumes without the need to write any TeX code yourself.
 
-![](https://camo.githubusercontent.com/de0532955fea66f17b749ef96c7efdbfad2e8bd2/687474703a2f2f692e696d6775722e636f6d2f547665617065372e706e67)
+![resumake](https://i.imgur.com/QUoFVmG.png)
 
-## Developing
-You will need to be using Node v7.6 or above because the source code has `async/await` usage. There was an issue with Node 8.0.0, but it was resolved in 8.1.0, so make sure to upgrade if you're still on Node 8.0.0.
+Simply choose a template, fill in as much (or as little) info as you want, and then press <kbd>Make</kbd> to see your output. You can change your template at any point to see how your resume looks with different designs.
 
-### Install Dependencies for client and server
-```
-npm run build
-```
+When you're happy with your result, you can download the resume as a PDF, TeX, or JSON document. The JSON output is compatible with [JSONResume](https://jsonresume.org).
 
-### Starting the dev server and api server
-```
-npm start
-```
+## Contributing
+Contributions are very welcome, and I am always happy to help out first-timers contributors with any questions you may have. You can check out the [contributing.md](./contributing.md) for an in-depth guide on how to get started on working on the app.
 
-### Running client/server tests
-```
-npm test
-```
+## Donations
+If you liked the project and would like to show your appreciation, [donations](https://www.paypal.me/saadquadri) are very much appreciated. Or, if you'd just like to say thanks, feel free to send me an [email](mailto:saad@saadq.com).
 
-To work on the client or server individually, check out the respective readme's in `app/client` or `app/server`.
+## Credits
+Thanks very much to the creators of the LaTeX templates used in this website.
 
-### Donating
-If you liked the project and want to buy me a bottle of water (I don't drink tea or coffee), [donations](https://www.paypal.me/saadquadri) are much appreciated.
-
-### License
-MIT &copy; Saad Quadri
+## License
+MIT © Saad Quadri

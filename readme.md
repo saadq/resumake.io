@@ -32,6 +32,9 @@ When you're happy with your result, you can download the resume as a PDF, TeX, o
 ## Contributing
 Contributions are very welcome, and I am always happy to help out first-timers contributors with any questions you may have. You can check out the [contributing.md](./contributing.md) for an in-depth guide on how to get started on working on the app.
 
+## Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](./code-of-conduct.md). By participating in this project you agree to abide by its terms.
+
 ## Donations
 If you liked the project and would like to show your appreciation, [donations](https://www.paypal.me/saadquadri) are very much appreciated. Or, if you'd just like to say thanks, feel free to send me an [email](mailto:saad@saadq.com).
 

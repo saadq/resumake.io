@@ -1,5 +1,5 @@
 # latexresu.me server
-This contains the code for the api backend for latexresu.me.
+This contains the code for the api backend for latexresu.me. Check out the [Contributing Server Changes](../../contributing.md#contributing-server-changes) in the contributing.md file to learn how to work on the app.
 
 ### Install dependencies
 ```
@@ -11,9 +11,9 @@ npm install
 npm start
 ```
 
-### Starting the server in watch mode (localhost:3001)
+### Run tests (lint, flow, jest all at once)
 ```
-npm run watch
+npm test
 ```
 
 ### Lint code
@@ -31,7 +31,22 @@ npm run fix
 npm run format
 ```
 
-### Run tests
+### Typecheck code
 ```
-npm test
+npm run flow
+```
+
+### Install library definitions
+```
+npm run flow-typed install
+```
+
+### Jest tests
+```
+npm run jest
+```
+
+### Building a compiled `lib` output folder
+```
+npm run build
 ```

@@ -8,7 +8,7 @@ import LabeledInput, { Label, Input } from './LabeledInput'
 import Button from './Button'
 import RoundButton from './RoundButton'
 import ScrollToTop from './ScrollToTop'
-import Loader from './Loader'
+import Loader, { Bars } from './Loader'
 import Logo from './Logo'
 import Toast from './Toast'
 
@@ -23,5 +23,6 @@ export {
   ScrollToTop,
   Loader,
   Logo,
-  Toast
+  Toast,
+  Bars
 }

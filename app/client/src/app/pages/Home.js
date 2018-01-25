@@ -8,7 +8,7 @@ import { Link, withRouter, type RouterHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
-import { Loader, Logo, Toast } from '../../common/components'
+import { Bars, Logo, Toast } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearState } from '../actions'
 import { clearPreview } from '../../features/preview/actions'
@@ -246,7 +246,7 @@ class Home extends Component<Props> {
     if (jsonUpload.status === 'pending' || resumeStatus === 'pending') {
       return (
         <LoadWrapper>
-          <Loader />
+          <Bars />
         </LoadWrapper>
       )
     }

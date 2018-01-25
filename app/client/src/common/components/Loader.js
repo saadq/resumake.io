@@ -61,4 +61,5 @@ function Loader({ error, timedOut, pastDelay }: Props) {
   }
 }
 
+export { Bars }
 export default Loader

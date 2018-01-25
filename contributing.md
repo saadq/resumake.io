@@ -170,8 +170,8 @@ This file combines the above two routers into a single `use`able middleware.
 
 The `middleware` folder contains 3 things – `errorHandler`, `sanitizer`, and `jsonResume`.
 
-### middleware/errorHandler.js
-The `errorHandler` is just our top-level conveninence middleware that catches all errors downstream.
+### middleware/error-handler.js
+The `errorHandler` is just our top-level convenience middleware that catches all errors downstream.
 
 ### middleware/sanitizer.js
 The `sanitizer` is used to sanitize the request body received from the client that has all the form data. Also, it removes null/undefined/empty values and sanitizes LaTeX symbols.

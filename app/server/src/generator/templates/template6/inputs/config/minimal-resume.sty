@@ -14,10 +14,10 @@
 
 % font families
 \newfontfamily{\montserratfont}[Path=fonts/,BoldFont=Montserrat-Bold]{Montserrat-Regular}
-\newfontfamily{\crimsonfont}[Path=fonts/,ItalicFont=CrimsonText-Italic]{CrimsonText-Roman}
+\newfontfamily{\crimsonfont}[Path=fonts/,ItalicFont=CrimsonText-Italic]{CrimsonText-Regular}
 
 % main font for the document
-\setmainfont[Path=fonts/, ItalicFont=CrimsonText-Italic]{CrimsonText-Roman}
+\setmainfont[Path=fonts/, ItalicFont=CrimsonText-Italic]{CrimsonText-Regular}
 
 % font sizes
 \newcommand{\sizeone}{1.618em}
@@ -71,39 +71,39 @@
 
 \newcommand{\subchap}[3]{
   \vspace{\sizefive}
-  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-SemiBold} #1} \hfill {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Regular} #2}
   {#3}
   \vspace{\sizefive}
 }
 
 \newcommand{\school}[5]{
   \vspace{\sizefive}
-  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-SemiBold} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #2}
 
-  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3}\hfill{\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman}#4}\\#5
+  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #3}\hfill{\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular}#4}\\#5
   \vspace{\sizefive}
 }
 
 \newcommand{\job}[5]{
   \vspace{\sizefive}
-  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-SemiBold} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #2}
 
-  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #4}
+  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #3} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #4}
   {#5}
   \vspace{\sizefive}
 }
 
 \newcommand{\project}[4]{
   \vspace{\sizefive}
-  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-SemiBold} #1} {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #2} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #3}
   \\#4
   \vspace{\sizefive}
 }
 
 \newcommand{\award}[4]{
   \vspace{\sizefive}
-  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-Roman} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #2}
+  {\fontsize{\sizetwo}{\sizetwo}\fontspec[Path = fonts/]{CrimsonText-SemiBold} #1} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #2}
 
-  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #3} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Roman} #4}
+  {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #3} \hfill {\fontsize{\sizethree}{\sizethree}\fontspec[Path = fonts/]{CrimsonText-Regular} #4}
   \vspace{\sizefive}
 }

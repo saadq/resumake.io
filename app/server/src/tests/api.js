@@ -4,7 +4,7 @@
 
 import request from 'supertest'
 import { join } from 'path'
-import app from '../src'
+import app from '..'
 
 test('POST /api/generate/resume should generate a PDF', async () => {
   const data = {

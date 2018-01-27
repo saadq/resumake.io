@@ -2,7 +2,7 @@
  * @flow
  */
 
-import { sanitize } from '../src/middleware/sanitizer'
+import { sanitize } from '../middleware/sanitizer'
 
 describe('sanitizer', () => {
   it('should remove excess whitespace', () => {

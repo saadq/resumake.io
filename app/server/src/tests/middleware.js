@@ -2,7 +2,7 @@
  * @flow
  */
 
-import { errorHandler, sanitizer, jsonResume } from '../src/middleware'
+import { errorHandler, sanitizer, jsonResume } from '../middleware'
 import { join } from 'path'
 
 test('errorHandler should catch all errors downstream', async () => {

@@ -3,7 +3,7 @@
  */
 
 import { stripIndent } from 'common-tags'
-import { makeReadme } from '../src/generator'
+import { makeReadme } from '../generator'
 
 test('makeReadme should work for all templates', () => {
   const templates = [

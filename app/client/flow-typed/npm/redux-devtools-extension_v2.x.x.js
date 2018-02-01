@@ -1,5 +1,5 @@
-// flow-typed signature: 20337ea7529d612463cccc21ea9e1cd4
-// flow-typed version: b43dff3e0e/redux-devtools-extension_v2.x.x/flow_>=v0.47.x
+// flow-typed signature: 263123e4b3d2cb666a60f721c2da5354
+// flow-typed version: e1af06321a/redux-devtools-extension_v2.x.x/flow_>=v0.47.x
 
 import type { ActionCreator, StoreEnhancer } from 'redux';
 import typeof { compose } from 'redux';
@@ -96,7 +96,7 @@ declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, 
   ab: A => B
 ): A => H;
 
-declare function $npm$ReduxDevtoolsExtension$devToolsEnhancer<S, A>(options: $npm$ReduxDevtoolsExtension$DevToolsOptions): StoreEnhancer<S, A>;
+declare function $npm$ReduxDevtoolsExtension$devToolsEnhancer<S, A>(options?: $npm$ReduxDevtoolsExtension$DevToolsOptions): StoreEnhancer<S, A>;
 
 declare module 'redux-devtools-extension' {
   declare export type DevToolsOptions = $npm$ReduxDevtoolsExtension$DevToolsOptions;

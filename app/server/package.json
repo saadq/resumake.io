@@ -14,9 +14,11 @@
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "npm run lint --silent && flow status && jest",
+    "test": "npm run lint --silent && glow && jest",
     "flow": "flow",
+    "flow:coverage": "flow-coverage-report -f ./node_modules/flow-bin/flow-osx-v0.61.0/flow -i 'src/**/*.jsx' -i 'src/**/*.js'",
     "flow-typed": "flow-typed",
+    "glow": "glow",
     "jest": "jest"
   },
   "jest": {
@@ -48,7 +50,9 @@
     "babel-preset-flow": "^6.23.0",
     "blyss": "^10.1.0",
     "flow-bin": "^0.61.0",
+    "flow-coverage-report": "^0.4.1",
     "flow-typed": "^2.2.0",
+    "glow": "^1.1.0",
     "jest": "^22.0.6",
     "nodemon": "^1.12.1",
     "prettier": "^1.9.2",

@@ -83,7 +83,6 @@ function getTemplateData(data: SanitizedValues): TemplateData {
       }
 
     case TEMPLATE6:
-      console.log(template6(data))
       return {
         texDoc: template6(data),
         opts: {

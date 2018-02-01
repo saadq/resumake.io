@@ -230,8 +230,6 @@ const generator: Generator = {
 function template6(values: SanitizedValues) {
   const { headings = {} } = values
 
-  console.log(values.sections)
-
   return stripIndent`
     \\documentclass[10pt]{article}
     \\usepackage[english]{babel}

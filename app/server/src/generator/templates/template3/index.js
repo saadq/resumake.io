@@ -50,6 +50,12 @@ const generator: Template3Generator = {
           endDate = ''
         } = school
 
+        let formattedLocation = ''
+
+        if (location) {
+          formattedLocation = location + '\\\\'
+        }
+
         let degreeLine = ''
 
         if (studyType && area) {
@@ -76,7 +82,7 @@ const generator: Template3Generator = {
           \\item[]
             \\school
               {${institution || ''}}
-              {${location || ''}}
+              {${formattedLocation || ''}}
               {${degreeLine}}
               {${dateRange || ''}}
         `
@@ -169,15 +175,19 @@ const generator: Template3Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\begin{itemize}[leftmargin=*]
       ${projects.map(project => {
-        const { name, description, keywords = [], url } = project
+        const { name = '', description = '', keywords = [], url = '' } = project
+
+        const descriptionWithNewline = description
+          ? `\\\\${description}`
+          : description
 
         return stripIndent`
           \\item[]
-              \\project
-                  {${name || ''}}
-                  {${keywords.join(', ') || ''}}
-                  {${url || ''}}
-                  {${description || ''}}
+            \\project
+              {${name}}
+              {${keywords.join(', ')}}
+              {${url}}
+              {${descriptionWithNewline}}
         `
       })}
       \\end{itemize}
@@ -195,15 +205,19 @@ const generator: Template3Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\begin{itemize}[leftmargin=*]
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award
+        const { title = '', summary = '', date = '', awarder = '' } = award
+
+        const summaryWithNewline = summary
+          ? `\\\\${summary}`
+          : summary
 
         return stripIndent`
           \\item[]
-              \\award
-                  {${title || ''}}
-                  {${date || ''}}
-                  {${awarder || ''}}
-                  {${summary || ''}}
+            \\award
+              {${title}}
+              {${date}}
+              {${awarder}}
+              {${summaryWithNewline}}
         `
       })}
       \\end{itemize}
@@ -275,23 +289,23 @@ const generator: Template3Generator = {
       \\end{tabular*}\\vspace{-6pt}}
 
       \\newcommand{\\school}[4]{\\vspace{1.5mm}
-        \\textbf{#1} \\hfill #2 \\hfill \\\\ \\textit{#3} \\hfill \\textit{#4} \\\\ \\vspace{1.5mm}
+        \\textbf{#1} \\hfill #2 \\textit{#3} \\hfill \\textit{#4} \\vspace{1.5mm}
       }
 
       \\newcommand{\\job}[4]{
-        \\textbf{#1} \\hfill #2 \\hfill \\\\ \\textit{#3} \\hfill \\textit{#4}
+        \\textbf{#1} \\hfill #2 \\hfill \\textit{#3} \\hfill \\textit{#4}
       }
 
       \\newcommand{\\skill}[2]{
-        \\textbf{#1} #2 \\\\
+        \\textbf{#1} #2
       }
 
       \\newcommand{\\project}[4]{ \\vspace{1.5mm}
-        \\textbf{#1} #2 \\hfill \\textit{#3} \\\\ #4 \\\\ \\vspace{1.5mm}
+        \\textbf{#1} #2 \\hfill \\textit{#3}#4 \\vspace{1.5mm}
       }
 
       \\newcommand{\\award}[4]{ \\vspace{1.5mm}
-        \\textbf{#1} #2 \\hfill \\textit{#3} \\\\ #4 \\\\ \\vspace{1.5mm}
+        \\textbf{#1} #2 \\hfill \\textit{#3} #4 \\vspace{1.5mm}
       }
       %-----------------------------------------------------------
     `

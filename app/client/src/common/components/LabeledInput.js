@@ -58,6 +58,7 @@ const Input = styled(Field)`
   }
 
   @media screen and (max-width: 850px) {
+    font-size: 16px;
     padding-left: 0;
     padding-right: 0;
     width: 100%;

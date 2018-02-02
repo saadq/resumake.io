@@ -207,9 +207,7 @@ const generator: Template3Generator = {
       ${awards.map(award => {
         const { title = '', summary = '', date = '', awarder = '' } = award
 
-        const summaryWithNewline = summary
-          ? `\\\\${summary}`
-          : summary
+        const summaryWithNewline = summary ? `\\\\${summary}` : summary
 
         return stripIndent`
           \\item[]

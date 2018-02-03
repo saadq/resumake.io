@@ -1,27 +1,27 @@
-<h1 align="center">resumake.io</h1>
+![resumake-logo](https://i.imgur.com/Y4JmhrV.png)
 
-<p align="center">
-  <a href="https://github.com/saadq/latexresu.me/stargazers">
-      <img src="https://img.shields.io/github/stars/saadq/latexresu.me.svg">
-  </a>
-  <a href="https://github.com/saadq/latexresu.me/issues">
-      <img src="https://img.shields.io/github/issues/saadq/latexresu.me.svg">
-  </a>
-  <a href="https://github.com/saadq/latexresu.me/blob/master/license">
-    <img src="https://img.shields.io/github/license/saadq/latexresu.me.svg?colorB=000000">
-  </a>
-  <a href="https://gitter.im/saadq/resumake">
-    <img src="https://badges.gitter.im/saadq/resumake.svg">
-  </a>  
-<a href="https://saythanks.io/to/saadq">
-      <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
-  </a>
-  <a href="https://www.paypal.me/saadquadri">
-    <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
-  </a>
-</p>
-
+# resumake.io
 > A website for automatically generating elegant LaTeX resumes without the need to write any TeX code yourself.
+
+<a href="https://github.com/saadq/latexresu.me/stargazers">
+    <img src="https://img.shields.io/github/stars/saadq/latexresu.me.svg">
+</a>
+<a href="https://github.com/saadq/latexresu.me/issues">
+    <img src="https://img.shields.io/github/issues/saadq/latexresu.me.svg">
+</a>
+<a href="https://github.com/saadq/latexresu.me/blob/master/license">
+  <img src="https://img.shields.io/github/license/saadq/latexresu.me.svg?colorB=000000">
+</a>
+<a href="https://gitter.im/saadq/resumake">
+  <img src="https://badges.gitter.im/saadq/resumake.svg">
+</a>  
+<a href="https://saythanks.io/to/saadq">
+    <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
+</a>
+<a href="https://www.paypal.me/saadquadri">
+  <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
+</a>
+
 
 ![resumake](https://i.imgur.com/QUoFVmG.png)
 

@@ -3,14 +3,14 @@
 # resumake.io
 > A website for automatically generating elegant LaTeX resumes without the need to write any TeX code yourself.
 
-<a href="https://github.com/saadq/latexresu.me/stargazers">
-    <img src="https://img.shields.io/github/stars/saadq/latexresu.me.svg">
+<a href="https://github.com/saadq/resumake/stargazers">
+    <img src="https://img.shields.io/github/stars/saadq/resumake.svg">
 </a>
-<a href="https://github.com/saadq/latexresu.me/issues">
-    <img src="https://img.shields.io/github/issues/saadq/latexresu.me.svg">
+<a href="https://github.com/saadq/resumake/issues">
+    <img src="https://img.shields.io/github/issues/saadq/resumake.svg">
 </a>
-<a href="https://github.com/saadq/latexresu.me/blob/master/license">
-  <img src="https://img.shields.io/github/license/saadq/latexresu.me.svg?colorB=000000">
+<a href="https://github.com/saadq/resumake/blob/master/license">
+  <img src="https://img.shields.io/github/license/saadq/resumake.svg?colorB=000000">
 </a>
 <a href="https://gitter.im/saadq/resumake">
   <img src="https://badges.gitter.im/saadq/resumake.svg">

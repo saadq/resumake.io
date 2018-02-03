@@ -1,7 +1,7 @@
 {
-  "name": "latexresu.me",
-  "version": "0.1.0",
-  "repository": "git@github.com:saadq/latexresu.me.git",
+  "name": "resumake.io",
+  "version": "0.2.0",
+  "repository": "git@github.com:saadq/resumake.git",
   "author": {
     "name": "Saad Quadri",
     "email": "saad@saadq.com",

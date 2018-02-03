@@ -5,9 +5,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/saadq/latexresu.me"
+    "url": "https://github.com/saadq/resumake"
   },
-  "homepage": "https://github.com/saadq/latexresu.me",
+  "homepage": "https://github.com/saadq/resumake",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
     "build": "babel src -d lib --copy-files",

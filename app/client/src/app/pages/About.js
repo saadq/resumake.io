@@ -241,7 +241,7 @@ function About() {
           </Question>
           <Answer>
             Feel free to open an issue{' '}
-            <Link href="https://github.com/saadq/latexresu.me/issues">
+            <Link href="https://github.com/saadq/resumake/issues">
               here
             </Link>.
           </Answer>
@@ -249,7 +249,7 @@ function About() {
           <Answer>
             Definitely! I'm always happy to help out first-time contributors to
             the project. You can check out the{' '}
-            <Link href="https://github.com/saadq/latexresu.me/tree/master/contributing.md">
+            <Link href="https://github.com/saadq/resumake/tree/master/contributing.md">
               <code>contributing.md</code>
             </Link>{' '}
             for an in-depth guide on how to get started on working on this

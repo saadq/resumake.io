@@ -26,7 +26,11 @@
     "fix:server": "cd app/server && npm run fix",
     "format:server": "cd app/server && npm run format",
     "lint:server": "cd app/server && npm run lint",
-    "test:server": "cd app/server && npm test"
+    "test:server": "cd app/server && npm test",
+    "contributors": "all-contributors"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "all-contributors-cli": "^4.10.1"
+  }
 }

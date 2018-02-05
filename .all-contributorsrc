@@ -8,12 +8,17 @@
   "commit": true,
   "contributors": [
     {
-      "login": "TsimpDim",
-      "name": "Tsimpitas Dimitris",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/26444315?v=4",
-      "profile": "https://github.com/TsimpDim",
+      "login": "saadq",
+      "name": "Saad Quadri",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5678694?v=4",
+      "profile": "http://saadq.com",
       "contributions": [
-        "code"
+        "code",
+        "design",
+        "doc",
+        "ideas",
+        "bug",
+        "test"
       ]
     },
     {
@@ -22,7 +27,8 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/22575238?v=4",
       "profile": "https://github.com/aviral1701",
       "contributions": [
-        "code"
+        "code",
+        "bug"
       ]
     },
     {
@@ -44,17 +50,22 @@
       ]
     },
     {
-      "login": "saadq",
-      "name": "Saad Quadri",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/5678694?v=4",
-      "profile": "http://saadq.com",
+      "login": "TsimpDim",
+      "name": "Tsimpitas Dimitris",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26444315?v=4",
+      "profile": "https://github.com/TsimpDim",
       "contributions": [
-        "code",
-        "design",
-        "doc",
-        "ideas",
-        "bug",
-        "test"
+        "code"
+      ]
+    },
+    {
+      "login": "dnl-blkv",
+      "name": "Daniil Belyakov",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6583731?v=4",
+      "profile": "https://www.linkedin.com/in/daniilb",
+      "contributions": [
+        "tool",
+        "ideas"
       ]
     }
   ]

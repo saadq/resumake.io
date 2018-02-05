@@ -41,6 +41,16 @@ If you liked the project and would like to show your appreciation, [donations](h
 ## Credits
 Thanks very much to the creators of the LaTeX templates used in this website.
 
+* [Rensselaer Career Development Center](https://www.rpi.edu/dept/arc/training/latex/resumes/)
+* [Byungjin Park](https://github.com/posquit0)
+* [Scott Clark](https://github.com/sc932)
+* [Debarghya Das](https://github.com/deedy)
+* [Xavier Danaux](https://github.com/xdanaux)
+* [Ratul Saha](https://github.com/RatulSaha)
+* [Daniil Belyakov](https://github.com/dnl-blkv)
+* [Frits Wenneker](https://www.overleaf.com/latex/templates/your-new-cv/xqzhcmqkqrtw)
+
+
 ## License
 MIT © Saad Quadri
 

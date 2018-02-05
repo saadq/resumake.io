@@ -241,9 +241,7 @@ function About() {
           </Question>
           <Answer>
             Feel free to open an issue{' '}
-            <Link href="https://github.com/saadq/resumake/issues">
-              here
-            </Link>.
+            <Link href="https://github.com/saadq/resumake/issues">here</Link>.
           </Answer>
           <Question>Are you accepting open-source contributions?</Question>
           <Answer>
@@ -262,6 +260,41 @@ function About() {
             very much appreciated. Or, if you'd just like to send me a message,
             you can send me an <Link href="mailto:saad@saadq.com">email</Link>.
           </Answer>
+        </section>
+        <SectionDivider />
+        <section>
+          <Heading>Credits</Heading>
+          <p>A huge thanks to all the original creators of the LaTeX templates:</p>
+          <ul>
+            <li>
+              <Link href="https://www.rpi.edu/dept/arc/training/latex/resumes/">
+                Rensselaer Career Development Center
+              </Link>
+            </li>
+            <li>
+              <Link href="https://github.com/posquit0">Byungjin Park</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/sc932">Scott Clark</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/deedy">Debarghya Das</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/xdanaux">Xavier Danaux</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/RatulSaha">Ratul Saha</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/dnl-blkv">Daniil Belyakov</Link>
+            </li>
+            <li>
+              <Link href="https://www.overleaf.com/latex/templates/your-new-cv/xqzhcmqkqrtw">
+                Frits Wenneker
+              </Link>
+            </li>
+          </ul>
         </section>
         <SectionDivider />
         <section>

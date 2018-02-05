@@ -38,6 +38,7 @@
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-combine-routers": "^2.0.1",
+    "koa-helmet": "^3.3.0",
     "koa-router": "^7.2.1",
     "koa2-formidable": "^1.0.2",
     "node-latex": "^2.5.0",

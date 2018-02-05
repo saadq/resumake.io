@@ -4,6 +4,7 @@
 
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
+import helmet from 'koa-helmet'
 import router from './routes'
 import { errorHandler } from './middleware'
 
@@ -14,6 +15,7 @@ if (app.env === 'development') {
 }
 
 app.use(errorHandler())
+app.use(helmet())
 app.use(bodyParser())
 app.use(router)
 

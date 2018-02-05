@@ -50,8 +50,8 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/26444315?v=4" width="100px;"/><br /><sub><b>Tsimpitas Dimitris</b></sub>](https://github.com/TsimpDim)<br />[💻](https://github.com/saadq/resumake/commits?author=TsimpDim "Code") |
-| :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/26444315?v=4" width="100px;"/><br /><sub><b>Tsimpitas Dimitris</b></sub>](https://github.com/TsimpDim)<br />[💻](https://github.com/saadq/resumake/commits?author=TsimpDim "Code") | [<img src="https://avatars1.githubusercontent.com/u/22575238?v=4" width="100px;"/><br /><sub><b>Aviral Verma</b></sub>](https://github.com/aviral1701)<br />[💻](https://github.com/saadq/resumake/commits?author=aviral1701 "Code") |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

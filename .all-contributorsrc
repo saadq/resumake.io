@@ -1,0 +1,20 @@
+{
+  "projectName": "resumake",
+  "projectOwner": "saadq",
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "TsimpDim",
+      "name": "Tsimpitas Dimitris",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26444315?v=4",
+      "profile": "https://github.com/TsimpDim",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

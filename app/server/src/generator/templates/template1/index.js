@@ -207,7 +207,7 @@ const generator: Template1Generator = {
         }
 
         if (keywords) {
-          line1 += ` \\sl {${keywords.join(', ')}} `
+          line1 += ` {\\sl ${keywords.join(', ')}} `
         }
 
         if (url) {

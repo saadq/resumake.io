@@ -1,5 +1,10 @@
 # Contributing to Resumake
 
+## Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](./code-of-conduct.md). By participating in this project you agree to abide by its terms.
+
+---
+
 Thanks very much for taking the time to contribute! Here's a Table of Contents that should cover mostly everything you may be interested in:
 
 1. [Project Overview](#project-overview)

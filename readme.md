@@ -32,11 +32,8 @@ When you're happy with your result, you can download the resume as a PDF, TeX, o
 ## Contributing
 Contributions are very welcome, and I am always happy to help out first-timers contributors with any questions you may have. You can check out the [contributing.md](./contributing.md) for an in-depth guide on how to get started on working on the app.
 
-## Code of Conduct
-Please note that this project is released with a [Contributor Code of Conduct](./code-of-conduct.md). By participating in this project you agree to abide by its terms.
-
 ## Donations
-If you liked the project and would like to show your appreciation, [donations](https://www.paypal.me/saadquadri) are very much appreciated. Or, if you'd just like to say thanks, feel free to send me an [email](mailto:saad@saadq.com).
+If you liked the project and would like to show your appreciation, [donations](https://opencollective.com/resumake/donate#) are very much appreciated. Or, if you'd just like to say thanks, feel free to send me an [email](mailto:saad@saadq.com).
 
 ## Credits
 Thanks very much to the creators of the LaTeX templates used in this website.
@@ -51,11 +48,7 @@ Thanks very much to the creators of the LaTeX templates used in this website.
 * [Frits Wenneker](https://www.overleaf.com/latex/templates/your-new-cv/xqzhcmqkqrtw)
 
 
-## License
-MIT © Saad Quadri
-
 ## Contributors
-
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -66,3 +59,6 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+MIT © Saad Quadri

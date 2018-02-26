@@ -5,10 +5,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter, type RouterHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
-import { Bars, Logo, Toast } from '../../common/components'
+import { Bars, Logo, RoundButton, Icon } from '../../common/components'
 import { uploadFileAndGenerateResume } from '../../features/form/actions'
 import { clearState } from '../actions'
 import { clearPreview } from '../../features/preview/actions'
@@ -198,6 +198,30 @@ const LoadWrapper = styled.div`
   align-items: center;
 `
 
+const ImportRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`
+
+const HelpButton = RoundButton.extend`
+  position: absolute;
+  right: -50px;
+  border: none;
+
+  &:hover {
+    background: transparent;
+    i {
+      color: ${colors.primary};
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+`
+
 const ctx = require.context('../../features/form/assets/img', true)
 const images = ctx.keys().map(ctx)
 
@@ -215,6 +239,8 @@ type Props = {
 }
 
 class Home extends Component<Props> {
+  toastId: *
+
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
     const { uploadFileAndGenerateResume } = this.props
     const file = e.target.files[0]
@@ -253,7 +279,7 @@ class Home extends Component<Props> {
 
     return (
       <Wrapper>
-        <Toast error />
+        <ToastContainer />
         <Main>
           <LeftSection>
             <Logo big />
@@ -265,8 +291,26 @@ class Home extends Component<Props> {
                 Continue Session
               </Button>
             )}
-            <Label htmlFor="import-json">Import JSON</Label>
-            <Input id="import-json" type="file" onChange={this.onFileUpload} />
+            <ImportRow>
+              <Label htmlFor="import-json">Import JSON</Label>
+              <Input
+                id="import-json"
+                type="file"
+                onChange={this.onFileUpload}
+              />
+              <HelpButton
+                onClick={() => {
+                  if (!toast.isActive(this.toastId)) {
+                    this.toastId = toast.info(
+                      "When you're done working on your resume, you can save it as a JSON which can be imported here to continue progress.",
+                      { position: toast.POSITION.TOP_LEFT }
+                    )
+                  }
+                }}
+              >
+                <Icon size={22} type="help" />
+              </HelpButton>
+            </ImportRow>
           </LeftSection>
           <RightSection>
             <ResumePreview>

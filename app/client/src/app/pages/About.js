@@ -264,7 +264,9 @@ function About() {
         <SectionDivider />
         <section>
           <Heading>Credits</Heading>
-          <p>A huge thanks to all the original creators of the LaTeX templates:</p>
+          <p>
+            A huge thanks to all the original creators of the LaTeX templates:
+          </p>
           <ul>
             <li>
               <Link href="https://www.rpi.edu/dept/arc/training/latex/resumes/">

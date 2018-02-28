@@ -27,10 +27,18 @@
     "format:server": "cd app/server && npm run format",
     "lint:server": "cd app/server && npm run lint",
     "test:server": "cd app/server && npm test",
-    "contributors": "all-contributors"
+    "contributors": "all-contributors",
+    "postinstall": "opencollective postinstall"
   },
   "license": "MIT",
   "devDependencies": {
     "all-contributors-cli": "^4.10.1"
+  },
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/resumake"
   }
 }

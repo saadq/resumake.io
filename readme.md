@@ -21,6 +21,15 @@
 <a href="https://www.paypal.me/saadquadri">
   <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
 </a>
+<a href="https://www.paypal.me/saadquadri">
+  <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
+</a>
+<a href="#backers">
+  <img src="https://opencollective.com/resumake/backers/badge.svg">
+</a>
+<a href="#sponsors">
+  <img src="https://opencollective.com/resumake/sponsors/badge.svg">
+</a>
 
 
 ![resumake](https://i.imgur.com/QUoFVmG.png)
@@ -59,6 +68,24 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/resumake#backer)]
+
+<a href="https://opencollective.com/resumake#backers" target="_blank"><img src="https://opencollective.com/resumake/backers.svg?width=890"></a>
+
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/resumake#sponsor)]
+
+<a href="https://opencollective.com/resumake/sponsor/0/website" target="_blank"><img src="https://opencollective.com/resumake/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/resumake/sponsor/1/website" target="_blank"><img src="https://opencollective.com/resumake/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/resumake/sponsor/2/website" target="_blank"><img src="https://opencollective.com/resumake/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/resumake/sponsor/3/website" target="_blank"><img src="https://opencollective.com/resumake/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/resumake/sponsor/4/website" target="_blank"><img src="https://opencollective.com/resumake/sponsor/4/avatar.svg"></a>
+
 
 ## License
 MIT © Saad Quadri

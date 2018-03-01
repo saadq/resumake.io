@@ -28,7 +28,7 @@
     "lint:server": "cd app/server && npm run lint",
     "test:server": "cd app/server && npm test",
     "contributors": "all-contributors",
-    "postbuild": "opencollective postinstall"
+    "postinstall": "opencollective postinstall"
   },
   "license": "MIT",
   "devDependencies": {

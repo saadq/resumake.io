@@ -18,10 +18,7 @@
 <a href="https://saythanks.io/to/saadq">
     <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
 </a>
-<a href="https://www.paypal.me/saadquadri">
-  <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
-</a>
-<a href="https://www.paypal.me/saadquadri">
+<a href="https://opencollective.com/resumake/donate">
   <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
 </a>
 <a href="#backers">

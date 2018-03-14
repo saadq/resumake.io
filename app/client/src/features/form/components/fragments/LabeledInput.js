@@ -6,7 +6,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 import { darken } from 'polished'
-import { colors } from '../../common/theme'
+import { colors } from '../../../../common/theme'
 
 const Label = styled.label`
   display: block;

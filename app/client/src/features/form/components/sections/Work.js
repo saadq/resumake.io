@@ -5,7 +5,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import { Button, LabeledInput, Divider } from '../../../../common/components'
+import { Button, Divider } from '../../../../common/components'
+import LabeledInput from '../fragments/LabeledInput'
 import { Job } from '..'
 import {
   addJob,

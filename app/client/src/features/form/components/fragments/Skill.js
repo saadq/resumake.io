@@ -6,12 +6,10 @@ import React from 'react'
 import styled from 'styled-components'
 import {
   Divider,
-  Label,
-  Input,
   RoundButton,
   Icon
 } from '../../../../common/components'
-import LabeledInput from '../fragments/LabeledInput'
+import LabeledInput, { Label, Input } from './LabeledInput'
 
 const ButtonRow = styled.div`
   margin-left: 15px;

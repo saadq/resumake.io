@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { Divider } from '../../../../common/components'
-import LabeledInput from '../fragments/LabeledInput'
+import LabeledInput from './LabeledInput'
 
 type Props = {
   index: number

@@ -4,7 +4,7 @@
 
 import React from 'react'
 import Section from './Section'
-import { LabeledInput } from '../../../../common/components'
+import LabeledInput from '../fragments/LabeledInput'
 
 function Profile() {
   return (

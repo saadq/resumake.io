@@ -6,12 +6,10 @@ import React from 'react'
 import styled from 'styled-components'
 import {
   Divider,
-  LabeledInput,
-  Label,
-  Input,
   RoundButton,
   Icon
 } from '../../../../common/components'
+import LabeledInput, { Label, Input } from './LabeledInput'
 
 const Row = styled.div`
   display: flex;

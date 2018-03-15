@@ -3,7 +3,8 @@
  */
 
 import React from 'react'
-import { Divider, LabeledInput } from '../../../../common/components'
+import { Divider } from '../../../../common/components'
+import LabeledInput from './LabeledInput'
 
 type Props = {
   index: number

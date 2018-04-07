@@ -10,10 +10,12 @@ import {
   Divider,
   RoundButton,
   Icon,
-  Label,
-  Input,
   Loader
 } from '../../common/components'
+import {
+  Label,
+  Input
+} from '../../features/form/components/fragments/LabeledInput'
 import { LoadingBar } from '../../features/preview/components'
 import { colors } from '../../common/theme'
 

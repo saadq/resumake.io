@@ -8,7 +8,9 @@ import Loadable from 'react-loadable'
 import { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 import { ScrollToTop, Loader } from '../common/components'
+import Page400 from '../common/components'
 import Page404 from '../common/components'
+import Page500 from '../common/components'
 import { colors } from '../common/theme'
 import Nexa from './assets/nexa.otf'
 
@@ -72,8 +74,6 @@ function App() {
         <Route path="/generator" component={LoadableGenerator} />
         <Route path="/about" component={LoadableAbout} />
         <Route path="*" component={Page400} />
-        <Route path="*" component={Page401} />
-        <Route path="*" component={Page403} />
         <Route path="*" component={Page404} />
         <Route path="*" component={Page500} />
       </Switch>

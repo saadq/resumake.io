@@ -27,7 +27,9 @@ function jsonResume(): Middleware {
       const { path } = file;
       const data = await readFile(path);
       const json = JSON.parse(data);
-        request.jsonResume = getValidJSON(json);
+      const validJSON = getValidJSON(json);
+
+      request.jsonResume = validJSON;
       await next()
     } catch (err) {
       ctx.throw(400, 'Invalid JSON')
@@ -51,16 +53,18 @@ function getValidJSON(json: Object): Object {
     awards = []
   } = json;
 
-  return {
-      selectedTemplate,
-      headings,
-      basics,
-      education,
-      work,
-      skills,
-      projects,
-      awards
-  }
+  const validJSON = {
+    selectedTemplate,
+    headings,
+    basics,
+    education,
+    work,
+    skills,
+    projects,
+    awards
+  };
+
+  return validJSON
 }
 
 export default jsonResume

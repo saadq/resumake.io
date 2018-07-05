@@ -12,10 +12,10 @@ const generator: Generator = {
       return ''
     }
 
-    const { name, email, phone, location = {}, website } = basics;
+    const { name, email, phone, location = {}, website } = basics
     const info = [email, phone, location.address, website]
       .filter(Boolean)
-      .join(' | ');
+      .join(' | ')
 
     return stripIndent`
       \\name{{\\LARGE ${name || ''}}}
@@ -28,7 +28,7 @@ const generator: Generator = {
       return ''
     }
 
-    const lastSchoolIndex = education.length - 1;
+    const lastSchoolIndex = education.length - 1
 
     return source`
       \\section{${heading || 'EDUCATION'}}
@@ -41,10 +41,10 @@ const generator: Generator = {
           gpa,
           startDate,
           endDate
-        } = school;
+        } = school
 
-        let schoolLine = '';
-        let degreeLine = '';
+        let schoolLine = ''
+        let degreeLine = ''
 
         if (institution) {
           schoolLine += `\\textbf{${institution}}, `
@@ -64,7 +64,7 @@ const generator: Generator = {
           schoolLine += `GPA: ${gpa}`
         }
 
-        let dateRange = '';
+        let dateRange = ''
 
         if (startDate && endDate) {
           dateRange = `${startDate} | ${endDate}`
@@ -110,10 +110,10 @@ const generator: Generator = {
           startDate,
           endDate,
           highlights
-        } = job;
+        } = job
 
-        let jobLine = '';
-        let dateRange = '';
+        let jobLine = ''
+        let dateRange = ''
 
         if (company) {
           jobLine += `\\textbf{${company}}, `
@@ -165,7 +165,7 @@ const generator: Generator = {
       \\section{${heading || 'SKILLS'}}
       \\begin{tabular}{@{}ll}
       ${skills.map(skill => {
-        const { name, keywords = [] } = skill;
+        const { name, keywords = [] } = skill
         return `\\textbf{${name || ''}}: & ${keywords.join(', ') || ''}\\\\`
       })}
       \\end{tabular}
@@ -180,9 +180,9 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'PROJECTS'}}
       ${projects.map(project => {
-        const { name, description, keywords = [], url } = project;
+        const { name, description, keywords = [], url } = project
 
-        let projectLine = '';
+        let projectLine = ''
 
         if (name) {
           projectLine += `\\textbf{${name}}`
@@ -217,7 +217,7 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'AWARDS'}}
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award;
+        const { title, summary, date, awarder } = award
 
         return stripIndent`
             \\textbf{${title || ''}}, {\\sl ${awarder || ''}} \\hfill ${date ||
@@ -227,10 +227,10 @@ const generator: Generator = {
       })}
     `
   }
-};
+}
 
 function template5(values: SanitizedValues) {
-  const { headings = {} } = values;
+  const { headings = {} } = values
 
   return stripIndent`
     \\documentclass[line,margin]{res}
@@ -249,22 +249,22 @@ function template5(values: SanitizedValues) {
                 return generator.educationSection(
                   values.education,
                   headings.education
-                );
+                )
 
               case 'work':
-                return generator.workSection(values.work, headings.work);
+                return generator.workSection(values.work, headings.work)
 
               case 'skills':
-                return generator.skillsSection(values.skills, headings.skills);
+                return generator.skillsSection(values.skills, headings.skills)
 
               case 'projects':
                 return generator.projectsSection(
                   values.projects,
                   headings.projects
-                );
+                )
 
               case 'awards':
-                return generator.awardsSection(values.awards, headings.awards);
+                return generator.awardsSection(values.awards, headings.awards)
 
               default:
                 return ''

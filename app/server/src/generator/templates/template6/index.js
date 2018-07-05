@@ -12,8 +12,8 @@ const generator: Generator = {
       return ''
     }
 
-    const { name = '', email, phone, location = {}, website } = basics;
-    const info = [email, phone, location.address, website].filter(Boolean);
+    const { name = '', email, phone, location = {}, website } = basics
+    const info = [email, phone, location.address, website].filter(Boolean)
 
     return stripIndent`
       \\begin{center}
@@ -49,10 +49,10 @@ const generator: Generator = {
           gpa = '',
           startDate = '',
           endDate = ''
-        } = school;
+        } = school
 
-        const degreeLine = [studyType, area].filter(Boolean).join(' ');
-        let dateRange = '';
+        const degreeLine = [studyType, area].filter(Boolean).join(' ')
+        let dateRange = ''
 
         if (startDate && endDate) {
           dateRange = `${startDate} – ${endDate}`
@@ -100,10 +100,10 @@ const generator: Generator = {
           startDate = '',
           endDate = '',
           highlights = []
-        } = job;
+        } = job
 
-        let dateRange = '';
-        let dutyLines = '';
+        let dateRange = ''
+        let dutyLines = ''
 
         if (startDate && endDate) {
           dateRange = `${startDate} – ${endDate}`
@@ -146,9 +146,9 @@ const generator: Generator = {
       \\chap{${heading ? heading.toUpperCase() : 'SKILLS'}}{
       \\begin{newitemize}
         ${skills.map(skill => {
-          const { name = '', keywords = [] } = skill;
+          const { name = '', keywords = [] } = skill
 
-          let item = '';
+          let item = ''
 
           if (name) {
             item += `${name}: `
@@ -182,11 +182,11 @@ const generator: Generator = {
             description = '',
             keywords = [],
             url = ''
-          } = project;
+          } = project
 
           const descriptionWithNewline = description
             ? `${description}\\\\`
-            : description;
+            : description
 
           return stripIndent`
             \\project
@@ -212,7 +212,7 @@ const generator: Generator = {
       \\chap{${heading ? heading.toUpperCase() : 'AWARDS'}}{
 
         ${awards.map(award => {
-          const { title = '', summary = '', awarder = '', date = '' } = award;
+          const { title = '', summary = '', awarder = '', date = '' } = award
 
           return stripIndent`
             \\award
@@ -225,10 +225,10 @@ const generator: Generator = {
       }
     `
   }
-};
+}
 
 function template6(values: SanitizedValues) {
-  const { headings = {} } = values;
+  const { headings = {} } = values
 
   return stripIndent`
     \\documentclass[10pt]{article}
@@ -239,25 +239,25 @@ function template6(values: SanitizedValues) {
       .map(section => {
         switch (section) {
           case 'profile':
-            return generator.profileSection(values.basics);
+            return generator.profileSection(values.basics)
 
           case 'education':
             return generator.educationSection(
               values.education,
               headings.education
-            );
+            )
 
           case 'work':
-            return generator.workSection(values.work, headings.work);
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills, headings.skills);
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects);
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards, headings.awards);
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

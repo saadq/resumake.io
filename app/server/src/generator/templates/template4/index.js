@@ -16,26 +16,26 @@ const generator: Template4Generator = {
       return '\\namesection{Your}{Name}{}'
     }
 
-    const { name, email, phone, location = {}, website } = profile;
+    const { name, email, phone, location = {}, website } = profile
 
-    let nameStart = '';
-    let nameEnd = '';
+    let nameStart = ''
+    let nameEnd = ''
 
     if (name) {
-      const names = name.split(' ');
+      const names = name.split(' ')
 
       if (names.length === 1) {
-        nameStart = names[0];
+        nameStart = names[0]
         nameEnd = ''
       } else {
-        nameStart = names[0];
+        nameStart = names[0]
         nameEnd = names.slice(1, names.length).join(' ')
       }
     }
 
     const info = [email, phone, location.address, website]
       .filter(Boolean)
-      .join(' | ');
+      .join(' | ')
 
     const sectionHeader = stripIndent`
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +43,7 @@ const generator: Template4Generator = {
       %     Profile
       %
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    `;
+    `
 
     if (!name) {
       return stripIndent`
@@ -85,10 +85,10 @@ const generator: Template4Generator = {
           gpa,
           startDate,
           endDate
-        } = school;
+        } = school
 
-        let line1 = '';
-        let line2 = '';
+        let line1 = ''
+        let line2 = ''
 
         if (institution) {
           line1 += `\\runsubsection{${institution}}`
@@ -102,7 +102,7 @@ const generator: Template4Generator = {
           line1 += `\\descript{| ${area}}`
         }
 
-        let dateRange = '';
+        let dateRange = ''
 
         if (startDate && endDate) {
           dateRange = `${startDate} - ${endDate}`
@@ -114,7 +114,7 @@ const generator: Template4Generator = {
 
         const locationAndDate = [location, dateRange]
           .filter(Boolean)
-          .join(' | ');
+          .join(' | ')
 
         if (locationAndDate) {
           line1 += `\\hfill \\location{${locationAndDate}}`
@@ -157,11 +157,11 @@ const generator: Template4Generator = {
           startDate,
           endDate,
           highlights
-        } = job;
+        } = job
 
-        let line1 = '';
-        let dateRange = '';
-        let highlightLines = '';
+        let line1 = ''
+        let dateRange = ''
+        let highlightLines = ''
 
         if (company) {
           line1 += `\\runsubsection{${company}}`
@@ -219,7 +219,7 @@ const generator: Template4Generator = {
       \\raggedright
       \\begin{tabular}{ l l }
       ${skills.map(skill => {
-        const { name = '', keywords = [] } = skill;
+        const { name = '', keywords = [] } = skill
         return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
       })}
       \\end{tabular}
@@ -241,11 +241,11 @@ const generator: Template4Generator = {
       \\section{${heading || 'Projects'}}
       \\raggedright
       ${projects.map(project => {
-        const { name, description, keywords, url } = project;
+        const { name, description, keywords, url } = project
 
-        let line1 = '';
-        let line2 = '';
-        let line3 = '';
+        let line1 = ''
+        let line2 = ''
+        let line3 = ''
 
         if (name) {
           line1 += `\\runsubsection{\\large{${name}}}`
@@ -290,8 +290,8 @@ const generator: Template4Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\section{${heading || 'Awards'}}
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award;
-        const info = [awarder, date].filter(Boolean).join(' | ');
+        const { title, summary, date, awarder } = award
+        const info = [awarder, date].filter(Boolean).join(' | ')
 
         return stripIndent`
           \\runsubsection{\\large{${title || ''}}} \\descript{${info}} \\\\
@@ -354,10 +354,10 @@ const generator: Template4Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     `
   }
-};
+}
 
 function template4(values: SanitizedValues) {
-  const { headings = {} } = values;
+  const { headings = {} } = values
 
   return stripIndent`
     ${generator.resumeHeader()}
@@ -368,25 +368,25 @@ function template4(values: SanitizedValues) {
       .map(section => {
         switch (section) {
           case 'profile':
-            return generator.profileSection(values.basics);
+            return generator.profileSection(values.basics)
 
           case 'education':
             return generator.educationSection(
               values.education,
               headings.education
-            );
+            )
 
           case 'work':
-            return generator.workSection(values.work, headings.work);
+            return generator.workSection(values.work, headings.work)
 
           case 'skills':
-            return generator.skillsSection(values.skills, headings.skills);
+            return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects);
+            return generator.projectsSection(values.projects, headings.projects)
 
           case 'awards':
-            return generator.awardsSection(values.awards, headings.awards);
+            return generator.awardsSection(values.awards, headings.awards)
 
           default:
             return ''

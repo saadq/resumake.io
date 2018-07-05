@@ -65,3 +65,9 @@ npm-debug.log
 .DS_Store
 dist
 *.swp
+.idea/vcs.xml
+.idea/resumake.io.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/deployment.xml
+.idea/codeStyles/codeStyleConfig.xml

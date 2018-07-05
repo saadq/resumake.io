@@ -321,7 +321,7 @@ class Home extends Component<Props> {
           </RightSection>
         </Main>
         <Footer>
-          <Copyright>© 2018 Saad Quadri</Copyright>
+            <Copyright>© 2018 <a href="https://github.com/saadq">Saad Quadri</a></Copyright>
           <Links>
             <Link to="/about">About</Link>
             <a href="https://github.com/saadq/resumake">Source</a>

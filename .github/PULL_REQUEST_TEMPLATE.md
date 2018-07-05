@@ -18,6 +18,7 @@ Links to blog posts, patterns, libraries or addons used to solve this problem
 - [How to Pull Request](https://github.com/flexyford/pull-request) Github Repo with Learning focused Pull Request Template.
 
 ## Submission Checklist ✅
-If you are making a module submission, please complete the below checklist. Failure to follow these instructions may result in your pull request being closed without review, and may affect your application to become a Campus Expert.
+Please complete the below checklist. Failure to follow these instructions may result in your pull request being closed without review.
 
--   [ ] I read the documentation before submit this pull request.
+- [ ] I already read (contributing.md)[../contributing.md].
+- [ ] I read the documentation before submit this pull request.

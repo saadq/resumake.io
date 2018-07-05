@@ -14,6 +14,7 @@ This section can be skipped if there are no existing similar features.
 Add any other context or screenshots about the feature request here.
 
 ## Submission Checklist ✅
-If you are making a module submission, please complete the below checklist. Failure to follow these instructions may result in your pull request being closed without review, and may affect your application to become a Campus Expert.
+Please complete the below checklist. Failure to follow these instructions may result in your pull request being closed without review.
 
--   [ ] I read the documentation before submit this pull request.
+- [ ] I already read (contributing.md)[../contributing.md].
+- [ ] I read the documentation before submit this pull request.

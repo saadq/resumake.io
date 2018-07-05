@@ -16,10 +16,10 @@ const generator: Template8Generator = {
       return ''
     }
 
-    const { name, email, phone = '', location = {}, website = '' } = basics
+    const { name, email, phone = '', location = {}, website = '' } = basics;
 
-    let addressLine = ''
-    let contactsLine = ''
+    let addressLine = '';
+    let contactsLine = '';
 
     if (location.address && phone) {
       addressLine = `\\address{${location.address} \\linebreak ${phone}}`
@@ -57,9 +57,9 @@ const generator: Template8Generator = {
           location,
           startDate,
           endDate
-        } = school
+        } = school;
 
-        let degreeLine = ''
+        let degreeLine = '';
 
         if (studyType && area) {
           degreeLine = `${studyType} in ${area}.`
@@ -67,7 +67,7 @@ const generator: Template8Generator = {
           degreeLine = (studyType || area) + '.'
         }
 
-        let dateRange = ''
+        let dateRange = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} | ${endDate}`
@@ -109,10 +109,10 @@ const generator: Template8Generator = {
           startDate,
           endDate,
           highlights
-        } = job
+        } = job;
 
-        let dateRange = ''
-        let highlightLines = ''
+        let dateRange = '';
+        let highlightLines = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} -- ${endDate}`
@@ -152,7 +152,7 @@ const generator: Template8Generator = {
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       ${skills.map(skill => {
-        const { name, keywords = [] } = skill
+        const { name, keywords = [] } = skill;
         return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
       })}
       \\end{itemize}
@@ -172,9 +172,9 @@ const generator: Template8Generator = {
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
       ${projects.map(project => {
-        const { name, description, keywords = [], url } = project
+        const { name, description, keywords = [], url } = project;
 
-        let line = ''
+        let line = '';
 
         if (name) {
           line += `\\textbf{${name}} `
@@ -211,9 +211,9 @@ const generator: Template8Generator = {
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award;
 
-        let line = ''
+        let line = '';
 
         if (title) {
           line += `\\textbf{${title}} `
@@ -264,10 +264,10 @@ const generator: Template8Generator = {
       %% SOFTWARE.
     `
   }
-}
+};
 
 function template8(values: SanitizedValues) {
-  const { headings = {} } = values
+  const { headings = {} } = values;
 
   return stripIndent`
     ${generator.resumeHeader()}
@@ -289,22 +289,22 @@ function template8(values: SanitizedValues) {
               return generator.educationSection(
                 values.education,
                 headings.education
-              )
+              );
 
             case 'work':
-              return generator.workSection(values.work, headings.work)
+              return generator.workSection(values.work, headings.work);
 
             case 'skills':
-              return generator.skillsSection(values.skills, headings.skills)
+              return generator.skillsSection(values.skills, headings.skills);
 
             case 'projects':
               return generator.projectsSection(
                 values.projects,
                 headings.projects
-              )
+              );
 
             case 'awards':
-              return generator.awardsSection(values.awards, headings.awards)
+              return generator.awardsSection(values.awards, headings.awards);
 
             default:
               return ''

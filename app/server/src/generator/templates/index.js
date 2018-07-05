@@ -43,7 +43,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
         opts: {
           cmd: 'pdflatex'
         }
-      }
+      };
 
     case TEMPLATE2:
       return {
@@ -53,7 +53,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           inputs: join(__dirname, 'template2', 'inputs'),
           fonts: join(__dirname, 'template2', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE3:
       return {
@@ -61,7 +61,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
         opts: {
           cmd: 'pdflatex'
         }
-      }
+      };
 
     case TEMPLATE4:
       return {
@@ -71,7 +71,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           inputs: join(__dirname, 'template4', 'inputs'),
           fonts: join(__dirname, 'template4', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE5:
       return {
@@ -80,7 +80,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           cmd: 'pdflatex',
           inputs: join(__dirname, 'template5', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE6:
       return {
@@ -90,7 +90,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           inputs: join(__dirname, 'template6', 'inputs'),
           fonts: join(__dirname, 'template6', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE7:
       return {
@@ -99,7 +99,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           cmd: 'pdflatex',
           inputs: join(__dirname, 'template7', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE8:
       return {
@@ -108,7 +108,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
           cmd: 'lualatex',
           inputs: join(__dirname, 'template8', 'inputs')
         }
-      }
+      };
 
     case TEMPLATE9:
       return {
@@ -116,7 +116,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
         opts: {
           cmd: 'pdflatex'
         }
-      }
+      };
 
     default:
       return {

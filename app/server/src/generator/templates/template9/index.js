@@ -16,10 +16,10 @@ const generator: Template9Generator = {
       return ''
     }
 
-    const { name, email, phone, location = {}, website } = basics
+    const { name, email, phone, location = {}, website } = basics;
     const info = [email, phone, location.address, website]
       .filter(Boolean)
-      .join(' | ')
+      .join(' | ');
 
     return stripIndent`
       \\MyName{${name || ''}}
@@ -33,7 +33,7 @@ const generator: Template9Generator = {
       return ''
     }
 
-    const lastSchoolIndex = education.length - 1
+    const lastSchoolIndex = education.length - 1;
 
     return source`
       %%% Education
@@ -48,10 +48,10 @@ const generator: Template9Generator = {
           location = '',
           startDate = '',
           endDate = ''
-        } = school
+        } = school;
 
-        let degreeLine = ''
-        let nameLine = ''
+        let degreeLine = '';
+        let nameLine = '';
 
         if (studyType && area) {
           degreeLine = `${studyType} ${area}`
@@ -59,7 +59,7 @@ const generator: Template9Generator = {
           degreeLine = studyType || area
         }
 
-        let dateRange = ''
+        let dateRange = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} - ${endDate}`
@@ -94,7 +94,7 @@ const generator: Template9Generator = {
       return ''
     }
 
-    const lastJobIndex = work.length - 1
+    const lastJobIndex = work.length - 1;
 
     return source`
       %%% Work experience
@@ -110,11 +110,11 @@ const generator: Template9Generator = {
           startDate,
           endDate,
           highlights
-        } = job
+        } = job;
 
-        const nameLine = [company, location].filter(Boolean).join(', ')
-        let dateRange = ''
-        let dutyLines = ''
+        const nameLine = [company, location].filter(Boolean).join(', ');
+        let dateRange = '';
+        let dutyLines = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} - ${endDate}`
@@ -154,7 +154,7 @@ const generator: Template9Generator = {
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Skills'}}{}
       ${skills.map(skill => {
-        const { name, keywords = [] } = skill
+        const { name, keywords = [] } = skill;
         return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
       })}
     `
@@ -165,7 +165,7 @@ const generator: Template9Generator = {
       return ''
     }
 
-    const lastProjectIndex = projects.length - 1
+    const lastProjectIndex = projects.length - 1;
 
     return source`
       %%% Projects
@@ -173,7 +173,7 @@ const generator: Template9Generator = {
       \\NewPart{${heading || 'Projects'}}{}
 
       ${projects.map((project, i) => {
-        const { name, description, keywords = [], url } = project
+        const { name, description, keywords = [], url } = project;
 
         return stripIndent`
           \\ProjectEntry{${name || ''}}{${url || ''}}
@@ -190,7 +190,7 @@ const generator: Template9Generator = {
       return ''
     }
 
-    const lastAwardIndex = awards.length - 1
+    const lastAwardIndex = awards.length - 1;
 
     return source`
       %%% Awards
@@ -198,7 +198,7 @@ const generator: Template9Generator = {
       \\NewPart{${heading || 'Awards'}}{}
 
       ${awards.map((award, i) => {
-        const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award;
 
         return stripIndent`
           \\AwardEntry{${title || ''}}{${awarder || ''}}
@@ -307,10 +307,10 @@ const generator: Template9Generator = {
           \\normalsize \\par}
     `
   }
-}
+};
 
 function template9(values: SanitizedValues) {
-  const { headings = {} } = values
+  const { headings = {} } = values;
 
   return stripIndent`
     \\documentclass[fontsize=11pt]{article}
@@ -320,25 +320,25 @@ function template9(values: SanitizedValues) {
       .map(section => {
         switch (section) {
           case 'profile':
-            return generator.profileSection(values.basics)
+            return generator.profileSection(values.basics);
 
           case 'education':
             return generator.educationSection(
               values.education,
               headings.education
-            )
+            );
 
           case 'work':
-            return generator.workSection(values.work, headings.work)
+            return generator.workSection(values.work, headings.work);
 
           case 'skills':
-            return generator.skillsSection(values.skills, headings.skills)
+            return generator.skillsSection(values.skills, headings.skills);
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects)
+            return generator.projectsSection(values.projects, headings.projects);
 
           case 'awards':
-            return generator.awardsSection(values.awards, headings.awards)
+            return generator.awardsSection(values.awards, headings.awards);
 
           default:
             return ''

@@ -12,7 +12,7 @@ type Template7Generator = Generator & {
 
 const generator: Template7Generator = {
   profileSection(basics = {}) {
-    const { name, email, phone, location = {}, website } = basics
+    const { name, email, phone, location = {}, website } = basics;
 
     return stripIndent`
     % Profile
@@ -40,9 +40,9 @@ const generator: Template7Generator = {
           location,
           startDate,
           endDate
-        } = school
+        } = school;
 
-        let degreeLine = ''
+        let degreeLine = '';
 
         if (studyType && area) {
           degreeLine = `${studyType} in ${area}`
@@ -50,7 +50,7 @@ const generator: Template7Generator = {
           degreeLine = studyType || area
         }
 
-        let dateRange = ''
+        let dateRange = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} | ${endDate}`
@@ -88,10 +88,10 @@ const generator: Template7Generator = {
           startDate,
           endDate,
           highlights
-        } = job
+        } = job;
 
-        let dateRange = ''
-        let highlightLines = ''
+        let dateRange = '';
+        let highlightLines = '';
 
         if (startDate && endDate) {
           dateRange = `${startDate} -- ${endDate}`
@@ -130,7 +130,7 @@ const generator: Template7Generator = {
     return source`
       \\section{${heading || 'Skills'}}
       ${skills.map(skill => {
-        const { name, keywords = [] } = skill
+        const { name, keywords = [] } = skill;
         return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
       })}
     `
@@ -144,9 +144,9 @@ const generator: Template7Generator = {
     return source`
       \\section{${heading || 'Projects'}}
       ${projects.map(project => {
-        const { name, description, keywords = [], url } = project
+        const { name, description, keywords = [], url } = project;
 
-        let detailsLine = ''
+        let detailsLine = '';
 
         if (description) {
           detailsLine += `${description}\\\\`
@@ -178,9 +178,9 @@ const generator: Template7Generator = {
     return source`
       \\section{${heading || 'Awards'}}
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award;
 
-        let detailsLine = ''
+        let detailsLine = '';
 
         if (summary) {
           detailsLine += `${summary}\\\\`
@@ -232,10 +232,10 @@ const generator: Template7Generator = {
       %\\setlength{\\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
     `
   }
-}
+};
 
 function template7(values: SanitizedValues) {
-  const { headings = {} } = values
+  const { headings = {} } = values;
 
   return stripIndent`
     ${generator.resumeHeader()}
@@ -249,19 +249,19 @@ function template7(values: SanitizedValues) {
             return generator.educationSection(
               values.education,
               headings.education
-            )
+            );
 
           case 'work':
-            return generator.workSection(values.work, headings.work)
+            return generator.workSection(values.work, headings.work);
 
           case 'skills':
-            return generator.skillsSection(values.skills, headings.skills)
+            return generator.skillsSection(values.skills, headings.skills);
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects)
+            return generator.projectsSection(values.projects, headings.projects);
 
           case 'awards':
-            return generator.awardsSection(values.awards, headings.awards)
+            return generator.awardsSection(values.awards, headings.awards);
 
           default:
             return ''

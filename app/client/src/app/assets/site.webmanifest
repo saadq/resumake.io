@@ -1,0 +1,21 @@
+{
+    "name": "Resumake",
+    "short_name": "Resumake",
+    "icons": [
+        {
+            "src": "/app/assets/android-chrome-192x192.png?v=PY4M3jz02x",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/app/assets/android-chrome-512x512.png?v=PY4M3jz02x",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "start_url": "https://resumake.io",
+    "display": "standalone",
+    "orientation": "portrait"
+}

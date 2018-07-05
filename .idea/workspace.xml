@@ -2,36 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3fdb097-f08b-4fbe-8d2e-0b6a0bbbe609" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/client/flow-typed/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/flow-typed/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/pages/About.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/pages/About.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/pages/Generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/pages/Generator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/pages/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/client/src/app/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/client/src/app/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template1/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template1/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template2/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template2/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template3/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template3/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template4/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template4/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template5/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template5/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template6/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template6/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template7/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template7/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template8/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template8/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/middleware/error-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/middleware/error-handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/middleware/json-resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/middleware/json-resume.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/middleware/sanitizer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/middleware/sanitizer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/routes/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/routes/root.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/routes/root.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/tests/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/tests/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/tests/generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/tests/generator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/tests/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/tests/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server/src/tests/sanitize.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/server/src/tests/sanitize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,76 +17,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="error-handler.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/server/src/middleware/error-handler.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="json-resume.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/server/src/middleware/json-resume.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+            <state relative-caret-position="493">
+              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#18#55#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template8/index.js">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constants.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/constants.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="45" column="7" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".all-contributorsrc" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.all-contributorsrc">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server/src/generator/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="626">
+              <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -143,7 +75,6 @@
         <option value="$PROJECT_DIR$/app/server/src/routes/index.js" />
         <option value="$PROJECT_DIR$/app/server/src/routes/root.js" />
         <option value="$PROJECT_DIR$/app/server/src/middleware/error-handler.js" />
-        <option value="$PROJECT_DIR$/app/server/src/middleware/json-resume.js" />
         <option value="$PROJECT_DIR$/app/server/src/middleware/sanitizer.js" />
         <option value="$PROJECT_DIR$/app/server/src/generator/index.js" />
         <option value="$PROJECT_DIR$/app/server/src/generator/templates/template1/index.js" />
@@ -157,6 +88,8 @@
         <option value="$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js" />
         <option value="$PROJECT_DIR$/app/server/src/generator/templates/constants.js" />
         <option value="$PROJECT_DIR$/app/server/src/generator/templates/index.js" />
+        <option value="$PROJECT_DIR$/app/server/src/middleware/json-resume.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -229,6 +162,38 @@
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="resumake.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="resumake.io" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="generator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="resumake.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="resumake.io" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="middleware" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="resumake.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="resumake.io" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="resumake.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="resumake.io" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -265,12 +230,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530749853629</updated>
-      <workItem from="1530749859927" duration="1380000" />
+      <workItem from="1530749859927" duration="1730000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1380000" />
+    <option name="totallyTimeSpent" value="1730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -470,16 +435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/tests/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/server/src/tests/generator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
@@ -513,55 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/routes/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="51" lean-forward="true" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/routes/root.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/error-handler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template1/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -576,16 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/sanitizer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -652,30 +548,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/json-resume.js">
+    <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="305">
+          <caret line="62" column="34" lean-forward="true" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template8/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.all-contributorsrc">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js">
+    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        <state relative-caret-position="408">
+          <caret line="45" column="7" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -689,25 +575,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/index.js">
+    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template9/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="45" column="7" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
+        <state relative-caret-position="323">
+          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
+    <entry file="file://$PROJECT_DIR$/app/server/src/generator/templates/template8/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="62" column="34" lean-forward="true" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.all-contributorsrc">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/sanitizer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/routes/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="51" lean-forward="true" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/routes/root.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/tests/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="25" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/error-handler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server/src/middleware/json-resume.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#18#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

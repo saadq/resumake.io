@@ -26,47 +26,47 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const Header = styled.header`
   width: 100%;
   margin-top: 50px;
-`
+`;
 
 const Link = styled.a`
   color: ${colors.primary};
-`
+`;
 
 const SectionDivider = Divider.extend`
   width: 100%;
   margin: 4em 0;
   padding: 0;
-`
+`;
 
 const Content = styled.main`
   width: 100%;
-`
+`;
 
 const Heading = styled.h2`
   color: white;
   font-size: 2.25em;
   margin: 10px 0;
-`
+`;
 
 const Question = styled.p`
   font-size: 1.5em;
-`
+`;
 
 const Answer = styled.p`
   padding-left: 1em;
-`
+`;
 
 const ListAnswer = styled.ol`
   padding-left: 2em;
   li {
     padding: 2px 0;
   }
-`
+`;
 
 const Box = styled.div`
   width: calc(100% - 4px);
@@ -76,7 +76,7 @@ const Box = styled.div`
   justify-content: center;
   padding: 50px 0;
   border: 2px solid ${colors.borders};
-`
+`;
 
 const Color = styled.div`
   width: 100px;
@@ -93,7 +93,7 @@ const Color = styled.div`
     height: 75px;
     margin: 2px;
   }
-`
+`;
 
 const Button = styled.button`
   width: 100px;
@@ -138,7 +138,7 @@ const Button = styled.button`
       position: initial;
     }
   }
-`
+`;
 
 const PrimaryButton = Button.extend`
   background: linear-gradient(
@@ -160,7 +160,7 @@ const PrimaryButton = Button.extend`
     color: white;
     cursor: pointer;
   }
-`
+`;
 
 const UnfilledButton = PrimaryButton.extend`
   background: transparent;
@@ -173,21 +173,21 @@ const UnfilledButton = PrimaryButton.extend`
     animation: none;
     cursor: pointer;
   }
-`
+`;
 
 const RoundedButton = RoundButton.extend`
   margin: 15px;
-`
+`;
 
 const VerticalBox = Box.extend`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const FormLabel = Label.extend`
   margin-top: 0;
-`
+`;
 
 const FormInput = Input.withComponent('input').extend`
   width: 50%;
@@ -196,7 +196,7 @@ const FormInput = Input.withComponent('input').extend`
   @media screen and (max-width: 850px) {
     width: 50%;
   }
-`
+`;
 
 const FormDivider = Divider.extend`
   width: 50%;
@@ -206,7 +206,7 @@ const FormDivider = Divider.extend`
   @media screen and (max-width: 850px) {
     width: 50%;
   }
-`
+`;
 
 function About() {
   return (

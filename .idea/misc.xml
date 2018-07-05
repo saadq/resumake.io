@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="FLOW" />
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="TerminalProjectOptionsProvider">
+    <option name="myStartingDirectory" value="/mnt/d/Cloud/OneDrive/Dev" />
+  </component>
+</project>

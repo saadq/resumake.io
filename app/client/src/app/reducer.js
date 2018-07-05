@@ -12,7 +12,7 @@ const appReducer = combineReducers({
   form,
   progress,
   preview
-})
+});
 
 function rootReducer(state?: State, action: Action) {
   if (action.type === 'CLEAR_STATE') {

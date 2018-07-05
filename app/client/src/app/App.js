@@ -46,22 +46,22 @@ injectGlobal`
     font-family: Nexa;
     src: url('${Nexa}') format('opentype');
   }
-`
+`;
 
 const LoadableHome = Loadable({
   loader: () => import('./pages/Home'),
   loading: Loader
-})
+});
 
 const LoadableGenerator = Loadable({
   loader: () => import('./pages/Generator'),
   loading: Loader
-})
+});
 
 const LoadableAbout = Loadable({
   loader: () => import('./pages/About'),
   loading: Loader
-})
+});
 
 function App() {
   return (

@@ -16,16 +16,16 @@ const generator: Template1Generator = {
       return ''
     }
 
-    const { name, email, phone, location, website } = basics
-    const address = (location && location.address) || ''
+    const { name, email, phone, location, website } = basics;
+    const address = (location && location.address) || '';
 
-    let line1 = name ? `{\\Huge \\scshape {${name}}}` : ''
+    let line1 = name ? `{\\Huge \\scshape {${name}}}` : '';
     let line2 = [address, email, phone, website]
       .filter(Boolean)
-      .join(' $\\cdot$ ')
+      .join(' $\\cdot$ ');
 
     if (line1 && line2) {
-      line1 += '\\\\'
+      line1 += '\\\\';
       line2 += '\\\\'
     }
 
@@ -56,10 +56,10 @@ const generator: Template1Generator = {
           gpa,
           startDate,
           endDate
-        } = school
+        } = school;
 
-        let line1 = ''
-        let line2 = ''
+        let line1 = '';
+        let line2 = '';
 
         if (institution) {
           line1 += `\\textbf{${institution}}`
@@ -82,7 +82,7 @@ const generator: Template1Generator = {
         }
 
         if (startDate || endDate) {
-          const gradLine = `${startDate || ''} - ${endDate || ''}`
+          const gradLine = `${startDate || ''} - ${endDate || ''}`;
           line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
         }
 
@@ -121,11 +121,11 @@ const generator: Template1Generator = {
           startDate,
           endDate,
           highlights
-        } = job
+        } = job;
 
-        let line1 = ''
-        let line2 = ''
-        let highlightLines = ''
+        let line1 = '';
+        let line2 = '';
+        let highlightLines = '';
 
         if (company) {
           line1 += `\\textbf{${company}}`
@@ -147,8 +147,8 @@ const generator: Template1Generator = {
           line2 += ` \\hfill ${endDate}`
         }
 
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
+        if (line1) line1 += '\\\\';
+        if (line2) line2 += '\\\\';
 
         if (highlights) {
           highlightLines = source`
@@ -177,7 +177,7 @@ const generator: Template1Generator = {
       \\header{${heading || 'Skills'}}
       \\begin{tabular}{ l l }
       ${skills.map(skill => {
-        const { name = 'Misc', keywords = [] } = skill
+        const { name = 'Misc', keywords = [] } = skill;
         return `${name}: & ${keywords.join(', ')} \\\\`
       })}
       \\end{tabular}
@@ -197,10 +197,10 @@ const generator: Template1Generator = {
           return ''
         }
 
-        const { name, description, keywords, url } = project
+        const { name, description, keywords, url } = project;
 
-        let line1 = ''
-        let line2 = description || ''
+        let line1 = '';
+        let line2 = description || '';
 
         if (name) {
           line1 += `{\\textbf{${name}}}`
@@ -239,10 +239,10 @@ const generator: Template1Generator = {
     return source`
       \\header{${heading || 'Awards'}}
       ${awards.map(award => {
-        const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award;
 
-        let line1 = ''
-        let line2 = summary || ''
+        let line1 = '';
+        let line2 = summary || '';
 
         if (title) {
           line1 += `\\textbf{${title}}`
@@ -256,8 +256,8 @@ const generator: Template1Generator = {
           line2 += ` \\hfill ${date}`
         }
 
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
+        if (line1) line1 += '\\\\';
+        if (line2) line2 += '\\\\';
 
         return stripIndent`
           ${line1}
@@ -326,10 +326,10 @@ const generator: Template1Generator = {
       % END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
     `
   }
-}
+};
 
 function template1(values: SanitizedValues) {
-  const { headings = {} } = values
+  const { headings = {} } = values;
 
   return stripIndent`
     \\documentclass[a4paper]{article}
@@ -352,25 +352,25 @@ function template1(values: SanitizedValues) {
       .map(section => {
         switch (section) {
           case 'profile':
-            return generator.profileSection(values.basics)
+            return generator.profileSection(values.basics);
 
           case 'education':
             return generator.educationSection(
               values.education,
               headings.education
-            )
+            );
 
           case 'work':
-            return generator.workSection(values.work, headings.work)
+            return generator.workSection(values.work, headings.work);
 
           case 'skills':
-            return generator.skillsSection(values.skills, headings.skills)
+            return generator.skillsSection(values.skills, headings.skills);
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects)
+            return generator.projectsSection(values.projects, headings.projects);
 
           case 'awards':
-            return generator.awardsSection(values.awards, headings.awards)
+            return generator.awardsSection(values.awards, headings.awards);
 
           default:
             return ''

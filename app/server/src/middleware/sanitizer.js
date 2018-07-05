@@ -11,7 +11,7 @@ import type { Middleware } from 'koa'
 
 function sanitizer(): Middleware {
   return async (ctx, next) => {
-    ctx.request.body = sanitize(ctx.request.body)
+    ctx.request.body = sanitize(ctx.request.body);
     await next()
   }
 }
@@ -25,14 +25,14 @@ function sanitize(obj: any = {}) {
   if (Array.isArray(obj)) {
     return obj
       .map(val => {
-        if (val && typeof val === 'object') return sanitize(val)
-        if (typeof val === 'string') return sanitizeLatex(trim(val))
+        if (val && typeof val === 'object') return sanitize(val);
+        if (typeof val === 'string') return sanitizeLatex(trim(val));
         return val
       })
       .filter(val => !isEmpty(val))
   }
 
-  const copy = {}
+  const copy = {};
 
   Object.entries(obj).forEach(([key, val]) => {
     if (isEmpty(val)) {
@@ -40,7 +40,7 @@ function sanitize(obj: any = {}) {
     }
 
     if (typeof val === 'object') {
-      const sanitized = sanitize(val)
+      const sanitized = sanitize(val);
       if (!isEmptyObject(sanitized)) {
         copy[key] = sanitized
       }
@@ -49,7 +49,7 @@ function sanitize(obj: any = {}) {
     } else if (val != null) {
       copy[key] = val
     }
-  })
+  });
 
   return copy
 }

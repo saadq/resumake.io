@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger'
 import persistState from 'redux-localstorage'
 import reducer from './reducer'
 
-const middleware = [thunk]
+const middleware = [thunk];
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(
@@ -22,8 +22,8 @@ if (process.env.NODE_ENV === 'development') {
 const enhancer = composeWithDevTools(
   applyMiddleware(...middleware),
   persistState(['form', 'progress'], { key: 'resumake' })
-)
+);
 
-const store = createStore(reducer, enhancer)
+const store = createStore(reducer, enhancer);
 
 export default store

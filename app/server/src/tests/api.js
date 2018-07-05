@@ -23,7 +23,7 @@ test('POST /api/generate/resume should generate a PDF', async () => {
       'projects',
       'awards'
     ]
-  }
+  };
 
   const response = await request(app.callback())
     .post('/api/generate/resume')
@@ -31,12 +31,12 @@ test('POST /api/generate/resume should generate a PDF', async () => {
     .set('Content-Type', 'application/json')
     .send(data)
     .expect('Content-Type', 'application/pdf')
-    .expect(200)
+    .expect(200);
 
-  expect(response).toBeTruthy()
-  expect(response.body).toBeTruthy()
+  expect(response).toBeTruthy();
+  expect(response.body).toBeTruthy();
   expect(Buffer.isBuffer(response.body)).toBeTruthy()
-})
+});
 
 test('POST /api/generate/source should generate a zip of the LaTeX source code', async () => {
   const data = {
@@ -55,7 +55,7 @@ test('POST /api/generate/source should generate a zip of the LaTeX source code',
       'projects',
       'awards'
     ]
-  }
+  };
 
   const response = await request(app.callback())
     .post('/api/generate/source')
@@ -63,10 +63,10 @@ test('POST /api/generate/source should generate a zip of the LaTeX source code',
     .set('Content-Type', 'application/json')
     .send(data)
     .expect('Content-Type', 'application/zip')
-    .expect(200)
+    .expect(200);
 
   expect(response).toBeTruthy()
-})
+});
 
 test('POST /api/upload should return the JSON from a file upload', async () => {
   const response = await request(app.callback())
@@ -74,7 +74,7 @@ test('POST /api/upload should return the JSON from a file upload', async () => {
     .set('Accept', 'application/json')
     .attach('json-file', join(__dirname, 'utils', 'upload.json'))
     .expect('Content-Type', /json/)
-    .expect(200)
+    .expect(200);
 
   const expectedJSON = {
     selectedTemplate: 1,
@@ -89,8 +89,8 @@ test('POST /api/upload should return the JSON from a file upload', async () => {
     skills: [{ keywords: [''] }],
     projects: [{ keywords: [''] }],
     awards: []
-  }
+  };
 
-  expect(response).toBeTruthy()
+  expect(response).toBeTruthy();
   expect(response.body).toEqual(expectedJSON)
-})
+});

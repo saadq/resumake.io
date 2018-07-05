@@ -12,21 +12,21 @@ test('errorHandler should catch all errors downstream', async () => {
     },
     request: {},
     response: {}
-  }
+  };
 
   const next = jest.fn(() => {
-    const err: Object = new Error('Bad user request')
-    err.status = 400
+    const err: Object = new Error('Bad user request');
+    err.status = 400;
     throw err
-  })
+  });
 
-  const middleware = errorHandler()
-  await middleware(ctx, next)
+  const middleware = errorHandler();
+  await middleware(ctx, next);
 
-  expect(next).toHaveBeenCalled()
-  expect(ctx.response.status).toBe(400)
+  expect(next).toHaveBeenCalled();
+  expect(ctx.response.status).toBe(400);
   expect(ctx.response.body).toBe('Bad user request')
-})
+});
 
 test('sanitizer should normalize the request body', async () => {
   const ctx: Object = {
@@ -44,9 +44,9 @@ test('sanitizer should normalize the request body', async () => {
       }
     },
     response: {}
-  }
+  };
 
-  const next = jest.fn()
+  const next = jest.fn();
 
   const expected = {
     selectedTemplate: 1,
@@ -55,14 +55,14 @@ test('sanitizer should normalize the request body', async () => {
       website: 'github.com/saadq'
     },
     work: [{ company: 'Johnson \\& Johnson' }]
-  }
+  };
 
-  const middleware = sanitizer()
-  await middleware(ctx, next)
+  const middleware = sanitizer();
+  await middleware(ctx, next);
 
-  expect(next).toHaveBeenCalled()
+  expect(next).toHaveBeenCalled();
   expect(ctx.request.body).toEqual(expected)
-})
+});
 
 test('jsonResume should validate and extract the JSON from file', async () => {
   const ctx: Object = {
@@ -75,9 +75,9 @@ test('jsonResume should validate and extract the JSON from file', async () => {
     },
     response: {},
     throw: jest.fn()
-  }
+  };
 
-  const next = jest.fn()
+  const next = jest.fn();
 
   const expected = {
     selectedTemplate: 1,
@@ -92,11 +92,11 @@ test('jsonResume should validate and extract the JSON from file', async () => {
     skills: [{ keywords: [''] }],
     projects: [{ keywords: [''] }],
     awards: []
-  }
+  };
 
-  const middleware = jsonResume()
-  await middleware(ctx, next)
+  const middleware = jsonResume();
+  await middleware(ctx, next);
 
-  expect(next).toHaveBeenCalled()
+  expect(next).toHaveBeenCalled();
   expect(ctx.request.jsonResume).toEqual(expected)
-})
+});

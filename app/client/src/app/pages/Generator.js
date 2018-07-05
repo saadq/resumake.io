@@ -16,7 +16,7 @@ const Layout = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-`
+`;
 
 const Content = styled.main`
   display: flex;
@@ -30,7 +30,7 @@ const Content = styled.main`
     margin-left: 0;
     flex-direction: column;
   }
-`
+`;
 
 const Header = styled.header`
   position: fixed;
@@ -42,7 +42,7 @@ const Header = styled.header`
   align-items: center;
   background: ${colors.background};
   border-bottom: 1px solid ${colors.borders};
-`
+`;
 
 const Footer = styled.footer`
   width: 100%;
@@ -55,12 +55,12 @@ const Footer = styled.footer`
   align-items: center;
   background: ${colors.background};
   border-top: 1px solid ${colors.borders};
-`
+`;
 
 const LoadablePreview = Loadable({
   loader: () => import('../../features/preview/components'),
   loading: Loader
-})
+});
 
 type Props = {
   location: Location

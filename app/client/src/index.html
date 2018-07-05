@@ -1,21 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="theme-color" content="#000000">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A website for automatically generating elegant LaTeX resumes.">
   <meta charset="UTF-8">
+
   <title>Resumake</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100232391-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-100232391-3');
-  </script>
+  <link rel="stylesheet" href="../vendor/outdatedbrowser/outdatedbrowser.min.css">
+  <link rel="stylesheet" type="text/css" href="vendor/cookieconsent/cookieconsent.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <meta name="apple-mobile-web-app-title" content="Resumake">
+  <meta name="application-name" content="Resumake">
+  <link type="text/plain" rel="author" href="humans.txt" />
+  <meta name="theme-color" content="#000000">
+
 </head>
+
 <body>
   <div id="app"></div>
+
+
+  <div id="outdated">
+      <h6>Your browser is out-of-date!</h6>
+      <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+      <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+  </div>
+  <script src="../vendor/outdatedbrowser/outdatedbrowser.min.js"></script>
+  <!-- outdated-browser call -->
+  <script>
+      //event listener form DOM ready
+      function addLoadEvent(func) {
+          const oldonload = window.onload;
+          if (typeof window.onload !== 'function') {
+              window.onload = func;
+          } else {
+              window.onload = function() {
+                  if (oldonload) {
+                      oldonload();
+                  }
+                  func();
+              }
+          }
+      }
+      //call function after DOM ready
+      addLoadEvent(function(){
+          outdatedBrowser({
+              bgColor: '#f25648',
+              color: '#ffffff',
+              lowerThan: 'transform',
+              languagePath: ''
+          })
+      });
+  </script>
+  <script src="vendor/cookieconsent/cookieconsent.min.js"></script>
+  <script>
+      window.addEventListener("load", function(){
+          window.cookieconsent.initialise({
+              "palette": {
+                  "popup": {
+                      "background": "#000"
+                  },
+                  "button": {
+                      "background": "#56c9aa",
+                      "text": "#ffffff"
+                  }
+              },
+              "theme": "edgeless",
+              "type": "opt-in",
+              "content": {
+                  "href": "https://resumake.io/about"
+              }
+          })});
+  </script>
+  <!-- Google Analytics -->
+  <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-100232391-3', 'auto');
+      ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
 </body>
 </html>

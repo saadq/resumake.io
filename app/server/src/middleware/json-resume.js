@@ -11,25 +11,25 @@ import type { Middleware } from 'koa'
 
 function jsonResume(): Middleware {
   return async (ctx, next) => {
-    const { request } = ctx;
+    const { request } = ctx
 
     try {
       if (request.files == null || typeof request.files !== 'object') {
         throw new Error()
       }
 
-      const file = request.files['json-file'];
+      const file = request.files['json-file']
 
       if (file == null || typeof file !== 'object') {
         throw new Error()
       }
 
-      const { path } = file;
-      const data = await readFile(path);
-      const json = JSON.parse(data);
-      const validJSON = getValidJSON(json);
+      const { path } = file
+      const data = await readFile(path)
+      const json = JSON.parse(data)
+      const validJSON = getValidJSON(json)
 
-      request.jsonResume = validJSON;
+      request.jsonResume = validJSON
       await next()
     } catch (err) {
       ctx.throw(400, 'Invalid JSON')
@@ -51,7 +51,7 @@ function getValidJSON(json: Object): Object {
     skills = [{ keywords: [''] }],
     projects = [{ keywords: [''] }],
     awards = []
-  } = json;
+  } = json
 
   const validJSON = {
     selectedTemplate,
@@ -62,7 +62,7 @@ function getValidJSON(json: Object): Object {
     skills,
     projects,
     awards
-  };
+  }
 
   return validJSON
 }

@@ -20,8 +20,8 @@ import type { SanitizedValues } from '../types'
  */
 
 function generatePDF(formData: SanitizedValues): Transform {
-  const { texDoc, opts } = getTemplateData(formData);
-  const pdf = latex(texDoc, opts);
+  const { texDoc, opts } = getTemplateData(formData)
+  const pdf = latex(texDoc, opts)
 
   return pdf
 }
@@ -36,19 +36,19 @@ function generatePDF(formData: SanitizedValues): Transform {
  */
 
 function generateSourceCode(formData: SanitizedValues): Transform {
-  const { texDoc, opts = {} } = getTemplateData(formData);
-  const prettyDoc = prettify(texDoc);
-  const zip = Archiver('zip');
-  const readme = makeReadme(formData.selectedTemplate, opts.cmd);
+  const { texDoc, opts = {} } = getTemplateData(formData)
+  const prettyDoc = prettify(texDoc)
+  const zip = Archiver('zip')
+  const readme = makeReadme(formData.selectedTemplate, opts.cmd)
 
-  zip.append(prettyDoc, { name: 'resume.tex' });
-  zip.append(readme, { name: 'README.md' });
+  zip.append(prettyDoc, { name: 'resume.tex' })
+  zip.append(readme, { name: 'README.md' })
 
   if (opts.inputs) {
     zip.directory(opts.inputs, '../')
   }
 
-  zip.finalize();
+  zip.finalize()
 
   return zip
 }

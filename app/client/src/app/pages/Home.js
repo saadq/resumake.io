@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
+`
 
 const Main = styled.main`
   flex: 1;
@@ -32,22 +32,22 @@ const Main = styled.main`
     align-items: center;
     justify-content: center;
   }
-`;
+`
 
 const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const LeftSection = Section.extend`
   width: 40%;
   flex-direction: column;
-`;
+`
 
 const RightSection = Section.extend`
   width: 60%;
-`;
+`
 
 const Button = styled(Link)`
   display: flex;
@@ -85,7 +85,7 @@ const Button = styled(Link)`
   &:focus {
     outline: none;
   }
-`;
+`
 
 const PrimaryButton = Button.extend`
   margin-top: 15px;
@@ -102,13 +102,13 @@ const PrimaryButton = Button.extend`
       ${colors.primary}
     );
   }
-`;
+`
 
-const Label = Button.withComponent('label');
+const Label = Button.withComponent('label')
 
 const Input = styled.input`
   display: none;
-`;
+`
 
 const ResumePreview = styled.div`
   position: relative;
@@ -118,7 +118,7 @@ const ResumePreview = styled.div`
   @media screen and (max-width: 850px) {
     display: none;
   }
-`;
+`
 
 const Image = styled.img`
   width: 50%;
@@ -145,7 +145,7 @@ const Image = styled.img`
     top: -10em;
     left: 15em;
   }
-`;
+`
 
 const Footer = styled.footer`
   width: 100%;
@@ -161,7 +161,7 @@ const Footer = styled.footer`
   @media screen and (max-width: 850px) {
     font-size: 0.75em;
   }
-`;
+`
 
 const Links = styled.div`
   margin-right: 50px;
@@ -179,7 +179,7 @@ const Links = styled.div`
       text-decoration: underline;
     }
   }
-`;
+`
 
 const Copyright = styled.span`
   opacity: 0.75;
@@ -188,7 +188,7 @@ const Copyright = styled.span`
   @media screen and (max-width: 850px) {
     margin-left: 15px;
   }
-`;
+`
 
 const LoadWrapper = styled.div`
   width: 100%;
@@ -196,14 +196,14 @@ const LoadWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const ImportRow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-`;
+`
 
 const HelpButton = RoundButton.extend`
   position: absolute;
@@ -220,10 +220,10 @@ const HelpButton = RoundButton.extend`
   @media screen and (max-width: 850px) {
     display: none;
   }
-`;
+`
 
-const ctx = require.context('../../features/form/assets/img', true);
-const images = ctx.keys().map(ctx);
+const ctx = require.context('../../features/form/assets/img', true)
+const images = ctx.keys().map(ctx)
 
 type Props = {
   hasPrevSession: boolean,
@@ -239,26 +239,26 @@ type Props = {
 }
 
 class Home extends Component<Props> {
-  toastId: *;
+  toastId: *
 
   onFileUpload = async (e: SyntheticInputEvent<*>) => {
-    const { uploadFileAndGenerateResume } = this.props;
-    const file = e.target.files[0];
+    const { uploadFileAndGenerateResume } = this.props
+    const file = e.target.files[0]
 
-    await uploadFileAndGenerateResume(file);
-    const { jsonUpload, history } = this.props;
+    await uploadFileAndGenerateResume(file)
+    const { jsonUpload, history } = this.props
 
     if (jsonUpload.status === 'success') {
       history.push('/generator')
     } else if (jsonUpload.status === 'failure') {
       toast.error(jsonUpload.errMessage, { position: toast.POSITION.TOP_LEFT })
     }
-  };
+  }
 
   clearState = () => {
-    this.props.clearState();
+    this.props.clearState()
     window.localStorage.clear()
-  };
+  }
 
   render() {
     const {
@@ -266,7 +266,7 @@ class Home extends Component<Props> {
       resumeStatus,
       jsonUpload,
       clearPreview
-    } = this.props;
+    } = this.props
 
     // Show loading screen if file is still uploading or if resume is generating
     if (jsonUpload.status === 'pending' || resumeStatus === 'pending') {
@@ -347,6 +347,6 @@ const mapActions = {
   clearState,
   clearPreview,
   uploadFileAndGenerateResume
-};
+}
 
 export default withRouter(connect(mapState, mapActions)(Home))

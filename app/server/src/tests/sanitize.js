@@ -16,7 +16,7 @@ describe('sanitizer', () => {
         },
         website: 'github.com/saadq   '
       }
-    };
+    }
 
     const expected = {
       basics: {
@@ -28,12 +28,12 @@ describe('sanitizer', () => {
         },
         website: 'github.com/saadq'
       }
-    };
+    }
 
-    const actual = sanitize(input);
+    const actual = sanitize(input)
 
     expect(actual).toEqual(expected)
-  });
+  })
 
   it('should normalize LaTeX symbols', () => {
     const input = {
@@ -45,7 +45,7 @@ describe('sanitizer', () => {
           company: 'LaTeX Symbols: {\\^~_%$&#}'
         }
       ]
-    };
+    }
 
     const expected = {
       work: [
@@ -57,12 +57,12 @@ describe('sanitizer', () => {
             'LaTeX Symbols: \\{\\textbackslash{}\\textasciicircum{}\\textasciitilde{}\\_\\%\\$\\&\\#\\}'
         }
       ]
-    };
+    }
 
-    const actual = sanitize(input);
+    const actual = sanitize(input)
 
     expect(actual).toEqual(expected)
-  });
+  })
 
   it('should recursively sanitize the entire object by removing falsy/empty values', () => {
     const input = {
@@ -164,7 +164,7 @@ describe('sanitizer', () => {
         'projects',
         'awards'
       ]
-    };
+    }
 
     const expected = {
       basics: {
@@ -236,10 +236,10 @@ describe('sanitizer', () => {
         'projects',
         'awards'
       ]
-    };
+    }
 
-    const actual = sanitize(input);
+    const actual = sanitize(input)
 
     expect(actual).toEqual(expected)
   })
-});
+})

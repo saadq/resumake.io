@@ -16,7 +16,7 @@ test('makeReadme should work for all templates', () => {
     { id: 7, cmd: 'pdflatex' },
     { id: 8, cmd: 'lualatex' },
     { id: 9, cmd: 'pdflatex' }
-  ];
+  ]
 
   templates.forEach(template => {
     const expected = stripIndent`
@@ -32,10 +32,10 @@ test('makeReadme should work for all templates', () => {
       You will need to have \`${template.cmd}\` installed on your machine.
 
       Alternatively, you can use a site like [ShareLaTeX](https://sharelatex.com) to build and edit your LaTeX instead.
-    `;
+    `
 
-    const actual = makeReadme(template.id, template.cmd);
+    const actual = makeReadme(template.id, template.cmd)
 
     expect(actual).toBe(expected)
   })
-});
+})

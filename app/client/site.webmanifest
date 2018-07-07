@@ -1,5 +1,6 @@
 {
     "name": "Resumake",
+    "description": "A website for automatically generating elegant LaTeX resumes.",
     "short_name": "Resumake",
     "icons": [
         {
@@ -13,6 +14,16 @@
             "type": "image/png"
         }
     ],
+    "screenshots": [
+        {
+          "src": "app/assets/ss-home.png",
+          "sizes": "1920x948"
+        },
+        {
+          "src": "app/assets/ss-creating.png",
+          "sizes": "1920x1463"
+        }
+    ]
     "theme_color": "#000000",
     "background_color": "#000000",
     "start_url": "https://resumake.io",

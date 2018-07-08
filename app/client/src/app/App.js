@@ -23,7 +23,7 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.95em;
+    font-size: 1em;
     background: ${colors.background};
     color: ${colors.foreground};
   }

@@ -52,7 +52,7 @@ const ButtonGroup = styled.div`
 const Button = styled.a`
   text-align: center;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 1em;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +106,7 @@ const Pagination = styled.div`
 `
 
 const PageNumber = styled.span`
-  font-size: 12px;
+  font-size: 1em;
   height: 35px;
   color: #ddd;
   display: flex;

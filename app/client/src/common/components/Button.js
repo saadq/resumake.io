@@ -12,6 +12,7 @@ const Button = styled.button`
   border-color: ${colors.primary};
   border-radius: 2px;
   background: transparent;
+  font-size: 1em;
   color: ${colors.primary};
   margin-right: 10px;
   margin-top: 10px;

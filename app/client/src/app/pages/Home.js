@@ -53,7 +53,7 @@ const Button = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.85em;
+  font-size: 1em;
   text-align: center;
   text-decoration: none;
   width: 175px;
@@ -114,7 +114,7 @@ const ResumePreview = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-
+  
   @media screen and (max-width: 850px) {
     display: none;
   }
@@ -136,14 +136,14 @@ const Image = styled.img`
 
   &:first-child {
     top: 10em;
-    left: -15em;
+    left: -25em;
     z-index: 3;
   }
 
   &:last-child {
     z-index: 1;
     top: -10em;
-    left: 15em;
+    left: 25em;
   }
 `
 
@@ -155,11 +155,11 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8em;
+  font-size: 1em;
   color: ${lighten(0.3, colors.background)};
 
   @media screen and (max-width: 850px) {
-    font-size: 0.75em;
+    font-size: 1em;
   }
 `
 
@@ -187,6 +187,16 @@ const Copyright = styled.span`
 
   @media screen and (max-width: 850px) {
     margin-left: 15px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: ${lighten(0.3, colors.background)};
+    margin: 0 1em;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `
 
@@ -321,7 +331,7 @@ class Home extends Component<Props> {
           </RightSection>
         </Main>
         <Footer>
-          <Copyright>© 2018 <a href="https://github.com/saadq">Saad Quadri</a></Copyright>
+          <Copyright>© 2018 <a href="http://saadq.com">Saad Quadri</a> &#38; <a href="https://github.com/saadq/resumake.io/graphs/contributors">contributors</a></Copyright>
           <Links>
             <Link to="/about">About</Link>
             <a href="https://github.com/saadq/resumake">Source</a>

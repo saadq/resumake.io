@@ -1,21 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A website for automatically generating elegant LaTeX resumes.">
   <meta charset="UTF-8">
-  <title>Resumake</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100232391-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-100232391-3');
-  </script>
+
+  <title>Resumake - Generating elegant LaTeX resumes</title>
+  <link rel=”canonical” href="https://resumake.io/" />
+  <link rel="stylesheet" type="text/css" href="/node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.min.css">
+  <link rel="stylesheet" type="text/css" href="/node_modules/cookieconsent/build/cookieconsent.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <link type="text/plain" rel="author" href="humans.txt" />
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  <link rel="shortcut icon" href="/app/assets/favicon.ico?v=PY4M3jz02x">
+
+  <meta name="application-name" content="Resumake">
+  <meta name="apple-mobile-web-app-title" content="Resumake">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/app/assets/apple-touch-icon.png?v=PY4M3jz02x">
+  <link rel="mask-icon" href="/app/assets/safari-pinned-tab.svg?v=PY4M3jz02x" color="#56c9aa">
+  <link rel="icon" type="image/png" sizes="32x32" href="/app/assets/favicon-32x32.png?v=PY4M3jz02x">
+  <link rel="icon" type="image/png" sizes="16x16" href="/app/assets/favicon-16x16.png?v=PY4M3jz02x">
+  <meta name="msapplication-TileImage" content="/app/assets/mstile-144x144.png?v=PY4M3jz02x">
+
+  <meta property="og:image" content="/app/assets/og-image.jpg">
+  <meta property="og:image:height" content="1032">
+  <meta property="og:image:width" content="1971">
+  <meta property="og:description" content="A website for automatically generating elegant LaTeX resumes.">
+  <meta property="og:title" content="Resumake">
+  <meta property="og:url" content="https://resumake.io/">
+
 </head>
+
 <body>
   <div id="app"></div>
+
+
+  <div id="outdated">
+      <h6>Your browser is out-of-date!</h6>
+      <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+      <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+  </div>
+  <script type="text/javascript" src="/node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.min.js"></script>
+  <!-- outdated-browser call -->
+  <script>
+      //event listener form DOM ready
+      function addLoadEvent(func) {
+          const oldonload = window.onload;
+          if (typeof window.onload !== 'function') {
+              window.onload = func;
+          } else {
+              window.onload = function() {
+                  if (oldonload) {
+                      oldonload();
+                  }
+                  func();
+              }
+          }
+      }
+      //call function after DOM ready
+      addLoadEvent(function(){
+          outdatedBrowser({
+              bgColor: '#f25648',
+              color: '#ffffff',
+              lowerThan: 'transform',
+              languagePath: ''
+          })
+      });
+  </script>
+  <script type="text/javascript" src="/node_modules/cookieconsent/build/cookieconsent.min.js"></script>
+  <script>
+      window.addEventListener("load", function(){
+          window.cookieconsent.initialise({
+              "palette": {
+                  "popup": {
+                      "background": "#f25648"
+                  },
+                  "button": {
+                      "background": "#56c9aa",
+                      "text": "#000000"
+                  }
+              },
+              "theme": "edgeless",
+              "type": "opt-in",
+              "content": {
+                  "href": "https://resumake.io/about"
+              }
+          })});
+  </script>
+  <!-- Google Analytics -->
+  <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-100232391-3', 'auto');
+      ga('send', 'pageview');
+  </script>
+  <script type="text/javascript" async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
 </body>
 </html>

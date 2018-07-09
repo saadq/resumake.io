@@ -1,0 +1,11 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Saad Quadri -- Author -- saadq
+    Matheus Rocha Vieira -- contributor -- matheusrv
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5, React

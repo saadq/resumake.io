@@ -12,8 +12,7 @@ const Label = styled.label`
   display: block;
   margin-top: 30px;
   margin-bottom: 5px;
-  color: ${darken(0.25, colors.foreground)};
-  font-weight: 300;
+  color: ${darken(0.2, colors.foreground)};
 `
 
 const Input = styled(Field)`
@@ -21,7 +20,7 @@ const Input = styled(Field)`
   padding: 10px 0;
   appearance: none;
   outline: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   font-family: inherit;
   border: none;
   border-bottom: 1px solid ${colors.borders};

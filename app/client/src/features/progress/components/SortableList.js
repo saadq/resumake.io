@@ -16,13 +16,11 @@ import { titleCase } from '../../../common/utils'
 const List = styled.div`
   margin: 0;
   padding: 0;
-  font-weight: 300;
   margin-bottom: 25px;
 `
 
 const NavItem = styled(NavLink)`
   text-decoration: none;
-  font-weight: 300;
   color: ${colors.foreground};
   list-style: none;
   display: inline-block;

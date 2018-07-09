@@ -20,7 +20,7 @@ import { LoadingBar } from '../../features/preview/components'
 import { colors } from '../../common/theme'
 
 const Wrapper = styled.div`
-  max-width: 850px;
+  max-width: 910px;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -218,7 +218,7 @@ function About() {
         </p>
         <p>
           The webapp was made by{' '}
-          <Link href="http://saadq.com">Saad Quadri</Link> and was built with
+          <Link href="http://saadq.com">Saad Quadri</Link> and <Link href="https://github.com/saadq/resumake.io/graphs/contributors">contributors</Link> and was built with
           Node.js, Koa, React, Redux, and Flow.
         </p>
       </Header>

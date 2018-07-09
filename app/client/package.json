@@ -44,7 +44,9 @@
     "react-toastify": "^3.2.2",
     "redux-form": "^7.0.4",
     "redux-localstorage": "^0.4.1",
-    "styled-components": "^2.1.2"
+    "styled-components": "^2.1.2",
+    "outdatedbrowser": "^1.1.5",
+    "cookieconsent": "^3.0.6"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

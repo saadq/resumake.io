@@ -8,6 +8,7 @@ import Loadable from 'react-loadable'
 import { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 import { ScrollToTop, Loader } from '../common/components'
+import Page404 from '../common/components'
 import { colors } from '../common/theme'
 import Nexa from './assets/nexa.otf'
 
@@ -22,7 +23,7 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.95em;
+    font-size: 1em;
     background: ${colors.background};
     color: ${colors.foreground};
   }
@@ -70,7 +71,7 @@ function App() {
         <Route exact path="/" component={LoadableHome} />
         <Route path="/generator" component={LoadableGenerator} />
         <Route path="/about" component={LoadableAbout} />
-        <Route path="*" render={() => <h1>ono 404</h1>} />
+        <Route path="*" component={Page404} />
       </Switch>
     </ScrollToTop>
   )

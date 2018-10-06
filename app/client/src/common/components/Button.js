@@ -4,6 +4,7 @@
 
 import styled from 'styled-components'
 import { colors } from '../../common/theme'
+import { lighten, darken } from 'polished'
 
 const Button = styled.button`
   display: inline-block;
@@ -19,6 +20,12 @@ const Button = styled.button`
   transition: all 0.4s ease;
   user-select: none;
 
+  &:focus:not(:hover) {
+    background-color: ${darken(0.4, colors.primary)};
+    border-color: ${lighten(0.2, colors.primary)};
+    color: ${lighten(0.2, colors.primary)};
+  }
+  
   &:hover {
     background: ${colors.primary};
     color: ${colors.background};

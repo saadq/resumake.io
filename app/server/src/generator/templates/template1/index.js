@@ -140,9 +140,9 @@ const generator: Template1Generator = {
         }
 
         if (startDate && endDate) {
-          line2 += ` \\hfill ${startDate} | ${endDate}`
+          line2 += ` \\hfill ${startDate} - ${endDate}`
         } else if (startDate) {
-          line2 += ` \\hfill ${startDate} | Present`
+          line2 += ` \\hfill ${startDate} - Present`
         } else if (endDate) {
           line2 += ` \\hfill ${endDate}`
         }

@@ -10,6 +10,7 @@ import {
   Icon
 } from '../../../../common/components'
 import LabeledInput, { Label, Input } from './LabeledInput'
+import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 const Row = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ type Props = {
 }
 
 function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
+  const isRemoveBtnEnabled = isLengthGreaterThanOne(highlights)
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -88,7 +90,7 @@ function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
             </RoundButton>
             <RoundButton
               inverted
-              disabled={i !== highlights.length - 1}
+              disabled={i !== highlights.length - 1 || !isRemoveBtnEnabled }
               type="button"
               onClick={() => removeHighlight(index)}
             >

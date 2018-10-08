@@ -16,6 +16,7 @@ import {
 } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
+import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 type Props = {
   skills: $PropertyType<FormValues, 'skills'>,
@@ -32,6 +33,7 @@ function Skills({
   addSkillKeyword,
   removeSkillKeyword
 }: Props) {
+  const isRemoveBtnEnabled = isLengthGreaterThanOne(skills)
   return (
     <Section heading="Your Skills">
       <LabeledInput
@@ -52,7 +54,7 @@ function Skills({
       <Button onClick={addSkill} type="button">
         Add Skill
       </Button>
-      <Button onClick={removeSkill} type="button">
+      <Button onClick={removeSkill} disabled={!isRemoveBtnEnabled} type="button">
         Remove Skill
       </Button>
     </Section>

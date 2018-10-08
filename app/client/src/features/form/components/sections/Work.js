@@ -16,6 +16,7 @@ import {
 } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
+import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 type Props = {
   work: $PropertyType<FormValues, 'work'>,
@@ -34,6 +35,7 @@ function Work({
   addJobHighlight,
   removeJobHighlight
 }: Props) {
+  const isRemoveBtnEnabled = isLengthGreaterThanOne(work)
   return (
     <Section heading="Your Work Experience">
       <LabeledInput
@@ -54,7 +56,7 @@ function Work({
       <Button onClick={addJob} type="button">
         Add Job
       </Button>
-      <Button onClick={removeJob} type="button">
+      <Button onClick={removeJob} disabled={!isRemoveBtnEnabled} type="button">
         Remove Job
       </Button>
     </Section>

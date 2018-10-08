@@ -16,6 +16,7 @@ import {
 } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
+import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 type Props = {
   projects: $PropertyType<FormValues, 'projects'>,
@@ -32,6 +33,7 @@ function Projects({
   addProjectKeyword,
   removeProjectKeyword
 }: Props) {
+  const isRemoveBtnEnabled = isLengthGreaterThanOne(projects)
   return (
     <Section heading="Your Projects">
       <LabeledInput
@@ -53,7 +55,7 @@ function Projects({
         <Button onClick={addProject} type="button">
           Add Project
         </Button>
-        <Button onClick={removeProject} type="button">
+        <Button onClick={removeProject} disabled={!isRemoveBtnEnabled} type="button">
           Remove Project
         </Button>
       </div>

@@ -31,7 +31,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
       <Button onClick={addSchool} type="button">
         Add School
       </Button>
-      <Button onClick={removeSchool} type="button">
+      <Button onClick={removeSchool} type="button" disabled={education.length < 2}>
         Remove School
       </Button>
     </Section>

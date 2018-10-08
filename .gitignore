@@ -3,3 +3,7 @@ npm-debug.log
 .DS_Store
 dist
 *.swp
+
+*.xml
+
+*.iml

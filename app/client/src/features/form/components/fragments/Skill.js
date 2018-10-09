@@ -10,7 +10,6 @@ import {
   Icon
 } from '../../../../common/components'
 import LabeledInput, { Label, Input } from './LabeledInput'
-import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 const ButtonRow = styled.div`
   margin-left: 15px;
@@ -35,7 +34,6 @@ type Props = {
 }
 
 function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
-  const isRemoveBtnEnabled = isLengthGreaterThanOne(keywords)
   return (
     <div>
       {index > 0 ? <Divider /> : null}
@@ -64,7 +62,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
               <RoundButton
                 inverted
                 type="button"
-                disabled={!isRemoveBtnEnabled}
+                disabled={keywords.length === 1}
                 onClick={() => removeKeyword(index)}
               >
                 <Icon type="remove" />

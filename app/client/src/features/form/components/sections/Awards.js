@@ -11,7 +11,6 @@ import { Award } from '..'
 import { addAward, removeAward } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
-import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 type Props = {
   awards: $PropertyType<FormValues, 'awards'>,
@@ -20,7 +19,6 @@ type Props = {
 }
 
 function Awards({ awards, addAward, removeAward }: Props) {
-  const isRemoveBtnEnabled = isLengthGreaterThanOne(awards)
   return (
     <Section heading="Honors & Awards">
       <LabeledInput
@@ -34,7 +32,7 @@ function Awards({ awards, addAward, removeAward }: Props) {
         <Button onClick={addAward} type="button">
           Add Award
         </Button>
-        <Button onClick={removeAward} disabled={!isRemoveBtnEnabled} type="button">
+        <Button onClick={removeAward} disabled={awards.length === 1} type="button">
           Remove Award
         </Button>
       </div>

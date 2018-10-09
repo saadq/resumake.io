@@ -11,7 +11,6 @@ import { School } from '..'
 import { addSchool, removeSchool } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
-import { isLengthGreaterThanOne } from '../../../../common/utils'
 
 type Props = {
   education: $PropertyType<FormValues, 'education'>,
@@ -20,7 +19,6 @@ type Props = {
 }
 
 function Education({ education, addSchool, removeSchool }: Props) {
-  const isRemoveBtnEnabled = isLengthGreaterThanOne(education)
   return (
     <Section heading="Your Educational Background">
       <LabeledInput
@@ -33,7 +31,7 @@ function Education({ education, addSchool, removeSchool }: Props) {
       <Button onClick={addSchool} type="button">
         Add School
       </Button>
-      <Button onClick={removeSchool} disabled={!isRemoveBtnEnabled} type="button">
+      <Button onClick={removeSchool} disabled={education.length === 1} type="button">
         Remove School
       </Button>
     </Section>

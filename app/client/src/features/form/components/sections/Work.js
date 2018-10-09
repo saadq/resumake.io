@@ -54,7 +54,7 @@ function Work({
       <Button onClick={addJob} type="button">
         Add Job
       </Button>
-      <Button onClick={removeJob} type="button">
+      <Button onClick={removeJob} disabled={work.length === 1} type="button">
         Remove Job
       </Button>
     </Section>

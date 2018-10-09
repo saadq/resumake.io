@@ -4,11 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Divider,
-  RoundButton,
-  Icon
-} from '../../../../common/components'
+import { Divider, RoundButton, Icon } from '../../../../common/components'
 import LabeledInput, { Label, Input } from './LabeledInput'
 
 const ButtonRow = styled.div`
@@ -62,6 +58,7 @@ function Skill({ keywords, index, addKeyword, removeKeyword }: Props) {
               <RoundButton
                 inverted
                 type="button"
+                disabled={keywords.length === 1}
                 onClick={() => removeKeyword(index)}
               >
                 <Icon type="remove" />

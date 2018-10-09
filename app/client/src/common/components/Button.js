@@ -25,7 +25,7 @@ const Button = styled.button`
     border-color: ${lighten(0.2, colors.primary)};
     color: ${lighten(0.2, colors.primary)};
   }
-  
+
   &:hover {
     background: ${colors.primary};
     color: ${colors.background};

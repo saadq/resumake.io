@@ -52,7 +52,11 @@ function Skills({
       <Button onClick={addSkill} type="button">
         Add Skill
       </Button>
-      <Button onClick={removeSkill} type="button">
+      <Button
+        onClick={removeSkill}
+        disabled={skills.length === 1}
+        type="button"
+      >
         Remove Skill
       </Button>
     </Section>

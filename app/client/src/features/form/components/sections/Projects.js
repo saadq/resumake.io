@@ -53,7 +53,11 @@ function Projects({
         <Button onClick={addProject} type="button">
           Add Project
         </Button>
-        <Button onClick={removeProject} type="button">
+        <Button
+          onClick={removeProject}
+          disabled={projects.length === 1}
+          type="button"
+        >
           Remove Project
         </Button>
       </div>

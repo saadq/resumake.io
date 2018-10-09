@@ -32,7 +32,11 @@ function Awards({ awards, addAward, removeAward }: Props) {
         <Button onClick={addAward} type="button">
           Add Award
         </Button>
-        <Button onClick={removeAward} type="button">
+        <Button
+          onClick={removeAward}
+          disabled={awards.length === 1}
+          type="button"
+        >
           Remove Award
         </Button>
       </div>

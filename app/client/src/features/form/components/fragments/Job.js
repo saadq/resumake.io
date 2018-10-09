@@ -4,11 +4,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Divider,
-  RoundButton,
-  Icon
-} from '../../../../common/components'
+import { Divider, RoundButton, Icon } from '../../../../common/components'
 import LabeledInput, { Label, Input } from './LabeledInput'
 
 const Row = styled.div`
@@ -88,7 +84,7 @@ function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
             </RoundButton>
             <RoundButton
               inverted
-              disabled={i !== highlights.length - 1}
+              disabled={highlights.length === 1}
               type="button"
               onClick={() => removeHighlight(index)}
             >

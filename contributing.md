@@ -25,6 +25,7 @@ The following are the requirements for installing and running the application lo
 
 * Node v7.6+
 * npm v5+
+* [LaTeX](https://github.com/saadq/node-latex/)
 
 ## Technology Stack
 This webapp is a fullstack JavaScript project hosted on a DigitalOcean droplet. [Flow](https://flow.org/) is used for type safety and [Jest](facebook.github.io/jest/) is used for tests. Don't worry if any of this stuff is new to you, it's actually easier than you may think.

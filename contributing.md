@@ -8,16 +8,24 @@ Please note that this project is released with a [Contributor Code of Conduct](.
 Thanks very much for taking the time to contribute! Here's a Table of Contents that should cover mostly everything you may be interested in:
 
 1. [Project Overview](#project-overview)
-2. [Technology Stack](technology-stack)
-3. [Setting Up](#setting-up)
-3. [Contributing Client Changes](#contributing-client-changes)
-4. [Contributing Server Changes](#contributing-server-changes)
-5. [Submitting Issues](#submitting-issues)
+2. [Requirements](#requirements)
+3. [Technology Stack](technology-stack)
+4. [Setting Up](#setting-up)
+5. [Contributing Client Changes](#contributing-client-changes)
+6. [Contributing Server Changes](#contributing-server-changes)
+7. [Submitting Issues](#submitting-issues)
 
 ## Project Overview
 The way this app works is pretty simple. There is a form where the user enters in their data. When the user presses the <kbd>MAKE</kbd> button, all that form data is sent to the server. Upon receiving that data, the server checks to see what template was selected, and generates a specific TeX document based on that.
 
 It then runs a [`latex`](https://github.com/saadq/node-latex/) child process on the generated TeX document which will generate a PDF. The PDF is then sent back to the client which will render it in the preview.
+
+## Requirements
+The following are the requirements for installing and running the application locally.
+
+* Node v7.6+
+* npm v5+
+* [LaTeX](https://www.latex-project.org/get/)
 
 ## Technology Stack
 This webapp is a fullstack JavaScript project hosted on a DigitalOcean droplet. [Flow](https://flow.org/) is used for type safety and [Jest](facebook.github.io/jest/) is used for tests. Don't worry if any of this stuff is new to you, it's actually easier than you may think.

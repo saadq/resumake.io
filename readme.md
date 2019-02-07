@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/github/stars/saadq/resumake.svg">
 </a>
 <a href="https://github.com/saadq/resumake/issues">
-    <img src="https://img.shields.io/github/issues/saadq/resumake.svg">
+    <img src="https://img.shields.io/github/issues/saadq/resumake.io.svg">
 </a>
 <a href="https://github.com/saadq/resumake/blob/master/license">
   <img src="https://img.shields.io/github/license/saadq/resumake.svg?colorB=000000">

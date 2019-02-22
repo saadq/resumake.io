@@ -9,7 +9,8 @@ import { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 import { ScrollToTop, Loader } from '../common/components'
 import { colors } from '../common/theme'
-import Nexa from './assets/nexa.otf'
+import NexaBold from './assets/nexa-bold.otf'
+import NexaLight from './assets/nexa-light.otf'
 
 injectGlobal`
   * {
@@ -43,8 +44,13 @@ injectGlobal`
   }
 
   @font-face {
-    font-family: Nexa;
-    src: url('${Nexa}') format('opentype');
+    font-family: NexaBold;
+    src: url('${NexaBold}') format('opentype');
+  }
+
+  @font-face {
+    font-family: NexaLight;
+    src: url('${NexaLight}') format('opentype');
   }
 `
 
@@ -63,6 +69,11 @@ const LoadableAbout = Loadable({
   loading: Loader
 })
 
+const LoadableError404 = Loadable({
+  loader: () => import('./pages/Error404'),
+  loading: Loader
+})
+
 function App() {
   return (
     <ScrollToTop>
@@ -70,7 +81,7 @@ function App() {
         <Route exact path="/" component={LoadableHome} />
         <Route path="/generator" component={LoadableGenerator} />
         <Route path="/about" component={LoadableAbout} />
-        <Route path="*" render={() => <h1>ono 404</h1>} />
+        <Route path="*" component={LoadableError404} />
       </Switch>
     </ScrollToTop>
   )

@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { colors } from '../theme'
 
 const Text = styled.h1`
-  font-family: 'Nexa';
+  font-family: NexaBold;
   font-size: ${props => (props.big ? 4 : 2.5)}em;
   margin: 0;
 `

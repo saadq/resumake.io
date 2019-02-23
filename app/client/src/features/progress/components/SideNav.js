@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { arrayMove } from 'react-sortable-hoc'
 import styled from 'styled-components'
 import SortableList from './SortableList'
-import MakeButton from './MakeButton'
+import { PrimaryButton } from '../../../common/components'
 import { setSectionOrder, setProgress } from '../actions'
 import { sizes, colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
@@ -83,9 +83,9 @@ class SideNav extends Component<Props> {
             onSortStart={this.onSortStart}
             onSortEnd={this.onSortEnd}
           />
-          <MakeButton type="submit" form="resume-form">
+          <PrimaryButton type="submit" form="resume-form">
             Make
-          </MakeButton>
+          </PrimaryButton>
         </Nav>
       </Aside>
     )

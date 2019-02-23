@@ -7,8 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter, type RouterHistory } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { lighten } from 'polished'
-import MakeButton from './MakeButton'
-import { Button } from '../../../common/components'
+import { Button, PrimaryButton } from '../../../common/components'
 import { colors } from '../../../common/theme'
 import type { Section } from '../../../common/types'
 import type { State } from '../../../app/types'
@@ -88,7 +87,7 @@ const SectionButton = Button.extend`
   }
 `
 
-const MobileButton = MakeButton.extend`
+const MobileButton = PrimaryButton.extend`
   letter-spacing: 0;
 `
 

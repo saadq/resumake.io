@@ -4,9 +4,9 @@
 
 import styled, { css } from 'styled-components'
 import { lighten, darken, rgba } from 'polished'
-import { colors } from '../../../common/theme'
+import { colors } from '../theme'
 
-const Button = styled.button`
+const PrimaryButton = styled.button`
   width: 125px;
   height: 45px;
   margin: 0;
@@ -53,4 +53,4 @@ const Button = styled.button`
   }
 `
 
-export default Button
+export default PrimaryButton

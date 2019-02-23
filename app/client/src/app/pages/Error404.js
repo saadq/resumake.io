@@ -5,6 +5,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { darken, rgba } from 'polished'
+import { PrimaryButton } from '../../common/components'
 import { colors } from '../../common/theme'
 import comic from '../assets/comic.png'
 
@@ -59,6 +60,25 @@ const ComicCite = styled.cite`
   font-style: normal;
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const Button = PrimaryButton.extend`
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 1.25em;
+  font-size: 1em;
+  text-decoration: none;
+`
+
+const LinkButton = Button.withComponent('a')
+
 function Error404() {
   return (
     <Wrapper>
@@ -72,6 +92,10 @@ function Error404() {
         <ComicImage src={comic} alt="Resume Comic" />
         <ComicCite>Credit: Bob Eckstein (bobeckstein.com)</ComicCite>
       </ComicContainer>
+      <ButtonContainer>
+        <Button onClick={() => window.history.back()}>Go Back</Button>
+        <LinkButton href="https://resumake.io">Go Home</LinkButton>
+      </ButtonContainer>
     </Wrapper>
   )
 }

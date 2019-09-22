@@ -300,7 +300,7 @@ function template8(values: SanitizedValues) {
         .map(section => {
           switch (section) {
             case 'about':
-              return generator.aboutSection(values.basics, headings.about)
+              return generator.aboutSection ? generator.aboutSection(values.basics, headings.about) : ''
 
             case 'education':
               return generator.educationSection(

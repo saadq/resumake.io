@@ -23,7 +23,7 @@ type Headings = {
 
 type Basics = {
   name?: string,
-  summary?: String,
+  summary?: string,
   email?: string,
   phone?: string,
   website?: string,

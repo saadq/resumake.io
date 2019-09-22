@@ -83,7 +83,8 @@ const generator: Template9Generator = {
           \\EducationEntry
             {${degreeLine}}
             {${dateRange || ''}}
-            {${nameLine}${i < lastSchoolIndex ? '\\\\' : ''}}
+            {${nameLine}}
+            ${i < lastSchoolIndex ? '\\sepspace' : ''}
         `
       })}
     `

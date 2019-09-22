@@ -11,4 +11,14 @@ import ScrollToTop from './ScrollToTop'
 import Loader, { Bars } from './Loader'
 import Logo from './Logo'
 
-export { Button, PrimaryButton, RoundButton, Divider, Icon, ScrollToTop, Loader, Logo, Bars }
+export {
+  Button,
+  PrimaryButton,
+  RoundButton,
+  Divider,
+  Icon,
+  ScrollToTop,
+  Loader,
+  Logo,
+  Bars
+}

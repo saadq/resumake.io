@@ -5,6 +5,7 @@
 type Section =
   | 'templates'
   | 'profile'
+  | 'about'
   | 'education'
   | 'work'
   | 'skills'

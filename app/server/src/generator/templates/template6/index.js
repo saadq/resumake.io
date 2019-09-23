@@ -257,7 +257,7 @@ function template6(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
-          
+
           case 'about':
             return generator.aboutSection
               ? generator.aboutSection(values.basics, headings.about)

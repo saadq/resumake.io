@@ -24,6 +24,17 @@ const generator: Template7Generator = {
   `
   },
 
+  aboutSection(basics, heading) {
+    if (!basics || !basics.summary) {
+      return ''
+    }
+
+    return source`
+      \\section{${heading || 'About'}}
+      \\cvitem{}{${basics.summary}}
+    `
+  },
+
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -245,6 +256,11 @@ function template7(values: SanitizedValues) {
     ${values.sections
       .map(section => {
         switch (section) {
+          case 'about':
+            return generator.aboutSection
+              ? generator.aboutSection(values.basics, headings.about)
+              : ''
+
           case 'education':
             return generator.educationSection(
               values.education,

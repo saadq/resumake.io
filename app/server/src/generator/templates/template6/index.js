@@ -29,6 +29,23 @@ const generator: Generator = {
     `
   },
 
+  aboutSection(basics, heading) {
+    if (!basics || !basics.summary) {
+      return ''
+    }
+
+    return source`
+      % Chapter: About
+      % ------------------
+
+      \\chap{${heading ? heading.toUpperCase() : 'ABOUT'}}{
+
+        ${basics.summary}
+        \\vspace{\\sizefour}
+      }
+    `
+  },
+
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -240,6 +257,11 @@ function template6(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
+
+          case 'about':
+            return generator.aboutSection
+              ? generator.aboutSection(values.basics, headings.about)
+              : ''
 
           case 'education':
             return generator.educationSection(

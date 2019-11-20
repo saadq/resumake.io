@@ -57,6 +57,20 @@ const generator: Template2Generator = {
     `
   },
 
+  aboutSection(basics, heading) {
+    if (!basics || !basics.summary) {
+      return ''
+    }
+
+    return source`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %     About
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\cvsection{${heading || 'About'}}
+      ${basics.summary}
+    `
+  },
+
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -302,6 +316,11 @@ function template2(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
+
+          case 'about':
+            return generator.aboutSection
+              ? generator.aboutSection(values.basics, headings.about)
+              : ''
 
           case 'education':
             return generator.educationSection(

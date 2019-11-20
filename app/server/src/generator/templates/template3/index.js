@@ -343,9 +343,7 @@ function template3(values: SanitizedValues) {
             return generator.profileSection(values.basics)
 
           case 'about':
-            return generator.aboutSection
-              ? generator.aboutSection(values.basics, headings.about)
-              : ''
+            return generator.aboutSection(values.basics, headings.about)
 
           case 'education':
             return generator.educationSection(

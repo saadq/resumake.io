@@ -28,6 +28,19 @@ const generator: Template3Generator = {
     `
   },
 
+  aboutSection(basics, heading) {
+    if (!basics || !basics.summary) {
+      return ''
+    }
+
+    return source`
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\resheading{${heading || 'About'}}
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \\about{${basics.summary}}
+    `
+  },
+
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -286,6 +299,13 @@ const generator: Template3Generator = {
 
       \\end{tabular*}\\vspace{-6pt}}
 
+      \\newcommand{\\about}[1]{
+        \\begin{itemize}[leftmargin=*]
+        \\setlength\\itemsep{0em}
+          \\item[] #1
+        \\end{itemize}
+      }
+
       \\newcommand{\\school}[4]{\\vspace{1.5mm}
         \\textbf{#1} \\hfill #2 \\textit{#3} \\hfill \\textit{#4} \\vspace{1.5mm}
       }
@@ -321,6 +341,11 @@ function template3(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
+
+          case 'about':
+            return generator.aboutSection
+              ? generator.aboutSection(values.basics, headings.about)
+              : ''
 
           case 'education':
             return generator.educationSection(

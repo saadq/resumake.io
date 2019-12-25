@@ -63,24 +63,6 @@ const generator: Template4Generator = {
     `
   },
 
-  aboutSection(basics, heading) {
-    if (!basics || !basics.summary) {
-      return ''
-    }
-
-    return source`
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      %
-      %     About
-      %
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \\section{${heading || 'About'}}
-      \\raggedright
-      ${basics.summary}
-      \\sectionsep
-    `
-  },
-
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -387,11 +369,6 @@ function template4(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
-
-          case 'about':
-            return generator.aboutSection
-              ? generator.aboutSection(values.basics, headings.about)
-              : ''
 
           case 'education':
             return generator.educationSection(

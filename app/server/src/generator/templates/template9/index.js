@@ -28,19 +28,6 @@ const generator: Template9Generator = {
     `
   },
 
-  aboutSection(basics, heading) {
-    if (!basics || !basics.summary) {
-      return ''
-    }
-
-    return source`
-      %%% About
-      %%% ------------------------------------------------------------
-      \\NewPart{${heading || 'About'}}{}
-      ${basics.summary}
-    `
-  },
-
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -333,11 +320,6 @@ function template9(values: SanitizedValues) {
     ${values.sections
       .map(section => {
         switch (section) {
-          case 'about':
-            return generator.aboutSection
-              ? generator.aboutSection(values.basics, headings.about)
-              : ''
-
           case 'profile':
             return generator.profileSection(values.basics)
 

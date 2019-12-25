@@ -5,7 +5,6 @@
 type Section =
   | 'templates'
   | 'profile'
-  | 'about'
   | 'education'
   | 'work'
   | 'skills'
@@ -13,7 +12,6 @@ type Section =
   | 'awards'
 
 type Headings = {
-  about?: string,
   work?: string,
   education?: string,
   skills?: string,
@@ -23,7 +21,6 @@ type Headings = {
 
 type Basics = {
   name?: string,
-  summary?: string,
   email?: string,
   phone?: string,
   website?: string,
@@ -85,7 +82,6 @@ type SanitizedValues = {
 
 type Generator = {
   profileSection: (basics?: Basics) => string,
-  aboutSection?: (basics?: Basics, heading?: string) => string,
   educationSection: (education?: Array<School>, heading?: string) => string,
   workSection: (work?: Array<Job>, heading?: string) => string,
   skillsSection: (skills?: Array<Skill>, heading?: string) => string,

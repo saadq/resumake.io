@@ -39,19 +39,6 @@ const generator: Template1Generator = {
     `
   },
 
-  aboutSection(basics, heading) {
-    if (!basics || !basics.summary) {
-      return ''
-    }
-
-    return source`
-      %==== About ====%
-      \\header{${heading || 'About'}}
-      ${basics.summary}
-      \\vspace{2mm}
-    `
-  },
-
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -366,11 +353,6 @@ function template1(values: SanitizedValues) {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)
-
-          case 'about':
-            return generator.aboutSection
-              ? generator.aboutSection(values.basics, headings.about)
-              : ''
 
           case 'education':
             return generator.educationSection(

@@ -41,20 +41,6 @@ const generator: Template8Generator = {
     `
   },
 
-  aboutSection(basics, heading) {
-    if (!basics || !basics.summary) {
-      return ''
-    }
-
-    return source`
-      \\begin{cvsection}{${heading || 'About'}}
-      \\begin{cvsubsection}{}{}{}
-      ${basics.summary}
-      \\end{cvsubsection}
-      \\end{cvsection}
-    `
-  },
-
   educationSection(education, heading) {
     if (!education) {
       return ''
@@ -299,11 +285,6 @@ function template8(values: SanitizedValues) {
       ${values.sections
         .map(section => {
           switch (section) {
-            case 'about':
-              return generator.aboutSection
-                ? generator.aboutSection(values.basics, headings.about)
-                : ''
-
             case 'education':
               return generator.educationSection(
                 values.education,

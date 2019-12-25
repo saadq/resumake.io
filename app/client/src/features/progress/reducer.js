@@ -13,7 +13,6 @@ const initialState = {
   sections: [
     'templates',
     'profile',
-    'about',
     'education',
     'work',
     'skills',

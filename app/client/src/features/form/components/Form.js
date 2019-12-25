@@ -10,7 +10,6 @@ import styled from 'styled-components'
 import {
   Templates,
   Profile,
-  About,
   Education,
   Work,
   Skills,
@@ -104,7 +103,6 @@ class Form extends Component<Props> {
             />
             <Route exact path="/generator/templates" component={Templates} />
             <Route exact path="/generator/profile" component={Profile} />
-            <Route exact path="/generator/about" component={About} />
             <Route exact path="/generator/education" component={Education} />
             <Route exact path="/generator/work" component={Work} />
             <Route exact path="/generator/skills" component={Skills} />

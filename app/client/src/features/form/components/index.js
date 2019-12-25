@@ -5,7 +5,6 @@
 import Form from './Form'
 import Templates from './sections/Templates'
 import Profile from './sections/Profile'
-import About from './sections/About'
 import Education from './sections/Education'
 import Work from './sections/Work'
 import Skills from './sections/Skills'
@@ -20,7 +19,6 @@ import Award from './fragments/Award'
 export {
   Templates,
   Profile,
-  About,
   Education,
   Work,
   Skills,

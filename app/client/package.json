@@ -7,7 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write src/**/*.*"
+    "format": "prettier --write src/**/*.*",
+    "lint": "eslint src/**/*.*"
   },
   "dependencies": {
     "react": "^16.12.0",
@@ -22,11 +23,14 @@
     "@types/node": "^12.12.22",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
-    "typescript": "^3.7.4",
-    "prettier": "^1.19.1"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "eslint-config-prettier": "^6.8.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.4"
   },
   "browserslist": {
     "production": [

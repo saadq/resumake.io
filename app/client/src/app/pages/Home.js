@@ -260,6 +260,10 @@ class Home extends Component<Props> {
     window.localStorage.clear()
   }
 
+  getYear() {
+    return new Date().getFullYear();
+}
+
   render() {
     const {
       hasPrevSession,
@@ -321,7 +325,7 @@ class Home extends Component<Props> {
           </RightSection>
         </Main>
         <Footer>
-          <Copyright>© 2018 Saad Quadri</Copyright>
+          <Copyright>© {this.getYear()} Saad Quadri</Copyright>
           <Links>
             <Link to="/about">About</Link>
             <a href="https://github.com/saadq/resumake">Source</a>

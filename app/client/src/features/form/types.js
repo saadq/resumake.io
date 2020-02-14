@@ -94,6 +94,8 @@ type FormAction =
   | { type: 'SELECT_TEMPLATE', templateId: number }
   | { type: 'ADD_SCHOOL' }
   | { type: 'REMOVE_SCHOOL' }
+  | { type: 'ADD_PROFILE_SUMMARY', index: number }
+  | { type: 'REMOVE_PROFILE_SUMMARY', index: number }
   | { type: 'ADD_JOB' }
   | { type: 'REMOVE_JOB' }
   | { type: 'ADD_JOB_HIGHLIGHT', index: number }

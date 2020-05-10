@@ -18,5 +18,7 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended'
   ],
-  rules: {}
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off'
+  }
 }

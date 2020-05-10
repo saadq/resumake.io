@@ -19,6 +19,8 @@ module.exports = {
     'plugin:prettier/recommended'
   ],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off'
   }
 }

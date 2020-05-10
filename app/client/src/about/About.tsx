@@ -1,9 +1,9 @@
 import React from 'react'
 
-export function Generator() {
+export function About() {
   return (
     <>
-      <h1>Generator</h1>
+      <h1>About</h1>
     </>
   )
 }

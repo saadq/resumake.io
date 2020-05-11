@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { GlobalStyle } from './GlobalStyle'
@@ -12,16 +12,18 @@ const store = createStore()
 
 export function App() {
   return (
-    <Provider store={store}>
-      <GlobalStyle />
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/generator" component={Generator} />
-          <Route exact path="/about" component={About} />
-          <Route path="*" component={ErrorPage404} />
-        </Switch>
-      </Router>
-    </Provider>
+    <StrictMode>
+      <Provider store={store}>
+        <GlobalStyle />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/generator" component={Generator} />
+            <Route exact path="/about" component={About} />
+            <Route path="*" component={ErrorPage404} />
+          </Switch>
+        </Router>
+      </Provider>
+    </StrictMode>
   )
 }

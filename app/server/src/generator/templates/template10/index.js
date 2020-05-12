@@ -7,150 +7,152 @@ import { WHITESPACE } from '../constants'
 import type { SanitizedValues, Generator } from '../../../types'
 
 type template10Generator = Generator & {
-    resumeHeader: () => string
+  resumeHeader: () => string
 }
 
 const generator: template10Generator = {
-    profileSection(basics) {
-        if (!basics) {
-            return ''
-        }
+  profileSection(basics) {
+    if (!basics) {
+      return ''
+    }
 
-        const { name, email, phone, location = {}, website, summarys } = basics
-        const info = [email, phone, location.address, website]
-            .filter(Boolean)
-            .join(' | ')
-        let summarySection = ''
-        if(summarys){
-            const lastSummaryIndex = summarys.length - 1;
-            summarySection = source`
+    const { name, email, phone, location = {}, website, summaries } = basics
+    const info = [email, phone, location.address, website]
+      .filter(Boolean)
+      .join(' | ')
+    let summarySection = ''
+    if (summaries) {
+      const lastSummaryIndex = summaries.length - 1
+      summarySection = source`
           %%% Summary
           %%% ------------------------------------------------------------
     
           \\NewPart{${'Summary'}}{}
-          ${summarys.map((summary, i) => {
-                return stripIndent`
-            \\ProfileSummarysEntry
+          ${summaries.map((summary, i) => {
+            return stripIndent`
+            \\ProfileSummaryEntry
             {${summary}}
             ${i < lastSummaryIndex ? '\\sepspace' : ''}
           `
           })}
         `
-        }
+    }
 
-        return stripIndent`
+    return (
+      stripIndent`
       \\MyName{${name || ''}}
       \\bigskip
       {\\small \\hfill ${info || ''}}
     ` + `{${summarySection || ''}}`
-    },
+    )
+  },
 
-    educationSection(education, heading) {
-        if (!education) {
-            return ''
-        }
+  educationSection(education, heading) {
+    if (!education) {
+      return ''
+    }
 
-        const lastSchoolIndex = education.length - 1
+    const lastSchoolIndex = education.length - 1
 
-        return source`
+    return source`
       %%% Education
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Education'}}{}
       ${education.map((school, i) => {
-            const {
-                institution = '',
-                studyType,
-                area,
-                gpa = '',
-                location = '',
-                startDate = '',
-                endDate = ''
-            } = school
+        const {
+          institution = '',
+          studyType,
+          area,
+          gpa = '',
+          location = '',
+          startDate = '',
+          endDate = ''
+        } = school
 
-            let degreeLine = ''
-            let nameLine = ''
+        let degreeLine = ''
+        let nameLine = ''
 
-            if (studyType && area) {
-                degreeLine = `${studyType} ${area}`
-            } else if (studyType || area) {
-                degreeLine = studyType || area
-            }
+        if (studyType && area) {
+          degreeLine = `${studyType} ${area}`
+        } else if (studyType || area) {
+          degreeLine = studyType || area
+        }
 
-            let dateRange = ''
+        let dateRange = ''
 
-            if (startDate && endDate) {
-                dateRange = `${startDate} - ${endDate}`
-            } else if (startDate) {
-                dateRange = `${startDate} - Present`
-            } else {
-                dateRange = endDate
-            }
+        if (startDate && endDate) {
+          dateRange = `${startDate} - ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} - Present`
+        } else {
+          dateRange = endDate
+        }
 
-            if (institution && location) {
-                nameLine += `${institution}, ${location}`
-            } else if (institution || location) {
-                nameLine = institution || location
-            }
+        if (institution && location) {
+          nameLine += `${institution}, ${location}`
+        } else if (institution || location) {
+          nameLine = institution || location
+        }
 
-            if (gpa) {
-                nameLine += ` ${gpa}`
-            }
+        if (gpa) {
+          nameLine += ` ${gpa}`
+        }
 
-            return stripIndent`
+        return stripIndent`
           \\EducationEntry
             {${degreeLine}}
             {${dateRange || ''}}
             {${nameLine}}
             ${i < lastSchoolIndex ? '\\sepspace' : ''}
         `
-        })}
+      })}
     `
-    },
+  },
 
-    workSection(work, heading) {
-        if (!work) {
-            return ''
-        }
+  workSection(work, heading) {
+    if (!work) {
+      return ''
+    }
 
-        const lastJobIndex = work.length - 1
+    const lastJobIndex = work.length - 1
 
-        return source`
+    return source`
       %%% Work experience
       %%% ------------------------------------------------------------
 
       \\NewPart{${heading || 'Experience'}}{}
 
       ${work.map((job, i) => {
-            const {
-                company,
-                position,
-                location,
-                startDate,
-                endDate,
-                highlights
-            } = job
+        const {
+          company,
+          position,
+          location,
+          startDate,
+          endDate,
+          highlights
+        } = job
 
-            const nameLine = [company, location].filter(Boolean).join(', ')
-            let dateRange = ''
-            let dutyLines = ''
+        const nameLine = [company, location].filter(Boolean).join(', ')
+        let dateRange = ''
+        let dutyLines = ''
 
-            if (startDate && endDate) {
-                dateRange = `${startDate} - ${endDate}`
-            } else if (startDate) {
-                dateRange = `${startDate} - Present`
-            } else {
-                dateRange = endDate
-            }
+        if (startDate && endDate) {
+          dateRange = `${startDate} - ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} - Present`
+        } else {
+          dateRange = endDate
+        }
 
-            if (highlights) {
-                dutyLines = source`
+        if (highlights) {
+          dutyLines = source`
             \\begin{itemize} \\itemsep -1pt
               ${highlights.map(duty => `\\item ${duty}`)}
             \\end{itemize}
           `
-            }
+        }
 
-            return stripIndent`
+        return stripIndent`
           \\WorkEntry
             {${position || ''}}
             {${dateRange || ''}}
@@ -158,78 +160,78 @@ const generator: template10Generator = {
             {${dutyLines}}
             ${i < lastJobIndex ? '\\sepspace' : ''}
         `
-        })}
+      })}
     `
-    },
+  },
 
-    skillsSection(skills, heading) {
-        if (!skills) {
-            return ''
-        }
+  skillsSection(skills, heading) {
+    if (!skills) {
+      return ''
+    }
 
-        return source`
+    return source`
       %%% Skills
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Skills'}}{}
       ${skills.map(skill => {
-            const { name, keywords = [] } = skill
-            return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}\\sepspace`
-        })}
+        const { name, keywords = [] } = skill
+        return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}\\sepspace`
+      })}
     `
-    },
+  },
 
-    projectsSection(projects, heading) {
-        if (!projects) {
-            return ''
-        }
+  projectsSection(projects, heading) {
+    if (!projects) {
+      return ''
+    }
 
-        const lastProjectIndex = projects.length - 1
+    const lastProjectIndex = projects.length - 1
 
-        return source`
+    return source`
       %%% Projects
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Projects'}}{}
 
       ${projects.map((project, i) => {
-            const { name, description, keywords = [], url } = project
+        const { name, description, keywords = [], url } = project
 
-            return stripIndent`
+        return stripIndent`
           \\ProjectEntry{${name || ''}}{${url || ''}}
           {${keywords.join(', ')}}
           {${description || ''}}
           ${i < lastProjectIndex ? '\\sepspace' : ''}
         `
-        })}
+      })}
     `
-    },
+  },
 
-    awardsSection(awards, heading) {
-        if (!awards) {
-            return ''
-        }
+  awardsSection(awards, heading) {
+    if (!awards) {
+      return ''
+    }
 
-        const lastAwardIndex = awards.length - 1
+    const lastAwardIndex = awards.length - 1
 
-        return source`
+    return source`
       %%% Awards
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Awards'}}{}
 
       ${awards.map((award, i) => {
-            const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award
 
-            return stripIndent`
+        return stripIndent`
           \\AwardEntry{${title || ''}}{${awarder || ''}}
           {${date || ''}}
           {${summary || ''}}
           ${i < lastAwardIndex ? '\\sepspace' : ''}
         `
-        })}
+      })}
     `
-    },
+  },
 
-    resumeHeader() {
-        return stripIndent`
+  resumeHeader() {
+    return stripIndent`
       \\usepackage[english]{babel}
       \\usepackage[utf8]{inputenc}
       \\usepackage[T1]{fontenc}
@@ -289,7 +291,7 @@ const generator: template10Generator = {
 
       \\newcommand{\\NewPart}[1]{\\section*{\\uppercase{#1}}}
         
-      \\newcommand{\\ProfileSummarysEntry}[1]{         % Similar to \\EducationEntry
+      \\newcommand{\\ProfileSummaryEntry}[1]{         % Similar to \\EducationEntry
           \\vspace*{-5pt}
           \\noindent \\small #1 \\par}
             
@@ -345,45 +347,45 @@ const generator: template10Generator = {
           \\noindent \\small #4 % Description
           \\normalsize \\par}
     `
-    }
+  }
 }
 
 function template10(values: SanitizedValues) {
-    const { headings = {} } = values
+  const { headings = {} } = values
 
-    return stripIndent`
+  return stripIndent`
     \\documentclass[fontsize=11pt]{article}
     ${generator.resumeHeader()}
     \\begin{document}
     ${values.sections
-        .map(section => {
-            switch (section) {
-                case 'profile':
-                    return generator.profileSection(values.basics)
+      .map(section => {
+        switch (section) {
+          case 'profile':
+            return generator.profileSection(values.basics)
 
-                case 'education':
-                    return generator.educationSection(
-                        values.education,
-                        headings.education
-                    )
+          case 'education':
+            return generator.educationSection(
+              values.education,
+              headings.education
+            )
 
-                case 'work':
-                    return generator.workSection(values.work, headings.work)
+          case 'work':
+            return generator.workSection(values.work, headings.work)
 
-                case 'skills':
-                    return generator.skillsSection(values.skills, headings.skills)
+          case 'skills':
+            return generator.skillsSection(values.skills, headings.skills)
 
-                case 'projects':
-                    return generator.projectsSection(values.projects, headings.projects)
+          case 'projects':
+            return generator.projectsSection(values.projects, headings.projects)
 
-                case 'awards':
-                    return generator.awardsSection(values.awards, headings.awards)
-                
-                default:
-                    return ''
-            }
-        })
-        .join('\n')}
+          case 'awards':
+            return generator.awardsSection(values.awards, headings.awards)
+
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
     ${WHITESPACE}
     \\end{document}
   `

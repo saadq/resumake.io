@@ -5,12 +5,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Section from './Section'
-import LabeledInput, {Input, Label} from '../fragments/LabeledInput'
-import {Icon, RoundButton} from "../../../../common/components";
-import type {FormValues} from "../../types";
-import type {State} from "../../../../app/types";
-import {addProfileSummary, removeProfileSummary} from "../../actions";
-import styled from "styled-components";
+import LabeledInput, { Input, Label } from '../fragments/LabeledInput'
+import { Icon, RoundButton } from '../../../../common/components'
+import type { FormValues } from '../../types'
+import type { State } from '../../../../app/types'
+import { addProfileSummary, removeProfileSummary } from '../../actions'
+import styled from 'styled-components'
 
 const Row = styled.div`
   display: flex;
@@ -34,13 +34,19 @@ const MiniInput = Input.extend`
 `
 
 type Props = {
-    basics: $PropertyType<FormValues, 'basics'>,
-    addProfileSummary: () => void,
-    removeProfileSummary: () => void
+  basics: $PropertyType<FormValues, 'basics'>,
+  selectedTemplate: $PropertyType<FormValues, 'selectedTemplate'>,
+  addProfileSummary: () => void,
+  removeProfileSummary: () => void
 }
 
-function Profile({ basics, addProfileSummary, removeProfileSummary }: Props) {
-  const { summarys } = basics
+function Profile({
+  basics,
+  selectedTemplate,
+  addProfileSummary,
+  removeProfileSummary
+}: Props) {
+  const { summaries } = basics
   return (
     <Section heading="Your Personal Info">
       <LabeledInput
@@ -68,48 +74,51 @@ function Profile({ basics, addProfileSummary, removeProfileSummary }: Props) {
         label="Link"
         placeholder="mycoolportfolio.com/myname"
       />
-        <Label>Summarys</Label>
-        {summarys.map((summary, i) => (
-            <Row key={i}>
-                <MiniInput
-                    type="text"
-                    name={`basics.summarys[${i}]`}
-                    placeholder="Experienced Regional Manager with a demonstrated history of working in the paper supply industry."
-                    component="input"
-                />
-                <ButtonRow hidden={i !== summarys.length - 1}>
-                    <RoundButton
-                        inverted
-                        disabled={i !== summarys.length - 1}
-                        type="button"
-                        onClick={() => addProfileSummary()}
-                    >
-                        <Icon type="add" />
-                    </RoundButton>
-                    <RoundButton
-                        inverted
-                        disabled={summarys.length === 1}
-                        type="button"
-                        onClick={() => removeProfileSummary()}
-                    >
-                        <Icon type="remove" />
-                    </RoundButton>
-                </ButtonRow>
-            </Row>
-        ))}
+      {selectedTemplate === 10 && [
+        <Label>Summaries</Label>,
+        summaries.map((summary, i) => (
+          <Row key={i}>
+            <MiniInput
+              type="text"
+              name={`basics.summaries[${i}]`}
+              placeholder="Experienced Regional Manager with a demonstrated history of working in the paper supply industry."
+              component="input"
+            />
+            <ButtonRow hidden={i !== summaries.length - 1}>
+              <RoundButton
+                inverted
+                disabled={i !== summaries.length - 1}
+                type="button"
+                onClick={() => addProfileSummary()}
+              >
+                <Icon type="add" />
+              </RoundButton>
+              <RoundButton
+                inverted
+                disabled={summaries.length === 1}
+                type="button"
+                onClick={() => removeProfileSummary()}
+              >
+                <Icon type="remove" />
+              </RoundButton>
+            </ButtonRow>
+          </Row>
+        ))
+      ]}
     </Section>
   )
 }
 
 const mapActions = {
-    addProfileSummary,
-    removeProfileSummary
+  addProfileSummary,
+  removeProfileSummary
 }
 
 function mapState(state: State) {
-    return {
-        basics: state.form.resume.values.basics
-    }
+  return {
+    basics: state.form.resume.values.basics,
+    selectedTemplate: state.form.resume.values.selectedTemplate
+  }
 }
 
 export default connect(mapState, mapActions)(Profile)

@@ -25,7 +25,7 @@ const initialState = {
       location: {
         address: ''
       },
-      summarys: ['']
+      summaries: ['']
     },
     education: [
       {
@@ -150,14 +150,14 @@ function form(state: FormState = initialState, action: Action): FormState {
           ...state.values,
           basics: {
             ...state.values.basics,
-            summarys: [...state.values.basics.summarys, '']
+            summaries: [...state.values.basics.summaries, '']
           }
         }
       }
     }
 
     case 'REMOVE_PROFILE_SUMMARY': {
-      if (state.values.basics.summarys.length <= 1) {
+      if (state.values.basics.summaries.length <= 1) {
         return state
       }
 
@@ -165,9 +165,9 @@ function form(state: FormState = initialState, action: Action): FormState {
         ...state,
         values: {
           ...state.values,
-          basics:{
+          basics: {
             ...state.values.basics,
-            summarys: state.values.basics.summarys.slice(0, -1)
+            summaries: state.values.basics.summaries.slice(0, -1)
           }
         }
       }

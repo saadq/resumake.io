@@ -11,7 +11,7 @@ import { Button } from '../../../../common/components'
 import { colors } from '../../../../common/theme'
 import { selectTemplate } from '../../actions'
 import type { State as ReduxState } from '../../../../app/types'
-import {naturalCompare} from "../../../../common/utils";
+import { naturalCompare } from '../../../../common/utils'
 
 const Grid = styled.div`
   display: grid;
@@ -71,7 +71,10 @@ type State = {
 }
 
 const ctx = require.context('../../assets/img', true)
-const images = ctx.keys().sort(naturalCompare).map(ctx)
+const images = ctx
+  .keys()
+  .sort(naturalCompare)
+  .map(ctx)
 
 class Templates extends Component<Props, State> {
   state = {

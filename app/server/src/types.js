@@ -27,7 +27,7 @@ type Basics = {
   location?: {
     address?: string
   },
-  summarys?: Array<string>
+  summaries?: Array<string>
 }
 
 type School = {

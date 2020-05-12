@@ -12,7 +12,7 @@ import template6 from './template6'
 import template7 from './template7'
 import template8 from './template8'
 import template9 from './template9'
-import template10 from "./template10";
+import template10 from './template10'
 import {
   TEMPLATE1,
   TEMPLATE2,

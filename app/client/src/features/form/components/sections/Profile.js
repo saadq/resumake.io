@@ -74,37 +74,39 @@ function Profile({
         label="Link"
         placeholder="mycoolportfolio.com/myname"
       />
-      {selectedTemplate === 10 && [
-        <Label>Summaries</Label>,
-        summaries.map((summary, i) => (
-          <Row key={i}>
-            <MiniInput
-              type="text"
-              name={`basics.summaries[${i}]`}
-              placeholder="Experienced Regional Manager with a demonstrated history of working in the paper supply industry."
-              component="input"
-            />
-            <ButtonRow hidden={i !== summaries.length - 1}>
-              <RoundButton
-                inverted
-                disabled={i !== summaries.length - 1}
-                type="button"
-                onClick={() => addProfileSummary()}
-              >
-                <Icon type="add" />
-              </RoundButton>
-              <RoundButton
-                inverted
-                disabled={summaries.length === 1}
-                type="button"
-                onClick={() => removeProfileSummary()}
-              >
-                <Icon type="remove" />
-              </RoundButton>
-            </ButtonRow>
-          </Row>
-        ))
-      ]}
+      {selectedTemplate === 10 && (
+        <React.Fragment>
+          <Label>Summaries</Label>
+          {summaries.map((summary, i) => (
+            <Row key={i}>
+              <MiniInput
+                type="text"
+                name={`basics.summaries[${i}]`}
+                placeholder="Experienced Regional Manager with a demonstrated history of working in the paper supply industry."
+                component="input"
+              />
+              <ButtonRow hidden={i !== summaries.length - 1}>
+                <RoundButton
+                  inverted
+                  disabled={i !== summaries.length - 1}
+                  type="button"
+                  onClick={() => addProfileSummary()}
+                >
+                  <Icon type="add" />
+                </RoundButton>
+                <RoundButton
+                  inverted
+                  disabled={summaries.length === 1}
+                  type="button"
+                  onClick={() => removeProfileSummary()}
+                >
+                  <Icon type="remove" />
+                </RoundButton>
+              </ButtonRow>
+            </Row>
+          ))}
+        </React.Fragment>
+      )}
     </Section>
   )
 }

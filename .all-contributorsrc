@@ -188,6 +188,15 @@
         "design",
         "ideas"
       ]
+    },
+    {
+      "login": "rayspock",
+      "name": "Ray",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19812545?v=4",
+      "profile": "https://twitter.com/rayspock675",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github"

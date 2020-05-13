@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { darkTheme } from '../../../common/theme'
 
 const Wrapper = styled.div`
-  background: blue;
+  background: ${darkTheme.lightBlack};
   width: 45%;
   height: 100vh;
 `

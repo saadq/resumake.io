@@ -84,6 +84,18 @@ function removeSchool(): Action {
   }
 }
 
+function addProfileSummary(): Action {
+  return {
+    type: 'ADD_PROFILE_SUMMARY'
+  }
+}
+
+function removeProfileSummary(): Action {
+  return {
+    type: 'REMOVE_PROFILE_SUMMARY'
+  }
+}
+
 function addJob(): Action {
   return {
     type: 'ADD_JOB'
@@ -182,6 +194,8 @@ export {
   selectTemplate,
   addSchool,
   removeSchool,
+  addProfileSummary,
+  removeProfileSummary,
   addJob,
   removeJob,
   addJobHighlight,

@@ -11,6 +11,7 @@ const TEMPLATE6 = 6
 const TEMPLATE7 = 7
 const TEMPLATE8 = 8
 const TEMPLATE9 = 9
+const TEMPLATE10 = 10
 
 const NEWLINE = '\\\\'
 const WHITESPACE = '\\ '
@@ -25,6 +26,7 @@ export {
   TEMPLATE7,
   TEMPLATE8,
   TEMPLATE9,
+  TEMPLATE10,
   NEWLINE,
   WHITESPACE
 }

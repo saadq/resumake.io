@@ -56,7 +56,7 @@ const ComicImage = styled.img`
 
 const ComicCite = styled.cite`
   margin: 1.5em 0;
-  font-size: .85em;
+  font-size: 0.85em;
   font-style: normal;
 `
 
@@ -66,7 +66,8 @@ const ButtonContainer = styled.div`
 `
 
 const Button = PrimaryButton.extend`
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;

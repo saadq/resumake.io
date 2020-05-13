@@ -24,7 +24,8 @@ const initialState = {
       website: '',
       location: {
         address: ''
-      }
+      },
+      summaries: ['']
     },
     education: [
       {
@@ -138,6 +139,36 @@ function form(state: FormState = initialState, action: Action): FormState {
         values: {
           ...state.values,
           education: state.values.education.slice(0, -1)
+        }
+      }
+    }
+
+    case 'ADD_PROFILE_SUMMARY': {
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          basics: {
+            ...state.values.basics,
+            summaries: [...state.values.basics.summaries, '']
+          }
+        }
+      }
+    }
+
+    case 'REMOVE_PROFILE_SUMMARY': {
+      if (state.values.basics.summaries.length <= 1) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          basics: {
+            ...state.values.basics,
+            summaries: state.values.basics.summaries.slice(0, -1)
+          }
         }
       }
     }

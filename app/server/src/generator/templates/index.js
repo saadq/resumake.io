@@ -12,6 +12,7 @@ import template6 from './template6'
 import template7 from './template7'
 import template8 from './template8'
 import template9 from './template9'
+import template10 from './template10'
 import {
   TEMPLATE1,
   TEMPLATE2,
@@ -21,7 +22,8 @@ import {
   TEMPLATE6,
   TEMPLATE7,
   TEMPLATE8,
-  TEMPLATE9
+  TEMPLATE9,
+  TEMPLATE10
 } from './constants'
 import type { SanitizedValues, TemplateData } from '../../types'
 
@@ -113,6 +115,14 @@ function getTemplateData(data: SanitizedValues): TemplateData {
     case TEMPLATE9:
       return {
         texDoc: template9(data),
+        opts: {
+          cmd: 'pdflatex'
+        }
+      }
+
+    case TEMPLATE10:
+      return {
+        texDoc: template10(data),
         opts: {
           cmd: 'pdflatex'
         }

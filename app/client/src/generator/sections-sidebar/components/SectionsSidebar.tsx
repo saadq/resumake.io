@@ -1,18 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Logo } from 'common/components/Logo'
+import { darkTheme } from 'common/theme'
 import { SideNav } from './SideNav'
-import { Logo } from '../../../common/components/Logo'
-import { darkTheme } from '../../../common/theme'
 
 const Sidebar = styled.aside`
-  background: ${darkTheme.darkGray};
+  background: ${darkTheme.lightBlack};
   box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
   width: 10%;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
   z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
 `
 
 const LogoContainer = styled.div`
@@ -23,7 +25,7 @@ export function SectionsSidebar() {
   return (
     <Sidebar>
       <LogoContainer>
-        <Logo width={125} />
+        <Logo width={110} />
       </LogoContainer>
       <SideNav />
     </Sidebar>

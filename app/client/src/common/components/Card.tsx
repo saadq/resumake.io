@@ -1,5 +1,6 @@
 import { darkTheme } from '../theme'
 import styled from 'styled-components'
+import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
 
 interface Props {
   width?: number | string
@@ -30,4 +31,8 @@ export const Card = styled.div<Props>`
   background: ${darkTheme.darkGray};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
   border-radius: 4px;
+
+  &:hover ${RemoveSubsectionButton} {
+    opacity: 1;
+  }
 `

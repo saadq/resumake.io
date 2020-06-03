@@ -1,30 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Card } from 'common/components/Card'
 import { InputWithLabel } from 'common/components/InputWithLabel'
-import { School as SchoolType } from '../../types'
-
-const Button = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  padding: 0;
-  margin: 0;
-`
+import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
 
 interface Props {
-  school: SchoolType
   removeSchool: () => void
   index: number
 }
 
-export function School({ school, removeSchool, index }: Props) {
+export function School({ removeSchool, index }: Props) {
   return (
     <Card marginTop="1.5em">
       <InputWithLabel
@@ -62,9 +46,9 @@ export function School({ school, removeSchool, index }: Props) {
         label="End Date"
         placeholder="Jun 2019"
       />
-      <Button type="button" onClick={removeSchool}>
+      <RemoveSubsectionButton type="button" onClick={removeSchool}>
         X
-      </Button>
+      </RemoveSubsectionButton>
     </Card>
   )
 }

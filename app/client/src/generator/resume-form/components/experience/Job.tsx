@@ -1,83 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-import { darken, lighten } from 'polished'
 import { Card } from 'common/components/Card'
 import { InputWithLabel } from 'common/components/InputWithLabel'
-import { Label } from 'common/components/Label'
-import { TextInput } from 'common/components/TextInput'
-import { darkTheme } from 'common/theme'
+import { InputListWithLabel } from 'common/components/InputListWithLabel'
+import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
 import { Job as JobType } from '../../types'
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5em;
-`
-
-const RemoveJobButton = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  padding: 0;
-  margin: 0;
-`
-
-const AddHighlightButton = styled.button`
-  background: ${darkTheme.gray};
-  color: ${darkTheme.primary};
-  font-size: 1.25em;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  margin-top: 0.35em;
-  padding: 0;
-  width: 2em;
-  height: 2em;
-  left: 355px;
-  top: 674px;
-  background: #2f3237;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background: ${lighten(0.1, darkTheme.gray)};
-    color: white;
-  }
-`
-
-const RemoveHighlightButton = styled.button`
-  margin: 0;
-  margin-left: 1em;
-  padding: 0 1em;
-  background: ${darken(0.05, darkTheme.gray)};
-  color: ${darkTheme.foreground};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    color: ${darkTheme.gray};
-    background: ${darkTheme.primary};
-  }
-`
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-interface RemoveHighlight {
-  jobIndex: number
-  highlightIndex: number
-}
 
 interface Props {
   job: JobType
@@ -121,28 +47,19 @@ export function Job({
         label="End Date"
         placeholder="May 2017 / Present / Etc."
       />
-      <Label>Highlights</Label>
-      {job.highlights.map((highlight, highlightIndex) => (
-        <Row key={highlightIndex}>
-          <TextInput
-            name={`work[${index}].highlights[${highlightIndex}]`}
-            component="input"
-          />
-          <RemoveHighlightButton
-            onClick={() => removeJobHighlight(index, highlightIndex)}
-          >
-            X
-          </RemoveHighlightButton>
-        </Row>
-      ))}
-      <ButtonWrapper>
-        <AddHighlightButton onClick={() => addJobHighlight(index)}>
-          +
-        </AddHighlightButton>
-      </ButtonWrapper>
-      <RemoveJobButton type="button" onClick={removeJob}>
+      <InputListWithLabel
+        namePrefix={`work[${index}].highlights`}
+        label="Job Responsibilities"
+        placeholder="Did stuff at company"
+        list={job.highlights}
+        addItem={() => addJobHighlight(index)}
+        removeItem={(highlightIndex: number) =>
+          removeJobHighlight(index, highlightIndex)
+        }
+      />
+      <RemoveSubsectionButton type="button" onClick={removeJob}>
         X
-      </RemoveJobButton>
+      </RemoveSubsectionButton>
     </Card>
   )
 }

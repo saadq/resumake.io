@@ -1,5 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { DropResult } from 'react-beautiful-dnd'
+import { DraggableList } from 'common/components/DraggableList'
+import { DraggableItem } from 'common/components/DraggableItem'
 import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Project } from './Project'
@@ -28,18 +31,32 @@ export function ProjectsSection() {
     dispatch(formActions.removeProjectKeyword({ projectIndex, keywordIndex }))
   }
 
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+
+    const startIndex = result.source.index
+    const endIndex = result.destination.index
+    dispatch(formActions.swapProjectsOrder({ startIndex, endIndex }))
+  }
+
   return (
     <FormSection title="Projects">
-      {projects.map((project, i) => (
-        <Project
-          project={project}
-          removeProject={removeProject(i)}
-          addProjectKeyword={addProjectKeyword}
-          removeProjectKeyword={removeProjectKeyword}
-          index={i}
-          key={`project${i}`}
-        />
-      ))}
+      <DraggableList onDragEnd={onDragEnd}>
+        {projects.map((project, i) => (
+          <DraggableItem key={`draggable-project-${i}`} index={i}>
+            <Project
+              project={project}
+              removeProject={removeProject(i)}
+              addProjectKeyword={addProjectKeyword}
+              removeProjectKeyword={removeProjectKeyword}
+              index={i}
+              key={`project${i}`}
+            />
+          </DraggableItem>
+        ))}
+      </DraggableList>
       <Button
         type="button"
         onClick={addProject}

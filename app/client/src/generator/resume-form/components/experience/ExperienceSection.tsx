@@ -1,5 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { DropResult } from 'react-beautiful-dnd'
+import { DraggableList } from 'common/components/DraggableList'
+import { DraggableItem } from 'common/components/DraggableItem'
 import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Job } from './Job'
@@ -28,18 +31,32 @@ export function ExperienceSection() {
     dispatch(formActions.removeJobHighlight({ jobIndex, highlightIndex }))
   }
 
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+
+    const startIndex = result.source.index
+    const endIndex = result.destination.index
+    dispatch(formActions.swapJobsOrder({ startIndex, endIndex }))
+  }
+
   return (
     <FormSection title="Experience">
-      {work.map((job, i) => (
-        <Job
-          job={job}
-          removeJob={removeJob(i)}
-          addJobHighlight={addJobHighlight}
-          removeJobHighlight={removeJobHighlight}
-          index={i}
-          key={`job${i}`}
-        />
-      ))}
+      <DraggableList onDragEnd={onDragEnd}>
+        {work.map((job, i) => (
+          <DraggableItem key={`draggable-job-${i}`} index={i}>
+            <Job
+              job={job}
+              removeJob={removeJob(i)}
+              addJobHighlight={addJobHighlight}
+              removeJobHighlight={removeJobHighlight}
+              index={i}
+              key={`job${i}`}
+            />
+          </DraggableItem>
+        ))}
+      </DraggableList>
       <Button
         type="button"
         onClick={addJob}

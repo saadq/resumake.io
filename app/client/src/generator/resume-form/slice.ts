@@ -13,10 +13,13 @@ import {
 type ResumeFormState = FormState['resume']
 
 const initialState: ResumeFormState = {
-  values: defaultFormValues,
+  values: { ...defaultFormValues },
   registeredFields: []
 }
 
+// TODO: Refactor these reducers to not be so repetitive
+// i.e. instead of `swapAwardsOrder`/`swapSchoolsOrder`/etc.
+// there should be one `swapSubsectionOrder` action
 const formSlice = createSlice({
   name: 'resume',
   initialState,
@@ -28,12 +31,28 @@ const formSlice = createSlice({
       const indexToRemove = action.payload
       state.values.education.splice(indexToRemove, 1)
     },
+    swapSchoolsOrder(
+      state: ResumeFormState,
+      action: PayloadAction<{ startIndex: number; endIndex: number }>
+    ) {
+      const { startIndex, endIndex } = action.payload
+      const [removed] = state.values.education.splice(startIndex, 1)
+      state.values.education.splice(endIndex, 0, removed)
+    },
     addJob(state: ResumeFormState, action: PayloadAction) {
       state.values.work.push(emptyJob)
     },
     removeJob(state: ResumeFormState, action: PayloadAction<number>) {
       const indexToRemove = action.payload
       state.values.work.splice(indexToRemove, 1)
+    },
+    swapJobsOrder(
+      state: ResumeFormState,
+      action: PayloadAction<{ startIndex: number; endIndex: number }>
+    ) {
+      const { startIndex, endIndex } = action.payload
+      const [removed] = state.values.work.splice(startIndex, 1)
+      state.values.work.splice(endIndex, 0, removed)
     },
     addJobHighlight(state: ResumeFormState, action: PayloadAction<number>) {
       const jobIndex = action.payload
@@ -64,12 +83,28 @@ const formSlice = createSlice({
       const { skillIndex, keywordIndex } = action.payload
       state.values.skills[skillIndex].keywords.splice(keywordIndex, 1)
     },
+    swapSkillsOrder(
+      state: ResumeFormState,
+      action: PayloadAction<{ startIndex: number; endIndex: number }>
+    ) {
+      const { startIndex, endIndex } = action.payload
+      const [removed] = state.values.skills.splice(startIndex, 1)
+      state.values.skills.splice(endIndex, 0, removed)
+    },
     addProject(state: ResumeFormState, action: PayloadAction) {
       state.values.projects.push(emptyProject)
     },
     removeProject(state: ResumeFormState, action: PayloadAction<number>) {
       const indexToRemove = action.payload
       state.values.projects.splice(indexToRemove, 1)
+    },
+    swapProjectsOrder(
+      state: ResumeFormState,
+      action: PayloadAction<{ startIndex: number; endIndex: number }>
+    ) {
+      const { startIndex, endIndex } = action.payload
+      const [removed] = state.values.projects.splice(startIndex, 1)
+      state.values.projects.splice(endIndex, 0, removed)
     },
     addProjectKeyword(state: ResumeFormState, action: PayloadAction<number>) {
       const jobIndex = action.payload
@@ -88,6 +123,14 @@ const formSlice = createSlice({
     removeAward(state: ResumeFormState, action: PayloadAction<number>) {
       const indexToRemove = action.payload
       state.values.awards.splice(indexToRemove, 1)
+    },
+    swapAwardsOrder(
+      state: ResumeFormState,
+      action: PayloadAction<{ startIndex: number; endIndex: number }>
+    ) {
+      const { startIndex, endIndex } = action.payload
+      const [removed] = state.values.awards.splice(startIndex, 1)
+      state.values.awards.splice(endIndex, 0, removed)
     }
   }
 })

@@ -1,30 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Card } from 'common/components/Card'
 import { InputWithLabel } from 'common/components/InputWithLabel'
-import { Award as AwardType } from '../../types'
-
-const Button = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  padding: 0;
-  margin: 0;
-`
+import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
 
 interface Props {
-  award: AwardType
   removeAward: () => void
   index: number
 }
 
-export function Award({ award, removeAward, index }: Props) {
+export function Award({ removeAward, index }: Props) {
   return (
     <Card marginTop="1.5em">
       <InputWithLabel
@@ -47,9 +31,9 @@ export function Award({ award, removeAward, index }: Props) {
         label="Summary"
         placeholder="Recognized for creating the most awesome project at a hackathon."
       />
-      <Button type="button" onClick={removeAward}>
+      <RemoveSubsectionButton type="button" onClick={removeAward}>
         X
-      </Button>
+      </RemoveSubsectionButton>
     </Card>
   )
 }

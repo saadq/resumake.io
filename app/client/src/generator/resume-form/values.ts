@@ -1,6 +1,19 @@
-import { FormValues } from './types'
+import { Section } from './types/sections'
+import {
+  FormValues,
+  Headings,
+  Basics,
+  School,
+  Job,
+  Project,
+  Skill,
+  Award,
+  BulletsSubsection,
+  TableSubsection,
+  ParagraphSubsection
+} from './types/form'
 
-export const emptyHeadings = {
+export const emptyHeadings: Headings = {
   work: '',
   education: '',
   skills: '',
@@ -8,7 +21,7 @@ export const emptyHeadings = {
   awards: ''
 }
 
-export const emptyProfile = {
+export const emptyProfile: Basics = {
   name: '',
   email: '',
   phone: '',
@@ -18,7 +31,7 @@ export const emptyProfile = {
   }
 }
 
-export const emptySchool = {
+export const emptySchool: School = {
   institution: '',
   location: '',
   area: '',
@@ -28,7 +41,7 @@ export const emptySchool = {
   gpa: ''
 }
 
-export const emptyJob = {
+export const emptyJob: Job = {
   company: '',
   location: '',
   position: '',
@@ -38,24 +51,54 @@ export const emptyJob = {
   highlights: ['', '', '']
 }
 
-export const emptySkill = {
+export const emptySkill: Skill = {
   name: '',
   keywords: ['', '', '']
 }
 
-export const emptyProject = {
+export const emptyProject: Project = {
   name: '',
   description: '',
   url: '',
-  keywords: ['']
+  keywords: ['', '', '']
 }
 
-export const emptyAward = {
+export const emptyAward: Award = {
   title: '',
   date: '',
   awarder: '',
   summary: ''
 }
+
+export const emptyBulletsSubsection: BulletsSubsection = {
+  topLeftText: '',
+  topRightText: '',
+  bottomLeftText: '',
+  bottomRightText: '',
+  bullets: ['', '', '']
+}
+
+export const emptyTableSubsection: TableSubsection = {
+  category: '',
+  keywords: ['', '', '']
+}
+
+export const emptyParagraphSubsection: ParagraphSubsection = {
+  topLeftText: '',
+  topRightText: '',
+  bottomLeftText: '',
+  bottomRightText: '',
+  paragraph: ''
+}
+
+export const defaultSections: Array<Section> = [
+  { name: 'profile', displayName: 'Profile', type: 'default' },
+  { name: 'education', displayName: 'Education', type: 'default' },
+  { name: 'work', displayName: 'Work', type: 'default' },
+  { name: 'skills', displayName: 'Skills', type: 'default' },
+  { name: 'projects', displayName: 'Projects', type: 'default' },
+  { name: 'awards', displayName: 'Awards', type: 'default' }
+]
 
 export const defaultFormValues: FormValues = {
   selectedTemplate: 1,
@@ -65,5 +108,6 @@ export const defaultFormValues: FormValues = {
   work: [emptyJob],
   skills: [emptySkill],
   projects: [emptyProject],
-  awards: [emptyAward]
+  awards: [emptyAward],
+  sections: [...defaultSections]
 }

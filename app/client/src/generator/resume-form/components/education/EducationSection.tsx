@@ -7,19 +7,31 @@ import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { School } from './School'
 import { formActions } from '../../slice'
+import { emptySchool } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { DefaultSectionNames } from '../../types/sections'
 
 export function EducationSection() {
   const { education } = useFormValues()
   const dispatch = useDispatch()
 
   const addSchool = () => {
-    dispatch(formActions.addSchool())
+    dispatch(
+      formActions.addSubsection({
+        sectionName: 'education',
+        emptyFields: { ...emptySchool }
+      })
+    )
   }
 
-  const removeSchool = (index: number) => {
+  const removeSchool = (indexToRemove: number) => {
     return () => {
-      dispatch(formActions.removeSchool(index))
+      dispatch(
+        formActions.removeSubsection({
+          sectionName: 'education',
+          indexToRemove
+        })
+      )
     }
   }
 
@@ -28,9 +40,12 @@ export function EducationSection() {
       return
     }
 
+    const sectionName: DefaultSectionNames = 'education'
     const startIndex = result.source.index
     const endIndex = result.destination.index
-    dispatch(formActions.swapSchoolsOrder({ startIndex, endIndex }))
+    dispatch(
+      formActions.swapSubsectionsOrder({ sectionName, startIndex, endIndex })
+    )
   }
 
   return (

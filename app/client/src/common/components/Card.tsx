@@ -2,6 +2,11 @@ import styled from 'styled-components'
 import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
 
 interface Props {
+  background?: string
+  flex?: boolean
+  flexDirection?: string
+  justifyContent?: string
+  alignItems?: string
   width?: number | string
   height?: number | string
   margin?: number | string
@@ -22,6 +27,10 @@ interface Props {
 
 export const Card = styled.div<Props>`
   position: relative;
+  display: ${(props) => (props.flex ? 'flex' : 'static')};
+  flex-direction: ${(props) => props.flexDirection ?? 'column'};
+  justify-content: ${(props) => props.justifyContent ?? 'flex-start'};
+  align-items: ${(props) => props.alignItems ?? 'stretch'};
   width: ${(props) => props.width ?? 'auto'};
   height: ${(props) => props.height ?? 'auto'};
   padding: ${(props) => props.padding ?? '1.25em 1em'};

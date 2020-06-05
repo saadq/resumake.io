@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
 import { api } from './routes/api'
 import { errorHandler } from './middleware/errorHandler'
 
@@ -6,6 +7,7 @@ const app = new Koa()
 const port = 4001
 
 app.use(errorHandler())
+app.use(bodyParser())
 app.use(api.routes())
 app.use(api.allowedMethods())
 

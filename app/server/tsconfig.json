@@ -2,7 +2,8 @@
   "compilerOptions": {
     "lib": ["es2020"],
     "module": "commonjs",
-    "target": "es2019",
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "rootDir": "src",

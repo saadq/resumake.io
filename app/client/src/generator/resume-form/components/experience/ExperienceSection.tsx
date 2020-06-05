@@ -7,28 +7,53 @@ import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Job } from './Job'
 import { formActions } from '../../slice'
+import { emptyJob } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { DefaultSectionNames } from '../../types/sections'
 
 export function ExperienceSection() {
   const { work } = useFormValues()
   const dispatch = useDispatch()
 
   const addJob = () => {
-    dispatch(formActions.addJob())
+    dispatch(
+      formActions.addSubsection({
+        sectionName: 'work',
+        emptyFields: { ...emptyJob }
+      })
+    )
   }
 
-  const removeJob = (index: number) => {
+  const removeJob = (indexToRemove: number) => {
     return () => {
-      dispatch(formActions.removeJob(index))
+      dispatch(
+        formActions.removeSubsection({
+          sectionName: 'work',
+          indexToRemove
+        })
+      )
     }
   }
 
   const addJobHighlight = (jobIndex: number) => {
-    dispatch(formActions.addJobHighlight(jobIndex))
+    dispatch(
+      formActions.addSubsectionKeyword({
+        sectionName: 'work',
+        keywordsName: 'highlights',
+        sectionIndex: jobIndex
+      })
+    )
   }
 
   const removeJobHighlight = (jobIndex: number, highlightIndex: number) => {
-    dispatch(formActions.removeJobHighlight({ jobIndex, highlightIndex }))
+    dispatch(
+      formActions.removeSubsectionKeyword({
+        sectionName: 'work',
+        keywordsName: 'highlights',
+        sectionIndex: jobIndex,
+        keywordIndexToRemove: highlightIndex
+      })
+    )
   }
 
   const onDragEnd = (result: DropResult) => {
@@ -36,9 +61,12 @@ export function ExperienceSection() {
       return
     }
 
+    const sectionName: DefaultSectionNames = 'work'
     const startIndex = result.source.index
     const endIndex = result.destination.index
-    dispatch(formActions.swapJobsOrder({ startIndex, endIndex }))
+    dispatch(
+      formActions.swapSubsectionsOrder({ sectionName, startIndex, endIndex })
+    )
   }
 
   return (

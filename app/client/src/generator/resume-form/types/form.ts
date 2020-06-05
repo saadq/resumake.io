@@ -1,4 +1,5 @@
 import { FormState as ReduxFormState } from 'redux-form'
+import { Section } from './sections'
 
 export type Template = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
@@ -59,6 +60,31 @@ export interface Award {
   summary: string
 }
 
+export interface BulletsSubsection {
+  topLeftText: string
+  topRightText: string
+  bottomLeftText: string
+  bottomRightText: string
+  bullets: Array<string>
+}
+
+export interface TableSubsection {
+  category: string
+  keywords: Array<string>
+}
+
+export interface ParagraphSubsection {
+  topLeftText: string
+  topRightText: string
+  bottomLeftText: string
+  bottomRightText: string
+  paragraph: string
+}
+
+export interface EmptyFields {
+  [key: string]: string | Array<string>
+}
+
 export interface FormValues {
   selectedTemplate: Template
   headings: Headings
@@ -68,10 +94,13 @@ export interface FormValues {
   skills: Array<Skill>
   projects: Array<Project>
   awards: Array<Award>
+  sections: Array<Section>
+  [customSection: string]: any
 }
 
 export interface FormStateWithValues extends ReduxFormState {
   values: FormValues
+  customSectionIndex: number
 }
 
 export interface FormState {

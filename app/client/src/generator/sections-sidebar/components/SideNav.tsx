@@ -1,12 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { formActions } from 'generator/resume-form/slice'
+import { useSections } from 'generator/resume-form/hooks/useSections'
 
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   font-family: 'Varela Round';
   font-size: 0.9em;
+  width: 70%;
 `
 
 const SectionsList = styled.ul`
@@ -29,30 +33,26 @@ const SectionLink = styled(NavLink)`
 `
 
 export function SideNav() {
+  const sections = useSections()
+  const dispatch = useDispatch()
+
+  const addCustomSection = () => {
+    dispatch(formActions.addCustomSection())
+  }
+
   return (
     <Nav>
       <SectionsList>
-        <ListItem>
-          <SectionLink to="/generator/profile">Profile</SectionLink>
-        </ListItem>
-        <ListItem>
-          <SectionLink to="/generator/education">Education</SectionLink>
-        </ListItem>
-        <ListItem>
-          <SectionLink to="/generator/work">Work</SectionLink>
-        </ListItem>
-        <ListItem>
-          <SectionLink to="/generator/skills">Skills</SectionLink>
-        </ListItem>
-        <ListItem>
-          <SectionLink to="/generator/projects">Projects</SectionLink>
-        </ListItem>
-        <ListItem>
-          <SectionLink to="/generator/awards">Awards</SectionLink>
-        </ListItem>
+        {sections.map((section, i) => (
+          <ListItem key={i}>
+            <SectionLink to={`/generator/${section.name.toLowerCase()}`}>
+              {section.displayName}
+            </SectionLink>
+          </ListItem>
+        ))}
       </SectionsList>
-      <button type="submit" form="resume-form">
-        Submit
+      <button type="button" onClick={addCustomSection}>
+        Custom
       </button>
     </Nav>
   )

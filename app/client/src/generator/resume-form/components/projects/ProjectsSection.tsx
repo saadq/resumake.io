@@ -7,28 +7,53 @@ import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Project } from './Project'
 import { formActions } from '../../slice'
+import { emptyProject } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { DefaultSectionNames } from '../../types/sections'
 
 export function ProjectsSection() {
   const { projects } = useFormValues()
   const dispatch = useDispatch()
 
   const addProject = () => {
-    dispatch(formActions.addProject())
+    dispatch(
+      formActions.addSubsection({
+        sectionName: 'projects',
+        emptyFields: { ...emptyProject }
+      })
+    )
   }
 
-  const removeProject = (index: number) => {
+  const removeProject = (indexToRemove: number) => {
     return () => {
-      dispatch(formActions.removeProject(index))
+      dispatch(
+        formActions.removeSubsection({
+          sectionName: 'projects',
+          indexToRemove
+        })
+      )
     }
   }
 
   const addProjectKeyword = (projectIndex: number) => {
-    dispatch(formActions.addProjectKeyword(projectIndex))
+    dispatch(
+      formActions.addSubsectionKeyword({
+        sectionName: 'projects',
+        keywordsName: 'keywords',
+        sectionIndex: projectIndex
+      })
+    )
   }
 
   const removeProjectKeyword = (projectIndex: number, keywordIndex: number) => {
-    dispatch(formActions.removeProjectKeyword({ projectIndex, keywordIndex }))
+    dispatch(
+      formActions.removeSubsectionKeyword({
+        sectionName: 'projects',
+        keywordsName: 'keywords',
+        sectionIndex: projectIndex,
+        keywordIndexToRemove: keywordIndex
+      })
+    )
   }
 
   const onDragEnd = (result: DropResult) => {
@@ -36,9 +61,12 @@ export function ProjectsSection() {
       return
     }
 
+    const sectionName: DefaultSectionNames = 'projects'
     const startIndex = result.source.index
     const endIndex = result.destination.index
-    dispatch(formActions.swapProjectsOrder({ startIndex, endIndex }))
+    dispatch(
+      formActions.swapSubsectionsOrder({ sectionName, startIndex, endIndex })
+    )
   }
 
   return (

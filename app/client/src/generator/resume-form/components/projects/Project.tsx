@@ -3,7 +3,7 @@ import { Card } from 'common/components/Card'
 import { InputWithLabel } from 'common/components/InputWithLabel'
 import { InputListWithLabel } from 'common/components/InputListWithLabel'
 import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
-import { Project as ProjectType } from '../../types'
+import { Project as ProjectType } from '../../types/form'
 
 interface Props {
   project: ProjectType

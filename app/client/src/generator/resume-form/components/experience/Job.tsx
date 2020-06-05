@@ -3,7 +3,7 @@ import { Card } from 'common/components/Card'
 import { InputWithLabel } from 'common/components/InputWithLabel'
 import { InputListWithLabel } from 'common/components/InputListWithLabel'
 import { RemoveSubsectionButton } from 'common/components/RemoveSubsectionButton'
-import { Job as JobType } from '../../types'
+import { Job as JobType } from '../../types/form'
 
 interface Props {
   job: JobType

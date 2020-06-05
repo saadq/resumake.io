@@ -8,7 +8,10 @@ import { ExperienceSection } from './experience/ExperienceSection'
 import { ProjectsSection } from './projects/ProjectsSection'
 import { SkillsSection } from './skills/SkillsSection'
 import { AwardsSection } from './awards/AwardsSection'
+import { CustomSection } from './custom/CustomSection'
 import { useFormValues } from '../hooks/useFormValues'
+import { useSections } from '../hooks/useSections'
+import { Section, CustomSection as CustomSectionType } from '../types/sections'
 
 const Form = styled.form`
   background: ${(props) => props.theme.black};
@@ -20,8 +23,13 @@ const Form = styled.form`
   overflow-y: auto;
 `
 
+function isCustomSection(section: Section): section is CustomSectionType {
+  return section.type !== 'default'
+}
+
 function ResumeFormView({ handleSubmit }: InjectedFormProps) {
   const vals = useFormValues()
+  const sections = useSections()
 
   const onSubmit = () => {
     console.log(vals)
@@ -49,6 +57,15 @@ function ResumeFormView({ handleSubmit }: InjectedFormProps) {
         <Route path="/generator/skills" component={SkillsSection} />
         <Route path="/generator/projects" component={ProjectsSection} />
         <Route path="/generator/awards" component={AwardsSection} />
+        {sections
+          .filter(isCustomSection)
+          .map((customSection: CustomSectionType, i) => (
+            <Route
+              key={i}
+              path={`/generator/${customSection.name}`}
+              render={() => <CustomSection sectionInfo={customSection} />}
+            />
+          ))}
         <Route path="*" render={() => <h1>404</h1>} />
       </Switch>
     </Form>

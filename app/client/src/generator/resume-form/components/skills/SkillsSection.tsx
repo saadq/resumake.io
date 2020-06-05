@@ -7,28 +7,53 @@ import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Skill } from './Skill'
 import { formActions } from '../../slice'
+import { emptySkill } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { DefaultSectionNames } from '../../types/sections'
 
 export function SkillsSection() {
   const { skills } = useFormValues()
   const dispatch = useDispatch()
 
   const addSkill = () => {
-    dispatch(formActions.addSkill())
+    dispatch(
+      formActions.addSubsection({
+        sectionName: 'skills',
+        emptyFields: { ...emptySkill }
+      })
+    )
   }
 
-  const removeSkill = (index: number) => {
+  const removeSkill = (indexToRemove: number) => {
     return () => {
-      dispatch(formActions.removeSkill(index))
+      dispatch(
+        formActions.removeSubsection({
+          sectionName: 'skills',
+          indexToRemove
+        })
+      )
     }
   }
 
   const addSkillKeyword = (skillIndex: number) => {
-    dispatch(formActions.addSkillKeyword(skillIndex))
+    dispatch(
+      formActions.addSubsectionKeyword({
+        sectionName: 'skills',
+        keywordsName: 'keywords',
+        sectionIndex: skillIndex
+      })
+    )
   }
 
   const removeSkillKeyword = (skillIndex: number, keywordIndex: number) => {
-    dispatch(formActions.removeSkillKeyword({ skillIndex, keywordIndex }))
+    dispatch(
+      formActions.removeSubsectionKeyword({
+        sectionName: 'skills',
+        keywordsName: 'keywords',
+        sectionIndex: skillIndex,
+        keywordIndexToRemove: keywordIndex
+      })
+    )
   }
 
   const onDragEnd = (result: DropResult) => {
@@ -36,9 +61,12 @@ export function SkillsSection() {
       return
     }
 
+    const sectionName: DefaultSectionNames = 'skills'
     const startIndex = result.source.index
     const endIndex = result.destination.index
-    dispatch(formActions.swapSkillsOrder({ startIndex, endIndex }))
+    dispatch(
+      formActions.swapSubsectionsOrder({ sectionName, startIndex, endIndex })
+    )
   }
 
   return (

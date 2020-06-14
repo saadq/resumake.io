@@ -5,7 +5,7 @@ import { FormSection } from 'common/components/FormSection'
 import { DraggableList } from 'common/components/DraggableList'
 import { DraggableItem } from 'common/components/DraggableItem'
 import { Button } from 'common/components/Button'
-import { RadioButtonList } from 'common/components/RadioButtonList'
+import { SectionTypeToggler } from '../toggler/SectionTypeToggler'
 import { TableSubsection } from './TableSubsection'
 import { formActions } from '../../../slice'
 import { emptyTableSubsection } from '../../../values'
@@ -86,14 +86,7 @@ export function TableSection({ sectionInfo }: Props) {
 
   return (
     <FormSection title={sectionInfo.displayName}>
-      <RadioButtonList
-        name={`${sectionInfo.name}.type`}
-        items={[
-          { value: 'bullets', label: 'Bullets' },
-          { value: 'table', label: 'Table' },
-          { value: 'paragraph', label: 'Paragraph' }
-        ]}
-      />
+      <SectionTypeToggler />
       <DraggableList onDragEnd={onDragEnd}>
         {tableSection.map((subsection, i) => (
           <DraggableItem key={`draggable-table-${sectionInfo.name}`} index={i}>

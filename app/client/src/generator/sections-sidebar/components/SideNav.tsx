@@ -33,6 +33,10 @@ const SectionLink = styled(NavLink)`
   }
 `
 
+const AddSectionButton = styled(AddItemButton)`
+  align-self: center;
+`
+
 export function SideNav() {
   const sections = useSections()
   const dispatch = useDispatch()
@@ -52,9 +56,9 @@ export function SideNav() {
           </ListItem>
         ))}
       </SectionsList>
-      <AddItemButton type="button" onClick={addCustomSection}>
+      <AddSectionButton type="button" onClick={addCustomSection}>
         +
-      </AddItemButton>
+      </AddSectionButton>
     </Nav>
   )
 }

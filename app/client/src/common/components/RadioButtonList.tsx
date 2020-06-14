@@ -2,17 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Field } from 'redux-form'
 import { Card } from './Card'
-import { RadioButton } from './RadioButton'
 import { Label } from './Label'
 
 const Wrapper = styled.div`
   margin-top: 1.25em;
-`
-
-const RadioButtonCard = styled(Card)`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
 `
 
 const RadioPair = styled.div`

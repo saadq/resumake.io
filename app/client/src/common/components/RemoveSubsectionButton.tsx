@@ -16,6 +16,8 @@ export const RemoveSubsectionButton = styled.button`
   cursor: pointer;
   outline: none;
   border: 0;
+  background: #111314;
+  color: white;
 
   &:hover {
     background: ${(props) => props.theme.primary};

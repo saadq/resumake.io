@@ -5,7 +5,9 @@ import { FormSection } from 'common/components/FormSection'
 import { DraggableList } from 'common/components/DraggableList'
 import { DraggableItem } from 'common/components/DraggableItem'
 import { Button } from 'common/components/Button'
+import { capitalize } from 'common/utils/strings'
 import { ParagraphSubsection } from './ParagraphSubsection'
+import { SectionTypeToggler } from '../toggler/SectionTypeToggler'
 import { formActions } from '../../../slice'
 import { emptyParagraphSubsection } from '../../../values'
 import { useFormValues } from '../../../hooks/useFormValues'
@@ -14,13 +16,13 @@ import { ParagraphSubsection as ParagraphSubsectionType } from '../../../types/f
 
 interface Props {
   sectionInfo: ParagraphSectionType
+  sectionIndex: number
 }
 
-export function ParagraphSection({ sectionInfo }: Props) {
+export function ParagraphSection({ sectionInfo, sectionIndex }: Props) {
   const paragraphSection: Array<ParagraphSubsectionType> = useFormValues()[
     sectionInfo.name
   ]
-
   const dispatch = useDispatch()
 
   const addParagraphSubsection = () => {
@@ -60,11 +62,15 @@ export function ParagraphSection({ sectionInfo }: Props) {
   }
 
   return (
-    <FormSection title={sectionInfo.displayName}>
+    <FormSection
+      title={sectionInfo.displayName ?? capitalize(sectionInfo.name)}
+      inputName={`sections[${sectionIndex}].displayName`}
+    >
+      <SectionTypeToggler sectionInfo={sectionInfo} />
       <DraggableList onDragEnd={onDragEnd}>
         {paragraphSection.map((subsection, i) => (
           <DraggableItem
-            key={`draggable-bullets-${sectionInfo.name}`}
+            key={`draggable-bullets-${sectionInfo.name}-${i}`}
             index={i}
           >
             <ParagraphSubsection

@@ -18,6 +18,7 @@ export function DraggableItem({ index, children }: Props) {
           ref={draggable.innerRef}
           {...draggable.draggableProps}
           {...draggable.dragHandleProps}
+          tabIndex={-1}
         >
           {children}
         </div>

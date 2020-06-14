@@ -9,10 +9,12 @@ import { Award } from './Award'
 import { formActions } from '../../slice'
 import { emptyAward } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { useSectionInfo } from '../../hooks/useSectionInfo'
 import { DefaultSectionNames } from '../../types/sections'
 
 export function AwardsSection() {
   const { awards } = useFormValues()
+  const [awardsSection, awardsSectionIndex] = useSectionInfo('awards')
   const dispatch = useDispatch()
 
   const addAward = () => {
@@ -49,7 +51,10 @@ export function AwardsSection() {
   }
 
   return (
-    <FormSection title="Awards">
+    <FormSection
+      title={awardsSection?.displayName || 'Awards'}
+      inputName={`sections[${awardsSectionIndex}].displayName`}
+    >
       <DraggableList onDragEnd={onDragEnd}>
         {awards.map((award, i) => (
           <DraggableItem key={`draggable-award-${i}`} index={i}>

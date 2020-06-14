@@ -5,7 +5,9 @@ import { FormSection } from 'common/components/FormSection'
 import { DraggableList } from 'common/components/DraggableList'
 import { DraggableItem } from 'common/components/DraggableItem'
 import { Button } from 'common/components/Button'
+import { capitalize } from 'common/utils/strings'
 import { BulletsSubsection } from './BulletsSubsection'
+import { SectionTypeToggler } from '../toggler/SectionTypeToggler'
 import { formActions } from '../../../slice'
 import { emptyBulletsSubsection } from '../../../values'
 import { useFormValues } from '../../../hooks/useFormValues'
@@ -14,13 +16,13 @@ import { BulletsSubsection as BulletsSubsectionType } from '../../../types/form'
 
 interface Props {
   sectionInfo: BulletsSectionType
+  sectionIndex: number
 }
 
-export function BulletsSection({ sectionInfo }: Props) {
+export function BulletsSection({ sectionInfo, sectionIndex }: Props) {
   const bulletsSection: Array<BulletsSubsectionType> = useFormValues()[
     sectionInfo.name
   ]
-
   const dispatch = useDispatch()
 
   const addBulletsSubsection = () => {
@@ -81,11 +83,15 @@ export function BulletsSection({ sectionInfo }: Props) {
   }
 
   return (
-    <FormSection title={sectionInfo.displayName}>
+    <FormSection
+      title={sectionInfo.displayName ?? capitalize(sectionInfo.name)}
+      inputName={`sections[${sectionIndex}].displayName`}
+    >
+      <SectionTypeToggler sectionInfo={sectionInfo} />
       <DraggableList onDragEnd={onDragEnd}>
         {bulletsSection.map((subsection, i) => (
           <DraggableItem
-            key={`draggable-bullets-${sectionInfo.name}`}
+            key={`draggable-bullets-${sectionInfo.name}-${i}`}
             index={i}
           >
             <BulletsSubsection

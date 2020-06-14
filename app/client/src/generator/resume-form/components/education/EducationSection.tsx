@@ -9,10 +9,12 @@ import { School } from './School'
 import { formActions } from '../../slice'
 import { emptySchool } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { useSectionInfo } from '../../hooks/useSectionInfo'
 import { DefaultSectionNames } from '../../types/sections'
 
 export function EducationSection() {
   const { education } = useFormValues()
+  const [educationSection, educationSectionIndex] = useSectionInfo('education')
   const dispatch = useDispatch()
 
   const addSchool = () => {
@@ -49,7 +51,10 @@ export function EducationSection() {
   }
 
   return (
-    <FormSection title="Education">
+    <FormSection
+      title={educationSection?.displayName || 'Education'}
+      inputName={`sections[${educationSectionIndex}].displayName`}
+    >
       <DraggableList onDragEnd={onDragEnd}>
         {education.map((school, i) => (
           <DraggableItem key={`draggable-school-${i}`} index={i}>

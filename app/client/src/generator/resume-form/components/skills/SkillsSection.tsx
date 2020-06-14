@@ -9,10 +9,12 @@ import { Skill } from './Skill'
 import { formActions } from '../../slice'
 import { emptySkill } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { useSectionInfo } from '../../hooks/useSectionInfo'
 import { DefaultSectionNames } from '../../types/sections'
 
 export function SkillsSection() {
   const { skills } = useFormValues()
+  const [skillsSection, skillsSectionIndex] = useSectionInfo('skills')
   const dispatch = useDispatch()
 
   const addSkill = () => {
@@ -70,7 +72,10 @@ export function SkillsSection() {
   }
 
   return (
-    <FormSection title="Skills">
+    <FormSection
+      title={skillsSection?.displayName || 'Skills'}
+      inputName={`sections[${skillsSectionIndex}].displayName`}
+    >
       <DraggableList onDragEnd={onDragEnd}>
         {skills.map((skill, i) => (
           <DraggableItem key={`draggable-skill-${i}`} index={i}>

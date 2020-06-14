@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { formActions } from 'generator/resume-form/slice'
 import { useSections } from 'generator/resume-form/hooks/useSections'
 import { AddItemButton } from 'common/components/AddItemButton'
+import { capitalize } from 'common/utils/strings'
 
 const Nav = styled.nav`
   display: flex;
@@ -22,6 +23,9 @@ const SectionsList = styled.ul`
 
 const ListItem = styled.li`
   padding-bottom: 0.75em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const SectionLink = styled(NavLink)`
@@ -50,8 +54,8 @@ export function SideNav() {
       <SectionsList>
         {sections.map((section, i) => (
           <ListItem key={i}>
-            <SectionLink to={`/generator/${section.name.toLowerCase()}`}>
-              {section.displayName}
+            <SectionLink to={`/generator/${section.name}`}>
+              {section.displayName ?? capitalize(section.name)}
             </SectionLink>
           </ListItem>
         ))}

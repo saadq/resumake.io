@@ -5,7 +5,7 @@ import { InputWithLabel } from 'common/components/InputWithLabel'
 
 export function ProfileSection() {
   return (
-    <FormSection title="Profile">
+    <FormSection title="Profile" disableSectionRenaming>
       <Card marginTop="1.5em">
         <InputWithLabel
           name="basics.name"

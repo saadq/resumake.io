@@ -12,12 +12,11 @@ const Button = styled.button<ButtonStyleProps>`
   display: flex;
   align-items: center;
   margin: 0;
-  margin-left: 1em;
   padding: 1em 1.5em;
   background: ${darken(0.05, darkTheme.gray)};
   color: ${(props) =>
     props.active ? darkTheme.primary : darkTheme.foreground};
-  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
+  font-weight: bold;
   border: none;
   border-radius: 4px;
   cursor: pointer;

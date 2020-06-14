@@ -1,7 +1,13 @@
 import { reducer as reduxFormReducer } from 'redux-form'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FormState, EmptyFields } from './types/form'
-import { defaultFormValues, emptyTableSubsection } from './values'
+import { CustomSectionTypes } from './types/sections'
+import {
+  defaultFormValues,
+  emptyBulletsSubsection,
+  emptyTableSubsection,
+  emptyParagraphSubsection
+} from './values'
 
 type ResumeFormState = FormState['resume']
 
@@ -86,6 +92,28 @@ const formSlice = createSlice({
         displayName: `Unnamed ${state.customSectionIndex}`
       })
       state.customSectionIndex += 1
+    },
+
+    setCustomSectionType(
+      state: ResumeFormState,
+      action: PayloadAction<{
+        sectionName: string
+        sectionType: CustomSectionTypes
+      }>
+    ) {
+      const { sectionName, sectionType } = action.payload
+      const oldSection = state.values.sections.find(
+        (section) => section.name === sectionName
+      )
+      oldSection!.type = sectionType
+
+      if (sectionType === 'bullets') {
+        state.values[sectionName] = [emptyBulletsSubsection]
+      } else if (sectionType === 'table') {
+        state.values[sectionName] = [emptyTableSubsection]
+      } else if (sectionType === 'paragraph') {
+        state.values[sectionName] = [emptyParagraphSubsection]
+      }
     }
   }
 })

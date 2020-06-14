@@ -1,41 +1,54 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import {
   AiOutlineUnorderedList as BulletListIcon,
   AiOutlineTable as TableIcon,
   AiOutlineAlignLeft as ParagraphIcon
 } from 'react-icons/ai'
-import styled from 'styled-components'
-import { Card } from 'common/components/Card'
-import { Label } from 'common/components/Label'
+import { LabeledCard } from 'common/components/LabeledCard'
 import { ToggleButton } from './ToggleButton'
+import { formActions } from '../../../slice'
+import { CustomSection, CustomSectionTypes } from '../../../types/sections'
 
-const Wrapper = styled.div`
-  margin-top: 1.25em;
-`
-
-const ListLabel = Label.withComponent('span')
-
-const handleClick = () => {
-  console.log('click')
+interface Props {
+  sectionInfo: CustomSection
 }
 
-export function SectionTypeToggler() {
+export function SectionTypeToggler({ sectionInfo }: Props) {
+  const dispatch = useDispatch()
+
+  const setSectionType = (sectionType: CustomSectionTypes) => {
+    dispatch(
+      formActions.setCustomSectionType({
+        sectionName: sectionInfo.name,
+        sectionType
+      })
+    )
+  }
+
   return (
-    <Wrapper>
-      <ListLabel>Section Type</ListLabel>
-      <Card
-        flex
-        flexDirection="row"
-        justifyContent="space-around"
-        background="#111314"
-        padding="2em 1em"
+    <LabeledCard label="Section Type">
+      <ToggleButton
+        onClick={() => setSectionType('bullets')}
+        Icon={BulletListIcon}
+        active={sectionInfo.type === 'bullets'}
       >
-        <ToggleButton onClick={handleClick} active Icon={BulletListIcon}>
-          Bullets
-        </ToggleButton>
-        <ToggleButton Icon={TableIcon}>Table</ToggleButton>
-        <ToggleButton Icon={ParagraphIcon}>Paragraph</ToggleButton>
-      </Card>
-    </Wrapper>
+        Bullets
+      </ToggleButton>
+      <ToggleButton
+        onClick={() => setSectionType('table')}
+        Icon={TableIcon}
+        active={sectionInfo.type === 'table'}
+      >
+        Table
+      </ToggleButton>
+      <ToggleButton
+        onClick={() => setSectionType('paragraph')}
+        Icon={ParagraphIcon}
+        active={sectionInfo.type === 'paragraph'}
+      >
+        Paragraph
+      </ToggleButton>
+    </LabeledCard>
   )
 }

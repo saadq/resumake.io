@@ -36,7 +36,7 @@ export const Card = styled.div<Props>`
   padding: ${(props) => props.padding ?? '1.25em 1em'};
   margin-top: ${(props) => props.marginTop ?? '0'};
   margin-bottom: ${(props) => props.marginBottom ?? '0'};
-  background: ${(props) => props.theme.darkGray};
+  background: ${(props) => props.background ?? props.theme.darkGray};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
   border-radius: 4px;
 

@@ -5,8 +5,9 @@ import { FormSection } from 'common/components/FormSection'
 import { DraggableList } from 'common/components/DraggableList'
 import { DraggableItem } from 'common/components/DraggableItem'
 import { Button } from 'common/components/Button'
-import { SectionTypeToggler } from '../toggler/SectionTypeToggler'
+import { capitalize } from 'common/utils/strings'
 import { TableSubsection } from './TableSubsection'
+import { SectionTypeToggler } from '../toggler/SectionTypeToggler'
 import { formActions } from '../../../slice'
 import { emptyTableSubsection } from '../../../values'
 import { useFormValues } from '../../../hooks/useFormValues'
@@ -15,13 +16,13 @@ import { TableSubsection as TableSubsectionType } from '../../../types/form'
 
 interface Props {
   sectionInfo: TableSectionType
+  sectionIndex: number
 }
 
-export function TableSection({ sectionInfo }: Props) {
+export function TableSection({ sectionInfo, sectionIndex }: Props) {
   const tableSection: Array<TableSubsectionType> = useFormValues()[
     sectionInfo.name
   ]
-
   const dispatch = useDispatch()
 
   const addTableSubsection = () => {
@@ -85,11 +86,17 @@ export function TableSection({ sectionInfo }: Props) {
   }
 
   return (
-    <FormSection title={sectionInfo.displayName}>
-      <SectionTypeToggler />
+    <FormSection
+      title={sectionInfo.displayName ?? capitalize(sectionInfo.name)}
+      inputName={`sections[${sectionIndex}].displayName`}
+    >
+      <SectionTypeToggler sectionInfo={sectionInfo} />
       <DraggableList onDragEnd={onDragEnd}>
         {tableSection.map((subsection, i) => (
-          <DraggableItem key={`draggable-table-${sectionInfo.name}`} index={i}>
+          <DraggableItem
+            key={`draggable-table-${sectionInfo.name}-${i}`}
+            index={i}
+          >
             <TableSubsection
               namePrefix={sectionInfo.name}
               subsection={subsection}

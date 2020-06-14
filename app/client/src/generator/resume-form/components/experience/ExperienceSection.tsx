@@ -9,10 +9,12 @@ import { Job } from './Job'
 import { formActions } from '../../slice'
 import { emptyJob } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { useSectionInfo } from '../../hooks/useSectionInfo'
 import { DefaultSectionNames } from '../../types/sections'
 
 export function ExperienceSection() {
   const { work } = useFormValues()
+  const [workSection, workSectionIndex] = useSectionInfo('work')
   const dispatch = useDispatch()
 
   const addJob = () => {
@@ -70,7 +72,10 @@ export function ExperienceSection() {
   }
 
   return (
-    <FormSection title="Experience">
+    <FormSection
+      title={workSection?.displayName || 'Work'}
+      inputName={`sections[${workSectionIndex}].displayName`}
+    >
       <DraggableList onDragEnd={onDragEnd}>
         {work.map((job, i) => (
           <DraggableItem key={`draggable-job-${i}`} index={i}>

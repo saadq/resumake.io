@@ -9,10 +9,12 @@ import { Project } from './Project'
 import { formActions } from '../../slice'
 import { emptyProject } from '../../values'
 import { useFormValues } from '../../hooks/useFormValues'
+import { useSectionInfo } from '../../hooks/useSectionInfo'
 import { DefaultSectionNames } from '../../types/sections'
 
 export function ProjectsSection() {
   const { projects } = useFormValues()
+  const [projectsSection, projectsSectionIndex] = useSectionInfo('projects')
   const dispatch = useDispatch()
 
   const addProject = () => {
@@ -70,7 +72,10 @@ export function ProjectsSection() {
   }
 
   return (
-    <FormSection title="Projects">
+    <FormSection
+      title={projectsSection?.displayName || 'Projects'}
+      inputName={`sections[${projectsSectionIndex}].displayName`}
+    >
       <DraggableList onDragEnd={onDragEnd}>
         {projects.map((project, i) => (
           <DraggableItem key={`draggable-project-${i}`} index={i}>

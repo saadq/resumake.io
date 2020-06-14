@@ -1,5 +1,11 @@
 import React from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import styled from 'styled-components'
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 interface Props {
   onDragEnd: (result: DropResult) => void
@@ -11,10 +17,10 @@ export function DraggableList({ onDragEnd, children }: Props) {
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(droppable) => (
-          <div {...droppable.droppableProps} ref={droppable.innerRef}>
+          <ListContainer {...droppable.droppableProps} ref={droppable.innerRef}>
             {children}
             {droppable.placeholder}
-          </div>
+          </ListContainer>
         )}
       </Droppable>
     </DragDropContext>

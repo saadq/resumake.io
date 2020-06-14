@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { formActions } from 'generator/resume-form/slice'
 import { useSections } from 'generator/resume-form/hooks/useSections'
+import { AddItemButton } from 'common/components/AddItemButton'
 
 const Nav = styled.nav`
   display: flex;
@@ -51,9 +52,9 @@ export function SideNav() {
           </ListItem>
         ))}
       </SectionsList>
-      <button type="button" onClick={addCustomSection}>
-        Custom
-      </button>
+      <AddItemButton type="button" onClick={addCustomSection}>
+        +
+      </AddItemButton>
     </Nav>
   )
 }

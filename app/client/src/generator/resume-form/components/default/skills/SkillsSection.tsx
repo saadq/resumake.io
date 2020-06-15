@@ -6,11 +6,11 @@ import { DraggableItem } from 'common/components/DraggableItem'
 import { FormSection } from 'common/components/FormSection'
 import { Button } from 'common/components/Button'
 import { Skill } from './Skill'
-import { formActions } from '../../slice'
-import { emptySkill } from '../../values'
-import { useFormValues } from '../../hooks/useFormValues'
-import { useSectionInfo } from '../../hooks/useSectionInfo'
-import { DefaultSectionNames } from '../../types/sections'
+import { formActions } from '../../../slice'
+import { emptySkill } from '../../../values'
+import { useFormValues } from '../../../hooks/useFormValues'
+import { useSectionInfo } from '../../../hooks/useSectionInfo'
+import { DefaultSectionNames } from '../../../types/sections'
 
 export function SkillsSection() {
   const { skills } = useFormValues()

@@ -11,7 +11,7 @@ declare module 'styled-components' {
     darkGray: string
     gray: string
     lightGray: string
-    white: stirng
+    white: string
     labelText: string
   }
 }

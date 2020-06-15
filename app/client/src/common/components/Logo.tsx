@@ -5,6 +5,7 @@ interface Props {
   height?: number
 }
 
+// TODO: modify fill colors based on theme once its added to state
 export function Logo({ width }: Props) {
   return (
     <svg width={width} viewBox="0 0 108 18" fill="none">

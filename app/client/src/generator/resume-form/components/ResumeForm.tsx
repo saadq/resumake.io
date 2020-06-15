@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { reduxForm, InjectedFormProps } from 'redux-form'
 import styled from 'styled-components'
-import { darkTheme } from 'common/theme'
 import { ProfileSection } from './profile/ProfileSection'
 import { EducationSection } from './education/EducationSection'
 import { ExperienceSection } from './experience/ExperienceSection'
@@ -12,7 +11,7 @@ import { AwardsSection } from './awards/AwardsSection'
 import { useFormValues } from '../hooks/useFormValues'
 
 const Form = styled.form`
-  background: ${darkTheme.black};
+  background: ${(props) => props.theme.black};
   width: 45%;
   margin-left: 10%;
   justify-content: center;

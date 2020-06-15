@@ -10,13 +10,17 @@ interface Props {
 }
 
 export const Button = styled.button<Props>`
-  background: linear-gradient(180deg, #8a8fff 0%, #686ef3 100%);
+  background: linear-gradient(
+    180deg,
+    ${(props) => props.theme.primary} 0%,
+    ${(props) => props.theme.primaryAccent} 100%
+  );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 10px #686ef3;
   border-radius: 4px;
   border: none;
   padding: 1em 2em;
   cursor: pointer;
-  outline-color: #8a8fff;
+  outline-color: ${(props) => props.theme.primary};
   margin-top: ${(props) => props.marginTop ?? '0'};
   margin-bottom: ${(props) => props.marginBottom ?? '0'};
   margin-left: ${(props) => props.marginLeft ?? '0'};
@@ -32,8 +36,8 @@ export const Button = styled.button<Props>`
   &:hover {
     background: linear-gradient(
       180deg,
-      ${lighten(0.04, '#8a8fff')} 0%,
-      ${lighten(0.04, '#686ef3')} 100%
+      ${(props) => lighten(0.04, props.theme.primary)} 0%,
+      ${(props) => lighten(0.04, props.theme.primaryAccent)} 100%}
     );
   }
 `

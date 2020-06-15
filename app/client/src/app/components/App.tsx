@@ -7,6 +7,8 @@ import { About } from 'about/About'
 import { GlobalStyle } from './GlobalStyle'
 import { ErrorPage404 } from './ErrorPage404'
 import { createStore } from '../store'
+import { ThemeProvider } from 'styled-components'
+import { darkTheme } from 'common/theme'
 
 const store = createStore()
 
@@ -20,15 +22,17 @@ if (process.env.NODE_ENV === 'development') {
 export function App() {
   return (
     <Provider store={store}>
-      <GlobalStyle />
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/generator" component={Generator} />
-          <Route path="/about" component={About} />
-          <Route path="*" component={ErrorPage404} />
-        </Switch>
-      </Router>
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/generator" component={Generator} />
+            <Route path="/about" component={About} />
+            <Route path="*" component={ErrorPage404} />
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </Provider>
   )
 }

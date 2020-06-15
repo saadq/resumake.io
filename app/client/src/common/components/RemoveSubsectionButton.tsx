@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { darkTheme } from 'common/theme'
 
 export const RemoveSubsectionButton = styled.button`
   position: absolute;
@@ -19,7 +18,7 @@ export const RemoveSubsectionButton = styled.button`
   border: 0;
 
   &:hover {
-    background: ${darkTheme.primary};
-    color: white;
+    background: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.white};
   }
 `

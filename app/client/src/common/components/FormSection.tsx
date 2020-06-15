@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import { darkTheme } from 'common/theme'
 import { Header } from './Header'
 
 const Fieldset = styled.fieldset`
@@ -41,7 +40,7 @@ interface Props {
 export function FormSection({ title, children }: Props) {
   return (
     <Fieldset>
-      <Header background={darkTheme.black}>
+      <Header>
         <Legend>{title}</Legend>
       </Header>
       <SectionContent>{children}</SectionContent>

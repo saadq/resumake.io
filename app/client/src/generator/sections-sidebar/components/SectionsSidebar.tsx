@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Logo } from 'common/components/Logo'
-import { darkTheme } from 'common/theme'
 import { SideNav } from './SideNav'
 
 const Sidebar = styled.aside`
-  background: ${darkTheme.lightBlack};
+  background: ${(props) => props.theme.lightBlack};
   box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
   width: 10%;
   min-height: 100vh;

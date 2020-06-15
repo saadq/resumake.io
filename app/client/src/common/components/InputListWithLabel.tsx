@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { darken, lighten } from 'polished'
 import { Label } from 'common/components/Label'
 import { TextInput } from 'common/components/TextInput'
-import { darkTheme } from 'common/theme'
 
 const Row = styled.div`
   display: flex;
@@ -17,8 +16,8 @@ const ButtonWrapper = styled.div`
 `
 
 const AddItemButton = styled.button`
-  background: ${darkTheme.gray};
-  color: ${darkTheme.primary};
+  background: ${(props) => props.theme.gray};
+  color: ${(props) => props.theme.primary};
   font-size: 1.25em;
   border: none;
   border-radius: 100px;
@@ -29,15 +28,15 @@ const AddItemButton = styled.button`
   height: 2em;
   left: 355px;
   top: 674px;
-  background: #2f3237;
+  background: ${(props) => props.theme.lightGray};
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background: ${lighten(0.1, darkTheme.gray)};
-    color: white;
+    background: ${(props) => lighten(0.1, props.theme.gray)};
+    color: ${(props) => props.theme.white};
   }
 `
 
@@ -45,15 +44,15 @@ const RemoveItemButton = styled.button`
   margin: 0;
   margin-left: 1em;
   padding: 0 1em;
-  background: ${darken(0.05, darkTheme.gray)};
-  color: ${darkTheme.foreground};
+  background: ${(props) => darken(0.05, props.theme.gray)};
+  color: ${(props) => props.theme.foreground};
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    color: ${darkTheme.gray};
-    background: ${darkTheme.primary};
+    color: ${(props) => props.theme.gray};
+    background: ${(props) => props.theme.primary};
   }
 `
 

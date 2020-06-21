@@ -37,7 +37,7 @@ export const Button = styled.button<Props>`
     background: linear-gradient(
       180deg,
       ${(props) => lighten(0.04, props.theme.primary)} 0%,
-      ${(props) => lighten(0.04, props.theme.primaryAccent)} 100%}
+      ${(props) => lighten(0.04, props.theme.primaryAccent)} 100%
     );
   }
 `

@@ -4,7 +4,7 @@ import { api } from './routes/api'
 import { errorHandler } from './middleware/error-handler'
 
 const app = new Koa()
-const port = 4001
+const port = process.env.PORT || 4001
 
 app.use(errorHandler())
 app.use(bodyParser())

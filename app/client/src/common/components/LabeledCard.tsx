@@ -20,7 +20,6 @@ export function LabeledCard({ label, children }: Props) {
         flex
         flexDirection="row"
         justifyContent="space-around"
-        background="#111314"
         padding="2em 1em"
       >
         {children}

@@ -5,7 +5,7 @@ import { Middleware } from 'koa'
  * Middleware that sanitizes the request body received from the form inputs.
  */
 
-function sanitizer(): Middleware {
+export function sanitizer(): Middleware {
   return async (ctx, next) => {
     ctx.request.body = sanitize(ctx.request.body)
     await next()
@@ -92,6 +92,3 @@ function isEmptyString(val: unknown) {
 function trim(str: string): string {
   return str.trim().replace(/\s\s+/g, ' ')
 }
-
-export { sanitize }
-export default sanitizer

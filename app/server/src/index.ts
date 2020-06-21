@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import { api } from './routes/api'
-import { errorHandler } from './middleware/errorHandler'
+import { errorHandler } from './middleware/error-handler'
 
 const app = new Koa()
 const port = 4001

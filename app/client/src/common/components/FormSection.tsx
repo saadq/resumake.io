@@ -35,19 +35,7 @@ const SectionContent = styled.section`
 `
 
 const SectionNameInput = styled(TextInput)`
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px solid ${(props) => props.theme.gray};
   color: ${(props) => props.theme.primary};
-  padding-left: 0;
-  padding-top: 0;
-  padding-bottom: 0.5em;
-
-  &:focus {
-    border: none;
-    border-bottom: 1px solid ${(props) => props.theme.primary};
-  }
 `
 
 interface Props {

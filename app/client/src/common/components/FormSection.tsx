@@ -1,9 +1,7 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import { darken } from 'polished'
 import { TextInput } from 'common/components/TextInput'
 import { LabeledCard } from 'common/components/LabeledCard'
-import { darkTheme } from 'common/theme'
 import { Header } from './Header'
 
 const Fieldset = styled.fieldset`
@@ -36,8 +34,19 @@ const SectionContent = styled.section`
   font-family: Varela;
 `
 
-const Input = styled(TextInput)`
-  background: ${darken(0.05, darkTheme.gray)};
+const SectionNameInput = styled(TextInput)`
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid ${(props) => props.theme.gray};
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0.5em;
+
+  &:focus {
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.primary};
+  }
 `
 
 interface Props {
@@ -61,7 +70,11 @@ export function FormSection({
       <SectionContent>
         {disableSectionRenaming ? null : (
           <LabeledCard label="Section Name">
-            <Input name={inputName} placeholder={title} component="input" />
+            <SectionNameInput
+              name={inputName}
+              placeholder={title}
+              component="input"
+            />
           </LabeledCard>
         )}
         {children}

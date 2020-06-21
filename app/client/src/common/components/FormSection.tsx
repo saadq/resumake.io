@@ -39,6 +39,7 @@ const SectionNameInput = styled(TextInput)`
   border: none;
   border-radius: 0;
   border-bottom: 1px solid ${(props) => props.theme.gray};
+  color: ${(props) => props.theme.primary};
   padding-left: 0;
   padding-top: 0;
   padding-bottom: 0.5em;

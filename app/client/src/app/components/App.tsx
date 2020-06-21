@@ -13,8 +13,8 @@ import { darkTheme } from 'common/theme'
 const store = createStore()
 
 if (process.env.NODE_ENV === 'development') {
-  module.hot?.accept('../rootReducer', () => {
-    const newRootReducer = require('../rootReducer').default
+  module.hot?.accept('../root-reducer', () => {
+    const newRootReducer = require('../root-reducer').default
     store.replaceReducer(newRootReducer)
   })
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { reduxForm, InjectedFormProps } from 'redux-form'
 import styled from 'styled-components'
+import { previewActions } from 'generator/resume-preview/slice'
 import { ProfileSection } from './default/profile/ProfileSection'
 import { EducationSection } from './default/education/EducationSection'
 import { ExperienceSection } from './default/experience/ExperienceSection'
@@ -30,9 +32,10 @@ function isCustomSection(section: Section): section is CustomSectionType {
 function ResumeFormView({ handleSubmit }: InjectedFormProps) {
   const vals = useFormValues()
   const sections = useSections()
+  const dispatch = useDispatch()
 
   const onSubmit = () => {
-    console.log(vals)
+    dispatch(previewActions.generateResume(vals))
   }
 
   const onChange = () => {

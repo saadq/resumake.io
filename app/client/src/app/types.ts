@@ -1,5 +1,5 @@
 import { FormState } from 'generator/resume-form/types/form'
-import { rootReducer } from './rootReducer'
+import { rootReducer } from './root-reducer'
 
 type ReduxState = ReturnType<typeof rootReducer>
 

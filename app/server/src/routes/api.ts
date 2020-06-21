@@ -1,7 +1,7 @@
 import Router from '@koa/router'
 import { sanitizer } from '../middleware/sanitizer'
 
-export const api = new Router()
+export const api = new Router({ prefix: '/api' })
 
 api.use('/generate', sanitizer())
 

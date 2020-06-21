@@ -95,7 +95,6 @@ const setCustomSectionType: ActionReducer<{
     (section) => section.name === sectionName
   )
   if (!oldSection) return
-
   oldSection.type = sectionType
   if (sectionType === 'bullets') {
     state.values[sectionName] = [emptyBulletsSubsection]

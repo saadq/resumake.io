@@ -63,6 +63,7 @@ export function SideNav() {
       <AddSectionButton type="button" onClick={addCustomSection}>
         +
       </AddSectionButton>
+      <button form="resume-form">Submit</button>
     </Nav>
   )
 }

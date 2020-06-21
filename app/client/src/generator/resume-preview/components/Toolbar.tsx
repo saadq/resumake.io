@@ -1,6 +1,13 @@
 import React from 'react'
 import { Header } from 'common/components/Header'
 
-export function Toolbar() {
+interface Props {
+  prevPage: () => void
+  nextPage: () => void
+  zoomIn: () => void
+  zoomOut: () => void
+}
+
+export function Toolbar({ prevPage, nextPage, zoomIn, zoomOut }: Props) {
   return <Header accent />
 }

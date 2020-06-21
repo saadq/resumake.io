@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.foreground};
     font-family: Varela Round;
   }
 

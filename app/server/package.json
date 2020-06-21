@@ -22,6 +22,7 @@
     "@types/koa__router": "^8.0.2",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
   }
 }

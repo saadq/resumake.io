@@ -1,5 +1,5 @@
 import { reducer as reduxFormReducer } from 'redux-form'
-import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FormState, EmptyFields } from './types/form'
 import { CustomSectionTypes } from './types/sections'
 import {
@@ -11,48 +11,49 @@ import {
 
 type ResumeFormState = FormState['resume']
 
-type ActionReducer<ActionPayload = void> = CaseReducer<
-  ResumeFormState,
-  PayloadAction<ActionPayload>
->
-
 const initialState: ResumeFormState = {
   values: { ...defaultFormValues },
   customSectionIndex: 1,
   registeredFields: []
 }
 
-const addSubsection: ActionReducer<{
-  sectionName: string
-  emptyFields: EmptyFields
-}> = (state, action) => {
+function addSubsection(
+  state: ResumeFormState,
+  action: PayloadAction<{ sectionName: string; emptyFields: EmptyFields }>
+) {
   const { sectionName, emptyFields } = action.payload
   state.values[sectionName].push(emptyFields)
 }
 
-const removeSubsection: ActionReducer<{
-  sectionName: string
-  indexToRemove: number
-}> = (state, action) => {
+function removeSubsection(
+  state: ResumeFormState,
+  action: PayloadAction<{ sectionName: string; indexToRemove: number }>
+) {
   const { sectionName, indexToRemove } = action.payload
   state.values[sectionName].splice(indexToRemove, 1)
 }
 
-const addSubsectionKeyword: ActionReducer<{
-  sectionName: string
-  sectionIndex: number
-  keywordsName: string
-}> = (state, action) => {
+function addSubsectionKeyword(
+  state: ResumeFormState,
+  action: PayloadAction<{
+    sectionName: string
+    sectionIndex: number
+    keywordsName: string
+  }>
+) {
   const { sectionName, sectionIndex, keywordsName } = action.payload
   state.values[sectionName][sectionIndex][keywordsName].push('')
 }
 
-const removeSubsectionKeyword: ActionReducer<{
-  sectionName: string
-  sectionIndex: number
-  keywordsName: string
-  keywordIndexToRemove: number
-}> = (state, action) => {
+function removeSubsectionKeyword(
+  state: ResumeFormState,
+  action: PayloadAction<{
+    sectionName: string
+    sectionIndex: number
+    keywordsName: string
+    keywordIndexToRemove: number
+  }>
+) {
   const {
     sectionName,
     sectionIndex,
@@ -65,17 +66,20 @@ const removeSubsectionKeyword: ActionReducer<{
   )
 }
 
-const swapSubsectionsOrder: ActionReducer<{
-  sectionName: string
-  startIndex: number
-  endIndex: number
-}> = (state, action) => {
+function swapSubsectionsOrder(
+  state: ResumeFormState,
+  action: PayloadAction<{
+    sectionName: string
+    startIndex: number
+    endIndex: number
+  }>
+) {
   const { sectionName, startIndex, endIndex } = action.payload
   const [removed] = state.values[sectionName].splice(startIndex, 1)
   state.values[sectionName].splice(endIndex, 0, removed)
 }
 
-const addCustomSection: ActionReducer = (state, action) => {
+function addCustomSection(state: ResumeFormState, action: PayloadAction) {
   const sectionName = `custom-${state.customSectionIndex}`
   state.values[sectionName] = [emptyTableSubsection]
   state.values.sections.push({
@@ -86,10 +90,13 @@ const addCustomSection: ActionReducer = (state, action) => {
   state.customSectionIndex += 1
 }
 
-const setCustomSectionType: ActionReducer<{
-  sectionName: string
-  sectionType: CustomSectionTypes
-}> = (state, action) => {
+function setCustomSectionType(
+  state: ResumeFormState,
+  action: PayloadAction<{
+    sectionName: string
+    sectionType: CustomSectionTypes
+  }>
+) {
   const { sectionName, sectionType } = action.payload
   const oldSection = state.values.sections.find(
     (section) => section.name === sectionName

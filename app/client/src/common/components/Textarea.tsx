@@ -17,7 +17,7 @@ export const Textarea: any = styled(Field)`
   background: ${darkTheme.gray};
   border: 2px solid transparent;
   border-radius: 4px;
-  padding: 0.5em 1em;
+  padding: 1em;
   width: ${(props: Props) => props.width ?? '100%'};
   color: ${darkTheme.foreground};
   transition: 0.4s border-color ease;

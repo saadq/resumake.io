@@ -1,9 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { NavLink, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { AppState } from 'app/types'
 import { formActions } from 'generator/resume-form/slice'
-import { useSections } from 'generator/resume-form/hooks/useSections'
 import { AddItemButton } from 'common/components/AddItemButton'
 import { capitalize } from 'common/utils/strings'
 
@@ -42,17 +42,21 @@ const AddSectionButton = styled(AddItemButton)`
 `
 
 export function SideNav() {
-  const sections = useSections()
   const dispatch = useDispatch()
+  const history = useHistory()
+  const { customSectionIndex, values } = useSelector(
+    (state: AppState) => state.form.resume
+  )
 
   const addCustomSection = () => {
     dispatch(formActions.addCustomSection())
+    history.push(`/generator/custom-${customSectionIndex}`)
   }
 
   return (
     <Nav>
       <SectionsList>
-        {sections.map((section, i) => (
+        {values.sections.map((section, i) => (
           <ListItem key={i}>
             <SectionLink to={`/generator/${section.name}`}>
               {section.displayName ?? capitalize(section.name)}

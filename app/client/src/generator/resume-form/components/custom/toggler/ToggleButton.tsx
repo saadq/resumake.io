@@ -26,7 +26,7 @@ const Button = styled.button<ButtonStyleProps>`
   box-shadow: ${(props) =>
     props.active
       ? '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 10px #686ef3'
-      : 'none'};
+      : '0px 0px 8px rgba(0, 0, 0, 0.45)'};
 
   svg {
     margin-right: 4px;

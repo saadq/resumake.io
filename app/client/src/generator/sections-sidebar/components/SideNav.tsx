@@ -35,6 +35,10 @@ const SectionLink = styled(NavLink)`
   &:hover {
     text-decoration: underline;
   }
+
+  &.active {
+    color: ${(props) => props.theme.primary};
+  }
 `
 
 const AddSectionButton = styled(AddItemButton)`
@@ -58,7 +62,10 @@ export function SideNav() {
       <SectionsList>
         {values.sections.map((section, i) => (
           <ListItem key={i}>
-            <SectionLink to={`/generator/${section.name}`}>
+            <SectionLink
+              activeClassName="active"
+              to={`/generator/${section.name}`}
+            >
               {section.displayName ?? capitalize(section.name)}
             </SectionLink>
           </ListItem>

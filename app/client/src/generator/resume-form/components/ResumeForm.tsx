@@ -17,7 +17,7 @@ import { Section, CustomSection as CustomSectionType } from '../types/sections'
 
 const Form = styled.form`
   background: ${(props) => props.theme.black};
-  width: 45%;
+  width: 40%;
   margin-left: 10%;
   justify-content: center;
   align-items: center;
@@ -38,9 +38,7 @@ function ResumeFormView({ handleSubmit }: InjectedFormProps) {
     dispatch(previewActions.generateResume(vals))
   }
 
-  const onChange = () => {
-    console.log('change')
-  }
+  const onChange = () => {}
 
   return (
     <Form

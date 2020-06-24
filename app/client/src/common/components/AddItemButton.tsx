@@ -24,4 +24,8 @@ export const AddItemButton = styled.button`
     background: ${(props) => lighten(0.1, props.theme.gray)};
     color: ${(props) => props.theme.white};
   }
+
+  &:focus {
+    outline-color: ${(props) => props.theme.primary};
+  }
 `

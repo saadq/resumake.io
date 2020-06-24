@@ -43,13 +43,15 @@ export function InputListWithLabel({
             component="input"
             placeholder={placeholder}
           />
-          <RemoveItemButton onClick={() => removeItem(index)}>
+          <RemoveItemButton type="button" onClick={() => removeItem(index)}>
             X
           </RemoveItemButton>
         </Row>
       ))}
       <ButtonWrapper>
-        <AddItemButton onClick={addItem}>+</AddItemButton>
+        <AddItemButton type="button" onClick={addItem}>
+          +
+        </AddItemButton>
       </ButtonWrapper>
     </>
   )

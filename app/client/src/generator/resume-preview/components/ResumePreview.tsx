@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from 'react'
+import { useSelector } from 'react-redux'
 import { pdfjs, Document, Page } from 'react-pdf'
 import { PDFDocumentProxy } from 'pdfjs-dist'
 import styled from 'styled-components'
+import { AppState } from 'app/types'
 import { Toolbar } from './Toolbar'
 import BlankPDF from '../assets/blank.pdf'
 
@@ -10,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
 
 const Wrapper = styled.output`
   background: ${(props) => props.theme.lightBlack};
-  width: 55%;
+  width: 60%;
   min-height: 100vh;
   overflow-y: auto;
 `
@@ -19,7 +21,7 @@ const ResumePage = styled(Page)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1.5em;
+  padding: 1.5em 0;
 
   canvas {
     max-width: 95% !important;
@@ -32,6 +34,7 @@ export function ResumePreview() {
   const [scale, setScale] = useState(initialScale)
   const [pageCount, setPageCount] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
+  const { resume } = useSelector((state: AppState) => state.preview)
 
   const handleDocumentLoadSuccess = useCallback((pdf: PDFDocumentProxy) => {
     setPageCount(pdf.numPages)
@@ -61,7 +64,11 @@ export function ResumePreview() {
         zoomIn={zoomIn}
         zoomOut={zoomOut}
       />
-      <Document file={BlankPDF} onLoadSuccess={handleDocumentLoadSuccess}>
+      <Document
+        file={resume.url || BlankPDF}
+        onLoadSuccess={handleDocumentLoadSuccess}
+        loading=""
+      >
         <ResumePage
           pageNumber={pageNumber}
           scale={scale}

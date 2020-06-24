@@ -13,6 +13,10 @@ const generateResume = createAsyncThunk(
   async (formValues: FormValues) => {
     const response = await fetch('/api/generate/pdf', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/pdf'
+      },
       body: JSON.stringify(formValues)
     })
     const blob = await response.blob()
@@ -28,7 +32,6 @@ const previewSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(generateResume.pending, (state, action) => {
       state.resume.loading = true
-      state.resume.url = null
       state.resume.error = null
     })
 

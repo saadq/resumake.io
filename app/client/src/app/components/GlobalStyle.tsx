@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.foreground};
     font-family: Varela Round;
+    line-height: 1.5;
   }
 
   ::selection {

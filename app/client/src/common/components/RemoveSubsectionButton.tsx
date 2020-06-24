@@ -24,4 +24,8 @@ export const RemoveSubsectionButton = styled.button`
     background: ${(props) => props.theme.primary};
     color: ${(props) => props.theme.white};
   }
+
+  &:focus {
+    outline-color: ${(props) => props.theme.primary};
+  }
 `

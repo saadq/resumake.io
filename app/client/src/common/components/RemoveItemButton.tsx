@@ -15,4 +15,8 @@ export const RemoveItemButton = styled.button`
     color: ${(props) => props.theme.gray};
     background: ${(props) => props.theme.primary};
   }
+
+  &:focus {
+    outline-color: ${(props) => props.theme.primary};
+  }
 `

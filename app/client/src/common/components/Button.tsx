@@ -40,4 +40,8 @@ export const Button = styled.button<Props>`
       ${(props) => lighten(0.04, props.theme.primaryAccent)} 100%
     );
   }
+
+  &:focus {
+    outline-color: ${(props) => props.theme.primary};
+  }
 `

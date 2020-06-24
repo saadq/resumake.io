@@ -10,6 +10,7 @@ interface Props {
   width?: string
 }
 
+// Needed because of weird type issues with styled-components + redux-form
 export const Textarea: any = styled(Field)`
   font-family: Arial;
   resize: vertical;
@@ -17,7 +18,7 @@ export const Textarea: any = styled(Field)`
   background: ${darkTheme.gray};
   border: 2px solid transparent;
   border-radius: 4px;
-  padding: 1em;
+  padding: 0.75em 1em;
   width: ${(props: Props) => props.width ?? '100%'};
   color: ${darkTheme.foreground};
   transition: 0.4s border-color ease;

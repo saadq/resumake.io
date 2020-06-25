@@ -1,31 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { darken } from 'polished'
+import {
+  AiOutlineDownload as DownloadIcon,
+  AiOutlineZoomIn as ZoomInIcon,
+  AiOutlineZoomOut as ZoomOutIcon,
+  AiOutlinePrinter as PrintIcon
+} from 'react-icons/ai'
 import { Header } from 'common/components/Header'
+import { ToolbarButton } from './ToolbarButton'
 
 const ToolbarHeader = styled(Header)`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `
 
-const ToolbarButton = styled.button`
+const ButtonGroup = styled.div`
   display: flex;
-  align-items: center;
-  padding: 0.75em 1.5em;
-  background: ${(props) => darken(0.03, props.theme.gray)};
-  border: 0;
-  color: ${(props) => props.theme.foreground};
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.45);
-  margin-right: 4px;
-
-  &:hover {
-    color: ${(props) => props.theme.gray};
-    background: ${(props) => props.theme.primary};
-  }
 `
 
 interface Props {
@@ -38,9 +28,21 @@ interface Props {
 export function Toolbar({ prevPage, nextPage, zoomIn, zoomOut }: Props) {
   return (
     <ToolbarHeader accent>
-      <ToolbarButton>JSON</ToolbarButton>
-      <ToolbarButton>PDF</ToolbarButton>
-      <ToolbarButton>TEX</ToolbarButton>
+      <ButtonGroup>
+        <ToolbarButton Icon={DownloadIcon}>JSON</ToolbarButton>
+        <ToolbarButton Icon={DownloadIcon}>PDF</ToolbarButton>
+        <ToolbarButton Icon={DownloadIcon}>TEX</ToolbarButton>
+      </ButtonGroup>
+      <div style={{ display: 'flex' }}>
+        <div>&lt;</div>
+        <div style={{ margin: '0 1em' }}>Page 1</div>
+        <div>&gt;</div>
+      </div>
+      <ButtonGroup>
+        <ToolbarButton Icon={ZoomOutIcon} />
+        <ToolbarButton Icon={ZoomInIcon} />
+        <ToolbarButton Icon={PrintIcon} />
+      </ButtonGroup>
     </ToolbarHeader>
   )
 }

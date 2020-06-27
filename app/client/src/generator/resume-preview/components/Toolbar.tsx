@@ -12,6 +12,7 @@ import { ToolbarButton } from './ToolbarButton'
 const ToolbarHeader = styled(Header)`
   display: flex;
   justify-content: space-between;
+  padding: 1em 0.75em;
 `
 
 const ButtonGroup = styled.div`
@@ -34,13 +35,13 @@ export function Toolbar({ prevPage, nextPage, zoomIn, zoomOut }: Props) {
         <ToolbarButton Icon={DownloadIcon}>TEX</ToolbarButton>
       </ButtonGroup>
       <div style={{ display: 'flex' }}>
-        <div>&lt;</div>
+        <div onClick={prevPage}>&lt;</div>
         <div style={{ margin: '0 1em' }}>Page 1</div>
-        <div>&gt;</div>
+        <div onClick={nextPage}>&gt;</div>
       </div>
       <ButtonGroup>
-        <ToolbarButton Icon={ZoomOutIcon} />
-        <ToolbarButton Icon={ZoomInIcon} />
+        <ToolbarButton onClick={zoomOut} Icon={ZoomOutIcon} />
+        <ToolbarButton onClick={zoomIn} Icon={ZoomInIcon} />
         <ToolbarButton Icon={PrintIcon} />
       </ButtonGroup>
     </ToolbarHeader>

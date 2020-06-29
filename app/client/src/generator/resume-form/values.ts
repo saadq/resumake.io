@@ -21,7 +21,7 @@ export const emptyHeadings: Headings = {
   awards: ''
 }
 
-export const emptyProfile: Basics = {
+export const emptyBasics: Basics = {
   name: '',
   email: '',
   phone: '',
@@ -79,7 +79,7 @@ export const emptyBulletsSubsection: BulletsSubsection = {
 }
 
 export const emptyTableSubsection: TableSubsection = {
-  category: '',
+  name: '',
   keywords: ['', '', '']
 }
 
@@ -92,7 +92,7 @@ export const emptyParagraphSubsection: ParagraphSubsection = {
 }
 
 export const defaultSections: Array<Section> = [
-  { name: 'profile', displayName: 'Profile', type: 'default' },
+  { name: 'basics', displayName: 'Profile', type: 'default' },
   { name: 'education', displayName: 'Education', type: 'default' },
   { name: 'work', displayName: 'Work', type: 'default' },
   { name: 'skills', displayName: 'Skills', type: 'default' },
@@ -103,7 +103,7 @@ export const defaultSections: Array<Section> = [
 export const defaultFormValues: FormValues = {
   selectedTemplate: 1,
   headings: emptyHeadings,
-  basics: emptyProfile,
+  basics: emptyBasics,
   education: [emptySchool],
   work: [emptyJob],
   skills: [emptySkill],

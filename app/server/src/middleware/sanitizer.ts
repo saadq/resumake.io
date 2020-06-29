@@ -1,4 +1,5 @@
 import { Middleware } from 'koa'
+import { sanitize as sanitizeLatex } from 'sanitize-latex'
 
 /**
  * Middleware that sanitizes the request body received from the form inputs.
@@ -21,7 +22,7 @@ export function sanitize(obj: any = {}): any {
     return obj
       .map((val) => {
         if (val && typeof val === 'object') return sanitize(val)
-        if (typeof val === 'string') return trim(val)
+        if (typeof val === 'string') return sanitizeLatex(trim(val))
       })
       .filter((val) => !isEmpty(val))
   }
@@ -39,7 +40,7 @@ export function sanitize(obj: any = {}): any {
         copy[key] = sanitized
       }
     } else if (typeof val === 'string') {
-      copy[key] = trim(val)
+      copy[key] = sanitizeLatex(trim(val))
     } else if (val != null) {
       copy[key] = val
     }

@@ -25,7 +25,7 @@ export function TableSubsection({
   return (
     <Card marginTop="1.5em">
       <InputWithLabel
-        name={`${namePrefix}[${subsectionIndex}].category`}
+        name={`${namePrefix}[${subsectionIndex}].name`}
         label="Category"
         placeholder="Programming Languages"
       />

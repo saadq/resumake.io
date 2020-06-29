@@ -13,6 +13,7 @@ api.post('/generate/tex', async ({ request, response }) => {
 
 api.post('/generate/pdf', sanitizer(), async ({ request, response }) => {
   const tex = generateTex(request.body)
+  console.log(tex)
   const pdf = latex(tex)
   response.body = pdf
   response.type = 'application/pdf'

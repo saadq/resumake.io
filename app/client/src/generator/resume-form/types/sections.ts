@@ -1,5 +1,5 @@
 export type DefaultSectionNames =
-  | 'profile'
+  | 'basics'
   | 'education'
   | 'work'
   | 'skills'

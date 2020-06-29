@@ -59,6 +59,7 @@ export function ResumePreview() {
   return (
     <Wrapper>
       <Toolbar
+        resumeUrl={resume.url || BlankPDF}
         prevPage={prevPage}
         nextPage={nextPage}
         zoomIn={zoomIn}

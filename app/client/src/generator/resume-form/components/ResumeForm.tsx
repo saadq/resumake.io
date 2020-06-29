@@ -50,9 +50,9 @@ function ResumeFormView({ handleSubmit }: InjectedFormProps) {
         <Route
           exact
           path="/generator"
-          render={() => <Redirect to="/generator/profile" />}
+          render={() => <Redirect to="/generator/basics" />}
         />
-        <Route path="/generator/profile" component={ProfileSection} />
+        <Route path="/generator/basics" component={ProfileSection} />
         <Route path="/generator/education" component={EducationSection} />
         <Route path="/generator/work" component={ExperienceSection} />
         <Route path="/generator/skills" component={SkillsSection} />

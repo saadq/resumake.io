@@ -20,19 +20,36 @@ const ButtonGroup = styled.div`
 `
 
 interface Props {
+  resumeUrl: string
   prevPage: () => void
   nextPage: () => void
   zoomIn: () => void
   zoomOut: () => void
 }
 
-export function Toolbar({ prevPage, nextPage, zoomIn, zoomOut }: Props) {
+export function Toolbar({
+  resumeUrl,
+  prevPage,
+  nextPage,
+  zoomIn,
+  zoomOut
+}: Props) {
   return (
     <ToolbarHeader accent>
       <ButtonGroup>
-        <ToolbarButton Icon={DownloadIcon}>JSON</ToolbarButton>
-        <ToolbarButton Icon={DownloadIcon}>PDF</ToolbarButton>
-        <ToolbarButton Icon={DownloadIcon}>TEX</ToolbarButton>
+        <ToolbarButton link="" Icon={DownloadIcon}>
+          JSON
+        </ToolbarButton>
+        <ToolbarButton
+          link={resumeUrl}
+          downloadName="resume.pdf"
+          Icon={DownloadIcon}
+        >
+          PDF
+        </ToolbarButton>
+        <ToolbarButton link="" Icon={DownloadIcon}>
+          TEX
+        </ToolbarButton>
       </ButtonGroup>
       <div style={{ display: 'flex' }}>
         <div onClick={prevPage}>&lt;</div>

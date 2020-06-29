@@ -67,11 +67,7 @@ const generator: TemplateGenerator = {
     `
   },
 
-  createProfileSection(basics) {
-    if (!basics) {
-      return ''
-    }
-
+  createBasicsSection(basics) {
     const { name, email, phone, location, website } = basics
     const address = location?.address ?? ''
 
@@ -95,237 +91,64 @@ const generator: TemplateGenerator = {
     `
   },
 
-  createEducationSection(education, heading) {
-    if (!education) {
-      return ''
-    }
+  createEducationSection(education, sectionName) {
+    const paragraphSection = education.map((school) => ({
+      paragraph: school.gpa,
+      topLeftText: school.institution,
+      topRightText: school.area,
+      bottomLeftText: `${school.studyType} ${school.area}`,
+      bottomRightText: `\\hfill ${[school.startDate, school.endDate]
+        .filter(Boolean)
+        .join(' - ')}`
+    }))
 
-    return source`
-      %==== Education ====%
-      \\header{${heading || 'Education'}}
-      ${education.map((school) => {
-        const {
-          institution,
-          location,
-          studyType,
-          area,
-          gpa,
-          startDate,
-          endDate
-        } = school
-
-        let line1 = ''
-        let line2 = ''
-
-        if (institution) {
-          line1 += `\\textbf{${institution}}`
-        }
-
-        if (location) {
-          line1 += `\\hfill ${location}`
-        }
-
-        if (studyType) {
-          line2 += studyType
-        }
-
-        if (area) {
-          line2 += studyType ? ` ${area}` : `Degree in ${area}`
-        }
-
-        if (gpa) {
-          line2 += ` \\textit{GPA: ${gpa}}`
-        }
-
-        if (startDate || endDate) {
-          const gradLine = `${startDate || ''} - ${endDate || ''}`
-          line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
-        }
-
-        if (line1) {
-          line1 += '\\\\'
-        }
-
-        if (line2) {
-          line2 += '\\\\'
-        }
-
-        return stripIndent`
-          ${line1}
-          ${line2.trim()}
-          \\vspace{2mm}
-        `
-      })}
-    `
+    return this.createParagraphSection(paragraphSection, sectionName)
   },
 
   createWorkSection(jobs, sectionName) {
-    if (!jobs) {
-      return ''
-    }
+    const bulletsSection = jobs.map((job) => ({
+      bullets: job.highlights,
+      topLeftText: job.company,
+      topRightText: job.location,
+      bottomLeftText: job.position,
+      bottomRightText: `\\hfill ${[job.startDate, job.endDate]
+        .filter(Boolean)
+        .join(' - ')}`
+    }))
 
-    return source`
-      %==== Experience ====%
-      \\header{${sectionName || 'Experience'}}
-      \\vspace{1mm}
-
-      ${jobs.map((job) => {
-        const {
-          company,
-          position,
-          location,
-          startDate,
-          endDate,
-          highlights
-        } = job
-
-        let line1 = ''
-        let line2 = ''
-        let highlightLines = ''
-
-        if (company) {
-          line1 += `\\textbf{${company}}`
-        }
-
-        if (location) {
-          line1 += ` \\hfill ${location}`
-        }
-
-        if (position) {
-          line2 += `\\textit{${position}}`
-        }
-
-        if (startDate && endDate) {
-          line2 += ` \\hfill ${startDate} - ${endDate}`
-        } else if (startDate) {
-          line2 += ` \\hfill ${startDate} - Present`
-        } else if (endDate) {
-          line2 += ` \\hfill ${endDate}`
-        }
-
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
-
-        if (highlights) {
-          highlightLines = source`
-              \\vspace{-1mm}
-              \\begin{itemize} \\itemsep 1pt
-                ${highlights.map((highlight) => `\\item ${highlight}`)}
-              \\end{itemize}
-            `
-        }
-
-        return stripIndent`
-          ${line1}
-          ${line2}
-          ${highlightLines}
-        `
-      })}
-    `
+    return this.createBulletsSection(bulletsSection, sectionName)
   },
 
   createSkillsSection(skills, sectionName) {
-    if (!skills) {
-      return ''
-    }
-
-    return source`
-      \\header{${sectionName || 'Skills'}}
-      \\begin{tabular}{ l l }
-      ${skills.map((skill) => {
-        const { name, keywords = [] } = skill
-        if (name) {
-          return `${name}: & ${keywords.join(', ')} \\\\`
-        } else {
-          return `${keywords.join(', ')} \\\\`
-        }
-      })}
-      \\end{tabular}
-      \\vspace{2mm}
-    `
+    return this.createTableSection(skills, sectionName)
   },
 
-  createProjectsSection(projects, heading) {
-    if (!projects || projects.filter(Boolean).length == 0) {
-      return ''
-    }
+  createProjectsSection(projects, sectionName) {
+    const paragraphSection = projects.map((project) => ({
+      paragraph: '',
+      topLeftText: project.name,
+      topRightText: project.url,
+      bottomLeftText: project.description,
+      bottomRightText: project.keywords.join(', ')
+    }))
 
-    return source`
-      \\header{${heading || 'Projects'}}
-      ${projects.map((project) => {
-        if (!project || Object.keys(project).length === 0) {
-          return ''
-        }
-
-        const { name, description, keywords, url } = project
-
-        let line1 = ''
-        let line2 = description || ''
-
-        if (name) {
-          line1 += `{\\textbf{${name}}}`
-        }
-
-        if (keywords) {
-          line1 += ` {\\sl ${keywords.join(', ')}} `
-        }
-
-        if (url) {
-          line1 += `\\hfill ${url}`
-        }
-
-        if (line1) {
-          line1 += '\\\\'
-        }
-
-        if (line2) {
-          line2 += '\\\\'
-        }
-
-        return stripIndent`
-          ${line1}
-          ${line2}
-          \\vspace*{2mm}
-        `
-      })}
-    `
+    return this.createParagraphSection(paragraphSection, sectionName)
   },
 
-  createAwardsSection(awards, sectionNmae) {
+  createAwardsSection(awards, sectionName) {
     if (!awards) {
       return ''
     }
 
-    return source`
-      \\header{${sectionNmae || 'Awards'}}
-      ${awards.map((award) => {
-        const { title, summary, date, awarder } = award
+    const paragraphSection = awards.map((award) => ({
+      paragraph: '',
+      topLeftText: award.title,
+      topRightText: award.awarder,
+      bottomLeftText: award.summary,
+      bottomRightText: award.date
+    }))
 
-        let line1 = ''
-        let line2 = summary || ''
-
-        if (title) {
-          line1 += `\\textbf{${title}}`
-        }
-
-        if (awarder) {
-          line1 += ` \\hfill ${awarder}`
-        }
-
-        if (date) {
-          line2 += ` \\hfill ${date}`
-        }
-
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
-
-        return stripIndent`
-          ${line1}
-          ${line2}
-          \\vspace*{2mm}
-        `
-      })}
-    `
+    return this.createParagraphSection(paragraphSection, sectionName)
   },
 
   createBulletsSection(section, sectionName) {
@@ -334,7 +157,7 @@ const generator: TemplateGenerator = {
     }
 
     return source`
-      %==== Experience ====%
+      %==== ${sectionName || 'BULLETS SECTION'} ====%
       \\header{${sectionName || 'Bullets Section'}}
       \\vspace{1mm}
 
@@ -389,17 +212,14 @@ const generator: TemplateGenerator = {
   },
 
   createTableSection(section, sectionName) {
-    if (!section) {
-      return ''
-    }
-
     return source`
+      %==== ${sectionName || 'TABLE SECTION'} ====%
       \\header{${sectionName || 'Table Section'}}
       \\begin{tabular}{ l l }
       ${section.map((subsection) => {
-        const { category, keywords = [] } = subsection
-        if (category) {
-          return `${category}: & ${keywords.join(', ')} \\\\`
+        const { name, keywords = [] } = subsection
+        if (name) {
+          return `${name}: & ${keywords.join(', ')} \\\\`
         } else {
           return `${keywords.join(', ')} \\\\`
         }
@@ -410,12 +230,8 @@ const generator: TemplateGenerator = {
   },
 
   createParagraphSection(section, sectionName) {
-    if (!section) {
-      return ''
-    }
-
     return source`
-      %==== Experience ====%
+      %==== ${sectionName || 'PARAGRAPH SECTION'} ====%
       \\header{${sectionName || 'Paragraph Section'}}
       \\vspace{1mm}
 
@@ -454,7 +270,7 @@ const generator: TemplateGenerator = {
           ${line1}
           ${line2}
           \\vspace*{4pt}
-          ${paragraph}
+          ${paragraph || ''}
         `
       })}
     `
@@ -462,6 +278,7 @@ const generator: TemplateGenerator = {
 }
 
 export function template1(values: FormValues) {
+  console.log(values)
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}
@@ -480,10 +297,11 @@ export function template1(values: FormValues) {
     \\vspace*{-40pt}
 
     ${values.sections
+      .filter((section) => values[section.name] != null)
       .map((section) => {
         switch (section.name) {
-          case 'profile':
-            return generator.createProfileSection(values.basics)
+          case 'basics':
+            return generator.createBasicsSection(values.basics)
 
           case 'education':
             return generator.createEducationSection(

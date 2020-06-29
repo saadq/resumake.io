@@ -69,7 +69,7 @@ export interface BulletsSubsection {
 }
 
 export interface TableSubsection {
-  category: string
+  name: string
   keywords: Array<string>
 }
 

@@ -1,5 +1,5 @@
 export type DefaultSectionNames =
-  | 'profile'
+  | 'basics'
   | 'education'
   | 'work'
   | 'skills'
@@ -108,7 +108,7 @@ export interface BulletsSubsection {
 }
 
 export interface TableSubsection {
-  category: string
+  name: string
   keywords: Array<string>
 }
 
@@ -135,7 +135,7 @@ export interface FormValues {
 
 export interface TemplateGenerator {
   createTexDefinitions(): string
-  createProfileSection(basics: Basics): string
+  createBasicsSection(basics: Basics): string
   createWorkSection(jobs: Array<Job>, sectionName: string): string
   createEducationSection(schools: Array<School>, sectionName: string): string
   createSkillsSection(skills: Array<Skill>, sectionName: string): string

@@ -60,13 +60,6 @@ export function Toolbar({
     <ToolbarHeader accent>
       <ButtonGroup>
         <ToolbarButton
-          link={jsonUrl}
-          downloadName="resume.json"
-          Icon={DownloadIcon}
-        >
-          JSON
-        </ToolbarButton>
-        <ToolbarButton
           link={resumeUrl}
           downloadName="resume.pdf"
           Icon={DownloadIcon}
@@ -75,6 +68,13 @@ export function Toolbar({
         </ToolbarButton>
         <ToolbarButton onClick={downloadSource} Icon={DownloadIcon}>
           TEX
+        </ToolbarButton>
+        <ToolbarButton
+          link={jsonUrl}
+          downloadName="resume.json"
+          Icon={DownloadIcon}
+        >
+          JSON
         </ToolbarButton>
       </ButtonGroup>
       <Pagination>

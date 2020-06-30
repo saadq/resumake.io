@@ -1,7 +1,6 @@
 import { Section } from './types/sections'
 import {
   FormValues,
-  Headings,
   Basics,
   School,
   Job,
@@ -12,14 +11,6 @@ import {
   TableSubsection,
   ParagraphSubsection
 } from './types/form'
-
-export const emptyHeadings: Headings = {
-  work: '',
-  education: '',
-  skills: '',
-  projects: '',
-  awards: ''
-}
 
 export const emptyBasics: Basics = {
   name: '',
@@ -102,7 +93,6 @@ export const defaultSections: Array<Section> = [
 
 export const defaultFormValues: FormValues = {
   selectedTemplate: 1,
-  headings: emptyHeadings,
   basics: emptyBasics,
   education: [emptySchool],
   work: [emptyJob],

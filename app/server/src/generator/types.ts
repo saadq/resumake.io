@@ -42,14 +42,6 @@ export type Section = DefaultSection | CustomSection
 
 export type Template = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
-export interface Headings {
-  work: string
-  education: string
-  skills: string
-  projects: string
-  awards: string
-}
-
 export interface Basics {
   name: string
   email: string
@@ -122,7 +114,6 @@ export interface ParagraphSubsection {
 
 export interface FormValues {
   selectedTemplate: Template
-  headings: Headings
   basics: Basics
   work: Array<Job>
   education: Array<School>

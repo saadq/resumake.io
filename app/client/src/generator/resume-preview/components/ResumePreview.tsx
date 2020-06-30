@@ -7,7 +7,7 @@ import { AppState } from 'app/types'
 import { useFormValues } from 'generator/resume-form/hooks/useFormValues'
 import { previewActions } from '../slice'
 import { Toolbar } from './Toolbar'
-import BlankPDF from '../assets/blank.pdf'
+import BlankPdf from '../assets/blank.pdf'
 
 const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
@@ -64,19 +64,24 @@ export function ResumePreview() {
     dispatch(previewActions.downloadSource(values))
   }
 
+  const openInExternalWindow = () => {
+    window.open(resume.url ?? BlankPdf)
+  }
+
   return (
     <Wrapper>
       <Toolbar
-        resumeUrl={resume.url || BlankPDF}
+        resumeUrl={resume.url || BlankPdf}
         jsonUrl={resume.jsonUrl || ''}
         downloadSource={downloadSource}
         prevPage={prevPage}
         nextPage={nextPage}
         zoomIn={zoomIn}
         zoomOut={zoomOut}
+        openInExternalWindow={openInExternalWindow}
       />
       <Document
-        file={resume.url || BlankPDF}
+        file={resume.url || BlankPdf}
         onLoadSuccess={handleDocumentLoadSuccess}
         loading=""
       >

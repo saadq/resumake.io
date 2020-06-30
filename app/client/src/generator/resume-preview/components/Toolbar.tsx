@@ -4,10 +4,10 @@ import {
   AiOutlineDownload as DownloadIcon,
   AiOutlineZoomIn as ZoomInIcon,
   AiOutlineZoomOut as ZoomOutIcon,
-  AiOutlinePrinter as PrintIcon,
   AiOutlineArrowLeft as LeftArrowIcon,
   AiOutlineArrowRight as RightArrowIcon
 } from 'react-icons/ai'
+import { FiExternalLink as OpenInExternalWindowIcon } from 'react-icons/fi'
 import { Header } from 'common/components/Header'
 import { ToolbarButton } from './ToolbarButton'
 
@@ -43,6 +43,7 @@ interface Props {
   nextPage: () => void
   zoomIn: () => void
   zoomOut: () => void
+  openInExternalWindow: () => void
 }
 
 export function Toolbar({
@@ -52,7 +53,8 @@ export function Toolbar({
   prevPage,
   nextPage,
   zoomIn,
-  zoomOut
+  zoomOut,
+  openInExternalWindow
 }: Props) {
   return (
     <ToolbarHeader accent>
@@ -83,7 +85,10 @@ export function Toolbar({
       <ButtonGroup>
         <ToolbarButton onClick={zoomOut} Icon={ZoomOutIcon} />
         <ToolbarButton onClick={zoomIn} Icon={ZoomInIcon} />
-        <ToolbarButton Icon={PrintIcon} />
+        <ToolbarButton
+          onClick={openInExternalWindow}
+          Icon={OpenInExternalWindowIcon}
+        />
       </ButtonGroup>
     </ToolbarHeader>
   )

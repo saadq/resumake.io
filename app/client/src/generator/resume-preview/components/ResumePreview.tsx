@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { pdfjs, Document, Page } from 'react-pdf'
 import { PDFDocumentProxy } from 'pdfjs-dist'
 import styled from 'styled-components'
 import { AppState } from 'app/types'
+import { useFormValues } from 'generator/resume-form/hooks/useFormValues'
+import { previewActions } from '../slice'
 import { Toolbar } from './Toolbar'
 import BlankPDF from '../assets/blank.pdf'
 
@@ -35,6 +37,8 @@ export function ResumePreview() {
   const [pageCount, setPageCount] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
   const { resume } = useSelector((state: AppState) => state.preview)
+  const { values } = useSelector((state: AppState) => state.form.resume)
+  const dispatch = useDispatch()
 
   const handleDocumentLoadSuccess = useCallback((pdf: PDFDocumentProxy) => {
     setPageCount(pdf.numPages)
@@ -56,11 +60,16 @@ export function ResumePreview() {
     setScale((currScale) => Math.max(currScale - 0.1, 0.5))
   }
 
+  const downloadSource = () => {
+    dispatch(previewActions.downloadSource(values))
+  }
+
   return (
     <Wrapper>
       <Toolbar
         resumeUrl={resume.url || BlankPDF}
         jsonUrl={resume.jsonUrl || ''}
+        downloadSource={downloadSource}
         prevPage={prevPage}
         nextPage={nextPage}
         zoomIn={zoomIn}

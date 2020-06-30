@@ -1,5 +1,6 @@
 import { PreviewState } from './types'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import FileSaver from 'file-saver'
 import { FormValues } from 'generator/resume-form/types/form'
 
 const initialState: PreviewState = {
@@ -7,6 +8,22 @@ const initialState: PreviewState = {
     loading: false
   }
 }
+
+const downloadSource = createAsyncThunk(
+  'preview/downloadSource',
+  async (formValues: FormValues) => {
+    const response = await fetch('/api/generate/source', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/zip'
+      },
+      body: JSON.stringify(formValues)
+    })
+    const blob = await response.blob()
+    FileSaver.saveAs(blob, 'resume.zip')
+  }
+)
 
 const generateResume = createAsyncThunk(
   'preview/generateResume',
@@ -56,7 +73,8 @@ const previewSlice = createSlice({
 
 export const previewActions = {
   ...previewSlice.actions,
-  generateResume
+  generateResume,
+  downloadSource
 }
 
 export const previewReducer = previewSlice.reducer

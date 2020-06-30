@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.6",
+    "@types/file-saver": "^2.0.1",
+    "file-saver": "^2.0.2",
     "polished": "^3.6.3",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",

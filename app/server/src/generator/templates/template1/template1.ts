@@ -278,7 +278,6 @@ const generator: TemplateGenerator = {
 }
 
 export function template1(values: FormValues) {
-  console.log(values)
   return stripIndent`
     \\documentclass[a4paper]{article}
     \\usepackage{fullpage}

@@ -40,7 +40,7 @@ export type CustomSection = BulletsSection | TableSection | ParagraphSection
 
 export type Section = DefaultSection | CustomSection
 
-export type Template = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+export type Template = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 
 export interface Basics {
   name: string

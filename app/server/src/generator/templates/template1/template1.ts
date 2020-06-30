@@ -305,28 +305,31 @@ export function template1(values: FormValues) {
           case 'education':
             return generator.createEducationSection(
               values.education,
-              section.displayName
+              section.displayName || section.name
             )
 
           case 'work':
-            return generator.createWorkSection(values.work, section.displayName)
+            return generator.createWorkSection(
+              values.work,
+              section.displayName || section.name
+            )
 
           case 'skills':
             return generator.createSkillsSection(
               values.skills,
-              section.displayName
+              section.displayName || section.name
             )
 
           case 'projects':
             return generator.createProjectsSection(
               values.projects,
-              section.displayName
+              section.displayName || section.name
             )
 
           case 'awards':
             return generator.createAwardsSection(
               values.awards,
-              section.displayName
+              section.displayName || section.name
             )
 
           default:

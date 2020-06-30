@@ -4,7 +4,9 @@ import {
   AiOutlineDownload as DownloadIcon,
   AiOutlineZoomIn as ZoomInIcon,
   AiOutlineZoomOut as ZoomOutIcon,
-  AiOutlinePrinter as PrintIcon
+  AiOutlinePrinter as PrintIcon,
+  AiOutlineArrowLeft as LeftArrowIcon,
+  AiOutlineArrowRight as RightArrowIcon
 } from 'react-icons/ai'
 import { Header } from 'common/components/Header'
 import { ToolbarButton } from './ToolbarButton'
@@ -17,6 +19,20 @@ const ToolbarHeader = styled(Header)`
 
 const ButtonGroup = styled.div`
   display: flex;
+`
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      color: ${({ theme }) => theme.primary};
+    }
+  }
 `
 
 interface Props {
@@ -51,11 +67,11 @@ export function Toolbar({
           TEX
         </ToolbarButton>
       </ButtonGroup>
-      <div style={{ display: 'flex' }}>
-        <div onClick={prevPage}>&lt;</div>
+      <Pagination>
+        <LeftArrowIcon onClick={prevPage} />
         <div style={{ margin: '0 1em' }}>Page 1</div>
-        <div onClick={nextPage}>&gt;</div>
-      </div>
+        <RightArrowIcon onClick={nextPage} />
+      </Pagination>
       <ButtonGroup>
         <ToolbarButton onClick={zoomOut} Icon={ZoomOutIcon} />
         <ToolbarButton onClick={zoomIn} Icon={ZoomInIcon} />

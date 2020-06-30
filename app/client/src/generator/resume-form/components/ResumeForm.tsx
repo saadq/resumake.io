@@ -1,8 +1,14 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { reduxForm, InjectedFormProps } from 'redux-form'
+import {
+  Form as ReduxForm,
+  reduxForm,
+  submit,
+  InjectedFormProps
+} from 'redux-form'
 import styled from 'styled-components'
+import { FormValues } from '../types/form'
 import { previewActions } from 'generator/resume-preview/slice'
 import { ProfileSection } from './default/profile/ProfileSection'
 import { EducationSection } from './default/education/EducationSection'
@@ -11,11 +17,10 @@ import { ProjectsSection } from './default/projects/ProjectsSection'
 import { SkillsSection } from './default/skills/SkillsSection'
 import { AwardsSection } from './default/awards/AwardsSection'
 import { CustomSection } from './custom/CustomSection'
-import { useFormValues } from '../hooks/useFormValues'
 import { useSections } from '../hooks/useSections'
 import { Section, CustomSection as CustomSectionType } from '../types/sections'
 
-const Form = styled.form`
+const Form = styled(ReduxForm)`
   background: ${(props) => props.theme.black};
   width: 40%;
   margin-left: 10%;
@@ -30,22 +35,23 @@ function isCustomSection(section: Section): section is CustomSectionType {
 }
 
 function ResumeFormView({ handleSubmit }: InjectedFormProps) {
-  const vals = useFormValues()
   const sections = useSections()
   const dispatch = useDispatch()
+  let timeoutId: number
 
-  const onSubmit = () => {
-    dispatch(previewActions.generateResume(vals))
+  const onSubmit = handleSubmit((formValues: unknown) => {
+    dispatch(previewActions.generateResume(formValues as FormValues))
+  })
+
+  const onChange = () => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      dispatch(submit('resume'))
+    }, 2000)
   }
 
-  const onChange = () => {}
-
   return (
-    <Form
-      id="resume-form"
-      onSubmit={handleSubmit(onSubmit)}
-      onChange={onChange}
-    >
+    <Form id="resume-form" onSubmit={onSubmit} onChange={onChange}>
       <Switch>
         <Route
           exact

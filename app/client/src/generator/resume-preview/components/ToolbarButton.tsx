@@ -14,7 +14,7 @@ const Button = styled.button<ButtonStyleProps>`
   margin: 0;
   margin-right: 0.4em;
   height: 3em;
-  width: 6em;
+  width: 5.5em;
   padding: 0;
   background: ${(props) => darken(0.05, props.theme.gray)};
   color: ${(props) => props.theme.foreground};

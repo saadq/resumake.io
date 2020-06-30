@@ -19,9 +19,15 @@ const generateResume = createAsyncThunk(
       },
       body: JSON.stringify(formValues)
     })
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-    return url
+
+    const jsonString = JSON.stringify(formValues, null, 2)
+    const jsonBlob = new Blob([jsonString], { type: 'application/json' })
+    const jsonUrl = URL.createObjectURL(jsonBlob)
+
+    const pdfBlob = await response.blob()
+    const pdfUrl = URL.createObjectURL(pdfBlob)
+
+    return { pdfUrl, jsonUrl }
   }
 )
 
@@ -37,7 +43,8 @@ const previewSlice = createSlice({
 
     builder.addCase(generateResume.fulfilled, (state, action) => {
       state.resume.loading = false
-      state.resume.url = action.payload
+      state.resume.url = action.payload.pdfUrl
+      state.resume.jsonUrl = action.payload.jsonUrl
     })
 
     builder.addCase(generateResume.rejected, (state, action) => {

@@ -36,7 +36,8 @@ const Pagination = styled.div`
 `
 
 interface Props {
-  resumeUrl: string
+  jsonUrl: string
+  resumeUrl?: string
   prevPage: () => void
   nextPage: () => void
   zoomIn: () => void
@@ -45,6 +46,7 @@ interface Props {
 
 export function Toolbar({
   resumeUrl,
+  jsonUrl,
   prevPage,
   nextPage,
   zoomIn,
@@ -53,7 +55,11 @@ export function Toolbar({
   return (
     <ToolbarHeader accent>
       <ButtonGroup>
-        <ToolbarButton link="" Icon={DownloadIcon}>
+        <ToolbarButton
+          link={jsonUrl}
+          downloadName="resume.json"
+          Icon={DownloadIcon}
+        >
           JSON
         </ToolbarButton>
         <ToolbarButton

@@ -95,7 +95,7 @@ const generator: TemplateGenerator = {
     const paragraphSection = education.map((school) => ({
       paragraph: school.gpa,
       topLeftText: school.institution,
-      topRightText: school.area,
+      topRightText: school.location,
       bottomLeftText: `${school.studyType} ${school.area}`,
       bottomRightText: `\\hfill ${[school.startDate, school.endDate]
         .filter(Boolean)

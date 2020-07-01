@@ -4,7 +4,7 @@ import { generatePdf, generateSource } from '../generator/generator'
 
 export const api = new Router({ prefix: '/api' })
 
-api.post('/generate/source', async ({ request, response }) => {
+api.post('/generate/source', sanitizer(), async ({ request, response }) => {
   response.body = generateSource(request.body)
   response.type = 'application/zip'
 })

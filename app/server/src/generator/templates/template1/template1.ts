@@ -96,7 +96,7 @@ const generator: TemplateGenerator = {
       paragraph: school.gpa,
       topLeftText: school.institution,
       topRightText: school.location,
-      bottomLeftText: `${school.studyType} ${school.area}`,
+      bottomLeftText: `${school.studyType || ''} ${school.area || ''}`,
       bottomRightText: `\\hfill ${[school.startDate, school.endDate]
         .filter(Boolean)
         .join(' - ')}`

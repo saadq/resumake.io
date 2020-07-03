@@ -30,7 +30,7 @@ const Form = styled(ReduxForm)`
   overflow-y: auto;
 `
 
-const RESUME_GENERATION_DELAY = 1000
+const RESUME_GENERATION_DELAY = 2000
 
 function isCustomSection(section: Section): section is CustomSectionType {
   return section.type !== 'default'

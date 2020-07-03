@@ -44,7 +44,7 @@ export function ResumePreview() {
   }, [])
 
   const prevPage = () => {
-    setPageNumber((currPage) => Math.min(currPage + 1, pageCount))
+    setPageNumber((currPage) => Math.max(currPage - 1, 1))
   }
 
   const nextPage = () => {

@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { useRef, ReactNode } from 'react'
+import { Field } from 'redux-form'
 import styled from 'styled-components'
-import { AiFillEdit as EditIcon } from 'react-icons/ai'
+import { AiFillEdit } from 'react-icons/ai'
 import { TextInput } from 'common/components/TextInput'
 import { Header } from './Header'
 
@@ -28,6 +29,11 @@ const SectionNameEditSection = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
+`
+
+const EditIcon = styled(AiFillEdit)`
+  cursor: pointer;
+  color: ${({ theme }) => theme.primary};
 `
 
 const SectionNameInput = styled(TextInput)`
@@ -66,13 +72,21 @@ export function FormSection({
   allowSectionRenaming = true,
   children
 }: Props) {
+  const inputRef = useRef<any>(null)
+
+  const handleEditClick = () => {
+    inputRef?.current?.ref?.current?.ref?.current?.focus()
+  }
+
   return (
     <Fieldset>
       <Header>
         {allowSectionRenaming ? (
           <SectionNameEditSection>
-            <EditIcon color="#8A8FFF" />
+            <EditIcon onClick={handleEditClick} />
             <SectionNameInput
+              forwardRef
+              ref={inputRef}
               name={inputName}
               placeholder={title}
               component="input"

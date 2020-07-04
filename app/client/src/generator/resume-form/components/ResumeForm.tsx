@@ -30,7 +30,8 @@ const Form = styled(ReduxForm)`
   overflow-y: auto;
 `
 
-const RESUME_GENERATION_DELAY = 2000
+const resumeGenerationTimeoutDelay = 2000
+let resumeGenerationTimeoutId: number
 
 function isCustomSection(section: Section): section is CustomSectionType {
   return section.type !== 'default'
@@ -39,17 +40,16 @@ function isCustomSection(section: Section): section is CustomSectionType {
 function ResumeFormView({ handleSubmit }: InjectedFormProps) {
   const sections = useSections()
   const dispatch = useDispatch()
-  let timeoutId: number
 
   const onSubmit = handleSubmit((formValues: unknown) => {
     dispatch(previewActions.generateResume(formValues as FormValues))
   })
 
   const onChange = () => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => {
+    clearTimeout(resumeGenerationTimeoutId)
+    resumeGenerationTimeoutId = setTimeout(() => {
       dispatch(submit('resume'))
-    }, RESUME_GENERATION_DELAY)
+    }, resumeGenerationTimeoutDelay)
   }
 
   return (

@@ -209,7 +209,7 @@ const generator: TemplateGenerator = {
             {${subsection.bottomLeftText || ''}}
             {${subsection.topLeftText || ''}}
             {${subsection.topRightText || ''}}
-            {${subsection.bottomRightText}}
+            {${subsection.bottomRightText || ''}}
             {${subsection.paragraph || ''}}
         `
       })}
@@ -285,7 +285,6 @@ export function template2(values: FormValues) {
         }
       })
       .join('\n')}
-
     ${WHITESPACE}
     \\end{document}
   `

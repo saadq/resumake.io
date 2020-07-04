@@ -1,5 +1,4 @@
 import React, { useRef, ReactNode } from 'react'
-import { Field } from 'redux-form'
 import styled from 'styled-components'
 import { AiFillEdit } from 'react-icons/ai'
 import { TextInput } from 'common/components/TextInput'

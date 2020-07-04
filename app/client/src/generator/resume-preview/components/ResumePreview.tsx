@@ -30,6 +30,20 @@ const ResumePage = styled(Page)`
   }
 `
 
+const PdfContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`
+
+const Doc = styled(Document)`
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+`
+
 export function ResumePreview() {
   const initialScale = document.body.clientWidth > 1440 ? 1.75 : 1
   const [scale, setScale] = useState(initialScale)
@@ -80,18 +94,33 @@ export function ResumePreview() {
         zoomOut={zoomOut}
         openInExternalWindow={openInExternalWindow}
       />
-      <Document
-        file={resume.url || BlankPdf}
-        onLoadSuccess={handleDocumentLoadSuccess}
-        loading=""
-      >
-        <ResumePage
-          pageNumber={pageNumber}
-          scale={scale}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
-        />
-      </Document>
+      <PdfContainer>
+        {/* To prevent a white flash whenever the PDF is regenerated, this Blank PDF document is always displayed underneath the actual PDF document. */}
+        <Doc file={BlankPdf}>
+          <ResumePage
+            pageNumber={1}
+            scale={scale}
+            renderAnnotationLayer={false}
+            renderTextLayer={false}
+            loading=""
+          />
+        </Doc>
+        {resume.url && (
+          <Doc
+            file={resume.url}
+            onLoadSuccess={handleDocumentLoadSuccess}
+            loading=""
+          >
+            <ResumePage
+              pageNumber={pageNumber}
+              scale={scale}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+              loading=""
+            />
+          </Doc>
+        )}
+      </PdfContainer>
     </Wrapper>
   )
 }

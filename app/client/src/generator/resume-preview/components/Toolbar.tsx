@@ -38,6 +38,7 @@ const Pagination = styled.div`
 interface Props {
   jsonUrl: string
   resumeUrl?: string
+  pageNumber?: number
   downloadSource: () => void
   prevPage: () => void
   nextPage: () => void
@@ -50,6 +51,7 @@ export function Toolbar({
   resumeUrl,
   jsonUrl,
   downloadSource,
+  pageNumber,
   prevPage,
   nextPage,
   zoomIn,
@@ -79,7 +81,7 @@ export function Toolbar({
       </ButtonGroup>
       <Pagination>
         <LeftArrowIcon onClick={prevPage} />
-        <div style={{ margin: '0 1em' }}>Page 1</div>
+        <div style={{ margin: '0 1em' }}>Page {pageNumber}</div>
         <RightArrowIcon onClick={nextPage} />
       </Pagination>
       <ButtonGroup>

@@ -73,6 +73,7 @@ export function ResumePreview() {
         resumeUrl={resume.url || BlankPdf}
         jsonUrl={resume.jsonUrl || ''}
         downloadSource={downloadSource}
+        pageNumber={pageNumber}
         prevPage={prevPage}
         nextPage={nextPage}
         zoomIn={zoomIn}

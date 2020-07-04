@@ -1,8 +1,10 @@
-import latex, { LatexOptions } from 'node-latex'
 import Archiver from 'archiver'
+import { join } from 'path'
 import { Transform } from 'stream'
+import latex, { LatexOptions } from 'node-latex'
 import { stripIndent } from 'common-tags'
 import { template1 } from './templates/template1/template1'
+import { template2 } from './templates/template2/template2'
 import { FormValues } from './types'
 
 interface TemplateData {
@@ -42,8 +44,13 @@ export function generateTemplateData(formValues: FormValues): TemplateData {
 
     case 2:
       return {
-        texDoc: '',
-        options: {}
+        texDoc: template2(formValues),
+        options: {
+          cmd: 'xelatex',
+          inputs: join(__dirname, 'templates', 'template2', 'inputs'),
+          fonts: join(__dirname, 'templates', 'template2', 'inputs'),
+          errorLogs: join(__dirname, 'error-logs.txt')
+        }
       }
 
     case 3:

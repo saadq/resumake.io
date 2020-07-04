@@ -129,17 +129,13 @@ const generator: TemplateGenerator = {
       topLeftText: project.name,
       topRightText: project.url,
       bottomLeftText: project.description,
-      bottomRightText: project.keywords.join(', ')
+      bottomRightText: project.keywords?.join(', ') || ''
     }))
 
     return this.createParagraphSection(paragraphSection, sectionName)
   },
 
   createAwardsSection(awards, sectionName) {
-    if (!awards) {
-      return ''
-    }
-
     const paragraphSection = awards.map((award) => ({
       paragraph: '',
       topLeftText: award.title,
@@ -152,10 +148,6 @@ const generator: TemplateGenerator = {
   },
 
   createBulletsSection(section, sectionName) {
-    if (!section) {
-      return ''
-    }
-
     return source`
       %==== ${sectionName || 'BULLETS SECTION'} ====%
       \\header{${sectionName || 'Bullets Section'}}

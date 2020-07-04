@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
+import { AiFillEdit as EditIcon } from 'react-icons/ai'
 import { TextInput } from 'common/components/TextInput'
-import { LabeledCard } from 'common/components/LabeledCard'
 import { Header } from './Header'
 
 const Fieldset = styled.fieldset`
@@ -14,18 +14,6 @@ const Fieldset = styled.fieldset`
   flex-direction: column;
 `
 
-const Legend = styled.legend`
-  width: 85%;
-  margin: 0 auto;
-  text-transform: uppercase;
-  font-family: Varela Round;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 22px;
-  letter-spacing: 0.05em;
-`
-
 const SectionContent = styled.section`
   width: 85%;
   margin: 0 auto;
@@ -34,40 +22,67 @@ const SectionContent = styled.section`
   font-family: Varela;
 `
 
+const SectionNameEditSection = styled.div`
+  width: 85%;
+  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+`
+
 const SectionNameInput = styled(TextInput)`
+  background: ${({ theme }) => theme.black};
   color: ${(props) => props.theme.primary};
+  text-transform: uppercase;
+  font-family: Varela Round;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.05em;
+  border: none;
+
+  &:focus {
+    border: none;
+  }
+`
+
+const SectionNameLegend = styled(SectionNameInput.withComponent('legend'))`
+  width: 85%;
+  padding: 1em 0;
+  margin: 0 auto;
 `
 
 interface Props {
   title: string
   inputName?: string
-  disableSectionRenaming?: boolean
+  allowSectionRenaming?: boolean
   children: ReactNode
 }
 
 export function FormSection({
   title,
   inputName,
-  disableSectionRenaming,
+  allowSectionRenaming = true,
   children
 }: Props) {
   return (
     <Fieldset>
       <Header>
-        <Legend>{title}</Legend>
-      </Header>
-      <SectionContent>
-        {disableSectionRenaming ? null : (
-          <LabeledCard label="Section Name">
+        {allowSectionRenaming ? (
+          <SectionNameEditSection>
+            <EditIcon color="#8A8FFF" />
             <SectionNameInput
               name={inputName}
               placeholder={title}
               component="input"
             />
-          </LabeledCard>
+          </SectionNameEditSection>
+        ) : (
+          <SectionNameLegend>{title}</SectionNameLegend>
         )}
-        {children}
-      </SectionContent>
+      </Header>
+      <SectionContent>{children}</SectionContent>
     </Fieldset>
   )
 }

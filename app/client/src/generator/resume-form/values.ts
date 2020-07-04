@@ -92,7 +92,7 @@ export const defaultSections: Array<Section> = [
 ]
 
 export const defaultFormValues: FormValues = {
-  selectedTemplate: 2,
+  selectedTemplate: 1,
   basics: emptyBasics,
   education: [emptySchool],
   work: [emptyJob],

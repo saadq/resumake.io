@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom'
+import { DropResult } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import { AppState } from 'app/types'
 import { formActions } from 'generator/resume-form/slice'
+import { DraggableList } from 'common/components/DraggableList'
+import { DraggableItem } from 'common/components/DraggableItem'
 import { AddItemButton } from 'common/components/AddItemButton'
 import { capitalize } from 'common/utils/strings'
 
@@ -57,19 +60,33 @@ export function SideNav() {
     history.push(`/generator/custom-${customSectionIndex}`)
   }
 
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+
+    const startIndex = result.source.index
+    const endIndex = result.destination.index
+    dispatch(formActions.swapSectionsOrder({ startIndex, endIndex }))
+  }
+
   return (
     <Nav>
       <SectionsList>
-        {values.sections.map((section, i) => (
-          <ListItem key={i}>
-            <SectionLink
-              activeClassName="active"
-              to={`/generator/${section.name}`}
-            >
-              {section.displayName ?? capitalize(section.name)}
-            </SectionLink>
-          </ListItem>
-        ))}
+        <DraggableList onDragEnd={handleDragEnd}>
+          {values.sections.map((section, i) => (
+            <DraggableItem index={i} key={i}>
+              <ListItem>
+                <SectionLink
+                  activeClassName="active"
+                  to={`/generator/${section.name}`}
+                >
+                  {section.displayName ?? capitalize(section.name)}
+                </SectionLink>
+              </ListItem>
+            </DraggableItem>
+          ))}
+        </DraggableList>
       </SectionsList>
       <AddSectionButton type="button" onClick={addCustomSection}>
         +

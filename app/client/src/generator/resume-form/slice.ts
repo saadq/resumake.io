@@ -66,6 +66,18 @@ function removeSubsectionKeyword(
   )
 }
 
+function swapSectionsOrder(
+  state: ResumeFormState,
+  action: PayloadAction<{
+    startIndex: number
+    endIndex: number
+  }>
+) {
+  const { startIndex, endIndex } = action.payload
+  const [removed] = state.values.sections.splice(startIndex, 1)
+  state.values.sections.splice(endIndex, 0, removed)
+}
+
 function swapSubsectionsOrder(
   state: ResumeFormState,
   action: PayloadAction<{
@@ -120,6 +132,7 @@ const formSlice = createSlice({
     removeSubsection,
     addSubsectionKeyword,
     removeSubsectionKeyword,
+    swapSectionsOrder,
     swapSubsectionsOrder,
     addCustomSection,
     setCustomSectionType

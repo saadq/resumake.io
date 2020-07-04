@@ -40,8 +40,8 @@ interface Props {
   resumeUrl?: string
   pageNumber?: number
   downloadSource: () => void
-  prevPage: () => void
-  nextPage: () => void
+  goToPrevPage: () => void
+  goToNextPage: () => void
   zoomIn: () => void
   zoomOut: () => void
   openInExternalWindow: () => void
@@ -52,8 +52,8 @@ export function Toolbar({
   jsonUrl,
   downloadSource,
   pageNumber,
-  prevPage,
-  nextPage,
+  goToPrevPage,
+  goToNextPage,
   zoomIn,
   zoomOut,
   openInExternalWindow
@@ -80,9 +80,9 @@ export function Toolbar({
         </ToolbarButton>
       </ButtonGroup>
       <Pagination>
-        <LeftArrowIcon onClick={prevPage} />
+        <LeftArrowIcon onClick={goToPrevPage} />
         <div style={{ margin: '0 1em' }}>Page {pageNumber}</div>
-        <RightArrowIcon onClick={nextPage} />
+        <RightArrowIcon onClick={goToNextPage} />
       </Pagination>
       <ButtonGroup>
         <ToolbarButton onClick={zoomOut} Icon={ZoomOutIcon} />

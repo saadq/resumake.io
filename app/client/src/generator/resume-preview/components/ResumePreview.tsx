@@ -43,11 +43,11 @@ export function ResumePreview() {
     setPageCount(pdf.numPages)
   }, [])
 
-  const prevPage = () => {
+  const goToPrevPage = () => {
     setPageNumber((currPage) => Math.max(currPage - 1, 1))
   }
 
-  const nextPage = () => {
+  const goToNextPage = () => {
     setPageNumber((currPage) => Math.min(currPage + 1, pageCount))
   }
 
@@ -74,8 +74,8 @@ export function ResumePreview() {
         jsonUrl={resume.jsonUrl || ''}
         downloadSource={downloadSource}
         pageNumber={pageNumber}
-        prevPage={prevPage}
-        nextPage={nextPage}
+        goToPrevPage={goToPrevPage}
+        goToNextPage={goToNextPage}
         zoomIn={zoomIn}
         zoomOut={zoomOut}
         openInExternalWindow={openInExternalWindow}

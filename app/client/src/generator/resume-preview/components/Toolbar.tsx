@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import {
   AiOutlineDownload as DownloadIcon,
-  AiOutlineZoomIn as ZoomInIcon,
-  AiOutlineZoomOut as ZoomOutIcon,
   AiOutlineArrowLeft as LeftArrowIcon,
   AiOutlineArrowRight as RightArrowIcon
 } from 'react-icons/ai'
+import {
+  IoMdRefresh as RefreshIcon,
+  IoMdSettings as SettingsIcon
+} from 'react-icons/io'
 import { FiExternalLink as OpenInExternalWindowIcon } from 'react-icons/fi'
 import { Header } from 'common/components/Header'
 import { ToolbarButton } from './ToolbarButton'
@@ -42,9 +44,9 @@ interface Props {
   downloadSource: () => void
   goToPrevPage: () => void
   goToNextPage: () => void
-  zoomIn: () => void
-  zoomOut: () => void
+  rebuildResume: () => void
   openInExternalWindow: () => void
+  openSettings: () => void
 }
 
 export function Toolbar({
@@ -54,9 +56,9 @@ export function Toolbar({
   pageNumber,
   goToPrevPage,
   goToNextPage,
-  zoomIn,
-  zoomOut,
-  openInExternalWindow
+  rebuildResume,
+  openInExternalWindow,
+  openSettings
 }: Props) {
   return (
     <ToolbarHeader accent>
@@ -85,12 +87,12 @@ export function Toolbar({
         <RightArrowIcon onClick={goToNextPage} />
       </Pagination>
       <ButtonGroup>
-        <ToolbarButton onClick={zoomOut} Icon={ZoomOutIcon} />
-        <ToolbarButton onClick={zoomIn} Icon={ZoomInIcon} />
+        <ToolbarButton onClick={rebuildResume} Icon={RefreshIcon} />
         <ToolbarButton
           onClick={openInExternalWindow}
           Icon={OpenInExternalWindowIcon}
         />
+        <ToolbarButton onClick={openSettings} Icon={SettingsIcon} />
       </ButtonGroup>
     </ToolbarHeader>
   )

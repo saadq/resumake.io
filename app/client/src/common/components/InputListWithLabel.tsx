@@ -43,7 +43,7 @@ export function InputListWithLabel({
             component="input"
             placeholder={placeholder}
           />
-          <RemoveItemButton type="button" onClick={() => removeItem(index)}>
+          <RemoveItemButton type="submit" onClick={() => removeItem(index)}>
             X
           </RemoveItemButton>
         </Row>

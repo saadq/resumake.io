@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { submit } from 'redux-form'
 import { pdfjs, Document, Page } from 'react-pdf'
 import { PDFDocumentProxy } from 'pdfjs-dist'
 import styled from 'styled-components'
@@ -45,8 +46,7 @@ const Doc = styled(Document)`
 `
 
 export function ResumePreview() {
-  const initialScale = document.body.clientWidth > 1440 ? 1.75 : 1
-  const [scale, setScale] = useState(initialScale)
+  const scale = document.body.clientWidth > 1440 ? 1.75 : 1
   const [pageCount, setPageCount] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
   const { resume } = useSelector((state: AppState) => state.preview)
@@ -65,16 +65,16 @@ export function ResumePreview() {
     setPageNumber((currPage) => Math.min(currPage + 1, pageCount))
   }
 
-  const zoomIn = () => {
-    setScale((currScale) => Math.min(currScale + 0.1, initialScale))
-  }
-
-  const zoomOut = () => {
-    setScale((currScale) => Math.max(currScale - 0.1, 0.5))
-  }
-
   const downloadSource = () => {
     dispatch(previewActions.downloadSource(values))
+  }
+
+  const rebuildResume = () => {
+    dispatch(submit('resume'))
+  }
+
+  const openSettings = () => {
+    console.log('OPEN SETTINGS')
   }
 
   const openInExternalWindow = () => {
@@ -90,8 +90,8 @@ export function ResumePreview() {
         pageNumber={pageNumber}
         goToPrevPage={goToPrevPage}
         goToNextPage={goToNextPage}
-        zoomIn={zoomIn}
-        zoomOut={zoomOut}
+        rebuildResume={rebuildResume}
+        openSettings={openSettings}
         openInExternalWindow={openInExternalWindow}
       />
       <PdfContainer>

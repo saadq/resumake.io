@@ -4,11 +4,29 @@ import { NavLink, useHistory } from 'react-router-dom'
 import { DropResult } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import { AppState } from 'app/types'
+import { Logo } from 'common/components/Logo'
 import { formActions } from 'generator/resume-form/slice'
 import { DraggableList } from 'common/components/DraggableList'
 import { DraggableItem } from 'common/components/DraggableItem'
 import { AddItemButton } from 'common/components/AddItemButton'
 import { capitalize } from 'common/utils/strings'
+
+const Aside = styled.aside`
+  background: ${(props) => props.theme.lightBlack};
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
+  width: 10%;
+  min-height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+`
+
+const LogoContainer = styled.div`
+  padding-top: 5em;
+`
 
 const Nav = styled.nav`
   display: flex;
@@ -48,7 +66,7 @@ const AddSectionButton = styled(AddItemButton)`
   align-self: center;
 `
 
-export function SideNav() {
+export function Navigation() {
   const dispatch = useDispatch()
   const history = useHistory()
   const { customSectionIndex, values } = useSelector(
@@ -71,31 +89,36 @@ export function SideNav() {
   }
 
   return (
-    <Nav>
-      <SectionsList>
-        <DraggableList onDragEnd={handleDragEnd}>
-          <ListItem>
-            <SectionLink activeClassName="active" to="/generator/templates">
-              Templates
-            </SectionLink>
-          </ListItem>
-          {values.sections.map((section, i) => (
-            <DraggableItem index={i} key={i}>
-              <ListItem>
-                <SectionLink
-                  activeClassName="active"
-                  to={`/generator/${section.name}`}
-                >
-                  {section.displayName ?? capitalize(section.name)}
-                </SectionLink>
-              </ListItem>
-            </DraggableItem>
-          ))}
-        </DraggableList>
-      </SectionsList>
-      <AddSectionButton type="button" onClick={addCustomSection}>
-        +
-      </AddSectionButton>
-    </Nav>
+    <Aside>
+      <LogoContainer>
+        <Logo width={110} />
+      </LogoContainer>
+      <Nav>
+        <SectionsList>
+          <DraggableList onDragEnd={handleDragEnd}>
+            <ListItem>
+              <SectionLink activeClassName="active" to="/generator/templates">
+                Templates
+              </SectionLink>
+            </ListItem>
+            {values.sections.map((section, i) => (
+              <DraggableItem index={i} key={i}>
+                <ListItem>
+                  <SectionLink
+                    activeClassName="active"
+                    to={`/generator/${section.name}`}
+                  >
+                    {section.displayName ?? capitalize(section.name)}
+                  </SectionLink>
+                </ListItem>
+              </DraggableItem>
+            ))}
+          </DraggableList>
+        </SectionsList>
+        <AddSectionButton type="button" onClick={addCustomSection}>
+          +
+        </AddSectionButton>
+      </Nav>
+    </Aside>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SectionsSidebar } from './sections-sidebar/components/SectionsSidebar'
+import { Navigation } from './navigation/Navigation'
 import { ResumeForm } from './resume-form/components/ResumeForm'
 import { ResumePreview } from './resume-preview/components/ResumePreview'
 
@@ -12,7 +12,7 @@ const Page = styled.main`
 export function Generator() {
   return (
     <Page>
-      <SectionsSidebar />
+      <Navigation />
       <ResumeForm />
       <ResumePreview />
     </Page>

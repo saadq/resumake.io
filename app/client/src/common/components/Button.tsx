@@ -7,6 +7,7 @@ interface Props {
   marginBottom?: string
   marginLeft?: string
   marginRight?: string
+  isActive?: boolean
 }
 
 export const Button = styled.button<Props>`

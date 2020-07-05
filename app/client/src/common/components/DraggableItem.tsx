@@ -15,6 +15,7 @@ export function DraggableItem({ index, children }: Props) {
     >
       {(draggable) => (
         <div
+          style={{ display: 'flex' }}
           ref={draggable.innerRef}
           {...draggable.draggableProps}
           {...draggable.dragHandleProps}

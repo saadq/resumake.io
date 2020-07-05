@@ -50,7 +50,8 @@ const Image = styled.img<{ isActive: boolean }>`
 const TemplateButton = styled(Button)`
   width: 55%;
   margin-top: 0.5em;
-  background: ${({ theme }) => theme.darkGray};
+  background: ${({ theme, isActive }) =>
+    isActive ? theme.primary : theme.darkGray};
   box-shadow: none;
 `
 
@@ -70,7 +71,10 @@ export function TemplatesSection() {
         {(images as Array<string>).map((imageUrl, i) => (
           <Template key={i}>
             <Image src={imageUrl} isActive={selectedTemplate === i + 1} />
-            <TemplateButton onClick={() => setTemplate(i + 1)}>
+            <TemplateButton
+              isActive={selectedTemplate === i + 1}
+              onClick={() => setTemplate(i + 1)}
+            >
               Select
             </TemplateButton>
           </Template>

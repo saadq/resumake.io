@@ -37,7 +37,7 @@ const EditIcon = styled(AiFillEdit)`
 
 const SectionNameInput = styled(TextInput)`
   background: ${({ theme }) => theme.black};
-  color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.foreground};
   text-transform: uppercase;
   font-family: Varela Round;
   font-style: normal;
@@ -46,6 +46,7 @@ const SectionNameInput = styled(TextInput)`
   line-height: 22px;
   letter-spacing: 0.05em;
   border: none;
+  border-radius: 0;
 
   &:focus {
     border: none;

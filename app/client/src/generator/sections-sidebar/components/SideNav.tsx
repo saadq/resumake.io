@@ -74,6 +74,11 @@ export function SideNav() {
     <Nav>
       <SectionsList>
         <DraggableList onDragEnd={handleDragEnd}>
+          <ListItem>
+            <SectionLink activeClassName="active" to={`/generator/templates`}>
+              Templates
+            </SectionLink>
+          </ListItem>
           {values.sections.map((section, i) => (
             <DraggableItem index={i} key={i}>
               <ListItem>

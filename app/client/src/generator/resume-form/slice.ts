@@ -8,6 +8,7 @@ import {
   emptyTableSubsection,
   emptyParagraphSubsection
 } from './values'
+import { Template } from './types/form'
 
 type ResumeFormState = FormState['resume']
 
@@ -15,6 +16,13 @@ const initialState: ResumeFormState = {
   values: { ...defaultFormValues },
   customSectionIndex: 1,
   registeredFields: []
+}
+
+function setTemplate(
+  state: ResumeFormState,
+  action: PayloadAction<{ templateId: Template }>
+) {
+  state.values.selectedTemplate = action.payload.templateId
 }
 
 function addSubsection(
@@ -128,6 +136,7 @@ const formSlice = createSlice({
   name: 'resume',
   initialState,
   reducers: {
+    setTemplate,
     addSubsection,
     removeSubsection,
     addSubsectionKeyword,

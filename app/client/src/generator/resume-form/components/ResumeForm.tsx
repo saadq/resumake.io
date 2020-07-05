@@ -10,6 +10,7 @@ import {
 import styled from 'styled-components'
 import { FormValues } from '../types/form'
 import { previewActions } from 'generator/resume-preview/slice'
+import { TemplatesSection } from './default/templates/TemplatesSection'
 import { ProfileSection } from './default/profile/ProfileSection'
 import { EducationSection } from './default/education/EducationSection'
 import { ExperienceSection } from './default/experience/ExperienceSection'
@@ -60,6 +61,7 @@ function ResumeFormView({ handleSubmit }: InjectedFormProps) {
           path="/generator"
           render={() => <Redirect to="/generator/basics" />}
         />
+        <Route path="/generator/templates" component={TemplatesSection} />
         <Route path="/generator/basics" component={ProfileSection} />
         <Route path="/generator/education" component={EducationSection} />
         <Route path="/generator/work" component={ExperienceSection} />

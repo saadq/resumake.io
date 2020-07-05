@@ -17,7 +17,6 @@
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
-    "react-github-corner": "^2.3.0",
     "react-icons": "^3.10.0",
     "react-pdf": "^5.0.0-beta.2",
     "react-redux": "^7.2.0",

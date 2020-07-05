@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import GithubCorner from 'react-github-corner'
 import { Home } from 'home/Home'
 import { Generator } from 'generator/Generator'
 import { About } from 'about/About'
@@ -23,14 +22,6 @@ export function App() {
           <Route path="*" component={ErrorPage404} />
         </Switch>
       </Router>
-      <GithubCorner
-        href="https://github.com/saadq/resumake.io"
-        bannerColor="#181B1F"
-        octoColor="#2A2D33"
-        size={60}
-        direction="left"
-        svgStyle={{ zIndex: 9999 }}
-      />
     </ThemeProvider>
   )
 }

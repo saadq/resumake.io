@@ -75,7 +75,7 @@ export function SideNav() {
       <SectionsList>
         <DraggableList onDragEnd={handleDragEnd}>
           <ListItem>
-            <SectionLink activeClassName="active" to={`/generator/templates`}>
+            <SectionLink activeClassName="active" to="/generator/templates">
               Templates
             </SectionLink>
           </ListItem>

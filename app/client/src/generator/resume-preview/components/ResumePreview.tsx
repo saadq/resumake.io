@@ -45,7 +45,11 @@ const Doc = styled(Document)`
   transform: translate(-50%);
 `
 
-export function ResumePreview() {
+interface Props {
+  setIsMenuOpen: (isVisible: boolean) => void
+}
+
+export function ResumePreview({ setIsMenuOpen }: Props) {
   const scale = document.body.clientWidth > 1440 ? 1.75 : 1
   const [pageCount, setPageCount] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
@@ -74,7 +78,11 @@ export function ResumePreview() {
   }
 
   const openSettings = () => {
-    console.log('OPEN SETTINGS')
+    setIsMenuOpen(true)
+  }
+
+  const closeSettings = () => {
+    setIsMenuOpen(false)
   }
 
   const openInExternalWindow = () => {
@@ -92,6 +100,7 @@ export function ResumePreview() {
         goToNextPage={goToNextPage}
         rebuildResume={rebuildResume}
         openSettings={openSettings}
+        closeSettings={closeSettings}
         openInExternalWindow={openInExternalWindow}
       />
       <PdfContainer>

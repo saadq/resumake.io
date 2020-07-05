@@ -22,6 +22,7 @@ import { useSections } from '../hooks/useSections'
 import { Section, CustomSection as CustomSectionType } from '../types/sections'
 
 const Form = styled(ReduxForm)`
+  position: relative;
   background: ${(props) => props.theme.black};
   width: 40%;
   margin-left: 10%;

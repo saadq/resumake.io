@@ -1,4 +1,5 @@
 export interface Theme {
+  name: 'dark' | 'light'
   background: string
   foreground: string
   primary: string
@@ -14,6 +15,7 @@ export interface Theme {
 }
 
 export const lightTheme: Theme = {
+  name: 'light',
   background: '#0000FF',
   foreground: '#FFFF00',
   primary: '#FF6600',
@@ -29,6 +31,7 @@ export const lightTheme: Theme = {
 }
 
 export const darkTheme: Theme = {
+  name: 'dark',
   background: '#181B1F',
   foreground: '#788396',
   primary: '#8A8FFF',

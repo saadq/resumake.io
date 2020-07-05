@@ -47,6 +47,7 @@ interface Props {
   rebuildResume: () => void
   openInExternalWindow: () => void
   openSettings: () => void
+  closeSettings: () => void
 }
 
 export function Toolbar({
@@ -58,7 +59,8 @@ export function Toolbar({
   goToNextPage,
   rebuildResume,
   openInExternalWindow,
-  openSettings
+  openSettings,
+  closeSettings
 }: Props) {
   return (
     <ToolbarHeader accent>

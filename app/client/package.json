@@ -22,6 +22,7 @@
     "react-pdf": "^5.0.0-beta.2",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
+    "react-switch": "^5.0.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
     "styled-components": "^5.1.0"

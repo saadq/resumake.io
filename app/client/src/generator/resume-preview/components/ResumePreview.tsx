@@ -46,10 +46,11 @@ const Doc = styled(Document)`
 `
 
 interface Props {
-  setIsMenuOpen: (isVisible: boolean) => void
+  openSettings: () => void
+  closeSettings: () => void
 }
 
-export function ResumePreview({ setIsMenuOpen }: Props) {
+export function ResumePreview({ openSettings, closeSettings }: Props) {
   const scale = document.body.clientWidth > 1440 ? 1.75 : 1
   const [pageCount, setPageCount] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
@@ -75,14 +76,6 @@ export function ResumePreview({ setIsMenuOpen }: Props) {
 
   const rebuildResume = () => {
     dispatch(submit('resume'))
-  }
-
-  const openSettings = () => {
-    setIsMenuOpen(true)
-  }
-
-  const closeSettings = () => {
-    setIsMenuOpen(false)
   }
 
   const openInExternalWindow = () => {

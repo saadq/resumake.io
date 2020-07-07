@@ -11,13 +11,28 @@ const Page = styled.main`
 `
 
 export function Generator() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+
+  const openSettings = () => {
+    setIsSettingsOpen(true)
+  }
+
+  const closeSettings = () => {
+    setIsSettingsOpen(false)
+  }
+
   return (
     <Page>
       <Navigation />
       <ResumeForm />
-      <ResumePreview setIsMenuOpen={setIsMenuOpen} />
-      <SettingsMenu setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
+      <ResumePreview
+        openSettings={openSettings}
+        closeSettings={closeSettings}
+      />
+      <SettingsMenu
+        isSettingsOpen={isSettingsOpen}
+        closeSettings={closeSettings}
+      />
     </Page>
   )
 }

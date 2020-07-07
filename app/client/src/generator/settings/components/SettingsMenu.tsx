@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Switch from 'react-switch'
 import styled from 'styled-components'
@@ -49,37 +49,32 @@ const IconWrapper = styled.div`
 `
 
 interface Props {
-  isMenuOpen: boolean
-  setIsMenuOpen: (isVisible: boolean) => void
+  isSettingsOpen: boolean
+  closeSettings: () => void
 }
 
-export function SettingsMenu({ setIsMenuOpen, isMenuOpen }: Props) {
+export function SettingsMenu({ isSettingsOpen, closeSettings }: Props) {
   const { theme } = useSelector((state: AppState) => state.settings)
   const dispatch = useDispatch()
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
 
   const toggleTheme = () => {
     dispatch(settingsActions.toggleTheme())
   }
 
   useEffect(() => {
-    const escapeKeyCode = 27
+    const escapeKey = 27
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.which === escapeKeyCode) {
-        closeMenu()
+      if (e.which === escapeKey) {
+        closeSettings()
       }
     }
-
     window.addEventListener('keyup', handleKeyPress)
     return () => window.removeEventListener('keypress', handleKeyPress)
-  }, [])
+  }, [closeSettings])
 
-  return isMenuOpen ? (
+  return isSettingsOpen ? (
     <Menu>
-      <Backdrop onClick={closeMenu} />
+      <Backdrop onClick={closeSettings} />
       <Content>
         <Switch
           checked={theme.name === 'light'}

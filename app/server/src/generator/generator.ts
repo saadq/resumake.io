@@ -5,6 +5,7 @@ import latex, { LatexOptions } from 'node-latex'
 import { stripIndent } from 'common-tags'
 import { template1 } from './templates/template1/template1'
 import { template2 } from './templates/template2/template2'
+import { template3 } from './templates/template3/template3'
 import { FormValues } from './types'
 
 interface TemplateData {
@@ -55,7 +56,7 @@ export function generateTemplateData(formValues: FormValues): TemplateData {
 
     case 3:
       return {
-        texDoc: '',
+        texDoc: template3(formValues),
         options: {}
       }
 

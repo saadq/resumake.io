@@ -6,6 +6,7 @@ import { stripIndent } from 'common-tags'
 import { template1 } from './templates/template1/template1'
 import { template2 } from './templates/template2/template2'
 import { template3 } from './templates/template3/template3'
+import { template4 } from './templates/template4/template4'
 import { FormValues } from './types'
 
 interface TemplateData {
@@ -62,8 +63,12 @@ export function generateTemplateData(formValues: FormValues): TemplateData {
 
     case 4:
       return {
-        texDoc: '',
-        options: {}
+        texDoc: template4(formValues),
+        options: {
+          cmd: 'xelatex',
+          inputs: join(__dirname, 'templates', 'template4', 'inputs'),
+          fonts: join(__dirname, 'templates', 'template4', 'inputs')
+        }
       }
 
     case 5:

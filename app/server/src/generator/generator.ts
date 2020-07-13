@@ -7,6 +7,7 @@ import { template1 } from './templates/template1/template1'
 import { template2 } from './templates/template2/template2'
 import { template3 } from './templates/template3/template3'
 import { template4 } from './templates/template4/template4'
+import { template5 } from './templates/template5/template5'
 import { FormValues } from './types'
 
 interface TemplateData {
@@ -50,8 +51,7 @@ export function generateTemplateData(formValues: FormValues): TemplateData {
         options: {
           cmd: 'xelatex',
           inputs: join(__dirname, 'templates', 'template2', 'inputs'),
-          fonts: join(__dirname, 'templates', 'template2', 'inputs'),
-          errorLogs: join(__dirname, 'error-logs.txt')
+          fonts: join(__dirname, 'templates', 'template2', 'inputs')
         }
       }
 
@@ -73,8 +73,11 @@ export function generateTemplateData(formValues: FormValues): TemplateData {
 
     case 5:
       return {
-        texDoc: '',
-        options: {}
+        texDoc: template5(formValues),
+        options: {
+          cmd: 'pdflatex',
+          inputs: join(__dirname, 'templates', 'template5', 'inputs')
+        }
       }
 
     case 6:

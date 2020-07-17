@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+    "start": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
   },
   "dependencies": {
     "@koa/router": "^9.0.1",
@@ -14,6 +14,7 @@
     "koa": "^2.12.0",
     "koa-bodyparser": "^4.3.0",
     "koa-helmet": "^5.2.0",
+    "koa-logger": "^3.2.1",
     "node-latex": "^3.0.0",
     "pretty-latex": "^0.1.0",
     "sanitize-latex": "^1.0.0"
@@ -23,6 +24,7 @@
     "@types/common-tags": "^1.8.0",
     "@types/koa": "^2.11.3",
     "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-logger": "^3.1.1",
     "@types/koa__router": "^8.0.2",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "PORT=4000 react-app-rewired start",
+    "start": "cross-env PORT=4000 react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
@@ -44,6 +44,7 @@
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
+    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",

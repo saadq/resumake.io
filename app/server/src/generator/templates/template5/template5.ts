@@ -36,6 +36,7 @@ const generator: TemplateGenerator = {
         .filter(Boolean)
         .join(' - ')
     }))
+
     return this.createParagraphSection(paragraphSection, sectionName)
   },
 
@@ -216,6 +217,8 @@ export function template5(values: FormValues) {
       ${values.sections
         .map((section) => {
           switch (section.name) {
+            case 'basics':
+              return generator.createBasicsSection(values.basics)
             case 'education':
               return generator.createEducationSection(
                 values.education,

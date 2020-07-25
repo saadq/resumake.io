@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Label = styled.label`
-  font-family: Varela;
+  font-family: Varela Round;
   font-style: normal;
   font-weight: normal;
   font-size: 0.85em;

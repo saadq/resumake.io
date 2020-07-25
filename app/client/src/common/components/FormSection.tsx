@@ -19,7 +19,7 @@ const SectionContent = styled.section`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  font-family: Varela;
+  font-family: Varela Round;
 `
 
 const SectionNameEditSection = styled.div`

@@ -110,7 +110,7 @@ class Templates extends Component<Props, State> {
               />
               <TemplateButton
                 active={i + 1 === selectedTemplate}
-                type="button"
+                type="submit"
                 onClick={() => selectTemplate(i + 1)}
               >
                 Template {i + 1}

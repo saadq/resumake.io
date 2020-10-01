@@ -71,5 +71,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4001"
+  "proxy": "http://server:4001"
 }

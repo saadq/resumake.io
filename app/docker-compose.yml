@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    server:
+        build: ./server
+        stdin_open: true
+        tty: true
+        volumes: 
+            - ./server:/home/node/app/server
+        ports:
+            - 4001:4001
+    client:
+        build: ./client
+        stdin_open: true
+        tty: true
+        volumes:
+            - ./client:/home/node/app/client
+        ports:
+            - 4000:4000
+        depends_on:
+            - server

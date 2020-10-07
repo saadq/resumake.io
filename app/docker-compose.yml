@@ -7,6 +7,7 @@ services:
         tty: true
         volumes: 
             - ./server:/home/node/app/server
+            - servermodules:/home/node/app/server/node_modules
         ports:
             - 4001:4001
     client:
@@ -15,7 +16,12 @@ services:
         tty: true
         volumes:
             - ./client:/home/node/app/client
+            - clientmodules:/home/node/app/client/node_modules
         ports:
             - 4000:4000
         depends_on:
             - server
+              
+volumes: 
+  servermodules:
+  clientmodules:

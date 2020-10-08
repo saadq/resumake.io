@@ -50,12 +50,19 @@ If you want to get the entire project running (both the client and the API serve
 1. Clone this repo
 2. In the root folder, run the following:
 
+### Docker
 ```bash
-npm run build # This installs both client and server dependencies
-npm start # This will start the client server on localhost:3000 and the API server on localhost:3001
+[sudo] docker-compose up -d # This starts and installs both client and server dependencies in (-d) detached mode
 ```
 
-3. Head over to [localhost:3000](http://localhost:3000) to open the app.
+### npm
+```bash
+#If you want to run with npm you will need to change the proxy in client/package.json to http://localhost:4001
+npm run build # This installs both client and server dependencies
+npm start # This will start the client server on localhost:4000 and the API server on localhost:3001
+```
+
+3. Head over to [localhost:4000](http://localhost:4000) to open the app.
 
 **Note**: You will need to have LaTeX installed on your machine if you wish to test out the resume generation. You can download it [here](https://www.latex-project.org/get/).
 
@@ -86,7 +93,7 @@ If you already have the client dependencies installed, you can just run the foll
 npm start
 ```
 
-You can then head over to [localhost:3000](http://localhost:3000) to open the app.
+You can then head over to [localhost:4000](http://localhost:4000) to open the app.
 
 To see what other `npm` commands you can run, checkout the [client readme](./app/client/readme.md).
 

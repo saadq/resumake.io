@@ -1,44 +1,17 @@
 {
   "name": "resumake.io",
-  "version": "0.2.0",
-  "repository": "git@github.com:saadq/resumake.git",
-  "author": {
-    "name": "Saad Quadri",
-    "email": "saad@saadq.com",
-    "url": "http://saadq.com"
-  },
-  "scripts": {
-    "build": "npm run build:client && npm run build:server",
-    "start": "npm run start:client & npm run start:server",
-    "lint": "npm run lint:client && npm run lint:server",
-    "fix": "npm run fix:client && npm run fix:server",
-    "format": "npm run format:client && npm run format:server",
-    "test": "npm run test:client && npm run test:server",
-    "dist": "cd app/client && npm run build",
-    "build:client": "cd app/client && npm install",
-    "start:client": "cd app/client && npm start",
-    "lint:client": "cd app/client && npm run lint",
-    "fix:client": "cd app/client && npm run fix",
-    "format:client": "cd app/client && npm run format",
-    "test:client": "cd app/client && npm test",
-    "build:server": "cd app/server && npm install",
-    "start:server": "cd app/server && npm run start",
-    "fix:server": "cd app/server && npm run fix",
-    "format:server": "cd app/server && npm run format",
-    "lint:server": "cd app/server && npm run lint",
-    "test:server": "cd app/server && npm test",
-    "contributors": "all-contributors",
-    "postinstall": "opencollective postinstall"
-  },
+  "version": "3.0.0",
+  "author": "saadq <saadquad@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "lerna run start",
+    "build": "lerna run build",
+    "clean": "lerna run clean",
+    "test": "lerna run test",
+    "lint": "lerna run lint",
+    "format": "lerna run format"
+  },
   "devDependencies": {
-    "all-contributors-cli": "^4.10.1"
-  },
-  "dependencies": {
-    "opencollective": "^1.0.3"
-  },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/resumake"
+    "lerna": "^4.0.0"
   }
 }

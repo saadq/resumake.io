@@ -1,0 +1,12 @@
+{
+  "extends": "@shared/configs/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "module": "esnext",
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src"
+  ]
+}

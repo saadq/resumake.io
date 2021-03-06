@@ -1,0 +1,6 @@
+{
+  "extends": "@shared/configs/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  }
+}

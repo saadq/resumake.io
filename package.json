@@ -4,6 +4,7 @@
   "author": "saadq <saadquad@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "start": "lerna run start",
     "build": "lerna run build",
     "clean": "lerna run clean",

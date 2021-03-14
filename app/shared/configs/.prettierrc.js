@@ -1,3 +1,5 @@
-const { prettier } = require('./dist/prettier')
-
-module.exports = prettier
+module.exports = {
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'none'
+}

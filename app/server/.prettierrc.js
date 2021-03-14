@@ -1,3 +1,1 @@
-const { prettier } = require('@shared/configs')
-
-module.exports = prettier
+module.exports = require('@shared/configs/.prettierrc')

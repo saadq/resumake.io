@@ -2,19 +2,10 @@
   "name": "@shared/types",
   "version": "1.0.0",
   "private": true,
-  "author": "saadq <saad@saadq.com>",
+  "author": "saadq <saadquad@gmail.com>",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "build": "tsc"
-  },
-  "devDependencies": {
-    "@shared/configs": "^1.0.0",
-    "eslint": "^7.21.0",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }

@@ -2,21 +2,17 @@
   "name": "@shared/configs",
   "version": "1.0.0",
   "private": true,
-  "author": "saadq <saad@saadq.com>",
+  "author": "saadq <saadquad@gmail.com>",
   "license": "MIT",
-  "files": [
-    "dist",
-    "tsconfig.json"
-  ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1"
   },
-  "devDependencies": {
+  "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
-    "eslint": "^7.21.0",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }

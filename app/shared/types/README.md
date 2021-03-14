@@ -1,11 +1,11 @@
-# `types`
+# `@shared/types`
 
 > TODO: description
 
 ## Usage
 
 ```
-const types = require('types');
+const types = require('@shared/types');
 
 // TODO: DEMONSTRATE API
 ```

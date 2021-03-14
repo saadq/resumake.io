@@ -1,5 +1,3 @@
-export function generateSource() {}
+export function generateResumeTex(): void {}
 
-export function generateResume() {}
-
-export function generateReadme() {}
+export function generateResumePdf(): void {}

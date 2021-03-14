@@ -1,1 +1,1 @@
-export function uploadResumeData() {}
+export function uploadJsonResume() {}

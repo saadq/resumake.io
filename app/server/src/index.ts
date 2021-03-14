@@ -1,8 +1,8 @@
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import logger from 'koa-logger'
-import errorHandler from 'koa-error-lite'
 import { api } from './api'
+import { errorHandler } from './middleware/errorHandler'
 
 const app = new Koa()
 const port = process.env.PORT ?? 4001

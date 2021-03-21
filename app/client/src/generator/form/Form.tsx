@@ -6,6 +6,8 @@ const Section = styled.section`
   background: ${colors.gray2};
   height: calc(${sizes.formSection.height} - ${sizes.footer.height});
   margin-left: ${sizes.sidebar.width};
+  box-shadow: 0px 4px 10px #000000;
+  overflow-y: scroll;
 `
 
 const Header = styled.header`

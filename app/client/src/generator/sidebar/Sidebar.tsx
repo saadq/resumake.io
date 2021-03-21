@@ -9,7 +9,7 @@ export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.25);
   position: fixed;
 `
 

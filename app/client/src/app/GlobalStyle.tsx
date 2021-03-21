@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    font-family: sans-serif;
+    font-family: Open Sans, sans-serif;
     background: ${colors.background};
     color: ${colors.foreground};
   }

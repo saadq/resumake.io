@@ -1,16 +1,13 @@
-import styled from 'styled-components'
 import { Sidebar } from './sidebar/Sidebar'
 import { Form } from './form/Form'
-
-export const Page = styled.div`
-  display: flex;
-`
+import { Footer } from './footer/Footer'
 
 export function Generator() {
   return (
-    <Page>
+    <>
       <Sidebar />
       <Form />
-    </Page>
+      <Footer />
+    </>
   )
 }

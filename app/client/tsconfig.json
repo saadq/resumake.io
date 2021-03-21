@@ -4,9 +4,8 @@
     "noEmit": true,
     "declaration": false,
     "module": "esnext",
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

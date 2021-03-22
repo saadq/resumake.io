@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { colors, sizes } from '../../common/theme'
+import { colors, sizes } from '../../../common/theme'
 
 const Section = styled.section`
-  width: ${sizes.formSection.width};
+  flex: 1;
   background: ${colors.gray2};
-  height: calc(${sizes.formSection.height} - ${sizes.footer.height});
-  box-shadow: 0px 4px 10px #000000;
+  height: calc(${sizes.templatesSection.height} - ${sizes.footer.height});
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   overflow-y: scroll;
 `
 
@@ -18,11 +18,11 @@ const Header = styled.header`
   align-items: center;
 `
 
-export function Form() {
+export function Templates() {
   return (
     <Section>
       <Header>
-        <h1>Education</h1>
+        <h1>Templates</h1>
       </Header>
     </Section>
   )

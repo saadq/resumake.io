@@ -7,5 +7,9 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "typescript": "^4.2.3"
   }
 }

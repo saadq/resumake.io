@@ -13,6 +13,8 @@
     "eslint-plugin-react-hooks": "^4.2.0"
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "eslint": "^7.23.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.3"
   }
 }

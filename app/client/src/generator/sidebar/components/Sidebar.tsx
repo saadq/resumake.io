@@ -3,7 +3,7 @@ import { Logo } from '../../../common/components'
 import { colors, sizes } from '../../../common/theme'
 
 export const Aside = styled.aside`
-  background: ${colors.gray3};
+  background: ${colors.black};
   width: ${sizes.sidebar.width};
   height: calc(${sizes.sidebar.height} - ${sizes.footer.height});
   display: flex;

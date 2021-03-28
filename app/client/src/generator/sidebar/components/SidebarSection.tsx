@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Logo } from '../../../common/components'
 import { colors, sizes } from '../../../common/theme'
 
 export const Aside = styled.aside`
-  background: ${colors.black};
+  background: ${colors.black1};
   width: ${sizes.sidebar.width};
   height: calc(${sizes.sidebar.height} - ${sizes.footer.height});
   display: flex;
@@ -16,7 +17,9 @@ export const Aside = styled.aside`
 export function Sidebar() {
   return (
     <Aside>
-      <Logo marginTop={30} marginBottom={100} />
+      <Link to="/">
+        <Logo marginTop={30} marginBottom={100} />
+      </Link>
       <p>hi</p>
     </Aside>
   )

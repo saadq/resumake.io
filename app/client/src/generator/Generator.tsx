@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Sidebar } from './sidebar/components/Sidebar'
-import { Form } from './form/Form'
-import { Preview } from './preview/components/Preview'
-import { Templates } from './templates/components/Templates'
+import { Sidebar } from './sidebar/components/SidebarSection'
+import { FormSection } from './form/FormSection'
+import { PreviewSection } from './preview/components/PreviewSection'
+import { TemplatesSection } from './templates/components/TemplatesSection'
 import { Footer } from './footer/components/Footer'
 import { sizes } from '../common/theme'
 
@@ -18,9 +18,9 @@ export function Generator() {
     <>
       <Sidebar />
       <Sections>
-        <Form />
-        <Preview />
-        <Templates />
+        <FormSection />
+        <PreviewSection />
+        <TemplatesSection />
       </Sections>
       <Footer />
     </>

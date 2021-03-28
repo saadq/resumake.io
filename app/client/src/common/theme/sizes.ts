@@ -26,3 +26,7 @@ export const previewSection = {
 export const templatesSection = {
   height: '100vh'
 }
+
+export const card = {
+  width: '85%'
+}

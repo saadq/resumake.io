@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { LabeledInput } from '../../common/components/LabeledInput'
-import { Card } from '../../common/components/Card'
-import { colors, sizes } from '../../common/theme'
+import { LabeledInput } from '../../../common/components/LabeledInput'
+import { Card } from '../../../common/components/Card'
+import { colors, sizes } from '../../../common/theme'
 
 const Section = styled.section`
   width: ${sizes.formSection.width};

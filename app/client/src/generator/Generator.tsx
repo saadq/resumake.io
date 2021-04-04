@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Sidebar } from './sidebar/components/SidebarSection'
-import { FormSection } from './form/FormSection'
+import { FormSection } from './form/components/FormSection'
 import { PreviewSection } from './preview/components/PreviewSection'
 import { TemplatesSection } from './templates/components/TemplatesSection'
 import { Footer } from './footer/components/Footer'

@@ -11,7 +11,7 @@ export function App() {
       <BrowserRouter>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/generator" component={Generator} />
+        <Route path="/generator" component={Generator} />
       </BrowserRouter>
     </>
   )

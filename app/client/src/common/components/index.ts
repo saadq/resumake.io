@@ -1,3 +1,7 @@
 export { Button } from './Button'
 export { Logo } from './Logo'
+export { IconLink } from './IconLink'
 export { Card } from './Card'
+export { Tooltip } from './Tooltip'
+export { Input } from './Input'
+export { LabeledInput } from './LabeledInput'

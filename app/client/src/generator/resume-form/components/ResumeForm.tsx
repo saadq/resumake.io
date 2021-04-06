@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { LabeledInput } from '../../../common/components/LabeledInput'
-import { Card } from '../../../common/components/Card'
 import { colors, sizes } from '../../../common/theme'
+import { LabeledInput, Card } from '../../../common/components'
 
 const Section = styled.section`
   width: ${sizes.formSection.width};
@@ -27,7 +26,7 @@ const FormContent = styled.div`
   margin-top: 2rem;
 `
 
-export function FormSection() {
+export function ResumeForm() {
   return (
     <Section>
       <Header>

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Sidebar } from './sidebar/components/SidebarSection'
-import { FormSection } from './form/components/FormSection'
-import { PreviewSection } from './preview/components/PreviewSection'
-import { TemplatesSection } from './templates/components/TemplatesSection'
+import { ResumeForm } from './resume-form/components/ResumeForm'
+import { ResumePreview } from './resume-preview/components/ResumePreview'
+import { ResumeTemplates } from './resume-templates/components/ResumeTemplates'
 import { Footer } from './footer/components/Footer'
 import { sizes } from '../common/theme'
 
@@ -18,9 +18,9 @@ export function Generator() {
     <>
       <Sidebar />
       <Sections>
-        <FormSection />
-        <PreviewSection />
-        <TemplatesSection />
+        <ResumeForm />
+        <ResumePreview />
+        <ResumeTemplates />
       </Sections>
       <Footer />
     </>

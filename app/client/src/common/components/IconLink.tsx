@@ -1,14 +1,10 @@
 import { ReactChild } from 'react'
 import styled from 'styled-components'
-import { colors } from '../theme'
+import { NavLink } from 'react-router-dom'
 import { Tooltip } from '.'
-import { Link } from 'react-router-dom'
+import { colors } from '../theme'
 
-export const StyledLink = styled(Link)`
-  width: 100%;
-`
-
-export const Icon = styled.div`
+const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,32 +14,39 @@ export const Icon = styled.div`
   border-radius: 100%;
   cursor: pointer;
 
-  &:hover {
-  }
-
   svg {
     color: ${colors.black1};
   }
 `
 
-export const Wrapper = styled.div`
-  margin: 0 auto;
+const Wrapper = styled.div`
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
+  margin: 0.25rem auto;
   cursor: pointer;
   border-radius: 20%;
 
   &:hover {
-    background: ${colors.gray2};
+    background: ${colors.gray3};
 
     ${Icon} {
       border-radius: 20%;
       svg {
         color: black;
       }
+    }
+  }
+`
+
+const StyledLink = styled(NavLink)`
+  width: 100%;
+
+  &.active {
+    ${Wrapper} {
+      background: ${colors.gray2};
     }
   }
 `
@@ -57,7 +60,7 @@ interface Props {
 
 export function IconLink({ to, children, tooltip, tooltipId }: Props) {
   return (
-    <StyledLink to={to}>
+    <StyledLink to={to} activeClassName="active">
       <Wrapper data-tip data-for={tooltipId}>
         <Tooltip text={tooltip} tooltipId={tooltipId} />
         <Icon>{children}</Icon>

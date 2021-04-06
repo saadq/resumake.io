@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   padding: 2rem 1.5rem;
   margin-top: 2rem;
   background: ${colors.gray4};
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.4);
 
   &:first-of-type {
     margin-top: 0;

@@ -6,6 +6,7 @@ const PageFooter = styled.footer`
   height: ${sizes.footer.height};
   background: black;
   position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;

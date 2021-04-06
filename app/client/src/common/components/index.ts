@@ -1,4 +1,5 @@
 export { Button } from './Button'
+export { RoundButton } from './RoundButton'
 export { Logo } from './Logo'
 export { IconLink } from './IconLink'
 export { Card } from './Card'

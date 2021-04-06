@@ -9,15 +9,16 @@ const TooltipText = styled.span`
 interface Props {
   text: string
   tooltipId: string
+  color?: string
 }
 
-export function Tooltip({ text, tooltipId }: Props) {
+export function Tooltip({ text, tooltipId, color = colors.gray6 }: Props) {
   return (
     <ReactTooltip
       id={tooltipId}
       effect="solid"
       place="right"
-      backgroundColor={colors.gray6}
+      backgroundColor={color}
     >
       <TooltipText>{text}</TooltipText>
     </ReactTooltip>

@@ -34,12 +34,17 @@ export const Nav = styled.nav`
   align-items: center;
 `
 
+const HomeLink = styled(Link)`
+  margin-top: 30px;
+  margin-bottom: 50px;
+`
+
 export function Sidebar() {
   return (
     <Aside>
-      <Link to="/">
-        <Logo marginTop={30} marginBottom={50} />
-      </Link>
+      <HomeLink to="/">
+        <Logo />
+      </HomeLink>
       <Nav>
         <IconLink to="/generator/profile" tooltip="Profile" tooltipId="profile">
           <IoPerson size={'1.3rem'} />

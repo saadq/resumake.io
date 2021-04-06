@@ -1,5 +1,5 @@
 export const header = {
-  width: '100vw',
+  width: '100%',
   height: '5rem'
 }
 

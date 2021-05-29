@@ -4,7 +4,7 @@ import { colors, sizes } from '../../../common/theme'
 const PageFooter = styled.footer`
   width: ${sizes.footer.width};
   height: ${sizes.footer.height};
-  background: black;
+  background: ${colors.black};
   position: fixed;
   display: flex;
   justify-content: center;
@@ -15,17 +15,25 @@ const PageFooter = styled.footer`
   p {
     padding: 2px;
   }
+
+  a,
+  a:visited {
+    color: ${colors.primary};
+  }
 `
 
 export function Footer() {
   return (
     <PageFooter>
-      <p>© 2018 – {new Date().getFullYear()} Saad Quadri. |</p>
+      <p>© 2018 – {new Date().getFullYear()} Saad Quadri.</p>
       <p>
-        Resumake will remain free and open source forever – please consider
-        donating! |
+        Resumake will remain free and open source forever – please consider{' '}
+        <a href="https://paypal.com">donating!</a>
       </p>
-      <p>Contributors on GitHub welcome ❤️</p>
+      <p>
+        Contributors on{' '}
+        <a href="https://github.com/saadq/resumake.io">GitHub</a> welcome ❤️
+      </p>
     </PageFooter>
   )
 }

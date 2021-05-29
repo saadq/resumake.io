@@ -1,6 +1,6 @@
 export const header = {
   width: '100vw',
-  height: '5rem'
+  height: '4.5rem'
 }
 
 export const sidebar = {
@@ -10,7 +10,7 @@ export const sidebar = {
 
 export const footer = {
   width: '100vw',
-  height: '3rem'
+  height: '2.5rem'
 }
 
 export const formSection = {

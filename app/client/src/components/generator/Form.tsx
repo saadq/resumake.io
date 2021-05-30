@@ -4,6 +4,7 @@ import { colors, sizes } from '../../theme'
 
 const Section = styled.section`
   width: ${sizes.formSection.width};
+  background: ${colors.gray2};
   height: ${sizes.formSection.height};
   overflow-y: scroll;
 `

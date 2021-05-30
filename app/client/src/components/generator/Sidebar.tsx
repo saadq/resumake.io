@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { Logo } from '../../../common/components'
-import { colors, sizes } from '../../../common/theme'
+import { Logo } from '../common/Logo'
+import { colors, sizes } from '../../theme'
 
 export const Aside = styled.aside`
   background: ${colors.gray3};
   width: ${sizes.sidebar.width};
-  height: calc(${sizes.sidebar.height} - ${sizes.footer.height});
+  height: ${sizes.sidebar.height};
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { Sidebar } from './sidebar/components/Sidebar'
-import { Form } from './form/Form'
-import { Preview } from './preview/components/Preview'
-import { Templates } from './templates/components/Templates'
-import { Footer } from './footer/components/Footer'
-import { sizes } from '../common/theme'
+import { Sidebar } from './Sidebar'
+import { Form } from './Form'
+import { Preview } from './Preview'
+import { Templates } from './Templates'
+import { sizes } from '../../theme'
 
 const Sections = styled.div`
   display: flex;
@@ -22,7 +21,6 @@ export function Generator() {
         <Preview />
         <Templates />
       </Sections>
-      <Footer />
     </>
   )
 }

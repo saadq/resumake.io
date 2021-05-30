@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { settingsReducer } from '../generator/settings/slice'
+import { settingsReducer } from '../slices/settings'
 
 export const rootReducer = combineReducers({
   settings: settingsReducer

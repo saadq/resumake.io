@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, sizes } from '../../../common/theme'
+import { colors, sizes } from '../../theme'
 
 const PageFooter = styled.footer`
   width: ${sizes.footer.width};

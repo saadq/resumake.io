@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from './app/store'
-import { App } from './app/App'
+import { createStore } from './state/store'
+import { App } from './components/App'
 
 const store = createStore()
 
-ReactDOM.render(
+render(
   <StrictMode>
     <Provider store={store}>
       <App />

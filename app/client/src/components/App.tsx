@@ -1,8 +1,8 @@
 import { BrowserRouter, Route } from 'react-router-dom'
-import { GlobalStyle } from './GlobalStyle'
-import { Home } from '../home/Home'
-import { About } from '../about/About'
-import { Generator } from '../generator/Generator'
+import { Home } from './home/Home'
+import { About } from './about/About'
+import { Generator } from './generator/Generator'
+import { GlobalStyle } from './common/GlobalStyle'
 
 export function App() {
   return (

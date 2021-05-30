@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Sidebar } from './sidebar/components/SidebarSection'
+import { Sidebar } from './sidebar/components/Sidebar'
 import { ResumeForm } from './resume-form/components/ResumeForm'
 import { ResumePreview } from './resume-preview/components/ResumePreview'
 import { ResumeTemplates } from './resume-templates/components/ResumeTemplates'

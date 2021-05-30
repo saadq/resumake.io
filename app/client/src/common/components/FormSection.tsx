@@ -4,15 +4,10 @@ import { colors, sizes } from '../theme'
 
 const Container = styled.fieldset`
   width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `
 
 const Header = styled.header`
-  width: ${sizes.header.width};
+  width: 100%;
   height: ${sizes.header.height};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
   background: ${colors.gray2};
@@ -20,6 +15,15 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+`
+
+const Main = styled.main`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
 
 interface Props {
@@ -33,7 +37,7 @@ export function FormSection({ name, children }: Props) {
       <Header>
         <h1>{name}</h1>
       </Header>
-      {children}
+      <Main>{children}</Main>
     </Container>
   )
 }

@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    font-family: CircularStd-Book, sans-serif;
+    font-family: Poppins, CircularStd-Book, sans-serif;
     font-size: 1rem;
     background: ${colors.background};
     color: ${colors.foreground};

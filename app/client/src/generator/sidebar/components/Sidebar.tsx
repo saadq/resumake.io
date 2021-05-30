@@ -24,6 +24,7 @@ export const Aside = styled.aside`
   align-items: center;
   box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.3);
   position: fixed;
+  z-index: 999;
 `
 
 export const Nav = styled.nav`
@@ -46,7 +47,7 @@ export function Sidebar() {
         <Logo />
       </HomeLink>
       <Nav>
-        <IconLink to="/generator/profile" tooltip="Profile" tooltipId="profile">
+        <IconLink to="/generator/basics" tooltip="Profile" tooltipId="profile">
           <IoPerson size={'1.3rem'} />
         </IconLink>
         <IconLink

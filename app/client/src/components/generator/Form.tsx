@@ -1,21 +1,11 @@
 import styled from 'styled-components'
+import { Header } from '../common/Header'
 import { colors, sizes } from '../../theme'
 
 const Section = styled.section`
   width: ${sizes.formSection.width};
-  background: ${colors.gray2};
   height: ${sizes.formSection.height};
-  box-shadow: 0px 4px 10px #000000;
   overflow-y: scroll;
-`
-
-const Header = styled.header`
-  height: ${sizes.header.height};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-  background: ${colors.gray2};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 export function Form() {
@@ -24,6 +14,7 @@ export function Form() {
       <Header>
         <h1>Education</h1>
       </Header>
+      <div>hi</div>
     </Section>
   )
 }

@@ -5,4 +5,5 @@ export const IconWrapper = styled.div`
   width: 40px;
   height: 40px;
   background: ${colors.gray5};
+  cursor: pointer;
 `

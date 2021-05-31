@@ -1,10 +1,10 @@
 interface Props {
-  width?: number
-  height?: number
-  marginTop?: number
-  marginBottom?: number
-  marginLeft?: number
-  marginRight?: number
+  width?: string | number
+  height?: string | number
+  marginTop?: string | number
+  marginBottom?: string | number
+  marginLeft?: string | number
+  marginRight?: string | number
 }
 
 export function Logo({

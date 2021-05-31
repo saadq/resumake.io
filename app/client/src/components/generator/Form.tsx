@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Header } from '../common/Header'
+import { Header } from './Header'
 import { colors, sizes } from '../../theme'
 
 const Section = styled.section`
@@ -15,7 +15,6 @@ export function Form() {
       <Header>
         <h1>Education</h1>
       </Header>
-      <div>hi</div>
     </Section>
   )
 }

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Sidebar } from './Sidebar'
-import { Form } from './Form'
-import { Preview } from './Preview'
-import { Templates } from './Templates'
+import { ResumeForm } from './ResumeForm'
+import { ResumePreview } from './ResumePreview'
+import { ResumeTemplates } from './ResumeTemplates'
 import { sizes } from '../../theme'
 
 const Sections = styled.div`
@@ -17,9 +17,9 @@ export function Generator() {
     <>
       <Sidebar />
       <Sections>
-        <Form />
-        <Preview />
-        <Templates />
+        <ResumeForm />
+        <ResumePreview />
+        <ResumeTemplates />
       </Sections>
     </>
   )

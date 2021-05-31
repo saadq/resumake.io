@@ -4,10 +4,10 @@
   "author": "saadq <saadquad@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "start": "lerna run start --stream",
+    "setup": "npm install && lerna bootstrap",
+    "start": "lerna run start --parallel --stream",
     "build": "lerna run build",
-    "clean": "lerna run clean",
+    "clean": "lerna exec 'rm -rf node_modules dist'",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format"

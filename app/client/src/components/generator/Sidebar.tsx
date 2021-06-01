@@ -70,7 +70,7 @@ export function Sidebar() {
         <IconLink to="/generator/skills" tooltip="Skills" tooltipId="skills">
           <IoConstruct size={'1.3rem'} />
         </IconLink>
-        <IconLink to="/generator/awards" tooltip="Skills" tooltipId="skills">
+        <IconLink to="/generator/awards" tooltip="Awards" tooltipId="awards">
           <IoRibbon size={'1.3rem'} />
         </IconLink>
       </Nav>

@@ -54,7 +54,7 @@ interface Props {
   tooltipId: string
 }
 
-export function IconLink({ to, children, tooltip, tooltipId }: Props) {
+export function NavIcon({ to, children, tooltip, tooltipId }: Props) {
   return (
     <StyledLink to={to} activeClassName="active">
       <Wrapper data-tip data-for={tooltipId}>

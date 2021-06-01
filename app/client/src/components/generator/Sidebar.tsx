@@ -15,7 +15,7 @@ import {
 } from 'react-icons/io5'
 import { Logo } from '../common/Logo'
 import { RoundButton } from '../common/RoundButton'
-import { IconLink } from '../common/IconLink'
+import { NavIcon } from '../common/NavIcon'
 import { Tooltip } from '../common/Tooltip'
 import { colors, sizes } from '../../theme'
 
@@ -50,29 +50,29 @@ export function Sidebar() {
         <Logo />
       </HomeLink>
       <Nav>
-        <IconLink to="/generator/basics" tooltip="Profile" tooltipId="profile">
+        <NavIcon to="/generator/basics" tooltip="Profile" tooltipId="profile">
           <IoPerson size={'1.3rem'} />
-        </IconLink>
-        <IconLink
+        </NavIcon>
+        <NavIcon
           to="/generator/education"
           tooltip="Education"
           tooltipId="education"
         >
           <IoSchool size={'1.3rem'} />
-        </IconLink>
-        <IconLink
+        </NavIcon>
+        <NavIcon
           to="/generator/experience"
           tooltip="Work Experience"
           tooltipId="experience"
         >
           <IoBriefcase size={'1.3rem'} />
-        </IconLink>
-        <IconLink to="/generator/skills" tooltip="Skills" tooltipId="skills">
+        </NavIcon>
+        <NavIcon to="/generator/skills" tooltip="Skills" tooltipId="skills">
           <IoConstruct size={'1.3rem'} />
-        </IconLink>
-        <IconLink to="/generator/awards" tooltip="Awards" tooltipId="awards">
+        </NavIcon>
+        <NavIcon to="/generator/awards" tooltip="Awards" tooltipId="awards">
           <IoRibbon size={'1.3rem'} />
-        </IconLink>
+        </NavIcon>
       </Nav>
       <Tooltip
         color={colors.primary}

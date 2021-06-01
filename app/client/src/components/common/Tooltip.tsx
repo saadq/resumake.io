@@ -12,7 +12,7 @@ interface Props {
   color?: string
 }
 
-export function Tooltip({ text, tooltipId, color = colors.gray5 }: Props) {
+export function Tooltip({ text, tooltipId, color = colors.black }: Props) {
   return (
     <ReactTooltip
       id={tooltipId}

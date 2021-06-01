@@ -10,11 +10,11 @@ const Icon = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
-  background: ${colors.gray5};
-  border-radius: 100%;
+  background: ${colors.black};
   cursor: pointer;
+  border-radius: 20%;
   svg {
-    color: ${colors.black};
+    color: #9aa2c2;
   }
 `
 
@@ -28,11 +28,10 @@ const Wrapper = styled.div`
   cursor: pointer;
   border-radius: 20%;
   &:hover {
-    background: ${colors.gray3};
+    background: ${colors.gray4};
     ${Icon} {
-      border-radius: 20%;
       svg {
-        color: black;
+        color: ${colors.white};
       }
     }
   }
@@ -42,7 +41,7 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   &.active {
     ${Wrapper} {
-      background: ${colors.gray2};
+      background: ${colors.gray5};
     }
   }
 `

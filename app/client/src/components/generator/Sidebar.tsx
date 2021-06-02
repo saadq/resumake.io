@@ -6,12 +6,7 @@ import {
   IoBriefcase as WorkIcon,
   IoConstruct as SkillsIcon,
   IoAppsSharp as ProjectsIcon,
-  IoRibbon as AwardsIcon,
-  IoBriefcase,
-  IoConstruct,
-  IoPerson,
-  IoSchool,
-  IoRibbon
+  IoRibbon as AwardsIcon
 } from 'react-icons/io5'
 import { Logo } from '../common/Logo'
 import { RoundButton } from '../common/RoundButton'
@@ -40,7 +35,7 @@ export const Nav = styled.nav`
 
 const HomeLink = styled(Link)`
   margin-top: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `
 
 export function Sidebar() {
@@ -51,27 +46,34 @@ export function Sidebar() {
       </HomeLink>
       <Nav>
         <NavIcon to="/generator/basics" tooltip="Profile" tooltipId="profile">
-          <IoPerson size={'1.3rem'} />
+          <ProfileIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
           to="/generator/education"
           tooltip="Education"
           tooltipId="education"
         >
-          <IoSchool size={'1.3rem'} />
+          <EducationIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
           to="/generator/experience"
           tooltip="Work Experience"
           tooltipId="experience"
         >
-          <IoBriefcase size={'1.3rem'} />
+          <WorkIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon to="/generator/skills" tooltip="Skills" tooltipId="skills">
-          <IoConstruct size={'1.3rem'} />
+          <SkillsIcon size={'1.3rem'} />
+        </NavIcon>
+        <NavIcon
+          to="/generator/projects"
+          tooltip="Projects"
+          tooltipId="projects"
+        >
+          <ProjectsIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon to="/generator/awards" tooltip="Awards" tooltipId="awards">
-          <IoRibbon size={'1.3rem'} />
+          <AwardsIcon size={'1.3rem'} />
         </NavIcon>
       </Nav>
       <Tooltip

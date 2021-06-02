@@ -45,41 +45,53 @@ export function Sidebar() {
         <Logo />
       </HomeLink>
       <Nav>
-        <NavIcon to="/generator/basics" tooltip="Profile" tooltipId="profile">
+        <NavIcon
+          to="/generator/basics"
+          tooltip="Profile"
+          tooltipId="tooltip-profile"
+        >
           <ProfileIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
           to="/generator/education"
           tooltip="Education"
-          tooltipId="education"
+          tooltipId="tooltip-education"
         >
           <EducationIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
           to="/generator/experience"
           tooltip="Work Experience"
-          tooltipId="experience"
+          tooltipId="tooltip-experience"
         >
           <WorkIcon size={'1.3rem'} />
         </NavIcon>
-        <NavIcon to="/generator/skills" tooltip="Skills" tooltipId="skills">
+        <NavIcon
+          to="/generator/skills"
+          tooltip="Skills"
+          tooltipId="tooltip-skills"
+        >
           <SkillsIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
           to="/generator/projects"
           tooltip="Projects"
-          tooltipId="projects"
+          tooltipId="tooltip-projects"
         >
           <ProjectsIcon size={'1.3rem'} />
         </NavIcon>
-        <NavIcon to="/generator/awards" tooltip="Awards" tooltipId="awards">
+        <NavIcon
+          to="/generator/awards"
+          tooltip="Awards"
+          tooltipId="tooltip-awards"
+        >
           <AwardsIcon size={'1.3rem'} />
         </NavIcon>
       </Nav>
       <Tooltip
         color={colors.primary}
         text="Add new section"
-        tooltipId="addNewSection"
+        tooltipId="tooltip-addNewSection"
       />
       <RoundButton margin="2rem 0 0 0" data-tip data-for="addNewSection">
         +

@@ -1,5 +1,6 @@
 import { ReactChild } from 'react'
 import styled from 'styled-components'
+import { darken, lighten } from 'polished'
 import { NavLink } from 'react-router-dom'
 import { Tooltip } from './Tooltip'
 import { colors } from '../../theme'
@@ -10,11 +11,11 @@ const Icon = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
-  background: ${colors.black};
+  background: ${colors.black1};
   cursor: pointer;
   border-radius: 20%;
   svg {
-    color: #9aa2c2;
+    color: ${lighten(0.25, '#6916f0')};
   }
 `
 
@@ -41,7 +42,7 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   &.active {
     ${Wrapper} {
-      background: ${colors.gray5};
+      background: ${darken(0.1, colors.gray5)};
     }
   }
 `

@@ -15,7 +15,7 @@ interface Props {
 export function Tooltip({ text, tooltipId, color = colors.black }: Props) {
   return (
     <ReactTooltip
-      id={tooltipId}
+      id={`tooltip-${tooltipId}`}
       effect="solid"
       place="right"
       backgroundColor={color}

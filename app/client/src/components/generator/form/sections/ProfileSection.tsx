@@ -1,6 +1,6 @@
-import { FormSection } from '../common/FormSection'
-import { Card } from '../common/Card'
-import { LabeledInput } from '../common/LabeledInput'
+import { FormSection } from '../../../common/FormSection'
+import { Card } from '../../../common/Card'
+import { LabeledInput } from '../../../common/LabeledInput'
 
 export function ProfileSection() {
   return (

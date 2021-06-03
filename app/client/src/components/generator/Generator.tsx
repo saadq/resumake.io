@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { Sidebar } from './Sidebar'
-import { ResumeForm } from './ResumeForm'
-import { ResumePreview } from './ResumePreview'
-import { ResumeTemplates } from './ResumeTemplates'
-import { Header } from './Header'
+import { Sidebar } from './layout/Sidebar'
+import { Header } from './layout/Header'
+import { FloatingButton } from './layout/FloatingButton'
+import { ResumeForm } from './form/ResumeForm'
+import { ResumePreview } from './preview/ResumePreview'
+import { ResumeTemplates } from './templates/ResumeTemplates'
 import { sizes } from '../../theme'
 
 const Sections = styled.div`
@@ -25,6 +26,7 @@ export function Generator() {
         <ResumePreview />
         <ResumeTemplates />
       </Sections>
+      <FloatingButton />
     </>
   )
 }

@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     background: ${colors.gray4};
     ${Icon} {
       svg {
-        color: ${colors.white};
+        color: ${colors.primary};
       }
     }
   }

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { ProfileSection } from './ProfileSection'
-import { EducationSection } from './EducationSection'
-import { colors, sizes } from '../../theme'
+import { ProfileSection } from './sections/ProfileSection'
+import { EducationSection } from './sections/EducationSection'
+import { colors, sizes } from '../../../theme'
 
 const Container = styled.section`
   width: ${sizes.formSection.width};

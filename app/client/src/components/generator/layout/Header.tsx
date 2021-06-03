@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { sizes, colors } from '../../theme'
+import { sizes, colors } from '../../../theme'
 
 const StyledHeader = styled.header`
   position: fixed;

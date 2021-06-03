@@ -8,11 +8,11 @@ import {
   IoAppsSharp as ProjectsIcon,
   IoRibbon as AwardsIcon
 } from 'react-icons/io5'
-import { Logo } from '../common/Logo'
-import { RoundButton } from '../common/RoundButton'
-import { NavIcon } from '../common/NavIcon'
-import { Tooltip } from '../common/Tooltip'
-import { colors, sizes } from '../../theme'
+import { Logo } from '../../common/Logo'
+import { RoundButton } from '../../common/RoundButton'
+import { NavIcon } from '../../common/NavIcon'
+import { Tooltip } from '../../common/Tooltip'
+import { colors, sizes } from '../../../theme'
 
 export const Aside = styled.aside`
   background: ${colors.gray3};
@@ -21,7 +21,8 @@ export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.75);
+  border-right: 1px solid black;
   position: fixed;
   z-index: 999;
 `
@@ -94,7 +95,11 @@ export function Sidebar() {
         text="Add new section"
         tooltipId="tooltip-addNewSection"
       />
-      <RoundButton margin="2rem 0 0 0" data-tip data-for="addNewSection">
+      <RoundButton
+        margin="2rem 0 0 0"
+        data-tip
+        data-for="tooltip-addNewSection"
+      >
         +
       </RoundButton>
     </Aside>

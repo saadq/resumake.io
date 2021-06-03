@@ -1,5 +1,5 @@
 export const sidebar = {
-  width: '4.5rem',
+  width: '5rem',
   height: '100vh'
 }
 

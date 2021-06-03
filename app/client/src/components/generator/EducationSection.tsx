@@ -4,7 +4,7 @@ import { LabeledInput } from '../common/LabeledInput'
 
 export function EducationSection() {
   return (
-    <FormSection name="Education">
+    <FormSection>
       <Card>
         <LabeledInput label="School name" placeholder="Rutgers University" />
         <LabeledInput label="Degree" placeholder="Bachelor's" />

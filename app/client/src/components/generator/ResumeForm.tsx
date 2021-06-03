@@ -7,8 +7,7 @@ import { colors, sizes } from '../../theme'
 const Container = styled.section`
   width: ${sizes.formSection.width};
   background: ${colors.gray2};
-  height: ${sizes.formSection.height};
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   overflow: scroll;
 `
 

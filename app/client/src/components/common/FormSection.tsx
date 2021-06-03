@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
-import { Header } from '../common/Header'
 
 const Container = styled.fieldset`
   width: 100%;
@@ -17,16 +16,12 @@ const Main = styled.main`
 `
 
 interface Props {
-  name: string
   children: ReactNode
 }
 
-export function FormSection({ name, children }: Props) {
+export function FormSection({ children }: Props) {
   return (
     <Container>
-      <Header>
-        <h1>{name}</h1>
-      </Header>
       <Main>{children}</Main>
     </Container>
   )

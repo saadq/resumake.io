@@ -1,11 +1,11 @@
-export const header = {
-  width: '100vw',
-  height: '4.5rem'
-}
-
 export const sidebar = {
   width: '4.5rem',
   height: '100vh'
+}
+
+export const header = {
+  width: `calc(100vw - ${sidebar.width})`,
+  height: '4.5rem'
 }
 
 export const footer = {
@@ -24,7 +24,7 @@ export const previewSection = {
 }
 
 export const templatesSection = {
-  height: '100vh'
+  width: '20%'
 }
 
 export const card = {

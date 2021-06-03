@@ -4,7 +4,7 @@ import { LabeledInput } from '../common/LabeledInput'
 
 export function ProfileSection() {
   return (
-    <FormSection name="Profile">
+    <FormSection>
       <Card>
         <LabeledInput label="Full name" placeholder="John Smith" />
         <LabeledInput label="Email" placeholder="johnsmith@gmail.com" />

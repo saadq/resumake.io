@@ -23,6 +23,7 @@ export const Aside = styled.aside`
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
   position: fixed;
+  z-index: 999;
 `
 
 export const Nav = styled.nav`

@@ -13,6 +13,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 99;
 `
 
 const HeaderSection = styled.section<{ width: string }>`

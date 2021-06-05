@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Sidebar } from './layout/Sidebar'
 import { Header } from './layout/Header'
 import { FloatingButton } from './layout/FloatingButton'
-import { ResumeForm } from './form/ResumeForm'
-import { ResumePreview } from './preview/ResumePreview'
-import { ResumeTemplates } from './templates/ResumeTemplates'
+import { Form } from './form/Form'
+import { ResumePreview } from './preview/Preview'
+import { Templates } from './templates/Templates'
 import { sizes } from '../../theme'
 
 const Sections = styled.div`
@@ -22,9 +22,9 @@ export function Generator() {
       <Sidebar />
       <Header />
       <Sections>
-        <ResumeForm />
+        <Form />
         <ResumePreview />
-        <ResumeTemplates />
+        <Templates />
       </Sections>
       <FloatingButton />
     </>

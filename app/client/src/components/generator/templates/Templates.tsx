@@ -9,6 +9,6 @@ const Section = styled.section`
   overflow-y: scroll;
 `
 
-export function ResumeTemplates() {
+export function Templates() {
   return <Section></Section>
 }

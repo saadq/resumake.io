@@ -11,16 +11,16 @@ const Container = styled.section`
   overflow: scroll;
 `
 
-const Form = styled.form`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-export function ResumeForm() {
+export function Form() {
   return (
     <Container>
-      <Form>
+      <StyledForm>
         <Switch>
           <Route exact path="/generator/basics" component={ProfileSection} />
           <Route
@@ -36,7 +36,7 @@ export function ResumeForm() {
             <Redirect to="/generator/basics" />
           </Route>
         </Switch>
-      </Form>
+      </StyledForm>
     </Container>
   )
 }

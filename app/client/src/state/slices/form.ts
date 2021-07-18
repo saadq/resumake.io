@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { FormState } from '../../types/form'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { FormState, FormValues } from '../../types/form'
 
 const initialState: FormState = {}
 
@@ -7,7 +7,7 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    generateResume() {}
+    generateResume(state, action: PayloadAction<FormValues>) {}
   }
 })
 

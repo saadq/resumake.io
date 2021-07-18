@@ -32,20 +32,22 @@ export function Form() {
 
   const dispatch = useDispatch()
 
-  const onSubmit = useCallback((data: FormValues) => {
-    console.log({ data })
-  }, [])
+  const onSubmit = form.handleSubmit(
+    useCallback(
+      (data: FormValues) => {
+        dispatch(formActions.generateResume(data))
+      },
+      [dispatch]
+    )
+  )
 
   const onChange = useCallback(() => {
-    dispatch(formActions.generateResume())
-  }, [dispatch])
+    onSubmit()
+  }, [onSubmit])
 
   return (
     <FormProvider {...form}>
-      <StyledForm
-        onSubmit={form.handleSubmit(onSubmit)}
-        onChange={debounce(onChange, 500)}
-      >
+      <StyledForm onSubmit={onSubmit} onChange={debounce(onChange, 500)}>
         <Switch>
           <Route exact path="/generator/basics" component={ProfileSection} />
           <Route

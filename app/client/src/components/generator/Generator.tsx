@@ -3,7 +3,7 @@ import { Sidebar } from './layout/Sidebar'
 import { Header } from './layout/Header'
 import { FloatingButton } from './layout/FloatingButton'
 import { Form } from './form/Form'
-import { ResumePreview } from './preview/Preview'
+import { Preview } from './preview/Preview'
 import { Templates } from './templates/Templates'
 import { sizes } from '../../theme'
 
@@ -23,7 +23,7 @@ export function Generator() {
       <Header />
       <Sections>
         <Form />
-        <ResumePreview />
+        <Preview />
         <Templates />
       </Sections>
       <FloatingButton />

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Input, InputProps } from './Input'
 import { colors } from '../../theme'
+import { useFormContext } from 'react-hook-form'
+import { FormValues } from '../../types/form'
 
 const Container = styled.div`
   display: flex;
@@ -18,15 +20,17 @@ const Label = styled.label`
   margin-bottom: 0.5rem;
 `
 
-interface Props extends InputProps {
+interface Props extends Omit<InputProps, 'formContext'> {
   label: string
 }
 
 export function LabeledInput({ label, ...inputProps }: Props) {
+  const formContext = useFormContext<FormValues>()
+
   return (
     <Container>
       <Label>{label}</Label>
-      <Input {...inputProps} />
+      <Input formContext={formContext} {...inputProps} />
     </Container>
   )
 }

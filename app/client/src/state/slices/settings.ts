@@ -5,15 +5,13 @@ const initialState: SettingsState = {
   theme: 'dark'
 }
 
-function toggle(state: SettingsState, action: PayloadAction) {
-  state.theme === 'dark' ? 'light' : 'dark'
-}
-
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    toggle
+    toggleTheme(state, action: PayloadAction) {
+      state.theme === 'dark' ? 'light' : 'dark'
+    }
   }
 })
 

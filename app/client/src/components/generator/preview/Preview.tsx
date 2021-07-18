@@ -9,6 +9,6 @@ const Section = styled.section`
   overflow-y: scroll;
 `
 
-export function ResumePreview() {
+export function Preview() {
   return <Section></Section>
 }

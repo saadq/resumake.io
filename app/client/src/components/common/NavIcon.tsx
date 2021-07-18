@@ -15,7 +15,7 @@ const Icon = styled.div`
   cursor: pointer;
   border-radius: 20%;
   svg {
-    color: ${lighten(0.25, '#6916f0')};
+    color: ${lighten(0.15, '#6916f0')};
   }
 `
 

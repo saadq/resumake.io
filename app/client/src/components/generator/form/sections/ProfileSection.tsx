@@ -6,32 +6,31 @@ export function ProfileSection() {
   return (
     <FormSection>
       <Card>
-        <LabeledInput label="Full name" placeholder="John Smith" />
-        <LabeledInput label="Email" placeholder="johnsmith@gmail.com" />
-        <LabeledInput label="Phone number" placeholder="(555) 464-6446" />
-        <LabeledInput label="Location" placeholder="Seattle, WA" />
-        <LabeledInput label="Link" placeholder="https://github.com/saadq" />
-      </Card>
-      <Card>
-        <LabeledInput label="Full name" placeholder="John Smith" />
-        <LabeledInput label="Email" placeholder="johnsmith@gmail.com" />
-        <LabeledInput label="Phone number" placeholder="(555) 464-6446" />
-        <LabeledInput label="Location" placeholder="Seattle, WA" />
-        <LabeledInput label="Link" placeholder="https://github.com/saadq" />
-      </Card>
-      <Card>
-        <LabeledInput label="Full name" placeholder="John Smith" />
-        <LabeledInput label="Email" placeholder="johnsmith@gmail.com" />
-        <LabeledInput label="Phone number" placeholder="(555) 464-6446" />
-        <LabeledInput label="Location" placeholder="Seattle, WA" />
-        <LabeledInput label="Link" placeholder="https://github.com/saadq" />
-      </Card>
-      <Card>
-        <LabeledInput label="Full name" placeholder="John Smith" />
-        <LabeledInput label="Email" placeholder="johnsmith@gmail.com" />
-        <LabeledInput label="Phone number" placeholder="(555) 464-6446" />
-        <LabeledInput label="Location" placeholder="Seattle, WA" />
-        <LabeledInput label="Link" placeholder="https://github.com/saadq" />
+        <LabeledInput
+          name="basics.fullName"
+          label="Full name"
+          placeholder="John Smith"
+        />
+        <LabeledInput
+          name="basics.email"
+          label="Email"
+          placeholder="johnsmith@gmail.com"
+        />
+        <LabeledInput
+          name="basics.phoneNumber"
+          label="Phone number"
+          placeholder="(555) 464-6446"
+        />
+        <LabeledInput
+          name="basics.location"
+          label="Location"
+          placeholder="Seattle, WA"
+        />
+        <LabeledInput
+          name="basics.link"
+          label="Link"
+          placeholder="https://github.com/saadq"
+        />
       </Card>
     </FormSection>
   )

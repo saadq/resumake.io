@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 type Timeout = ReturnType<typeof setTimeout>
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce(func: (...args: any[]) => void, wait: number) {
   let timeout: Timeout | null
   return function (this: unknown, ...args: unknown[]) {

@@ -1,13 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FormState, FormValues } from '../../types/form'
 
-const initialState: FormState = {}
+const initialState: FormState = {
+  isGenerating: false
+}
 
 export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    generateResume(state, action: PayloadAction<FormValues>) {}
+    generateResume(state, action: PayloadAction<FormValues>) {
+      state.isGenerating = true
+    },
+    generateResumeSuccess(state, action: PayloadAction) {
+      state.isGenerating = false
+    },
+    generateResumeFailure(state, action: PayloadAction) {
+      state.isGenerating = false
+    }
   }
 })
 

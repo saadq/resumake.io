@@ -22,17 +22,20 @@ const StyledForm = styled.form`
 
 const defaultValues: FormValues = {
   basics: {},
-  education: [{}]
+  work: [{ highlights: [''] }],
+  skills: [{}],
+  education: [{}],
+  projects: [{}],
+  awards: [{}],
+  volunteer: [{}],
+  publications: [{}]
 }
 
 export function Form() {
-  const form = useForm<FormValues>({
-    defaultValues
-  })
-
+  const form = useForm<FormValues>({ defaultValues })
   const dispatch = useDispatch()
 
-  const onSubmit = form.handleSubmit(
+  const generateResume = form.handleSubmit(
     useCallback(
       (data: FormValues) => {
         dispatch(formActions.generateResume(data))
@@ -41,13 +44,12 @@ export function Form() {
     )
   )
 
-  const onChange = useCallback(() => {
-    onSubmit()
-  }, [onSubmit])
-
   return (
     <FormProvider {...form}>
-      <StyledForm onSubmit={onSubmit} onChange={debounce(onChange, 500)}>
+      <StyledForm
+        onSubmit={generateResume}
+        onChange={debounce(generateResume, 500)}
+      >
         <Switch>
           <Route exact path="/generator/basics" component={ProfileSection} />
           <Route

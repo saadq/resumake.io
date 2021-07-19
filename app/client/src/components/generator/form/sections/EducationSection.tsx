@@ -2,10 +2,9 @@ import { useFieldArray } from 'react-hook-form'
 import { FormSection } from '../../../common/FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../../../common/LabeledInput'
-import { FormValues } from '../../../../types/form'
 
 export function EducationSection() {
-  const { fields, append, remove } = useFieldArray<FormValues>({
+  const { fields, append, remove } = useFieldArray({
     name: 'education'
   })
 
@@ -14,17 +13,17 @@ export function EducationSection() {
       {fields.map((field, index) => (
         <Card key={field.id}>
           <LabeledInput
-            name={`education.${index}.name`}
+            name={`education.${index}.institution`}
             label="School name"
             placeholder="Rutgers University"
           />
           <LabeledInput
-            name={`education.${index}.degree`}
+            name={`education.${index}.studyType`}
             label="Degree"
             placeholder="Bachelor's"
           />
           <LabeledInput
-            name={`education.${index}.major`}
+            name={`education.${index}.area`}
             label="Major"
             placeholder="Computer Science"
           />

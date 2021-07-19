@@ -22,7 +22,7 @@ export function ProfileSection() {
           placeholder="(555) 464-6446"
         />
         <LabeledInput
-          name="basics.location"
+          name="basics.location.address"
           label="Location"
           placeholder="Seattle, WA"
         />

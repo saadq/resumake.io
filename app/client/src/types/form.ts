@@ -24,7 +24,6 @@ interface School {
 interface Job {
   name?: string
   location?: string
-  description?: string
   position?: string
   startDate?: string
   endDate?: string
@@ -35,7 +34,7 @@ interface Job {
 interface Skill {
   name?: string
   level?: string
-  keywords?: string
+  keywords?: string[]
 }
 
 interface Project {
@@ -58,7 +57,6 @@ interface Award {
 interface VolunteerExperience {
   organization?: string
   position?: string
-  url?: string
   startDate?: string
   endDate?: string
   summary?: string

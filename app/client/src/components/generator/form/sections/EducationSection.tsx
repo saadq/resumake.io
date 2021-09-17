@@ -11,7 +11,7 @@ export function EducationSection() {
   return (
     <FormSection>
       {fields.map((field, index) => (
-        <Card key={field.id}>
+        <Card key={field.id} removeCard={() => remove(index)}>
           <LabeledInput
             name={`education.${index}.institution`}
             label="School name"
@@ -37,7 +37,6 @@ export function EducationSection() {
             label="End Date"
             placeholder="Jun 2019"
           />
-          <button onClick={() => remove(index)}>Remove</button>
         </Card>
       ))}
       <button onClick={() => append({})}>Add</button>

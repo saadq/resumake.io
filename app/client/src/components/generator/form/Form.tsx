@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { colors, sizes } from '../../../theme'
-import { FormProvider, useForm } from 'react-hook-form'
 import { FormValues } from '../../../types/form'
 import { formActions } from '../../../state/slices/form'
 import { debounce } from '../../../utils/debounce'
@@ -20,19 +20,82 @@ const StyledForm = styled.form`
   overflow: scroll;
 `
 
-const defaultValues: FormValues = {
-  basics: {},
-  work: [{ highlights: [''] }],
-  skills: [{}],
-  education: [{}],
-  projects: [{}],
-  awards: [{}],
-  volunteer: [{}],
-  publications: [{}]
+const defaultFormValues: FormValues = {
+  basics: {
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    location: {
+      address: ''
+    },
+    link: ''
+  },
+  work: [
+    {
+      name: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      summary: '',
+      highlights: ['']
+    }
+  ],
+  skills: [
+    {
+      name: '',
+      keywords: ['']
+    }
+  ],
+  education: [
+    {
+      institution: '',
+      area: '',
+      studyType: '',
+      gpa: '',
+      startDate: '',
+      endDate: ''
+    }
+  ],
+  projects: [
+    {
+      name: '',
+      description: '',
+      url: '',
+      keywords: [''],
+      highlights: [''],
+      startDate: '',
+      endDate: ''
+    }
+  ],
+  awards: [
+    {
+      title: '',
+      awarder: '',
+      date: '',
+      summary: ''
+    }
+  ],
+  volunteer: [
+    {
+      organization: '',
+      position: '',
+      summary: '',
+      highlights: [''],
+      startDate: '',
+      endDate: ''
+    }
+  ],
+  publications: [
+    {
+      name: '',
+      publisher: '',
+      url: ''
+    }
+  ]
 }
 
 export function Form() {
-  const form = useForm<FormValues>({ defaultValues })
+  const form = useForm<FormValues>({ defaultValues: defaultFormValues })
   const dispatch = useDispatch()
 
   const generateResume = form.handleSubmit(
@@ -65,7 +128,6 @@ export function Form() {
             <Redirect to="/generator/basics" />
           </Route>
         </Switch>
-        <button>Submit</button>
       </StyledForm>
     </FormProvider>
   )

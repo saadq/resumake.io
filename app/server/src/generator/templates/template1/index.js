@@ -342,8 +342,7 @@ function template1(values: SanitizedValues) {
     \\textheight=10in
     \\pagestyle{empty}
     \\raggedright
-    \\usepackage[bottom=0.8in,top=0.8in]{geometry}
-
+    \\usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
 
     ${generator.resumeDefinitions()}
 

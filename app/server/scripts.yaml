@@ -1,0 +1,25 @@
+imap: import_map.json
+lock: lock.json
+
+scripts:
+  setup:
+    cmd: deno cache --reload src/mod.ts
+    desc: Installs all the dependencies using the lockfile
+
+  start:
+    cmd: deno run src/mod.ts
+    desc: Starts the server in dev mode
+    watch: true
+    allow:
+      - net
+      - env
+      - read
+      - write
+
+  lint:
+    cmd: deno lint
+    desc: Lints the code using Deno's standard linter
+
+  format:
+    cmd: deno fmt
+    desc: Formats the code using Deno's standard formatter

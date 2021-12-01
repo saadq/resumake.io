@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "dotenv": "https://deno.land/x/dotenv@v3.1.0/load.ts",
+    "oak": "https://deno.land/x/oak@v10.0.0/mod.ts"
+  }
+}

@@ -2,7 +2,7 @@
   "name": "client",
   "version": "3.0.0",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview --port 4002"
   },

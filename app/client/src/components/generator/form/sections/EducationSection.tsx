@@ -39,7 +39,9 @@ export function EducationSection() {
           />
         </Card>
       ))}
-      <button onClick={() => append({})}>Add</button>
+      <button type="button" onClick={() => append({})}>
+        Add
+      </button>
     </FormSection>
   )
 }

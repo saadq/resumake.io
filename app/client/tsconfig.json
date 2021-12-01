@@ -1,12 +1,20 @@
 {
-  "extends": "@shared/configs/tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
-    "declaration": false,
-    "module": "esnext",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "noUnusedLocals": false
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["./src"]
 }

@@ -1,14 +1,15 @@
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
+import { formAtom } from '../../../atoms/form'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types/form'
-import { formActions } from '../../../state/slices/form'
-import { debounce } from '../../../utils/debounce'
+import { useCallback } from 'react'
+
+let x
 
 const StyledForm = styled.form`
   display: flex;
@@ -20,114 +21,32 @@ const StyledForm = styled.form`
   overflow: scroll;
 `
 
-const defaultFormValues: FormValues = {
-  basics: {
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    location: {
-      address: ''
-    },
-    link: ''
-  },
-  work: [
-    {
-      name: '',
-      position: '',
-      startDate: '',
-      endDate: '',
-      summary: '',
-      highlights: ['']
-    }
-  ],
-  skills: [
-    {
-      name: '',
-      keywords: ['']
-    }
-  ],
-  education: [
-    {
-      institution: '',
-      area: '',
-      studyType: '',
-      gpa: '',
-      startDate: '',
-      endDate: ''
-    }
-  ],
-  projects: [
-    {
-      name: '',
-      description: '',
-      url: '',
-      keywords: [''],
-      highlights: [''],
-      startDate: '',
-      endDate: ''
-    }
-  ],
-  awards: [
-    {
-      title: '',
-      awarder: '',
-      date: '',
-      summary: ''
-    }
-  ],
-  volunteer: [
-    {
-      organization: '',
-      position: '',
-      summary: '',
-      highlights: [''],
-      startDate: '',
-      endDate: ''
-    }
-  ],
-  publications: [
-    {
-      name: '',
-      publisher: '',
-      url: ''
-    }
-  ]
-}
-
 export function Form() {
-  const form = useForm<FormValues>({ defaultValues: defaultFormValues })
-  const dispatch = useDispatch()
+  const [formState, setFormState] = useAtom(formAtom)
+  const formContext = useForm<FormValues>({
+    defaultValues: formState
+  })
 
-  const generateResume = form.handleSubmit(
-    useCallback(
-      (data: FormValues) => {
-        dispatch(formActions.generateResume(data))
-      },
-      [dispatch]
-    )
-  )
+  const handleFormChange = useCallback(() => {
+    const formValues = formContext.getValues()
+    setFormState(formValues)
+  }, [formContext])
 
   return (
-    <FormProvider {...form}>
-      <StyledForm
-        onSubmit={generateResume}
-        onChange={debounce(generateResume, 500)}
-      >
-        <Switch>
-          <Route exact path="/generator/basics" component={ProfileSection} />
+    <FormProvider {...formContext}>
+      <StyledForm onChange={handleFormChange}>
+        <Routes>
+          <Route path="/basics" element={<ProfileSection />} />
+          <Route path="/education" element={<EducationSection />} />
+          <Route path="/awards" />
+          <Route path="/experience" />
+          <Route path="/skills" />
+          <Route path="/projects" />
           <Route
-            exact
-            path="/generator/education"
-            component={EducationSection}
+            path="/"
+            element={<Navigate replace to="/generator/basics" />}
           />
-          <Route exact path="/generator/awards" />
-          <Route exact path="/generator/experience" />
-          <Route exact path="/generator/skills" />
-          <Route exact path="/generator/projects" />
-          <Route path="*">
-            <Redirect to="/generator/basics" />
-          </Route>
-        </Switch>
+        </Routes>
       </StyledForm>
     </FormProvider>
   )

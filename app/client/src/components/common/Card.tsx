@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 
 interface Props {
   children: ReactNode
-  removeCard: () => void
+  removeCard?: () => void
 }
 
 export function Card({ children, removeCard }: Props) {

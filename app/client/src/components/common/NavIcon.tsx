@@ -40,10 +40,14 @@ const Wrapper = styled.div`
 
 const StyledLink = styled(NavLink)`
   width: 100%;
+  outline: none;
   &.active {
     ${Wrapper} {
       background: ${darken(0.1, colors.gray5)};
     }
+  }
+  &:focus ${Wrapper} {
+    box-shadow: 0 0 0 3px ${colors.primary};
   }
 `
 
@@ -56,7 +60,10 @@ interface Props {
 
 export function NavIcon({ to, children, tooltip, tooltipId }: Props) {
   return (
-    <StyledLink to={to} activeClassName="active">
+    <StyledLink
+      to={to}
+      className={({ isActive }) => (isActive ? 'active' : '')}
+    >
       <Wrapper data-tip data-for={tooltipId}>
         <Tooltip text={tooltip} tooltipId={tooltipId} />
         <Icon>{children}</Icon>

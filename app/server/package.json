@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
   },
   "dependencies": {
     "@koa/router": "^10.0.0",

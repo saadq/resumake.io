@@ -1,1 +1,5 @@
-module.exports = require('@shared/configs/.prettierrc')
+module.exports = {
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'none'
+}

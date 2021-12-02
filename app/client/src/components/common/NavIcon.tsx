@@ -1,9 +1,10 @@
-import { ReactChild } from 'react'
+import { ReactChild, useCallback, useRef } from 'react'
 import styled from 'styled-components'
-import { darken, lighten } from 'polished'
+import { lighten } from 'polished'
 import { NavLink } from 'react-router-dom'
 import { Tooltip } from './Tooltip'
 import { colors } from '../../theme'
+import ReactTooltip from 'react-tooltip'
 
 const Icon = styled.div`
   display: flex;
@@ -11,11 +12,11 @@ const Icon = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
-  background: ${colors.black1};
+  background: #0e0e0f;
   cursor: pointer;
   border-radius: 20%;
   svg {
-    color: ${lighten(0.15, '#6916f0')};
+    color: ${lighten(0.2, colors.primary)};
   }
 `
 
@@ -29,12 +30,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   border-radius: 20%;
   &:hover {
-    background: ${colors.gray4};
-    ${Icon} {
-      svg {
-        color: ${colors.primary};
-      }
-    }
+    background: ${colors.gray};
   }
 `
 
@@ -43,7 +39,15 @@ const StyledLink = styled(NavLink)`
   outline: none;
   &.active {
     ${Wrapper} {
-      background: ${darken(0.1, colors.gray5)};
+      background: ${colors.lightGray};
+    }
+
+    ${Icon} {
+      background: ${colors.primary};
+    }
+
+    svg {
+      color: ${colors.black};
     }
   }
   &:focus ${Wrapper} {
@@ -59,12 +63,24 @@ interface Props {
 }
 
 export function NavIcon({ to, children, tooltip, tooltipId }: Props) {
+  const tooltipRef = useRef<HTMLDivElement>(null)
+
+  const showTooltip = useCallback(() => {
+    tooltipRef.current && ReactTooltip.show(tooltipRef.current)
+  }, [tooltipRef.current])
+
+  const hideTooltip = useCallback(() => {
+    tooltipRef.current && ReactTooltip.hide(tooltipRef.current)
+  }, [tooltipRef.current])
+
   return (
     <StyledLink
+      onFocus={showTooltip}
+      onBlur={hideTooltip}
       to={to}
       className={({ isActive }) => (isActive ? 'active' : '')}
     >
-      <Wrapper data-tip data-for={tooltipId}>
+      <Wrapper ref={tooltipRef} data-tip data-for={tooltipId}>
         <Tooltip text={tooltip} tooltipId={tooltipId} />
         <Icon>{children}</Icon>
       </Wrapper>

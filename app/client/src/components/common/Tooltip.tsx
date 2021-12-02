@@ -15,7 +15,7 @@ interface Props extends TooltipProps {
 export function Tooltip({
   text,
   tooltipId,
-  color = colors.black,
+  color = colors.primary,
   place,
   ...props
 }: Props) {

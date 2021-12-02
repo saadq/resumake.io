@@ -5,22 +5,23 @@ import { colors } from '../../theme'
 import { FormValues } from '../../types/form'
 
 const StyledInput = styled.input`
-  border: 1px solid ${colors.borders};
-  background: ${colors.black2};
-  padding: 0.75rem 1rem;
-  color: ${colors.gray7};
+  border: none;
+  background: ${colors.input};
+  padding: 1rem;
+  color: ${colors.white};
   transition: all 0.2s ease;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 0.85rem;
 
   &:focus {
     outline: 0;
     border-color: ${colors.primary};
+    box-shadow: 0 0 4px 1px ${colors.primary};
   }
 
   &::placeholder {
-    color: ${colors.gray6};
-    opacity: 0.35;
+    color: white;
+    opacity: 0;
   }
 `
 

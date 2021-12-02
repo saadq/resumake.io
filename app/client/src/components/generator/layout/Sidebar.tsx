@@ -15,7 +15,7 @@ import { Tooltip } from '../../common/Tooltip'
 import { colors, sizes } from '../../../theme'
 
 export const Aside = styled.aside`
-  background: ${colors.gray3};
+  background: ${colors.sidebar};
   width: ${sizes.sidebar.width};
   height: ${sizes.sidebar.height};
   display: flex;
@@ -38,6 +38,12 @@ export const Nav = styled.nav`
 const HomeLink = styled(Link)`
   margin-top: 30px;
   margin-bottom: 30px;
+  outline: none;
+  padding: 0.25rem;
+  border-radius: 10px;
+  &:focus {
+    box-shadow: 0 0 0 3px ${colors.primary};
+  }
 `
 
 export function Sidebar() {

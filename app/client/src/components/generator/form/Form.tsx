@@ -9,14 +9,12 @@ import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types/form'
 import { useCallback } from 'react'
 
-let x
-
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: ${sizes.formSection.width};
-  background: ${colors.gray2};
+  background: ${colors.background};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   overflow: scroll;
 `

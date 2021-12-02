@@ -1,10 +1,12 @@
 imap: import_map.json
 lock: lock.json
+envFile: .env
 
 scripts:
   setup:
-    cmd: deno cache --reload src/mod.ts
+    cmd: deno cache src/mod.ts
     desc: Installs all the dependencies using the lockfile
+    reload: true
 
   start:
     cmd: deno run src/mod.ts
@@ -12,14 +14,15 @@ scripts:
     watch: true
     allow:
       - net
+      - run
       - env
       - read
       - write
 
   lint:
-    cmd: deno lint
+    cmd: deno lint --config=deno.json
     desc: Lints the code using Deno's standard linter
 
   format:
-    cmd: deno fmt
+    cmd: deno fmt --config=deno.json
     desc: Formats the code using Deno's standard formatter

@@ -35,7 +35,7 @@ export const Nav = styled.nav`
   align-items: center;
 `
 
-const HomeLink = styled(Link)`
+const LogoLink = styled(Link)`
   margin-top: 30px;
   margin-bottom: 30px;
   outline: none;
@@ -49,9 +49,9 @@ const HomeLink = styled(Link)`
 export function Sidebar() {
   return (
     <Aside>
-      <HomeLink to="/">
+      <LogoLink to="/">
         <Logo />
-      </HomeLink>
+      </LogoLink>
       <Nav>
         <NavIcon
           to="/generator/basics"

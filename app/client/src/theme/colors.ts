@@ -12,6 +12,7 @@ export const borders = '#333745'
 export const placeholders = borders
 export const card = lightGray
 export const input = '#181820'
+export const placeholder = '#c0c5ce'
 export const header = lightGray
 export const sidebar = lightGray
 export const footer = lightGray

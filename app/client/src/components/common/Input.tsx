@@ -17,15 +17,11 @@ const StyledInput = styled.input`
     outline: 0;
     border-color: ${colors.primary};
     box-shadow: 0 0 4px 1px ${colors.primary};
-    &::placeholder {
-      color: #c0c5ce;
-      opacity: 0.3;
-    }
   }
 
   &::placeholder {
-    color: white;
-    opacity: 0;
+    color: ${colors.placeholder};
+    opacity: 0.3;
   }
 `
 

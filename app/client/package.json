@@ -6,7 +6,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview --port 4002",
-    "lint": "eslint \"src/**/*.{ts,tsx}\""
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "format": "prettier \"src/**/*.{ts,tsx}\" --write"
   },
   "dependencies": {
     "jotai": "^1.4.6",
@@ -34,6 +35,7 @@
     "eslint": "^8.3.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.4"
   }

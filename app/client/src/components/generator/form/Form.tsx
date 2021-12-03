@@ -1,13 +1,15 @@
+import { useCallback } from 'react'
+import { useMutation } from 'react-query'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
+import { generateResume } from '../../../api/generateResume'
 import { formAtom } from '../../../atoms/form'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types/form'
-import { useCallback } from 'react'
 
 const StyledForm = styled.form`
   display: flex;
@@ -28,7 +30,7 @@ export function Form() {
   const handleFormChange = useCallback(() => {
     const formValues = formContext.getValues()
     setFormState(formValues)
-  }, [formContext])
+  }, [formContext, setFormState])
 
   return (
     <FormProvider {...formContext}>

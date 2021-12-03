@@ -12,8 +12,8 @@ export function errorHandler(): Middleware {
             ctx.response.body = 'Resource not found';
             break;
           default:
-            ctx.response.status = 400;
-            ctx.response.body = 'Request can not be processed currently';
+            ctx.response.status = err.status;
+            ctx.response.body = 'Unable to process request';
             break;
         }
       } else {

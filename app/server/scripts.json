@@ -1,0 +1,35 @@
+{
+  "imap": "import_map.json",
+  "lock": "lock.json",
+  "envFile": ".env",
+  "scripts": {
+    "install": {
+      "cmd": "deno cache src/mod.ts",
+      "desc": "Installs all the dependencies using the lockfile"
+    },
+    "start": {
+      "cmd": "deno run src/mod.ts",
+      "desc": "Starts the server in dev mode",
+      "watch": true,
+      "allow": ["net", "run", "env", "read", "write"],
+      "cachedOnly": true
+    },
+    "reload": {
+      "cmd": "deno cache src/mod.ts",
+      "desc": "Recompiles all dependencies and updates the cache",
+      "reload": true
+    },
+    "lock": {
+      "cmd": "deno cache --lock-write src/mod.ts",
+      "desc": "Rebuilds the lockfile"
+    },
+    "lint": {
+      "cmd": "deno lint --config=deno.json",
+      "desc": "Lints the code using Deno's standard linter"
+    },
+    "format": {
+      "cmd": "deno fmt --config=deno.json",
+      "desc": "Formats the code using Deno's standard formatter"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Application, Router } from 'oak';
+import { Application } from 'oak';
 import { logger } from './app/logger.ts';
 import { errorHandler } from './app/errorHandler.ts';
 import { router } from './generator/routes.ts';

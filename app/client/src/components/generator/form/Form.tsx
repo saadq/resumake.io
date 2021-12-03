@@ -16,7 +16,8 @@ const StyledForm = styled.form`
   width: ${sizes.formSection.width};
   background: ${colors.background};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-  overflow: scroll;
+  overflow: auto;
+  padding-bottom: calc(2.5rem + ${sizes.footer.height});
 `
 
 export function Form() {
@@ -25,14 +26,18 @@ export function Form() {
     defaultValues: formState
   })
 
-  const handleFormChange = useCallback(() => {
+  const submitForm = useCallback(() => {
     const formValues = formContext.getValues()
     setFormState(formValues)
   }, [formContext, setFormState])
 
   return (
     <FormProvider {...formContext}>
-      <StyledForm onChange={handleFormChange}>
+      <StyledForm
+        id="resume-form"
+        onSubmit={formContext.handleSubmit(submitForm)}
+        onChange={submitForm}
+      >
         <Routes>
           <Route path="/basics" element={<ProfileSection />} />
           <Route path="/education" element={<EducationSection />} />

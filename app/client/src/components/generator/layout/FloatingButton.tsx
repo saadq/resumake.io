@@ -6,7 +6,7 @@ import { colors, sizes } from '../../../theme'
 
 const Button = styled(RoundButton)`
   position: fixed;
-  bottom: 1rem;
+  bottom: calc(1rem + ${sizes.footer.height});
   right: ${sizes.templatesSection.width};
   width: 65px;
   height: 65px;
@@ -27,7 +27,7 @@ export function FloatingButton() {
         tooltipId="tooltip-rebuildResume"
         place="left"
       />
-      <Button data-tip data-for="tooltip-rebuildResume">
+      <Button data-tip data-for="tooltip-rebuildResume" form="resume-form">
         <IoReload size="1.5rem" />
       </Button>
     </>

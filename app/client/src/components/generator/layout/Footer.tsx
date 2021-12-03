@@ -1,3 +1,4 @@
+import { lighten } from 'polished'
 import styled from 'styled-components'
 import { colors, sizes } from '../../../theme'
 
@@ -7,11 +8,21 @@ const PageFooter = styled.footer`
   background: ${colors.black};
   position: fixed;
   bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.65rem;
-  color: ${colors.gray5};
+  font-size: 0.7rem;
+  color: ${colors.white};
+  border-top: 1px solid black;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.35);
+  background: ${colors.footer};
+  padding: 0 4rem;
+
+  div {
+    width: 65%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   p {
     padding: 2px;
@@ -19,22 +30,24 @@ const PageFooter = styled.footer`
 
   a,
   a:visited {
-    color: ${colors.primary};
+    color: ${lighten(0.25, colors.primary)};
   }
 `
 
 export function Footer() {
   return (
     <PageFooter>
-      <p>© 2018 – {new Date().getFullYear()} Saad Quadri.</p>
-      <p>
-        Resumake will remain free and open source forever – please consider{' '}
-        <a href="https://paypal.com">donating!</a>
-      </p>
-      <p>
-        Contributors on{' '}
-        <a href="https://github.com/saadq/resumake.io">GitHub</a> welcome ❤️
-      </p>
+      <div>
+        <p>
+          © 2018 – {new Date().getFullYear()}{' '}
+          <a href="https://saadq.com">Saad Quadri</a>.
+        </p>
+        <p>
+          Resumake will remain free and open source forever, please consider{' '}
+          <a href="https://paypal.com">donating</a> or contributing on{' '}
+          <a href="https://github.com/saadq/resumake.io">GitHub!</a> ❤
+        </p>
+      </div>
     </PageFooter>
   )
 }

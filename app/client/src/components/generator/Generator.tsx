@@ -5,6 +5,7 @@ import { Form } from './form/Form'
 import { Preview } from './preview/Preview'
 import { Templates } from './templates/Templates'
 import { sizes } from '../../theme'
+import { Footer } from './layout/Footer'
 
 const Sections = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ export function Generator() {
         <Preview />
         <Templates />
       </Sections>
+      <Footer />
     </>
   )
 }

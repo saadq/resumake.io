@@ -14,3 +14,4 @@ export const card = lightGray
 export const input = '#181820'
 export const header = lightGray
 export const sidebar = lightGray
+export const footer = lightGray

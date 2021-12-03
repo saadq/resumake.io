@@ -17,7 +17,7 @@
     "react-dom": "^17.0.0",
     "react-hook-form": "^7.20.5",
     "react-icons": "^4.3.1",
-    "react-pdf": "^5.5.0",
+    "react-pdf": "5.5.0",
     "react-query": "^3.34.0",
     "react-router-dom": "^6.0.2",
     "react-tooltip": "^4.2.21",

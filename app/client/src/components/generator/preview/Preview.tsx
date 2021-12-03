@@ -8,7 +8,7 @@ import { generateResume } from '../../../api/generateResume'
 import { formAtom } from '../../../atoms/form'
 import { colors, sizes } from '../../../theme'
 
-const Section = styled.section`
+const Output = styled.output`
   width: ${sizes.previewSection.width};
   background: ${colors.background};
   border-left: 1px solid rgba(0, 0, 0, 0.5);
@@ -43,13 +43,13 @@ export function Preview() {
   }, [mutate, formState])
 
   return (
-    <Section>
+    <Output name="resume-preview" form="resume-form">
       {data && (
         <Document file={data}>
           <StyledPage pageNumber={1} scale={scale} />
         </Document>
       )}
       <FloatingButton />
-    </Section>
+    </Output>
   )
 }

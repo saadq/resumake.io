@@ -10,6 +10,7 @@
     "format": "prettier \"src/**/*.{ts,tsx}\" --write"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "jotai": "^1.4.6",
     "polished": "^4.1.3",
     "react": "^17.0.0",

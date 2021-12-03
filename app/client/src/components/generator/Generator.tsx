@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Sidebar } from './layout/Sidebar'
 import { Header } from './layout/Header'
-import { FloatingButton } from './layout/FloatingButton'
 import { Form } from './form/Form'
 import { Preview } from './preview/Preview'
 import { Templates } from './templates/Templates'
@@ -26,7 +25,6 @@ export function Generator() {
         <Preview />
         <Templates />
       </Sections>
-      <FloatingButton />
     </>
   )
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import { useMutation } from 'react-query'
 import styled from 'styled-components'
+import { FloatingButton } from '../layout/FloatingButton'
 import { generateResume } from '../../../api/generateResume'
 import { formAtom } from '../../../atoms/form'
 import { colors, sizes } from '../../../theme'
@@ -48,6 +49,7 @@ export function Preview() {
           <StyledPage pageNumber={1} scale={scale} />
         </Document>
       )}
+      <FloatingButton />
     </Section>
   )
 }

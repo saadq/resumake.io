@@ -67,11 +67,11 @@ export function NavIcon({ to, children, tooltip, tooltipId }: Props) {
 
   const showTooltip = useCallback(() => {
     tooltipRef.current && ReactTooltip.show(tooltipRef.current)
-  }, [tooltipRef.current])
+  }, [])
 
   const hideTooltip = useCallback(() => {
     tooltipRef.current && ReactTooltip.hide(tooltipRef.current)
-  }, [tooltipRef.current])
+  }, [])
 
   return (
     <StyledLink

@@ -32,7 +32,7 @@ export function Preview() {
   const [formState] = useAtom(formAtom)
   const { mutate, data } = useMutation(generateResume)
   const initialScale = document.body.clientWidth > 1440 ? 1.75 : 1
-  const [scale, setScale] = useState(initialScale)
+  const [scale] = useState(initialScale)
 
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = import.meta.env.CLIENT_PDF_WORKER_SRC
@@ -40,7 +40,7 @@ export function Preview() {
 
   useEffect(() => {
     mutate(formState)
-  }, [formState.basics.fullName])
+  }, [mutate, formState])
 
   return (
     <Section>

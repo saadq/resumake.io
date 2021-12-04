@@ -4,6 +4,6 @@ import { colors } from '../../theme'
 export const IconWrapper = styled.div`
   width: 40px;
   height: 40px;
-  background: ${colors.gray5};
+  background: ${colors.gray};
   cursor: pointer;
 `

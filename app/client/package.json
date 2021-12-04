@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview --port 4002",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc",
     "format": "prettier \"src/**/*.{ts,tsx}\" --write"
   },
   "dependencies": {

@@ -3,17 +3,19 @@ import styled from 'styled-components'
 import { colors, sizes } from '../../../theme'
 
 const PageFooter = styled.footer`
-  width: ${sizes.footer.width};
+  width: calc(${sizes.footer.width} - ${sizes.sidebar.width});
   height: ${sizes.footer.height};
   background: ${colors.black};
   position: fixed;
+  left: ${sizes.sidebar.width};
   bottom: 0;
   font-size: 0.7rem;
   color: ${colors.white};
   border-top: 1px solid black;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.35);
   background: ${colors.footer};
-  padding: 0 4rem;
+  padding: 2rem 4rem;
+  font-family: Poppins;
 
   div {
     width: 65%;
@@ -31,6 +33,11 @@ const PageFooter = styled.footer`
   a,
   a:visited {
     color: ${lighten(0.25, colors.primary)};
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px ${colors.primary};
+    }
   }
 `
 

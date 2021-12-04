@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai'
 import { useState, useCallback } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
+import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import styled from 'styled-components'
 import BlankPdf from '../../../assets/blank.pdf'
 import { resumeAtom } from '../../../atoms/resume'
@@ -22,7 +23,7 @@ const PdfContainer = styled.article`
   height: 100%;
 `
 
-const Doc = styled(Document)`
+const ResumeDocument = styled(Document)`
   width: 100%;
   position: absolute;
   top: 0;
@@ -55,8 +56,8 @@ export function Preview() {
   return (
     <Output>
       <PdfContainer>
-        {/* To prevent a white flash whenever the PDF is regenerated, this Blank PDF document is always displayed underneath the actual PDF document. */}
-        <Doc file={BlankPdf}>
+        {/* To prevent a white flash whenever the PDF is regenerated, this extra PDF document is always displayed underneath the actual PDF document. */}
+        <ResumeDocument file={BlankPdf}>
           <ResumePage
             pageNumber={1}
             scale={scale}
@@ -64,9 +65,9 @@ export function Preview() {
             renderTextLayer={false}
             loading=""
           />
-        </Doc>
+        </ResumeDocument>
         {resume.url && (
-          <Doc
+          <ResumeDocument
             file={resume.url}
             onLoadSuccess={handleDocumentLoadSuccess}
             loading=""
@@ -78,7 +79,7 @@ export function Preview() {
               renderTextLayer={false}
               loading=""
             />
-          </Doc>
+          </ResumeDocument>
         )}
       </PdfContainer>
       <FloatingButton />

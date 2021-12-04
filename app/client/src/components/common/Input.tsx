@@ -21,7 +21,7 @@ const StyledInput = styled.input`
 
   &::placeholder {
     color: ${colors.placeholder};
-    opacity: 0.3;
+    opacity: 0.5;
   }
 `
 

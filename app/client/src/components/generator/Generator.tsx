@@ -14,6 +14,7 @@ const Sections = styled.div`
   left: ${sizes.sidebar.width};
   width: ${sizes.header.width};
   height: calc(100vh - ${sizes.header.height});
+  overflow: hidden;
 `
 
 export function Generator() {

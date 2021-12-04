@@ -2,10 +2,10 @@ export const black = '#0F0F0F'
 export const lightGray = '#121217'
 export const gray = '#161619'
 export const white = '#ffffff'
-export const purple = '#6916f0'
+export const green = '#22d7a6'
 
-export const primary = purple
-export const accent = purple
+export const primary = green
+export const accent = green
 export const foreground = white
 export const background = '#0b0b0e'
 export const borders = '#333745'

@@ -6,8 +6,10 @@ import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { formAtom } from '../../../atoms/form'
+import { resumeAtom } from '../../../atoms/resume'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types/form'
+import { generateResume } from '../../../api/generateResume'
 
 const StyledForm = styled.form`
   display: flex;
@@ -21,22 +23,28 @@ const StyledForm = styled.form`
 `
 
 export function Form() {
-  const [formState, setFormState] = useAtom(formAtom)
-  const formContext = useForm<FormValues>({
-    defaultValues: formState
-  })
+  const [form, setForm] = useAtom(formAtom)
+  const [resume, setResume] = useAtom(resumeAtom)
+  const formContext = useForm<FormValues>({ defaultValues: form })
 
-  const submitForm = useCallback(() => {
+  const handleFormSubmit = useCallback(async () => {
     const formValues = formContext.getValues()
-    setFormState(formValues)
-  }, [formContext, setFormState])
+    setResume({ ...resume, isLoading: true })
+    try {
+      const newResumeUrl = await generateResume(formValues)
+      setResume({ ...resume, url: newResumeUrl, isLoading: false })
+      setForm(formValues)
+    } catch (error) {
+      setResume({ ...resume, isError: true, isLoading: false })
+    }
+  }, [formContext, resume, setResume, setForm])
 
   return (
     <FormProvider {...formContext}>
       <StyledForm
         id="resume-form"
-        onSubmit={formContext.handleSubmit(submitForm)}
-        onChange={submitForm}
+        onSubmit={formContext.handleSubmit(handleFormSubmit)}
+        onChange={handleFormSubmit}
       >
         <Routes>
           <Route path="/basics" element={<ProfileSection />} />

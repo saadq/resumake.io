@@ -7,22 +7,32 @@ const Container = styled.fieldset`
 
 const Main = styled.main`
   width: 100%;
-  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin-top: 1.5rem;
+`
+
+const Title = styled.h2`
+  margin: 1.5rem 0;
+  font-family: NATS;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 `
 
 interface Props {
+  title?: string
   children: ReactNode
 }
 
-export function FormSection({ children }: Props) {
+export function FormSection({ title = '', children }: Props) {
   return (
     <Container>
-      <Main>{children}</Main>
+      <Main>
+        <Title>{title}</Title>
+        {children}
+      </Main>
     </Container>
   )
 }

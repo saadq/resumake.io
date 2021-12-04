@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { colors } from '../../theme'
 
 const TooltipText = styled.span`
-  font-size: 0.95rem;
+  font-size: 1.15rem;
+  font-family: NATS;
 `
 
 interface Props extends TooltipProps {
@@ -26,6 +27,7 @@ export function Tooltip({
       effect="solid"
       place={place ?? 'right'}
       backgroundColor={color}
+      textColor="black"
     >
       <TooltipText>{text}</TooltipText>
     </ReactTooltip>

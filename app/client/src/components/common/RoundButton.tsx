@@ -14,7 +14,7 @@ export const RoundButton = styled.button<Props>`
   cursor: pointer;
   font-size: 1.5rem;
   background: ${colors.primary};
-  color: ${colors.foreground};
+  color: ${colors.black};
   vertical-align: middle;
   display: flex;
   justify-content: center;

@@ -6,12 +6,12 @@ import { colors, sizes } from '../../../theme'
 
 const Button = styled(RoundButton)`
   position: fixed;
-  bottom: calc(1rem + ${sizes.footer.height});
+  top: calc(2.5rem + ${sizes.header.height});
   right: ${sizes.templatesSection.width};
   width: 65px;
   height: 65px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.4);
-  z-index: 99;
+  z-index: 999999;
 
   &:hover {
     transform: rotate(180deg);

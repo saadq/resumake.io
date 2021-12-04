@@ -9,7 +9,7 @@ export function EducationSection() {
   })
 
   return (
-    <FormSection>
+    <FormSection title="Your Educational Background">
       {fields.map((field, index) => (
         <Card key={field.id} removeCard={() => remove(index)}>
           <LabeledInput

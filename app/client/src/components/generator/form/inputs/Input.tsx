@@ -15,8 +15,9 @@ const StyledInput = styled.input`
 
   &:focus {
     outline: 0;
+    color: ${colors.primary};
     border-color: ${colors.primary};
-    box-shadow: 0 0 4px 1px ${colors.primary};
+    box-shadow: 0 0 4px 2px ${colors.primary};
   }
 
   &::placeholder {

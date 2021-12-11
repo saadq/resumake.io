@@ -11,8 +11,7 @@
       "cmd": "deno run src/mod.ts",
       "desc": "Starts the server in dev mode",
       "watch": true,
-      "allow": ["net", "run", "env", "read", "write"],
-      "cachedOnly": true
+      "allow": ["net", "run", "env", "read", "write"]
     },
     "reload": {
       "cmd": "deno cache src/mod.ts",

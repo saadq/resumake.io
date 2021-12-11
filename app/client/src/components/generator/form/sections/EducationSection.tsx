@@ -2,9 +2,10 @@ import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
+import { FormValues } from '../../../../types/form'
 
 export function EducationSection() {
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray<FormValues, 'education'>({
     name: 'education'
   })
 

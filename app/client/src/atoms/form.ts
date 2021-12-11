@@ -9,7 +9,7 @@ export const formAtom = atom<FormValues>({
     location: {
       address: ''
     },
-    link: ''
+    profiles: [{}]
   },
   work: [
     {

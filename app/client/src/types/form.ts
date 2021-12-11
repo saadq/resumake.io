@@ -1,4 +1,4 @@
-interface Profile {
+export interface Basics {
   fullName?: string
   email?: string
   phoneNumber?: string
@@ -9,10 +9,14 @@ interface Profile {
     countryCode?: string
     region?: string
   }
-  link?: string
+  profiles?: ProfileLink[]
 }
 
-interface School {
+export interface ProfileLink {
+  url?: string
+}
+
+export interface School {
   institution?: string
   studyType?: string
   area?: string
@@ -21,7 +25,7 @@ interface School {
   endDate?: string
 }
 
-interface Job {
+export interface Job {
   name?: string
   location?: string
   position?: string
@@ -31,13 +35,13 @@ interface Job {
   highlights: string[]
 }
 
-interface Skill {
+export interface Skill {
   name?: string
   level?: string
   keywords?: string[]
 }
 
-interface Project {
+export interface Project {
   name?: string
   description?: string
   highlights?: string[]
@@ -47,14 +51,14 @@ interface Project {
   endDate?: string
 }
 
-interface Award {
+export interface Award {
   title?: string
   date?: string
   awarder?: string
   summary?: string
 }
 
-interface VolunteerExperience {
+export interface VolunteerExperience {
   organization?: string
   position?: string
   startDate?: string
@@ -63,7 +67,7 @@ interface VolunteerExperience {
   highlights?: string[]
 }
 
-interface Publication {
+export interface Publication {
   name?: string
   publisher?: string
   releaseDate?: string
@@ -72,7 +76,7 @@ interface Publication {
 }
 
 export interface FormValues {
-  basics: Profile
+  basics: Basics
   education: School[]
   work: Job[]
   skills: Skill[]

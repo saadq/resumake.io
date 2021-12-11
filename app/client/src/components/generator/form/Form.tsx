@@ -20,6 +20,7 @@ const StyledForm = styled.form`
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   overflow: auto;
   padding-bottom: calc(2.5rem + ${sizes.footer.height});
+  flex: 1;
 `
 
 export function Form() {

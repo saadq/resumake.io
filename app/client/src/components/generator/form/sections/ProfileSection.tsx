@@ -1,8 +1,13 @@
+import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
-import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
+import { Card } from '../../../common/Card'
 
 export function ProfileSection() {
+  const { fields, append, remove } = useFieldArray({
+    name: 'basics.links'
+  })
+
   return (
     <FormSection title="Your personal info">
       <Card>
@@ -26,11 +31,10 @@ export function ProfileSection() {
           label="Location"
           placeholder="Seattle, WA"
         />
-        <LabeledInput
-          name="basics.link"
-          label="Link"
-          placeholder="https://github.com/saadq"
-        />
+        {fields.map((field, index) => (
+          <input key={field.id} name={`basics.links.${index}`} />
+        ))}
+        <button onClick={() => append('')}>Add</button>
       </Card>
     </FormSection>
   )

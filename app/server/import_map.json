@@ -1,6 +1,0 @@
-{
-  "imports": {
-    "latrex": "https://deno.land/x/latrex@v1.0.0/mod.ts",
-    "oak": "https://deno.land/x/oak@v10.0.0/mod.ts"
-  }
-}

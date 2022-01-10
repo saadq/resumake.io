@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "resumake.io",
+  "version": "3.0.0",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "build": "next build",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "koa": "^2.13.4",
+    "next": "12.0.7",
+    "node-latex": "^3.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-pdf": "^5.6.0",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "@types/koa__router": "^8.0.11",
+    "@types/node": "16.11.12",
+    "@types/react": "17.0.37",
+    "@types/react-pdf": "^5.0.9",
+    "@types/styled-components": "^5.1.17",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^12.0.7",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "typescript": "4.5.3"
+  }
+}

@@ -2,11 +2,9 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:@next/next/recommended"
   ],
-  "plugins": ["@typescript-eslint", "react-hooks", "import"],
+  "plugins": ["@typescript-eslint", "react-hooks"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -30,62 +28,14 @@
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
-    "@typescript-eslint/no-inferrable-types": "off",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "type",
-          "parent",
-          "sibling",
-          "index",
-          "object"
-        ],
-        "pathGroups": [
-          {
-            "pattern": "next/*",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "next",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "react-*",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "react-*/*",
-            "group": "builtin",
-            "position": "before"
-          },
-          {
-            "pattern": "react",
-            "group": "builtin",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react", "next"],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
+    "@typescript-eslint/no-inferrable-types": "off"
   },
   "overrides": [
     {
       "files": ["server.js"],
       "rules": {
         "no-console": "off",
-        "@typescript-eslint/no-var-requires": "off",
-        "import/order": "off"
+        "@typescript-eslint/no-var-requires": "off"
       }
     }
   ]

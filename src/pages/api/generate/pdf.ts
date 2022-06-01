@@ -14,8 +14,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return
   }
 
-  const { name } = JSON.parse(req.body)
-  const doc = template.replace(/REPLACEME/, name)
+  const fullName = req.body.basics.fullName as string
+  const doc = template.replace(/REPLACEME/, fullName)
   const pdf = latex(doc)
   pdf.pipe(res)
   res.setHeader('Content-Type', 'application/pdf')

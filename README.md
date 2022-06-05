@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+> # Important note
+> Resumake is currently undergoing a major v3 rewrite. For any thing related to the current app, please see [v2-(old)](https://github.com/saadq/resumake.io/tree/v2-(old)).
 
-## Getting Started
+# resumake.io
 
-First, run the development server:
+> A website for automatically generating elegant LaTeX resumes without the need to write any TeX code yourself.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<a href="https://github.com/saadq/resumake/stargazers">
+    <img src="https://img.shields.io/github/stars/saadq/resumake.svg">
+</a>
+<a href="https://github.com/saadq/resumake/issues">
+    <img src="https://img.shields.io/github/issues/saadq/resumake.io.svg">
+</a>
+<a href="https://github.com/saadq/resumake/blob/master/license">
+  <img src="https://img.shields.io/github/license/saadq/resumake.svg?colorB=000000">
+</a>
+<a href="https://gitter.im/saadq/resumake">
+  <img src="https://badges.gitter.im/saadq/resumake.svg">
+</a>  
+<a href="https://saythanks.io/to/saadq">
+    <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
+</a>
+<a href="https://opencollective.com/resumake/donate">
+  <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
+</a>
+<a href="#backers">
+  <img src="https://opencollective.com/resumake/backers/badge.svg">
+</a>
+<a href="#sponsors">
+  <img src="https://opencollective.com/resumake/sponsors/badge.svg">
+</a>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![resumake](https://i.imgur.com/QUoFVmG.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Developing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Requirements
+* Nodejs v16 or greater
+* [Tectonic Typesetting System](https://tectonic-typesetting.github.io/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Running
+Run `npm run dev` to start the app on port 4000
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+MIT © Saad Quadri

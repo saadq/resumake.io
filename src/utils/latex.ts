@@ -5,7 +5,7 @@ import os from 'node:os'
 import path from 'node:path'
 
 export default async function latex(doc: string) {
-  const tempdir = await mkdtemp(path.join(os.tmpdir(), 'tex-'));
+  const tempdir = await mkdtemp(path.join(os.tmpdir(), 'tex-'))
   const tectonic = spawn('tectonic', ['-'], { cwd: tempdir })
   tectonic.stdin.write(doc)
   tectonic.stdin.end()
@@ -19,7 +19,7 @@ export default async function latex(doc: string) {
   await new Promise<void>((resolve, reject) => {
     tectonic.on('close', (code) => {
       if (code !== 0) {
-        console.log(`tectonic exited with code ${code}`);
+        console.log(`tectonic exited with code ${code}`)
         reject()
       }
       resolve()

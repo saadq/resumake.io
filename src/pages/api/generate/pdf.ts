@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import latex from 'node-latex'
+import latex from '../../../utils/latex'
 
 const template = `
     \\documentclass{article}
@@ -8,7 +8,7 @@ const template = `
     \\end{document}
   `
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     res.status(405)
     return
@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const fullName = req.body.basics.fullName as string
   const doc = template.replace(/REPLACEME/, fullName)
-  const pdf = latex(doc)
+  const pdf = await latex(doc)
   pdf.pipe(res)
   res.setHeader('Content-Type', 'application/pdf')
 }

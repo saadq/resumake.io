@@ -1,24 +1,19 @@
-> # Important note
-> Resumake is currently undergoing a major v3 rewrite. For any thing related to the current app, please see [v2-(old)](https://github.com/saadq/resumake.io/tree/v2-(old)).
+![resumake-logo](https://i.imgur.com/Y4JmhrV.png)
+
+---
+
+# Important note
+
+Resumake is currently undergoing a major v3 rewrite. For any thing related to the current app, please see [v2-(old)](https://github.com/saadq/resumake.io/tree/v2-(old)).
+
+---
 
 # resumake.io
 
 > A website for automatically generating elegant LaTeX resumes without the need to write any TeX code yourself.
 
-<a href="https://github.com/saadq/resumake/stargazers">
-    <img src="https://img.shields.io/github/stars/saadq/resumake.svg">
-</a>
-<a href="https://github.com/saadq/resumake/issues">
-    <img src="https://img.shields.io/github/issues/saadq/resumake.io.svg">
-</a>
-<a href="https://github.com/saadq/resumake/blob/master/license">
-  <img src="https://img.shields.io/github/license/saadq/resumake.svg?colorB=000000">
-</a>
-<a href="https://gitter.im/saadq/resumake">
-  <img src="https://badges.gitter.im/saadq/resumake.svg">
-</a>  
-<a href="https://saythanks.io/to/saadq">
-    <img src="https://img.shields.io/badge/say%20thanks-!-1EAEDB.svg">
+<a href="https://discord.gg/UYygFCF">
+  <img src="https://img.shields.io/badge/chat-discord-blue?style=flat&logo=discord" alt="discord chat">
 </a>
 <a href="https://opencollective.com/resumake/donate">
   <img src="https://img.shields.io/badge/donate-$-ff69b4.svg?maxAge=2592000">
@@ -32,14 +27,32 @@
 
 ![resumake](https://i.imgur.com/QUoFVmG.png)
 
-## Developing
+Simply choose a template, fill in as much (or as little) info as you want, and then press <kbd>Make</kbd> to see your output. You can change your template at any point to see how your resume looks with different designs.
 
-### Requirements
-* Nodejs v16 or greater
-* [Tectonic Typesetting System](https://tectonic-typesetting.github.io/)
+When you're happy with your result, you can download the resume as a PDF, TeX, or JSON document. The JSON output is compatible with [JSONResume](https://jsonresume.org).
 
-### Running
-Run `npm run dev` to start the app on port 4000
+## Credits
+Thanks very much to the creators of the LaTeX templates used in this website.
+
+* [Rensselaer Career Development Center](https://www.rpi.edu/dept/arc/training/latex/resumes/)
+* [Byungjin Park](https://github.com/posquit0)
+* [Scott Clark](https://github.com/sc932)
+* [Debarghya Das](https://github.com/deedy)
+* [Xavier Danaux](https://github.com/xdanaux)
+* [Ratul Saha](https://github.com/RatulSaha)
+* [Daniil Belyakov](https://github.com/dnl-blkv)
+* [Frits Wenneker](https://www.overleaf.com/latex/templates/your-new-cv/xqzhcmqkqrtw)
+
+## Running resumake.io locally
+
+Make sure you have Nodejs v16 and [Tectonic](https://tectonic-typesetting.github.io/) installed, and then:
+
+```
+$ npm install
+$ npm run dev
+```
+
+This will start the app on http://localhost:4000
 
 ## License
 MIT © Saad Quadri

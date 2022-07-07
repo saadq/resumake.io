@@ -4,7 +4,7 @@
 
 # Important Note
 
-All development is currently happening in the Resumake rewrite which is in the [v3](https://github.com/saadq/resumake.io/tree/v3) branch. In the mean time, no further development/fixes will be done in the current app in order to focus efforts on the next version.
+All development is currently happening in the Resumake rewrite which is in the [v3](https://github.com/saadq/resumake.io/tree/main) branch. In the mean time, no further development/fixes will be done in the current app in order to focus efforts on the next version.
 
 ---
 

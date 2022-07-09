@@ -4,7 +4,7 @@ import { LabeledInput } from '../inputs/LabeledInput'
 import { Card } from '../../../common/Card'
 
 export function ProfileSection() {
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: 'basics.links'
   })
 

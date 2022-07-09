@@ -10,10 +10,10 @@ export default async function latex(doc: string) {
   tectonic.stdin.write(doc)
   tectonic.stdin.end()
 
-  tectonic.stdout.on('data', data => {
+  tectonic.stdout.on('data', (data) => {
     console.log('tectonic stdout:', data.toString().trim())
   })
-  tectonic.stderr.on('data', data => {
+  tectonic.stderr.on('data', (data) => {
     console.error('tectonic stderr:', data.toString().trim())
   })
   await new Promise<void>((resolve, reject) => {

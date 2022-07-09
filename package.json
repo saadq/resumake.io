@@ -6,7 +6,8 @@
     "dev": "node src/server.js",
     "start": "NODE_ENV=production node src/server.js",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write src"
   },
   "dependencies": {
     "@koa/router": "^10.1.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "2.7.1",
     "typescript": "4.5.3"
   }
 }

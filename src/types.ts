@@ -15,7 +15,7 @@ export type Basics = {
   email?: string
   phone?: string
   location?: Location
-  profiles?: Profile[]
+  profiles?: Profile[] // TODO: revisit how profiles gets rendered
 }
 
 export type Work = {

@@ -3,8 +3,8 @@
   "name": "resumake.io",
   "version": "3.0.0",
   "scripts": {
-    "dev": "node src/server.js",
-    "start": "NODE_ENV=production node src/server.js",
+    "dev": "next dev",
+    "start": "next start",
     "build": "next build",
     "lint": "next lint",
     "format": "prettier --write src",

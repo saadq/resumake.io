@@ -3,7 +3,6 @@ import { useState, useCallback } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import styled from 'styled-components'
-import BlankPdf from '../../../assets/blank.pdf'
 import { resumeAtom } from '../../../atoms/resume'
 import { FloatingButton } from '../layout/FloatingButton'
 
@@ -57,7 +56,7 @@ export function Preview() {
     <Output>
       <PdfContainer>
         {/* To prevent a white flash whenever the PDF is regenerated, this extra PDF document is always displayed underneath the actual PDF document. */}
-        <ResumeDocument file={BlankPdf}>
+        <ResumeDocument file='/blank.pdf'>
           <ResumePage
             pageNumber={1}
             scale={scale}

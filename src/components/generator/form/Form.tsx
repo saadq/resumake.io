@@ -61,7 +61,7 @@ export function Form() {
       <StyledForm
         id="resume-form"
         onSubmit={formContext.handleSubmit(handleFormSubmit)}
-        onChange={handleFormSubmit}
+        // onChange={handleFormSubmit}
       >
         {currSection === 'basics' && <ProfileSection />}
         {currSection === 'education' && <EducationSection />}

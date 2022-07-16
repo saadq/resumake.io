@@ -1,5 +1,5 @@
 import { atom } from 'jotai'
-import { FormValues } from '../types/form'
+import { FormValues } from '../types'
 
 export const formAtom = atom<FormValues>({
   basics: {

@@ -7,7 +7,7 @@ import { EducationSection } from './sections/EducationSection'
 import { formAtom } from '../../../atoms/form'
 import { resumeAtom } from '../../../atoms/resume'
 import { colors, sizes } from '../../../theme'
-import { FormValues } from '../../../types/form'
+import { FormValues } from '../../../types'
 import { progressAtom } from '../../../atoms/progress'
 
 async function generateResume(formData: FormValues): Promise<string> {

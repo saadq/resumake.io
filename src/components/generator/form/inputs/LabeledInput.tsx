@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Input, InputProps } from './Input'
 import { colors } from '../../../../theme'
 import { useFormContext } from 'react-hook-form'
-import { FormValues } from '../../../../types/form'
+import { FormValues } from '../../../../types'
 
 const Container = styled.div`
   display: flex;

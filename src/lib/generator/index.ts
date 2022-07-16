@@ -29,8 +29,14 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template2(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(process.cwd(), 'src/lib/generator/template2/inputs'),
-          fonts: path.resolve(process.cwd(), 'src/lib/generator/template2/inputs')
+          inputs: path.resolve(
+            process.cwd(),
+            'src/lib/generator/template2/inputs'
+          ),
+          fonts: path.resolve(
+            process.cwd(),
+            'src/lib/generator/template2/inputs'
+          )
         }
       }
 

@@ -39,7 +39,7 @@ const generator: Generator = {
     return source`
       %==== Education ====%
       \\header{${heading || 'Education'}}
-      ${education.map(school => {
+      ${education.map((school) => {
         const {
           institution,
           location,
@@ -105,15 +105,8 @@ const generator: Generator = {
       \\header{${heading || 'Experience'}}
       \\vspace{1mm}
 
-      ${work.map(job => {
-        const {
-          name,
-          position,
-          location,
-          startDate,
-          endDate,
-          highlights
-        } = job
+      ${work.map((job) => {
+        const { name, position, location, startDate, endDate, highlights } = job
 
         let line1 = ''
         let line2 = ''
@@ -146,7 +139,7 @@ const generator: Generator = {
           highlightLines = source`
               \\vspace{-1mm}
               \\begin{itemize} \\itemsep 1pt
-                ${highlights.map(highlight => `\\item ${highlight}`)}
+                ${highlights.map((highlight) => `\\item ${highlight}`)}
               \\end{itemize}
             `
         }
@@ -168,7 +161,7 @@ const generator: Generator = {
     return source`
       \\header{${heading || 'Skills'}}
       \\begin{tabular}{ l l }
-      ${skills.map(skill => {
+      ${skills.map((skill) => {
         const { name = 'Misc', keywords = [] } = skill
         return `${name}: & ${keywords.join(', ')} \\\\`
       })}
@@ -184,7 +177,7 @@ const generator: Generator = {
 
     return source`
       \\header{${heading || 'Projects'}}
-      ${projects.map(project => {
+      ${projects.map((project) => {
         if (Object.keys(project).length === 0) {
           return ''
         }
@@ -230,7 +223,7 @@ const generator: Generator = {
 
     return source`
       \\header{${heading || 'Awards'}}
-      ${awards.map(award => {
+      ${awards.map((award) => {
         const { title, summary, date, awarder } = award
 
         let line1 = ''
@@ -342,7 +335,7 @@ function template1(values: FormValues) {
     \\vspace*{-40pt}
 
     ${values.sections
-      .map(section => {
+      .map((section) => {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)

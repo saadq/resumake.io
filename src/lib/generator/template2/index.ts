@@ -60,7 +60,7 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\cvsection{${heading || 'Education'}}
       \\begin{cventries}
-      ${education.map(school => {
+      ${education.map((school) => {
         const {
           institution,
           location,
@@ -115,15 +115,8 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\cvsection{${heading || 'Experience'}}
       \\begin{cventries}
-      ${work.map(job => {
-        const {
-          name,
-          position,
-          location,
-          startDate,
-          endDate,
-          highlights
-        } = job
+      ${work.map((job) => {
+        const { name, position, location, startDate, endDate, highlights } = job
 
         let dateRange
         let dutyLines
@@ -139,7 +132,7 @@ const generator: Generator = {
         if (highlights) {
           dutyLines = source`
             \\begin{cvitems}
-              ${highlights.map(duty => `\\item {${duty}}`)}
+              ${highlights.map((duty) => `\\item {${duty}}`)}
             \\end{cvitems}
             `
         }
@@ -168,7 +161,7 @@ const generator: Generator = {
       \\cventry
       {}
       {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
-      ${skills.map(skill => {
+      ${skills.map((skill) => {
         const { name, keywords = [] } = skill
         const nameLine = name ? `${name}: ` : ''
         const detailsLine = `{\\skill{ ${keywords.join(', ') || ''}}}`
@@ -193,7 +186,7 @@ const generator: Generator = {
     return source`
       \\cvsection{${heading || 'Projects'}}
       \\begin{cventries}
-      ${projects.map(project => {
+      ${projects.map((project) => {
         const { name, description, keywords = [], url } = project
 
         return stripIndent`
@@ -219,7 +212,7 @@ const generator: Generator = {
     return source`
       \\cvsection{${heading || 'Awards'}}
       \\begin{cvhonors}
-      ${awards.map(award => {
+      ${awards.map((award) => {
         const { title, summary, date, awarder } = award
 
         return stripIndent`
@@ -290,7 +283,7 @@ function template2(values: FormValues) {
     ${generator.resumeHeader()}
     \\begin{document}
     ${values.sections
-      .map(section => {
+      .map((section) => {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)

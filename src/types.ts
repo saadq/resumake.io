@@ -96,7 +96,7 @@ export type Resume = {
 }
 
 export type FormValues = Resume & {
-  headings: {[K in keyof Resume]?: string}
+  headings: { [K in keyof Resume]?: string }
   sections: (keyof Resume | 'profile')[]
   selectedTemplate: number
 }
@@ -106,24 +106,24 @@ export interface FormState {
 }
 
 export type Generator = {
-  resumeHeader: () => string,
-  profileSection: (basics?: Basics) => string,
-  educationSection: (education?: Array<Education>, heading?: string) => string,
-  workSection: (work?: Array<Work>, heading?: string) => string,
-  skillsSection: (skills?: Array<Skill>, heading?: string) => string,
-  projectsSection: (projects?: Array<Project>, heading?: string) => string,
+  resumeHeader: () => string
+  profileSection: (basics?: Basics) => string
+  educationSection: (education?: Array<Education>, heading?: string) => string
+  workSection: (work?: Array<Work>, heading?: string) => string
+  skillsSection: (skills?: Array<Skill>, heading?: string) => string
+  projectsSection: (projects?: Array<Project>, heading?: string) => string
   awardsSection: (awards?: Array<Award>, heading?: string) => string
 }
 
 export type LaTeXOpts = {
-  cmd?: string,
-  inputs?: string,
-  fonts?: string,
-  passes?: number,
+  cmd?: string
+  inputs?: string
+  fonts?: string
+  passes?: number
   errorLogs?: string
 }
 
 export type TemplateData = {
-  texDoc: string,
+  texDoc: string
   opts: LaTeXOpts
 }

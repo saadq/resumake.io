@@ -30,7 +30,7 @@ export default async function handler(
  */
 function generateSourceCode(formData: FormValues) {
   const { texDoc, opts } = getTemplateData(formData)
-  const prettyDoc = /*prettify(texDoc)*/texDoc
+  const prettyDoc = /*prettify(texDoc)*/ texDoc
   const zip = Archiver('zip')
   const readme = makeReadme(formData.selectedTemplate, opts.cmd)
 

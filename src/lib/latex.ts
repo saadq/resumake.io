@@ -38,7 +38,5 @@ async function tectonic(doc: string, opt: LaTeXOpts) {
 }
 
 export default function latex(doc: string, opt: LaTeXOpts) {
-  return opt?.cmd === 'tectonic'
-    ? tectonic(doc, opt)
-    : nodeLatex(doc, opt)
+  return opt?.cmd === 'tectonic' ? tectonic(doc, opt) : nodeLatex(doc, opt)
 }

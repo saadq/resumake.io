@@ -56,7 +56,7 @@ export function Preview() {
     <Output>
       <PdfContainer>
         {/* To prevent a white flash whenever the PDF is regenerated, this extra PDF document is always displayed underneath the actual PDF document. */}
-        <ResumeDocument file='/blank.pdf'>
+        <ResumeDocument file="/blank.pdf">
           <ResumePage
             pageNumber={1}
             scale={scale}

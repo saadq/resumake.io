@@ -1,7 +1,7 @@
 import { useAtomDevtools } from 'jotai/devtools'
-import { formAtom } from '../atoms/form'
-import { resumeAtom } from '../atoms/resume'
-import { progressAtom } from '../atoms/progress'
+import { formAtom } from './form'
+import { resumeAtom } from './resume'
+import { progressAtom } from './progress'
 
 export const useDevtools =
   process.env.NODE_ENV === 'development'

@@ -11,7 +11,7 @@ import { FormValues } from '../../../types'
 import { progressAtom } from '../../../atoms/progress'
 
 async function generateResume(formData: FormValues): Promise<string> {
-  const pdfResponse = await fetch('/api/generate/pdf', {
+  const pdfResponse = await fetch('/api/generate-pdf', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

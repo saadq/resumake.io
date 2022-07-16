@@ -1,9 +1,12 @@
+/* eslint-disable no-console */
+
 import { spawn } from 'node:child_process'
 import { mkdtemp } from 'node:fs/promises'
 import { createReadStream } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import nodeLatex from 'node-latex'
+import { LaTeXOpts } from '../types'
 
 async function tectonic(doc: string) {
   const tempdir = await mkdtemp(path.join(os.tmpdir(), 'tex-'))
@@ -30,7 +33,7 @@ async function tectonic(doc: string) {
   return createReadStream(path.join(tempdir, 'texput.pdf'))
 }
 
-export default function latex(doc: string, opt: any) {
+export default function latex(doc: string, opt: LaTeXOpts) {
   return opt?.cmd === 'tectonic'
     ? tectonic(doc)
     : nodeLatex(doc, opt)

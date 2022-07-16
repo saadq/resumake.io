@@ -12,7 +12,7 @@ export function ProfileSection() {
     <FormSection title="Your personal info">
       <Card>
         <LabeledInput
-          name="basics.fullName"
+          name="basics.name"
           label="Full name"
           placeholder="John Smith"
         />
@@ -22,7 +22,7 @@ export function ProfileSection() {
           placeholder="johnsmith@gmail.com"
         />
         <LabeledInput
-          name="basics.phoneNumber"
+          name="basics.phone"
           label="Phone number"
           placeholder="(555) 464-6446"
         />

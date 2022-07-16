@@ -29,14 +29,5 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
     "@typescript-eslint/no-inferrable-types": "off"
-  },
-  "overrides": [
-    {
-      "files": ["server.js"],
-      "rules": {
-        "no-console": "off",
-        "@typescript-eslint/no-var-requires": "off"
-      }
-    }
-  ]
+  }
 }

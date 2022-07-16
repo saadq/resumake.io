@@ -1,5 +1,7 @@
+import path from 'node:path'
 import template1 from './template1'
-import { TEMPLATE1 } from './constants'
+import template2 from './template2'
+import { TEMPLATE1, TEMPLATE2 } from './constants'
 import { FormValues } from '../../types'
 import { TemplateData } from '../../types'
 
@@ -19,6 +21,16 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template1(data),
         opts: {
           cmd: 'tectonic'
+        }
+      }
+
+    case TEMPLATE2:
+      return {
+        texDoc: template2(data),
+        opts: {
+          cmd: 'tectonic',
+          inputs: path.resolve(process.cwd(), 'src/lib/generator/template2/inputs'),
+          fonts: path.resolve(process.cwd(), 'src/lib/generator/template2/inputs')
         }
       }
 

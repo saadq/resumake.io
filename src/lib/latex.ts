@@ -7,9 +7,13 @@ import os from 'node:os'
 import path from 'node:path'
 import nodeLatex from 'node-latex'
 import { LaTeXOpts } from '../types'
+import { copy } from 'fs-extra'
 
-async function tectonic(doc: string) {
+async function tectonic(doc: string, opt: LaTeXOpts) {
   const tempdir = await mkdtemp(path.join(os.tmpdir(), 'tex-'))
+  if (opt.inputs) {
+    await copy(opt.inputs, tempdir)
+  }
   const tectonic = spawn('tectonic', ['-'], { cwd: tempdir })
   tectonic.stdin.write(doc)
   tectonic.stdin.end()
@@ -35,6 +39,6 @@ async function tectonic(doc: string) {
 
 export default function latex(doc: string, opt: LaTeXOpts) {
   return opt?.cmd === 'tectonic'
-    ? tectonic(doc)
+    ? tectonic(doc, opt)
     : nodeLatex(doc, opt)
 }

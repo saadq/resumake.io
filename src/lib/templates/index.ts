@@ -2,8 +2,7 @@ import path from 'node:path'
 import template1 from './template1'
 import template2 from './template2'
 import { TEMPLATE1, TEMPLATE2 } from './constants'
-import { FormValues } from '../../types'
-import { TemplateData } from '../../types'
+import { FormValues, TemplateData } from '../../types'
 
 /**
  * Generates the LaTeX document based on the selected template

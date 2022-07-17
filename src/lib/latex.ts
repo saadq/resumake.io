@@ -6,8 +6,8 @@ import { createReadStream } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import nodeLatex from 'node-latex'
-import { LaTeXOpts } from '../types'
 import { copy } from 'fs-extra'
+import { LaTeXOpts } from '../types'
 
 async function tectonic(doc: string, opt: LaTeXOpts) {
   const tempdir = await mkdtemp(path.join(os.tmpdir(), 'tex-'))

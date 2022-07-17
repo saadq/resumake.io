@@ -1,0 +1,33 @@
+%% start of file `moderncviconssymbols.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncviconssymbols}[2021-12-12 v2.2.0 modern curriculum vitae icons selector]
+
+
+\ifxetexorluatex
+  \RequirePackage{moderncviconsawesome}
+  \RequirePackage{moderncviconsacademic}
+\else
+  \ClassWarningNoLine{moderncv}{"academicons requires xetex/luatex to work. Using alternatives."}
+  \ifpdftex
+    \RequirePackage{moderncviconsawesome}
+  \else
+    \RequirePackage{moderncviconsmarvosym}
+  \fi
+\fi
+
+% Define symbols that are not defined at this level
+\RequirePackage{moderncviconstikz}
+
+\endinput
+
+%% end of file `moderncviconssymbols.sty'.

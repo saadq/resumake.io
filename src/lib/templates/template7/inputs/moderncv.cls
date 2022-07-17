@@ -1,5 +1,5 @@
 %% start of file `moderncv.cls'.
-%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2013/02/09 v1.3.0 modern curriculum vitae and letter document class]
+\ProvidesClass{moderncv}[2022-02-21 v2.3.1 modern curriculum vitae and letter document class]
 
 
 %-------------------------------------------------------------------------------
@@ -81,34 +81,21 @@
 % TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
 
 % color
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 
-% font loading
-%\RequirePackage{ifxetex,ifluatex}
-%\newif\ifxetexorluatex
-%\ifxetex
-%  \xetexorluatextrue
-%\else
-%  \ifluatex
-%    \xetexorluatextrue
-%  \else
-%    \xetexorluatexfalse
-%  \fi
-%\fi
-% automatic loading of latin modern fonts
-%\ifxetexorluatex
-%  \RequirePackage{fontspec}
-%  \defaultfontfeatures{Ligatures=TeX}
-%  \RequirePackage{unicode-math}
-%  \setmainfont{Latin Modern}
-%  \setsansfont{Latin Modern Sans}
-%  \setmathfont{Latin Modern Math}
-%\else
-  \RequirePackage[T1]{fontenc}
-  \IfFileExists{lmodern.sty}%
-    {\RequirePackage{lmodern}}%
-    {}
-%\fi
+% tex compiler checking for symbol loading
+\RequirePackage{iftex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
+
 
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \newcommand*\pdfpagemode{UseNone}% do not show thumbnails or bookmarks on opening (on supporting browsers); set \pdfpagemode to "UseOutlines" to show bookmarks
@@ -119,7 +106,6 @@
   \RequirePackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
   \hypersetup{
     breaklinks,
-    baseurl       = http://,
     pdfborder     = 0 0 0,
     pdfpagemode   = \pdfpagemode,
     pdfstartpage  = 1,
@@ -128,9 +114,9 @@
     bookmarksopen = true,
     bookmarksdepth= 2,% to show sections and subsections
     pdfauthor     = {\@firstname{}~\@lastname{}},
-    pdftitle      = {\@firstname{}~\@lastname{} -- \@title{}},
-    pdfsubject    = {Resum\'{e} of \@firstname{}~\@lastname{}},
-    pdfkeywords   = {\@firstname{}~\@lastname{}, curriculum vit\ae{}, resum\'{e}}}}
+    pdftitle      = {\@firstname{}~\@lastname{}\notblank{\@title}{ -- \@title}{}},
+    pdfsubject    = {R\'{e}sum\'{e} of \@firstname{}~\@lastname{}},
+    pdfkeywords   = {\@firstname{}~\@lastname{}, curriculum vit\ae{}, r\'{e}sum\'{e}}}}
 
 % graphics
 \RequirePackage{graphicx}
@@ -146,6 +132,8 @@
 \newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
 \AtEndPreamble{%
   \AtBeginDocument{%
+    % fancyhdr length
+    \renewcommand{\headwidth}{\textwidth}
     \if@displaypagenumbers%
       \@ifundefined{r@lastpage}{}{%
         \ifthenelse{\pageref{lastpage}>1}{%
@@ -153,13 +141,13 @@
           \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
           \fancypagestyle{plain}{%
             \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\pagenumberfont\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
-          \pagestyle{plain}}{}}%
-      \AtEndDocument{\label{lastpage}}\else\fi}}
+          \pagestyle{plain}}{}}\fi}%
+  \AtEndDocument{\label{lastpage}}}
 \pagestyle{plain}
 
 % reduced list spacing
 % package providing hooks into lists
-%   originally developped by Jakob Schiøtz (see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
+%   originally developped by Jakob Schiotz (see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
 %   modified and distributed with moderncv(not available otherwise on ctan)
 \RequirePackage{tweaklist}
 \renewcommand*{\itemhook}{%
@@ -183,9 +171,13 @@
 % micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
 \RequirePackage{microtype}
 
+% stack of key-value elements, used to save personal information
+\RequirePackage{moderncvcollection}
+
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
+\RequirePackage{expl3}
 
 %-------------------------------------------------------------------------------
 %                class definition
@@ -216,56 +208,126 @@
 %                overall design commands definitions
 %-------------------------------------------------------------------------------
 % elements
+%---------
 % defines one's name
 % usage: \name{<firstname>}{<lastname>}
 \newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
+
 % defines one's title (optional)
 % usage: \title{<title>}
 \renewcommand*{\title}[1]{\def\@title{#1}}
+
 % defines one's address (optional)
 % usage: \address{<street>}{<city>}{<country>}
 % where the <city> and <country> arguments can be omitted or provided empty
 \NewDocumentCommand{\address}{mG{}G{}}{\def\@addressstreet{#1}\def\@addresscity{#2}\def\@addresscountry{#3}}
-% adds a mobile/fixed/fax number to one's personal information (optional)
-% usage: \phone[<optional type>]{<number>}
-% where <optional type> should be either "mobile", "fixed" or "fax
-\RequirePackage{collection}
-\collectionnew{phones}
-\newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
+
+% defines one's birthday (optional)
+% usage: \born{date, place}
+\newcommand*{\born}[1]{\def\@born{#1}}
+
+% defines one's email (optional)
+% usage: \email{<email adress>}
 \newcommand*{\email}[1]{\def\@email{#1}}
+
 % defines one's home page (optional)
 % usage: \homepage{<url>}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
+
+% adds a fixed/mobile/fax number to one's personal information (optional)
+% usage: \phone[<optional type>]{<number>}
+% where <optional type> should be either "fixed" (default), "mobile" or "fax
+\collectionnew{phones}
+\NewDocumentCommand{\phone}{O{fixed}m}{%
+  \ifthenelse{\equal{#1}{fax}}%
+    {\collectionadd[#1]{phones}{#2}}
+    {\collectionadd[#1]{phones}{\protect\tellink{#2}}}
+    }
+
+
+% http://latex.org/forum/viewtopic.php?t=12239
+\def\SplitMyMacro#1/#2{#2}
+    
+    
+% adds a social link to one's personal information (optional)
+% usage: \social[<optional type>][<optional url>]{<account name>}
+% where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab", "bitbucket" or "skype"
+\collectionnew{socials}
+\NewDocumentCommand{\social}{O{}O{}m}{%
+  \ifthenelse{\equal{#2}{}}%
+    {%
+      \ifthenelse{\equal{#1}{linkedin}}     {\collectionadd[linkedin]{socials}     {\protect\httpslink[#3]{www.linkedin.com/in/#3}}}               {}%
+      \ifthenelse{\equal{#1}{xing}}         {\collectionadd[xing]{socials}         {\protect\httpslink[#3]{www.xing.com/profile/#3}}}              {}%
+      \ifthenelse{\equal{#1}{twitter}}      {\collectionadd[twitter]{socials}      {\protect\httpslink[#3]{twitter.com/#3}}}                       {}%
+      \ifthenelse{\equal{#1}{github}}       {\collectionadd[github]{socials}       {\protect\httpslink[#3]{github.com/#3}}}                        {}%
+      \ifthenelse{\equal{#1}{gitlab}}       {\collectionadd[gitlab]{socials}       {\protect\httpslink[#3]{gitlab.com/#3}}}                        {}%
+      \ifthenelse{\equal{#1}{stackoverflow}}{\collectionadd[stackoverflow]{socials}{\protect\httpslink[#3]{stackoverflow.com/users/#3}}}           {}%
+      \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}    {\protect\httpslink[#3]{bitbucket.org/#3}}}                     {}%
+      \ifthenelse{\equal{#1}{skype}}        {\collectionadd[skype]{socials}        {#3}}                                                           {}%
+      \ifthenelse{\equal{#1}{orcid}}        {\collectionadd[orcid]{socials}        {\protect\httpslink[#3]{orcid.org/#3}}}                         {}%
+      \ifthenelse{\equal{#1}{researchgate}} {\collectionadd[researchgate]{socials} {\protect\httpslink[#3]{www.researchgate.net/profile/#3}}}      {}%
+      \ifthenelse{\equal{#1}{researcherid}} {\collectionadd[researcherid]{socials} {\protect\httpslink[#3]{www.researcherid.com/rid/#3}}}          {}%
+      \ifthenelse{\equal{#1}{telegram}}     {\collectionadd[telegram]{socials}     {\protect\httpslink[#3]{t.me/#3}}}                              {}%
+      \ifthenelse{\equal{#1}{whatsapp}}     {\collectionadd[whatsapp]{socials}     {\protect\httpslink[#3]{wa.me/#3}}}                             {}%
+      \ifthenelse{\equal{#1}{signal}}       {\collectionadd[signal]{socials}       {#3}}                                                           {}%
+      \ifthenelse{\equal{#1}{matrix}}       {\collectionadd[matrix]{socials}       {\httpslink[#3]{matrix.to/\#/#3}}}                              {}%
+      \ifthenelse{\equal{#1}{googlescholar}}{\collectionadd[googlescholar]{socials}{\protect\httpslink[#3]{scholar.google.com/citations?user=#3}}} {}%                        {}%
+      }
+    {\collectionadd[#1]{socials}{\protect\httpslink[#3]{#2}}}}%
+
 % defines additional personal information (optional)
 % usage: \extrainfo{<text>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 
 % colors
+%-------
 \definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
-\definecolor{color1}{rgb}{0,0,0}% primary theme color
-\definecolor{color2}{rgb}{0,0,0}% secondary theme color
-\definecolor{color3}{rgb}{0,0,0}% tertiary theme color
+\definecolor{color1}{rgb}{0,0,0}% primary scheme color
+\definecolor{color2}{rgb}{0,0,0}% secondary scheme color
+\definecolor{color3}{rgb}{0,0,0}% tertiary scheme color
 
 % symbols
-%   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
-\newcommand*{\labelitemi}{\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemii}{\strut\textcolor{color1}{\large\bfseries-}}
-\newcommand*{\labelitemiii}{\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemiv}{\labelitemiii}
-%   enumerate labels
-\renewcommand{\theenumi}{\@arabic\c@enumi}
-\renewcommand{\theenumii}{\@alph\c@enumii}
-\renewcommand{\theenumiii}{\@roman\c@enumiii}
-\renewcommand{\theenumiv}{\@Alph\c@enumiv}
-%   other symbols
-\newcommand*{\listitemsymbol}{\labelitemi~}
-\newcommand*{\addresssymbol}{}
-\newcommand*{\mobilephonesymbol}{}
-\newcommand*{\fixedphonesymbol}{}
-\newcommand*{\faxphonesymbol}{}
-\newcommand*{\emailsymbol}{}
-\newcommand*{\homepagesymbol}{}
+%--------
+% itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
+\newcommand*{\labelitemi}          {\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+\newcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}
+\newcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+\newcommand*{\labelitemiv}         {\labelitemiii}
 
+% enumerate labels
+\renewcommand{\theenumi}           {\@arabic\c@enumi}
+\renewcommand{\theenumii}          {\@alph\c@enumii}
+\renewcommand{\theenumiii}         {\@roman\c@enumiii}
+\renewcommand{\theenumiv}          {\@Alph\c@enumiv}
+
+% other symbols
+\newcommand*{\listitemsymbol}           {\labelitemi~}
+\newcommand*{\addresssymbol}            {}
+\newcommand*{\bornsymbol}               {}
+\newcommand*{\mobilephonesymbol}        {}
+\newcommand*{\fixedphonesymbol}         {}
+\newcommand*{\faxphonesymbol}           {}
+\newcommand*{\emailsymbol}              {}
+\newcommand*{\homepagesymbol}           {}
+\newcommand*{\linkedinsocialsymbol}     {}
+\newcommand*{\xingsocialsymbol}         {}
+\newcommand*{\twittersocialsymbol}      {}
+\newcommand*{\githubsocialsymbol}       {}
+\newcommand*{\gitlabsocialsymbol}       {}
+\newcommand*{\stackoverflowsocialsymbol}{}
+\newcommand*{\bitbucketsocialsymbol}    {}
+\newcommand*{\skypesocialsymbol}        {}
+\newcommand*{\orcidsocialsymbol}        {}
+\newcommand*{\researchgatesocialsymbol} {}
+\newcommand*{\researcheridsocialsymbol} {}
+\newcommand*{\googlescholarsocialsymbol}{}
+\newcommand*{\telegramsocialsymbol}     {}
+\newcommand*{\whatsappsocialsymbol}     {}
+\newcommand*{\matrixsocialsymbol}       {}
+\newcommand*{\signalsocialsymbol}       {}
+
+% other
+%------
 % fonts
 \AtBeginDocument{\normalfont\color{color0}}
 
@@ -277,28 +339,79 @@
 % usage: \makefooter
 \newcommand*{\makefooter}{}%
 
-% loads a style variant
+\newcommand*{\@loadmoderncvpackage}[3][]{%
+  \begingroup\edef\x{\endgroup%
+    \noexpand\RequirePackage[#1]{moderncv#2\ifcase#3\or i\or ii\or iii\or iv\or v\or vi\or vii\or viii\or ix\or x\fi}%
+  }\x}
+
+% loads a style variant (a combination of header, body and footer)
 % usage: \moderncvstyle{<style variant name>}
-\newcommand*{\moderncvstyle}[1]{
-  \RequirePackage{moderncvstyle#1}}
+\newcommand*{\moderncvstyle}[2][]{%
+  \RequirePackage[#1]{moderncvstyle#2}}
+
+% loads a header variant
+% usage: \moderncvhead[<optional head option>]{<header variant number>}
+\newcommand*{\moderncvhead}[2][]{%
+  \@loadmoderncvpackage[#1]{head}{#2}}
+
+% loads a body variant
+% usage: \moderncvbody[<optional body option>]{<body variant number>}
+\newcommand*{\moderncvbody}[2][]{%
+  \@loadmoderncvpackage[#1]{body}{#2}}
+
+% loads a footer variant
+% usage: \moderncvfoot[<optional foot option>]{<foot variant number>}
+\newcommand*{\moderncvfoot}[2][]{%
+  \@loadmoderncvpackage[#1]{foot}{#2}}
 
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
-\newcommand*{\moderncvcolor}[1]{
+\newcommand*{\moderncvcolor}[1]{%
   \RequirePackage{moderncvcolor#1}}
 
 % loads an icons set
 % usage: \moderncvicons{<icon set name>}
-\newcommand*{\moderncvicons}[1]{
+\newcommand*{\moderncvicons}[1]{%
   \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
+\newcommand*{\recomputeheadlengths}{\recomputecvheadlengths}
+\newcommand*{\recomputebodylengths}{\recomputecvbodylengths}
+\newcommand*{\recomputefootlengths}{\recomputecvfootlengths}
 \newcommand*{\recomputelengths}{\recomputecvlengths}
 \AtBeginDocument{\recomputelengths{}}
 
+% creates a command if not yet defined
+\newcommand*{\@initializecommand}[2]{%
+  \ifdefined#1
+    \renewcommand{#1}{#2}%
+  \else%
+    \newcommand*{#1}{#2}\fi}
+
 % creates a length if not yet defined
 \newcommand*{\@initializelength}[1]{%
-  \ifdefined#1\else\newlength{#1}\fi}
+  \ifdefined#1
+  \else%
+    \newlength{#1}\fi%
+  \setlength{#1}{0pt}}
+
+% creates a box if not yet defined
+\newcommand*{\@initializebox}[1]{%
+  \ifdefined#1
+    \savebox{#1}{}%
+  \else%
+    \newsavebox{#1}\fi}
+
+% creates an if switch if not yet defined
+\newcommand*{\@initializeif}[1]{%
+%  \ifdefined#1% not working due to the nested \if
+%  \else%
+    \newif#1%\fi
+  }
+
+% custom strut for spacing; the first argument is the vertical offset of the strut, the second its total height
+\newcommand*{\@moderncvstrut}[2]{%
+  \rule[-#1]{0pt}{#2}}
 
 
 %-------------------------------------------------------------------------------
@@ -319,6 +432,12 @@
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
 \newcommand*{\pagenumberfont}{\addressfont\itshape}
+% fake small caps - cfr http://tex.stackexchange.com/questions/55664/fake-small-caps-with-xetex-fontspec
+%\def\fakesc{\bgroup\obeyspaces\fakescaux}
+%\def\fakescaux#1{\fakescauxii #1\relax\relax\egroup}
+%\def\fakescauxii#1{%
+%\ifx\relax#1\else \ifcat#1\@sptoken{} \expandafter\expandafter\expandafter\fakescauxii\else
+%\ifnum`#1=\uccode`#1 {\normalsize #1}\else {\footnotesize \uppercase{#1}}\fi \expandafter\expandafter\expandafter\fakescauxii\expandafter\fi\fi}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
@@ -331,24 +450,30 @@
 \newcommand*{\pagenumberstyle}[1]{{\pagenumberfont#1}}
 
 % recompute all resume lengths
-\newcommand*{\recomputecvlengths}{}
+\newcommand*{\recomputecvheadlengths}{}
+\newcommand*{\recomputecvbodylengths}{}
+\newcommand*{\recomputecvfootlengths}{}
+\newcommand*{\recomputecvlengths}{%
+  \recomputecvheadlengths%
+  \recomputecvbodylengths%
+  \recomputecvfootlengths}
 
 % internal maketitle command to issue a new line only when required
 \newif\if@firstdetailselement\@firstdetailselementtrue
-\newcommand*{\makenewline}{
+\newcommand*{\makenewline}[1][0pt]{%
   \if@firstdetailselement%
     \strut% to ensure baseline alignment, e.g. with when put in the margin vs sections that also contains a \strut
   \else%
-    \\\fi%
+    \\[#1]\fi%
   \@firstdetailselementfalse}
 
 % makes the resume title
 % usage: \makecvtitle
-\newcommand*{\makecvtitle}{}
-
-% makes the resume footer
-% usage: \makecvfooter
-\newcommand*{\makecvfooter}{\makefooter}
+\newcommand*{\makecvtitle}{%
+  \makecvhead%
+  \makecvfoot}
+\newcommand*{\makecvhead}{}
+\newcommand*{\makecvfoot}{}
 
 % makes a resume section
 % usage: \section{<title>}
@@ -397,12 +522,36 @@
     {\href{http://#2}{#2}}%
     {\href{http://#2}{#1}}}
 
+
+% makes an https hyperlink
+% usage: \httpslink[optional text]{link}
+\newcommand*{\httpslink}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\href{https://#2}{#2}}%
+    {\href{https://#2}{#1}}}
+
 % makes an email hyperlink
 % usage: \emaillink[optional text]{link}
 \newcommand*{\emaillink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{mailto:#2}{#2}}%
     {\href{mailto:#2}{#1}}}
+
+% makes a tel hyperlink
+% usage: \tellink[optional text]{link}
+\newcommand*{\tellink}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\expandafter\onlynumberslink\expandafter{#2}{#2}}%
+    {\expandafter\onlynumberslink\expandafter{#2}{#1}}}
+
+\ExplSyntaxOn
+\tl_new:N \l_onlynumberslink_tl
+\cs_new:Npn \onlynumberslink #1 #2  {
+    \tl_set:Nn \l_onlynumberslink_tl {#1}
+    \regex_replace_all:nnN {[^0-9+]} {} \l_onlynumberslink_tl
+    \href{ tel\token_to_str:N : \tl_use:N \l_onlynumberslink_tl}{ #2 }
+}
+\ExplSyntaxOff
 
 % cvcolumns environment, where every column is created through \cvcolumn
 % usage: \begin{cvcolumns}
@@ -425,7 +574,7 @@
     \setcounter{cvcolumnsautowidthcounter}{0}%
     \setlength{\cvcolumnsautowidth}{\cvcolumnsdummywidth}%
     \setlength{\cvcolumnautowidth}{0pt}%
-    \@cvcolumns@head@emptytrue}%
+    \@cvcolumns@head@emptytrue\ignorespaces}%
   {% at environment closing: typeset environment
     % compute the width of each cvcolumn, considering a spacing of \separatorcolumnwidth and the columns with set width
     \ifnum\thecvcolumnscounter>0%
@@ -446,7 +595,9 @@
         \g@addto@macro\cvcolumns@def{@{\hspace*{\separatorcolumnwidth}}}%
         \g@addto@macro\cvcolumns@head{&}%
         \g@addto@macro\cvcolumns@content{&}\fi%
-      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+%      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%      % this creates issues with the colortbl" package (loaded by xcolor when passing the "table" option) as the column definitions passed to \begin{tabular} contains \cvcolumn<i>@def references that it doesn't understand; the next 2 lines expand \cvcolumn@def to the point it doesn't
+      \edef\tmpcvcolumn@def{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\tmpcvcolumn@def}%
       \expandafter\g@addto@macro\expandafter\cvcolumns@head\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@head\endcsname}%
       \expandafter\g@addto@macro\expandafter\cvcolumns@content\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@content\endcsname}%
       \stepcounter{tmpiteratorcounter}%
@@ -464,10 +615,13 @@
 %      \repeat%
     % create the tabular
     \cvitem{}{%
-      \begin{tabular}{\cvcolumns@def}%
+%      \begin{tabular}{\cvcolumns@def}% this conflicts with the "colortbl" package (loaded by xcolor when passing the "table" option), and requires the below 2 lines to expand \cvcolumns@def
+      \def\begincvcolumns{\begin{tabular}[t]}% "[t]" is required for some body styles; the default alignment is "[c]"
+      \expandafter\begincvcolumns\expandafter{\cvcolumns@def}%
         \if@cvcolumns@head@empty\else%
-          \cvcolumns@head\\[-.8em]%
-          {\color{color1}\rule{\maincolumnwidth}{.25pt}}\\\fi%
+          \cvcolumns@head%\\[-.8em]%
+%          {\color{color1}\rule{\maincolumnwidth}{.25pt}}%
+          \\\fi%
         \cvcolumns@content%
       \end{tabular}}}
 
@@ -487,7 +641,8 @@
       \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@head\endcsname{\protect\parbox[b]{#1\cvcolumnswidth}{\protect\subsectionstyle{#2}}}}%
   \ifthenelse{\equal{#2}{}}{}{\@cvcolumns@head@emptyfalse}%
   \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@content\endcsname{\protect\cvcolumncell{#3}}%
-  \stepcounter{cvcolumnscounter}}
+  \stepcounter{cvcolumnscounter}%
+  \ignorespaces}
 
 % internal cvcolumncell command, that enables a cvcolumn cell to contain paragraph commands (lists, newlines, etc)
 \newcommand*{\cvcolumncell}[1]{{% put cell inside a group, so that command redefinitions are only local
@@ -509,6 +664,10 @@
 \newenvironment{thebibliography}[1]{}{}
 \newcommand*{\newblock}{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
+%% fix a bug (hardcoded bib label) in \@bibitem
+%\renewcommand\@bibitem[1]{%
+%  \item\if@filesw \immediate\write\@auxout
+%    {\string\bibcite{#1}{\theenumiv}}\fi\ignorespaces}% replaced "\the\value{\@listctr}" with "\theenumiv"
 
 % itemize, enumerate and description environment
 \setlength{\leftmargini}   {1em}
@@ -561,15 +720,21 @@
   \def\@enclosure{#2}}
 
 % recompute all letter lengths
-\newcommand*{\recomputeletterlengths}{}
+\newcommand*{\recomputeletterheadlengths}{}
+\newcommand*{\recomputeletterbodylengths}{}
+\newcommand*{\recomputeletterfootlengths}{}
+\newcommand*{\recomputeletterlengths}{%
+  \recomputeletterheadlengths%
+  \recomputeletterbodylengths%
+  \recomputeletterfootlengths}
 
 % makes the letter title
 % usage: \makelettertitle
-\newcommand*{\makelettertitle}{}
-
-% makes the letter footer
-% usage: \makeletterfooter
-\newcommand*{\makeletterfooter}{\makefooter}
+\newcommand*{\makelettertitle}{%
+  \makeletterhead%
+  \makeletterfoot}
+\newcommand*{\makeletterhead}{}
+\newcommand*{\makeletterfoot}{}
 
 % makes the letter closing
 % usage: \makeletterclosing

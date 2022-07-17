@@ -1,4 +1,4 @@
-%% start of file `moderncvstyleclassic.sty'.
+%% start of file `moderncvstylecasual.sty'.
 %% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
 %
 % This work may be distributed and/or modified under the
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleclassic}[2022-02-21 v2.3.1 modern curriculum vitae and letter style scheme: classic]
+\ProvidesPackage{moderncvstylecasual}[2022-02-21 v2.3.1 modern curriculum vitae and letter style scheme: casual]
 
 % head section alignment options: "left" (default) or "right"
 \@initializecommand{\moderncvstyleheadoptions}{}
@@ -23,7 +23,7 @@
 \DeclareOption{nosymbols}    {\@symbolsfalse}
 
 \DeclareOption*{}% avoid choking on unknown options
-\ExecuteOptions{left,symbols}
+\ExecuteOptions{right,symbols}
 \ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
 
 %-------------------------------------------------------------------------------
@@ -51,11 +51,12 @@
 %-------------------------------------------------------------------------------
 %                header, body & footer
 %-------------------------------------------------------------------------------
-\moderncvhead[\moderncvstyleheadoptions]{1}
+\moderncvhead[\moderncvstyleheadoptions]{2}
 \moderncvbody{1}
+\moderncvfoot{1}
 
 
 \endinput
 
 
-%% end of file `moderncvstyleclassic.sty'.
+%% end of file `moderncvstylecasual.sty'.

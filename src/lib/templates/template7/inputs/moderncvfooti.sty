@@ -1,0 +1,136 @@
+%% start of file `moderncvfooti.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvfooti}[2022-02-21 v2.3.1 modern curriculum vitae and letter footer variant: 1]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                overall foot definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
+
+% symbols
+%   footer symbol used to separate footer elements
+\newcommand*{\footsymbol}{%
+    {\hspace{1em}{\rmfamily\textbullet}\hspace{1em}}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+
+% lengths
+\@initializelength{\footwidth}%
+\renewcommand*{\recomputefootlengths}{%
+  \setlength{\footwidth}{0.8\textwidth}}
+
+% commands
+%   internal command to add an element to the footer
+%   it collects the elements in a temporary box, and checks when to flush the box
+\@initializebox{\footbox}%
+\@initializebox{\foottempbox}%
+\@initializelength{\footboxwidth}%
+\@initializeif{\if@firstfootelement}\@firstfootelementtrue%
+%   adds an element to the footer, separated by footsymbol
+%   usage: \addtofoot[footsymbol]{element}
+\newcommand*{\addtofoot}[2][\footsymbol]{%
+  \if@firstfootelement%
+    \savebox{\foottempbox}{\usebox{\footbox}#2}%
+  \else%
+    \savebox{\foottempbox}{\usebox{\footbox}#1#2}\fi%
+  \settowidth{\footboxwidth}{\usebox{\foottempbox}}%
+  \ifnum\footboxwidth<\footwidth%
+    \savebox{\footbox}{\usebox{\foottempbox}}%
+    \@firstfootelementfalse%
+  \else%
+    \flushfoot\\%
+    \savebox{\footbox}{#2}%
+    \savebox{\foottempbox}{#2}%
+    \settowidth{\footboxwidth}{\usebox{\footbox}}%
+    \@firstfootelementfalse\fi}
+%   internal command to flush the foot
+\newcommand*{\flushfoot}{%
+  \strut\usebox{\footbox}%
+  \savebox{\footbox}{}%
+  \savebox{\foottempbox}{}%
+  \setlength{\footboxwidth}{0pt}}
+
+
+%-------------------------------------------------------------------------------
+%                resume foot definition
+%-------------------------------------------------------------------------------
+% lenghts
+\renewcommand*{\recomputecvfootlengths}{\recomputefootlengths}
+
+% commands
+\renewcommand*{\makecvfoot}{%
+  \recomputecvfootlengths{}%
+  \fancypagestyle{plain}{%
+    \fancyfoot[c]{%
+      \parbox[b]{\footwidth}{%
+        \centering%
+        \color{color2}\addressfont%
+        \vspace{\baselineskip}% forces a white line to ensure space between main text and footer (as footer height can't be known in advance)
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofoot[]{\addresssymbol\@addressstreet}%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\addtofoot[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\addtofoot[~--~]{\@addresscountry}}%
+          \flushfoot\@firstfootelementtrue\\}%
+        \ifthenelse{\isundefined{\@born}}{}{\addtofoot{\bornsymbol\@born}\flushfoot\@firstfootelementtrue\\}%
+        \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+          \addtofoot{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
+        \ifthenelse{\isundefined{\@email}}{}{\addtofoot{\emailsymbol\emaillink{\@email}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\addtofoot{\homepagesymbol\httpslink{\@homepage}}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \addtofoot{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofoot{\@extrainfo}}%
+        \ifthenelse{\lengthtest{\footboxwidth=0pt}}{}{\flushfoot}% the lengthtest is required to avoid flushing an empty footer, which could cause a blank line due to the \\ after the address, if no other personal info is used
+        }}}%
+  \pagestyle{plain}}
+
+
+%-------------------------------------------------------------------------------
+%                letter foot definition
+%-------------------------------------------------------------------------------
+% commands
+\renewcommand*{\recomputeletterfootlengths}{\recomputefootlengths}
+\renewcommand*{\makeletterfoot}{%
+  \recomputeletterfootlengths{}%
+  \fancypagestyle{plain}{%
+    \fancyfoot[c]{%
+      \parbox[b]{\footwidth}{%
+        \centering%
+        \addressfont\color{color2}%
+        \vspace{\baselineskip}% forces a white line to ensure space between main text and footer (as footer height can't be known in advance)
+        \vspace{-\baselineskip}% to cancel out the extra vertical space taken by the name (below) and ensure perfect alignment of letter and cv footers
+        \strut{\bfseries\upshape\@firstname~\@lastname}\\% the \strut is required to ensure the line is exactly \baselineskip tall
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofoot[]{\addresssymbol\@addressstreet}%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\addtofoot[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\addtofoot[~--~]{\@addresscountry}}%
+          \flushfoot\@firstfootelementtrue\\}%
+        \ifthenelse{\isundefined{\@born}}{}{\addtofoot{\bornsymbol\@born}\flushfoot\@firstfootelementtrue\\}%
+        \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+          \addtofoot{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
+        \ifthenelse{\isundefined{\@email}}{}{\addtofoot{\emailsymbol\emaillink{\@email}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\addtofoot{\homepagesymbol\httpslink{\@homepage}}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \addtofoot{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofoot{\@extrainfo}}%
+        \ifthenelse{\lengthtest{\footboxwidth=0pt}}{}{\flushfoot}% the lengthtest is required to avoid flushing an empty footer, which could cause a blank line due to the \\ after the address, if no other personal info is used
+        }}}%
+  \pagestyle{plain}}
+
+
+\endinput
+
+
+%% end of file `moderncvfooti.sty'.

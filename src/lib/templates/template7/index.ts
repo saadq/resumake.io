@@ -24,7 +24,7 @@ const generator: Generator = {
 
     return source`
       \\section{${heading || 'Education'}}
-      ${education.map(school => {
+      ${education.map((school) => {
         const {
           institution,
           studyType = '',
@@ -73,7 +73,7 @@ const generator: Generator = {
 
     return source`
       \\section{${heading || 'Experience'}}
-      ${work.map(job => {
+      ${work.map((job) => {
         const {
           name,
           position,
@@ -97,7 +97,7 @@ const generator: Generator = {
         if (highlights) {
           highlightLines = source`
             \\begin{itemize}%
-              ${highlights.map(highlight => `\\item ${highlight}`)}
+              ${highlights.map((highlight) => `\\item ${highlight}`)}
             \\end{itemize}
             `
         }
@@ -122,7 +122,7 @@ const generator: Generator = {
 
     return source`
       \\section{${heading || 'Skills'}}
-      ${skills.map(skill => {
+      ${skills.map((skill) => {
         const { name, keywords = [] } = skill
         return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
       })}
@@ -136,7 +136,7 @@ const generator: Generator = {
 
     return source`
       \\section{${heading || 'Projects'}}
-      ${projects.map(project => {
+      ${projects.map((project) => {
         const { name, description, keywords = [], url } = project
 
         let detailsLine = ''
@@ -170,7 +170,7 @@ const generator: Generator = {
 
     return source`
       \\section{${heading || 'Awards'}}
-      ${awards.map(award => {
+      ${awards.map((award) => {
         const { title, summary, date, awarder } = award
 
         let detailsLine = ''
@@ -236,7 +236,7 @@ function template7(values: FormValues) {
     \\begin{document}
     ${values.basics ? '\\makecvtitle' : ''}
     ${values.sections
-      .map(section => {
+      .map((section) => {
         switch (section) {
           case 'education':
             return generator.educationSection(

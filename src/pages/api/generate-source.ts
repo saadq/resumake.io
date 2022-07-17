@@ -10,14 +10,21 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method !== 'POST') {
-    res.status(405)
-    return
+    const sourceCode = await generateSourceCode({
+      ...resume,
+      sections: resume.sections as FormValues['sections']
+    })
+    return sourceCode.pipe(res)
+      .setHeader('content-type', 'application/zip')
+      .setHeader('content-disposition', 'attachment; filename="resume.zip"')
+    // res.status(405)
+    // return
   }
 
-  return generateSourceCode({
-    ...resume,
-    sections: resume.sections as FormValues['sections']
-  })
+  const sourceCode = await generateSourceCode(req.body as FormValues)
+  sourceCode.pipe(res)
+    .setHeader('content-type', 'application/zip')
+    .setHeader('content-disposition', 'attachment; filename="resume.zip"')
 }
 
 /**

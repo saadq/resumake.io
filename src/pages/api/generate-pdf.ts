@@ -9,14 +9,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method !== 'POST') {
-    res.status(405)
+    const pdf = await generatePDF({
+      ...resume,
+      sections: resume.sections as FormValues['sections']
+    })
+    pdf.pipe(res)
+    res.setHeader('Content-Type', 'application/pdf')
     return
+    // res.status(405)
+    // return
   }
 
-  const pdf = await generatePDF({
-    ...resume,
-    sections: resume.sections as FormValues['sections']
-  })
+  const pdf = await generatePDF(req.body as FormValues)
   pdf.pipe(res)
   res.setHeader('Content-Type', 'application/pdf')
 }

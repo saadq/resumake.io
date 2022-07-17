@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import latex from '../../lib/latex'
-import getTemplateData from '../../lib/generator'
+import getTemplateData from '../../lib/templates'
 import { FormValues } from '../../types'
 import resume from './resume.json'
 

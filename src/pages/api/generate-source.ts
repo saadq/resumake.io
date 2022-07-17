@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getTemplateData from '../../lib/generator'
+import getTemplateData from '../../lib/templates'
 import { FormValues } from '../../types'
 import Archiver from 'archiver'
 import { stripIndent } from 'common-tags'

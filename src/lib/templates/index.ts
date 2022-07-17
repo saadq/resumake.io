@@ -5,13 +5,15 @@ import template3 from './template3'
 import template4 from './template4'
 import template5 from './template5'
 import template6 from './template6'
+import template7 from './template7'
 import {
   TEMPLATE1,
   TEMPLATE2,
   TEMPLATE3,
   TEMPLATE4,
   TEMPLATE5,
-  TEMPLATE6
+  TEMPLATE6,
+  TEMPLATE7
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
@@ -102,6 +104,18 @@ export default function getTemplateData(data: FormValues): TemplateData {
           fonts: path.resolve(
             process.cwd(),
             'src/lib/templates/template6/inputs'
+          )
+        }
+      }
+
+    case TEMPLATE7:
+      return {
+        texDoc: template7(data),
+        opts: {
+          cmd: 'tectonic',
+          inputs: path.resolve(
+            process.cwd(),
+            'src/lib/templates/template7/inputs'
           )
         }
       }

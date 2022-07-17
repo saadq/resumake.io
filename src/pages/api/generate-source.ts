@@ -14,7 +14,8 @@ export default async function handler(
       ...resume,
       sections: resume.sections as FormValues['sections']
     })
-    return sourceCode.pipe(res)
+    return sourceCode
+      .pipe(res)
       .setHeader('content-type', 'application/zip')
       .setHeader('content-disposition', 'attachment; filename="resume.zip"')
     // res.status(405)
@@ -22,7 +23,8 @@ export default async function handler(
   }
 
   const sourceCode = await generateSourceCode(req.body as FormValues)
-  sourceCode.pipe(res)
+  sourceCode
+    .pipe(res)
     .setHeader('content-type', 'application/zip')
     .setHeader('content-disposition', 'attachment; filename="resume.zip"')
 }

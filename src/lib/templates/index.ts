@@ -30,11 +30,11 @@ export default function getTemplateData(data: FormValues): TemplateData {
           cmd: 'tectonic',
           inputs: path.resolve(
             process.cwd(),
-            'src/lib/generator/template2/inputs'
+            'src/lib/templates/template2/inputs'
           ),
           fonts: path.resolve(
             process.cwd(),
-            'src/lib/generator/template2/inputs'
+            'src/lib/templates/template2/inputs'
           )
         }
       }

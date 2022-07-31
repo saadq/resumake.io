@@ -120,7 +120,7 @@ const generator: Generator = {
         if (highlights) {
           dutyLines = source`
             \\begin{itemize} \\itemsep -1pt
-              ${highlights.map(duty => `\\item ${duty}`)}
+              ${highlights.map((duty) => `\\item ${duty}`)}
             \\end{itemize}
           `
         }
@@ -146,7 +146,7 @@ const generator: Generator = {
       %%% Skills
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Skills'}}{}
-      ${skills.map(skill => {
+      ${skills.map((skill) => {
         const { name, keywords = [] } = skill
         return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
       })}
@@ -310,7 +310,7 @@ function template9(values: FormValues) {
     ${generator.resumeHeader()}
     \\begin{document}
     ${values.sections
-      .map(section => {
+      .map((section) => {
         switch (section) {
           case 'profile':
             return generator.profileSection(values.basics)

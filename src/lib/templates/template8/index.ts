@@ -40,7 +40,7 @@ const generator: Generator = {
 
     return source`
       \\begin{cvsection}{${heading || 'Education'}}
-      ${education.map(school => {
+      ${education.map((school) => {
         const {
           institution,
           studyType = '',
@@ -74,8 +74,9 @@ const generator: Generator = {
         }
 
         return stripIndent`
-          \\begin{cvsubsection}{${location || ''}}{${institution ||
-          ''}}{${dateRange || ''}}
+          \\begin{cvsubsection}{${location || ''}}{${institution || ''}}{${
+          dateRange || ''
+        }}
             \\begin{itemize}
               \\item ${degreeLine}
             \\end{itemize}
@@ -93,7 +94,7 @@ const generator: Generator = {
 
     return source`
       \\begin{cvsection}{${heading || 'Experience'}}
-      ${work.map(job => {
+      ${work.map((job) => {
         const {
           name,
           position,
@@ -117,14 +118,15 @@ const generator: Generator = {
         if (highlights) {
           highlightLines = source`
             \\begin{itemize}%
-              ${highlights.map(highlight => `\\item ${highlight}`)}
+              ${highlights.map((highlight) => `\\item ${highlight}`)}
             \\end{itemize}
             `
         }
 
         return stripIndent`
-          \\begin{cvsubsection}{${position || ''}}{${name ||
-          ''}}{${dateRange || ''}}
+          \\begin{cvsubsection}{${position || ''}}{${name || ''}}{${
+          dateRange || ''
+        }}
             ${location || ''}
             ${highlightLines || ''}
           \\end{cvsubsection}
@@ -143,7 +145,7 @@ const generator: Generator = {
       \\begin{cvsection}{${heading || 'Skills'}}
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
-      ${skills.map(skill => {
+      ${skills.map((skill) => {
         const { name, keywords = [] } = skill
         return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
       })}
@@ -163,7 +165,7 @@ const generator: Generator = {
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
-      ${projects.map(project => {
+      ${projects.map((project) => {
         const { name, description, keywords = [], url } = project
 
         let line = ''
@@ -202,7 +204,7 @@ const generator: Generator = {
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
-      ${awards.map(award => {
+      ${awards.map((award) => {
         const { title, summary, date, awarder } = award
 
         let line = ''
@@ -275,7 +277,7 @@ function template8(values: FormValues) {
       % Print the header
       \\makeheader
       ${values.sections
-        .map(section => {
+        .map((section) => {
           switch (section) {
             case 'education':
               return generator.educationSection(

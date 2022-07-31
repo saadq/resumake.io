@@ -6,6 +6,7 @@ import template4 from './template4'
 import template5 from './template5'
 import template6 from './template6'
 import template7 from './template7'
+import template8 from './template8'
 import {
   TEMPLATE1,
   TEMPLATE2,
@@ -13,7 +14,8 @@ import {
   TEMPLATE4,
   TEMPLATE5,
   TEMPLATE6,
-  TEMPLATE7
+  TEMPLATE7,
+  TEMPLATE8
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
@@ -116,6 +118,18 @@ export default function getTemplateData(data: FormValues): TemplateData {
           inputs: path.resolve(
             process.cwd(),
             'src/lib/templates/template7/inputs'
+          )
+        }
+      }
+
+    case TEMPLATE8:
+      return {
+        texDoc: template8(data),
+        opts: {
+          cmd: 'lualatex',
+          inputs: path.resolve(
+            process.cwd(),
+            'src/lib/templates/template8/inputs'
           )
         }
       }

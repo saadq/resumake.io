@@ -16,6 +16,9 @@ export type Basics = {
   phone?: string
   location?: Location
   profiles?: Profile[] // TODO: revisit how profiles gets rendered
+
+  // non-standard attributes
+  website?: string
 }
 
 export type Work = {

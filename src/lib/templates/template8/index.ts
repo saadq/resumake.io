@@ -8,8 +8,7 @@ const generator: Generator = {
       return ''
     }
 
-    const { name, email, phone = '', location = {}, profiles = [] } = basics
-    const website = profiles[0]?.url
+    const { name, email, phone = '', location = {}, website } = basics
 
     let addressLine = ''
     let contactsLine = ''

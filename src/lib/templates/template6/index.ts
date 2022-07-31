@@ -8,8 +8,8 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       return ''
     }
 
-    const { name = '', email, phone, location = {}, profiles = [] } = basics
-    const info = [email, phone, location.address, ...profiles].filter(Boolean)
+    const { name = '', email, phone, location = {}, website } = basics
+    const info = [email, phone, location.address, website].filter(Boolean)
 
     return stripIndent`
       \\begin{center}

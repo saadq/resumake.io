@@ -4,8 +4,7 @@ import type { FormValues, Generator } from '../../../types'
 
 const generator: Generator = {
   profileSection(basics = {}) {
-    const { name, email, phone, location = {}, profiles = [] } = basics
-    const website = profiles[0]?.url
+    const { name, email, phone, location = {}, website } = basics
 
     return stripIndent`
     % Profile

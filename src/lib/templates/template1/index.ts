@@ -8,11 +8,11 @@ const generator: Generator = {
       return ''
     }
 
-    const { name, email, phone, location, profiles = [] } = basics
+    const { name, email, phone, location, website } = basics
     const address = location?.address || ''
 
     let line1 = name ? `{\\Huge \\scshape {${name}}}` : ''
-    let line2 = [address, email, phone, ...profiles]
+    let line2 = [address, email, phone, website]
       .filter(Boolean)
       .join(' $\\cdot$ ')
 

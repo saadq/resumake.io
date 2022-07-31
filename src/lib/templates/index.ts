@@ -7,6 +7,7 @@ import template5 from './template5'
 import template6 from './template6'
 import template7 from './template7'
 import template8 from './template8'
+import template9 from './template9'
 import {
   TEMPLATE1,
   TEMPLATE2,
@@ -15,7 +16,8 @@ import {
   TEMPLATE5,
   TEMPLATE6,
   TEMPLATE7,
-  TEMPLATE8
+  TEMPLATE8,
+  TEMPLATE9,
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
@@ -131,6 +133,14 @@ export default function getTemplateData(data: FormValues): TemplateData {
             process.cwd(),
             'src/lib/templates/template8/inputs'
           )
+        }
+      }
+
+    case TEMPLATE9:
+      return {
+        texDoc: template9(data),
+        opts: {
+          cmd: 'pdflatex',
         }
       }
 

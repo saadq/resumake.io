@@ -17,9 +17,13 @@ import {
   TEMPLATE6,
   TEMPLATE7,
   TEMPLATE8,
-  TEMPLATE9,
+  TEMPLATE9
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
+
+function resolveTemplatePath(templatePath: string) {
+  return path.resolve(process.cwd(), 'src/lib/templates' + templatePath)
+}
 
 /**
  * Generates the LaTeX document based on the selected template
@@ -45,14 +49,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template2(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template2/inputs'
-          ),
-          fonts: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template2/inputs'
-          )
+          inputs: resolveTemplatePath('/template2/inputs'),
+          fonts: resolveTemplatePath('/template2/inputs')
         }
       }
 
@@ -69,14 +67,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template4(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template4/inputs'
-          ),
-          fonts: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template4/inputs'
-          )
+          inputs: resolveTemplatePath('/template4/inputs'),
+          fonts: resolveTemplatePath('/template4/inputs')
         }
       }
 
@@ -85,14 +77,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template5(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template5/inputs'
-          ),
-          fonts: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template5/inputs'
-          )
+          inputs: resolveTemplatePath('/template5/inputs'),
+          fonts: resolveTemplatePath('/template5/inputs')
         }
       }
 
@@ -101,14 +87,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template6(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template6/inputs'
-          ),
-          fonts: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template6/inputs'
-          )
+          inputs: resolveTemplatePath('/template6/inputs'),
+          fonts: resolveTemplatePath('/template6/inputs')
         }
       }
 
@@ -117,10 +97,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template7(data),
         opts: {
           cmd: 'tectonic',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template7/inputs'
-          )
+          inputs: resolveTemplatePath('/template7/inputs')
         }
       }
 
@@ -129,10 +106,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template8(data),
         opts: {
           cmd: 'lualatex',
-          inputs: path.resolve(
-            process.cwd(),
-            'src/lib/templates/template8/inputs'
-          )
+          inputs: resolveTemplatePath('/template8/inputs')
         }
       }
 
@@ -140,7 +114,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template9(data),
         opts: {
-          cmd: 'pdflatex',
+          cmd: 'pdflatex'
         }
       }
 

@@ -1,23 +1,12 @@
-/** @type {import('next').NextConfig} */
+// @ts-check
 
-const path = require('path')
-
-module.exports = {
+/** @type {import('next').NextConfig} **/
+const NextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
+  compiler: {
     styledComponents: true
   },
-  output: { path: path.resolve(__dirname, 'static') },
-  webpack: (config, options) => {
-    config.module.rules.push({
-      test: /\.pdf/,
-      type: 'asset/resource',
-      generator: {
-        filename: 'static/[hash][ext]'
-      }
-    })
-
-    return config
-  }
 }
+
+module.exports = NextConfig

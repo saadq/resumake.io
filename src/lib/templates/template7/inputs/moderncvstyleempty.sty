@@ -1,0 +1,50 @@
+%% start of file `moderncvstyleempty.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstyleempty}[2022-02-21 v2.3.1 modern curriculum vitae scheme: empty]
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+% toggle use of symbol fonts.
+\@initializeif{\if@symbols}\@symbolsfalse
+\DeclareOption{symbols}      {\@symbolstrue}
+\DeclareOption{nosymbols}    {\@symbolsfalse}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{symbols}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+%                fonts & icons
+%-------------------------------------------------------------------------------
+% symbols
+\if@symbols
+    \moderncvicons{symbols}     % use symbols 
+\else
+    \moderncvicons{letters}     % do not use symbols, use letters
+\fi
+
+% see moderncv.cls for command declarations that needs to be implemented, e.g. \maketitle, \section, \subsections, \cvline, etc
+
+\endinput
+
+
+%% end of file `moderncvstyleempty.sty'.

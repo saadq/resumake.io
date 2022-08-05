@@ -6,7 +6,7 @@ import { Header } from '../../components/generator/layout/Header'
 import { Sidebar } from '../../components/generator/layout/Sidebar'
 import { Templates } from '../../components/generator/templates/Templates'
 import { sizes } from '../../theme'
-import { useDevtools } from '../../hooks/useDevtools'
+import { useDevtools } from '../../atoms/useDevtools'
 
 const Preview = dynamic(
   async () =>

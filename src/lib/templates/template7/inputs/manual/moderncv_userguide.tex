@@ -1,0 +1,462 @@
+%% moderncv_userguide.tex (compiled with pdfLaTeX)
+%% Copyright 2007 Cristina Sambo
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+\documentclass[a4paper,11pt]{article}
+
+\title{\bfseries Moderncv -- v. 0.6}
+\author{Package by Xavier Danaux \\ \begin{small}Documentation by Cristina Sambo \end{small}}
+\date{}
+
+%language and encoding options
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+%font options
+\usepackage{txfonts}
+\usepackage{marvosym}
+\usepackage{pifont}
+
+%margins, spacing and page layout
+\usepackage[pdftex,colorlinks=true]{hyperref} %(hyperref must be loaded before geometry)
+\usepackage[pdftex]{geometry}
+\geometry{top=2.5cm, bottom=3cm}
+\setlength{\parindent}{0pt} %(to soppress indentation when starting a new paragraph)
+\frenchspacing %(to soppress additional space after a full stop)
+
+%packages
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex]{xcolor}
+\usepackage[labelfont=sl,font=small,width=0.9\textwidth]{caption}
+\usepackage{marvosym}
+\usepackage{latexsym}
+
+%pdfLaTeX options
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+\pdfimageresolution=150
+\pdfinfo{
+	/Title		(Moderncv -- v. 0.6)
+	/Author		(Cristina Sambo)
+	/Subject		(Moderncv package user's guide)
+	/Keywords	(curriculum vitae, LaTeX)
+}
+
+%my commands
+\definecolor{bluecv}{rgb}{0.25,0.5,0.75}
+\definecolor{greencv}{rgb}{0.55,0.85,0.35}
+\definecolor{redcv}{rgb}{1.00,0.30,0.30}
+\definecolor{orangecv}{rgb}{1,0.65,0.20}
+\definecolor{greycv}{rgb}{0.75,0.75,0.75}
+
+%==================
+% DOCUMENT BEGINNING
+%==================
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent \texttt{Moderncv}, as its author says in the readme file, provides a documentclass for typesetting modern curriculum vitaes in various styles. It is fairly customizable, allowing you to define your own style by changing the colors, the fonts, \dots\ and provides two default styles: classic and casual.
+\end{abstract}
+
+\section{Introduction}
+When I saw for the first time this class I was amazing: ``Here it is what I need'', I thought. Using the very clear examples, was easy to make my first curriculum. 
+Indeed the class is very simple to use, in this documentation I will only put together all the things to help users to have all on hand.
+
+\smallskip
+\texttt{Moderncv} requires the following packages: \texttt{ifthen}, \texttt{ifpdf}, \texttt{color}, \texttt{lmodern}, \texttt{marvosym}, \texttt{url}, \texttt{hyperref}, \texttt{longtable}, \texttt{graphicx}, \texttt{fancyhdr}, usually all just included in the \LaTeX\ distributions.
+
+\section{In the preamble}
+
+At the very beginning of your preamble (that is the part before \verb|\begin{document}|) insert:
+
+\begin{verbatim}
+\documentclass[<options>]{moderncv}
+\end{verbatim} 
+
+where the options are:
+
+\begin{description}
+ \item[paper size options:] \texttt{a4paper}, \texttt{a5paper}, \texttt{b5paper}, \texttt{letterpaper}, \texttt{legalpaper}, \texttt{ex\-ec\-u\-tive\-pa\-per}, \texttt{landscape}
+ \item[font size options:] \texttt{10pt}, \texttt{11pt}, \texttt{12pt}
+ \item[font option:] \texttt{nolmodern}, for people without the latin modern fonts
+ \item[color option:] \texttt{nocolor}, to have all in black and white
+ \item[draft/final options:] \texttt{draft}, \texttt{final}
+\end{description}
+
+The default options are: \texttt{a4paper}, \texttt{11pt}, \texttt{color}, \texttt{final}. 
+
+After the documentclass specification, choose the theme for your curriculum vit\ae:
+
+\begin{verbatim}
+\moderncvtheme[<options>]{casual}
+\end{verbatim} 
+
+which is the default theme, or
+
+\begin{verbatim}
+\moderncvtheme[<options>]{classic}
+\end{verbatim} 
+
+where the theme options are:
+
+\begin{description}
+ \item[color options:] you can choose between five color: 
+	\begin{itemize}
+	 \item[\texttt{blue}] {\color{bluecv}\rule{1cm}{2ex}} (default color)
+	 \item[\texttt{green}] {\color{greencv}\rule{1cm}{2ex}}
+	 \item[\texttt{red}] {\color{redcv}\rule{1cm}{2ex}}
+	 \item[\texttt{orange}] {\color{orangecv}\rule{1cm}{2ex}}
+	 \item[\texttt{grey}] {\color{greycv}\rule{1cm}{2ex}}
+	\end{itemize}
+ \item[roman option:] \texttt{roman}, for {\fontsize{11}{12} \usefont{T1}{lmr}{m}{n}\selectfont roman} fonts, instead of \fontsize{11}{12} \usefont{T1}{lmss}{m}{n}\selectfont sans serif fonts.
+\end{description}
+
+Then you have to specify the character encoding (utf8, latin1, and so on):
+
+\begin{verbatim}
+\usepackage[<your encoding>]{inputenc}
+\end{verbatim} 
+
+and you can adjust the page geometry:
+
+\begin{verbatim}
+\usepackage[<options>]{geometry}
+\recomputelengths
+\end{verbatim} 
+
+where \verb|\recomputelengths| is required when changes are made to page layout lengths.
+
+Now we can get into the part most related to our curriculum vit\ae: our personal data. They will be inserted in the header of the first page, in the classic theme, or in the footer of every page, in the case of casual theme.
+
+\begin{itemize}
+\item \verb|\firstname{John}|
+\item \verb|\familyname{Doe}|
+\item \verb|\title{Resum\'e title}|: optional
+\item \verb|\address{street and number}{postcode city}|: optional 
+\item \verb|\mobile{mobile}|: optional
+\item \verb|\phone{phone}|: optional
+\item \verb|\fax{fax}|: optional
+\item \verb|\email{email}|: optional
+\item \verb|\extrainfo{additional information}|: optional; here you can put, for example, the address of your website
+\item \verb|\photo[64pt]{picture}|: optional; \texttt{64pt} is the height the picture, you can set here the size you prefer; \texttt{picture} is the name of the picture file
+\item \verb|\quote{Some quote}|: optional
+\end{itemize} 
+
+Finally you can suppress automatic page numbering for CVs longer than one page:
+
+\begin{verbatim}
+\nopagenumbers{}
+\end{verbatim} 
+
+\subsection{Examples}
+
+In practice, you will type:
+
+\begin{verbatim}
+\documentclass[11pt,a4paper]{moderncv}
+
+% moderncv themes
+\moderncvtheme[green]{casual}
+
+% character encoding
+\usepackage[utf8]{inputenc}
+
+% adjust the page margins
+\usepackage[scale=0.8]{geometry}
+\recomputelengths
+
+% personal data 
+\firstname{John}
+\familyname{Doe}
+\title{Design enthusiast}
+\address{12 somestreet}{3456 somecity}
+\mobile{+123 456 7890}
+\phone{+12 (3)456 78 90}
+\fax{+12 (3)456 78 90}
+\email{jdoe@design.org}
+\extrainfo{\weblink{www.ctan.org}}
+\photo[64pt]{jdoe_picture}
+\quote{Any intelligent fool can make things bigger, more complex, 
+and more violent. It takes a touch of genius -- and a lot of courage -- to 
+move in the opposite direction.}
+
+\begin{document}
+\maketitle
+
+... <what you'll see in the next section>
+
+\end{document}
+\end{verbatim}
+
+to obtain a casual moderncv in green, as shown in figure \ref{fig:casual}, and you will substitute the line describing the theme with:
+
+\begin{verbatim}
+% moderncv themes
+\moderncvtheme[blue]{classic}
+\end{verbatim}
+
+to obtain a classic moderncv in blue, as shown in figure \ref{fig:classic}.
+
+
+\begin{figure}[p]
+ \centering
+ \fbox{\includegraphics[angle=90,width=\textwidth]{cv_casual.pdf}}
+ \caption{An example of casual moderncv in green.}
+ \label{fig:casual}
+\end{figure}
+
+\begin{figure}[p]
+ \centering
+ \fbox{\includegraphics[angle=90,width=\textwidth]{cv_classic.pdf}}
+ \caption{An example of classic moderncv in blue.}
+ \label{fig:classic}
+\end{figure}
+
+\section{Customize sections}
+
+Now we are ready to edit the part between \verb|\begin{document}| and \verb|\end{document}|.
+
+As you can seen in figure \ref{fig:casual} e \ref{fig:classic}, you can divide your CV into sections, each of them describing what you are, what you know and what you have done in your life. Every section is divide into items chosen from different flavours. More in details:
+
+\subsection{Section}
+
+The command to open a new section is: 
+
+\begin{verbatim}
+\section{<title>}
+\end{verbatim}
+
+and every section can be divided into subsections:
+
+\begin{verbatim}
+\subsection{<title>}
+\end{verbatim}
+
+If necessary, there is a command to close the section: 
+
+\begin{verbatim}
+\closesection{}
+\end{verbatim}
+
+and even one to create an empty section:
+
+\begin{verbatim}
+\emptysection{}
+\end{verbatim}
+
+An example of their usage can be the next one:
+
+\begin{verbatim}
+\section{Section with your own content}\closesection
+Your content here, inside the normal \LaTeX{} environment. 
+You can use any regular \LaTeX{} command, display mathematics
+\[e =m\,c^2,\]
+put some table or figure, \dots
+
+\emptysection{}
+\cvitem{Now}{Back to moderncv layout, without making a new section :-)}
+\end{verbatim}
+
+whose results is shown in figure \ref{fig:ex_sec}.
+
+\begin{figure}[!ht]
+ \centering
+ \fbox{\includegraphics[width=0.9\textwidth]{ex_sec}}
+ \caption{Example of usage of section commands.}
+ \label{fig:ex_sec}
+\end{figure}
+
+\subsection{Items}
+
+Inside sections, you can choose between different kind of items depending on the purpose:
+
+\begin{itemize}
+ \item in the sections describing your education or your job experiences, you can use:
+ \begin{verbatim}
+\cventry{years}{degree/job title}{institution/employer}
+{localization}{optional: grade/...}
+{optional: comment/job description}
+  \end{verbatim} 
+\vspace{-20pt}  
+where the last three arguments are optional
+ \item inside `language' cvsection environment, you can type every entry with:
+ \begin{verbatim}
+\cvlanguage{name}{level}{comment}
+ \end{verbatim}
+ \item inside `computer skills' cvsection environment, you can type every entry with:
+ \begin{verbatim}
+\cvcomputer{category}{programs}{category}{programs}
+ \end{verbatim}
+ \item to typeset lines with a hint on the left:
+ \begin{verbatim}
+\cvline{leftmark}{text}
+ \end{verbatim}
+ \item to typeset entry with a description on the left, but in two columns inside a cvsection:
+ \begin{verbatim}
+\cvdoubleitem{subtitle}{text}{subtitle}{text}
+ \end{verbatim}
+ \item to typeset lists on one column inside a cvsection:
+ \begin{verbatim}
+\cvlistitem{point1}
+ \end{verbatim}
+ \item to typeset lists on two columns inside a cvsection:
+ \begin{verbatim}
+\cvlistdoubleitem{point1}{point2}
+ \end{verbatim}
+ \item to add a section listing all your publications stored in a BibTeX file:
+ \begin{verbatim}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{BibTeX_file}
+ \end{verbatim}
+\vspace{-20pt}
+ where the name of the section title can be changed by redefining the \texttt{refname} with  \verb|\renewcommand{\refname}{<new_name>}|
+\end{itemize}
+
+\subsubsection*{Example}
+
+Let's put all together and see in figure \ref{fig:sections} what is the result:
+
+\begin{verbatim}
+... preamble ...
+\begin{document}
+\section{Education}
+\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
+\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
+% 
+\section{Master thesis}
+\cvline{title}{\emph{Title}}
+\cvline{supervisors}{Supervisors}
+\cvline{description}{\small Short thesis abstract}
+% 
+\section{Experience}
+\subsection{Vocational}
+\cventry{year--year}{Job title}{Employer}{City}{}{Description}
+\cventry{year--year}{Job title}{Employer}{City}{}{Description}
+\subsection{Miscellaneous}
+\cventry{year--year}{Job title}{Employer}{City}{}%
+  {Description line 1\newline{}Description line 2}
+% 
+\section{Languages}
+\cvlanguage{language 1}{Skill level}{Comment}
+\cvlanguage{language 2}{Skill level}{Comment}
+% 
+\section{Computer skills}
+\cvcomputer{category 1}{XXX, YYY, ZZZ}{category 3}{XXX, YYY, ZZZ}
+\cvcomputer{category 2}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
+% 
+\section{Interests}
+\cvline{hobby 1}{\small Description}
+\cvline{hobby 2}{\small Description}
+\cvline{hobby 3}{\small Description}
+% 
+\closesection{}
+\pagebreak
+%
+\section{Extra}
+\cvlistitem{Item 1}
+\cvlistitem{Item 2}
+\cvlistitem{Item 3}
+%
+\section{Extra 2}
+\cvlistdoubleitem{Item 1}{Item 4}
+\cvlistdoubleitem{Item 2}{Item 5}
+\cvlistdoubleitem{Item 3}{}
+%
+% Publications from a BibTeX file
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{publications}  % 'publications' is the name of a BibTeX file 
+%
+\end{document}
+\end{verbatim} 
+
+\begin{figure}[!ht]
+ \centering
+ \fbox{\includegraphics[angle=90,width=\textwidth]{test_cvsection2.pdf}}\\
+ \fbox{\includegraphics[angle=90,width=\textwidth]{test_cvsection1.pdf}} 
+\caption{Example of usage of items inside cvsections.}
+ \label{fig:sections}
+\end{figure}
+
+\section{More customizations}
+
+You have some useful commands to personalize your CV further.
+
+\subsection*{Modifying the symbols}
+You can modify the symbols used for the personal data (phone number, the email, \ldots) redefining \texttt{phonesymbol}, \texttt{emailsymbol}, \texttt{addresssymbol}, \texttt{mobilesymbol}, \texttt{faxsymbol}.
+
+For example: if you want to use the dingbat fonts, load the \texttt{pifont} package in the preamble, then substitute the default symbol \Telefon\ with the dingbat symbol \ding{38}\ by:
+\begin{verbatim}
+\renewcommand{\phonesymbol}{\ding{38}}
+\end{verbatim} 
+
+You can change the symbol for lists in two way:
+\begin{itemize}
+ \item redefining the command \texttt{listitemsymbol}: \verb|\renewcommand{\listitemsymbol}{-}|
+ \item adding a specification for the label in \texttt{cvlistitem} and \texttt{cvlistdoubleitem}
+\end{itemize}
+
+For example: the  following code produces the result shown in figure \ref{fig:ex_items}.
+
+\begin{verbatim}
+\closesection{}                   % needed to renewcommands
+\renewcommand{\listitemsymbol}{-} % change the symbol for lists
+
+\section{Extra 1}
+\cvlistitem{Item 1}
+\cvlistitem{Item 2}
+\cvlistitem[+]{Item 3}            % optional other symbol
+
+\section{Extra 2}
+\cvlistdoubleitem[\Neutral]{Item 1}{Item 4}
+\cvlistdoubleitem[\Neutral]{Item 2}{Item 5}
+\cvlistdoubleitem[\Neutral]{Item 3}{}
+\end{verbatim} 
+
+\begin{figure}[!hbt]
+ \centering
+ \fbox{\includegraphics[width=.8\textwidth]{ex_items.png}}
+ \caption{Example of customization of the list labels.}
+ \label{fig:ex_items}
+\end{figure}
+
+\subsection*{Adjusting lenghts}
+The different lengths used by moderncv are customizable by
+\begin{verbatim}
+\setlength{<length>}{<new_dimensions>}
+\end{verbatim}
+where \texttt{<length>} are \texttt{quote\-width}, \texttt{sep\-a\-ra\-tor\-col\-umn\-width}, \texttt{main\-col\-umn\-width}, \texttt{doub\-le\-i\-tem\-main\-col\-umn\-width}, \texttt{list\-i\-tem\-sym\-bol\-width}, \texttt{list\-doub\-le\-i\-tem\-main\-col\-umn\-width}, 
+
+In particular, the first column, can be set to any width. You can do that in two way:
+\begin{itemize}
+ \item using \verb|\sethintscolumnlength{<length>}|, where  \texttt{<length>} is the desired length in a unit LaTeX understands
+ \item using \verb|\sethintscolumntowidth{<string>}|, where \texttt{<string>} is a string of the desired length (usually, the longest string that has to appear in the column)
+\end{itemize}
+
+\subsection*{Additional commands}
+There are commands to manage hypertextual links:
+\begin{itemize}
+ \item[-] \verb|\weblink[optional text]{link}|
+ \item[-] \verb|\httplink[optional text]{link}|
+ \item[-] \verb|\emaillink[optional text]{link}|
+\end{itemize}
+
+There is a \verb|\today| command, useful for example if you need to add the date the CV was produced.
+
+\subsection*{Putting things at the end of CV}
+Sometimes there is the need to add some lines at the end of the CV. For example, in Italy is necessary to add the permission to treat the personal data contained in the r\'esum\'e. You can do that dropping out of the layout of \texttt{moderncv} and pushing the lines at the end by the command \verb|\vfill|:
+\begin{verbatim}
+\emptysection{}\closesection
+\vfill
+\begin{center} 
+\textit{\small Ai sensi del D. Lgs. 196/2003 ...}
+\end{center}
+\end{verbatim}
+
+\end{document}

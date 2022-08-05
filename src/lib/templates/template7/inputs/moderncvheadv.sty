@@ -1,0 +1,174 @@
+%% start of file `moderncvheadv.sty'.
+%% Copyright 2015-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvheadv}[2022-02-21 v2.3.1 modern curriculum vitae and letter header variant: 5]
+
+% details options: "details" (default) or "nodetails"
+\@initializeif{\if@details}\@detailsfalse
+\DeclareOption{details}   {\@detailstrue}
+\DeclareOption{nodetails} {\@detailsfalse}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{details}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                overall head definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
+\renewcommand*{\addressfont}{\small\mdseries\slshape}
+\renewcommand*{\quotefont}{\large\slshape}
+
+% styles
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color0}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
+\renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+
+
+%-------------------------------------------------------------------------------
+%                resume head definition
+%-------------------------------------------------------------------------------
+% lengths
+\@initializelength{\quotewidth}
+\renewcommand*{\recomputecvheadlengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}}
+
+% commands
+\renewcommand*{\makecvhead}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
+  % optional photo (pre-rendering)
+  \@initializebox{\makecvheadpicturebox}%
+  \savebox{\makecvheadpicturebox}{%
+    \ifthenelse{\isundefined{\@photo}}%
+    {}%
+    {%
+      \color{color1}%
+      \setlength{\fboxrule}{\@photoframewidth}%
+      \ifdim\@photoframewidth=0pt%
+        \setlength{\fboxsep}{0pt}\fi%
+      \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
+  % rendering
+  \@makecvtitle%
+    {%
+      \raggedleft%
+      % optional photo
+      \usebox{\makecvheadpicturebox}%
+      % optional details
+      \if@details%
+        \ifthenelse{\isundefined{\@photo}}{}{\\[0.5em]}%
+        \addressfont\color{color2}%
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+        \ifthenelse{\isundefined{\@born}}{}{\makenewline\bornsymbol~\@born}%
+        \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+          \makenewline\csname\collectionloopkey phonesymbol\endcsname~\collectionloopitem}%
+        \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol~\emaillink{\@email}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol~\httpslink{\@homepage}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \makenewline\csname\collectionloopkey socialsymbol\endcsname~\collectionloopitem}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}\fi}%
+    {%
+      % name and optional title
+      \newlength{\makecvheadpictureboxskip}%
+      \setlength{\makecvheadpictureboxskip}{\totalheightof{\usebox{\makecvheadpicturebox}}}%
+      \namestyle{\@firstname\ \@lastname}%
+	  \ifthenelse{\equal{\@title}{}}{
+	    \ifthenelse{\isundefined{\@quote}}%
+          {}%
+          {\\[1.25em]\begin{minipage}{\quotewidth}\quotestyle{\@quote}\end{minipage}\\[2.5em]}
+	    }{
+	    \\[1.25em]\titlestyle{\@title}\\[2.5em]%
+        % optional quote
+        \ifthenelse{\isundefined{\@quote}}%
+          {}%
+          {\begin{minipage}{\quotewidth}\quotestyle{\@quote}\end{minipage}\\[2.5em]}}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
+
+% underlying command to implement \makecvtitle, identical to \@cvitem from moderncvbodyv
+\let\standarddoublebackslash\\%
+\newcommand*{\@makecvtitle}[3][.5ex]{%
+  \arrayrulecolor{color1}%
+  \setlength\arrayrulewidth{1.2\p@}%
+  \if@aftersection\else%
+    \vspace*{-\arrayrulewidth}\fi% HACK; I don't understand where the space is coming from, nor what it's exact value is :(
+  \noindent%
+  \begin{tabular}[t]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}|@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+    \@moderncvstrut{4pt}{16pt}%
+    \begin{minipage}[t]{\hintscolumnwidth}#2\end{minipage}
+      &\begin{minipage}[t]{\maincolumnwidth}#3\end{minipage}%
+      \\[#1]% the spacing needs to be inside the cell for the vertical rule to extend correctly
+  \end{tabular}%
+  \par\@aftersectionfalse\ignorespaces}
+
+
+%-------------------------------------------------------------------------------
+%                letter head definition
+%-------------------------------------------------------------------------------
+% lengths
+%\renewcommand*{\recomputeletterheadlengths}{}
+
+% commands
+\renewcommand*{\makeletterhead}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
+  % sender contact info
+  \hfill%
+  \begin{minipage}{.5\textwidth}%
+    % optional detailed information
+    \if@details%
+      \raggedleft%
+      \addressfont\textcolor{color2}{%
+        {\bfseries\upshape\@firstname~\@lastname}\@firstdetailselementfalse%
+        % optional detailed information
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+        \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+          \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
+        \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httpslink{\@homepage}}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}\fi%
+    \end{minipage}\\[1em]
+  % recipient block
+  \begin{minipage}[t]{.5\textwidth}
+    \raggedright%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress%
+  \end{minipage}
+  % date
+  \hfill% US style
+%  \\[1em]% UK style
+  \@date\\[2em]% US informal style: "January 1, 1900"; UK formal style: "01/01/1900"
+  % opening
+  \raggedright%
+  \@opening\\[1.5em]%
+  % ensure no extra spacing after \makelettertitle due to a possible blank line
+%  \ignorespacesafterend% not working
+  \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+
+
+\endinput
+
+
+%% end of file `moderncvheadv.sty'.

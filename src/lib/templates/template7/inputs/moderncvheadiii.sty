@@ -1,0 +1,160 @@
+%% start of file `moderncvheadiii.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvheadiii}[2022-02-21 v2.3.1 modern curriculum vitae and letter header variant: 3]
+
+% details options: "details" (default) or "nodetails"
+\@initializeif{\if@details}\@detailsfalse
+\DeclareOption{details}{\@detailstrue}
+\DeclareOption{nodetails}{\@detailsfalse}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{details}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                overall head definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\Huge\bfseries\upshape}
+\renewcommand*{\titlefont}{\Huge\mdseries\upshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\upshape}
+\renewcommand*{\quotefont}{\large\slshape}
+
+% styles
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2!85}{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
+\renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+
+% commands
+\@initializecommand{\makeheaddetailssymbol}{%
+    {\hspace{1em}{\rmfamily\textbullet}\hspace{1em}}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+%   internal command to add an element to the footer
+%   it collects the elements in a temporary box, and checks when to flush the box
+\@initializebox{\makeheaddetailsbox}%
+\@initializebox{\makeheaddetailstempbox}%
+\@initializelength{\makeheaddetailswidth}%
+\@initializelength{\makeheaddetailsboxwidth}%
+\@initializeif{\if@firstmakeheaddetailselement}\@firstmakeheaddetailselementtrue%
+%   adds an element to the makehead, separated by makeheadsymbol
+%   usage: \addtomakehead[makeheadsymbol]{element}
+\newcommand*{\addtomakeheaddetails}[2][\makeheaddetailssymbol]{% TODO: use \@initializecommand, which requires modifying its definition to handle mandatory and optional arguments
+  \if@firstmakeheaddetailselement%
+    \savebox{\makeheaddetailstempbox}{\usebox{\makeheaddetailsbox}#2}%
+  \else%
+    \savebox{\makeheaddetailstempbox}{\usebox{\makeheaddetailsbox}#1#2}\fi%
+  \settowidth{\makeheaddetailsboxwidth}{\usebox{\makeheaddetailstempbox}}%
+  \ifnum\makeheaddetailsboxwidth<\makeheaddetailswidth%
+    \savebox{\makeheaddetailsbox}{\usebox{\makeheaddetailstempbox}}%
+    \@firstmakeheaddetailselementfalse%
+  \else%
+    \flushmakeheaddetails\\%
+    \savebox{\makeheaddetailsbox}{#2}%
+    \savebox{\makeheaddetailstempbox}{#2}%
+    \settowidth{\makeheaddetailsboxwidth}{\usebox{\makeheaddetailsbox}}%
+    \@firstmakeheaddetailselementfalse\fi}
+%   internal command to flush the makehead
+\@initializecommand{\flushmakeheaddetails}{%
+  \ifnum\makeheaddetailsboxwidth>0%
+    \strut\usebox{\makeheaddetailsbox}%
+    \savebox{\makeheaddetailsbox}{}%
+    \savebox{\makeheaddetailstempbox}{}%
+    \setlength{\makeheaddetailsboxwidth}{0pt}\fi}
+\@initializecommand{\makehead}{%
+  \setlength{\makeheaddetailswidth}{0.8\textwidth}%
+  \hfil%
+  \parbox{\makeheaddetailswidth}{%
+    \centering%
+    % name and title
+    \namestyle{\@firstname~\@lastname}%
+    \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title) 
+    % optional detailed information
+    \if@details{%
+      \\%
+      \addressfont\color{color2}%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomakeheaddetails{\addresssymbol\@addressstreet}%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\addtomakeheaddetails[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscountry}{}}{}{\addtomakeheaddetails[~--~]{\@addresscountry}}%
+        \flushmakeheaddetails\@firstmakeheaddetailselementtrue\\}%
+      \ifthenelse{\isundefined{\@born}}{}{\addtomakeheaddetails{\bornsymbol\@born}}%
+      \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+        \addtomakeheaddetails{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
+      \ifthenelse{\isundefined{\@email}}{}{\addtomakeheaddetails{\emailsymbol\emaillink{\@email}}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\addtomakeheaddetails{\homepagesymbol\httpslink{\@homepage}}}%
+      \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+        \addtomakeheaddetails{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
+      \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomakeheaddetails{\@extrainfo}}%
+      \flushmakeheaddetails}\fi}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \makehead
+
+
+%-------------------------------------------------------------------------------
+%                resume head definition
+%-------------------------------------------------------------------------------
+% lengths
+\@initializelength{\quotewidth}
+\renewcommand*{\recomputecvheadlengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}}
+
+% commands
+\renewcommand*{\makecvhead}{% TODO: use \@initializecommand, which requires modifying its definition to handle \par
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
+  \makehead%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle}
+
+
+%-------------------------------------------------------------------------------
+%                letter head definition
+%-------------------------------------------------------------------------------
+% lengths
+%\renewcommand*{\recomputeletterheadlengths}{}
+
+% commands
+\renewcommand*{\makeletterhead}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
+  % sender block
+  \makehead%
+  \par%
+   % recipient block
+  \begin{minipage}[t]{.5\textwidth}
+    \raggedright%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress%
+  \end{minipage}
+  % date
+  \hfill% US style
+%  \\[1em]% UK style
+  \@date\\[2em]% US informal style: "January 1, 1900"; UK formal style: "01/01/1900"
+  % opening
+  \raggedright%
+  \@opening\\[1.5em]%
+  % ensure no extra spacing after \makelettertitle due to a possible blank line
+%  \ignorespacesafterend% not working
+  \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+
+
+\endinput
+
+
+%% end of file `moderncvheadiii.sty'.

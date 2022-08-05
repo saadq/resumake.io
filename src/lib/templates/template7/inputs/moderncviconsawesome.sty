@@ -1,0 +1,57 @@
+%% start of file `moderncviconsawesome.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncviconsawesome}[2022-02-21 v2.3.1 modern curriculum vitae icons: awesome]
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+% Font Awesome font
+\RequirePackage{fontawesome5}
+
+%-------------------------------------------------------------------------------
+%                all symbols described in moderncv.cls
+%-------------------------------------------------------------------------------
+\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\tiny\faCircle[regular]}} % alternative: \faCircle (solid style)
+%\renewcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}            % no change from default in moderncv.cls
+%\renewcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% no change from default in moderncv.cls
+%\renewcommand*{\labelitemiv}         {\labelitemiii}                                         % no change from default in moderncv.cls
+
+
+%\renewcommand*{\addresssymbol}            {}
+\renewcommand*{\mobilephonesymbol}        {{\small\faMobile*}~}            % alternative: \faMobile (solid style)
+\renewcommand*{\fixedphonesymbol}         {{\small\faPhone*}~}             % alternative: \faPhone (reversed)
+\renewcommand*{\faxphonesymbol}           {{\small\faFax}~}                % alternative: \faPrint
+\renewcommand*{\emailsymbol}              {{\small\faEnvelope[regular]}~}  % alternative: \faInbox, \faEnvelope (solid style)
+\renewcommand*{\homepagesymbol}           {{\small\faGlobeAmericas}~}      % alternative: \faHome, \faGlobe, \faGlobeEurope, \faGlobeAfrica, \faGlobeAsia
+\renewcommand*{\linkedinsocialsymbol}     {{\small\faLinkedinIn}~}         % alternative: \faLinkedin
+\renewcommand*{\xingsocialsymbol}         {{\small\faXing}~}               % alternative: \faXingSquare
+\renewcommand*{\twittersocialsymbol}      {{\small\faTwitter}~}            % alternative: \faTwitterSquare
+\renewcommand*{\githubsocialsymbol}       {{\small\faGithub}~}             % alternative: \faGithubSquare, \faGithub*
+\renewcommand*{\gitlabsocialsymbol}       {{\small\faGitlab}~}
+\renewcommand*{\stackoverflowsocialsymbol}{{\small\faStackOverflow}~}
+\renewcommand*{\bitbucketsocialsymbol}    {{\small\faBitbucket}~}
+\renewcommand*{\skypesocialsymbol}        {{\small\faSkype}~}
+\renewcommand*{\orcidsocialsymbol}        {{\small\faOrcid}~}
+\renewcommand*{\researchgatesocialsymbol} {{\small\faResearchgate}~}
+%\renewcommand*{\researcheridsocialsymbol} {}
+%\renewcommand*{\googlescholarsocialsymbol}{}
+\renewcommand*{\telegramsocialsymbol}     {{\small\faTelegram}~}
+\renewcommand*{\whatsappsocialsymbol}     {{\small\faWhatsapp}~}
+%\renewcommand*{\signalsocialsymbol}       {}
+%\renewcommand*{\matrixsocialsymbol}       {}
+\renewcommand*{\bornsymbol}               {{\small\faAsterisk}~}           % alternative: \faBabyCarriage
+
+\endinput
+
+
+%% end of file `moderncviconsawesome.sty'.

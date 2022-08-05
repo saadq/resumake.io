@@ -1,0 +1,63 @@
+%% start of file `moderncvstyleoldstyle.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstyleoldstyle}[2022-02-21 v2.3.1 modern curriculum vitae and letter style scheme: oldstyle]
+
+% toggle use of symbol fonts.
+\@initializeif{\if@symbols}\@symbolsfalse
+\DeclareOption{symbols}      {\@symbolstrue}
+\DeclareOption{nosymbols}    {\@symbolsfalse}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{symbols}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+%-------------------------------------------------------------------------------
+%                fonts & icons
+%-------------------------------------------------------------------------------
+% Kurier font
+%\ifxetexorluatex
+%  \setmainfont[Numbers={OldStyle,Proportional}, BoldFont={Kurier Bold}, ItalicFont={Kurier Light Italic}, BoldItalicFont={Kurier Bold Italic}]{Kurier Light}
+%  \setsansfont[Numbers={OldStyle,Proportional}, BoldFont={Kurier Bold}, ItalicFont={Kurier Light Italic}, BoldItalicFont={Kurier Bold Italic}]{Kurier Light}
+%  \setmathfont{Kurier Light}
+%  \setmathfont[range=\mathit,\mathsfit]{Kurier Light Italic}
+%  \setmathfont[range=\mathbfup,\mathbfsfup]{Kurier Bold}
+%  \setmathfont[range=\mathbfit,\mathbfsfit]{Kurier Bold Italic}
+%\else
+  \IfFileExists{kurier.sty}%
+    {\RequirePackage[light,math]{kurier}}%
+    {}
+%\fi
+
+% symbols
+\if@symbols
+    \ifxetexorluatex
+    \moderncvicons{awesome}     % use font-awesome symbols if lualatex or xelatex is used
+    \else
+    \moderncvicons{marvosym}    % use marvosym symbols pdflatex is used
+    \fi
+\else
+    \moderncvicons{letters}    % do not use symbols, use letters
+\fi
+
+
+%-------------------------------------------------------------------------------
+%                header, body & footer
+%-------------------------------------------------------------------------------
+\moderncvhead{4}
+\moderncvbody{4}
+
+
+\endinput
+
+
+%% end of file `moderncvstyleoldstyle.sty'.

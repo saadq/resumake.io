@@ -2,7 +2,7 @@ import { InputHTMLAttributes, memo, FC } from 'react'
 import { FieldPath, UseFormReturn } from 'react-hook-form'
 import styled from 'styled-components'
 import { colors } from '../../../../theme'
-import { FormValues } from '../../../../types/form'
+import { FormValues } from '../../../../types'
 
 const StyledInput = styled.input`
   border: none;

@@ -35,6 +35,7 @@ function resolveTemplatePath(templatePath: string) {
  * @return The generated LaTeX document as well as its additional opts.
  */
 export default function getTemplateData(data: FormValues): TemplateData {
+  // TODO: list required packages for each template
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {

@@ -40,7 +40,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template1(data),
         opts: {
-          cmd: 'tectonic'
+          cmd: 'pdflatex'
         }
       }
 
@@ -48,7 +48,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template2(data),
         opts: {
-          cmd: 'tectonic',
+          cmd: 'xelatex',
           inputs: resolveTemplatePath('/template2/inputs'),
           fonts: resolveTemplatePath('/template2/inputs')
         }
@@ -58,7 +58,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template3(data),
         opts: {
-          cmd: 'tectonic'
+          cmd: 'pdflatex'
         }
       }
 
@@ -66,7 +66,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template4(data),
         opts: {
-          cmd: 'tectonic',
+          cmd: 'xelatex',
           inputs: resolveTemplatePath('/template4/inputs'),
           fonts: resolveTemplatePath('/template4/inputs')
         }
@@ -76,7 +76,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template5(data),
         opts: {
-          cmd: 'tectonic',
+          cmd: 'pdflatex',
           inputs: resolveTemplatePath('/template5/inputs'),
           fonts: resolveTemplatePath('/template5/inputs')
         }
@@ -86,7 +86,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template6(data),
         opts: {
-          cmd: 'tectonic',
+          cmd: 'xelatex',
           inputs: resolveTemplatePath('/template6/inputs'),
           fonts: resolveTemplatePath('/template6/inputs')
         }
@@ -96,7 +96,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template7(data),
         opts: {
-          cmd: 'tectonic',
+          cmd: 'pdflatex',
           inputs: resolveTemplatePath('/template7/inputs')
         }
       }
@@ -122,7 +122,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template1(data),
         opts: {
-          cmd: 'tectonic'
+          cmd: 'pdflatex'
         }
       }
   }

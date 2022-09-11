@@ -2,22 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import latex from 'node-latex'
 import getTemplateData from '../../lib/templates'
 import { FormValues } from '../../types'
-import resume from './resume.json'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method !== 'POST') {
-    const pdf = await generatePDF({
-      ...resume,
-      sections: resume.sections as FormValues['sections']
-    })
-    pdf.pipe(res)
-    res.setHeader('Content-Type', 'application/pdf')
+    res.status(405)
     return
-    // res.status(405)
-    // return
   }
 
   const pdf = await generatePDF(req.body as FormValues)

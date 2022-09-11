@@ -3,23 +3,14 @@ import Archiver from 'archiver'
 import { stripIndent } from 'common-tags'
 import getTemplateData from '../../lib/templates'
 import { FormValues } from '../../types'
-import resume from './resume.json'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method !== 'POST') {
-    const sourceCode = await generateSourceCode({
-      ...resume,
-      sections: resume.sections as FormValues['sections']
-    })
-    return sourceCode
-      .pipe(res)
-      .setHeader('content-type', 'application/zip')
-      .setHeader('content-disposition', 'attachment; filename="resume.zip"')
-    // res.status(405)
-    // return
+    res.status(405)
+    return
   }
 
   const sourceCode = await generateSourceCode(req.body as FormValues)

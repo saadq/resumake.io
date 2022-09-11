@@ -45,9 +45,9 @@ Thanks very much to the creators of the LaTeX templates used in this website.
 
 ## Running resumake.io locally
 
-Make sure you have the following installed:
-1. Node v16 or greater
-2. LaTeX (TinyTeX Recommended)
+Ensure you have the following installed:
+- Node v16 or greater
+- LaTeX (TinyTeX Recommended)
 ```sh
 $ curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
 $ tlmgr install preprint enumitem ragged2e fancyhdr xifthen \
@@ -56,7 +56,7 @@ $ tlmgr install preprint enumitem ragged2e fancyhdr xifthen \
   moderncv colortbl pgf multirow arydshln tabu changepage sectsty
 ```
 
-Next, clone the project and run the following inside the root folder:
+Next, clone this repo and run the following inside the root folder:
 ```
 $ npm install
 $ npm run dev

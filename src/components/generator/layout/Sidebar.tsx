@@ -7,7 +7,6 @@ import {
   IoAppsSharp as ProjectsIcon,
   IoRibbon as AwardsIcon
 } from 'react-icons/io5'
-import { Logo } from '../../common/Logo'
 import { RoundButton } from '../../common/RoundButton'
 import { NavIcon } from '../../common/NavIcon'
 import { Tooltip } from '../../common/Tooltip'
@@ -51,7 +50,7 @@ export function Sidebar() {
     <Aside>
       <Link href="/" passHref>
         <LogoLink>
-          <Logo />
+          logo
         </LogoLink>
       </Link>
       <Nav>

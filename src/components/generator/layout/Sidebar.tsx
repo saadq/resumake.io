@@ -49,9 +49,7 @@ export function Sidebar() {
   return (
     <Aside>
       <Link href="/" passHref>
-        <LogoLink>
-          logo
-        </LogoLink>
+        <LogoLink>logo</LogoLink>
       </Link>
       <Nav>
         <NavIcon

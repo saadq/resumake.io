@@ -14,7 +14,7 @@ export function Logo(props: Props) {
       height={70}
       viewBox="0 0 260 70"
       xmlns="http://www.w3.org/2000/svg"
-      style={{...props}}
+      style={{ ...props }}
     >
       <rect x={0} y={0} width={260} height={70} fill="transparent" />
       <path

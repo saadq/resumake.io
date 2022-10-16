@@ -51,7 +51,7 @@ export function Home() {
   return (
     <Wrapper>
       <Main>
-        <Logo marginBottom='0.75em' />
+        <Logo marginBottom="0.75em" />
         <Link href="/generator">
           <PrimaryButton>Make New Resume</PrimaryButton>
         </Link>

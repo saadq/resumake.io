@@ -1,9 +1,13 @@
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { GlobalStyle } from '../components/common/GlobalStyle'
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>Resumake</title>
+      </Head>
       <GlobalStyle />
       <Component {...pageProps} />
     </>

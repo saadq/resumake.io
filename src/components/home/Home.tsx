@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
+
 import { Logo } from '../common/Logo'
 import { PrimaryButton, Button } from '../common/Button'
 import { colors } from '../../theme'
@@ -47,15 +49,46 @@ const Copyright = styled.span`
   flex: 1;
 `
 
+const HiddenInput = styled.input`
+  display: none;
+`
+
 export function Home() {
+  const router = useRouter()
+
+  const startNewSession = () => {
+    window.localStorage.clear()
+    router.push('/generator')
+  }
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader()
+    reader.addEventListener('load', (e) => {
+      // TODO: validate JSON schema using Zod
+      const jsonResume = JSON.parse(e.target?.result as string)
+      localStorage.setItem('jsonResume', JSON.stringify(jsonResume))
+      router.push('/generator')
+    })
+
+    if (e.target.files) {
+      reader.readAsText(e.target.files[0])
+    }
+  }
+
   return (
     <Wrapper>
       <Main>
         <Logo marginBottom="0.75em" />
-        <Link href="/generator">
-          <PrimaryButton>Make New Resume</PrimaryButton>
-        </Link>
-        <Button>Import JSON</Button>
+        <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
+        <Button as="label" htmlFor="import-json">
+          Import JSON
+        </Button>
+        <HiddenInput
+          id="import-json"
+          type="file"
+          accept="application/json"
+          onChange={handleFileUpload}
+        />
       </Main>
       <Footer>
         <Copyright>© 2022 Saad Quadri</Copyright>

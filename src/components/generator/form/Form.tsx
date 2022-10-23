@@ -1,10 +1,9 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
-import { formAtom } from '../../../atoms/form'
 import { resumeAtom } from '../../../atoms/resume'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types'
@@ -37,12 +36,31 @@ const StyledForm = styled.form`
   flex: 1;
 `
 
+const initialFormValues = {
+  headings: {},
+  sections: [],
+  selectedTemplate: 1
+}
+
 export function Form() {
-  const [form, setForm] = useAtom(formAtom)
   const [resume, setResume] = useAtom(resumeAtom)
   const [progress] = useAtom(progressAtom)
-  const formContext = useForm<FormValues>({ defaultValues: form })
+  const formContext = useForm<FormValues>({ defaultValues: initialFormValues })
   const { currSection } = progress
+
+  // TODO: move this to a custom react hook
+  useEffect(() => {
+    const lastSession = localStorage.getItem('jsonResume')
+    if (lastSession) {
+      // TODO: validate JSON schema using Zod
+      const jsonResume = JSON.parse(lastSession) as FormValues
+      formContext.reset(jsonResume)
+    }
+    const subscription = formContext.watch((data) => {
+      localStorage.setItem('jsonResume', JSON.stringify(data))
+    })
+    return () => subscription.unsubscribe()
+  }, [formContext])
 
   const handleFormSubmit = useCallback(async () => {
     const formValues = formContext.getValues()
@@ -50,11 +68,10 @@ export function Form() {
     try {
       const newResumeUrl = await generateResume(formValues)
       setResume({ ...resume, url: newResumeUrl, isLoading: false })
-      setForm(formValues)
     } catch (error) {
       setResume({ ...resume, isError: true, isLoading: false })
     }
-  }, [formContext, resume, setResume, setForm])
+  }, [formContext, resume, setResume])
 
   return (
     <FormProvider {...formContext}>

@@ -55,6 +55,8 @@ const HiddenInput = styled.input`
 
 export function Home() {
   const router = useRouter()
+  const lastSession =
+    typeof window === 'undefined' ? null : localStorage.getItem('jsonResume')
 
   const startNewSession = () => {
     window.localStorage.clear()
@@ -80,6 +82,11 @@ export function Home() {
       <Main>
         <Logo marginBottom="0.75em" />
         <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
+        {lastSession && (
+          <Link href="/generator">
+            <Button>Continue Session</Button>
+          </Link>
+        )}
         <Button as="label" htmlFor="import-json">
           Import JSON
         </Button>

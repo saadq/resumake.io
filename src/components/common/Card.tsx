@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, SyntheticEvent } from 'react'
 import styled from 'styled-components'
 import { colors, sizes } from '../../theme'
 
@@ -7,6 +7,34 @@ const CloseButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
+  padding: 0.75rem;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: ${colors.black};
+  color: ${colors.primary};
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+`
+const UpButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 60px;
+  padding: 0.75rem;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: ${colors.black};
+  color: ${colors.primary};
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+`
+const DownButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 30px;
   padding: 0.75rem;
   cursor: pointer;
   outline: none;
@@ -46,12 +74,30 @@ const Wrapper = styled.div`
 interface Props {
   children: ReactNode
   removeCard?: () => void
+  moveUp?: () => void
+  moveDown?: () => void
 }
 
-export function Card({ children, removeCard }: Props) {
+/**
+ * Adds a prevent default just before the function call
+ * @param callback The action to execute after the preventDefault
+ */
+function prependPreventDefault(callback: () => void) {
+  return (event: SyntheticEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    callback()
+  }
+}
+
+export function Card({ children, removeCard, moveUp, moveDown }: Props) {
   return (
     <Wrapper>
       {children}
+      {/* prepending preventDefault to a click callback is needed due to element swaps, these can rerender the entire form tree if we don't call it */}
+      {moveUp && <UpButton onClick={prependPreventDefault(moveUp)}>↑</UpButton>}
+      {moveDown && (
+        <DownButton onClick={prependPreventDefault(moveDown)}>↓</DownButton>
+      )}
       {removeCard && <CloseButton onClick={removeCard}>X</CloseButton>}
     </Wrapper>
   )

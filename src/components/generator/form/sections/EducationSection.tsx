@@ -5,14 +5,24 @@ import { LabeledInput } from '../inputs/LabeledInput'
 import { FormValues } from '../../../../types'
 
 export function EducationSection() {
-  const { fields, append, remove } = useFieldArray<FormValues, 'education'>({
+  const { fields, append, remove, swap } = useFieldArray<
+    FormValues,
+    'education'
+  >({
     name: 'education'
   })
 
   return (
     <FormSection title="Your Educational Background">
       {fields.map((field, index) => (
-        <Card key={field.id} removeCard={() => remove(index)}>
+        <Card
+          key={field.id}
+          removeCard={() => remove(index)}
+          moveUp={index >= 1 ? () => swap(index - 1, index) : undefined}
+          moveDown={
+            index < fields.length - 1 ? () => swap(index + 1, index) : undefined
+          }
+        >
           <LabeledInput
             name={`education.${index}.institution`}
             label="School name"

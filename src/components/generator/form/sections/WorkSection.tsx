@@ -2,22 +2,38 @@ import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
+import { Input } from '../inputs/Input'
 
-function Highlights({ index }: { index: number }) {
-  // TODO: implement reordering
-  const { fields } = useFieldArray({
-    name: `work.${index}.highlights`
+interface HighlightProps {
+  workIndex: number
+}
+
+function Highlights({ workIndex }: HighlightProps) {
+  const { fields, append, remove, swap } = useFieldArray({
+    name: `work.${workIndex}.highlights`
   })
 
   return (
     <div>
-      {fields.map((field, index2 /* TODO: come up with better name */) => (
-        <LabeledInput
-          key={field.id}
-          name={`work.${index}.highlights.${index2}`}
-          label="lorem"
-        />
+      <label>Job Responsibilities</label>
+      {fields.map((field, index) => (
+        <div key={field.id} style={{ display: 'flex' }}>
+          <Input
+            name={`work.${workIndex}.highlights.${index}`}
+            placeholder="Did cool stuff at company"
+          />
+          <button onClick={() => remove(index)}>X</button>
+          {index > 0 && (
+            <button onClick={() => swap(index - 1, index)}>↑</button>
+          )}
+          {index < fields.length - 1 && (
+            <button onClick={() => swap(index + 1, index)}>↓</button>
+          )}
+        </div>
       ))}
+      <button type="button" onClick={() => append('')}>
+        Add
+      </button>
     </div>
   )
 }
@@ -63,7 +79,7 @@ export function WorkSection() {
             label="End Date"
             placeholder="Jun 2019"
           />
-          <Highlights index={index} />
+          <Highlights workIndex={index} />
         </Card>
       ))}
       <button type="button" onClick={() => append({})}>

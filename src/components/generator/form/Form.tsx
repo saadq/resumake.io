@@ -4,6 +4,7 @@ import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
+import { WorkSection } from './sections/WorkSection'
 import { resumeAtom } from '../../../atoms/resume'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types'
@@ -82,6 +83,7 @@ export function Form() {
       >
         {currSection === 'basics' && <ProfileSection />}
         {currSection === 'education' && <EducationSection />}
+        {currSection === 'work' && <WorkSection />}
       </StyledForm>
     </FormProvider>
   )

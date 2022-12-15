@@ -67,7 +67,7 @@ export function Sidebar() {
           <EducationIcon size={'1.3rem'} />
         </NavIcon>
         <NavIcon
-          sectionToNavigateTo="experience"
+          sectionToNavigateTo="work"
           tooltip="Work Experience"
           tooltipId="tooltip-experience"
         >

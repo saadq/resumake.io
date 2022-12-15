@@ -78,27 +78,15 @@ interface Props {
   moveDown?: () => void
 }
 
-/**
- * Adds a prevent default just before the function call
- * @param callback The action to execute after the preventDefault
- */
-function prependPreventDefault(callback: () => void) {
-  return (event: SyntheticEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    callback()
-  }
-}
-
 export function Card({ children, removeCard, moveUp, moveDown }: Props) {
   return (
     <Wrapper>
       {children}
-      {/* prepending preventDefault to a click callback is needed due to element swaps, these can rerender the entire form tree if we don't call it */}
-      {moveUp && <UpButton onClick={prependPreventDefault(moveUp)}>↑</UpButton>}
+      {moveUp && <UpButton type="button" onClick={moveUp}>↑</UpButton>}
       {moveDown && (
-        <DownButton onClick={prependPreventDefault(moveDown)}>↓</DownButton>
+        <DownButton type="button" onClick={moveDown}>↓</DownButton>
       )}
-      {removeCard && <CloseButton onClick={removeCard}>X</CloseButton>}
+      {removeCard && <CloseButton type="button" onClick={removeCard}>X</CloseButton>}
     </Wrapper>
   )
 }

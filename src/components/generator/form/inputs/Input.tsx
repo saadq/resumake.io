@@ -1,5 +1,5 @@
-import { InputHTMLAttributes, FC } from 'react'
-import { FieldPath, UseFormReturn } from 'react-hook-form'
+import { InputHTMLAttributes } from 'react'
+import { FieldPath, useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 import { colors } from '../../../../theme'
 import { FormValues } from '../../../../types'
@@ -27,11 +27,10 @@ const StyledInput = styled.input`
 `
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  formContext: UseFormReturn<FormValues>
   name: FieldPath<FormValues>
 }
 
-// TODO: Investigate if component should be memoized
-export const Input: FC<InputProps> = ({ formContext, name, ...inputProps }) => (
-  <StyledInput {...inputProps} {...formContext.register(name)} />
-)
+export function Input({ name, ...inputProps }: InputProps) {
+  const formContext = useFormContext<FormValues>()
+  return <StyledInput {...inputProps} {...formContext.register(name)} />
+}

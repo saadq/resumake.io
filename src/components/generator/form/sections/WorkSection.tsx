@@ -2,7 +2,6 @@ import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
-import { FormValues } from '../../../../types'
 
 function Highlights({ index }: { index: number }) {
   // TODO: implement reordering

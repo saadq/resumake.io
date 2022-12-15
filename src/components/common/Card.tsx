@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { colors, sizes } from '../../theme'
 

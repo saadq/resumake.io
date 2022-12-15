@@ -4,9 +4,7 @@ import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
 
 export function EducationSection() {
-  const { fields, append, remove, swap } = useFieldArray({
-    name: 'education'
-  })
+  const { fields, append, remove, swap } = useFieldArray({ name: 'education' })
 
   return (
     <FormSection title="Your Educational Background">

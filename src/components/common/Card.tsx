@@ -82,11 +82,21 @@ export function Card({ children, removeCard, moveUp, moveDown }: Props) {
   return (
     <Wrapper>
       {children}
-      {moveUp && <UpButton type="button" onClick={moveUp}>↑</UpButton>}
-      {moveDown && (
-        <DownButton type="button" onClick={moveDown}>↓</DownButton>
+      {moveUp && (
+        <UpButton type="button" onClick={moveUp}>
+          ↑
+        </UpButton>
       )}
-      {removeCard && <CloseButton type="button" onClick={removeCard}>X</CloseButton>}
+      {moveDown && (
+        <DownButton type="button" onClick={moveDown}>
+          ↓
+        </DownButton>
+      )}
+      {removeCard && (
+        <CloseButton type="button" onClick={removeCard}>
+          X
+        </CloseButton>
+      )}
     </Wrapper>
   )
 }

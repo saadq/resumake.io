@@ -4,9 +4,7 @@ import { LabeledInput } from '../inputs/LabeledInput'
 import { Card } from '../../../common/Card'
 
 export function ProfileSection() {
-  const { fields, append } = useFieldArray({
-    name: 'basics.links'
-  })
+  const { fields, append } = useFieldArray({ name: 'basics.links' })
 
   return (
     <FormSection title="Your personal info">

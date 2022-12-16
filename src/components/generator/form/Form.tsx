@@ -45,7 +45,7 @@ const initialFormValues = {
 
 export function Form() {
   const router = useRouter()
-  const {section: currSection} = router.query
+  const { section: currSection } = router.query
 
   const [resume, setResume] = useAtom(resumeAtom)
   const formContext = useForm<FormValues>({ defaultValues: initialFormValues })

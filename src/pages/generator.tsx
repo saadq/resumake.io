@@ -15,7 +15,7 @@ const Preview = dynamic(
 
 const Main = styled.main`
   display: grid;
-  grid-template-columns: .3fr .7fr 1fr;
+  grid-template-columns: 0.3fr 0.7fr 1fr;
   grid-template-areas:
     'header header header'
     'sidebar form preview';

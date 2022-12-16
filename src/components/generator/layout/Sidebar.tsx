@@ -29,13 +29,27 @@ export function Sidebar() {
   return (
     <Aside>
       <Nav>
-        <Link href="/generator?section=templates"><a>Templates</a></Link>
-        <Link href="/generator?section=basics"><a>Profile</a></Link>
-        <Link href="/generator?section=education"><a>Education</a></Link>
-        <Link href="/generator?section=work"><a>Work Experience</a></Link>
-        <Link href="/generator?section=skills"><a>Skills</a></Link>
-        <Link href="/generator?section=projects"><a>Projects</a></Link>
-        <Link href="/generator?section=awards"><a>Awards</a></Link>
+        <Link href="/generator?section=templates">
+          <a>Templates</a>
+        </Link>
+        <Link href="/generator?section=basics">
+          <a>Profile</a>
+        </Link>
+        <Link href="/generator?section=education">
+          <a>Education</a>
+        </Link>
+        <Link href="/generator?section=work">
+          <a>Work Experience</a>
+        </Link>
+        <Link href="/generator?section=skills">
+          <a>Skills</a>
+        </Link>
+        <Link href="/generator?section=projects">
+          <a>Projects</a>
+        </Link>
+        <Link href="/generator?section=awards">
+          <a>Awards</a>
+        </Link>
       </Nav>
     </Aside>
   )

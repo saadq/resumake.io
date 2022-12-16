@@ -5,13 +5,14 @@ interface Props {
   marginBottom?: string | number
   marginLeft?: string | number
   marginRight?: string | number
+  scale?: number
 }
 
 export function Logo(props: Props) {
   return (
     <svg
-      width={260}
-      height={70}
+      width={260 * (props.scale ?? 1)}
+      height={70 * (props.scale ?? 1)}
       viewBox="0 0 260 70"
       xmlns="http://www.w3.org/2000/svg"
       style={{ ...props }}

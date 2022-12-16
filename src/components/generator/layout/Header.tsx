@@ -1,19 +1,26 @@
+import Link from 'next/link'
 import styled from 'styled-components'
-import { sizes, colors } from '../../../theme'
+
+import { Logo } from '../../common/Logo'
+import { colors } from '../../../theme'
 
 const StyledHeader = styled.header`
   grid-area: header;
   width: 100%;
-  height: ${sizes.header.height};
-  background: ${colors.header};
+  height: 3.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid ${colors.borders};
 `
 export function Header() {
   return (
     <StyledHeader>
-      Resumake
+      <Link href="/">
+        <a>
+          <Logo scale={0.65} />
+        </a>
+      </Link>
     </StyledHeader>
   )
 }

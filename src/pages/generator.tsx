@@ -6,7 +6,6 @@ import { Form } from '../components/generator/form/Form'
 import { Header } from '../components/generator/layout/Header'
 import { Sidebar } from '../components/generator/layout/Sidebar'
 // import { Templates } from '../components/generator/templates/Templates'
-// import { sizes } from '../theme'
 import { useDevtools } from '../atoms/useDevtools'
 
 const Preview = dynamic(
@@ -18,10 +17,10 @@ const Main = styled.main`
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   grid-template-areas:
-    "header header header"
-    "sidebar form preview";
+    'header header header'
+    'sidebar form preview';
   height: 100vh;
-`;
+`
 
 export default function GeneratorPage() {
   useDevtools()

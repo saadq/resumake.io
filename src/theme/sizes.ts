@@ -5,7 +5,7 @@ export const sidebar = {
 
 export const header = {
   width: `calc(100vw - ${sidebar.width})`,
-  height: '4.5rem'
+  height: '3.75rem'
 }
 
 export const footer = {

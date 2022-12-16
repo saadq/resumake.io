@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
@@ -8,7 +9,6 @@ import { WorkSection } from './sections/WorkSection'
 import { resumeAtom } from '../../../atoms/resume'
 import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types'
-import { progressAtom } from '../../../atoms/progress'
 
 async function generateResume(formData: FormValues): Promise<string> {
   const pdfResponse = await fetch('/api/generate-pdf', {
@@ -44,10 +44,11 @@ const initialFormValues = {
 }
 
 export function Form() {
+  const router = useRouter()
+  const {section: currSection} = router.query
+
   const [resume, setResume] = useAtom(resumeAtom)
-  const [progress] = useAtom(progressAtom)
   const formContext = useForm<FormValues>({ defaultValues: initialFormValues })
-  const { currSection } = progress
 
   // TODO: move this to a custom react hook
   useEffect(() => {
@@ -73,6 +74,7 @@ export function Form() {
       setResume({ ...resume, isError: true, isLoading: false })
     }
   }, [formContext, resume, setResume])
+  console.log(currSection)
 
   return (
     <FormProvider {...formContext}>
@@ -81,6 +83,7 @@ export function Form() {
         onSubmit={formContext.handleSubmit(handleFormSubmit)}
         // onChange={handleFormSubmit}
       >
+        {!currSection && <ProfileSection />}
         {currSection === 'basics' && <ProfileSection />}
         {currSection === 'education' && <EducationSection />}
         {currSection === 'work' && <WorkSection />}

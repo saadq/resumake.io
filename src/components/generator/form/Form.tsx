@@ -74,7 +74,6 @@ export function Form() {
       setResume({ ...resume, isError: true, isLoading: false })
     }
   }, [formContext, resume, setResume])
-  console.log(currSection)
 
   return (
     <FormProvider {...formContext}>

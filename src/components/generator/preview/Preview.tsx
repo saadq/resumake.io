@@ -10,24 +10,18 @@ const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
 
 const Output = styled.output`
+  grid-area: preview;
   background: ${(props) => props.theme.lightBlack};
-  width: 50%;
-  min-height: 100vh;
   overflow-y: auto;
 `
 
 const PdfContainer = styled.article`
-  position: relative;
   width: 100%;
   height: 100%;
 `
 
 const ResumeDocument = styled(Document)`
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%);
 `
 
 const ResumePage = styled(Page)`
@@ -81,7 +75,7 @@ export function Preview() {
           </ResumeDocument>
         )}
       </PdfContainer>
-      <FloatingButton />
+      {/* <FloatingButton /> */}
     </Output>
   )
 }

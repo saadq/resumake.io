@@ -26,10 +26,10 @@ async function generateResume(formData: FormValues): Promise<string> {
 }
 
 const StyledForm = styled.form`
+  grid-area: form;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${sizes.formSection.width};
   background: ${colors.background};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   overflow: auto;

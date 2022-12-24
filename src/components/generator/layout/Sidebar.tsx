@@ -29,7 +29,7 @@ const A = styled.a<{ active: boolean }>`
 
 export function Sidebar() {
   const router = useRouter()
-  const { section: currSection } = router.query
+  const { section: currSection = 'basics' } = router.query
 
   const sectionLinks = [
     { label: 'Templates', section: 'templates' },

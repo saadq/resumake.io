@@ -10,7 +10,6 @@ const StyledInput = styled.input`
   padding: 1rem;
   color: ${colors.white};
   transition: all 0.2s ease;
-  border-radius: 10px;
   font-size: 0.85rem;
 
   &:focus {

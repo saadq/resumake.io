@@ -7,7 +7,6 @@ import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { WorkSection } from './sections/WorkSection'
 import { resumeAtom } from '../../../atoms/resume'
-import { colors, sizes } from '../../../theme'
 import { FormValues } from '../../../types'
 
 async function generateResume(formData: FormValues): Promise<string> {
@@ -27,14 +26,7 @@ async function generateResume(formData: FormValues): Promise<string> {
 
 const StyledForm = styled.form`
   grid-area: form;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: ${colors.background};
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   overflow: auto;
-  padding-bottom: calc(2.5rem + ${sizes.footer.height});
-  flex: 1;
 `
 
 const initialFormValues = {

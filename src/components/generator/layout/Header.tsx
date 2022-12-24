@@ -7,7 +7,7 @@ import { colors } from '../../../theme'
 const StyledHeader = styled.header`
   grid-area: header;
   width: 100%;
-  height: 3.75rem;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;

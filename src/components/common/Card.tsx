@@ -11,7 +11,7 @@ const Button = styled.button`
   color: ${colors.primary};
 
   :hover {
-    background: ${colors.borders}
+    background: ${colors.borders};
   }
 `
 
@@ -19,6 +19,7 @@ const Controls = styled.div`
   display: flex;
   justify-content: end;
   margin-right: -22px;
+  min-height: 2rem;
 `
 
 const Wrapper = styled.div`
@@ -30,24 +31,35 @@ const Wrapper = styled.div`
 
 interface Props {
   children: ReactNode
+  showControls?: boolean
   removeCard?: () => void
   moveUp?: () => void
   moveDown?: () => void
 }
 
-export function Card({ children, removeCard, moveUp, moveDown }: Props) {
+export function Card({
+  children,
+  showControls,
+  removeCard,
+  moveUp,
+  moveDown
+}: Props) {
   return (
     <Wrapper>
       <Controls>
-        <Button type="button" onClick={moveUp}>
-          ▲
-        </Button>
-        <Button type="button" onClick={moveDown}>
-          ▼
-        </Button>
-        <Button type="button" onClick={removeCard}>
-          ✕
-        </Button>
+        {showControls && (
+          <>
+            <Button type="button" onClick={moveUp}>
+              ▲
+            </Button>
+            <Button type="button" onClick={moveDown}>
+              ▼
+            </Button>
+            <Button type="button" onClick={removeCard}>
+              ✕
+            </Button>
+          </>
+        )}
       </Controls>
       {children}
     </Wrapper>

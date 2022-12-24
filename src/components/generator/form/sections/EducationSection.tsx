@@ -11,6 +11,7 @@ export function EducationSection() {
       {fields.map((field, index) => (
         <Card
           key={field.id}
+          showControls
           removeCard={() => remove(index)}
           moveUp={index >= 1 ? () => swap(index - 1, index) : undefined}
           moveDown={

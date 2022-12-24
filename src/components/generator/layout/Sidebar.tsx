@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
+
 import { colors } from '../../../theme'
 
 const Aside = styled.aside`
@@ -14,42 +16,39 @@ const Nav = styled.nav`
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
+`
 
-  a {
-    text-decoration: none;
-    font-weight: 300;
-    color: ${colors.foreground};
-    list-style: none;
-    display: inline-block;
-    position: relative;
-  }
+const A = styled.a<{ active: boolean }>`
+  text-decoration: none;
+  font-weight: 300;
+  color: ${colors.foreground};
+  padding-bottom: 6px;
+
+  ${(props) => props.active && `color: ${colors.primary};`}
 `
 
 export function Sidebar() {
+  const router = useRouter()
+  const { section: currSection } = router.query
+
+  const sectionLinks = [
+    { label: 'Templates', section: 'templates' },
+    { label: 'Profile', section: 'basics' },
+    { label: 'Education', section: 'education' },
+    { label: 'Work Experience', section: 'work' },
+    { label: 'Skills', section: 'skills' },
+    { label: 'Projects', section: 'projects' },
+    { label: 'Awards', section: 'awards' }
+  ]
+
   return (
     <Aside>
       <Nav>
-        <Link href="/generator?section=templates">
-          <a>Templates</a>
-        </Link>
-        <Link href="/generator?section=basics">
-          <a>Profile</a>
-        </Link>
-        <Link href="/generator?section=education">
-          <a>Education</a>
-        </Link>
-        <Link href="/generator?section=work">
-          <a>Work Experience</a>
-        </Link>
-        <Link href="/generator?section=skills">
-          <a>Skills</a>
-        </Link>
-        <Link href="/generator?section=projects">
-          <a>Projects</a>
-        </Link>
-        <Link href="/generator?section=awards">
-          <a>Awards</a>
-        </Link>
+        {sectionLinks.map(({ label, section }) => (
+          <Link key={section} href={`/generator?section=${section}`} passHref>
+            <A active={section === currSection}>{label}</A>
+          </Link>
+        ))}
       </Nav>
     </Aside>
   )

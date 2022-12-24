@@ -52,3 +52,14 @@ export const PrimaryButton = styled(Button)`
     );
   }
 `
+
+export const AddButton = styled.button`
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: ${colors.primary};
+  margin-bottom: 2rem;
+  margin-top: -2rem;
+`

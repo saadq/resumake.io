@@ -1,7 +1,10 @@
+import styled from 'styled-components'
+
 import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
+import { AddButton } from '../../../common/Button'
 
 export function EducationSection() {
   const { fields, append, remove, swap } = useFieldArray({ name: 'education' })
@@ -45,9 +48,9 @@ export function EducationSection() {
           />
         </Card>
       ))}
-      <button type="button" onClick={() => append({})}>
-        Add
-      </button>
+      <AddButton type="button" onClick={() => append({})}>
+        + Add School
+      </AddButton>
     </FormSection>
   )
 }

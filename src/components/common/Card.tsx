@@ -25,7 +25,7 @@ const Controls = styled.div`
 const Wrapper = styled.div`
   padding: 2rem 1.5rem;
   padding-top: 0;
-  margin-top: 2rem;
+  margin: 2rem 0;
   border: 1px solid ${colors.borders};
 `
 

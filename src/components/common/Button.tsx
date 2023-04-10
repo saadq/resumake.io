@@ -63,3 +63,17 @@ export const AddButton = styled.button`
   margin-bottom: 2rem;
   margin-top: -2rem;
 `
+
+// TODO: pass icon name as prop
+export const IconButton = styled.button`
+  display: flex;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: white;
+  border-radius: 4px;
+
+  :hover {
+    background: ${colors.borders};
+  }
+`

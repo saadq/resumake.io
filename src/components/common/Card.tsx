@@ -1,24 +1,13 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
+import { IconButton } from './Button'
 import { colors } from '../../theme'
-
-const Button = styled.button`
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  background: transparent;
-  color: ${colors.primary};
-
-  :hover {
-    background: ${colors.borders};
-  }
-`
 
 const Controls = styled.div`
   display: flex;
   justify-content: end;
-  margin-right: -22px;
+  align-items: flex-end;
+  gap: 8px;
   min-height: 2rem;
 `
 
@@ -27,6 +16,7 @@ const Wrapper = styled.div`
   padding-top: 0;
   margin: 2rem 0;
   border: 1px solid ${colors.borders};
+  border-radius: 8px;
 `
 
 interface Props {
@@ -49,15 +39,15 @@ export function Card({
       <Controls>
         {showControls && (
           <>
-            <Button type="button" onClick={moveUp}>
-              ▲
-            </Button>
-            <Button type="button" onClick={moveDown}>
-              ▼
-            </Button>
-            <Button type="button" onClick={removeCard}>
-              ✕
-            </Button>
+            <IconButton type="button" onClick={moveUp}>
+              <span className="material-symbols-rounded">arrow_upward</span>
+            </IconButton>
+            <IconButton type="button" onClick={moveDown}>
+              <span className="material-symbols-rounded">arrow_downward</span>
+            </IconButton>
+            <IconButton type="button" onClick={removeCard}>
+              <span className="material-symbols-rounded">delete</span>
+            </IconButton>
           </>
         )}
       </Controls>

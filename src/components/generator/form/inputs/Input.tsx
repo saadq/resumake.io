@@ -6,17 +6,16 @@ import { FormValues } from '../../../../types'
 
 const StyledInput = styled.input`
   border: none;
-  background: ${colors.input};
+  background: transparent;
+  border: 1px solid ${colors.input};
   padding: 1rem;
   color: ${colors.white};
   transition: all 0.2s ease;
   font-size: 0.85rem;
+  border-radius: 4px;
 
   &:focus {
-    outline: 0;
-    color: ${colors.primary};
-    border-color: ${colors.primary};
-    box-shadow: 0 0 4px 2px ${colors.primary};
+    outline: 1px solid ${colors.primary};
   }
 
   &::placeholder {

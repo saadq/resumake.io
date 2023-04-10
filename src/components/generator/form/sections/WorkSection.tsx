@@ -1,9 +1,10 @@
+import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
 import { Input } from '../inputs/Input'
-import { AddButton } from '../../../common/Button'
+import { AddButton, IconButton } from '../../../common/Button'
 
 interface HighlightProps {
   workIndex: number
@@ -15,27 +16,39 @@ function Highlights({ workIndex }: HighlightProps) {
   })
 
   return (
-    <div>
+    <>
       <label>Job Responsibilities</label>
-      {fields.map((field, index) => (
-        <div key={field.id} style={{ display: 'flex' }}>
-          <Input
-            name={`work.${workIndex}.highlights.${index}`}
-            placeholder="Did cool stuff at company"
-          />
-          <button onClick={() => remove(index)}>X</button>
-          {index > 0 && (
-            <button onClick={() => swap(index - 1, index)}>↑</button>
-          )}
-          {index < fields.length - 1 && (
-            <button onClick={() => swap(index + 1, index)}>↓</button>
-          )}
-        </div>
-      ))}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr auto auto auto',
+          alignItems: 'center',
+          gap: '8px',
+          margin: '0.5rem 0'
+        }}
+      >
+        {fields.map((field, i) => (
+          <Fragment key={field.id}>
+            <Input
+              name={`work.${workIndex}.highlights.${i}`}
+              placeholder="Did cool stuff at company"
+            />
+            <IconButton type="button" onClick={() => swap(i - 1, i)}>
+              <span className="material-symbols-rounded">arrow_upward</span>
+            </IconButton>
+            <IconButton type="button" onClick={() => swap(i + 1, i)}>
+              <span className="material-symbols-rounded">arrow_downward</span>
+            </IconButton>
+            <IconButton type="button" onClick={() => remove(i)}>
+              <span className="material-symbols-rounded">delete</span>
+            </IconButton>
+          </Fragment>
+        ))}
+      </div>
       <button type="button" onClick={() => append('')}>
-        Add
+        + Add
       </button>
-    </div>
+    </>
   )
 }
 

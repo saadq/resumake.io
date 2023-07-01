@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
+import {MdClose, MdArrowUpward, MdArrowDownward} from 'react-icons/md'
 import { FormSection } from './FormSection'
 import { Card } from '../../../common/Card'
 import { LabeledInput } from '../inputs/LabeledInput'
@@ -34,13 +35,13 @@ function Highlights({ workIndex }: HighlightProps) {
               placeholder="Did cool stuff at company"
             />
             <IconButton type="button" onClick={() => swap(i - 1, i)}>
-              <span className="material-symbols-rounded">arrow_upward</span>
+              <MdArrowUpward />
             </IconButton>
             <IconButton type="button" onClick={() => swap(i + 1, i)}>
-              <span className="material-symbols-rounded">arrow_downward</span>
+              <MdArrowDownward />
             </IconButton>
             <IconButton type="button" onClick={() => remove(i)}>
-              <span className="material-symbols-rounded">delete</span>
+              <MdClose />
             </IconButton>
           </Fragment>
         ))}

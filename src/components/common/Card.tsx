@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
+import {MdClose, MdArrowUpward, MdArrowDownward} from 'react-icons/md'
 import { IconButton } from './Button'
 import { colors } from '../../theme'
 
@@ -40,13 +41,13 @@ export function Card({
         {showControls && (
           <>
             <IconButton type="button" onClick={moveUp}>
-              <span className="material-symbols-rounded">arrow_upward</span>
+              <MdArrowUpward />
             </IconButton>
             <IconButton type="button" onClick={moveDown}>
-              <span className="material-symbols-rounded">arrow_downward</span>
+              <MdArrowDownward />
             </IconButton>
             <IconButton type="button" onClick={removeCard}>
-              <span className="material-symbols-rounded">delete</span>
+              <MdClose />
             </IconButton>
           </>
         )}

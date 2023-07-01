@@ -4,7 +4,6 @@ import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import styled from 'styled-components'
 import { resumeAtom } from '../../../atoms/resume'
-// import { FloatingButton } from '../layout/FloatingButton'
 
 const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
@@ -75,7 +74,6 @@ export function Preview() {
           </ResumeDocument>
         )}
       </PdfContainer>
-      {/* <FloatingButton /> */}
     </Output>
   )
 }

@@ -60,8 +60,14 @@ export function WorkSection() {
 
   return (
     <FormSection title="Your Work Experience">
+      <LabeledInput
+        name="headings.work"
+        label="Section Heading"
+        placeholder="Work"
+      />
       {fields.map((field, index) => (
         <Fragment key={field.id}>
+          <Divider />
           <LabeledInput
             name={`work.${index}.company`}
             label="Company name"
@@ -88,7 +94,6 @@ export function WorkSection() {
             placeholder="Jun 2019"
           />
           <Highlights workIndex={index} />
-          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

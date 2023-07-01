@@ -11,15 +11,20 @@ export function SkillsSection() {
   })
 
   return (
-    <FormSection title="Your Work Experience">
+    <FormSection title="Your Skills">
+      <LabeledInput
+        name="headings.skills"
+        label="Section Heading"
+        placeholder="Skills"
+      />
       {fields.map((field, index) => (
         <Fragment key={field.id}>
+          <Divider />
           <LabeledInput
             name={`skills.${index}.name`}
             label="Skill name"
             placeholder="Programming Languages"
           />
-          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

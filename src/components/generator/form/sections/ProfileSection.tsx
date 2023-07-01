@@ -1,14 +1,12 @@
 // import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../inputs/LabeledInput'
-import { Card } from '../../../common/Card'
 
 export function ProfileSection() {
   // const { fields, append } = useFieldArray({ name: 'basics.links' })
 
   return (
     <FormSection title="Your personal info">
-      <Card>
         <LabeledInput
           name="basics.name"
           label="Full name"
@@ -33,7 +31,6 @@ export function ProfileSection() {
           <input key={field.id} name={`basics.links.${index}`} />
         ))}
         <button onClick={() => append('')}>Add</button> */}
-      </Card>
     </FormSection>
   )
 }

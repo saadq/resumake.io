@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
@@ -55,8 +56,13 @@ const HiddenInput = styled.input`
 
 export function Home() {
   const router = useRouter()
-  const lastSession =
-    typeof window === 'undefined' ? null : localStorage.getItem('jsonResume')
+  const [hasSession, setHasSession] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHasSession(!!localStorage.getItem('jsonResume'))
+    }
+  })
 
   const startNewSession = () => {
     window.localStorage.clear()
@@ -82,12 +88,14 @@ export function Home() {
       <Main>
         <Logo marginBottom="0.75em" />
         <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
-        <Link
-          href="/generator"
-          style={{ display: lastSession ? 'none' : 'unset' }}
-        >
-          <Button>Continue Session</Button>
-        </Link>
+        {hasSession && (
+          <Link
+            href="/generator"
+            style={{ textDecoration: 'none' }}
+          >
+            <Button>Continue Session</Button>
+          </Link>
+        )}
         <Button as="label" htmlFor="import-json">
           Import JSON
         </Button>

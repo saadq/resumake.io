@@ -18,7 +18,7 @@ const Nav = styled.nav`
   gap: 20px;
 `
 
-const A = styled.span<{ active: boolean }>`
+const StyledLink = styled(Link)<{ active: boolean }>`
   text-decoration: none;
   font-weight: 300;
   color: ${colors.foreground};
@@ -45,9 +45,12 @@ export function Sidebar() {
     <Aside>
       <Nav>
         {sectionLinks.map(({ label, section }) => (
-          <Link key={section} href={`/generator?section=${section}`} passHref>
-            <A active={section === currSection}>{label}</A>
-          </Link>
+          <StyledLink
+            key={section} href={`/generator?section=${section}`}
+            active={section === currSection}
+          >
+            {label}
+          </StyledLink>
         ))}
       </Nav>
     </Aside>

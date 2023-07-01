@@ -1,8 +1,8 @@
 import { InputHTMLAttributes } from 'react'
 import { FieldPath, useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
-import { colors } from '../../../../theme'
-import { FormValues } from '../../../../types'
+import { colors } from '../../theme'
+import { FormValues } from '../../types'
 
 const StyledInput = styled.input`
   border: none;

@@ -2,9 +2,9 @@ import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import {MdClose, MdArrowUpward, MdArrowDownward} from 'react-icons/md'
 import { FormSection } from './FormSection'
-import { LabeledInput } from '../inputs/LabeledInput'
-import { Input } from '../inputs/Input'
-import { AddButton, IconButton } from '../../../common/Button'
+import { LabeledInput } from '../../../core/LabeledInput'
+import { Input } from '../../../core/Input'
+import { AddButton, IconButton } from '../../../core/Button'
 
 interface HighlightProps {
   workIndex: number

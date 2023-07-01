@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Input, InputProps } from './Input'
-import { colors } from '../../../../theme'
+import { colors } from '../../theme'
 
 const Container = styled.div`
   display: flex;

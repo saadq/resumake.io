@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
-import { LabeledInput } from '../inputs/LabeledInput'
-import { AddButton } from '../../../common/Button'
+import { LabeledInput } from '../../../core/LabeledInput'
+import { AddButton } from '../../../core/Button'
 
 export function SkillsSection() {
   const { fields, append, remove, swap } = useFieldArray({

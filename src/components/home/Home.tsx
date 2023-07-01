@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
 
-import { Logo } from '../common/Logo'
-import { PrimaryButton, Button } from '../common/Button'
+import { Logo } from '../core/Logo'
+import { PrimaryButton, Button } from '../core/Button'
 import { colors } from '../../theme'
 
 const Wrapper = styled.div`

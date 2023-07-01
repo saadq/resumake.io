@@ -89,10 +89,7 @@ export function Home() {
         <Logo marginBottom="0.75em" />
         <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
         {hasSession && (
-          <Link
-            href="/generator"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link href="/generator" style={{ textDecoration: 'none' }}>
             <Button>Continue Session</Button>
           </Link>
         )}

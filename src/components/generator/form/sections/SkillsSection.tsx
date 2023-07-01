@@ -3,6 +3,7 @@ import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
+import { Divider } from '../../../core/Divider'
 
 export function SkillsSection() {
   const { fields, append, remove, swap } = useFieldArray({
@@ -18,6 +19,7 @@ export function SkillsSection() {
             label="Skill name"
             placeholder="Programming Languages"
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

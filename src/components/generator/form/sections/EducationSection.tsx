@@ -1,8 +1,9 @@
-import {Fragment} from 'react'
+import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
+import { Divider } from '../../../core/Divider'
 
 export function EducationSection() {
   const { fields, append, remove, swap } = useFieldArray({ name: 'education' })
@@ -36,6 +37,7 @@ export function EducationSection() {
             label="End Date"
             placeholder="Jun 2019"
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

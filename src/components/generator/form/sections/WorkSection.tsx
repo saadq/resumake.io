@@ -1,10 +1,11 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
-import {MdClose, MdArrowUpward, MdArrowDownward} from 'react-icons/md'
+import { MdClose, MdArrowUpward, MdArrowDownward } from 'react-icons/md'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { Input } from '../../../core/Input'
 import { AddButton, IconButton } from '../../../core/Button'
+import { Divider } from '../../../core/Divider'
 
 interface HighlightProps {
   workIndex: number
@@ -87,6 +88,7 @@ export function WorkSection() {
             placeholder="Jun 2019"
           />
           <Highlights workIndex={index} />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

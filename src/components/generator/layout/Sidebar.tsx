@@ -46,7 +46,8 @@ export function Sidebar() {
       <Nav>
         {sectionLinks.map(({ label, section }) => (
           <StyledLink
-            key={section} href={`/generator?section=${section}`}
+            key={section}
+            href={`/generator?section=${section}`}
             active={section === currSection}
           >
             {label}

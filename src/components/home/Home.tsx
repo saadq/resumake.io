@@ -82,11 +82,12 @@ export function Home() {
       <Main>
         <Logo marginBottom="0.75em" />
         <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
-        {lastSession && (
-          <Link href="/generator">
-            <Button>Continue Session</Button>
-          </Link>
-        )}
+        <Link
+          href="/generator"
+          style={{ display: lastSession ? 'none' : 'unset' }}
+        >
+          <Button>Continue Session</Button>
+        </Link>
         <Button as="label" htmlFor="import-json">
           Import JSON
         </Button>

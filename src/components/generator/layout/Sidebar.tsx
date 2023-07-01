@@ -18,7 +18,7 @@ const Nav = styled.nav`
   gap: 20px;
 `
 
-const A = styled.a<{ active: boolean }>`
+const A = styled.span<{ active: boolean }>`
   text-decoration: none;
   font-weight: 300;
   color: ${colors.foreground};

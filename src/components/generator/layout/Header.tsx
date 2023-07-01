@@ -17,9 +17,7 @@ export function Header() {
   return (
     <StyledHeader>
       <Link href="/">
-        <a>
-          <Logo scale={0.65} />
-        </a>
+        <Logo scale={0.65} />
       </Link>
     </StyledHeader>
   )

@@ -50,7 +50,6 @@ function Keywords({ projectIndex }: KeywordsProps) {
   )
 }
 
-
 export function ProjectsSection() {
   const { fields, append } = useFieldArray({
     name: 'projects'

@@ -7,11 +7,11 @@ import { Input } from '../../../core/Input'
 import { AddButton, IconButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
-interface HighlightProps {
+interface HighlightsProps {
   workIndex: number
 }
 
-function Highlights({ workIndex }: HighlightProps) {
+function Highlights({ workIndex }: HighlightsProps) {
   const { fields, append, remove } = useFieldArray({
     name: `work.${workIndex}.highlights`
   })

@@ -6,7 +6,7 @@ import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
 export function EducationSection() {
-  const { fields, append, remove, swap } = useFieldArray({ name: 'education' })
+  const { fields, append } = useFieldArray({ name: 'education' })
 
   return (
     <FormSection title="Your Educational Background">

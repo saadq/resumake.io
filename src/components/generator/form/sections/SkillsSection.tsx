@@ -6,7 +6,7 @@ import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
 export function SkillsSection() {
-  const { fields, append, remove, swap } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: 'skills'
   })
 

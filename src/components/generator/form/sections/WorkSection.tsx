@@ -54,7 +54,7 @@ function Highlights({ workIndex }: HighlightProps) {
 }
 
 export function WorkSection() {
-  const { fields, append, remove, swap } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: 'work'
   })
 

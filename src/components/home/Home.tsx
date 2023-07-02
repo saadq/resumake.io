@@ -62,7 +62,7 @@ export function Home() {
     if (typeof window !== 'undefined') {
       setHasSession(!!localStorage.getItem('jsonResume'))
     }
-  })
+  }, [])
 
   const startNewSession = () => {
     window.localStorage.clear()

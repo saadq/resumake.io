@@ -9,6 +9,7 @@ import { WorkSection } from './sections/WorkSection'
 import { resumeAtom } from '../../../atoms/resume'
 import { FormValues } from '../../../types'
 import { SkillsSection } from './sections/SkillsSection'
+import { AwardSection } from './sections/AwardsSection'
 
 async function generateResume(formData: FormValues): Promise<string> {
   const pdfResponse = await fetch('/api/generate-pdf', {
@@ -80,6 +81,7 @@ export function Form() {
         {currSection === 'education' && <EducationSection />}
         {currSection === 'work' && <WorkSection />}
         {currSection === 'skills' && <SkillsSection />}
+        {currSection === 'awards' && <AwardSection />}
       </StyledForm>
     </FormProvider>
   )

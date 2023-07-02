@@ -60,8 +60,6 @@ export const AddButton = styled.button`
   border: none;
   background: transparent;
   color: ${colors.primary};
-  margin-bottom: 2rem;
-  margin-top: -2rem;
 `
 
 // TODO: pass icon name as prop

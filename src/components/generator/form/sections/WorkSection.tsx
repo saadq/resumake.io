@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
-import { MdClose, MdArrowUpward, MdArrowDownward } from 'react-icons/md'
+import { MdClose, MdDragIndicator } from 'react-icons/md'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { Input } from '../../../core/Input'
@@ -12,7 +12,7 @@ interface HighlightProps {
 }
 
 function Highlights({ workIndex }: HighlightProps) {
-  const { fields, append, remove, swap } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: `work.${workIndex}.highlights`
   })
 
@@ -22,33 +22,30 @@ function Highlights({ workIndex }: HighlightProps) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr auto auto auto',
+          gridTemplateColumns: 'auto 1fr auto',
           alignItems: 'center',
-          gap: '8px',
+          gap: '4px',
           margin: '0.5rem 0'
         }}
       >
         {fields.map((field, i) => (
           <Fragment key={field.id}>
+            <IconButton type="button">
+              <MdDragIndicator />
+            </IconButton>
             <Input
               name={`work.${workIndex}.highlights.${i}`}
               placeholder="Did cool stuff at company"
             />
-            <IconButton type="button" onClick={() => swap(i - 1, i)}>
-              <MdArrowUpward />
-            </IconButton>
-            <IconButton type="button" onClick={() => swap(i + 1, i)}>
-              <MdArrowDownward />
-            </IconButton>
             <IconButton type="button" onClick={() => remove(i)}>
               <MdClose />
             </IconButton>
           </Fragment>
         ))}
       </div>
-      <button type="button" onClick={() => append('')}>
+      <AddButton type="button" onClick={() => append('')}>
         + Add
-      </button>
+      </AddButton>
     </>
   )
 }

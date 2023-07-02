@@ -18,13 +18,13 @@ const Nav = styled.nav`
   gap: 20px;
 `
 
-const StyledLink = styled(Link)<{ active: boolean }>`
+const StyledLink = styled(Link)<{ $active: boolean }>`
   text-decoration: none;
   font-weight: 300;
   color: ${colors.foreground};
   padding-bottom: 6px;
 
-  ${(props) => props.active && `color: ${colors.primary};`}
+  ${(props) => props.$active && `color: ${colors.primary};`}
 `
 
 export function Sidebar() {
@@ -48,7 +48,7 @@ export function Sidebar() {
           <StyledLink
             key={section}
             href={`/generator?section=${section}`}
-            active={section === currSection}
+            $active={section === currSection}
           >
             {label}
           </StyledLink>

@@ -2,11 +2,9 @@ import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 
 import { Form } from '../components/generator/form/Form'
-// import { Footer } from '../components/generator/layout/Footer'
 import { Header } from '../components/generator/layout/Header'
 import { Sidebar } from '../components/generator/layout/Sidebar'
 // import { Templates } from '../components/generator/templates/Templates'
-import { useDevtools } from '../atoms/useDevtools'
 
 const Preview = dynamic(
   async () => (await import('../components/generator/preview/Preview')).Preview,
@@ -23,8 +21,6 @@ const Main = styled.main`
 `
 
 export default function GeneratorPage() {
-  useDevtools()
-
   return (
     <Main>
       <Header />

@@ -6,10 +6,11 @@ import styled from 'styled-components'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { WorkSection } from './sections/WorkSection'
-import { resumeAtom } from '../../../atoms/resume'
-import { FormValues } from '../../../types'
 import { SkillsSection } from './sections/SkillsSection'
 import { AwardSection } from './sections/AwardsSection'
+import { ProjectsSection } from './sections/projectsSection'
+import { resumeAtom } from '../../../atoms/resume'
+import { FormValues } from '../../../types'
 
 async function generateResume(formData: FormValues): Promise<string> {
   const pdfResponse = await fetch('/api/generate-pdf', {
@@ -82,6 +83,7 @@ export function Form() {
         {currSection === 'work' && <WorkSection />}
         {currSection === 'skills' && <SkillsSection />}
         {currSection === 'awards' && <AwardSection />}
+        {currSection === 'projects' && <ProjectsSection />}
       </StyledForm>
     </FormProvider>
   )

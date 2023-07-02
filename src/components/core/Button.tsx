@@ -52,3 +52,26 @@ export const PrimaryButton = styled(Button)`
     );
   }
 `
+
+export const AddButton = styled.button`
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: ${colors.primary};
+`
+
+// TODO: pass icon name as prop
+export const IconButton = styled.button`
+  display: flex;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: white;
+  border-radius: 4px;
+
+  :hover {
+    background: ${colors.borders};
+  }
+`

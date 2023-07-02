@@ -1,10 +1,11 @@
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { lighten, darken } from 'polished'
 
-import { Logo } from '../common/Logo'
-import { PrimaryButton, Button } from '../common/Button'
+import { Logo } from '../core/Logo'
+import { PrimaryButton, Button } from '../core/Button'
 import { colors } from '../../theme'
 
 const Wrapper = styled.div`
@@ -55,8 +56,13 @@ const HiddenInput = styled.input`
 
 export function Home() {
   const router = useRouter()
-  const lastSession =
-    typeof window === 'undefined' ? null : localStorage.getItem('jsonResume')
+  const [hasSession, setHasSession] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHasSession(!!localStorage.getItem('jsonResume'))
+    }
+  }, [])
 
   const startNewSession = () => {
     window.localStorage.clear()
@@ -82,8 +88,8 @@ export function Home() {
       <Main>
         <Logo marginBottom="0.75em" />
         <PrimaryButton onClick={startNewSession}>Make New Resume</PrimaryButton>
-        {lastSession && (
-          <Link href="/generator">
+        {hasSession && (
+          <Link href="/generator" style={{ textDecoration: 'none' }}>
             <Button>Continue Session</Button>
           </Link>
         )}

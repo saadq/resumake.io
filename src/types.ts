@@ -23,6 +23,8 @@ export type Basics = {
 
 export type Work = {
   name?: string
+  company?: string // non-standard
+
   position?: string
   startDate?: string
   endDate?: string

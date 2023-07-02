@@ -3,7 +3,7 @@ import { atom } from 'jotai'
 export type SectionName =
   | 'basics'
   | 'education'
-  | 'experience'
+  | 'work'
   | 'skills'
   | 'projects'
   | 'awards'

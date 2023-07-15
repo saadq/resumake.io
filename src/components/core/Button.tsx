@@ -71,9 +71,9 @@ export const AddButton = styled.button`
   color: ${colors.primary};
 `
 
-// TODO: pass icon name as prop
 export const IconButton = styled.button`
   display: flex;
+  align-items: center;
   outline: none;
   border: none;
   background: transparent;

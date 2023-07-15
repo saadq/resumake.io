@@ -22,7 +22,7 @@ export const Button = styled.button`
   &:hover {
     background: linear-gradient(
       40deg,
-      ${darken(0.5, colors.primary)},
+      ${darken(0.45, colors.primary)},
       ${darken(0.3, colors.primary)}
     );
     animation: none;
@@ -51,6 +51,15 @@ export const PrimaryButton = styled(Button)`
       ${colors.primary}
     );
   }
+`
+
+export const MiniButton = styled(Button)`
+  height: unset;
+  width: unset;
+  padding: 6px 24px;
+  background: ${colors.borders};
+  border: none;
+  border-radius: 4px;
 `
 
 export const AddButton = styled.button`

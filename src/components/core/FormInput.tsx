@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, CSSProperties } from 'react'
 import styled from 'styled-components'
 
 import { StyledInput } from './Input'
@@ -11,13 +11,14 @@ const Container = styled.div`
 
 interface FormInputProps {
   onSubmit: (value: string) => void
+  style?: CSSProperties
 }
 
-export function FormInput({ onSubmit }: FormInputProps) {
+export function FormInput({ onSubmit, style }: FormInputProps) {
   const [value, setValue] = useState('')
 
   return (
-    <Container>
+    <Container style={style}>
       <StyledInput
         value={value}
         onChange={(e) => setValue(e.target.value)}

@@ -83,4 +83,8 @@ export const IconButton = styled.button`
   :hover {
     background: ${colors.borders};
   }
+
+  :focus {
+    background: ${colors.borders};
+  }
 `

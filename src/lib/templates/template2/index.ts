@@ -61,35 +61,35 @@ const generator: Generator = {
       \\cvsection{${heading || 'Education'}}
       \\begin{cventries}
       ${education.map((school) => {
-        const {
-          institution,
-          location,
-          area,
-          studyType,
-          score,
-          startDate,
-          endDate
-        } = school
+      const {
+        institution,
+        location,
+        area,
+        studyType,
+        score,
+        startDate,
+        endDate
+      } = school
 
-        let degreeLine
+      let degreeLine
 
-        if (studyType && area) {
-          degreeLine = `${studyType} in ${area}`
-        } else if (studyType || area) {
-          degreeLine = studyType || area
-        }
+      if (studyType && area) {
+        degreeLine = `${studyType} in ${area}`
+      } else if (studyType || area) {
+        degreeLine = studyType || area
+      }
 
-        let dateRange
+      let dateRange
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} – ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} – Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} – ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} – Present`
+      } else {
+        dateRange = endDate
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\cventry
             {${degreeLine || ''}}
             {${institution || ''}}
@@ -97,7 +97,7 @@ const generator: Generator = {
             {${dateRange || ''}}
             {${score ? `GPA: ${score}` : ''}}
         `
-      })}
+    })}
       \\end{cventries}
 
       \\vspace{-2mm}
@@ -116,28 +116,28 @@ const generator: Generator = {
       \\cvsection{${heading || 'Experience'}}
       \\begin{cventries}
       ${work.map((job) => {
-        const { name, position, location, startDate, endDate, highlights } = job
+      const { name, position, location, startDate, endDate, highlights } = job
 
-        let dateRange
-        let dutyLines
+      let dateRange
+      let dutyLines
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} – ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} – Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} – ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} – Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (highlights) {
-          dutyLines = source`
+      if (highlights) {
+        dutyLines = source`
             \\begin{cvitems}
               ${highlights.map((duty) => `\\item {${duty}}`)}
             \\end{cvitems}
             `
-        }
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\cventry
             {${position || ''}}
             {${name || ''}}
@@ -145,7 +145,7 @@ const generator: Generator = {
             {${dateRange || ''}}
             {${dutyLines}}
         `
-      })}
+    })}
       \\end{cventries}
     `
   },
@@ -162,12 +162,12 @@ const generator: Generator = {
       {}
       {\\def\\arraystretch{1.15}{\\begin{tabular}{ l l }
       ${skills.map((skill) => {
-        const { name, keywords = [] } = skill
-        const nameLine = name ? `${name}: ` : ''
-        const detailsLine = `{\\skill{ ${keywords.join(', ') || ''}}}`
+      const { name, keywords = [] } = skill
+      const nameLine = name ? `${name}: ` : ''
+      const detailsLine = `{\\skill{ ${keywords.join(', ') || ''}}}`
 
-        return `${nameLine} & ${detailsLine} \\\\`
-      })}
+      return `${nameLine} & ${detailsLine} \\\\`
+    })}
       \\end{tabular}}}
       {}
       {}
@@ -184,24 +184,30 @@ const generator: Generator = {
     }
 
     return source`
-      \\cvsection{${heading || 'Projects'}}
-      \\begin{cventries}
-      ${projects.map((project) => {
-        const { name, description, keywords = [], url } = project
+    \\cvsection{${heading || 'Projects'}}
+    \\begin{cventries}
+    ${projects.map((project) => {
+      const { name, description, highlights = [], url } = project
 
-        return stripIndent`
+      // Using highlights as the bullet points
+      const bulletPoints = highlights.map((highlight) => `\\item {${highlight}}`).join('\n')
+
+      return stripIndent`
           \\cventry
             {${description || ''}}
             {${name || ''}}
-            {${keywords.join(', ') || ''}}
+            {}
             {${url || ''}}
             {}
+            \\begin{itemize}
+            ${bulletPoints}
+            \\end{itemize}
 
           \\vspace{-5mm}
         `
-      })}
-      \\end{cventries}
-    `
+    })}
+    \\end{cventries}
+  `
   },
 
   awardsSection(awards, heading) {
@@ -213,16 +219,16 @@ const generator: Generator = {
       \\cvsection{${heading || 'Awards'}}
       \\begin{cvhonors}
       ${awards.map((award) => {
-        const { title, summary, date, awarder } = award
+      const { title, summary, date, awarder } = award
 
-        return stripIndent`
+      return stripIndent`
           \\cvhonor
             {${title || ''}}
             {${summary || ''}}
             {${awarder || ''}}
             {${date || ''}}
         `
-      })}
+    })}
       \\end{cvhonors}
     `
   },

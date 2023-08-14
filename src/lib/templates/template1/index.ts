@@ -40,58 +40,58 @@ const generator: Generator = {
       %==== Education ====%
       \\header{${heading || 'Education'}}
       ${education.map((school) => {
-        const {
-          institution,
-          location,
-          studyType,
-          area,
-          score,
-          startDate,
-          endDate
-        } = school
+      const {
+        institution,
+        location,
+        studyType,
+        area,
+        score,
+        startDate,
+        endDate
+      } = school
 
-        let line1 = ''
-        let line2 = ''
+      let line1 = ''
+      let line2 = ''
 
-        if (institution) {
-          line1 += `\\textbf{${institution}}`
-        }
+      if (institution) {
+        line1 += `\\textbf{${institution}}`
+      }
 
-        if (location) {
-          line1 += `\\hfill ${location}`
-        }
+      if (location) {
+        line1 += `\\hfill ${location}`
+      }
 
-        if (studyType) {
-          line2 += studyType
-        }
+      if (studyType) {
+        line2 += studyType
+      }
 
-        if (area) {
-          line2 += studyType ? ` ${area}` : `Degree in ${area}`
-        }
+      if (area) {
+        line2 += studyType ? ` ${area}` : `Degree in ${area}`
+      }
 
-        if (score) {
-          line2 += ` \\textit{GPA: ${score}}`
-        }
+      if (score) {
+        line2 += ` \\textit{GPA: ${score}}`
+      }
 
-        if (startDate || endDate) {
-          const gradLine = `${startDate || ''} - ${endDate || ''}`
-          line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
-        }
+      if (startDate || endDate) {
+        const gradLine = `${startDate || ''} - ${endDate || ''}`
+        line2 += line2 ? ` \\hfill ${gradLine}` : gradLine
+      }
 
-        if (line1) {
-          line1 += '\\\\'
-        }
+      if (line1) {
+        line1 += '\\\\'
+      }
 
-        if (line2) {
-          line2 += '\\\\'
-        }
+      if (line2) {
+        line2 += '\\\\'
+      }
 
-        return stripIndent`
+      return stripIndent`
           ${line1}
           ${line2.trim()}
           \\vspace{2mm}
         `
-      })}
+    })}
     `
   },
 
@@ -106,50 +106,50 @@ const generator: Generator = {
       \\vspace{1mm}
 
       ${work.map((job) => {
-        const { name, position, location, startDate, endDate, highlights } = job
+      const { name, position, location, startDate, endDate, highlights } = job
 
-        let line1 = ''
-        let line2 = ''
-        let highlightLines = ''
+      let line1 = ''
+      let line2 = ''
+      let highlightLines = ''
 
-        if (name) {
-          line1 += `\\textbf{${name}}`
-        }
+      if (name) {
+        line1 += `\\textbf{${name}}`
+      }
 
-        if (location) {
-          line1 += ` \\hfill ${location}`
-        }
+      if (location) {
+        line1 += ` \\hfill ${location}`
+      }
 
-        if (position) {
-          line2 += `\\textit{${position}}`
-        }
+      if (position) {
+        line2 += `\\textit{${position}}`
+      }
 
-        if (startDate && endDate) {
-          line2 += ` \\hfill ${startDate} - ${endDate}`
-        } else if (startDate) {
-          line2 += ` \\hfill ${startDate} - Present`
-        } else if (endDate) {
-          line2 += ` \\hfill ${endDate}`
-        }
+      if (startDate && endDate) {
+        line2 += ` \\hfill ${startDate} - ${endDate}`
+      } else if (startDate) {
+        line2 += ` \\hfill ${startDate} - Present`
+      } else if (endDate) {
+        line2 += ` \\hfill ${endDate}`
+      }
 
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
+      if (line1) line1 += '\\\\'
+      if (line2) line2 += '\\\\'
 
-        if (highlights) {
-          highlightLines = source`
+      if (highlights) {
+        highlightLines = source`
               \\vspace{-1mm}
               \\begin{itemize} \\itemsep 1pt
                 ${highlights.map((highlight) => `\\item ${highlight}`)}
               \\end{itemize}
             `
-        }
+      }
 
-        return stripIndent`
+      return stripIndent`
           ${line1}
           ${line2}
           ${highlightLines}
         `
-      })}
+    })}
     `
   },
 
@@ -162,9 +162,9 @@ const generator: Generator = {
       \\header{${heading || 'Skills'}}
       \\begin{tabular}{ l l }
       ${skills.map((skill) => {
-        const { name = 'Misc', keywords = [] } = skill
-        return `${name}: & ${keywords.join(', ')} \\\\`
-      })}
+      const { name = 'Misc', keywords = [] } = skill
+      return `${name}: & ${keywords.join(', ')} \\\\`
+    })}
       \\end{tabular}
       \\vspace{2mm}
     `
@@ -218,7 +218,7 @@ const generator: Generator = {
 
       return stripIndent`
         ${line1}
-        ${highlightLines}  // Added this line
+        ${highlightLines}
         \\vspace*{2mm}
       `
     })}
@@ -233,32 +233,32 @@ const generator: Generator = {
     return source`
       \\header{${heading || 'Awards'}}
       ${awards.map((award) => {
-        const { title, summary, date, awarder } = award
+      const { title, summary, date, awarder } = award
 
-        let line1 = ''
-        let line2 = summary || ''
+      let line1 = ''
+      let line2 = summary || ''
 
-        if (title) {
-          line1 += `\\textbf{${title}}`
-        }
+      if (title) {
+        line1 += `\\textbf{${title}}`
+      }
 
-        if (awarder) {
-          line1 += ` \\hfill ${awarder}`
-        }
+      if (awarder) {
+        line1 += ` \\hfill ${awarder}`
+      }
 
-        if (date) {
-          line2 += ` \\hfill ${date}`
-        }
+      if (date) {
+        line2 += ` \\hfill ${date}`
+      }
 
-        if (line1) line1 += '\\\\'
-        if (line2) line2 += '\\\\'
+      if (line1) line1 += '\\\\'
+      if (line2) line2 += '\\\\'
 
-        return stripIndent`
+      return stripIndent`
           ${line1}
           ${line2}
           \\vspace*{2mm}
         `
-      })}
+    })}
     `
   },
 

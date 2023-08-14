@@ -182,10 +182,9 @@ const generator: Generator = {
         return ''
       }
 
-      const { name, description, highlights, url } = project
+      const { name, highlights, url } = project
 
       let line1 = ''
-      let line2 = description || ''
       let highlightLines = ''
 
       if (name) {

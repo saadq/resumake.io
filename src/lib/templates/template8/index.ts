@@ -41,48 +41,47 @@ const generator: Generator = {
     return source`
       \\begin{cvsection}{${heading || 'Education'}}
       ${education.map((school) => {
-        const {
-          institution,
-          studyType = '',
-          area = '',
-          score,
-          location,
-          startDate,
-          endDate = ''
-        } = school
+      const {
+        institution,
+        studyType = '',
+        area = '',
+        score,
+        location,
+        startDate,
+        endDate = ''
+      } = school
 
-        let degreeLine = ''
+      let degreeLine = ''
 
-        if (studyType && area) {
-          degreeLine = `${studyType} in ${area}.`
-        } else if (studyType || area) {
-          degreeLine = (studyType || area) + '.'
-        }
+      if (studyType && area) {
+        degreeLine = `${studyType} in ${area}.`
+      } else if (studyType || area) {
+        degreeLine = (studyType || area) + '.'
+      }
 
-        let dateRange = ''
+      let dateRange = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} | ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} | Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} | ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} | Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (score) {
-          degreeLine += ` GPA: ${score}`
-        }
+      if (score) {
+        degreeLine += ` GPA: ${score}`
+      }
 
-        return stripIndent`
-          \\begin{cvsubsection}{${location || ''}}{${institution || ''}}{${
-          dateRange || ''
+      return stripIndent`
+          \\begin{cvsubsection}{${location || ''}}{${institution || ''}}{${dateRange || ''
         }}
             \\begin{itemize}
               \\item ${degreeLine}
             \\end{itemize}
           \\end{cvsubsection}
         `
-      })}
+    })}
       \\end{cvsection}
     `
   },
@@ -95,43 +94,42 @@ const generator: Generator = {
     return source`
       \\begin{cvsection}{${heading || 'Experience'}}
       ${work.map((job) => {
-        const {
-          name,
-          position,
-          location,
-          startDate,
-          endDate = '',
-          highlights
-        } = job
+      const {
+        name,
+        position,
+        location,
+        startDate,
+        endDate = '',
+        highlights
+      } = job
 
-        let dateRange = ''
-        let highlightLines = ''
+      let dateRange = ''
+      let highlightLines = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} -- ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} -- Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} -- ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} -- Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (highlights) {
-          highlightLines = source`
+      if (highlights) {
+        highlightLines = source`
             \\begin{itemize}%
               ${highlights.map((highlight) => `\\item ${highlight}`)}
             \\end{itemize}
             `
-        }
+      }
 
-        return stripIndent`
-          \\begin{cvsubsection}{${position || ''}}{${name || ''}}{${
-          dateRange || ''
+      return stripIndent`
+          \\begin{cvsubsection}{${position || ''}}{${name || ''}}{${dateRange || ''
         }}
             ${location || ''}
             ${highlightLines || ''}
           \\end{cvsubsection}
         `
-      })}
+    })}
       \\end{cvsection}
     `
   },
@@ -146,9 +144,9 @@ const generator: Generator = {
       \\begin{cvsubsection}{}{}{}
       \\begin{itemize}
       ${skills.map((skill) => {
-        const { name, keywords = [] } = skill
-        return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
-      })}
+      const { name, keywords = [] } = skill
+      return `\\item ${name ? `${name}: ` : ''} ${keywords.join(', ') || ''}`
+    })}
       \\end{itemize}
       \\end{cvsubsection}
       \\end{cvsection}
@@ -161,37 +159,38 @@ const generator: Generator = {
     }
 
     return source`
-      \\begin{cvsection}{${heading || 'Projects'}}
-      \\begin{cvsubsection}{}{}{}
-      \\begin{itemize}
-      \\setlength\\itemsep{3pt}
-      ${projects.map((project) => {
-        const { name, description, keywords = [], url } = project
+    \\begin{cvsection}{${heading || 'Projects'}}
+    \\begin{cvsubsection}{}{}{}
+    \\begin{itemize}
+    \\setlength\\itemsep{3pt}
+    ${projects.map((project) => {
+      const { name, highlights = [], keywords = [], url } = project
 
-        let line = ''
+      let line = ''
 
-        if (name) {
-          line += `\\textbf{${name}} `
-        }
+      if (name) {
+        line += `\\textbf{${name}} `
+      }
 
-        if (url) {
-          line += `(${url}) `
-        }
+      if (url) {
+        line += `(${url}) `
+      }
 
-        if (description) {
-          line += ` ${description}`
-        }
+      let highlightLines = ''
+      if (highlights.length) {
+        highlightLines = highlights.map((highlight) => `\\item ${highlight}`).join('\n')
+      }
 
-        if (keywords) {
-          line += ` ${keywords.join(', ')}`
-        }
+      if (keywords) {
+        line += ` ${keywords.join(', ')}`
+      }
 
-        return `\\item ${line}`
-      })}
-      \\end{itemize}
-      \\end{cvsubsection}
-      \\end{cvsection}
-    `
+      return `\\item ${line}\n${highlightLines}`
+    })}
+    \\end{itemize}
+    \\end{cvsubsection}
+    \\end{cvsection}
+  `
   },
 
   awardsSection(awards, heading) {
@@ -205,28 +204,28 @@ const generator: Generator = {
       \\begin{itemize}
       \\setlength\\itemsep{3pt}
       ${awards.map((award) => {
-        const { title, summary, date, awarder } = award
+      const { title, summary, date, awarder } = award
 
-        let line = ''
+      let line = ''
 
-        if (title) {
-          line += `\\textbf{${title}} `
-        }
+      if (title) {
+        line += `\\textbf{${title}} `
+      }
 
-        if (awarder) {
-          line += `(${awarder}) `
-        }
+      if (awarder) {
+        line += `(${awarder}) `
+      }
 
-        if (summary) {
-          line += ` ${summary}`
-        }
+      if (summary) {
+        line += ` ${summary}`
+      }
 
-        if (date) {
-          line += ` ${date}`
-        }
+      if (date) {
+        line += ` ${date}`
+      }
 
-        return `\\item ${line}`
-      })}
+      return `\\item ${line}`
+    })}
       \\end{itemize}
       \\end{cvsubsection}
       \\end{cvsection}
@@ -277,34 +276,34 @@ function template8(values: FormValues) {
       % Print the header
       \\makeheader
       ${values.sections
-        .map((section) => {
-          switch (section) {
-            case 'education':
-              return generator.educationSection(
-                values.education,
-                headings.education
-              )
+      .map((section) => {
+        switch (section) {
+          case 'education':
+            return generator.educationSection(
+              values.education,
+              headings.education
+            )
 
-            case 'work':
-              return generator.workSection(values.work, headings.work)
+          case 'work':
+            return generator.workSection(values.work, headings.work)
 
-            case 'skills':
-              return generator.skillsSection(values.skills, headings.skills)
+          case 'skills':
+            return generator.skillsSection(values.skills, headings.skills)
 
-            case 'projects':
-              return generator.projectsSection(
-                values.projects,
-                headings.projects
-              )
+          case 'projects':
+            return generator.projectsSection(
+              values.projects,
+              headings.projects
+            )
 
-            case 'awards':
-              return generator.awardsSection(values.awards, headings.awards)
+          case 'awards':
+            return generator.awardsSection(values.awards, headings.awards)
 
-            default:
-              return ''
-          }
-        })
-        .join('\n')}
+          default:
+            return ''
+        }
+      })
+      .join('\n')}
       ${WHITESPACE}
     \\end{document}
   `

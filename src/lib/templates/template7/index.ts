@@ -24,35 +24,35 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'Education'}}
       ${education.map((school) => {
-      const {
-        institution,
-        studyType = '',
-        area = '',
-        score,
-        location,
-        startDate,
-        endDate = ''
-      } = school
+        const {
+          institution,
+          studyType = '',
+          area = '',
+          score,
+          location,
+          startDate,
+          endDate = ''
+        } = school
 
-      let degreeLine = ''
+        let degreeLine = ''
 
-      if (studyType && area) {
-        degreeLine = `${studyType} in ${area}`
-      } else if (studyType || area) {
-        degreeLine = studyType || area
-      }
+        if (studyType && area) {
+          degreeLine = `${studyType} in ${area}`
+        } else if (studyType || area) {
+          degreeLine = studyType || area
+        }
 
-      let dateRange = ''
+        let dateRange = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} | ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} | Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} | ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} | Present`
+        } else {
+          dateRange = endDate
+        }
 
-      return stripIndent`
+        return stripIndent`
           \\cventry
             {${dateRange || ''}}
             {${degreeLine}}
@@ -61,7 +61,7 @@ const generator: Generator = {
             {\\textit{${location || ''}}}
             {}
         `
-    })}
+      })}
     `
   },
 
@@ -73,35 +73,35 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'Experience'}}
       ${work.map((job) => {
-      const {
-        name,
-        position,
-        location,
-        startDate,
-        endDate = '',
-        highlights
-      } = job
+        const {
+          name,
+          position,
+          location,
+          startDate,
+          endDate = '',
+          highlights
+        } = job
 
-      let dateRange = ''
-      let highlightLines = ''
+        let dateRange = ''
+        let highlightLines = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} -- ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} -- Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} -- ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} -- Present`
+        } else {
+          dateRange = endDate
+        }
 
-      if (highlights) {
-        highlightLines = source`
+        if (highlights) {
+          highlightLines = source`
             \\begin{itemize}%
               ${highlights.map((highlight) => `\\item ${highlight}`)}
             \\end{itemize}
             `
-      }
+        }
 
-      return stripIndent`
+        return stripIndent`
           \\cventry
             {${dateRange || ''}}
             {${position || ''}}
@@ -110,7 +110,7 @@ const generator: Generator = {
             {}
             {${highlightLines}}
         `
-    })}
+      })}
     `
   },
 
@@ -122,9 +122,9 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'Skills'}}
       ${skills.map((skill) => {
-      const { name, keywords = [] } = skill
-      return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
-    })}
+        const { name, keywords = [] } = skill
+        return `\\cvitem{${name || ''}}{${keywords.join(', ')}}`
+      })}
     `
   },
 
@@ -171,19 +171,19 @@ const generator: Generator = {
     return source`
       \\section{${heading || 'Awards'}}
       ${awards.map((award) => {
-      const { title, summary, date, awarder } = award
+        const { title, summary, date, awarder } = award
 
-      let detailsLine = ''
+        let detailsLine = ''
 
-      if (summary) {
-        detailsLine += `${summary}\\\\`
-      }
+        if (summary) {
+          detailsLine += `${summary}\\\\`
+        }
 
-      if (awarder) {
-        detailsLine += awarder
-      }
+        if (awarder) {
+          detailsLine += awarder
+        }
 
-      return stripIndent`
+        return stripIndent`
           \\cventry
             {}
             {${title || ''}}
@@ -193,7 +193,7 @@ const generator: Generator = {
             {${detailsLine}}
           \\vspace{1mm}
         `
-    })}
+      })}
     `
   },
 

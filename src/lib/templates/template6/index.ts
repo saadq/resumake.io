@@ -19,8 +19,8 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       ${name && info.length > 1 ? '\\\\' : ''}
       \\vspace{2mm}
       {\\fontsize{1em}{1em}\\fontspec[Path = fonts/]{Montserrat-Light} ${info.join(
-      ' -- '
-    )}}
+        ' -- '
+      )}}
       \\end{center}
     `
   },
@@ -37,42 +37,43 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       \\chap{${heading ? heading.toUpperCase() : 'EDUCATION'}}{
 
       ${education.map((school) => {
-      const {
-        institution = '',
-        location = '',
-        area = '',
-        studyType = '',
-        score = '',
-        startDate = '',
-        endDate = ''
-      } = school
+        const {
+          institution = '',
+          location = '',
+          area = '',
+          studyType = '',
+          score = '',
+          startDate = '',
+          endDate = ''
+        } = school
 
-      const degreeLine = [studyType, area].filter(Boolean).join(' ')
-      let dateRange = ''
+        const degreeLine = [studyType, area].filter(Boolean).join(' ')
+        let dateRange = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} – ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} – Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
 
-      return stripIndent`
+        return stripIndent`
             \\school
               {${institution}}
               {${dateRange}}
               {${degreeLine}}
               {${location}}
-              {${score
-          ? `\\begin{newitemize}
+              {${
+                score
+                  ? `\\begin{newitemize}
                   \\item ${score ? `GPA: ${score}` : ''}
                 \\end{newitemize}`
-          : ''
-        }
+                  : ''
+              }
           }
         `
-    })}
+      })}
       }
     `
   },
@@ -88,35 +89,35 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       \\chap{${heading ? heading.toUpperCase() : 'EXPERIENCE'}}{
 
       ${work.map((job) => {
-      const {
-        name = '',
-        position = '',
-        location = '',
-        startDate = '',
-        endDate = '',
-        highlights = []
-      } = job
+        const {
+          name = '',
+          position = '',
+          location = '',
+          startDate = '',
+          endDate = '',
+          highlights = []
+        } = job
 
-      let dateRange = ''
-      let dutyLines = ''
+        let dateRange = ''
+        let dutyLines = ''
 
-      if (startDate && endDate) {
-        dateRange = `${startDate} – ${endDate}`
-      } else if (startDate) {
-        dateRange = `${startDate} – Present`
-      } else {
-        dateRange = endDate
-      }
+        if (startDate && endDate) {
+          dateRange = `${startDate} – ${endDate}`
+        } else if (startDate) {
+          dateRange = `${startDate} – Present`
+        } else {
+          dateRange = endDate
+        }
 
-      if (highlights) {
-        dutyLines = source`
+        if (highlights) {
+          dutyLines = source`
             \\begin{newitemize}
               ${highlights.map((duty) => `\\item {${duty}}`)}
             \\end{newitemize}
             `
-      }
+        }
 
-      return stripIndent`
+        return stripIndent`
           \\job
             {${name}}
             {${dateRange}}
@@ -124,7 +125,7 @@ const generator: Omit<Generator, 'resumeHeader'> = {
             {${location}}
             {${dutyLines}}
         `
-    })}
+      })}
     }
     `
   },
@@ -141,20 +142,20 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       \\chap{${heading ? heading.toUpperCase() : 'SKILLS'}}{
       \\begin{newitemize}
         ${skills.map((skill) => {
-      const { name = '', keywords = [] } = skill
+          const { name = '', keywords = [] } = skill
 
-      let item = ''
+          let item = ''
 
-      if (name) {
-        item += `${name}: `
-      }
+          if (name) {
+            item += `${name}: `
+          }
 
-      if (keywords.length > 0) {
-        item += keywords.join(', ')
-      }
+          if (keywords.length > 0) {
+            item += keywords.join(', ')
+          }
 
-      return `\\item ${item}`
-    })}
+          return `\\item ${item}`
+        })}
       \\end{newitemize}
       }
     `
@@ -172,27 +173,25 @@ const generator: Omit<Generator, 'resumeHeader'> = {
     \\chap{${heading ? heading.toUpperCase() : 'PROJECTS'}}{
 
       ${projects.map((project) => {
-      const {
-        name = '',
-        highlights = [],
-        keywords = [],
-        url = ''
-      } = project
+        const { name = '', highlights = [], keywords = [], url = '' } = project
 
-      const highlightsList = highlights.length > 0 ? stripIndent`
+        const highlightsList =
+          highlights.length > 0
+            ? stripIndent`
           \\begin{newitemize}
             ${highlights.map((highlight) => `\\item {${highlight}}`)}
           \\end{newitemize}
-        ` : ''
+        `
+            : ''
 
-      return stripIndent`
+        return stripIndent`
           \\project
             {${name}}
             {${keywords.join(', ')}}
             {${url}}
             {${highlightsList}} % Include the highlights list here
         `
-    })}
+      })}
     }
   `
   },
@@ -209,16 +208,16 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       \\chap{${heading ? heading.toUpperCase() : 'AWARDS'}}{
 
         ${awards.map((award) => {
-      const { title = '', summary = '', awarder = '', date = '' } = award
+          const { title = '', summary = '', awarder = '', date = '' } = award
 
-      return stripIndent`
+          return stripIndent`
             \\award
               {${title}}
               {${date}}
               {${summary}}
               {${awarder}}
           `
-    })}
+        })}
       }
     `
   }

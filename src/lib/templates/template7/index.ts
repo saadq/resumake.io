@@ -155,6 +155,7 @@ const generator: Generator = {
           {}
           {\\textit{${keywords.join(', ')}}}
           {}
+          {${url || ''}}
           {${highlightLines}}
         \\vspace{1mm}
       `

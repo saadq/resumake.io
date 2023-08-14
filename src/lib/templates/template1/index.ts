@@ -182,7 +182,7 @@ const generator: Generator = {
         return ''
       }
 
-      const { name, highlights, url } = project
+      const { name, highlights, keywords, url } = project
 
       let line1 = ''
       let highlightLines = ''
@@ -191,16 +191,16 @@ const generator: Generator = {
         line1 += `{\\textbf{${name}}}`
       }
 
+      if (keywords) {
+        line1 += ` {\\sl ${keywords.join(', ')}} `
+      }
+
       if (url) {
         line1 += `\\hfill ${url}`
       }
 
       if (line1) {
         line1 += '\\\\'
-      }
-
-      if (line2) {
-        line2 += '\\\\'
       }
 
       if (highlights) {
@@ -212,9 +212,12 @@ const generator: Generator = {
           `
       }
 
+      if (highlightLines) {
+        highlightLines += '\\\\'
+      }
+
       return stripIndent`
         ${line1}
-        ${line2}
         ${highlightLines}  // Added this line
         \\vspace*{2mm}
       `

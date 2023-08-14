@@ -187,7 +187,7 @@ const generator: Generator = {
     \\cvsection{${heading || 'Projects'}}
     \\begin{cventries}
     ${projects.map((project) => {
-      const { name, highlights = [], url } = project
+      const { name, highlights = [], keywords = [], url } = project
 
       // Using highlights as the bullet points
       const bulletPoints = highlights.map((highlight) => `\\item {${highlight}}`).join('\n')
@@ -195,7 +195,7 @@ const generator: Generator = {
       return stripIndent`
           \\cventry
             {${name || ''}}
-            {}
+            {${keywords.join(', ') || ''}}
             {${url || ''}}
             {}
             \\begin{itemize}

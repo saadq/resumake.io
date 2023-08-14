@@ -175,6 +175,7 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       const {
         name = '',
         highlights = [],
+        keywords = [],
         url = ''
       } = project
 
@@ -187,6 +188,7 @@ const generator: Omit<Generator, 'resumeHeader'> = {
       return stripIndent`
           \\project
             {${name}}
+            {${keywords.join(', ')}}
             {${url}}
             {${highlightsList}} % Include the highlights list here
         `

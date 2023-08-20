@@ -48,12 +48,11 @@ export function Sidebar() {
     <Aside>
       <Nav>
         {sectionLinks.map(({ label, section }) => (
-          <div style={{display: 'flex', gap: 8}}>
+          <div key={section} style={{ display: 'flex', gap: 8 }}>
             <IconButton type="button">
               <MdDragIndicator />
             </IconButton>
             <StyledLink
-              key={section}
               href={`/generator?section=${section}`}
               $active={section === currSection}
             >

@@ -52,7 +52,6 @@ export function Form() {
       // TODO: validate JSON schema using Zod
       const jsonResume = JSON.parse(lastSession) as FormValues
       formContext.reset(jsonResume)
-      handleFormSubmit()
     }
     const subscription = formContext.watch((data) => {
       localStorage.setItem('jsonResume', JSON.stringify(data))

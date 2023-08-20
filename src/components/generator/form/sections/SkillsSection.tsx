@@ -1,59 +1,14 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
-import { MdClose, MdDragIndicator } from 'react-icons/md'
-import { FormSection } from './FormSection'
+
 import { LabeledInput } from '../../../core/LabeledInput'
-import { Input } from '../../../core/Input'
-import { AddButton, IconButton } from '../../../core/Button'
+import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
-
-interface KeywordsProps {
-  skillIndex: number
-}
-
-function Keywords({ skillIndex }: KeywordsProps) {
-  const { fields, append, remove } = useFieldArray({
-    name: `skills.${skillIndex}.keywords`
-  })
-
-  return (
-    <>
-      <label>Skill Details</label>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr auto',
-          alignItems: 'center',
-          gap: '4px',
-          margin: '0.5rem 0'
-        }}
-      >
-        {fields.map((field, i) => (
-          <Fragment key={field.id}>
-            <IconButton type="button">
-              <MdDragIndicator />
-            </IconButton>
-            <Input
-              name={`skills.${skillIndex}.keywords.${i}`}
-              placeholder="TypeScript"
-            />
-            <IconButton type="button" onClick={() => remove(i)}>
-              <MdClose />
-            </IconButton>
-          </Fragment>
-        ))}
-      </div>
-      <AddButton type="button" onClick={() => append('')}>
-        + Add
-      </AddButton>
-    </>
-  )
-}
+import { FormSection } from './FormSection'
+import Keywords from '../Keywords'
 
 export function SkillsSection() {
-  const { fields, append } = useFieldArray({
-    name: 'skills'
-  })
+  const { fields, append } = useFieldArray({ name: 'skills' })
 
   return (
     <FormSection title="Your Skills">
@@ -70,7 +25,11 @@ export function SkillsSection() {
             label="Skill name"
             placeholder="Programming Languages"
           />
-          <Keywords skillIndex={index} />
+          <Keywords
+            label="Skill Details"
+            placeholder="TypeScript"
+            name={`skills.${index}.keywords`}
+          />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

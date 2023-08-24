@@ -7,6 +7,8 @@ import { lighten, darken } from 'polished'
 import { Logo } from '../core/Logo'
 import { PrimaryButton, Button } from '../core/Button'
 import { colors } from '../../theme'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -106,8 +108,10 @@ export function Home() {
       <Footer>
         <Copyright>© 2022 Saad Quadri</Copyright>
         <Link href="/about">About</Link>
-        <a href="https://github.com/saadq/resumake">Source</a>
         <a href="https://github.com/saadq/resumake/issues">Issues</a>
+        <a href="https://github.com/saadq/resumake"  target="_blank" rel="noopener noreferrer">
+        <FontAwesomeIcon icon={faGithub} size="2x"/>
+        </a>
       </Footer>
     </Wrapper>
   )

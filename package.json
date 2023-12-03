@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.31.3",
     "react-icons": "^4.4.0",
+    "react-is": "^18.2.0",
     "react-pdf": "^5.7.2",
     "react-tooltip": "^4.2.21",
     "styled-components": "^5.3.3",

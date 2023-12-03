@@ -22,7 +22,7 @@ export const Button = styled.button`
   &:hover {
     background: linear-gradient(
       40deg,
-      ${darken(0.5, colors.primary)},
+      ${darken(0.45, colors.primary)},
       ${darken(0.3, colors.primary)}
     );
     animation: none;
@@ -53,6 +53,15 @@ export const PrimaryButton = styled(Button)`
   }
 `
 
+export const MiniButton = styled(Button)`
+  height: unset;
+  width: unset;
+  padding: 6px 24px;
+  background: ${colors.borders};
+  border: none;
+  border-radius: 4px;
+`
+
 export const AddButton = styled.button`
   padding: 0.5rem 0.75rem;
   cursor: pointer;
@@ -62,9 +71,9 @@ export const AddButton = styled.button`
   color: ${colors.primary};
 `
 
-// TODO: pass icon name as prop
 export const IconButton = styled.button`
   display: flex;
+  align-items: center;
   outline: none;
   border: none;
   background: transparent;
@@ -72,6 +81,10 @@ export const IconButton = styled.button`
   border-radius: 4px;
 
   :hover {
+    background: ${colors.borders};
+  }
+
+  :focus {
     background: ${colors.borders};
   }
 `

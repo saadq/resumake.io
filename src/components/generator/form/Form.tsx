@@ -95,12 +95,16 @@ function convertFormData(formData: FormValues) {
   const newProjects = []
   for (let i = 0; i < formData.projects.length; i++) {
     if (formData.projects[i].description) {
+      const highlights = formData.projects[i].highlights || []
+      highlights.push(formData.projects[i].description || '')
       const newProject = {
         ...formData.projects[i],
-        highlights: [formData.projects[i].description]
+        highlights: highlights
       }
       delete newProject.description
       newProjects.push(newProject)
+    } else {
+      newProjects.push(formData.projects[i])
     }
   }
 

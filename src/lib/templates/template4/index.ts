@@ -69,63 +69,63 @@ const generator: Generator = {
       \\section{${heading || 'Education'}}
       \\raggedright
       ${education.map((school) => {
-        const {
-          institution,
-          location,
-          studyType,
-          area,
-          score,
-          startDate,
-          endDate
-        } = school
+      const {
+        institution,
+        location,
+        studyType,
+        area,
+        score,
+        startDate,
+        endDate
+      } = school
 
-        let line1 = ''
-        let line2 = ''
+      let line1 = ''
+      let line2 = ''
 
-        if (institution) {
-          line1 += `\\runsubsection{${institution}}`
-        }
+      if (institution) {
+        line1 += `\\runsubsection{${institution}}`
+      }
 
-        if (studyType && area) {
-          line1 += `\\descript{| ${studyType} ${area}}`
-        } else if (studyType) {
-          line1 += `\\descript{| ${studyType}}`
-        } else if (area) {
-          line1 += `\\descript{| ${area}}`
-        }
+      if (studyType && area) {
+        line1 += `\\descript{| ${studyType} ${area}}`
+      } else if (studyType) {
+        line1 += `\\descript{| ${studyType}}`
+      } else if (area) {
+        line1 += `\\descript{| ${area}}`
+      }
 
-        let dateRange
+      let dateRange
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} - ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} - Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} - ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} - Present`
+      } else {
+        dateRange = endDate
+      }
 
-        const locationAndDate = [location, dateRange]
-          .filter(Boolean)
-          .join(' | ')
+      const locationAndDate = [location, dateRange]
+        .filter(Boolean)
+        .join(' | ')
 
-        if (locationAndDate) {
-          line1 += `\\hfill \\location{${locationAndDate}}`
-        }
+      if (locationAndDate) {
+        line1 += `\\hfill \\location{${locationAndDate}}`
+      }
 
-        if (line1) {
-          line1 += '\\\\'
-        }
+      if (line1) {
+        line1 += '\\\\'
+      }
 
-        if (score) {
-          line2 += `GPA: ${score}\\\\`
-        }
+      if (score) {
+        line2 += `GPA: ${score}\\\\`
+      }
 
-        return `
+      return `
           ${line1}
           ${line2}
           \\sectionsep
         `
-      })}
+    })}
     `
   },
 
@@ -142,57 +142,57 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\section{${heading || 'Experience'}}
       ${work.map((job) => {
-        const {
-          name,
-          position,
-          location,
-          startDate,
-          endDate = '',
-          highlights
-        } = job
+      const {
+        name,
+        position,
+        location,
+        startDate,
+        endDate = '',
+        highlights
+      } = job
 
-        let line1 = ''
-        let dateRange = ''
-        let highlightLines = ''
+      let line1 = ''
+      let dateRange = ''
+      let highlightLines = ''
 
-        if (name) {
-          line1 += `\\runsubsection{${name}}`
-        }
+      if (name) {
+        line1 += `\\runsubsection{${name}}`
+      }
 
-        if (position) {
-          line1 += `\\descript{| ${position}}`
-        }
+      if (position) {
+        line1 += `\\descript{| ${position}}`
+      }
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} – ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} – Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} – ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} – Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (location && dateRange) {
-          line1 += `\\hfill \\location{${location} | ${dateRange}}`
-        } else if (location) {
-          line1 += `\\hfill \\location{${location}}`
-        } else if (dateRange) {
-          line1 += `\\hfill \\location{${dateRange}}`
-        }
+      if (location && dateRange) {
+        line1 += `\\hfill \\location{${location} | ${dateRange}}`
+      } else if (location) {
+        line1 += `\\hfill \\location{${location}}`
+      } else if (dateRange) {
+        line1 += `\\hfill \\location{${dateRange}}`
+      }
 
-        if (highlights) {
-          highlightLines = source`
+      if (highlights) {
+        highlightLines = source`
             \\begin{tightemize}
               ${highlights.map((highlight) => `\\item ${highlight}`)}
             \\end{tightemize}
             `
-        }
+      }
 
-        return stripIndent`
+      return stripIndent`
           ${line1}
           ${highlightLines}
           \\sectionsep
         `
-      })}
+    })}
     `
   },
 
@@ -211,9 +211,9 @@ const generator: Generator = {
       \\raggedright
       \\begin{tabular}{ l l }
       ${skills.map((skill) => {
-        const { name = '', keywords = [] } = skill
-        return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
-      })}
+      const { name = '', keywords = [] } = skill
+      return `\\descript{${name}} & {\\location{${keywords.join(', ')}}} \\\\`
+    })}
       \\end{tabular}
       \\sectionsep
     `
@@ -286,15 +286,15 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\section{${heading || 'Awards'}}
       ${awards.map((award) => {
-        const { title, summary, date, awarder } = award
-        const info = [awarder, date].filter(Boolean).join(' | ')
+      const { title, summary, date, awarder } = award
+      const info = [awarder, date].filter(Boolean).join(' | ')
 
-        return stripIndent`
+      return stripIndent`
           \\runsubsection{\\large{${title || ''}}} \\descript{${info}} \\\\
           ${summary ? `${summary}\\\\` : ''}
           \\sectionsep
         `
-      })}
+    })}
     `
   },
 

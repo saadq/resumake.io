@@ -32,45 +32,45 @@ const generator: Generator = {
       \\begin{itemize}[leftmargin=*]
 
       ${education.map((school) => {
-        const {
-          institution = '',
-          location = '',
-          studyType = '',
-          area = '',
-          score = '',
-          startDate = '',
-          endDate = ''
-        } = school
+      const {
+        institution = '',
+        location = '',
+        studyType = '',
+        area = '',
+        score = '',
+        startDate = '',
+        endDate = ''
+      } = school
 
-        let formattedLocation = ''
+      let formattedLocation = ''
 
-        if (location) {
-          formattedLocation = location + '\\\\'
-        }
+      if (location) {
+        formattedLocation = location + '\\\\'
+      }
 
-        let degreeLine = ''
+      let degreeLine = ''
 
-        if (studyType && area) {
-          degreeLine = `${studyType} ${area}`
-        } else if (studyType || area) {
-          degreeLine = studyType || area
-        }
+      if (studyType && area) {
+        degreeLine = `${studyType} ${area}`
+      } else if (studyType || area) {
+        degreeLine = studyType || area
+      }
 
-        if (score) {
-          degreeLine += degreeLine ? `, GPA: ${score}` : `GPA: ${score}`
-        }
+      if (score) {
+        degreeLine += degreeLine ? `, GPA: ${score}` : `GPA: ${score}`
+      }
 
-        let dateRange = ''
+      let dateRange = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} | ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} | Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} | ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} | Present`
+      } else {
+        dateRange = endDate
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\item[]
             \\school
               {${institution || ''}}
@@ -78,7 +78,7 @@ const generator: Generator = {
               {${degreeLine}}
               {${dateRange || ''}}
         `
-      })}
+    })}
 
       \\end{itemize}
     `
@@ -95,28 +95,28 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\begin{itemize}[leftmargin=*]
       ${work.map((job) => {
-        const { name, position, location, startDate, endDate, highlights } = job
+      const { name, position, location, startDate, endDate, highlights } = job
 
-        let dateRange
-        let dutyLines
+      let dateRange
+      let dutyLines
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} | ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} | Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} | ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} | Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (highlights) {
-          dutyLines = source`
+      if (highlights) {
+        dutyLines = source`
             \\begin{itemize}
               ${highlights.map((duty) => `\\item ${duty}`)}
             \\end{itemize}
             `
-        }
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\item[]
             \\job
               {${name || ''}}
@@ -125,7 +125,7 @@ const generator: Generator = {
               {${dateRange || ''}}
               ${dutyLines}
         `
-      })}
+    })}
       \\end{itemize}
     `
   },
@@ -142,9 +142,9 @@ const generator: Generator = {
       \\begin{itemize}[leftmargin=*]
       \\setlength\\itemsep{0em}
       ${skills.map((skill) => {
-        const { name = '', keywords = [] } = skill
-        return `\\item[] \\skill{${name}}{${keywords.join(', ')}}`
-      })}
+      const { name = '', keywords = [] } = skill
+      return `\\item[] \\skill{${name}}{${keywords.join(', ')}}`
+    })}
       \\end{itemize}
     `
   },
@@ -195,11 +195,11 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\begin{itemize}[leftmargin=*]
       ${awards.map((award) => {
-        const { title = '', summary = '', date = '', awarder = '' } = award
+      const { title = '', summary = '', date = '', awarder = '' } = award
 
-        const summaryWithNewline = summary ? `\\\\${summary}` : summary
+      const summaryWithNewline = summary ? `\\\\${summary}` : summary
 
-        return stripIndent`
+      return stripIndent`
           \\item[]
             \\award
               {${title}}
@@ -207,7 +207,7 @@ const generator: Generator = {
               {${awarder}}
               {${summaryWithNewline}}
         `
-      })}
+    })}
       \\end{itemize}
     `
   },

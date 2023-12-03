@@ -32,53 +32,53 @@ const generator: Generator = {
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Education'}}{}
       ${education.map((school, i) => {
-        const {
-          institution = '',
-          studyType,
-          area = '',
-          score = '',
-          location = '',
-          startDate = '',
-          endDate = ''
-        } = school
+      const {
+        institution = '',
+        studyType,
+        area = '',
+        score = '',
+        location = '',
+        startDate = '',
+        endDate = ''
+      } = school
 
-        let degreeLine = ''
-        let nameLine = ''
+      let degreeLine = ''
+      let nameLine = ''
 
-        if (studyType && area) {
-          degreeLine = `${studyType} ${area}`
-        } else if (studyType || area) {
-          degreeLine = studyType || area
-        }
+      if (studyType && area) {
+        degreeLine = `${studyType} ${area}`
+      } else if (studyType || area) {
+        degreeLine = studyType || area
+      }
 
-        let dateRange = ''
+      let dateRange = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} - ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} - Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} - ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} - Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (institution && location) {
-          nameLine += `${institution}, ${location}`
-        } else if (institution || location) {
-          nameLine = institution || location
-        }
+      if (institution && location) {
+        nameLine += `${institution}, ${location}`
+      } else if (institution || location) {
+        nameLine = institution || location
+      }
 
-        if (score) {
-          nameLine += ` ${score}`
-        }
+      if (score) {
+        nameLine += ` ${score}`
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\EducationEntry
             {${degreeLine}}
             {${dateRange || ''}}
             {${nameLine}}
             ${i < lastSchoolIndex ? '\\sepspace' : ''}
         `
-      })}
+    })}
     `
   },
 
@@ -96,36 +96,36 @@ const generator: Generator = {
       \\NewPart{${heading || 'Experience'}}{}
 
       ${work.map((job, i) => {
-        const {
-          name,
-          position,
-          location,
-          startDate,
-          endDate = '',
-          highlights
-        } = job
+      const {
+        name,
+        position,
+        location,
+        startDate,
+        endDate = '',
+        highlights
+      } = job
 
-        const nameLine = [name, location].filter(Boolean).join(', ')
-        let dateRange = ''
-        let dutyLines = ''
+      const nameLine = [name, location].filter(Boolean).join(', ')
+      let dateRange = ''
+      let dutyLines = ''
 
-        if (startDate && endDate) {
-          dateRange = `${startDate} - ${endDate}`
-        } else if (startDate) {
-          dateRange = `${startDate} - Present`
-        } else {
-          dateRange = endDate
-        }
+      if (startDate && endDate) {
+        dateRange = `${startDate} - ${endDate}`
+      } else if (startDate) {
+        dateRange = `${startDate} - Present`
+      } else {
+        dateRange = endDate
+      }
 
-        if (highlights) {
-          dutyLines = source`
+      if (highlights) {
+        dutyLines = source`
             \\begin{itemize} \\itemsep -1pt
               ${highlights.map((duty) => `\\item ${duty}`)}
             \\end{itemize}
           `
-        }
+      }
 
-        return stripIndent`
+      return stripIndent`
           \\WorkEntry
             {${position || ''}}
             {${dateRange || ''}}
@@ -133,7 +133,7 @@ const generator: Generator = {
             {${dutyLines}}
             ${i < lastJobIndex ? '\\sepspace' : ''}
         `
-      })}
+    })}
     `
   },
 
@@ -147,9 +147,9 @@ const generator: Generator = {
       %%% ------------------------------------------------------------
       \\NewPart{${heading || 'Skills'}}{}
       ${skills.map((skill) => {
-        const { name, keywords = [] } = skill
-        return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
-      })}
+      const { name, keywords = [] } = skill
+      return `\\SkillsEntry{${name || ''}}{${keywords.join(', ')}}`
+    })}
     `
   },
 
@@ -200,15 +200,15 @@ const generator: Generator = {
       \\NewPart{${heading || 'Awards'}}{}
 
       ${awards.map((award, i) => {
-        const { title, summary, date, awarder } = award
+      const { title, summary, date, awarder } = award
 
-        return stripIndent`
+      return stripIndent`
           \\AwardEntry{${title || ''}}{${awarder || ''}}
           {${date || ''}}
           {${summary || ''}}
           ${i < lastAwardIndex ? '\\sepspace' : ''}
         `
-      })}
+    })}
     `
   },
 

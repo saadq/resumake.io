@@ -60,7 +60,7 @@ export function Form() {
   }, [formContext])
 
   const handleFormSubmit = useCallback(async () => {
-    const formValues = formContext.getValues()
+    const formValues = convertFormData(formContext.getValues())
     setResume({ ...resume, isLoading: true })
     try {
       const newResumeUrl = await generateResume(formValues)
@@ -87,4 +87,25 @@ export function Form() {
       </StyledForm>
     </FormProvider>
   )
+}
+
+// Temporary function to convert form data to new format with highlights
+function convertFormData(formData: FormValues) {
+  if (!formData.projects) return formData
+  const newProjects = []
+  for (let i = 0; i < formData.projects.length; i++) {
+    if (formData.projects[i].description) {
+      const newProject = {
+        ...formData.projects[i],
+        highlights: [formData.projects[i].description]
+      }
+      delete newProject.description
+      newProjects.push(newProject)
+    }
+  }
+
+  return {
+    ...formData,
+    projects: newProjects
+  }
 }

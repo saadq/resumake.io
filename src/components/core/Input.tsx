@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { colors } from '../../theme'
 import { FormValues } from '../../types'
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   border: none;
   background: transparent;
   border: 1px solid ${colors.input};

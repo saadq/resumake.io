@@ -74,7 +74,7 @@ const generator: Generator = {
       \\section{${heading || 'Experience'}}
       ${work.map((job) => {
       const {
-        name,
+        company,
         position,
         location,
         startDate,
@@ -105,7 +105,7 @@ const generator: Generator = {
           \\cventry
             {${dateRange || ''}}
             {${position || ''}}
-            {${name || ''}}
+            {${company || ''}}
             {${location || ''}}
             {}
             {${highlightLines}}

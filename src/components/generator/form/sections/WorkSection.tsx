@@ -30,11 +30,7 @@ export function WorkSection() {
             label="Position"
             placeholder="Software Engineer"
           />
-          <LabeledInput
-            name={`work.${index}.summary`}
-            label="Summary"
-            placeholder="lorem ipsum"
-          />
+
           <LabeledInput
             name={`work.${index}.startDate`}
             label="Start Date"

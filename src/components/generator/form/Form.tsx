@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
+import { TemplatesSection } from './sections/TemplatesSection'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { WorkSection } from './sections/WorkSection'
@@ -34,7 +35,15 @@ const StyledForm = styled.form`
 
 const initialFormValues = {
   headings: {},
-  sections: [],
+  sections: [
+    'templates',
+    'profile',
+    'education',
+    'work',
+    'skills',
+    'projects',
+    'awards'
+  ],
   selectedTemplate: 1
 }
 
@@ -61,6 +70,7 @@ export function Form() {
 
   const handleFormSubmit = useCallback(async () => {
     const formValues = convertFormData(formContext.getValues())
+    console.log(formValues)
     setResume({ ...resume, isLoading: true })
     try {
       const newResumeUrl = await generateResume(formValues)
@@ -78,6 +88,7 @@ export function Form() {
         // onChange={handleFormSubmit}
       >
         {!currSection && <ProfileSection />}
+        {currSection === 'templates' && <TemplatesSection />}
         {currSection === 'basics' && <ProfileSection />}
         {currSection === 'education' && <EducationSection />}
         {currSection === 'work' && <WorkSection />}

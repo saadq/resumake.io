@@ -143,7 +143,7 @@ const generator: Generator = {
       \\section{${heading || 'Experience'}}
       ${work.map((job) => {
       const {
-        name,
+        company,
         position,
         location,
         startDate,
@@ -155,8 +155,8 @@ const generator: Generator = {
       let dateRange = ''
       let highlightLines = ''
 
-      if (name) {
-        line1 += `\\runsubsection{${name}}`
+      if (company) {
+        line1 += `\\runsubsection{${company}}`
       }
 
       if (position) {

@@ -6,6 +6,7 @@ import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
 import Keywords from '../Keywords'
+import Highlights from '../Highlights'
 
 export function ProjectsSection() {
   const { fields, append } = useFieldArray({ name: 'projects' })
@@ -25,10 +26,10 @@ export function ProjectsSection() {
             label="Project Name"
             placeholder="Piper Chat"
           />
-          <LabeledInput
-            name={`projects.${index}.description`}
-            label="Project Description"
-            placeholder="A video chat app with great picture quality."
+          <Highlights
+            label="Project Details"
+            placeholder="Won CalHacks 2023"
+            name={`projects.${index}.highlights`}
           />
           <LabeledInput
             name={`projects.${index}.url`}

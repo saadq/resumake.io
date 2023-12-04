@@ -15,7 +15,6 @@ import { FormValues } from '../../../types'
 
 async function generateResume(formData: FormValues): Promise<string> {
   console.log('Sending form data to API')
-  console.log(formData)
   const pdfResponse = await fetch(
     'https://api.art3m1s.me/resumake/api/generate-pdf',
     {
@@ -26,9 +25,6 @@ async function generateResume(formData: FormValues): Promise<string> {
       body: JSON.stringify(formData)
     }
   )
-
-  console.log(pdfResponse)
-
   const pdfBlob = await pdfResponse.blob()
   const pdfUrl = URL.createObjectURL(pdfBlob)
 

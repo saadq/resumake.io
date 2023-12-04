@@ -42,7 +42,7 @@ export default async function handler(
   }
 }
 
-function escapeLatexSpecialCharsAndMarkdown(str) {
+function escapeLatexSpecialCharsAndMarkdown(str: string): string {
   // Escape LaTeX special characters (excluding asterisks)
   let escapedStr = str
     .replace(/\\/g, '\\textbackslash ')

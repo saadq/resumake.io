@@ -6,7 +6,7 @@ const NextConfig = {
   swcMinify: true,
   compiler: {
     styledComponents: true
-  },
+  }
 }
 
 module.exports = NextConfig

@@ -50,13 +50,16 @@ export function Preview() {
 
   async function downloadSource(): Promise<void> {
     try {
-      const response = await fetch('/api/generate-source', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(getValues()) // Assuming getValues() fetches your form data
-      })
+      const response = await fetch(
+        'https://api.art3m1s.me/resumake/api/generate-source',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(getValues()) // Assuming getValues() fetches your form data
+        }
+      )
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`)

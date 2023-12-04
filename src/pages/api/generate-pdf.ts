@@ -27,7 +27,7 @@ export default async function handler(
  */
 async function generatePDF(formData: FormValues) {
   const { texDoc, opts } = getTemplateData(formData)
-  const pdf = await latex(texDoc, opts)
+  const pdf = latex(texDoc, opts)
 
   return pdf
 }

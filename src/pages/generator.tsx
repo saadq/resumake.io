@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import { Form } from '../components/generator/form/Form'
 import { Header } from '../components/generator/layout/Header'
 import { Sidebar } from '../components/generator/layout/Sidebar'
-import { Templates } from '../components/generator/form/sections/TemplatesSection'
-
 const Preview = dynamic(
   async () => (await import('../components/generator/preview/Preview')).Preview,
   { ssr: false }

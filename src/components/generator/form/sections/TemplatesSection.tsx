@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-import Lightbox from 'react-image-lightbox'
+import { useFormContext } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { Button } from '../../../core/Button'
-import { colors, sizes } from '../../../../theme'
+import { colors } from '../../../../theme'
+import FsLightbox from 'fslightbox-react'
 import { useState } from 'react'
 
 import image1 from '../img/1.png'
@@ -28,14 +29,6 @@ const images = [
   image10
 ]
 
-const Section = styled.section`
-  width: ${sizes.templatesSection.width};
-  background: ${colors.background};
-  border-left: 1px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-  overflow-y: scroll;
-`
-
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -53,7 +46,7 @@ const Div = styled.div`
   align-items: center;
 `
 
-const Image = styled.img`
+const StyledImage = styled.img`
   position: relative;
   border-radius: 3px;
   color: #fff;
@@ -71,29 +64,43 @@ const Image = styled.img`
   }
 `
 
-type Props = {
-  selectedTemplate: number
-  selectTemplate: (templateId: number) => void
-}
-
-type State = {
-  isLightboxOpen: boolean
-  lightboxImageIndex: number
-}
-
 export function TemplatesSection() {
-  const [state, setState] = useState<State>({
-    isLightboxOpen: false,
-    lightboxImageIndex: 0
-  })
+  const { watch, setValue } = useFormContext()
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(0)
 
-  const showLightbox = (index: number) => {
-    setState({ isLightboxOpen: true, lightboxImageIndex: index })
+  const setIndex = (index: number) => {
+    setLightboxImageIndex(index)
   }
 
-  const hideLightbox = () => {
-    setState({ isLightboxOpen: false })
-  }
-
-  return <FormSection title="Choose a template"></FormSection>
+  return (
+    <FormSection title="Choose a template">
+      <Grid>
+        {images.map((src, i) => (
+          <Div key={i}>
+            <StyledImage
+              active={i + 1 === watch('selectedTemplate')}
+              src={src.src}
+              onClick={() => setIndex(i)}
+            />
+            <Button
+              type="button"
+              onClick={() => setValue('selectedTemplate', i + 1)}
+              color={
+                i + 1 === watch('selectedTemplate')
+                  ? colors.silver
+                  : colors.white
+              }
+            >
+              Template {i + 1}
+            </Button>
+          </Div>
+        ))}
+      </Grid>
+      <FsLightbox
+        toggler={lightboxImageIndex}
+        sources={[images[lightboxImageIndex].src]}
+        captions={[`Template ${lightboxImageIndex + 1}`]}
+      />
+    </FormSection>
+  )
 }

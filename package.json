@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "archiver": "^5.3.1",
+    "babel-runtime": "^6.26.0",
     "common-tags": "^1.8.2",
+    "core-js": "^3.33.3",
     "fs-extra": "^10.1.0",
+    "fslightbox-react": "^1.7.6",
     "jotai": "^1.7.0",
     "next": "^13.5.4",
     "node-latex": "^3.1.0",

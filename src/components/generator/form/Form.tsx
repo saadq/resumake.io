@@ -70,7 +70,6 @@ export function Form() {
 
   const handleFormSubmit = useCallback(async () => {
     const formValues = convertFormData(formContext.getValues())
-    console.log(formValues)
     setResume({ ...resume, isLoading: true })
     try {
       const newResumeUrl = await generateResume(formValues)

@@ -3,6 +3,7 @@ export const lightGray = '#121217'
 export const gray = '#161619'
 export const white = '#ffffff'
 export const green = '#22d7a6'
+export const silver = '#c0c5ce'
 
 export const primary = green
 export const accent = green

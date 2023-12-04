@@ -11,7 +11,7 @@ export default async function handler(
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
@@ -26,9 +26,10 @@ export default async function handler(
   res.setHeader('Content-Type', 'application/pdf')
 }
 
-function escapeLatexSpecialChars(str: string): string {
-  return str
-    .replace(/\\/g, '\\textbackslash')
+function escapeLatexSpecialCharsAndMarkdown(str) {
+  // Escape LaTeX special characters (excluding asterisks)
+  let escapedStr = str
+    .replace(/\\/g, '\\textbackslash ')
     .replace(/#/g, '\\#')
     .replace(/\$/g, '\\$')
     .replace(/%/g, '\\%')
@@ -38,18 +39,26 @@ function escapeLatexSpecialChars(str: string): string {
     .replace(/}/g, '\\}')
     .replace(/~/g, '\\textasciitilde')
     .replace(/\^/g, '\\textasciicircum');
+
+  // Replace Markdown bold and italics
+  // The non-greedy regex (.*?) ensures it matches the shortest possible string
+  escapedStr = escapedStr
+    .replace(/\*\*(.*?)\*\*/g, '\\textbf{$1}')
+    .replace(/\*(.*?)\*/g, '\\textit{$1}');
+
+  return escapedStr;
 }
 
 function cleanData(data: FormValues): FormValues {
   data.projects?.forEach((project) => {
     project.highlights = project.highlights?.map(highlight =>
-      escapeLatexSpecialChars(highlight)
+      escapeLatexSpecialCharsAndMarkdown(highlight)
     );
   });
 
   data.work?.forEach((work) => {
     work.highlights = work.highlights?.map(highlight =>
-      escapeLatexSpecialChars(highlight)
+      escapeLatexSpecialCharsAndMarkdown(highlight)
     );
   });
 

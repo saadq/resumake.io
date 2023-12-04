@@ -19,25 +19,18 @@ RUN npm run build
 # Step 2: Set up a LaTeX environment
 # Use a base image that includes a minimal TeX distribution like TinyTeX
 # Start from a LaTeX base image that uses Debian
-FROM blang/latex:ctanfull
+FROM texlive/texlive:latest
 
 # Install Node.js
 RUN apt-get update && \
-    apt-get install -y curl software-properties-common && \
-    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install nodejs -y && \
+    apt-get install npm -y 
 
 # Copy the built Next.js application from the builder stage
 COPY --from=builder /app/.next .next
 COPY --from=builder /app/node_modules node_modules
 COPY --from=builder /app/package.json package.json
 COPY --from=builder /app/public public
-
-# Update tlmgr to the latest version
-RUN tlmgr update --self
-
-# Install additional LaTeX packages if needed
-RUN tlmgr install enumitem fancyhdr unicode-math fontawesome microtype moderncv fontawesome5 multirow arydshln ebgaramond
 
 # Expose the port the app runs on
 EXPOSE 3000

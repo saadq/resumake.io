@@ -20,6 +20,36 @@ export default async function handler(
     .setHeader('content-disposition', 'attachment; filename="resume.zip"')
 }
 
+function escapeLatexSpecialChars(str: string): string {
+  return str
+    .replace(/\\/g, '\\textbackslash')
+    .replace(/#/g, '\\#')
+    .replace(/\$/g, '\\$')
+    .replace(/%/g, '\\%')
+    .replace(/&/g, '\\&')
+    .replace(/_/g, '\\_')
+    .replace(/{/g, '\\{')
+    .replace(/}/g, '\\}')
+    .replace(/~/g, '\\textasciitilde')
+    .replace(/\^/g, '\\textasciicircum');
+}
+
+function cleanData(data: FormValues): FormValues {
+  data.projects?.forEach((project) => {
+    project.highlights = project.highlights?.map(highlight =>
+      escapeLatexSpecialChars(highlight)
+    );
+  });
+
+  data.work?.forEach((work) => {
+    work.highlights = work.highlights?.map(highlight =>
+      escapeLatexSpecialChars(highlight)
+    );
+  });
+
+  return data;
+}
+
 /**
  * Generates resume source files from the request body,
  * and then saves it to a zip which is then sent to the client.
@@ -29,7 +59,8 @@ export default async function handler(
  * @return The generated zip.
  */
 function generateSourceCode(formData: FormValues) {
-  const { texDoc, opts } = getTemplateData(formData)
+  const cleanedData = cleanData(formData)
+  const { texDoc, opts } = getTemplateData(cleanedData)
   const prettyDoc = /*prettify(texDoc)*/ texDoc
   const zip = Archiver('zip')
   const readme = makeReadme(formData.selectedTemplate, opts.cmd)

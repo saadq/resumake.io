@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { TemplatesSection } from './sections/TemplatesSection'
@@ -33,26 +33,12 @@ const StyledForm = styled.form`
   overflow: auto;
 `
 
-const initialFormValues = {
-  headings: {},
-  sections: [
-    'templates',
-    'profile',
-    'education',
-    'work',
-    'skills',
-    'projects',
-    'awards'
-  ],
-  selectedTemplate: 1
-}
-
 export function Form() {
   const router = useRouter()
   const { section: currSection } = router.query
 
   const [resume, setResume] = useAtom(resumeAtom)
-  const formContext = useForm<FormValues>({ defaultValues: initialFormValues })
+  const formContext = useFormContext<FormValues>()
 
   // TODO: move this to a custom react hook
   useEffect(() => {
@@ -81,22 +67,20 @@ export function Form() {
   }, [formContext, resume, setResume])
 
   return (
-    <FormProvider {...formContext}>
-      <StyledForm
-        id="resume-form"
-        onSubmit={formContext.handleSubmit(handleFormSubmit)}
-        // onChange={handleFormSubmit}
-      >
-        {!currSection && <ProfileSection />}
-        {currSection === 'templates' && <TemplatesSection />}
-        {currSection === 'basics' && <ProfileSection />}
-        {currSection === 'education' && <EducationSection />}
-        {currSection === 'work' && <WorkSection />}
-        {currSection === 'skills' && <SkillsSection />}
-        {currSection === 'awards' && <AwardSection />}
-        {currSection === 'projects' && <ProjectsSection />}
-      </StyledForm>
-    </FormProvider>
+    <StyledForm
+      id="resume-form"
+      onSubmit={formContext.handleSubmit(handleFormSubmit)}
+      // onChange={handleFormSubmit}
+    >
+      {!currSection && <ProfileSection />}
+      {currSection === 'templates' && <TemplatesSection />}
+      {currSection === 'basics' && <ProfileSection />}
+      {currSection === 'education' && <EducationSection />}
+      {currSection === 'work' && <WorkSection />}
+      {currSection === 'skills' && <SkillsSection />}
+      {currSection === 'awards' && <AwardSection />}
+      {currSection === 'projects' && <ProjectsSection />}
+    </StyledForm>
   )
 }
 

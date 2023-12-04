@@ -1,0 +1,247 @@
+%% start of file `moderncvbodyiii.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvbodyiii}[2022-02-21 v2.3.1 modern curriculum vitae and letter body variant: 3]
+
+% rules type options: "fullrules", "shortrules", "mixedrules" (default) or "norules"
+\@initializeif{\if@fullrules}\@fullrulesfalse
+\DeclareOption{fullrules} {\@fullrulestrue\@shortrulesfalse\@mixedrulesfalse\@norulesfalse}
+\@initializeif{\if@shortrules}\@shortrulesfalse
+\DeclareOption{shortrules}{\@fullrulesfalse\@shortrulestrue\@mixedrulesfalse\@norulesfalse}
+\@initializeif{\if@mixedrules}\@mixedrulesfalse
+\DeclareOption{mixedrules}{\@fullrulesfalse\@shortrulesfalse\@mixedrulestrue\@norulesfalse}
+\@initializeif{\if@norules}\@norulesfalse
+\DeclareOption{norules}   {\@fullrulesfalse\@shortrulesfalse\@mixedrulesfalse\@norulestrue}
+
+% section alignment options: "left" (default), "center" or "right"
+\@initializeif{\if@left}\@leftfalse
+\DeclareOption{left}      {\@lefttrue\@centerfalse\@rightfalse}
+\@initializeif{\if@center}\@centerfalse
+\DeclareOption{center}    {\@leftfalse\@centertrue\@rightfalse}
+\@initializeif{\if@right}\@rightfalse
+\DeclareOption{right}     {\@leftfalse\@centerfalse\@righttrue}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{mixedrules,left}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+% provides the commands for the skillmatrix as well as the command 
+% \recompute@cvskillmatrix@lengths
+\RequirePackage[moderncvbodyiii]{moderncvskillmatrix}
+
+%-------------------------------------------------------------------------------
+%                overall body definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\sectionfont}{%
+  \if@norules%
+    \Large\bfseries\scshape%
+  \else%
+    \Large\bfseries\upshape\fi}
+\renewcommand*{\subsectionfont}{%
+  \if@norules%
+    \large\mdseries\itshape%
+  \else%
+    \large\upshape\fontseries{sb}\selectfont\fi}
+\renewcommand*{\hintfont}{\bfseries}
+
+% styles
+\renewcommand*{\sectionstyle}[1]{{%
+  \if@center\centering\else%
+  \if@right\raggedleft\fi\fi%
+  \sectionfont\textcolor{color1}{#1}%
+  \if@shortrules\else%
+    \par\fi}}
+\renewcommand*{\subsectionstyle}[1]{{%
+  \if@center\centering\else%
+  \if@right\raggedleft\fi\fi%
+  \subsectionfont\textcolor{color1}{#1}%
+  \if@shortrules\else\if@mixedrules\else%
+    \par\fi\fi}}
+\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+
+
+%-------------------------------------------------------------------------------
+%                resume body definition
+%-------------------------------------------------------------------------------
+% lengths
+%   used by \cvitem (and all children command)
+\@initializelength{\hintscolumnwidth}             \setlength{\hintscolumnwidth}{0.3\textwidth}
+\@initializelength{\separatorcolumnwidth}         \setlength{\separatorcolumnwidth}{0.025\textwidth}
+\@initializelength{\maincolumnwidth}
+%   used by \cvdoubleitem
+\@initializelength{\doubleitemcolumnwidth}
+%   used by \cvlistitem
+\@initializelength{\listitemsymbolwidth}          \settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\@initializelength{\listitemcolumnwidth}
+%   used by \cvlistdoubleitem
+\@initializelength{\listdoubleitemcolumnwidth}
+
+% commands
+\renewcommand*{\recomputecvbodylengths}{%
+  % body lengths
+  \setlength{\maincolumnwidth}{\textwidth-\leftskip-\rightskip}%
+  \setlength{\listitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{0.5\listdoubleitemcolumnwidth}%
+  \recompute@cvskillmatrix@lengths
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
+
+\RenewDocumentCommand{\section}{sm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#2}%
+  \if@left\else\if@fullrules\else\if@mixedrules\else%
+    \sectionrule\fi\fi\fi%
+  \strut\sectionstyle{#2}%
+  \if@fullrules%
+    \sectionrule%
+  \else\if@mixedrules%
+    \sectionrule%
+  \else\if@right\else%
+    \sectionrule\fi\fi\fi%
+  \par\nobreak\addvspace{1ex}\@afterheading}
+
+\RenewDocumentCommand{\subsection}{sm}{%
+  \par\addvspace{1ex}%
+  \phantomsection{}%
+  \addcontentsline{toc}{subsection}{#2}%
+  \if@left\else\if@fullrules\else%
+    \subsectionrule\fi\fi%
+  \strut\subsectionstyle{#2}%
+  \if@fullrules%
+    \subsectionrule%
+  \else\if@right\else%
+    \subsectionrule\fi\fi%
+  \par\nobreak\addvspace{0.5ex}\@afterheading}
+
+\newcommand*{\sectionrule}{}
+\newcommand*{\subsectionrule}{}
+\if@fullrules%
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}
+\if@shortrules%
+  \renewcommand*{\sectionrule}{\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\if@mixedrules%
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\if@norules%
+  \renewcommand*{\sectionrule}{}
+  \renewcommand*{\subsectionrule}{}\fi
+
+\renewcommand*{\cvitem}[3][.25em]{%
+  \ifstrempty{#2}{}{\hintstyle{#2}: }{#3}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvdoubleitem}[5][.25em]{%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifstrempty{#4}{}{\hintstyle{#4}: }#5\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistitem}[2][.25em]{%
+  \listitemsymbol\begin{minipage}[t]{\listitemcolumnwidth}#2\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistdoubleitem}[3][.25em]{%
+  \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \ifstrempty{#3}%
+    {}%
+    {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
+
+\renewcommand*{\cventry}[7][.25em]{
+  \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}%
+    % skip the company name and location line if both are empty, allowing one to show multiple roles within the same company without repeating it
+    \ifboolexpr{%
+      test {\ifstrempty{#4}}
+      and
+      test {\ifstrempty{#5}}}%
+      {}%
+      {{\bfseries #4} & {\bfseries #5}\\}%
+    {\itshape #3\ifstrempty{#6}{}{, #6}} & {\itshape #2}\\%
+  \end{tabular*}%
+  \ifx&#7&%
+  \else{\\%
+    \begin{minipage}{\maincolumnwidth}%
+      \small#7%
+    \end{minipage}}\fi%
+  \par\addvspace{#1}}
+
+\@initializebox{\cvitemwithcommentmainbox}
+\@initializelength{\cvitemwithcommentmainlength}
+\@initializelength{\cvitemwithcommentcommentlength}
+\renewcommand*{\cvitemwithcomment}[4][.25em]{%
+  \savebox{\cvitemwithcommentmainbox}{\ifstrempty{#2}{}{\hintstyle{#2}: }#3}%
+  \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
+  \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
+  \begin{minipage}[t]{\cvitemwithcommentmainlength}\usebox{\cvitemwithcommentmainbox}\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewenvironment{thebibliography}[1]%
+  {%
+    \bibliographyhead{\refname}%
+%    \small%
+    \begin{list}{\bibliographyitemlabel}%
+      {%
+        \setlength{\topsep}{0pt}%
+        \setlength{\labelwidth}{0pt}%
+        \ifthenelse{\equal{\bibliographyitemlabel}{}}%
+          {\setlength{\labelsep}{0pt}}%
+          {\setlength{\labelsep}{\separatorcolumnwidth}}%
+        \leftmargin\labelwidth%
+        \advance\leftmargin\labelsep%
+        \@openbib@code%
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty%
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy%
+        \clubpenalty4000%\@clubpenalty \clubpenalty%
+        \widowpenalty4000%
+        \sfcode`\.\@m%
+        \sfcode `\=1000\relax}%
+  {%
+    \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+    \end{list}}
+
+
+%-------------------------------------------------------------------------------
+%                letter style definition
+%-------------------------------------------------------------------------------
+% commands
+\renewcommand*{\recomputeletterbodylengths}{%
+  \recomputecvbodylengths%
+  \setlength{\parskip}{6\p@}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries\@firstname~\@lastname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfil%
+    {\color{color2}\itshape\enclname: \@enclosure}}%
+    \vfil}
+
+
+\endinput
+
+
+%% end of file `moderncvbodyiii.sty'.

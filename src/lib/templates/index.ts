@@ -22,8 +22,8 @@ import {
 import { FormValues, TemplateData } from '../../types'
 
 function resolveTemplatePath(templatePath: string) {
-  console.log(path.resolve(process.cwd(), 'src/lib/templates' + templatePath))
-  return path.resolve(process.cwd(), 'src/lib/templates' + templatePath)
+  console.log(path.resolve(process.cwd(), 'public/lib/templates' + templatePath))
+  return path.resolve(process.cwd(), 'public/lib/templates' + templatePath)
 }
 
 /**

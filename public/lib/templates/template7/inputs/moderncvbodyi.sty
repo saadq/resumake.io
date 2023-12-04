@@ -1,0 +1,178 @@
+%% start of file `moderncvbodyi.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvbodyi}[2022-02-21 v2.3.1 modern curriculum vitae and letter body variant: 1]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+% provides the commands for the skillmatrix as well as the command 
+% \recompute@cvskillmatrix@lengths
+\RequirePackage[moderncvbodyi]{moderncvskillmatrix}
+
+%-------------------------------------------------------------------------------
+%                overall body definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
+\renewcommand*{\subsectionfont}{\large\mdseries\upshape}
+\renewcommand*{\hintfont}{}
+
+% styles
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
+\renewcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+
+
+%-------------------------------------------------------------------------------
+%                resume body definition
+%-------------------------------------------------------------------------------
+% lengths
+%   used by \cvitem (and all children command)
+\@initializelength{\hintscolumnwidth}             \setlength{\hintscolumnwidth}{0.175\textwidth}
+\@initializelength{\separatorcolumnwidth}         \setlength{\separatorcolumnwidth}{0.025\textwidth}
+\@initializelength{\maincolumnwidth}
+%   used by \cvdoubleitem
+\@initializelength{\doubleitemcolumnwidth}
+%   used by \cvlistitem
+\@initializelength{\listitemsymbolwidth}          \settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\@initializelength{\listitemcolumnwidth}
+%   used by \cvlistdoubleitem
+\@initializelength{\listdoubleitemcolumnwidth}
+%   default moderncv \photo (change the definition such that by default the photo and its box align with the section bars
+\RenewDocumentCommand{\photo}{O{\hintscolumnwidth-0.8pt-2\fboxsep}O{0.4pt}m}{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}%
+
+% commands
+\renewcommand*{\recomputecvbodylengths}{%
+  % body lengths
+  \setlength{\maincolumnwidth}{\textwidth-\leftskip-\rightskip-\separatorcolumnwidth-\hintscolumnwidth}%
+  \setlength{\listitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\hintscolumnwidth-\separatorcolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{0.5\listdoubleitemcolumnwidth}%
+  \recompute@cvskillmatrix@lengths
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
+
+
+\@initializelength{\baseletterheight}
+\settoheight{\baseletterheight}{\sectionstyle{o}}
+\setlength{\baseletterheight}{\baseletterheight-0.95ex}
+\RenewDocumentCommand{\section}{sm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#2}%
+  \cvitem[0ex]{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}{\strut\sectionstyle{#2}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
+\RenewDocumentCommand{\subsection}{sm}{%
+  \par\addvspace{1ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{subsection}{#2}%
+  \cvitem[0ex]{}{\strut\subsectionstyle{#2}}%
+  \par\nobreak\addvspace{.5ex}\@afterheading}% to avoid a pagebreak after the heading
+
+\renewcommand*{\cvitem}[3][.25em]{%
+  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+    \raggedleft\hintstyle{#2} &{#3}%
+  \end{tabular}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvdoubleitem}[5][.25em]{%
+  \cvitem[#1]{#2}{%
+    \begin{minipage}[t]{\doubleitemcolumnwidth}#3\end{minipage}%
+    \hfill% fill of \separatorcolumnwidth
+    \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintstyle{#4}\end{minipage}%
+    \hspace*{\separatorcolumnwidth}%
+    \begin{minipage}[t]{\doubleitemcolumnwidth}#5\end{minipage}}}
+
+\renewcommand*{\cvlistitem}[2][.25em]{%
+  \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listitemcolumnwidth}#2\end{minipage}}}
+
+\renewcommand*{\cvlistdoubleitem}[3][.25em]{%
+  \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \ifthenelse{\equal{#3}{}}%
+    {}%
+    {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
+
+\renewcommand*{\cventry}[7][.25em]{%
+  \cvitem[#1]{#2}{%
+    {\bfseries#3}%
+    \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
+    \ifthenelse{\equal{#5}{}}{}{, #5}%
+    \ifthenelse{\equal{#6}{}}{}{, #6}%
+    \strut%
+    \ifx&#7&%
+    \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+
+\@initializebox{\cvitemwithcommentbox}
+\@initializelength{\cvitemwithcommentskilllength}
+\@initializelength{\cvitemwithcommentcommentlength}
+\renewcommand*{\cvitemwithcomment}[4][.25em]{%
+  \savebox{\cvitemwithcommentbox}{{#3}}%
+  \setlength{\cvitemwithcommentskilllength}{\widthof{\usebox{\cvitemwithcommentbox}}}%
+  \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentskilllength}%
+  \cvitem[#1]{#2}{%
+    \begin{minipage}[t]{\cvitemwithcommentskilllength}\usebox{\cvitemwithcommentbox}\end{minipage}%
+    \hfill% fill of \separatorcolumnwidth
+    \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}}}
+
+\renewenvironment{thebibliography}[1]%
+  {%
+    \bibliographyhead{\refname}%
+%    \small%
+    \begin{list}{\bibliographyitemlabel}%
+      {%
+        \setlength{\topsep}{0pt}%
+        \setlength{\labelwidth}{\hintscolumnwidth}%
+        \setlength{\labelsep}{\separatorcolumnwidth}%
+        \leftmargin\labelwidth%
+        \advance\leftmargin\labelsep%
+        \@openbib@code%
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty%
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy%
+        \clubpenalty4000%\@clubpenalty \clubpenalty%
+        \widowpenalty4000%
+        \sfcode`\.\@m%
+        \sfcode `\=1000\relax}%
+  {%
+    \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+    \end{list}}
+
+
+%-------------------------------------------------------------------------------
+%                letter style definition
+%-------------------------------------------------------------------------------
+% commands
+\renewcommand*{\recomputeletterbodylengths}{%
+  \recomputecvlengths%
+  \setlength{\parskip}{6\p@}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries\@firstname~\@lastname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfil%
+    {\color{color2}\itshape\enclname: \@enclosure}}%
+    \vfil}
+
+
+\endinput
+
+
+%% end of file `moderncvbodyi.sty'.

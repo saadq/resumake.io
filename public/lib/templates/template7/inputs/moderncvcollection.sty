@@ -1,0 +1,92 @@
+%% start of file `moderncvcollection.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvcollection}[2022-02-21 v2.3.1 moderncv collections]
+
+
+%-------------------------------------------------------------------------------
+%                requirements
+%-------------------------------------------------------------------------------
+
+
+\RequirePackage{ifthen}
+
+
+%-------------------------------------------------------------------------------
+%                code
+%-------------------------------------------------------------------------------
+
+% creates a new collection
+% usage: \collectionnew{<collection name>}
+\NewDocumentCommand\collectionnew{m}{%
+  \newcounter{collection@#1@count}%
+}%
+
+% adds an item to a collection
+% usage: \collectionadd[<optional key>]{<collection name>}{<item to add>}
+\NewDocumentCommand\collectionadd{ O{} m m }{%
+  \expandafter\def\csname collection@#2@item\roman{collection@#2@count}\endcsname{#3}%
+  \def\optional@FirstArg{#1}%
+  \ifdefempty{\optional@FirstArg}{%
+      \relax% if #1 is empty
+    }{%
+      \expandafter\def\csname collection@#2@key\roman{collection@#2@count}\endcsname{#1}%
+    }%
+  \stepcounter{collection@#2@count}%
+}%
+% returns the number of items in a collection
+% usage: \collectioncount{<collection name>}
+\NewDocumentCommand\collectioncount{m}{%
+  \value{collection@#1@count}%
+}%
+% gets an item from a collection
+% usage: \collectiongetitem{<collection name>}{<element id>}
+% where <element id> is an integer between 0 and (collectioncount-1)
+\NewDocumentCommand\collectiongetitem{m m}{%
+  \csname collection@#1@item\romannumeral #2\endcsname%
+}%
+
+% gets a key from a collection
+% usage: \collectiongetkey{<collection name>}{<element id>}
+% where <element id> is an integer between 0 and (collectioncount-1)
+\NewDocumentCommand\collectiongetkey{m m}{%
+  \csname collection@#1@key\romannumeral #2\endcsname%
+}%
+% loops through a collection and perform the given operation on every element
+% usage: \collectionloop{<collection name>}{<operation sequence>}
+% where <operation sequence> is the code sequence to be evaluated for each collection item,
+%   code which can refer to \collectionloopid, \collectionloopkey, \collectionloopitem and
+%   \collectionloopbreak
+\newcounter{collection@iterator}
+\NewDocumentCommand\collectionloopbreak{}{\let\iterate\relax}
+\NewDocumentCommand\collectionloop{m m}{%
+  \setcounter{collection@iterator}{0}%
+  \loop\ifnum\value{collection@iterator}<\value{collection@#1@count}%
+    \def\collectionloopid{\arabic{collection@iterator}}%
+    \def\collectionloopitem{\collectiongetitem{#1}{\collectionloopid}}%
+    \def\collectionloopkey{\collectiongetkey{#1}{\collectionloopid}}%
+    #2%
+    \stepcounter{collection@iterator}%
+    \repeat%
+}
+
+% loops through a collection and finds the (first) element matching the given key
+% usage: \collectionfindbykey{<collection name>}{key>}
+\NewDocumentCommand\collectionfindbykey{m m}{%
+  \collectionloop{#1}{%
+    \ifthenelse{\equal{\collectionloopkey}{#2}}{\collectionloopitem\collectionloopbreak}{}}%
+}%
+
+\endinput
+
+
+%% end of file `moderncvcollection.cls'.

@@ -1,0 +1,31 @@
+%% start of file `moderncviconsmarvosym.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncviconsmarvosym}[2022-02-21 v2.3.1 modern curriculum vitae icons: marvosym]
+
+%-------------------------------------------------------------------------------
+%                all symbols described in moderncv.cls
+%-------------------------------------------------------------------------------
+\newcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
+
+\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\marvosymbol{123}}}            % equivalent to \Neutral from marvosym package; alternative: \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+
+\renewcommand*{\mobilephonesymbol}   {\marvosymbol{72}~}
+\renewcommand*{\fixedphonesymbol}    {\marvosymbol{84}~}
+\renewcommand*{\faxphonesymbol}      {\marvosymbol{117}~}
+\renewcommand*{\emailsymbol}         {\marvosymbol{66}~}
+\renewcommand*{\homepagesymbol}      {{\Large\marvosymbol{205}}~}
+
+\endinput
+
+
+%% end of file `moderncviconsmarvosym.sty'.

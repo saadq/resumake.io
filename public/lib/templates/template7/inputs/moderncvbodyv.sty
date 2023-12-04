@@ -1,0 +1,221 @@
+%% start of file `moderncvbodyv.sty'.
+%% Copyright 2015-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvbodyv}[2022-02-21 v2.3.1 modern curriculum vitae and letter body variant: 5]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+% provides the commands for the skillmatrix as well as the command 
+% \recompute@cvskillmatrix@lengths
+\RequirePackage[moderncvbodyv]{moderncvskillmatrix}
+
+%-------------------------------------------------------------------------------
+%                overall style definition
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                resume style definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
+\renewcommand*{\subsectionfont}{\large\mdseries\slshape}
+\renewcommand*{\hintfont}{\bfseries}
+
+% styles
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
+\renewcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+
+% lengths
+%   used by \cvitem (and all children command)
+\@initializelength{\hintscolumnwidth}             \setlength{\hintscolumnwidth}{0.25\textwidth}
+\@initializelength{\separatorcolumnwidth}         \setlength{\separatorcolumnwidth}{0.025\textwidth}
+\@initializelength{\separatorrulewidth}           \setlength{\separatorrulewidth}{1.2\p@}%
+\@initializelength{\maincolumnwidth}
+%   used by \cvdoubleitem
+\@initializelength{\doubleitemcolumnwidth}
+%   used by \cvlistitem
+\@initializelength{\listitemsymbolwidth}           \settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\@initializelength{\listitemcolumnwidth}
+%\@initializelength{\listitemmaincolumnwidth}
+%   used by \cvlistdoubleitem
+\@initializelength{\listdoubleitemcolumnwidth}
+%\@initializelength{\listdoubleitemmaincolumnwidth}
+
+% commands
+\@initializecommand{\recomputecvbodylengths}{%
+  % body lengths
+  \setlength{\maincolumnwidth}{\textwidth-\leftskip-\rightskip-\separatorcolumnwidth-\separatorcolumnwidth-\hintscolumnwidth-\separatorrulewidth}%
+  \setlength{\listitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{0.5\listdoubleitemcolumnwidth}%
+  \recompute@cvskillmatrix@lengths
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
+
+\@initializeif{\if@aftersection}\@aftersectionfalse%
+\RenewDocumentCommand{\section}{sm}{%
+  \addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#2}%
+  \noindent\rlap{\@cvitem{\raggedleft\sectionstyle{#2}}{}}%
+  \nobreak\@afterheading\@aftersectiontrue\ignorespaces}
+
+%\@initializeif{\if@aftersubsection}\@aftersubsectionfalse%
+\RenewDocumentCommand{\subsection}{sm}{%
+  %\addvspace{1ex}%
+  \vspace*{-\arrayrulewidth}% HACK; I don't understand where the space is coming from, nor what it's exact value is :(
+  \if@aftersection%
+    \par\ignorespaces\fi%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{subsection}{#2}%
+  \noindent\rlap{\@cvitem{\if@aftersection\else\@moderncvstrut{4pt}{24pt}\fi\raggedleft\subsectionstyle{#2}}{}}%
+  \nobreak\@afterheading\@aftersectiontrue\ignorespaces}
+
+\renewcommand*{\cvitem}[3][.5ex]{%
+  \@cvitem[#1]{}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}}%
+  }
+% \RenewDocumentCommand{\cvitem}{+O{.5ex} +m +m}{%
+%     \IfNoValueTF{#2}{%
+%         \@cvitem[#1]{}{#3}%
+%     }{%
+%         \@cvitem[#1]{}{\hintstyle{#2}: {#3}}%
+%     }%
+% }
+
+% underlying command to implement \cvitem, \subsection and \section
+\newcommand*{\@cvitem}[3][.5ex]{%
+  \arrayrulecolor{color1}%
+  \setlength\arrayrulewidth{\separatorrulewidth}%
+  \if@aftersection\else%
+    \vspace*{-\separatorrulewidth}\fi% HACK; I don't understand where the space is coming from, nor what it's exact value is :(
+  \noindent%
+%  \setlength{\fboxsep}{0pt}\framebox{% start of debuging
+  \begin{tabular}[t]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}|@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+    \@moderncvstrut{4pt}{16pt}#2 &#3\\[#1]% the spacing needs to be inside the cell for the vertical rule to extend correctly
+  \end{tabular}%
+%  }% end of debuging
+  \par\@aftersectionfalse\ignorespaces}
+
+\renewcommand*{\cvdoubleitem}[5][.5ex]{%
+  \@cvitem[#1]{}{%
+    \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
+    \hfill% fill of \separatorcolumnwidth
+    \begin{minipage}[t]{\doubleitemcolumnwidth}\ifthenelse{\equal{#4}{}}{}{\hintstyle{#4}: }#5\end{minipage}}}
+
+\renewcommand*{\cvlistitem}[2][.5ex]{%
+  \@cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listitemcolumnwidth}#2\end{minipage}}}
+
+\renewcommand*{\cvlistdoubleitem}[3][.5ex]{%
+  \@cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \ifthenelse{\equal{#3}{}}%
+    {}%
+    {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
+
+\@initializebox{\cventryyearbox}
+\@initializelength{\cventrytitleboxwidth}
+\renewcommand*{\cventry}[7][.5ex]{%
+  \savebox{\cventryyearbox}{%
+    \hspace*{2\separatorcolumnwidth}%
+    \hintstyle{#2}}%
+  \setlength{\cventrytitleboxwidth}{\widthof{\usebox{\cventryyearbox}}}%
+  \setlength{\cventrytitleboxwidth}{\maincolumnwidth-\cventrytitleboxwidth}%
+  \cvitem[#1]{}{%
+    \parbox[t]{\cventrytitleboxwidth}{%
+      \strut%
+      {\bfseries#3}%
+      \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
+      \ifthenelse{\equal{#5}{}}{}{, #5}%
+      \ifthenelse{\equal{#6}{}}{}{, #6}%
+      .\strut}%
+    \usebox{\cventryyearbox}}%
+  \ifx&#7&%
+  \else%
+    \vspace*{-4pt}%
+    \cvitem[#1]{}{\small#7}\fi}
+
+\@initializebox{\cvitemwithcommentmainbox}
+\@initializelength{\cvitemwithcommentmainlength}
+\@initializelength{\cvitemwithcommentcommentlength}
+\renewcommand*{\cvitemwithcomment}[4][.5ex]{%
+  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3}%
+  \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
+  \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
+  \@cvitem[#1]{}{%
+    \begin{minipage}[t]{\cvitemwithcommentmainlength}\usebox{\cvitemwithcommentmainbox}\end{minipage}%
+    \hfill% fill of \separatorcolumnwidth
+    \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}}}
+
+\renewenvironment{thebibliography}[1]% BUG/TODO: remove extra space between heading and first bibliography entry, as well as after last one
+  {%
+    \bibliographyhead{\refname}%
+%    \small%
+    \arrayrulecolor{color1}%
+    \setlength\arrayrulewidth{\separatorrulewidth}%
+    \noindent%
+    \begin{tabular}[t]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}|@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+      \@moderncvstrut{4pt}{16pt} &%
+        \begin{list}{\bibliographyitemlabel}{%
+          \setlength{\topsep}{0pt}%
+          \setlength{\partopsep}{0pt}%
+          \setlength{\labelwidth}{0pt}%
+          \setlength{\itemsep}{0pt}%
+          \setlength{\parskip}{0pt}%
+          \ifthenelse{\equal{\bibliographyitemlabel}{}}%
+            {\setlength{\labelsep}{0pt}}%
+            {\setlength{\labelsep}{\separatorcolumnwidth}}%
+          \leftmargin\labelwidth%
+          \advance\leftmargin\labelsep%
+          \@openbib@code%
+          \usecounter{enumiv}%
+          \let\p@enumiv\@empty%
+          \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy%
+        \clubpenalty4000%\@clubpenalty \clubpenalty%
+        \widowpenalty4000%
+        \sfcode`\.\@m%
+        \sfcode `\=1000\relax}%
+  {%
+        \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+        \end{list}%
+        \\[.5ex]%
+    \end{tabular}%
+    \par\@aftersectionfalse\ignorespaces}
+
+
+%-------------------------------------------------------------------------------
+%                letter style definition
+%-------------------------------------------------------------------------------
+% commands
+\renewcommand*{\recomputeletterbodylengths}{%
+  \recomputecvbodylengths%
+  \setlength{\parskip}{6\p@}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries \@firstname~\@lastname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfill%
+    {\color{color2}\itshape\enclname: \@enclosure}}}
+
+
+\endinput
+
+
+%% end of file `moderncvbodyv.sty'.

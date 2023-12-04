@@ -1,0 +1,172 @@
+%% start of file `moderncvheadiv.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvheadiv}[2022-02-21 v2.3.1 modern curriculum vitae and letter header variant: 4]
+
+% details options: "details" (default) or "nodetails"
+\@initializeif{\if@details}\@detailsfalse
+\DeclareOption{details}{\@detailstrue}
+\DeclareOption{nodetails}{\@detailsfalse}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{details}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+% change the layout of the page on the fly, for resume or letter layout
+\RequirePackage{changepage}
+
+
+%-------------------------------------------------------------------------------
+%                overall head definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
+\renewcommand*{\addressfont}{\small\mdseries}
+\renewcommand*{\quotefont}{\large\itshape}
+
+% styles
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color0}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
+\renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+
+
+%-------------------------------------------------------------------------------
+%                resume head definition
+%-------------------------------------------------------------------------------
+% lengths
+\@initializelength{\quotewidth}
+\@initializelength{\makecvheadnamewidth}% optional makecvheadname width to force a certain width (if set/remains to 0pt, the width is calculated automatically)
+\setlength{\marginparwidth}{0\p@}
+\setlength{\marginparsep}{0\p@}
+\renewcommand*{\recomputecvheadlengths}{%
+  \changepage{}{+\marginparwidth+\marginparsep}{}{}{}{}{}{}{}% if a letter was typeset before the resume, \marginparwidth and \marginparsep will be non-zero; otherwise, this has no effect
+  \setlength{\marginparwidth}{0\p@}%
+  \setlength{\marginparsep}{0\p@}%
+  \setlength{\quotewidth}{0.85\textwidth}}
+
+% commands
+\newcommand*{\makecvheadinfo}[1]{% TODO: use \@initializecommand, which requires modifying its definition to handle mandatory and optional arguments
+  \newbox{\makecvheadinfobox}%
+  \savebox{\makecvheadinfobox}{\parbox[t]{\hintscolumnwidth}{#1}}%
+  \newlength{\makecvheadinfoheight}%
+  \setlength{\makecvheadinfoheight}{\totalheightof{\usebox{\makecvheadinfobox}}}% the total height of the parbox is the sum of its height (\the\ht\makeinfobox) and its depth (\the\dp\makeinfobox); the \totalheightof command is provided by the "calc" package
+  \usebox{\makecvheadinfobox}\vspace{-\makecvheadinfoheight}%
+%  \newlength{\leftcolumnwidth}%
+%  \setlength{\leftcolumnwidth}{\hintscolumnwidth+\separatorcolumnwidth}%
+%  \par\vspace{-\baselineskip}\vspace{-\parskip}\leftskip=\leftcolumnwidth%
+  \par\vspace{-\baselineskip}\vspace{-\parskip}%
+  \leftskip=\dimexpr\hintscolumnwidth+\separatorcolumnwidth\relax% \dimexpr require e-TeX engine extensions
+  \recomputecvlengths} % need to recompute the layout lenghts as we just changed \leftskip
+\renewcommand*{\makecvhead}{
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
+  % optional picture box
+  \newbox{\makecvheadpicturebox}%
+  \savebox{\makecvheadpicturebox}{%
+    \ifthenelse{\isundefined{\@photo}}%
+    {}%
+    {%
+      \color{color1}%
+      \setlength\fboxrule{\@photoframewidth}%
+      \ifdim\@photoframewidth=0pt%
+        \setlength{\fboxsep}{0pt}\fi%
+      \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
+  % name and optional title
+  \newlength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
+  \ifthenelse{\lengthtest{\makecvheadnamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvheadnamewidth=0pt)
+    {\setlength{\makecvheadnamewidth}{\textwidth-\makecvheadpicturewidth}}%
+    {}%
+  \begin{minipage}[b]{\makecvheadnamewidth}%
+    \namestyle{\@firstname\ \@lastname}%
+    \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
+  \end{minipage}%
+  % optional photo
+  \usebox{\makecvheadpicturebox}\\[2.5em]%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  % optional details
+  \if@details%
+    \makecvheadinfo{%
+      \addressfont\color{color2}%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+      \ifthenelse{\isundefined{\@born}}{}{\makenewline\hbox to 1.0em{\bornsymbol}~\@born}%
+      \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+        \makenewline\hbox to 1.0em{\csname\collectionloopkey phonesymbol\endcsname}~\collectionloopitem}%
+      \ifthenelse{\isundefined{\@email}}{}{\makenewline\hbox to 1.0em{\emailsymbol}~\emaillink{\@email}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httpslink{\@homepage}}%
+      \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+        \makenewline\hbox to 1.0em{\csname\collectionloopkey socialsymbol\endcsname}~\collectionloopitem}%
+      \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}\fi}
+
+
+%-------------------------------------------------------------------------------
+%                letter head definition
+%-------------------------------------------------------------------------------
+% lengths
+%\newlength{\textwidthdelta}%
+\renewcommand*{\recomputeletterheadlengths}{%
+  \recomputecvlengths%
+%  \setlength{\textwidthdelta}{+\marginparwidth+\marginparsep}%
+%  \addtolength{\textwidthdelta}{-\marginparwidth-\marginparsep}%
+%  \changepage{}{\textwidthdelta}{-\textwidthdelta}{}{}{}{}{}{}%\changepage{<textheight>}{<textwidth>}{<evensidemargin>}{<oddsidemargin>}{<columnsep>}{<topmargin>}{<headheight>}{<headsep>}{<footskip>}
+  \setlength{\marginparwidth}{\hintscolumnwidth}%
+  \setlength{\marginparsep}{2\separatorcolumnwidth}%
+  \changepage{}{-\marginparwidth-\marginparsep}{}{}{}{}{}{}{}%\changepage{<textheight>}{<textwidth>}{<evensidemargin>}{<oddsidemargin>}{<columnsep>}{<topmargin>}{<headheight>}{<headsep>}{<footskip>}
+  }
+
+% commands
+\renewcommand*{\makeletterhead}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \leftskip=0pt% needs to be set before \recomputeletterlengths
+  \recomputeletterlengths%
+  % recipient block
+  {\addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress}\\[1em]%
+  % date
+  \@date\\[2em]%
+  % opening
+  \@opening\\[1.5em]%
+  % sender contact info
+  \if@details%
+    \hspace{0pt}%
+    \marginpar{%
+      \addressfont\textcolor{color2}{%
+        {\bfseries\@firstname~\@lastname}\@firstdetailselementfalse%
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+        \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+          \makenewline\hbox to 1.0em{\csname\collectionloopkey phonesymbol\endcsname}~\collectionloopitem}%
+        \ifthenelse{\isundefined{\@email}}{}{\makenewline\hbox to 1.0em{\emailsymbol}~\emaillink{\@email}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httpslink{\@homepage}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \makenewline\hbox to 1.0em{\csname\collectionloopkey socialsymbol\endcsname}~\collectionloopitem}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}%
+    % ensure no extra spacing after \makelettertitle due to a possible blank line
+    %\ignorespacesafterend% not working
+    \par\vspace{-\baselineskip}\vspace{-\parskip}\fi}
+
+
+\endinput
+
+
+%% end of file `moderncvheadiv.sty'.

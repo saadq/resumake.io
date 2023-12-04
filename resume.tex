@@ -1,0 +1,164 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+    \usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
+
+    %\renewcommand{\encodingdefault}{cg}
+%\renewcommand{\rmdefault}{lgrcmr}
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} \textsc{#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+    \begin{document}
+    \vspace*{-40pt}
+
+    
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+  {\Huge \scshape {Bill Zhang}}\\
+  San Jose, CA $\cdot$ jzhang71@usc.edu $\cdot$ 408-585-8267 $\cdot$ https://bzhang.info/\\
+\end{center}
+
+%==== Education ====%
+      \header{Education}
+      \textbf{University of Southern California}\hfill Los Angeles, CA\\
+Master of Science in Computer Science -  Artificial Intelligence \hfill August 2023 - Present\\
+\vspace{2mm}
+      \textbf{University of California, Santa Cruz}\hfill Santa Cruz, CA\\
+Bachelor of Science in Computer Science \hfill September 2020 - March 2023\\
+\vspace{2mm}
+
+%==== Experience ====%
+      \header{Work Experience}
+      \vspace{1mm}
+
+      \textbf{RingCentral} \hfill Belmont, CA\\
+          \textit{AI Specialist} \hfill June 2023 - Present\\
+          \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item Build and maintain an Autonomous Code-Driven Visualization Engine Proof-of-Concept, leveraging Autonomous Agents, Langchain, and OpenAI APIs with prompt engineering and few-shot learning.
+  \item Increase first-try success in addressing customer questions by over 1000\% by developing a support-focused deflection chatbot.
+  \item Design and implement a new contact card feature for RingCentral, receiving positive feedback from RingCentral employees.
+  \item Work with the Product Team to architect a personal assistant, now in trial-stage with strong approval from C-level executives.
+\end{itemize}
+      \textbf{SproutLabs, LLC} \hfill Santa Cruz, California, United States\\
+          \textit{Software Engineer Intern} \hfill January 2023 - June 2023\\
+          \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item Collaborated in cross-functional team of 3 in architecting an intuitive, user-centric wireframe, enhancing user experience.
+  \item Engineered an administrative dashboard with real-time back-end integration, featuring multi-faceted tables and Google Maps for streamlined device oversight.
+  \item Implemented comprehensive unit and end-to-end testing across five screen sizes and multiple browsers, utilizing Playwright and Vitest to ensure optimal functionality.
+\end{itemize}
+
+\header{Skills}
+\begin{tabular}{ l l }
+Programming Languages: & C/C++, Java, Python, Dart, Javascript, Typescript \\
+ML Libraries: & Tensorflow, Keras, NumPy, Pandas, Scikit Learn, OpenCV \\
+Visualization/Other Libraries: & MatplotLib, FastAPI, Flask, NextJS, OpenAI, Azure, GCP, PostgreSQL \\
+\end{tabular}
+\vspace{2mm}
+
+\header{Projects}
+    {\textbf{Slug Loop}} {\sl React, Material UI, ExpressJS, C, Azure} \hfill https://www.slugloop.tech\\
+        \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item Real-time UCSC loop bus tracker development
+  \item Utilized Radio Transmitters, Raspberry PIs, and C programming
+  \item Increased route efficiency, serving 50 daily users
+  \item GDSC Global Top 10 Finalist among 2000 teams
+\end{itemize}
+        \vspace*{2mm}
+    {\textbf{WebWeaver}} {\sl NextJs, FastAPI, GPT Vision, Material UI, Redis} \hfill https://webweaver.biz\\
+        \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item AI-powered website generation tool
+  \item Real-time, AI-assisted design and editing features
+\end{itemize}
+        \vspace*{2mm}
+    {\textbf{Paddy Plant Prognosis}} {\sl Tensorflow, Vite, Flask, TailwindCSS} \hfill https://www.paddyplantprognosis.tech/ https://github.com/IdkwhatImD0ing/PaddyPlantPrognosis/blob/main/modelv2.ipynb\\
+        \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item App development for identifying paddy crop diseases
+  \item Utilized computer vision, 97\% accuracy with Mobile Net Transfer Learning
+\end{itemize}
+        \vspace*{2mm}
+    {\textbf{Sink or Swim}} {\sl NextJS, Flask, Tensorflow, TailwindCSS, OpenAI, Framer Motion} \hfill https://sos.art3m1s.me/ https://github.com/simon-quach/sink-or-swim/blob/main/titanic.ipynb\\
+        \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item Web app predicting Titanic survival chances
+  \item Generated narratives, custom RNN with 84\% accuracy
+\end{itemize}
+        \vspace*{2mm}
+    {\textbf{ASL Recognition}} {\sl Tensorflow, Pandas, Sklearn, NumPy, Keras} \hfill https://github.com/IdkwhatImD0ing/Kaggle/blob/main/SignLanguage/MobileOther.py\\
+        \vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+  \item Machine learning-based Snapchat filter for ASL recognition
+  \item 91.6\% test accuracy using MobileNetV2 for transfer learning
+\end{itemize}
+        \vspace*{2mm}
+
+\header{Relevant Coursework}
+      \textbf{Artificial Intelligence, Applied Machine Learning, Computer Vision}\\
+
+\vspace*{2mm}
+
+    \ 
+    \end{document}

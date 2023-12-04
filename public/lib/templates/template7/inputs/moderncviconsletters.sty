@@ -1,0 +1,55 @@
+%% start of file `moderncviconsletters.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2022 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncviconsletters}[2022-02-21 v2.3.1 modern curriculum vitae icons: letter]
+
+%-------------------------------------------------------------------------------
+%                symbols definition
+%-------------------------------------------------------------------------------
+\newcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
+
+\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\marvosymbol{123}}}            % equivalent to \Neutral from marvosym package; alternative: \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+%\renewcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}            % no change from default in moderncv.cls
+%\renewcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% no change from default in moderncv.cls
+%\renewcommand*{\labelitemiv}         {\labelitemiii}                                         % no change from default in moderncv.cls
+
+\renewcommand*{\addresssymbol}            {}
+\renewcommand*{\mobilephonesymbol}        {\textbf{M}~}
+\renewcommand*{\fixedphonesymbol}         {\textbf{T}~}
+\renewcommand*{\faxphonesymbol}           {\textbf{F}~}
+\renewcommand*{\emailsymbol}              {\textbf{E}~}
+\renewcommand*{\homepagesymbol}           {\textbf{W}~}
+\renewcommand*{\linkedinsocialsymbol}     {\textbf{in}~}
+\renewcommand*{\xingsocialsymbol}         {\textbf{xi}~}
+\renewcommand*{\twittersocialsymbol}      {\textbf{tw}~}
+\renewcommand*{\githubsocialsymbol}       {\textbf{gh}~}
+\renewcommand*{\gitlabsocialsymbol}       {\textbf{gl}~}
+\renewcommand*{\stackoverflowsocialsymbol}{\textbf{so}~}
+\renewcommand*{\bitbucketsocialsymbol}    {\textbf{bb}~}
+\renewcommand*{\skypesocialsymbol}        {\textbf{sk}~}
+\renewcommand*{\orcidsocialsymbol}        {\textbf{orcid}~}
+\renewcommand*{\researchgatesocialsymbol} {\textbf{rg}~}
+\renewcommand*{\researcheridsocialsymbol} {\textbf{ri}~}
+\renewcommand*{\telegramsocialsymbol}     {\textbf{tg}~}
+\renewcommand*{\whatsappsocialsymbol}     {\textbf{wa}~}
+\renewcommand*{\signalsocialsymbol}       {\textbf{si}~}
+\renewcommand*{\matrixsocialsymbol}       {\textbf{ma}~}
+\renewcommand*{\googlescholarsocialsymbol}{\textbf{gs}~}
+\renewcommand*{\bornsymbol}               {\textbf{B}~}
+
+\renewcommand*{\listitemsymbol}      {\labelitemi~}
+
+
+\endinput
+
+
+%% end of file `moderncviconsletters.sty'.

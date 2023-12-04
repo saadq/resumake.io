@@ -2,7 +2,9 @@ import { useAtom } from 'jotai'
 import { useState, useCallback } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
+import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
+import Toolbar from '../../core/Toolbar'
 import { resumeAtom } from '../../../atoms/resume'
 
 const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
@@ -37,6 +39,7 @@ const ResumePage = styled(Page)`
 
 export function Preview() {
   const [resume] = useAtom(resumeAtom)
+  const { getValues } = useFormContext()
   const [, setPageCount] = useState(1)
   const [pageNumber] = useState(1)
   const [scale] = useState(document.body.clientWidth > 1440 ? 1.75 : 1)
@@ -44,6 +47,40 @@ export function Preview() {
   const handleDocumentLoadSuccess = useCallback((pdf: PDFDocumentProxy) => {
     setPageCount(pdf.numPages)
   }, [])
+
+  async function downloadSource(): Promise<void> {
+    try {
+      const response = await fetch('/api/generate-source', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(getValues()) // Assuming getValues() fetches your form data
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+
+      const blob = await response.blob() // Get the response as a blob
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'source.zip' // Name the download as 'source.zip'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url) // Clean up the URL object
+    } catch (error) {
+      console.error('Error downloading the source:', error)
+    }
+  }
+
+  function getJsonUrl(): string {
+    const json = JSON.stringify(getValues())
+    const blob = new Blob([json], { type: 'application/json' })
+    return URL.createObjectURL(blob)
+  }
 
   return (
     <Output>
@@ -58,20 +95,28 @@ export function Preview() {
             loading=""
           />
         </ResumeDocument> */}
+
         {resume.url && (
-          <ResumeDocument
-            file={resume.url}
-            onLoadSuccess={handleDocumentLoadSuccess}
-            loading=""
-          >
-            <ResumePage
-              pageNumber={pageNumber}
-              scale={scale}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
-              loading=""
+          <>
+            <Toolbar
+              resumeURL={resume.url}
+              jsonURL={getJsonUrl()}
+              downloadSource={downloadSource}
             />
-          </ResumeDocument>
+            <ResumeDocument
+              file={resume.url}
+              onLoadSuccess={handleDocumentLoadSuccess}
+              loading=""
+            >
+              <ResumePage
+                pageNumber={pageNumber}
+                scale={scale}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                loading=""
+              />
+            </ResumeDocument>
+          </>
         )}
       </PdfContainer>
     </Output>

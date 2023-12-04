@@ -7,6 +7,14 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Resumake</title>
+        <meta
+            name="description"
+            content="Free Online Resume Builder"
+          />
+        <meta 
+            name="keywords"
+            content="resume, builder, free, online, generator, maker"
+          />
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />

@@ -104,10 +104,9 @@ export function Home() {
         />
       </Main>
       <Footer>
-        <Copyright>© 2022 Saad Quadri</Copyright>
+        <Copyright>© 2023 Bill Zhang</Copyright>
         <Link href="/about">About</Link>
-        <a href="https://github.com/saadq/resumake">Source</a>
-        <a href="https://github.com/saadq/resumake/issues">Issues</a>
+        <a href="https://github.com/IdkwhatImD0ing/resumake.io">Source</a>
       </Footer>
     </Wrapper>
   )

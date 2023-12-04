@@ -24,13 +24,22 @@ export default async function handler(
   }
 
   if (req.method !== 'POST') {
-    res.status(405)
+    res.status(405).end();
     return
   }
 
-  const pdf = await generatePDF(req.body as FormValues)
-  pdf.pipe(res)
-  res.setHeader('Content-Type', 'application/pdf')
+  try {
+    const pdf = await generatePDF(req.body as FormValues);
+
+    pdf.pipe(res)
+      .on('error', (err) => {
+        res.status(500).end();
+      });
+
+    res.setHeader('Content-Type', 'application/pdf');
+  } catch (err) {
+    res.status(500).end();
+  }
 }
 
 function escapeLatexSpecialCharsAndMarkdown(str) {

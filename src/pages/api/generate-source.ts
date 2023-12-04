@@ -24,15 +24,23 @@ export default async function handler(
   }
 
   if (req.method !== 'POST') {
-    res.status(405)
+    res.status(405).end();
     return
   }
 
-  const sourceCode = await generateSourceCode(req.body as FormValues)
-  sourceCode
-    .pipe(res)
-    .setHeader('content-type', 'application/zip')
-    .setHeader('content-disposition', 'attachment; filename="resume.zip"')
+  try {
+    const sourceCode = await generateSourceCode(req.body as FormValues);
+
+    sourceCode
+      .pipe(res)
+      .on('error', (err) => {
+        res.status(500).end();
+      });
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', 'attachment; filename="resume.zip"');
+  } catch (err) {
+    res.status(500).end();
+  }
 }
 
 function escapeLatexSpecialCharsAndMarkdown(str) {

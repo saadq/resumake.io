@@ -60,9 +60,6 @@ export function Preview() {
           body: JSON.stringify(getValues()) // Assuming getValues() fetches your form data
         }
       )
-
-      console.log(response)
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`)
       }

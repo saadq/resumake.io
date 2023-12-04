@@ -22,6 +22,7 @@ import {
 import { FormValues, TemplateData } from '../../types'
 
 function resolveTemplatePath(templatePath: string) {
+  console.log(path.resolve(process.cwd(), 'src/lib/templates' + templatePath))
   return path.resolve(process.cwd(), 'src/lib/templates' + templatePath)
 }
 
@@ -46,6 +47,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
       }
 
     case TEMPLATE2:
+
       return {
         texDoc: template2(data),
         opts: {

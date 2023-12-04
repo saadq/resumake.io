@@ -102,7 +102,7 @@ export type Resume = {
 
 export type FormValues = Resume & {
   headings: { [K in keyof Resume]?: string }
-  sections: (keyof Resume | 'profile')[]
+  sections: (keyof Resume | 'profile' | 'templates' | string)[] //TODO: Fix this lmfao
   selectedTemplate: number
 }
 

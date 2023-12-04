@@ -180,7 +180,7 @@ const generator: Generator = {
             {${highlightsWithNewline}}
       `
     })}
-    \\end{itemize>
+    \\end{itemize}
   `
   },
 

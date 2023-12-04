@@ -4,7 +4,7 @@ import { FormSection } from './FormSection'
 import { Button } from '../../../core/Button'
 import { colors } from '../../../../theme'
 import FsLightbox from 'fslightbox-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import image1 from '../img/1.png'
 import image2 from '../img/2.png'
@@ -46,7 +46,11 @@ const Div = styled.div`
   align-items: center;
 `
 
-const StyledImage = styled.img`
+interface StyledImageProps {
+  active: boolean
+}
+
+const StyledImage = styled.img<StyledImageProps>`
   position: relative;
   border-radius: 3px;
   color: #fff;
@@ -67,6 +71,12 @@ const StyledImage = styled.img`
 export function TemplatesSection() {
   const { watch, setValue } = useFormContext()
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
+  // Effect to toggle lightboxOpen whenever lightboxImageIndex changes
+  useEffect(() => {
+    setLightboxOpen((prev) => !prev)
+  }, [lightboxImageIndex])
 
   const setIndex = (index: number) => {
     setLightboxImageIndex(index)
@@ -97,7 +107,7 @@ export function TemplatesSection() {
         ))}
       </Grid>
       <FsLightbox
-        toggler={lightboxImageIndex}
+        toggler={lightboxOpen}
         sources={[images[lightboxImageIndex].src]}
         captions={[`Template ${lightboxImageIndex + 1}`]}
       />

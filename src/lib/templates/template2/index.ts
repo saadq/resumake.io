@@ -115,29 +115,36 @@ const generator: Generator = {
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       \\cvsection{${heading || 'Experience'}}
       \\begin{cventries}
-      ${work.map((job) => {
-      const { company, position, location, startDate, endDate, highlights } = job
+      ${work.map(job => {
+      const {
+        company,
+        position,
+        location,
+        startDate,
+        endDate,
+        highlights
+      } = job
 
-      let dateRange
-      let dutyLines
+      let dateRange = ''
+      let dutyLines = ''
 
       if (startDate && endDate) {
         dateRange = `${startDate} – ${endDate}`
       } else if (startDate) {
         dateRange = `${startDate} – Present`
       } else {
-        dateRange = endDate
+        dateRange = endDate || ''
       }
 
       if (highlights) {
         dutyLines = source`
             \\begin{cvitems}
-              ${highlights.map((duty) => `\\item {${duty}}`)}
+              ${highlights.map(duty => `\\item {${duty}}`)}
             \\end{cvitems}
             `
       }
 
-      return stripIndent`
+      const final = stripIndent`
           \\cventry
             {${position || ''}}
             {${company || ''}}
@@ -145,6 +152,8 @@ const generator: Generator = {
             {${dateRange || ''}}
             {${dutyLines}}
         `
+      return final
+
     })}
       \\end{cventries}
     `
@@ -193,16 +202,17 @@ const generator: Generator = {
         .map((highlight) => `\\item {${highlight}}`)
         .join('\n')
 
+      // Ensure that all LaTeX commands are properly closed
       return stripIndent`
           \\cventry
-            {${name || ''}}
-            {${keywords.join(', ') || ''}}
-            {${url || ''}}
+            {${name || ''}} % Project Name
+            {${keywords.join(', ') || ''}} % Keywords
+            {${url || ''}} % URL
+            {} % Empty field for compatibility
             {}
             \\begin{itemize}
             ${bulletPoints}
             \\end{itemize}
-
           \\vspace{-5mm}
         `
     })}
@@ -286,8 +296,10 @@ function template2(values: FormValues) {
   const { headings = {} } = values
 
   return stripIndent`
+    \\errorcontextlines=5
     ${generator.resumeHeader()}
     \\begin{document}
+    
     ${values.sections
       .map((section) => {
         switch (section) {

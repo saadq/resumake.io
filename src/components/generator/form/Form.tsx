@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { useFormContext } from 'react-hook-form'
 import { useAtom } from 'jotai'
@@ -39,20 +39,6 @@ export function Form() {
 
   const [resume, setResume] = useAtom(resumeAtom)
   const formContext = useFormContext<FormValues>()
-
-  // TODO: move this to a custom react hook
-  useEffect(() => {
-    const lastSession = localStorage.getItem('jsonResume')
-    if (lastSession) {
-      // TODO: validate JSON schema using Zod
-      const jsonResume = JSON.parse(lastSession) as FormValues
-      formContext.reset(jsonResume)
-    }
-    const subscription = formContext.watch((data) => {
-      localStorage.setItem('jsonResume', JSON.stringify(data))
-    })
-    return () => subscription.unsubscribe()
-  }, [formContext])
 
   const handleFormSubmit = useCallback(async () => {
     const formValues = convertFormData(formContext.getValues())

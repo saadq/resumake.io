@@ -7,10 +7,6 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Resumake</title>
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />

@@ -28,6 +28,7 @@
     "react-is": "^18.2.0",
     "react-pdf": "^5.7.2",
     "react-tooltip": "^4.2.21",
+    "sharp": "^0.33.0",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.4.1"
   },

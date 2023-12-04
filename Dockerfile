@@ -33,7 +33,8 @@ COPY --from=builder /app/package.json package.json
 COPY --from=builder /app/public public
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 4006
 
 # Set the command to start your app
-CMD ["npm", "start"]
+CMD ["npm", "run", "start", "--", "-p", "4006"]
+

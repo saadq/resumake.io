@@ -61,6 +61,8 @@ export function Preview() {
         }
       )
 
+      console.log(response)
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`)
       }

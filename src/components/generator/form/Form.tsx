@@ -18,7 +18,7 @@ import getTemplateData from '../../../lib/templates'
 
 
 async function generateResume(formData: FormValues): Promise<string> {
-  const { texDoc, opts } = getTemplateData({...formData, sections: ['profile']})
+  const { texDoc, opts } = getTemplateData(formData)
   return latex(texDoc, opts)
 }
 

@@ -121,7 +121,7 @@ export type Generator = {
 }
 
 export type LaTeXOpts = {
-  cmd?: string
+  cmd: 'pdflatex' | 'xelatex' | 'lualatex'
   inputs?: string
   fonts?: string
   passes?: number

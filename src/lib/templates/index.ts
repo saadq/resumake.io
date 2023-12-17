@@ -1,4 +1,3 @@
-import path from 'node:path'
 import template1 from './template1'
 import template2 from './template2'
 import template3 from './template3'
@@ -21,21 +20,16 @@ import {
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
-function resolveTemplatePath(templatePath: string) {
-  return path.resolve(process.cwd(), 'src/lib/templates' + templatePath)
-}
 
 /**
  * Generates the LaTeX document based on the selected template
- * as well as the necessary options needed for it to create a
- * pdf via node-latex.
+ * as well as the necessary options needed for it to create a pdf.
  *
  * @param data - The sanitized form data from the request body.
  *
  * @return The generated LaTeX document as well as its additional opts.
  */
 export default function getTemplateData(data: FormValues): TemplateData {
-  // TODO: list required packages for each template
   switch (data.selectedTemplate) {
     case TEMPLATE1:
       return {
@@ -50,8 +44,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template2(data),
         opts: {
           cmd: 'xelatex',
-          inputs: resolveTemplatePath('/template2/inputs'),
-          fonts: resolveTemplatePath('/template2/inputs')
+          inputs: '/template2/inputs',
+          fonts: '/template2/inputs'
         }
       }
 
@@ -68,8 +62,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template4(data),
         opts: {
           cmd: 'xelatex',
-          inputs: resolveTemplatePath('/template4/inputs'),
-          fonts: resolveTemplatePath('/template4/inputs')
+          inputs: '/template4/inputs',
+          fonts: '/template4/inputs'
         }
       }
 
@@ -78,8 +72,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template5(data),
         opts: {
           cmd: 'pdflatex',
-          inputs: resolveTemplatePath('/template5/inputs'),
-          fonts: resolveTemplatePath('/template5/inputs')
+          inputs: '/template5/inputs',
+          fonts: '/template5/inputs'
         }
       }
 
@@ -88,8 +82,8 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template6(data),
         opts: {
           cmd: 'xelatex',
-          inputs: resolveTemplatePath('/template6/inputs'),
-          fonts: resolveTemplatePath('/template6/inputs')
+          inputs: '/template6/inputs',
+          fonts: '/template6/inputs'
         }
       }
 
@@ -98,7 +92,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template7(data),
         opts: {
           cmd: 'pdflatex',
-          inputs: resolveTemplatePath('/template7/inputs')
+          inputs: '/template7/inputs'
         }
       }
 
@@ -107,7 +101,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template8(data),
         opts: {
           cmd: 'lualatex',
-          inputs: resolveTemplatePath('/template8/inputs')
+          inputs: '/template8/inputs'
         }
       }
 

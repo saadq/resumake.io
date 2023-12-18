@@ -44,8 +44,31 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template2(data),
         opts: {
           cmd: 'xelatex',
-          inputs: '/template2/inputs',
-          fonts: '/template2/inputs'
+          inputs: [
+            '/templates/template2/awesome-cv.cls',
+            '/templates/template2/fontawesome.sty',
+          ],
+          fonts: [
+            '/templates/template2/fonts/FontAwesome.otf',
+            '/templates/template2/fonts/Roboto-Bold.ttf',
+            '/templates/template2/fonts/Roboto-BoldItalic.ttf',
+            '/templates/template2/fonts/Roboto-Italic.ttf',
+            '/templates/template2/fonts/Roboto-Light.ttf',
+            '/templates/template2/fonts/Roboto-LightItalic.ttf',
+            '/templates/template2/fonts/Roboto-Medium.ttf',
+            '/templates/template2/fonts/Roboto-MediumItalic.ttf',
+            '/templates/template2/fonts/Roboto-Regular.ttf',
+            '/templates/template2/fonts/Roboto-Thin.ttf',
+            '/templates/template2/fonts/Roboto-ThinItalic.ttf',
+            '/templates/template2/fonts/SourceSansPro-Bold.otf',
+            '/templates/template2/fonts/SourceSansPro-BoldIt.otf',
+            '/templates/template2/fonts/SourceSansPro-It.otf',
+            '/templates/template2/fonts/SourceSansPro-Light.otf',
+            '/templates/template2/fonts/SourceSansPro-LightIt.otf',
+            '/templates/template2/fonts/SourceSansPro-Regular.otf',
+            '/templates/template2/fonts/SourceSansPro-Semibold.otf',
+            '/templates/template2/fonts/SourceSansPro-SemiboldIt.otf',
+          ]
         }
       }
 
@@ -62,8 +85,20 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template4(data),
         opts: {
           cmd: 'xelatex',
-          inputs: '/template4/inputs',
-          fonts: '/template4/inputs'
+          inputs: [
+            '/templates/template4/deedy-resume-openfont.cls'
+          ],
+          fonts: [
+            '/templates/template4/fonts/Raleway-Bold.otf',
+            '/templates/template4/fonts/Raleway-ExtraBold.otf',
+            '/templates/template4/fonts/Raleway-ExtraLight.otf',
+            '/templates/template4/fonts/Raleway-Heavy.otf',
+            '/templates/template4/fonts/Raleway-Light.otf',
+            '/templates/template4/fonts/Raleway-Medium.otf',
+            '/templates/template4/fonts/Raleway-Regular.otf',
+            '/templates/template4/fonts/Raleway-SemiBold.otf',
+            '/templates/template4/fonts/Raleway-Thin.otf',
+          ]
         }
       }
 
@@ -71,9 +106,11 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template5(data),
         opts: {
-          cmd: 'pdflatex',
-          inputs: '/template5/inputs',
-          fonts: '/template5/inputs'
+          cmd: 'xelatex',
+          inputs: [
+            '/templates/template5/helvetica.sty',
+            '/templates/template5/res.cls'
+          ],
         }
       }
 
@@ -82,8 +119,23 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template6(data),
         opts: {
           cmd: 'xelatex',
-          inputs: '/template6/inputs',
-          fonts: '/template6/inputs'
+          inputs: [
+            '/templates/template6/custom-command.tex',
+            '/templates/template6/minimal-resume-config.tex',
+            '/templates/template6/minimal-resume.sty',
+          ],
+          fonts: [
+            '/templates/template6/fonts/CrimsonText-Bold.ttf',
+            '/templates/template6/fonts/CrimsonText-BoldItalic.ttf',
+            '/templates/template6/fonts/CrimsonText-Italic.ttf',
+            '/templates/template6/fonts/CrimsonText-Regular.ttf',
+            '/templates/template6/fonts/CrimsonText-Roman.ttf',
+            '/templates/template6/fonts/CrimsonText-SemiBold.ttf',
+            '/templates/template6/fonts/CrimsonText-SemiBoldItalic.ttf',
+            '/templates/template6/fonts/Montserrat-Bold.ttf',
+            '/templates/template6/fonts/Montserrat-Light.otf',
+            '/templates/template6/fonts/Montserrat-Regular.ttf',
+          ]
         }
       }
 
@@ -92,7 +144,15 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template7(data),
         opts: {
           cmd: 'pdflatex',
-          inputs: '/template7/inputs'
+          inputs: [
+            '/templates/template7/collection.sty',
+            '/templates/template7/moderncv.cls',
+            '/templates/template7/moderncvcolorblue.sty',
+            '/templates/template7/moderncviconsletters.sty',
+            '/templates/template7/moderncviconsmarvosym.sty',
+            '/templates/template7/moderncvstyleclassic.sty',
+            '/templates/template7/tweaklist.sty'
+          ]
         }
       }
 
@@ -100,8 +160,10 @@ export default function getTemplateData(data: FormValues): TemplateData {
       return {
         texDoc: template8(data),
         opts: {
-          cmd: 'lualatex',
-          inputs: '/template8/inputs'
+          cmd: 'xelatex',
+          inputs: [
+            '/templates/template8/mcdowellcv.cls'
+          ]
         }
       }
 

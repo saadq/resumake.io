@@ -61,6 +61,7 @@ export function Form() {
       const newResumeUrl = await generateResume(formValues)
       setResume({ ...resume, url: newResumeUrl, isLoading: false })
     } catch (error) {
+      console.error(error)
       setResume({ ...resume, isError: true, isLoading: false })
     }
   }, [formContext, resume, setResume])

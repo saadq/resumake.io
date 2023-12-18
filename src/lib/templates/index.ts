@@ -20,7 +20,6 @@ import {
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
-
 /**
  * Generates the LaTeX document based on the selected template
  * as well as the necessary options needed for it to create a pdf.
@@ -46,7 +45,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
           cmd: 'xelatex',
           inputs: [
             '/templates/template2/awesome-cv.cls',
-            '/templates/template2/fontawesome.sty',
+            '/templates/template2/fontawesome.sty'
           ],
           fonts: [
             '/templates/template2/fonts/FontAwesome.otf',
@@ -67,7 +66,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
             '/templates/template2/fonts/SourceSansPro-LightIt.otf',
             '/templates/template2/fonts/SourceSansPro-Regular.otf',
             '/templates/template2/fonts/SourceSansPro-Semibold.otf',
-            '/templates/template2/fonts/SourceSansPro-SemiboldIt.otf',
+            '/templates/template2/fonts/SourceSansPro-SemiboldIt.otf'
           ]
         }
       }
@@ -85,9 +84,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template4(data),
         opts: {
           cmd: 'xelatex',
-          inputs: [
-            '/templates/template4/deedy-resume-openfont.cls'
-          ],
+          inputs: ['/templates/template4/deedy-resume-openfont.cls'],
           fonts: [
             '/templates/template4/fonts/Raleway-Bold.otf',
             '/templates/template4/fonts/Raleway-ExtraBold.otf',
@@ -97,7 +94,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
             '/templates/template4/fonts/Raleway-Medium.otf',
             '/templates/template4/fonts/Raleway-Regular.otf',
             '/templates/template4/fonts/Raleway-SemiBold.otf',
-            '/templates/template4/fonts/Raleway-Thin.otf',
+            '/templates/template4/fonts/Raleway-Thin.otf'
           ]
         }
       }
@@ -110,7 +107,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
           inputs: [
             '/templates/template5/helvetica.sty',
             '/templates/template5/res.cls'
-          ],
+          ]
         }
       }
 
@@ -122,7 +119,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
           inputs: [
             '/templates/template6/custom-command.tex',
             '/templates/template6/minimal-resume-config.tex',
-            '/templates/template6/minimal-resume.sty',
+            '/templates/template6/minimal-resume.sty'
           ],
           fonts: [
             '/templates/template6/fonts/CrimsonText-Bold.ttf',
@@ -134,7 +131,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
             '/templates/template6/fonts/CrimsonText-SemiBoldItalic.ttf',
             '/templates/template6/fonts/Montserrat-Bold.ttf',
             '/templates/template6/fonts/Montserrat-Light.otf',
-            '/templates/template6/fonts/Montserrat-Regular.ttf',
+            '/templates/template6/fonts/Montserrat-Regular.ttf'
           ]
         }
       }
@@ -161,9 +158,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
         texDoc: template8(data),
         opts: {
           cmd: 'xelatex',
-          inputs: [
-            '/templates/template8/mcdowellcv.cls'
-          ]
+          inputs: ['/templates/template8/mcdowellcv.cls']
         }
       }
 

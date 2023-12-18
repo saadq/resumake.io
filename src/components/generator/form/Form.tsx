@@ -16,7 +16,6 @@ import { FormValues } from '../../../types'
 import latex from '../../../lib/latex'
 import getTemplateData from '../../../lib/templates'
 
-
 async function generateResume(formData: FormValues): Promise<string> {
   const { texDoc, opts } = getTemplateData(formData)
   return latex(texDoc, opts)

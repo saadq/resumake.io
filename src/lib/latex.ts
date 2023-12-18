@@ -23,7 +23,7 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
   const fonts = await resolveAssets(opts.fonts || [])
   const inputs = await resolveAssets(opts.inputs || [])
 
-  switch(opts.cmd) {
+  switch (opts.cmd) {
     case 'pdflatex': {
       await pdftex.makeMemFSFolder('fonts/')
       for (const [name, content] of fonts) {
@@ -38,7 +38,7 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
       await pdftex.setEngineMainFile('main.tex')
       const { pdf } = await pdftex.compileLaTeX()
 
-      return URL.createObjectURL(new Blob([pdf], {type: 'application/pdf'}))
+      return URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))
     }
     case 'xelatex': {
       for (const engine of [xetex, dvipdfmx]) {
@@ -60,17 +60,17 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
       await dvipdfmx.setEngineMainFile('main.xdv')
       const { pdf } = await dvipdfmx.compilePDF()
 
-      return URL.createObjectURL(new Blob([pdf], {type: 'application/pdf'}))
+      return URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))
     }
   }
 }
 
 async function resolveAssets(urls: string[]) {
   const assets = await Promise.all(
-    urls.map(
-      url => fetch(url)
-        .then((res => res.arrayBuffer()))
-        .then(buffer => new Uint8Array(buffer))
+    urls.map((url) =>
+      fetch(url)
+        .then((res) => res.arrayBuffer())
+        .then((buffer) => new Uint8Array(buffer))
     )
   )
   const basenames = urls.map(basename)

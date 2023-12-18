@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
+
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { WorkSection } from './sections/WorkSection'
@@ -12,19 +13,12 @@ import { ProjectsSection } from './sections/projectsSection'
 import { resumeAtom } from '../../../atoms/resume'
 import { FormValues } from '../../../types'
 
+import latex from '../../../lib/latex'
+import getTemplateData from '../../../lib/templates'
+
 async function generateResume(formData: FormValues): Promise<string> {
-  const pdfResponse = await fetch('/api/generate-pdf', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-
-  const pdfBlob = await pdfResponse.blob()
-  const pdfUrl = URL.createObjectURL(pdfBlob)
-
-  return pdfUrl
+  const { texDoc, opts } = getTemplateData(formData)
+  return latex(texDoc, opts)
 }
 
 const StyledForm = styled.form`
@@ -66,6 +60,7 @@ export function Form() {
       const newResumeUrl = await generateResume(formValues)
       setResume({ ...resume, url: newResumeUrl, isLoading: false })
     } catch (error) {
+      console.error(error)
       setResume({ ...resume, isError: true, isLoading: false })
     }
   }, [formContext, resume, setResume])

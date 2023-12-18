@@ -121,11 +121,9 @@ export type Generator = {
 }
 
 export type LaTeXOpts = {
-  cmd?: string
-  inputs?: string
-  fonts?: string
-  passes?: number
-  errorLogs?: string
+  cmd: 'pdflatex' | 'xelatex'
+  inputs?: string[]
+  fonts?: string[]
 }
 
 export type TemplateData = {

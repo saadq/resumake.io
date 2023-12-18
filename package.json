@@ -2,6 +2,9 @@
   "private": true,
   "name": "resumake.io",
   "version": "3.0.0",
+  "engines": {
+    "node" : ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "start": "next start",

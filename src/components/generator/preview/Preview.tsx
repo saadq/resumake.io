@@ -48,31 +48,19 @@ export function Preview() {
   return (
     <Output>
       <PdfContainer>
-        {/* To prevent a white flash whenever the PDF is regenerated, this extra PDF document is always displayed underneath the actual PDF document. */}
-        {/* <ResumeDocument file="/blank.pdf">
+        <ResumeDocument
+          file={resume.url || '/blank.pdf'}
+          onLoadSuccess={handleDocumentLoadSuccess}
+          loading=""
+        >
           <ResumePage
-            pageNumber={1}
+            pageNumber={pageNumber}
             scale={scale}
             renderAnnotationLayer={false}
             renderTextLayer={false}
             loading=""
           />
-        </ResumeDocument> */}
-        {resume.url && (
-          <ResumeDocument
-            file={resume.url}
-            onLoadSuccess={handleDocumentLoadSuccess}
-            loading=""
-          >
-            <ResumePage
-              pageNumber={pageNumber}
-              scale={scale}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
-              loading=""
-            />
-          </ResumeDocument>
-        )}
+        </ResumeDocument>
       </PdfContainer>
     </Output>
   )

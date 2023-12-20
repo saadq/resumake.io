@@ -1,23 +1,23 @@
 import { PdfTeXEngine, XeTeXEngine, DvipdfmxEngine } from 'swiftlatex'
 import { LaTeXOpts } from '../types'
 
-let pdftex
-let xetex
-let dvipdfmx
+let pdftex = new PdfTeXEngine()
+let xetex = new XeTeXEngine()
+let dvipdfmx = new DvipdfmxEngine()
 let engineLoaded = false
 
 export default async function latex(texDoc: string, opts: LaTeXOpts) {
   if (!engineLoaded) {
-    pdftex = new PdfTeXEngine()
-    await pdftex.loadEngine()
-
-    xetex = new XeTeXEngine()
-    await xetex.loadEngine()
-
-    dvipdfmx = new DvipdfmxEngine()
-    await dvipdfmx.loadEngine()
-
+    await Promise.all([
+      pdftex.loadEngine(),
+      xetex.loadEngine(),
+      dvipdfmx.loadEngine()
+    ])
     engineLoaded = true
+
+    await pdftex.makeMemFSFolder('fonts/')
+    await xetex.makeMemFSFolder('fonts/')
+    await dvipdfmx.makeMemFSFolder('fonts/')
   }
 
   const fonts = await resolveAssets(opts.fonts || [])
@@ -25,13 +25,12 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
 
   switch (opts.cmd) {
     case 'pdflatex': {
-      await pdftex.makeMemFSFolder('fonts/')
       for (const [name, content] of fonts) {
         await pdftex.writeMemFSFile(`fonts/${name}`, content)
       }
 
       for (const [name, content] of inputs) {
-        await xetex.writeMemFSFile(name, content)
+        await pdftex.writeMemFSFile(name, content)
       }
 
       await pdftex.writeMemFSFile('main.tex', texDoc)
@@ -42,7 +41,6 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
     }
     case 'xelatex': {
       for (const engine of [xetex, dvipdfmx]) {
-        await engine.makeMemFSFolder('fonts/')
         for (const [name, content] of fonts) {
           await engine.writeMemFSFile(`fonts/${name}`, content)
         }

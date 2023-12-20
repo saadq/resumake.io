@@ -1,9 +1,9 @@
 import { PdfTeXEngine, XeTeXEngine, DvipdfmxEngine } from 'swiftlatex'
 import { LaTeXOpts } from '../types'
 
-let pdftex = new PdfTeXEngine()
-let xetex = new XeTeXEngine()
-let dvipdfmx = new DvipdfmxEngine()
+const pdftex = new PdfTeXEngine()
+const xetex = new XeTeXEngine()
+const dvipdfmx = new DvipdfmxEngine()
 let engineLoaded = false
 
 export default async function latex(texDoc: string, opts: LaTeXOpts) {

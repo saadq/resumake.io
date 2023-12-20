@@ -3,7 +3,7 @@
   "name": "resumake.io",
   "version": "3.0.0",
   "engines": {
-    "node" : ">=20"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "next dev",

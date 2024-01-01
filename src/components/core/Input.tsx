@@ -10,7 +10,6 @@ export const StyledInput = styled.input`
   border: 1px solid ${colors.input};
   padding: 1rem;
   color: ${colors.white};
-  transition: all 0.2s ease;
   font-size: 0.85rem;
   border-radius: 4px;
 

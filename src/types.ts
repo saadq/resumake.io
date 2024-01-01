@@ -102,7 +102,14 @@ export type Resume = {
 
 export type FormValues = Resume & {
   headings: { [K in keyof Resume]?: string }
-  sections: (keyof Resume | 'profile')[]
+  sections: (
+    | 'profile'
+    | 'education'
+    | 'work'
+    | 'skills'
+    | 'projects'
+    | 'awards'
+  )[]
   selectedTemplate: number
 }
 

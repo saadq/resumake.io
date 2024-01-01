@@ -26,9 +26,9 @@ const StyledForm = styled.form`
   overflow: auto;
 `
 
-const initialFormValues = {
+const initialFormValues: FormValues = {
   headings: {},
-  sections: [],
+  sections: ['profile', 'education', 'work', 'skills', 'projects', 'awards'],
   selectedTemplate: 1
 }
 

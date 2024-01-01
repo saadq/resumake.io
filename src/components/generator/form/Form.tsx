@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
 import styled from 'styled-components'
 
+import { TemplatesSection } from './sections/TemplatesSection'
 import { ProfileSection } from './sections/ProfileSection'
 import { EducationSection } from './sections/EducationSection'
 import { WorkSection } from './sections/WorkSection'
@@ -34,7 +35,7 @@ const initialFormValues: FormValues = {
 
 export function Form() {
   const router = useRouter()
-  const { section: currSection } = router.query
+  const { section: currSection = 'basics' } = router.query
 
   const [resume, setResume] = useAtom(resumeAtom)
   const formContext = useForm<FormValues>({ defaultValues: initialFormValues })
@@ -70,9 +71,8 @@ export function Form() {
       <StyledForm
         id="resume-form"
         onSubmit={formContext.handleSubmit(handleFormSubmit)}
-        // onChange={handleFormSubmit}
       >
-        {!currSection && <ProfileSection />}
+        {currSection === 'templates' && <TemplatesSection />}
         {currSection === 'basics' && <ProfileSection />}
         {currSection === 'education' && <EducationSection />}
         {currSection === 'work' && <WorkSection />}

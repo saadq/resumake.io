@@ -37,5 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# for local testing purposes
-resume.json
+# swiftlatex's postinstall files
+/public/*.js
+/public/*.wasm

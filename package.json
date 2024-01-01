@@ -11,7 +11,8 @@
     "build": "next build",
     "lint": "next lint",
     "format": "prettier --write src",
-    "format:check": "prettier --check src"
+    "format:check": "prettier --check src",
+    "postinstall": "cp node_modules/swiftlatex/dist/swift*.js node_modules/swiftlatex/dist/*.wasm public"
   },
   "dependencies": {
     "archiver": "^5.3.1",

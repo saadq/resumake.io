@@ -16,7 +16,6 @@
   "dependencies": {
     "archiver": "^5.3.1",
     "common-tags": "^1.8.2",
-    "fs-extra": "^10.1.0",
     "jotai": "^1.7.0",
     "next": "^13.5.4",
     "polished": "^4.2.2",
@@ -25,7 +24,6 @@
     "react-hook-form": "^7.31.3",
     "react-icons": "^4.4.0",
     "react-pdf": "^5.7.2",
-    "react-tooltip": "^4.2.21",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.4.1",
     "swiftlatex": "https://github.com/ducaale/SwiftLaTeX/releases/download/v1.0.0-experimental-9902734/swiftlatex-1.0.0-experimental-9902734.tgz"
@@ -33,7 +31,6 @@
   "devDependencies": {
     "@types/archiver": "^5.3.1",
     "@types/common-tags": "^1.8.1",
-    "@types/fs-extra": "^9.0.13",
     "@types/node": "16.11.12",
     "@types/react": "17.0.37",
     "@types/react-pdf": "^5.0.9",

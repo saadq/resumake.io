@@ -17,15 +17,18 @@ const Nav = styled.nav`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 20px;
+  gap: 24px;
   margin-bottom: 28px;
+
+  button {
+    cursor: grab;
+  }
 `
 
 const StyledLink = styled(Link)<{ $active: boolean }>`
   text-decoration: none;
   font-weight: 300;
   color: ${colors.foreground};
-  padding-bottom: 6px;
 
   ${(props) => props.$active && `color: ${colors.primary};`}
 `

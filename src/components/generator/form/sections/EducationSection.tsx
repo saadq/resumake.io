@@ -10,11 +10,13 @@ export function EducationSection() {
 
   return (
     <FormSection title="Your Educational Background">
-      <LabeledInput
-        name="headings.education"
-        label="Section Heading"
-        placeholder="Education"
-      />
+      {fields.length > 0 && (
+        <LabeledInput
+          name="headings.education"
+          label="Section Heading"
+          placeholder="Education"
+        />
+      )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
           <Divider />

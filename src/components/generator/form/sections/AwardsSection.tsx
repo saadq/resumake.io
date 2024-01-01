@@ -10,11 +10,13 @@ export function AwardSection() {
 
   return (
     <FormSection title="Honors & Awards">
-      <LabeledInput
-        name="headings.awards"
-        label="Section Heading"
-        placeholder="Awards"
-      />
+      {fields.length > 0 && (
+        <LabeledInput
+          name="headings.awards"
+          label="Section Heading"
+          placeholder="Awards"
+        />
+      )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
           <Divider />

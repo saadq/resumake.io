@@ -12,11 +12,13 @@ export function SkillsSection() {
 
   return (
     <FormSection title="Your Skills">
-      <LabeledInput
-        name="headings.skills"
-        label="Section Heading"
-        placeholder="Skills"
-      />
+      {fields.length > 0 && (
+        <LabeledInput
+          name="headings.skills"
+          label="Section Heading"
+          placeholder="Skills"
+        />
+      )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
           <Divider />

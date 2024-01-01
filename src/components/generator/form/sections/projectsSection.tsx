@@ -12,11 +12,13 @@ export function ProjectsSection() {
 
   return (
     <FormSection title="Your Projects">
-      <LabeledInput
-        name="headings.projects"
-        label="Section Heading"
-        placeholder="Projects"
-      />
+      {fields.length > 0 && (
+        <LabeledInput
+          name="headings.projects"
+          label="Section Heading"
+          placeholder="Projects"
+        />
+      )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
           <Divider />

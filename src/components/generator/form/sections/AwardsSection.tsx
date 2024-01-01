@@ -11,15 +11,17 @@ export function AwardSection() {
   return (
     <FormSection title="Honors & Awards">
       {fields.length > 0 && (
-        <LabeledInput
-          name="headings.awards"
-          label="Section Heading"
-          placeholder="Awards"
-        />
+        <Fragment>
+          <LabeledInput
+            name="headings.awards"
+            label="Section Heading"
+            placeholder="Awards"
+          />
+          <Divider />
+        </Fragment>
       )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
-          <Divider />
           <LabeledInput
             name={`awards.${index}.title`}
             label="Award Name"
@@ -40,6 +42,7 @@ export function AwardSection() {
             label="Summary"
             placeholder="Recognized for creating the most awesome project at a hackathon."
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

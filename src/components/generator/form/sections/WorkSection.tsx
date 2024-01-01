@@ -13,15 +13,17 @@ export function WorkSection() {
   return (
     <FormSection title="Your Work Experience">
       {fields.length > 0 && (
-        <LabeledInput
-          name="headings.work"
-          label="Section Heading"
-          placeholder="Work"
-        />
+        <Fragment>
+          <LabeledInput
+            name="headings.work"
+            label="Section Heading"
+            placeholder="Work"
+          />
+          <Divider />
+        </Fragment>
       )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
-          <Divider />
           <LabeledInput
             name={`work.${index}.company`}
             label="Company name"
@@ -52,6 +54,7 @@ export function WorkSection() {
             placeholder="Did cool stuff at company"
             name={`work.${index}.highlights`}
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

@@ -11,15 +11,17 @@ export function EducationSection() {
   return (
     <FormSection title="Your Educational Background">
       {fields.length > 0 && (
-        <LabeledInput
-          name="headings.education"
-          label="Section Heading"
-          placeholder="Education"
-        />
+        <Fragment>
+          <LabeledInput
+            name="headings.education"
+            label="Section Heading"
+            placeholder="Education"
+          />
+          <Divider />
+        </Fragment>
       )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
-          <Divider />
           <LabeledInput
             name={`education.${index}.institution`}
             label="School name"
@@ -45,6 +47,7 @@ export function EducationSection() {
             label="End Date"
             placeholder="Jun 2019"
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

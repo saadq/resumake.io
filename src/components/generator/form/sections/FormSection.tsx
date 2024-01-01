@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Container = styled.fieldset`
   width: 100%;
   padding: 0 2rem;
+  padding-bottom: 2rem;
 `
 
 const Title = styled.h2`

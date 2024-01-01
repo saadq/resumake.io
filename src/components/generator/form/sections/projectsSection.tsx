@@ -13,15 +13,17 @@ export function ProjectsSection() {
   return (
     <FormSection title="Your Projects">
       {fields.length > 0 && (
-        <LabeledInput
-          name="headings.projects"
-          label="Section Heading"
-          placeholder="Projects"
-        />
+        <Fragment>
+          <LabeledInput
+            name="headings.projects"
+            label="Section Heading"
+            placeholder="Projects"
+          />
+          <Divider />
+        </Fragment>
       )}
       {fields.map((field, index) => (
         <Fragment key={field.id}>
-          <Divider />
           <LabeledInput
             name={`projects.${index}.name`}
             label="Project Name"
@@ -42,6 +44,7 @@ export function ProjectsSection() {
             placeholder="TypeScript"
             name={`projects.${index}.keywords`}
           />
+          <Divider />
         </Fragment>
       ))}
       <AddButton type="button" onClick={() => append({})}>

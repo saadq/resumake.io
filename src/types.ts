@@ -17,13 +17,14 @@ export type Basics = {
   location?: Location
   profiles?: Profile[] // TODO: revisit how profiles gets rendered
 
-  // non-standard attributes
+  // non-standard attribute
   website?: string
 }
 
 export type Work = {
   name?: string
-  company?: string // non-standard
+  // non-standard attribute
+  company?: string
 
   position?: string
   startDate?: string
@@ -31,8 +32,8 @@ export type Work = {
   summary?: string
   highlights: string[]
 
-  // non-standard attributes
-  location: string
+  // non-standard attribute
+  location?: string
 }
 
 export type Volunteer = {
@@ -52,8 +53,8 @@ export type Education = {
   endDate?: string
   score?: string
 
-  // non-standard attributes
-  location: string
+  // non-standard attribute
+  location?: string
 }
 
 export type Award = {

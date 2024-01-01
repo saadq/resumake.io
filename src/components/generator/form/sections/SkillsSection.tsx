@@ -7,8 +7,19 @@ import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
 import Keywords from '../Keywords'
 
+import { Skill } from '../../../../types'
+
 export function SkillsSection() {
   const { fields, append } = useFieldArray({ name: 'skills' })
+
+  const handleAdd = () => {
+    const defaultSkill: Skill = {
+      name: '',
+      keywords: []
+    }
+
+    append(defaultSkill)
+  }
 
   return (
     <FormSection title="Your Skills">
@@ -37,7 +48,7 @@ export function SkillsSection() {
           <Divider />
         </Fragment>
       ))}
-      <AddButton type="button" onClick={() => append({})}>
+      <AddButton type="button" onClick={handleAdd}>
         + Add Skill
       </AddButton>
     </FormSection>

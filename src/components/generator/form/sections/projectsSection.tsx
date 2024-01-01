@@ -7,8 +7,21 @@ import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
 import Keywords from '../Keywords'
 
+import { Project } from '../../../../types'
+
 export function ProjectsSection() {
   const { fields, append } = useFieldArray({ name: 'projects' })
+
+  const handleAdd = () => {
+    const defaultProject: Project = {
+      name: '',
+      description: '',
+      url: '',
+      keywords: []
+    }
+
+    append(defaultProject)
+  }
 
   return (
     <FormSection title="Your Projects">
@@ -47,7 +60,7 @@ export function ProjectsSection() {
           <Divider />
         </Fragment>
       ))}
-      <AddButton type="button" onClick={() => append({})}>
+      <AddButton type="button" onClick={handleAdd}>
         + Add Project
       </AddButton>
     </FormSection>

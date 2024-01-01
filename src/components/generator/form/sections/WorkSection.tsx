@@ -7,8 +7,23 @@ import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
 import Highlights from '../Highlights'
 
+import { Work } from '../../../../types'
+
 export function WorkSection() {
   const { fields, append } = useFieldArray({ name: 'work' })
+
+  const handleAdd = () => {
+    const defaultWork: Work = {
+      company: '',
+      position: '',
+      summary: '',
+      startDate: '',
+      endDate: '',
+      highlights: []
+    }
+
+    append(defaultWork)
+  }
 
   return (
     <FormSection title="Your Work Experience">
@@ -57,7 +72,7 @@ export function WorkSection() {
           <Divider />
         </Fragment>
       ))}
-      <AddButton type="button" onClick={() => append({})}>
+      <AddButton type="button" onClick={handleAdd}>
         + Add Work Experience
       </AddButton>
     </FormSection>

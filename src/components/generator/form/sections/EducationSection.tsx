@@ -1,12 +1,27 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
+
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
+import { Education } from '../../../../types'
+
 export function EducationSection() {
   const { fields, append } = useFieldArray({ name: 'education' })
+
+  const handleAdd = () => {
+    const defaultEducation: Education = {
+      institution: '',
+      studyType: '',
+      area: '',
+      startDate: '',
+      endDate: ''
+    }
+
+    append(defaultEducation)
+  }
 
   return (
     <FormSection title="Your Educational Background">
@@ -50,7 +65,7 @@ export function EducationSection() {
           <Divider />
         </Fragment>
       ))}
-      <AddButton type="button" onClick={() => append({})}>
+      <AddButton type="button" onClick={handleAdd}>
         + Add School
       </AddButton>
     </FormSection>

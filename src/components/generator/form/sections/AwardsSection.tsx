@@ -1,12 +1,26 @@
 import { Fragment } from 'react'
 import { useFieldArray } from 'react-hook-form'
+
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
+import { Award } from '../../../../types'
+
 export function AwardSection() {
   const { fields, append } = useFieldArray({ name: 'awards' })
+
+  const handleAdd = () => {
+    const defaultAward: Award = {
+      title: '',
+      date: '',
+      awarder: '',
+      summary: ''
+    }
+
+    append(defaultAward)
+  }
 
   return (
     <FormSection title="Honors & Awards">
@@ -45,7 +59,7 @@ export function AwardSection() {
           <Divider />
         </Fragment>
       ))}
-      <AddButton type="button" onClick={() => append({})}>
+      <AddButton type="button" onClick={handleAdd}>
         + Add Award
       </AddButton>
     </FormSection>

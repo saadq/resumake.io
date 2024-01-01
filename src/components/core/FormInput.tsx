@@ -1,4 +1,4 @@
-import { useState, CSSProperties } from 'react'
+import { useState, CSSProperties, SyntheticEvent } from 'react'
 import styled from 'styled-components'
 
 import { StyledInput } from './Input'
@@ -17,16 +17,23 @@ interface FormInputProps {
 export function FormInput({ onSubmit, style }: FormInputProps) {
   const [value, setValue] = useState('')
 
+  const handleSubmit = (event: SyntheticEvent) => {
+    event.preventDefault()
+    onSubmit(value)
+    setValue('')
+  }
+
   return (
     <Container style={style}>
       <StyledInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
         style={{ gridColumn: '1/4', gridRow: '1/1', paddingRight: 96 }}
       />
       <MiniButton
         type="button"
-        onClick={() => onSubmit(value)}
+        onClick={handleSubmit}
         style={{ gridArea: '1/2' }}
       >
         Add

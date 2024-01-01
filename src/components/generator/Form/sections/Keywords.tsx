@@ -3,9 +3,9 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { MdClose } from 'react-icons/md'
 import styled from 'styled-components'
 
-import { IconButton } from '../../core/Button'
-import { FormInput } from '../../core/FormInput'
-import { colors } from '../../../theme'
+import { IconButton } from '../../../core/Button'
+import { FormInput } from '../../../core/FormInput'
+import { colors } from '../../../../theme'
 
 const Pill = styled.div`
   display: inline-flex;

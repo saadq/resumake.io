@@ -5,7 +5,7 @@ import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
-import Keywords from '../Keywords'
+import Keywords from './Keywords'
 
 import { Project } from '../../../../types'
 

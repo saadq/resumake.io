@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 
-import { Logo } from '../../core/Logo'
-import { colors } from '../../../theme'
+import { Logo } from '../core/Logo'
+import { colors } from '../../theme'
 
 const StyledHeader = styled.header`
   grid-area: header;

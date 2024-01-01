@@ -5,7 +5,7 @@ import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
-import Highlights from '../Highlights'
+import Highlights from './Highlights'
 
 import { Work } from '../../../../types'
 

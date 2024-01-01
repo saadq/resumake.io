@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import styled from 'styled-components'
-import { resumeAtom } from '../../../atoms/resume'
+import { resumeAtom } from '../../atoms/resume'
 
 const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc

@@ -3,9 +3,9 @@ import { useFieldArray } from 'react-hook-form'
 import { MdClose, MdDragIndicator } from 'react-icons/md'
 import styled from 'styled-components'
 
-import { Input } from '../../core/Input'
-import { FormInput } from '../../core/FormInput'
-import { IconButton } from '../../core/Button'
+import { Input } from '../../../core/Input'
+import { FormInput } from '../../../core/FormInput'
+import { IconButton } from '../../../core/Button'
 
 const ListContainer = styled.div`
   display: grid;

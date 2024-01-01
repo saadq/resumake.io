@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { MdDragIndicator } from 'react-icons/md'
 
-import { colors } from '../../../theme'
-import { PrimaryButton, IconButton } from '../../core/Button'
+import { colors } from '../../theme'
+import { PrimaryButton, IconButton } from '../core/Button'
 
 const Aside = styled.aside`
   grid-area: sidebar;

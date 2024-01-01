@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 
-import { Form } from '../components/generator/form/Form'
-import { Header } from '../components/generator/layout/Header'
-import { Sidebar } from '../components/generator/layout/Sidebar'
-// import { Templates } from '../components/generator/templates/Templates'
+import { Form } from '../components/generator/Form'
+import { Header } from '../components/generator/Header'
+import { Sidebar } from '../components/generator/Sidebar'
 
 const Preview = dynamic(
-  async () => (await import('../components/generator/preview/Preview')).Preview,
+  async () => (await import('../components/generator/Preview')).Preview,
   { ssr: false }
 )
 
@@ -28,8 +27,6 @@ export default function GeneratorPage() {
       <Sidebar />
       <Form />
       <Preview />
-      {/* <Templates /> */}
-      {/* <Footer /> */}
     </Main>
   )
 }

@@ -11,7 +11,7 @@ const generator: Generator = {
     const { name, email, phone, location, website } = basics
     const address = location?.address || ''
 
-    let line1 = name ? `{\\Huge \\scshape {${name}}}` : ''
+    let line1 = name ? `{\\Huge \\scshape \\textbf{${name}}}` : ''
     let line2 = [address, email, phone, website]
       .filter(Boolean)
       .join(' $\\cdot$ ')
@@ -334,7 +334,6 @@ function template1(values: FormValues) {
     ${generator.resumeHeader()}
 
     \\begin{document}
-    \\vspace*{-40pt}
 
     ${values.sections
       .map((section) => {

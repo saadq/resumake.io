@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import latex from 'node-latex'
-import fs from 'fs'
 import getTemplateData from '../../lib/templates'
 import { FormValues } from '../../types'
 
@@ -42,7 +41,7 @@ export default async function handler(
   }
 }
 
-function escapeLatexSpecialCharsAndMarkdown(str) {
+function escapeLatexSpecialCharsAndMarkdown(str: string): string {
   // Escape LaTeX special characters (excluding asterisks)
   let escapedStr = str
     .replace(/\\/g, '\\textbackslash ')
@@ -93,8 +92,6 @@ async function generatePDF(formData: FormValues) {
   const cleanedData = cleanData(formData)
   const { texDoc, opts } = getTemplateData(cleanedData)
   try {
-    // Save tex fike
-    fs.writeFileSync('resume.tex', texDoc)
     const pdf = latex(texDoc, opts)
     return pdf
   } catch (err) {

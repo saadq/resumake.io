@@ -14,7 +14,6 @@ import { resumeAtom } from '../../../atoms/resume'
 import { FormValues } from '../../../types'
 
 async function generateResume(formData: FormValues): Promise<string> {
-  console.log('Sending form data to API')
   const pdfResponse = await fetch(
     'https://api.art3m1s.me/resumake/api/generate-pdf',
     {

@@ -47,6 +47,7 @@ export function Preview() {
 
   return (
     <Output>
+      <button onClick={() => window.open(resume.url)}>export as pdf</button>
       <PdfContainer>
         <ResumeDocument
           file={resume.url || '/blank.pdf'}

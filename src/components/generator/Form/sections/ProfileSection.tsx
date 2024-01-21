@@ -1,10 +1,7 @@
-// import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 
 export function ProfileSection() {
-  // const { fields, append } = useFieldArray({ name: 'basics.links' })
-
   return (
     <FormSection title="Your personal info">
       <LabeledInput
@@ -27,10 +24,11 @@ export function ProfileSection() {
         label="Location"
         placeholder="Seattle, WA"
       />
-      {/* {fields.map((field, index) => (
-          <input key={field.id} name={`basics.links.${index}`} />
-        ))}
-        <button onClick={() => append('')}>Add</button> */}
+      <LabeledInput
+        name="basics.website"
+        label="Website"
+        placeholder="mycoolportifolio.com/myname"
+      />
     </FormSection>
   )
 }

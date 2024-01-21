@@ -9,6 +9,7 @@ const generator: Generator = {
     }
 
     const { name, email, phone = '', location = {}, website } = basics
+    const websiteLine = website ? `\\href{${website}}{${website}}` : ''
 
     let addressLine = ''
     let contactsLine = ''
@@ -20,9 +21,9 @@ const generator: Generator = {
     }
 
     if (email && website) {
-      contactsLine = `\\contacts{${email} \\linebreak ${website}}`
+      contactsLine = `\\contacts{${email} \\linebreak ${websiteLine}}`
     } else if (email || website) {
-      contactsLine = `\\contacts{${email || website}}`
+      contactsLine = `\\contacts{${email || websiteLine}}`
     }
 
     return `
@@ -175,7 +176,8 @@ const generator: Generator = {
         }
 
         if (url) {
-          line += `(${url}) `
+          const urlLine = url ? `\\href{${url}}{${url}}` : ''
+          line += `(${urlLine}) `
         }
 
         if (description) {
@@ -270,6 +272,7 @@ function template8(values: FormValues) {
 
     % For mathematical symbols
     \\usepackage{amsmath}
+    \\usepackage[hidelinks]{hyperref}
 
     ${generator.profileSection(values.basics)}
 

@@ -9,7 +9,9 @@ const generator: Generator = {
     }
 
     const { name, email, phone, location = {}, website } = basics
-    const info = [email, phone, location.address, website]
+    const websiteLine = website ? `\\href{${website}}{${website}}` : ''
+
+    const info = [email, phone, location.address, websiteLine]
       .filter(Boolean)
       .join(' | ')
 
@@ -165,13 +167,14 @@ const generator: Generator = {
         const descriptionWithNewline = description
           ? `\\\\${description}`
           : description
+        const urlLine = url ? `\\href{${url}}{${url}}` : ''
 
         return stripIndent`
           \\item[]
             \\project
               {${name}}
               {${keywords.join(', ')}}
-              {${url}}
+              {${urlLine}}
               {${descriptionWithNewline}}
         `
       })}
@@ -229,6 +232,7 @@ const generator: Generator = {
       \\usepackage{textcomp}
       \\usepackage[utf8]{inputenc}
       \\usepackage[T1]{fontenc}
+      \\usepackage[hidelinks]{hyperref}
 
 
       %-----------------------------------------------------------

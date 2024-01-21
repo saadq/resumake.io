@@ -9,7 +9,9 @@ const generator: Omit<Generator, 'resumeHeader'> = {
     }
 
     const { name, email, phone, location = {}, website } = basics
-    const info = [email, phone, location.address, website]
+    const websiteLine = website ? `\\href{${website}}{${website}}` : ''
+
+    const info = [email, phone, location.address, websiteLine]
       .filter(Boolean)
       .join(' | ')
 
@@ -193,7 +195,8 @@ const generator: Omit<Generator, 'resumeHeader'> = {
         }
 
         if (url) {
-          projectLine += projectLine ? `\\\\ ${url}` : url
+          const urlLine = url ? `\\href{${url}}{${url}}` : ''
+          projectLine += projectLine ? `\\\\ ${urlLine}` : urlLine
         }
 
         if (projectLine) {
@@ -235,6 +238,7 @@ function template5(values: FormValues) {
     \\usepackage{textcomp}
     \\usepackage[utf8]{inputenc}
     \\usepackage[T1]{fontenc}
+    \\usepackage[hidelinks]{hyperref}
     \\begin{document}
       ${generator.profileSection(values.basics)}
       \\begin{resume}

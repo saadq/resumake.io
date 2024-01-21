@@ -9,7 +9,9 @@ const generator: Omit<Generator, 'resumeHeader'> = {
     }
 
     const { name = '', email, phone, location = {}, website } = basics
-    const info = [email, phone, location.address, website].filter(Boolean)
+    const websiteLine = website ? `\\href{${website}}{${website}}` : ''
+
+    const info = [email, phone, location.address, websiteLine].filter(Boolean)
 
     return stripIndent`
       \\begin{center}
@@ -183,12 +185,13 @@ const generator: Omit<Generator, 'resumeHeader'> = {
           const descriptionWithNewline = description
             ? `${description}\\\\`
             : description
+          const urlLine = url ? `\\href{${url}}{${url}}` : ''
 
           return stripIndent`
             \\project
               {${name}}
               {${keywords.join(', ')}}
-              {${url}}
+              {${urlLine}}
               {${descriptionWithNewline}}
           `
         })}
@@ -229,6 +232,7 @@ function template6(values: FormValues) {
   return stripIndent`
     \\documentclass[10pt]{article}
     \\usepackage[english]{babel}
+    \\usepackage[hidelinks]{hyperref}
     \\input{minimal-resume-config}
     \\begin{document}
     ${values.sections

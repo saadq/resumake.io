@@ -32,7 +32,9 @@ const generator: Generator = {
     const addressLine = location.address
       ? `{\\faMapMarker\\ ${location.address}}`
       : ''
-    const websiteLine = website ? `{\\faLink\\ ${website}}` : ''
+    const websiteLine = website
+      ? `{\\faLink\\ \\href{${website}}{${website}}}`
+      : ''
     const info = [emailLine, phoneLine, addressLine, websiteLine]
       .filter(Boolean)
       .join(' | ')
@@ -188,13 +190,14 @@ const generator: Generator = {
       \\begin{cventries}
       ${projects.map((project) => {
         const { name, description, keywords = [], url } = project
+        const urlLine = url ? `\\href{${url}}{${url}}` : ''
 
         return stripIndent`
           \\cventry
             {${description || ''}}
             {${name || ''}}
             {${keywords.join(', ') || ''}}
-            {${url || ''}}
+            {${urlLine}}
             {}
 
           \\vspace{-5mm}

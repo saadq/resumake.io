@@ -9,7 +9,9 @@ const generator: Generator = {
     }
 
     const { name, email, phone, location = {}, website } = basics
-    const info = [email, phone, location.address, website]
+    const websiteLine = website ? `\\href{${website}}{${website}}` : ''
+
+    const info = [email, phone, location.address, websiteLine]
       .filter(Boolean)
       .join(' | ')
 
@@ -167,9 +169,10 @@ const generator: Generator = {
 
       ${projects.map((project, i) => {
         const { name, description, keywords = [], url } = project
+        const urlLine = url ? `\\href{${url}}{${url}}` : ''
 
         return stripIndent`
-          \\ProjectEntry{${name || ''}}{${url || ''}}
+          \\ProjectEntry{${name || ''}}{${urlLine || ''}}
           {${keywords.join(', ')}}
           {${description || ''}}
           ${i < lastProjectIndex ? '\\sepspace' : ''}
@@ -216,6 +219,7 @@ const generator: Generator = {
       \\usepackage{url}
       \\usepackage{lmodern} % Allow arbitrary font sizes
       \\usepackage{textcomp}
+      \\usepackage[hidelinks]{hyperref}
 
       %% Define a new 'modern' style for the url package that will use a smaller font.
       \\makeatletter

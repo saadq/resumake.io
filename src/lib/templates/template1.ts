@@ -12,7 +12,7 @@ const generator: Generator = {
     const address = location?.address || ''
 
     let line1 = name ? `{\\Huge \\scshape {${name}}}` : ''
-    let line2 = [address, email, phone, website]
+    let line2 = [address, email, phone, `\\href{${website}}{${website}}`]
       .filter(Boolean)
       .join(' $\\cdot$ ')
 
@@ -196,7 +196,7 @@ const generator: Generator = {
         }
 
         if (url) {
-          line1 += `\\hfill ${url}`
+          line1 += `\\hfill \\href{${url}}{${url}}`
         }
 
         if (line1) {
@@ -328,6 +328,7 @@ function template1(values: FormValues) {
     \\pagestyle{empty}
     \\raggedright
     \\usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
+    \\usepackage[hidelinks]{hyperref}
 
     ${generator.resumeHeader()}
 

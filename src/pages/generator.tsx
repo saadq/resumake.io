@@ -19,35 +19,8 @@ const Main = styled.main`
     'sidebar form preview';
   height: 100vh;
 `
-const initialFormValues = {
-  headings: {},
-  sections: [
-    'templates',
-    'profile',
-    'education',
-    'work',
-    'skills',
-    'projects',
-    'awards'
-  ],
-  selectedTemplate: 1
-}
 
 export default function GeneratorPage() {
-  const formContext = useForm<FormValues>({ defaultValues: initialFormValues })
-  // TODO: move this to a custom react hook
-  useEffect(() => {
-    const lastSession = localStorage.getItem('jsonResume')
-    if (lastSession) {
-      // TODO: validate JSON schema using Zod
-      const jsonResume = JSON.parse(lastSession) as FormValues
-      formContext.reset(jsonResume)
-    }
-    const subscription = formContext.watch((data) => {
-      localStorage.setItem('jsonResume', JSON.stringify(data))
-    })
-    return () => subscription.unsubscribe()
-  }, [formContext])
   return (
     <Main>
       <Header />

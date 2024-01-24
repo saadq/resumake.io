@@ -5,8 +5,8 @@ import { LabeledInput } from '../../../core/LabeledInput'
 import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 import { FormSection } from './FormSection'
-import Keywords from '../Keywords'
-import Highlights from '../Highlights'
+import Keywords from './Keywords'
+import Highlights from './Highlights'
 import { Project } from '../../../../types'
 
 export function ProjectsSection() {

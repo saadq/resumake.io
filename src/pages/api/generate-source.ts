@@ -118,7 +118,7 @@ function generateSourceCode(formData: FormValues) {
  *
  * @return The generated README text.
  */
-function makeReadme(template: number, cmd: string = 'tectonic'): string {
+function makeReadme(template: number, cmd: string): string {
   return stripIndent`
     # Resumake Template ${template}
     > LaTeX code generated at [resumake.io](https://resumake.io)

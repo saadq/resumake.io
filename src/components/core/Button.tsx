@@ -18,7 +18,6 @@ export const Button = styled.button`
   border-radius: 100px;
   border: 1px solid ${darken(0.1, colors.primary)};
   box-shadow: 0 0 0 0 ${rgba(colors.primary, 0.7)};
-  transition: all 0.4s ease;
   &:hover {
     background: linear-gradient(
       40deg,

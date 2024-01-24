@@ -17,13 +17,14 @@ export type Basics = {
   location?: Location
   profiles?: Profile[] // TODO: revisit how profiles gets rendered
 
-  // non-standard attributes
+  // non-standard attribute
   website?: string
 }
 
 export type Work = {
   name?: string
-  company?: string // non-standard
+  // non-standard attribute
+  company?: string
 
   position?: string
   startDate?: string
@@ -31,8 +32,8 @@ export type Work = {
   summary?: string
   highlights: string[]
 
-  // non-standard attributes
-  location: string
+  // non-standard attribute
+  location?: string
 }
 
 export type Volunteer = {
@@ -52,8 +53,8 @@ export type Education = {
   endDate?: string
   score?: string
 
-  // non-standard attributes
-  location: string
+  // non-standard attribute
+  location?: string
 }
 
 export type Award = {
@@ -102,7 +103,14 @@ export type Resume = {
 
 export type FormValues = Resume & {
   headings: { [K in keyof Resume]?: string }
-  sections: (keyof Resume | 'profile' | 'templates' | string)[] //TODO: Fix this lmfao
+  sections: (
+    | 'profile'
+    | 'education'
+    | 'work'
+    | 'skills'
+    | 'projects'
+    | 'awards'
+  )[]
   selectedTemplate: number
 }
 
@@ -121,11 +129,9 @@ export type Generator = {
 }
 
 export type LaTeXOpts = {
-  cmd?: string
-  inputs?: string
-  fonts?: string
-  passes?: number
-  errorLogs?: string
+  cmd: 'pdflatex' | 'xelatex'
+  inputs?: string[]
+  fonts?: string[]
 }
 
 export type TemplateData = {

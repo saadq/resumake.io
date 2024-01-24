@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic'
 import styled from 'styled-components'
-import { useEffect } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { FormValues } from '../types'
-import { Form } from '../components/generator/form/Form'
-import { Header } from '../components/generator/layout/Header'
-import { Sidebar } from '../components/generator/layout/Sidebar'
+
+import { Form } from '../components/generator/Form'
+import { Header } from '../components/generator/Header'
+import { Sidebar } from '../components/generator/Sidebar'
+
 const Preview = dynamic(
-  async () => (await import('../components/generator/preview/Preview')).Preview,
+  async () => (await import('../components/generator/Preview')).Preview,
   { ssr: false }
 )
 
@@ -51,14 +50,10 @@ export default function GeneratorPage() {
   }, [formContext])
   return (
     <Main>
-      <FormProvider {...formContext}>
-        <Header />
-        <Sidebar />
-        <Form />
-        <Preview />
-        {/* <Templates /> */}
-        {/* <Footer /> */}
-      </FormProvider>
+      <Header />
+      <Sidebar />
+      <Form />
+      <Preview />
     </Main>
   )
 }

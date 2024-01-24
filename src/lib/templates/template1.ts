@@ -196,9 +196,9 @@ const generator: Generator = {
         line1 += ` {\\sl ${keywords.join(', ')}} `
       }
 
-        if (url) {
-          line1 += `\\hfill \\href{${url}}{${url}}`
-        }
+      if (url) {
+        line1 += `\\hfill \\href{${url}}{${url}}`
+      }
 
       if (highlights && highlights.length > 0) {
         highlightLines = source`
@@ -330,7 +330,7 @@ function template1(values: FormValues) {
     \\textheight=10in
     \\pagestyle{empty}
     \\raggedright
-    \\usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.8in]{geometry}
+    \\usepackage[left=0.8in,right=0.8in,bottom=0.8in,top=0.5in]{geometry}
     \\usepackage[hidelinks]{hyperref}
 
     ${generator.resumeHeader()}

@@ -17,7 +17,12 @@ import { FormValues } from '../../../types'
 import latex from '../../../lib/latex'
 import getTemplateData from '../../../lib/templates'
 
-async function generateResume(formData: FormValues): Promise<string> {
+interface LatexResult {
+  pdfUrl: string
+  texUrl: string
+}
+
+async function generateResume(formData: FormValues): Promise<LatexResult> {
   const { texDoc, opts } = getTemplateData(formData)
   return latex(texDoc, opts)
 }
@@ -58,8 +63,14 @@ export function Form() {
     const formValues = formContext.getValues()
     setResume({ ...resume, isLoading: true })
     try {
-      const newResumeUrl = await generateResume(formValues)
-      setResume({ ...resume, url: newResumeUrl, isLoading: false })
+      const { pdfUrl, texUrl } = await generateResume(formValues)
+      setResume({
+        ...resume,
+        url: pdfUrl,
+        isLoading: false,
+        json: formValues,
+        latex: texUrl
+      })
     } catch (error) {
       console.error(error)
       setResume({ ...resume, isError: true, isLoading: false })

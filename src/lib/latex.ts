@@ -23,6 +23,9 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
   const fonts = await resolveAssets(opts.fonts || [])
   const inputs = await resolveAssets(opts.inputs || [])
 
+  const texSourceBlob = new Blob([texDoc], { type: 'text/plain' })
+  const texUrl = URL.createObjectURL(texSourceBlob)
+
   switch (opts.cmd) {
     case 'pdflatex': {
       for (const [name, content] of fonts) {
@@ -37,7 +40,8 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
       await pdftex.setEngineMainFile('main.tex')
       const { pdf } = await pdftex.compileLaTeX()
 
-      return URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))
+      const pdfUrl = URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }));
+      return { pdfUrl, texUrl };
     }
     case 'xelatex': {
       for (const engine of [xetex, dvipdfmx]) {
@@ -58,7 +62,8 @@ export default async function latex(texDoc: string, opts: LaTeXOpts) {
       await dvipdfmx.setEngineMainFile('main.xdv')
       const { pdf } = await dvipdfmx.compilePDF()
 
-      return URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))
+      const pdfUrl = URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }));
+      return { pdfUrl, texUrl };
     }
   }
 }

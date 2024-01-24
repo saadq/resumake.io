@@ -2,7 +2,6 @@ import { useAtom } from 'jotai'
 import { useState, useCallback } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
-import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 import Toolbar from '../core/Toolbar'
 import { resumeAtom } from '../../atoms/resume'
@@ -47,11 +46,26 @@ export function Preview() {
     setPageCount(pdf.numPages)
   }, [])
 
-  // function getJsonUrl(): string {
-  //   const json = JSON.stringify(getValues())
-  //   const blob = new Blob([json], { type: 'application/json' })
-  //   return URL.createObjectURL(blob)
-  // }
+  function getJsonUrl(): string {
+    const json = JSON.stringify(resume.json)
+    const blob = new Blob([json], { type: 'application/json' })
+    return URL.createObjectURL(blob)
+  }
+
+  function downloadSource(): void {
+    try {
+      const url = resume.latex
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'resume.tex'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url) // Clean up the URL object
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <Output>
@@ -60,8 +74,8 @@ export function Preview() {
           <>
             <Toolbar
               resumeURL={resume.url}
-              // jsonURL={getJsonUrl()}
-              // downloadSource={downloadSource}
+              jsonURL={getJsonUrl()}
+              downloadSource={downloadSource}
             />
             <ResumeDocument
               file={resume.url}

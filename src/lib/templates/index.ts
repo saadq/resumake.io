@@ -29,10 +29,54 @@ import { FormValues, TemplateData } from '../../types'
  * @return The generated LaTeX document as well as its additional opts.
  */
 export default function getTemplateData(data: FormValues): TemplateData {
-  switch (data.selectedTemplate) {
+
+  function escapeLatexSpecialCharsAndMarkdown(str: string): string {
+    // Escape LaTeX special characters (excluding asterisks)
+    let escapedStr = str
+      .replace(/\\/g, '\\textbackslash ')
+      .replace(/#/g, '\\#')
+      .replace(/\$/g, '\\$')
+      .replace(/%/g, '\\%')
+      .replace(/&/g, '\\&')
+      .replace(/_/g, '\\_')
+      .replace(/{/g, '\\{')
+      .replace(/}/g, '\\}')
+      .replace(/~/g, '\\textasciitilde')
+      .replace(/\^/g, '\\textasciicircum');
+
+    // Replace Markdown bold and italics
+    // The non-greedy regex (.*?) ensures it matches the shortest possible string
+    escapedStr = escapedStr
+      .replace(/\*\*(.*?)\*\*/g, '\\textbf{$1}')
+      .replace(/\*(.*?)\*/g, '\\textit{$1}');
+
+    return escapedStr;
+  }
+
+  function cleanData(data: FormValues): FormValues {
+    const dataCopy: FormValues = JSON.parse(JSON.stringify(data));
+
+    dataCopy.projects?.forEach((project) => {
+      project.highlights = project.highlights?.map(highlight =>
+        escapeLatexSpecialCharsAndMarkdown(highlight)
+      );
+    });
+
+    dataCopy.work?.forEach((work) => {
+      work.highlights = work.highlights?.map(highlight =>
+        escapeLatexSpecialCharsAndMarkdown(highlight)
+      );
+    });
+
+    return dataCopy;
+  }
+
+  const cleanedData = cleanData(data);
+
+  switch (cleanedData.selectedTemplate) {
     case TEMPLATE1:
       return {
-        texDoc: template1(data),
+        texDoc: template1(cleanedData),
         opts: {
           cmd: 'pdflatex'
         }
@@ -41,7 +85,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
     case TEMPLATE2:
 
       return {
-        texDoc: template2(data),
+        texDoc: template2(cleanedData),
         opts: {
           cmd: 'xelatex',
           inputs: [
@@ -74,7 +118,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE3:
       return {
-        texDoc: template3(data),
+        texDoc: template3(cleanedData),
         opts: {
           cmd: 'pdflatex'
         }
@@ -82,7 +126,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE4:
       return {
-        texDoc: template4(data),
+        texDoc: template4(cleanedData),
         opts: {
           cmd: 'xelatex',
           inputs: ['/templates/template4/deedy-resume-openfont.cls'],
@@ -102,7 +146,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE5:
       return {
-        texDoc: template5(data),
+        texDoc: template5(cleanedData),
         opts: {
           cmd: 'xelatex',
           inputs: [
@@ -114,7 +158,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE6:
       return {
-        texDoc: template6(data),
+        texDoc: template6(cleanedData),
         opts: {
           cmd: 'xelatex',
           inputs: [
@@ -139,7 +183,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE7:
       return {
-        texDoc: template7(data),
+        texDoc: template7(cleanedData),
         opts: {
           cmd: 'pdflatex',
           inputs: [
@@ -156,7 +200,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE8:
       return {
-        texDoc: template8(data),
+        texDoc: template8(cleanedData),
         opts: {
           cmd: 'xelatex',
           inputs: ['/templates/template8/mcdowellcv.cls']
@@ -165,7 +209,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     case TEMPLATE9:
       return {
-        texDoc: template9(data),
+        texDoc: template9(cleanedData),
         opts: {
           cmd: 'pdflatex'
         }
@@ -173,7 +217,7 @@ export default function getTemplateData(data: FormValues): TemplateData {
 
     default:
       return {
-        texDoc: template1(data),
+        texDoc: template1(cleanedData),
         opts: {
           cmd: 'pdflatex'
         }

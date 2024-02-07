@@ -40,3 +40,7 @@ yarn-error.log*
 # swiftlatex's postinstall files
 /public/*.js
 /public/*.wasm
+
+#vscode
+.vscode
+.history/**

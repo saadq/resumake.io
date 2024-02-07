@@ -18,13 +18,9 @@ const Aside = styled.aside`
 // div targets the items inside the drag sort library
 const NavList = styled.nav`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 24px;
   margin-bottom: 28px;
 
-  > div {
+  .sort-list-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -93,10 +89,14 @@ export function Sidebar() {
   return (
     <Aside>
       <NavList>
-        <SortableList lockAxis="y" onSortEnd={onSortEnd}>
+        <SortableList
+          lockAxis="y"
+          onSortEnd={onSortEnd}
+          className="sort-list-wrapper"
+        >
           {sortedSections.map(({ label, section, isSortble }) => (
             <SortableItem key={section}>
-              <div>
+              <div className="sort-item-wrapper">
                 <NavItem
                   draggable={isSortble}
                   key={section}

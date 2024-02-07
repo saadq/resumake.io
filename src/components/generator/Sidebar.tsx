@@ -1,12 +1,13 @@
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { MdDragIndicator } from 'react-icons/md'
-import DragSort from 'react-dragged'
+import arrayMove from 'array-move'
+import SortableList, { SortableItem, SortableKnob } from 'react-easy-sort'
 
 import { colors } from '../../theme'
 import { PrimaryButton, IconButton } from '../core/Button'
-import { useState } from 'react'
 
 const Aside = styled.aside`
   grid-area: sidebar;
@@ -44,17 +45,14 @@ const DragIconButton = styled(IconButton)`
   cursor: ${(props) => (props.disabled ? 'default' : 'grab')};
 `
 
-const staticSectionLinks = [
-  { label: 'Templates', section: 'templates' },
-  { label: 'Profile', section: 'basics' }
-]
-
-const sortableSectionLinks = [
-  { label: 'Education', section: 'education' },
-  { label: 'Work Experience', section: 'work' },
-  { label: 'Skills', section: 'skills' },
-  { label: 'Projects', section: 'projects' },
-  { label: 'Awards', section: 'awards' }
+const sections = [
+  { label: 'Templates', section: 'templates', isSortble: false },
+  { label: 'Profile', section: 'basics', isSortble: false },
+  { label: 'Education', section: 'education', isSortble: true },
+  { label: 'Work Experience', section: 'work', isSortble: true },
+  { label: 'Skills', section: 'skills', isSortble: true },
+  { label: 'Projects', section: 'projects', isSortble: true },
+  { label: 'Awards', section: 'awards', isSortble: true }
 ]
 
 const NavItem = ({
@@ -69,9 +67,11 @@ const NavItem = ({
   draggable?: boolean
 }) => (
   <div key={section} style={{ display: 'flex', gap: 8 }}>
-    <DragIconButton type="button" disabled={!Boolean(draggable)}>
-      <MdDragIndicator />
-    </DragIconButton>
+    <SortableKnob>
+      <DragIconButton type="button" disabled={!Boolean(draggable)}>
+        <MdDragIndicator />
+      </DragIconButton>
+    </SortableKnob>
     <StyledLink
       href={`/generator?section=${section}`}
       $active={section === currSection}
@@ -84,36 +84,30 @@ const NavItem = ({
 export function Sidebar() {
   const router = useRouter()
   const currSection = (router.query.section || 'basics') as string
-  const [sections, updateSectionOrder] = useState(sortableSectionLinks)
+  const [sortedSections, updateSectionOrder] = useState(sections)
+
+  const onSortEnd = (oldIndex: number, newIndex: number) => {
+    updateSectionOrder((array) => arrayMove(array, oldIndex, newIndex))
+  }
 
   return (
     <Aside>
       <NavList>
-        <div>
-          {staticSectionLinks.map(({ label, section }) => (
-            <NavItem
-              key={section}
-              label={label}
-              section={section}
-              currSection={currSection}
-            />
+        <SortableList lockAxis="y" onSortEnd={onSortEnd}>
+          {sortedSections.map(({ label, section, isSortble }) => (
+            <SortableItem key={section}>
+              <div>
+                <NavItem
+                  draggable={isSortble}
+                  key={section}
+                  label={label}
+                  section={section}
+                  currSection={currSection}
+                />
+              </div>
+            </SortableItem>
           ))}
-        </div>
-        <DragSort
-          items={sections}
-          onChange={(params) => updateSectionOrder(params)}
-          renderItem={({ label, section }) => {
-            return (
-              <NavItem
-                draggable
-                key={section}
-                label={label}
-                section={section}
-                currSection={currSection}
-              />
-            )
-          }}
-        />
+        </SortableList>
       </NavList>
       <PrimaryButton form="resume-form">MAKE</PrimaryButton>
     </Aside>

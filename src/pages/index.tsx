@@ -7,6 +7,7 @@ import { lighten, darken } from 'polished'
 import { Logo } from '../components/core/Logo'
 import { PrimaryButton, Button } from '../components/core/Button'
 import { colors } from '../theme'
+import {getToken} from '../token/token'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -57,7 +58,7 @@ const HiddenInput = styled.input`
 export default function Home() {
   const router = useRouter()
   const [hasSession, setHasSession] = useState(false)
-
+  const tokenSection = getToken()? getToken():''
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setHasSession(!!localStorage.getItem('jsonResume'))
@@ -67,6 +68,12 @@ export default function Home() {
   const startNewSession = () => {
     window.localStorage.clear()
     router.push('/generator')
+  }
+
+  const startToken = () => {
+    if(!tokenSection) {
+      router.push('/connexion')
+    }
   }
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +99,14 @@ export default function Home() {
           <Link href="/generator" style={{ textDecoration: 'none' }}>
             <Button>Continue Session</Button>
           </Link>
+          
         )}
+       {tokenSection && (
+          <Link href="/generator" onClick={startToken} style={{ textDecoration: 'none' }}>
+            <Button>Modifier CV</Button>
+          </Link>
+          )}
+          
         <Button as="label" htmlFor="import-json">
           Import JSON
         </Button>

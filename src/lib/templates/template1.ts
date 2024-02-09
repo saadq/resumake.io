@@ -357,6 +357,7 @@ function template1(values: FormValues) {
 
           case 'awards':
             return generator.awardsSection(values.awards, headings.awards)
+            
 
           default:
             return ''

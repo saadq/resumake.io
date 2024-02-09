@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form'
 
 import { FormSection } from './FormSection'
@@ -7,9 +7,17 @@ import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
 import { Award } from '../../../../types'
+import { useDispatch } from 'react-redux'
+import { setData } from '../../../../slice/DataSlice'
 
 export function AwardSection() {
   const { fields, append } = useFieldArray({ name: 'awards' })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setData(fields))
+  }, [fields])
 
   const handleAdd = () => {
     const defaultAward: Award = {

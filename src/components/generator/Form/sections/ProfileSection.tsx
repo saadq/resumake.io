@@ -1,10 +1,23 @@
-// import { useFieldArray } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useFieldArray } from 'react-hook-form'
 import { FormSection } from './FormSection'
 import { LabeledInput } from '../../../core/LabeledInput'
 
-export function ProfileSection() {
-  // const { fields, append } = useFieldArray({ name: 'basics.links' })
+import { useDispatch } from 'react-redux'
+import { setData } from '../../../../slice/DataSlice'
 
+export function ProfileSection(props) {
+  const { fields, append } = useFieldArray({ name: 'basics.links' })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setData(fields))
+  }, [fields])
+
+  console.log('props', fields)
+
+  //console.log('nom', fields)
   return (
     <FormSection title="Your personal info">
       <LabeledInput

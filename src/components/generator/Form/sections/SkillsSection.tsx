@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form'
 
 import { LabeledInput } from '../../../core/LabeledInput'
@@ -8,9 +8,17 @@ import { FormSection } from './FormSection'
 import Keywords from './Keywords'
 
 import { Skill } from '../../../../types'
+import { useDispatch } from 'react-redux'
+import { setData } from '../../../../slice/DataSlice'
 
 export function SkillsSection() {
   const { fields, append } = useFieldArray({ name: 'skills' })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setData(fields))
+  }, [fields])
 
   const handleAdd = () => {
     const defaultSkill: Skill = {

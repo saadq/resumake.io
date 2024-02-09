@@ -15,16 +15,21 @@
     "postinstall": "cp node_modules/swiftlatex/dist/swift*.js node_modules/swiftlatex/dist/*.wasm public"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
     "archiver": "^5.3.1",
+    "axios": "^1.6.5",
+    "bootstrap": "^5.3.2",
     "common-tags": "^1.8.2",
     "jotai": "^1.7.0",
     "next": "^13.5.4",
     "polished": "^4.2.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.31.3",
     "react-icons": "^4.4.0",
     "react-pdf": "^5.7.2",
+    "react-redux": "^9.1.0",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.4.1",
     "swiftlatex": "https://github.com/ducaale/SwiftLaTeX/releases/download/v1.0.0-experimental-9902734/swiftlatex-1.0.0-experimental-9902734.tgz"

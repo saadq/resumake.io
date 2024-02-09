@@ -20,7 +20,7 @@ const Main = styled.main`
   height: 100vh;
 `
 
-export default function GeneratorPage() {
+export default function GeneratorPage(props: any) {
   return (
     <Main>
       <Header />

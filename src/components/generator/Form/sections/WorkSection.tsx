@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form'
 
 import { LabeledInput } from '../../../core/LabeledInput'
@@ -8,9 +8,18 @@ import { FormSection } from './FormSection'
 import Highlights from './Highlights'
 
 import { Work } from '../../../../types'
+import { useDispatch } from 'react-redux'
+import { setData } from '../../../../slice/DataSlice'
 
-export function WorkSection() {
+export function WorkSection(props) {
+  console.log('props', props)
   const { fields, append } = useFieldArray({ name: 'work' })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setData(fields))
+  }, [fields])
 
   const handleAdd = () => {
     const defaultWork: Work = {

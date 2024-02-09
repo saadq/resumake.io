@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form'
 
 import { FormSection } from './FormSection'
@@ -7,9 +7,24 @@ import { AddButton } from '../../../core/Button'
 import { Divider } from '../../../core/Divider'
 
 import { Education } from '../../../../types'
+import { useDispatch } from 'react-redux'
+import { setData } from '../../../../slice/DataSlice'
 
-export function EducationSection() {
+export function EducationSection(props: any) {
+
   const { fields, append } = useFieldArray({ name: 'education' })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (fields && fields.length > 0) {
+      dispatch(setData(fields));
+    }
+  }, [fields]);
+  
+
+
+
 
   const handleAdd = () => {
     const defaultEducation: Education = {

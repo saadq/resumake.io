@@ -186,6 +186,19 @@ function removeAward(): Action {
   }
 }
 
+function moveJobUp(index: number): Action {
+  return {
+    type: 'MOVE_JOB_UP',
+    index
+  }
+}
+function moveJobDown(index: number): Action {
+  return {
+    type: 'MOVE_JOB_DOWN',
+    index
+  }
+}
+
 export {
   uploadJSON,
   uploadJSONRequest,
@@ -210,5 +223,7 @@ export {
   removeProjectKeyword,
   addAward,
   removeAward,
-  uploadFileAndGenerateResume
+  uploadFileAndGenerateResume,
+  moveJobUp,
+  moveJobDown
 }

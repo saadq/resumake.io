@@ -110,5 +110,7 @@ type FormAction =
   | { type: 'REMOVE_PROJECT_KEYWORD', index: number }
   | { type: 'ADD_AWARD' }
   | { type: 'REMOVE_AWARD' }
+  | { type: 'MOVE_JOB_UP', index: number }
+  | { type: 'MOVE_JOB_DOWN', index: number }
 
 export type { FormState, FormAction, FormValues, FormValuesWithSectionOrder }

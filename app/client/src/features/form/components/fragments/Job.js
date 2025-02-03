@@ -32,13 +32,43 @@ type Props = {
   highlights: Array<?string>,
   index: number,
   addHighlight: (index: number) => void,
-  removeHighlight: (index: number) => void
+  removeHighlight: (index: number) => void,
+  jobCount: number,
+  moveUp: (index: number) => void,
+  moveDown: (index: number) => void
 }
 
-function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
+function Job({
+  highlights,
+  index,
+  addHighlight,
+  removeHighlight,
+  jobCount,
+  moveUp,
+  moveDown
+}: Props) {
   return (
     <div>
       {index > 0 ? <Divider /> : null}
+      <Row>
+        <Label>Move job position</Label>
+        <ButtonRow>
+          <RoundButton
+            disabled={index === 0}
+            type="button"
+            onClick={() => moveUp(index)}
+          >
+            <Icon type="arrow_upward" />
+          </RoundButton>
+          <RoundButton
+            disabled={index >= jobCount - 1}
+            type="button"
+            onClick={() => moveDown(index)}
+          >
+            <Icon type="arrow_downward" />
+          </RoundButton>
+        </ButtonRow>
+      </Row>
       <LabeledInput
         name={`work[${index}].company`}
         label="Company Name"

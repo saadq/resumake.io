@@ -406,6 +406,47 @@ function form(state: FormState = initialState, action: Action): FormState {
       }
     }
 
+    case 'MOVE_JOB_UP': {
+      if (state.values.work.length <= 1 || action.index <= 0) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          work: [
+            ...state.values.work.slice(0, action.index - 1),
+            state.values.work[action.index],
+            state.values.work[action.index - 1],
+            ...state.values.work.slice(action.index + 1)
+          ]
+        }
+      }
+    }
+
+    case 'MOVE_JOB_DOWN': {
+      if (
+        state.values.work.length <= 1 ||
+        action.index + 1 >= state.values.work.length
+      ) {
+        return state
+      }
+
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          work: [
+            ...state.values.work.slice(0, action.index),
+            state.values.work[action.index + 1],
+            state.values.work[action.index],
+            ...state.values.work.slice(action.index + 2)
+          ]
+        }
+      }
+    }
+
     default:
       return state
   }

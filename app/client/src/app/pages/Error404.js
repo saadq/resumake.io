@@ -4,7 +4,6 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { darken, rgba } from 'polished'
 import { PrimaryButton } from '../../common/components'
 import { colors } from '../../common/theme'
 import comic from '../assets/comic.png'

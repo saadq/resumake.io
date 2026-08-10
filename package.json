@@ -12,7 +12,7 @@
     "lint": "next lint",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
-    "postinstall": "cp node_modules/swiftlatex/dist/swift*.js node_modules/swiftlatex/dist/*.wasm public"
+    "postinstall": "shx cp node_modules/swiftlatex/dist/swift*.js node_modules/swiftlatex/dist/*.wasm public"
   },
   "dependencies": {
     "archiver": "^5.3.1",
@@ -44,6 +44,7 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "2.7.1",
+    "shx": "^0.3.4",
     "typescript": "4.5.3"
   },
   "prettier": {

@@ -1,22 +1,16 @@
-import template1 from './template1'
 import template2 from './template2'
-import template3 from './template3'
 import template4 from './template4'
 import template5 from './template5'
 import template6 from './template6'
 import template7 from './template7'
 import template8 from './template8'
-import template9 from './template9'
 import {
-  TEMPLATE1,
   TEMPLATE2,
-  TEMPLATE3,
   TEMPLATE4,
   TEMPLATE5,
   TEMPLATE6,
   TEMPLATE7,
-  TEMPLATE8,
-  TEMPLATE9
+  TEMPLATE8
 } from './constants'
 import { FormValues, TemplateData } from '../../types'
 
@@ -30,14 +24,6 @@ import { FormValues, TemplateData } from '../../types'
  */
 export default function getTemplateData(data: FormValues): TemplateData {
   switch (data.selectedTemplate) {
-    case TEMPLATE1:
-      return {
-        texDoc: template1(data),
-        opts: {
-          cmd: 'pdflatex'
-        }
-      }
-
     case TEMPLATE2:
       return {
         texDoc: template2(data),
@@ -70,16 +56,6 @@ export default function getTemplateData(data: FormValues): TemplateData {
           ]
         }
       }
-
-    case TEMPLATE3:
-      return {
-        texDoc: template3(data),
-        opts: {
-          cmd: 'pdflatex'
-        }
-      }
-
-    case TEMPLATE4:
       return {
         texDoc: template4(data),
         opts: {
@@ -162,19 +138,36 @@ export default function getTemplateData(data: FormValues): TemplateData {
         }
       }
 
-    case TEMPLATE9:
-      return {
-        texDoc: template9(data),
-        opts: {
-          cmd: 'pdflatex'
-        }
-      }
-
     default:
       return {
-        texDoc: template1(data),
+        texDoc: template2(data),
         opts: {
-          cmd: 'pdflatex'
+          cmd: 'xelatex',
+          inputs: [
+            '/templates/template2/awesome-cv.cls',
+            '/templates/template2/fontawesome.sty'
+          ],
+          fonts: [
+            '/templates/template2/fonts/FontAwesome.otf',
+            '/templates/template2/fonts/Roboto-Bold.ttf',
+            '/templates/template2/fonts/Roboto-BoldItalic.ttf',
+            '/templates/template2/fonts/Roboto-Italic.ttf',
+            '/templates/template2/fonts/Roboto-Light.ttf',
+            '/templates/template2/fonts/Roboto-LightItalic.ttf',
+            '/templates/template2/fonts/Roboto-Medium.ttf',
+            '/templates/template2/fonts/Roboto-MediumItalic.ttf',
+            '/templates/template2/fonts/Roboto-Regular.ttf',
+            '/templates/template2/fonts/Roboto-Thin.ttf',
+            '/templates/template2/fonts/Roboto-ThinItalic.ttf',
+            '/templates/template2/fonts/SourceSansPro-Bold.otf',
+            '/templates/template2/fonts/SourceSansPro-BoldIt.otf',
+            '/templates/template2/fonts/SourceSansPro-It.otf',
+            '/templates/template2/fonts/SourceSansPro-Light.otf',
+            '/templates/template2/fonts/SourceSansPro-LightIt.otf',
+            '/templates/template2/fonts/SourceSansPro-Regular.otf',
+            '/templates/template2/fonts/SourceSansPro-Semibold.otf',
+            '/templates/template2/fonts/SourceSansPro-SemiboldIt.otf'
+          ]
         }
       }
   }

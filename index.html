@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resumake - A Free LaTeX Resume Generator. Thank You and Farewell.</title>
-  <meta name="description" content="Resumake was a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection. After years of helping tens of thousands of people build resumes, it has closed its doors. Find out what tools to use next.">
+  <title>Resumake - Free Resume Builder. The New Beta Is Live.</title>
+  <meta name="description" content="Resumake is a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection. After helping hundreds of thousands of people build resumes, it's back: the rebuilt version is open to everyone in beta.">
   <meta name="keywords" content="resumake, resume builder, LaTeX resume, free resume generator, resume maker, CV builder, open source resume, resumake.io, latexresu.me">
   <meta name="author" content="Saad Quadri">
   <meta name="robots" content="index, follow">
@@ -12,16 +12,16 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Resumake - Thank You and Farewell">
-  <meta property="og:description" content="Resumake was a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection. After helping tens of thousands of people, it has closed its doors.">
+  <meta property="og:title" content="Resumake is back: the new beta is live">
+  <meta property="og:description" content="Resumake is a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection. The rebuilt version is open to everyone in beta at beta.resumake.io.">
   <meta property="og:url" content="https://resumake.io">
   <meta property="og:site_name" content="Resumake">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Resumake - Thank You and Farewell">
-  <meta name="twitter:description" content="Resumake was a free, open-source LaTeX resume generator. After helping tens of thousands of people build resumes, it has closed its doors.">
+  <meta name="twitter:title" content="Resumake is back: the new beta is live">
+  <meta name="twitter:description" content="Resumake is a free, open-source LaTeX resume generator. The rebuilt version is open to everyone in beta at beta.resumake.io.">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7CB3C3B2"></script>
@@ -40,7 +40,7 @@
     "name": "Resumake",
     "alternateName": ["LaTeX Resume Generator", "resumake.io", "latexresu.me"],
     "url": "https://resumake.io",
-    "description": "Resumake was a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection.",
+    "description": "Resumake is a free, open-source LaTeX resume generator with no ads, no accounts, and no data collection. The rebuilt version is open to everyone in beta.",
     "creator": {
       "@type": "Person",
       "name": "Saad Quadri",
@@ -49,453 +49,220 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Sen:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root{
+      color-scheme: dark;
+      --canvas:#090c10; --floor:#0f1319; --surface:#161a21; --surface-2:#1c212a; --popover:#232936;
+      --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.15);
+      --ink:#eceef2; --body:#c3c9d3; --muted:#9199a6; --faint:#636b79;
+      --mint:#56c9aa; --mint-bright:#6ad8bb; --mint-dim:rgba(86,201,170,.12); --mint-line:rgba(86,201,170,.34);
+      --sans:"Geist",system-ui,-apple-system,sans-serif;
+      --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+      --serif:"Newsreader",Georgia,"Times New Roman",serif;
+      --display:"Sen",system-ui,sans-serif;
+      --wrap:760px; --radius:16px;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+    body{background:var(--canvas);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.72;-webkit-font-smoothing:antialiased;min-height:100vh}
+    a{color:var(--mint);text-decoration:none}
+    a:hover{color:var(--mint-bright);text-decoration:underline}
+    ::selection{background:rgba(86,201,170,.26);color:#fff}
+    :focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:5px}
+    h1,h2,h3{color:var(--ink);line-height:1.2;text-wrap:balance}
+    p{margin:0 0 1em}
+    strong{color:var(--ink);font-weight:600}
 
-    html {
-      font-size: 16px;
-    }
+    .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:24px}
+    .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+    .eyebrow::before{content:"";width:22px;height:1px;background:var(--mint-line)}
 
-    body {
-      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #14171d;
-      color: #c0c5ce;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
+    /* hero */
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+      radial-gradient(820px 420px at 72% -10%,rgba(86,201,170,.17),transparent 60%),
+      radial-gradient(620px 360px at 4% 2%,rgba(86,201,170,.06),transparent 55%)}
+    .hero::after{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+      background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);background-size:22px 22px;
+      mask-image:linear-gradient(to bottom,#000,transparent 72%)}
+    .hero-in{position:relative;padding-block:64px 58px}
+    .wordmark{font-family:var(--display);font-weight:700;font-size:1.7rem;letter-spacing:-.01em;color:#fff;margin-bottom:34px}
+    .wordmark span{color:var(--mint)}
+    .pill{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mint);background:var(--mint-dim);border:1px solid var(--mint-line);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+    .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 9px rgba(86,201,170,.8);animation:pulse 2.2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .hero h1{font-size:clamp(2.4rem,7vw,3.9rem);font-weight:600;letter-spacing:-.03em;line-height:1.03;color:#fff;max-width:14ch}
+    .hero h1 em{font-style:normal;color:var(--mint)}
+    .hero .sub{font-family:var(--serif);font-size:clamp(1.15rem,2.6vw,1.45rem);line-height:1.52;color:var(--body);max-width:56ch;margin-top:24px}
+    .cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:32px}
+    .cta .btn{padding:13px 24px;font-size:1rem}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;border:1px solid var(--line-strong);color:var(--ink);font-weight:500;font-size:.95rem;transition:border-color .14s,background .14s}
+    .btn-ghost:hover{border-color:var(--mint-line);background:var(--mint-dim);color:var(--ink);text-decoration:none}
+    a.btn:hover{text-decoration:none;color:#07130f}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+    .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.76rem;color:var(--body);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+    .chip::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--mint)}
 
-    ::selection {
-      background: #56c9aa;
-      color: white;
-    }
+    /* sections */
+    .section{padding-block:52px;border-top:1px solid var(--line)}
+    h2.h{font-size:clamp(1.5rem,4vw,1.95rem);font-weight:600;letter-spacing:-.02em;margin-bottom:22px}
 
-    a {
-      color: #56c9aa;
-      text-decoration: none;
-    }
+    /* announcement card */
+    .announce{background:linear-gradient(180deg,var(--mint-dim),transparent 72%),var(--surface);border:1px solid var(--mint-line);border-radius:var(--radius);padding:28px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+    .announce p{color:var(--body)}
+    .announce p:last-child{margin-bottom:0}
+    .features{list-style:none;padding:0;margin:20px 0 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+    .features li{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.93rem;color:var(--muted);line-height:1.55}
+    .features strong{display:block;color:var(--ink);font-size:.98rem;margin-bottom:3px}
+    .beta-note{font-size:.92rem;color:var(--muted)}
+    .maintainer{display:flex;gap:16px;align-items:flex-start;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:13px;padding:18px 20px;margin:22px 0}
+    .maintainer .m-ic{font-size:1.5rem;line-height:1.3;flex-shrink:0}
+    .maintainer .m-name{font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .maintainer .m-tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);background:var(--mint-dim);border:1px solid var(--mint-line);border-radius:999px;padding:3px 9px}
+    .maintainer p{margin:0;font-size:.95rem;color:var(--muted)}
 
-    a:hover {
-      text-decoration: underline;
-    }
+    /* note from saad */
+    .note{font-family:var(--serif);font-size:1.12rem;line-height:1.68;color:var(--body)}
+    .note p{margin-bottom:1.05em}
+    .signoff{margin-top:22px;color:var(--mint);font-size:1.1rem}
+    .signoff a{color:var(--mint)}
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 24px 40px;
-    }
+    /* tips */
+    .tips{list-style:none;padding:0;margin:4px 0 0}
+    .tips li{position:relative;padding:18px 0 18px 24px;border-bottom:1px solid var(--line)}
+    .tips li:last-child{border-bottom:none}
+    .tips li::before{content:"";position:absolute;left:2px;top:27px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+    .tips strong{display:block;color:var(--ink);font-weight:600;font-size:1.02rem;margin-bottom:5px}
+    .tips .d{color:var(--muted);font-size:.93rem;line-height:1.62}
+    .privacy{background:var(--mint-dim);border:1px solid var(--mint-line);border-radius:12px;padding:16px 20px;margin-top:22px;font-size:.9rem;color:var(--body);line-height:1.62}
+    .privacy strong{color:var(--mint)}
 
-    /* Logo */
-    .logo {
-      font-size: 3rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 40px;
-      letter-spacing: -0.5px;
-    }
+    /* form */
+    .form-card{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:26px}
+    .form-card h2{font-size:1.15rem;font-weight:600;margin-bottom:6px}
+    .form-card .intro{font-size:.92rem;color:var(--muted);margin-bottom:20px}
+    .fg{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+    .fg label{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .fg input,.fg textarea{width:100%;border-radius:9px;border:1px solid var(--line-strong);background:var(--canvas);color:var(--ink);padding:11px 13px;font-family:inherit;font-size:.95rem;outline:none;transition:border-color .12s,box-shadow .12s}
+    .fg textarea{resize:vertical;min-height:120px}
+    .fg input::placeholder,.fg textarea::placeholder{color:var(--faint)}
+    .fg input:focus,.fg textarea:focus{border-color:var(--mint-line);box-shadow:0 0 0 3px rgba(86,201,170,.12)}
+    .actions{display:flex;align-items:center;gap:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:10px;border:1px solid transparent;background:var(--mint);color:#07130f;font-family:var(--sans);font-size:.92rem;font-weight:600;cursor:pointer;transition:background .14s,transform .12s,box-shadow .14s;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 0 18px rgba(86,201,170,.22)}
+    .btn:hover{background:var(--mint-bright);transform:translateY(-1px)}
+    .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .fstatus{display:none;font-size:.85rem;color:var(--muted)}
+    .fstatus[data-state="success"]{color:var(--mint)}
+    .email-line{margin-top:16px;font-size:.88rem;color:var(--muted)}
 
-    .logo span {
-      color: #56c9aa;
-    }
+    footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--faint);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    footer a{color:var(--muted)}
+    footer a:hover{color:var(--mint)}
 
-    /* Banner */
-    .banner {
-      background: rgba(86, 201, 170, 0.08);
-      border: 1px solid rgba(86, 201, 170, 0.2);
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-bottom: 48px;
-    }
-
-    .banner h2 {
-      color: #56c9aa;
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-
-    .banner p {
-      color: #9ba3ae;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-    }
-
-    .banner p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Sections */
-    .section {
-      margin-bottom: 48px;
-    }
-
-    .section h2 {
-      color: white;
-      font-size: 1.25rem;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .section p {
-      margin-bottom: 14px;
-      color: #9ba3ae;
-      font-size: 0.95rem;
-    }
-
-    .section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .signoff {
-      margin-top: 24px;
-      color: #56c9aa;
-      font-size: 1.05rem;
-    }
-
-    /* Divider */
-    .divider {
-      border: none;
-      border-top: 1px solid #202530;
-      margin: 48px 0;
-    }
-
-    /* Tips list */
-    .tips {
-      list-style: none;
-      padding: 0;
-    }
-
-    .tips li {
-      position: relative;
-      padding: 14px 0 14px 20px;
-      border-bottom: 1px solid #202530;
-      color: #9ba3ae;
-      font-size: 0.95rem;
-    }
-
-    .tips li:last-child {
-      border-bottom: none;
-    }
-
-    .tips li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 22px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #56c9aa;
-    }
-
-    .tips li strong {
-      color: #c0c5ce;
-      font-weight: 600;
-    }
-
-    .tip-detail {
-      display: block;
-      margin-top: 6px;
-      color: #6b7280;
-      font-size: 0.875rem;
-      line-height: 1.6;
-    }
-
-    /* Privacy note */
-    .privacy-note {
-      background: rgba(86, 201, 170, 0.06);
-      border: 1px solid rgba(86, 201, 170, 0.15);
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin-top: 20px;
-      font-size: 0.875rem;
-      color: #9ba3ae;
-      line-height: 1.6;
-    }
-
-    .privacy-note strong {
-      color: #56c9aa;
-      font-weight: 600;
-    }
-
-    /* Contact form */
-    .form-card {
-      border: 1px solid #202530;
-      background: rgba(19, 21, 26, 0.4);
-      border-radius: 10px;
-      padding: 24px;
-    }
-
-    .form-card h2 {
-      color: white;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      background: rgba(19, 21, 26, 0.55);
-      color: rgba(226, 232, 240, 0.9);
-      padding: 10px 12px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 120ms ease, box-shadow 120ms ease;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(148, 163, 184, 0.4);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: rgba(86, 201, 170, 0.4);
-      box-shadow: 0 0 0 3px rgba(86, 201, 170, 0.1);
-    }
-
-    .form-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .form-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: 1px solid rgba(86, 201, 170, 0.25);
-      background: rgba(86, 201, 170, 0.1);
-      color: #56c9aa;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 120ms ease, border-color 120ms ease;
-    }
-
-    .form-btn:hover {
-      border-color: rgba(86, 201, 170, 0.4);
-      background: rgba(86, 201, 170, 0.15);
-    }
-
-    .form-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .form-status {
-      display: none;
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-
-    .form-status[data-state="success"] {
-      color: #56c9aa;
-    }
-
-    .email-line {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-
-    .email-line a {
-      color: #56c9aa;
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 60px;
-      padding: 24px 0;
-      border-top: 1px solid #202530;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #4b5563;
-    }
-
-    .footer a {
-      color: #4b5563;
-    }
-
-    .footer a:hover {
-      color: #56c9aa;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 40px 18px 30px;
-      }
-
-      .logo {
-        font-size: 2.25rem;
-      }
-
-      .footer {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-      }
+    @media (max-width:520px){
+      .hero-in{padding-block:48px 44px}
+      .section{padding-block:42px}
+      .announce,.form-card{padding:22px}
+      footer{flex-direction:column;text-align:center}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="logo">resu<span>make</span></h1>
-
-    <div class="banner">
-      <h2>Update</h2>
-      <p>
-        I've been overwhelmed by all the responses since posting this page. So many of you reached out to share how much Resumake helped you over the years, and it really touched me.
-      </p>
-      <p>
-        I'm not in a position to continue working on Resumake myself, but I'm looking to pass the torch to someone trustworthy who will keep the philosophy of Resumake alive. That means keeping it free, ad-free, and never requiring user accounts. There may be a paid option added down the road, but only for newer features and add-ons. The Resumake that people already use and know and love will always remain free when it comes back.
-      </p>
-      <p>
-        I appreciate your patience. More to come.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2>Thank You</h2>
-      <p>
-        After years of helping people build resumes, Resumake has closed its doors. I want to take a moment to thank every single person who used this little tool over the years.
-      </p>
-      <p>
-        I built Resumake out of a pure love of coding and open source. As a student, I was frustrated by how much time and effort it took to put together a decent resume. I figured if I needed something simpler, others probably did too. So I built it. A free, open-source resume generator that had no ads, required no user accounts, and collected no personal data. It was the kind of software I wished more of the world had. And being open source meant I got to collaborate with other developers who cared about the same things. It was awesome working with others and building something together just because we wanted to make it better.
-      </p>
-      <p>
-        I never made money from Resumake. But what I got in return was something far more meaningful. Over the years, I watched this small project grow in ways I never could have imagined. It was featured in a Mashable article and shared across the world. Tens of thousands of people used it to build their resumes, and many of them took the time to send thank-you emails, share kind words, and some even donated. Every single one of those messages meant the world to me.
-      </p>
-      <p>
-        It was beautiful to see how many lives it helped. People landing their first jobs, students applying to internships, career changers putting themselves out there. That was always the point. Not profit, not growth metrics, just making something useful and putting it out there for free.
-      </p>
-      <p>
-        Thank you and farewell. Please feel free to leave a message at the bottom because I'd really like to hear from you.
-      </p>
-      <p class="signoff">
-        With love,<br><a href="https://saadq.com">Saad Q.</a>
-      </p>
-    </div>
-
-    <hr class="divider">
-
-    <div class="section">
-      <h2>What's Next for Resume Building</h2>
-      <p>
-        Times have changed, and AI can now do a lot of what Resumake used to do, and honestly, much more. Here are some ways you can build a great resume today.
-      </p>
-
-      <ul class="tips">
-        <li>
-          <strong>Use Claude or ChatGPT to draft your resume</strong>
-          <span class="tip-detail">
-            Start a conversation and tell the AI about your experience, skills, and the type of role you're targeting. Ask it to format your resume in a clean, professional layout. You can iterate on the wording, tailor it for specific job descriptions, and get suggestions you might not have thought of. These tools go beyond what Resumake ever could. They can help you write better bullet points, optimize for ATS systems, and adapt your resume for different industries.
-          </span>
-        </li>
-        <li>
-          <strong>Ask AI for LaTeX output</strong>
-          <span class="tip-detail">
-            If you loved Resumake's LaTeX templates, you can ask Claude or ChatGPT to generate LaTeX code for your resume. Just describe the layout you want or share a template you like, and the AI will produce clean, compilable LaTeX. You can then compile it using <a href="https://www.overleaf.com">Overleaf</a> or any local LaTeX setup.
-          </span>
-        </li>
-        <li>
-          <strong>Get feedback on your existing resume</strong>
-          <span class="tip-detail">
-            Upload your current resume (as text or a PDF) and ask the AI to critique it. It can point out weak bullet points, suggest stronger action verbs, identify missing sections, and help you tighten up the language.
-          </span>
-        </li>
-        <li>
-          <strong>Tailor your resume for specific jobs</strong>
-          <span class="tip-detail">
-            Paste a job description into the chat along with your resume and ask the AI to help you align your experience with what the employer is looking for. This kind of targeted customization used to take hours. Now it takes minutes.
-          </span>
-        </li>
-        <li>
-          <strong>Run your resume through an ATS scanner</strong>
-          <span class="tip-detail">
-            Most companies use Applicant Tracking Systems to filter resumes before a human ever sees them. Tools like <a href="https://www.jobscan.co">Jobscan</a> and <a href="https://resumeworded.com">Resume Worded</a> can scan your resume against a job posting and tell you how well it matches. They'll flag missing keywords, formatting issues that confuse parsers, and sections that could be stronger. It's worth running your resume through one of these before you hit submit.
-          </span>
-        </li>
-      </ul>
-
-      <div class="privacy-note">
-        <strong>A word on privacy.</strong> Be thoughtful about the personal information you share with AI tools. Your resume contains sensitive data like your full name, address, phone number, and employment history. Consider anonymizing or redacting personal details before pasting your resume into any AI chat. You could use placeholder names and remove contact info, then add the real details back into the final document yourself. It's a small extra step that keeps your personal data out of training datasets.
+  <header class="hero">
+    <div class="wrap hero-in">
+      <div class="wordmark">resu<span>make</span></div>
+      <span class="pill"><span class="dot"></span>Beta is live</span>
+      <h1>Resumake is <em>back</em>.</h1>
+      <p class="sub">After helping hundreds of thousands of people build their resumes, Resumake has been rebuilt from the ground up. The new version is open to everyone in beta, and it's still free, ad-free, and account-free, exactly as you remember it.</p>
+      <div class="cta">
+        <a class="btn" href="https://beta.resumake.io">Try the beta &rarr;</a>
+        <a class="btn-ghost" href="https://beta.resumake.io/tutorial">Take the tour</a>
+      </div>
+      <div class="chips">
+        <span class="chip">Always free</span>
+        <span class="chip">No ads</span>
+        <span class="chip">No accounts</span>
+        <span class="chip">Open source</span>
       </div>
     </div>
+  </header>
 
-    <hr class="divider">
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">Now in beta</div>
+      <div class="announce">
+        <p>The new Resumake is ready to try at <a href="https://beta.resumake.io"><strong>beta.resumake.io</strong></a>. Fill in your details, watch your resume update as you type, and download a clean PDF. No sign-up, no watermark, no catch.</p>
 
-    <div class="section">
+        <ul class="features">
+          <li><strong>13 templates</strong>Including the classic designs from the original Resumake, with a full-size preview before you pick one.</li>
+          <li><strong>Drag to reorder</strong>Move whole sections or single entries, and the page follows instantly.</li>
+          <li><strong>Spacing you control</strong>Tighten or loosen the whole page, or just one section.</li>
+          <li><strong>More sections</strong>Volunteer work, certifications, publications, or a section of your own.</li>
+          <li><strong>Back up anytime</strong>Export to the standard JSON Resume format and pick up on any computer.</li>
+          <li><strong>Private by design</strong>Your resume is saved in your own browser. The server keeps nothing.</li>
+        </ul>
+
+        <p class="beta-note">It's a beta, so you may run into rough edges. If something looks off, please tell me with the form at the bottom of this page. The Resumake you know will always stay free.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">A note from Saad</div>
+      <h2 class="h">Thank you</h2>
+      <div class="note">
+        <p>After years of helping people build resumes, Resumake went quiet for a while, and now it's back. As the next chapter begins, I want to take a moment to thank every single person who used this little tool over the years.</p>
+        <p>I built Resumake out of a pure love of coding and open source. As a student, I was frustrated by how much time and effort it took to put together a decent resume. I figured if I needed something simpler, others probably did too. So I built it: a free, open-source resume generator that had no ads, required no user accounts, and collected no personal data. It was the kind of software I wished more of the world had. And being open source meant I got to collaborate with other developers who cared about the same things.</p>
+        <p>I never made money from Resumake. But what I got in return was something far more meaningful. Over the years, I watched this small project grow in ways I never could have imagined. It was featured in a Mashable article and shared across the world. Hundreds of thousands of people used it to build their resumes, and many took the time to send thank-you emails, share kind words, and some even donated. Every one of those messages meant the world to me.</p>
+        <p>It was beautiful to see how many lives it helped. People landing their first jobs, students applying to internships, career changers putting themselves out there. That was always the point. Not profit, not growth metrics, just making something useful and putting it out there for free.</p>
+        <p>This was never goodbye. It's a new beginning, and I hope you'll give the beta a try. Please feel free to leave a message at the bottom, I'd really like to hear from you.</p>
+        <p class="signoff">With love,<br><a href="https://saadq.com">Saad Q.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
       <div class="form-card">
-        <h2>Send a Message</h2>
-        <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 18px;">
-          I'd really like to hear from you. Thank you, feedback, a story about how Resumake helped, or anything else on your mind. It all means a lot.
-        </p>
+        <h2>Send a message</h2>
+        <p class="intro">I'd really like to hear from you. Something broken or confusing in the beta, a feature you miss, a story about how Resumake helped, or anything else on your mind. It all means a lot.</p>
 
         <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="1fd84beb-bba4-45d0-8971-03bbbbc2bd1f">
           <input type="hidden" name="subject" value="Message from resumake.io">
 
-          <div class="form-group">
-            <label for="name">Name <span style="color: #4b5563; font-weight: 400;">(optional)</span></label>
+          <div class="fg">
+            <label for="name">Name (optional)</label>
             <input type="text" id="name" name="name" placeholder="Your name">
           </div>
-
-          <div class="form-group">
+          <div class="fg">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="you@example.com" required>
           </div>
-
-          <div class="form-group">
+          <div class="fg">
             <label for="message">Message</label>
             <textarea id="message" name="message" placeholder="What would you like to say?" required></textarea>
           </div>
-
-          <div class="form-actions">
-            <button type="submit" id="submit-btn" class="form-btn">Send Message</button>
-            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+          <div class="actions">
+            <button type="submit" id="submit-btn" class="btn">Send message</button>
+            <div id="form-status" class="fstatus" role="status" aria-live="polite"></div>
           </div>
         </form>
 
-        <p class="email-line">
-          Or reach me directly at <a href="mailto:saadq@gmail.com">saadq@gmail.com</a>
-        </p>
+        <p class="email-line">Or reach me directly at <a href="mailto:saadquad@gmail.com">saadquad@gmail.com</a></p>
       </div>
     </div>
+  </section>
 
-    <footer class="footer">
-      <a href="https://saadq.com">&copy; Saad Quadri</a>
-    </footer>
-  </div>
+  <footer class="wrap">
+    <a href="https://saadq.com">&copy; Saad Quadri</a>
+  </footer>
 
   <script>
     const form = document.getElementById('contact-form')
@@ -516,9 +283,7 @@
           method: 'POST',
           body: new FormData(form)
         })
-
         const data = await response.json()
-
         if (data && data.success) {
           statusDiv.textContent = 'Message sent! Thank you.'
           statusDiv.dataset.state = 'success'
@@ -532,7 +297,7 @@
         statusDiv.dataset.state = 'muted'
       } finally {
         submitBtn.disabled = false
-        submitBtn.textContent = 'Send Message'
+        submitBtn.textContent = 'Send message'
       }
     })
   </script>

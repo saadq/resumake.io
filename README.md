@@ -1,7 +1,13 @@
 # Resumake
 
-Resumake was a free, open-source LaTeX resume generator. No ads, no accounts, no data collection. It helped tens of thousands of people build professional resumes over the years.
+Resumake is a free, open-source LaTeX resume generator. No ads, no accounts, no data collection. Over the years it has helped hundreds of thousands of people build professional resumes.
 
-The app has been retired, and this branch serves a static farewell page at [resumake.io](https://resumake.io).
+## The new beta is live
 
-The original application source code is preserved on the [`v2`](https://github.com/saadq/resumake.io/tree/v2) branch.
+Resumake is back. It has been rebuilt from the ground up, and the new version is open to everyone in beta at [beta.resumake.io](https://beta.resumake.io). It's still free, ad-free, and account-free: your resume is saved in your own browser and the server keeps nothing.
+
+It's a beta, so you may run into rough edges. Feedback is welcome through the form on [resumake.io](https://resumake.io).
+
+This branch serves the landing page at [resumake.io](https://resumake.io). The application that ran for years is preserved on the [`v2-(old)`](https://github.com/saadq/resumake.io/tree/v2-%28old%29) branch.
+
+MIT © [Saad Quadri](https://saadq.com)
